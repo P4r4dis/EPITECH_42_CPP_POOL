@@ -6,34 +6,9 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 16:48:09 by Paradis           #+#    #+#              #
-#    Updated: 2024/06/25 05:22:56 by Paradis          ###   ########.fr        #
+#    Updated: 2024/06/25 19:03:02 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-# SRC1 = main1.c
-# SRC2 = main2.c
-
-# # Binaires cibles
-# BIN1 = prog1
-# BIN2 = prog2
-
-# # Compilateur et options de compilation
-# CC = gcc
-# CFLAGS = -Wall -Wextra
-
-# # Règle par défaut pour tout compiler
-# all: $(BIN1) $(BIN2)
-
-# # Règles pour compiler chaque programme
-# $(BIN1): $(SRC1)
-#     $(CC) $(CFLAGS) -o $(BIN1) $(SRC1)
-
-# $(BIN2): $(SRC2)
-#     $(CC) $(CFLAGS) -o $(BIN2) $(SRC2)
-
-# # Règle pour nettoyer les fichiers compilés
-# clean:
-#     rm -f $(BIN1) $(BIN2)
 
 # # Compilateur
 G++			=	g++
@@ -50,18 +25,10 @@ UT_NAME 	= 	test_$(NAME)
 
 # # Options de compilation
 INCFLAGS	+=	-I $(INC_PATH)
-CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -std=c++23 $(INCFLAGS)
+CPPFLAGS	+= 	-Wall -Wextra -Werror -W -Wfatal-errors -std=c++98 $(INCFLAGS)
 
 # # Files sources
-SRCS		=	$(SRC_PATH)/Fruit.cpp \
-				$(SRC_PATH)/Lemon.cpp \
-				$(SRC_PATH)/Banana.cpp \
-				$(SRC_PATH)/FruitBox.cpp \
-				$(SRC_PATH)/LittleHand.cpp \
-				$(SRC_PATH)/Lime.cpp \
-				$(SRC_PATH)/Coconut.cpp \
-				$(SRC_PATH)/Mixer.cpp \
-				$(SRC_PATH)/MixerBase.cpp \
+SRCS		=	$(SRC_PATH)/Megaphone.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp
@@ -69,22 +36,33 @@ UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp
 # # Files object
 OBJS		=	$(SRCS:.cpp=.o)
 
+# # Log file
+LOG			=	*.log
+
 CLEAN		=	clean
 FCLEAN		=	fclean
 RM			=	rm -rf
 
-# # Règle par défaut pour tout compiler
+# # Default rules for compilation
 all			:	$(NAME)
 
 $(NAME)		:	$(OBJS)
 				$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME) 
-
-# # Règle pour nettoyer les fichiers compilés
+				@valgrind --leak-check=full --show-leak-kinds=all  --error-exitcode=1 ./$(NAME) 2>&1 | tee valgrind_output.log || true
+				@if ! grep -q "definitely lost" valgrind_output.log; \
+				then \
+					echo -e "\033[32mNo memory leaks detected, running unit tests...\033[0m"; \
+				else \
+					echo -e "\033[31mMemory leaks detected, aborting.\033[0m"; \
+					exit 1; \
+				fi
+				
+# # Rule for clean files object
 clean		:
-				$(RM) $(OBJS)
+				$(RM) $(OBJS) $(LOG)
 				@$(MAKE) -s $(CLEAN) -C $(UT_PATH)
 
-# # Target for clean files object
+# # Target for clean name and files object
 fclean		:	clean
 				$(RM) $(NAME) $(UT_NAME)
 				@$(MAKE) -s $(FCLEAN) -C $(UT_PATH)
