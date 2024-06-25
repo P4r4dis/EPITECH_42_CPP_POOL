@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 16:48:09 by Paradis           #+#    #+#              #
-#    Updated: 2024/06/25 19:03:02 by Paradis          ###   ########.fr        #
+#    Updated: 2024/06/25 21:06:13 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ $(NAME)		:	$(OBJS)
 				@valgrind --leak-check=full --show-leak-kinds=all  --error-exitcode=1 ./$(NAME) 2>&1 | tee valgrind_output.log || true
 				@if ! grep -q "definitely lost" valgrind_output.log; \
 				then \
-					echo -e "\033[32mNo memory leaks detected, running unit tests...\033[0m"; \
+					echo -e "\033[32mNo memory leaks detected, running binary...\033[0m"; \
 				else \
 					echo -e "\033[31mMemory leaks detected, aborting.\033[0m"; \
 					exit 1; \
