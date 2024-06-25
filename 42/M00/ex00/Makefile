@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 16:48:09 by Paradis           #+#    #+#              #
-#    Updated: 2024/06/19 16:56:33 by Paradis          ###   ########.fr        #
+#    Updated: 2024/06/25 05:22:56 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ UT_NAME 	= 	test_$(NAME)
 
 # # Options de compilation
 INCFLAGS	+=	-I $(INC_PATH)
-CPPFLAGS	+= -g -Wall -Wextra -Werror -W -std=c++23 $(INCFLAGS)
+CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -std=c++23 $(INCFLAGS)
 
 # # Files sources
 SRCS		=	$(SRC_PATH)/Fruit.cpp \
@@ -82,18 +82,18 @@ $(NAME)		:	$(OBJS)
 # # Règle pour nettoyer les fichiers compilés
 clean		:
 				$(RM) $(OBJS)
-				@$(MAKE) $(CLEAN) -C $(UT_PATH)
+				@$(MAKE) -s $(CLEAN) -C $(UT_PATH)
 
 # # Target for clean files object
 fclean		:	clean
 				$(RM) $(NAME) $(UT_NAME)
-				@$(MAKE) $(FCLEAN) -C $(UT_PATH)
+				@$(MAKE) -s $(FCLEAN) -C $(UT_PATH)
 
 re			: 	clean fclean all
 
 # # Start units test
 tests_run	:	fclean
-				@$(MAKE) -C $(UT_PATH)
+				@$(MAKE) -s -C $(UT_PATH)
 				$(UT_PATH)/$(UT_NAME)
 
 .PHONY		: 	all clean fclean re tests_run

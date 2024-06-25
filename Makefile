@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/06/19 16:46:41 by Paradis          ###   ########.fr        #
+#    Updated: 2024/06/25 07:06:50 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,13 @@
 42_EX00_UT_SRC			=	$(42_EX00_UT_PATH)/$(42_EX00_NAME)_test.cpp
 42_EX00_UT_NAME 		= 	test_$(42_EX00_NAME)
 
-EPITECH_EX00_PATH 		= 	./Ex0_Fruit
-EPITECH_EX00_SRC_PATH	=	./Ex0_Fruit/source
-EPITECH_EX00_UT_PATH	=	./Ex0_Fruit/test
-EPITECH_EX00_INC_PATH	=	./Ex0_Fruit/include
-EPITECH_EX00_NAME		=	Ex0
-EPITECH_EX00_UT_SRC		=	$(42_EX00_UT_PATH)/$(42_EX00_NAME)_test.cpp
-EPITECH_EX00_UT_NAME 	= 	test_$(42_EX00_NAME)
+# EPITECH_EX00_PATH 		= 	./Ex0_Fruit
+# EPITECH_EX00_SRC_PATH	=	./Ex0_Fruit/source
+# EPITECH_EX00_UT_PATH	=	./Ex0_Fruit/test
+# EPITECH_EX00_INC_PATH	=	./Ex0_Fruit/include
+# EPITECH_EX00_NAME		=	Ex0
+# EPITECH_EX00_UT_SRC		=	$(42_EX00_UT_PATH)/$(42_EX00_NAME)_test.cpp
+# EPITECH_EX00_UT_NAME 	= 	test_$(42_EX00_NAME)
 ##########################################################################
 # # Fichiers source
 # SRC1 = main1.c
@@ -67,13 +67,13 @@ RM						=	rm -rf
 
 # # Règle pour nettoyer les fichiers compilés
 clean					:	
-							@$(MAKE) $(CLEAN) -C $(42_EX00_UT_PATH)
+							@$(MAKE) -s $(CLEAN) -C $(42_EX00_UT_PATH)
 
 # # Règle pour nettoyer les objets
 fclean					:	clean
 							$(RM) $(NAME) $(TEST_42_EX00_NAME)
-							@$(MAKE) $(FCLEAN) -C $(42_EX00_UT_PATH)
-							@$(MAKE) $(FCLEAN) -C $(42_EX00_PATH)
+							@$(MAKE) -s $(FCLEAN) -C $(42_EX00_UT_PATH)
+							@$(MAKE) -s $(FCLEAN) -C $(42_EX00_PATH)
 
 re						: 	clean fclean all
 ##########################################################################
@@ -83,9 +83,10 @@ re						: 	clean fclean all
 
 
 42_test_run_ex00		:	fclean
-							@$(MAKE) -C $(42_EX00_UT_PATH)
-							$(42_EX00_UT_PATH)/$(TEST_42_EX00_NAME)
-							gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --txt --html-details coverage.html
+							@$(MAKE) -s -C $(42_EX00_UT_PATH)
+							$(42_EX00_UT_PATH)/$(42_EX00_UT_NAME)
+							gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+# @brave coverage.html
 
 
 tests_run				:	fclean
