@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/06/25 20:30:43 by Paradis          ###   ########.fr        #
+#    Updated: 2024/07/01 20:00:31 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,15 @@
 # EPITECH_EX00_NAME		=	Ex0
 # EPITECH_EX00_UT_SRC		=	$(42_EX00_UT_PATH)/$(42_EX00_NAME)_test.cpp
 # EPITECH_EX00_UT_NAME 	= 	test_$(42_EX00_NAME)
+##########################################################################
+42_EX01_PATH 			= 	./42/M00/ex01
+42_EX01_BIN_PATH 		= 	./42/M00/ex01/bin
+42_EX01_SRC_PATH		=	./42/M00/ex01/source
+42_EX01_INC_PATH		=	./42/M00/ex01/include
+42_EX01_UT_PATH			=	./42/M00/ex01/test
+42_EX01_NAME			=	PhoneBook
+42_EX01_UT_SRC			=	$(42_EX01_UT_PATH)/$(42_EX01_NAME)_test.cpp
+42_EX01_UT_NAME 		= 	test_$(42_EX01_NAME)
 ##########################################################################
 # # Compilation and options compilation
 G++ 					= 	g++
@@ -56,12 +65,15 @@ RM						=	rm -rf
 # # Rule compiling object files
 clean					:	
 							@$(MAKE) -s $(CLEAN) -C $(42_EX00_UT_PATH)
+							@$(MAKE) -s $(CLEAN) -C $(42_EX01_UT_PATH)
 
 # # Rule compiling object files and binaries name
 fclean					:	clean
-							$(RM) $(42_EX00_NAME)
+							$(RM) $(42_EX00_NAME) $(42_EX01_NAME)
 							@$(MAKE) -s $(FCLEAN) -C $(42_EX00_UT_PATH)
 							@$(MAKE) -s $(FCLEAN) -C $(42_EX00_PATH)
+							@$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
+							@$(MAKE) -s $(FCLEAN) -C $(42_EX01_PATH)
 
 re						: 	clean fclean all
 ##########################################################################
@@ -76,7 +88,10 @@ re						: 	clean fclean all
 							gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 # @brave coverage.html
 
-
+42_test_run_ex01		:	fclean
+							@$(MAKE) -s -C $(42_EX01_UT_PATH)
+							$(42_EX01_UT_PATH)/$(42_EX01_UT_NAME)
+							gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 tests_run				:	fclean
 							@$(MAKE) 42_test_run_ex00
 							@echo "Press Enter to continue to the next test (ex01)..."
