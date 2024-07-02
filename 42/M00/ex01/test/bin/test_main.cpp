@@ -139,23 +139,19 @@ Test(Contact, test_Contact_set_and_getDarkestSecret)
 }
 
 
-// Test(Contact, test_Contact_Getters_and_Setters)
-// {
-//     {
-//         Contact     contact;
-//         contact.setDarkestSecret("Mark");
-//         contact.setDarkestSecret("MarkX");
-//         contact.setDarkestSecret("AllMark");
-//         contact.setDarkestSecret("0908070605");
-//         contact.setDarkestSecret("secret1");
-//         cr_assert(contact.getDarkestSecret() == "Mark");
-//         cr_assert(contact.getDarkestSecret() == "MarkX");
-//         cr_assert(contact.getDarkestSecret() == "AllMark");
-//         cr_assert(contact.getDarkestSecret() == "0908070605");
-//         cr_assert(contact.getDarkestSecret() == "secret1");
-        
-//     }
-// }
+Test(Contact, test_Contact_setInfoContact)
+{
+    {
+        Contact     contact;
+
+        contact.setInfoContact("Mark", "MarkX", "AllMark", "0908070605", "secret1");
+        cr_assert(contact.getFirstName() == "Mark");
+        cr_assert(contact.getLastName() == "MarkX");
+        cr_assert(contact.getNickName() == "AllMark");
+        cr_assert(contact.getPhoneNb() == "0908070605");
+        cr_assert(contact.getDarkestSecret() == "secret1");
+    }
+}
 
 // Test(PhoneBook, test_PhoneBook_CTOR_DTOR_call)
 // {
