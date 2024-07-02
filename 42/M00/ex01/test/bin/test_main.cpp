@@ -153,15 +153,14 @@ Test(Contact, test_Contact_setInfoContact)
     }
 }
 
-// Test(PhoneBook, test_PhoneBook_CTOR_DTOR_call)
-// {
-//     {
-//         PhoneBook   phoneBook;
+Test(PhoneBook, test_PhoneBook_CTOR_isDefined)
+{
+    {
+        PhoneBook   phoneBook;
 
-//         cr_assert_not_null(&phoneBook);
-
-//     }
-// }
+        cr_assert_not_null(&phoneBook);
+    }
+}
 
 // Test(PhoneBook, test_PhoneBook_getters_and_setters)
 // {
