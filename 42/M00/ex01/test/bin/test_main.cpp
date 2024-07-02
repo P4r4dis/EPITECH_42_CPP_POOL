@@ -162,6 +162,15 @@ Test(PhoneBook, test_PhoneBook_CTOR_isDefined)
     }
 }
 
+Test(PhoneBook, test_PhoneBook_getNbContact)
+{
+    {
+        PhoneBook   phoneBook;
+
+        cr_assert(phoneBook.getNbContact() == 0);
+    }
+}
+
 // Test(PhoneBook, test_PhoneBook_getters_and_setters)
 // {
 //     {
