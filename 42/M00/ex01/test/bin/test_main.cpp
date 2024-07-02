@@ -23,10 +23,25 @@ Test(Contact, test_Contact_CTOR_isDefined)
     }
 }
 
+Test(Contact, test_Contact_set_and_getFirstName_isEmpty)
+{
+    {
+        Contact     contact;
+
+        cr_assert(contact.getFirstName().empty() == true);
+    }
+}
+
 Test(Contact, test_Contact_set_and_getFirstName)
 {
     {
         Contact     contact;
+
+        cr_assert(contact.getFirstName().empty() == true);
+        contact.setFirstName("0");
+        cr_assert(contact.getFirstName().empty() == false);
+        cr_assert(contact.getFirstName() == "0");
+
 
     }
 }
