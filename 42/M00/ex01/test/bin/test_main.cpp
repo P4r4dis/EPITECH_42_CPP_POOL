@@ -91,18 +91,43 @@ Test(Contact, test_Contact_set_and_getNickName)
 
     }
 }
+
+Test(Contact, test_Contact_set_and_getPhoneNb_isEmpty)
+{
+    {
+        Contact     contact;
+
+        cr_assert(contact.getPhoneNb().empty() == true);
+    }
+}
+
+Test(Contact, test_Contact_set_and_getPhoneNb)
+{
+    {
+        Contact     contact;
+
+        cr_assert(contact.getPhoneNb().empty() == true);
+        contact.setPhoneNb("0");
+        cr_assert(contact.getPhoneNb().empty() == false);
+        cr_assert(contact.getPhoneNb() == "0");
+
+
+    }
+}
+
+
 // Test(Contact, test_Contact_Getters_and_Setters)
 // {
 //     {
 //         Contact     contact;
-//         contact.setNickName("Mark");
-//         contact.setNickName("MarkX");
-//         contact.setNickName("AllMark");
+//         contact.setPhoneNb("Mark");
+//         contact.setPhoneNb("MarkX");
+//         contact.setPhoneNb("AllMark");
 //         contact.setPhoneNb("0908070605");
 //         contact.setDarkestSecret("secret1");
-//         cr_assert(contact.getNickName() == "Mark");
-//         cr_assert(contact.getNickName() == "MarkX");
-//         cr_assert(contact.getNickName() == "AllMark");
+//         cr_assert(contact.getPhoneNb() == "Mark");
+//         cr_assert(contact.getPhoneNb() == "MarkX");
+//         cr_assert(contact.getPhoneNb() == "AllMark");
 //         cr_assert(contact.getPhoneNb() == "0908070605");
 //         cr_assert(contact.getDarkestSecret() == "secret1");
         
@@ -150,7 +175,7 @@ Test(Contact, test_Contact_set_and_getNickName)
         //         f_cin.close();
         //         std::string name;
         //         std::cin >> name;
-        //         contact.setNickName(name);
+        //         contact.setPhoneNb(name);
         //         phoneBook.setContact(&contact);
         // }
         // for (int i = 0; i < MAX_NB_CONTACT; ++i)
@@ -159,7 +184,7 @@ Test(Contact, test_Contact_set_and_getNickName)
         //     {
         //         cr_assert(phoneBook.getContactTab(i) != nullptr);
         //         std::cout   << "Verify: " 
-        //                     << phoneBook.getContactTab(0)->getNickName() 
+        //                     << phoneBook.getContactTab(0)->getPhoneNb() 
         //                     << std::endl;
         //     }
         // }
@@ -193,7 +218,7 @@ Test(Contact, test_Contact_set_and_getNickName)
 
 //         for (int  i = 0; i < phoneBook.getNbContact() + 1; i++)
 //         {
-//             std::cout << phoneBook.getContactArray(i).getNickName() << std::endl;
+//             std::cout << phoneBook.getContactArray(i).getPhoneNb() << std::endl;
 //         }
 
 //     // }
@@ -263,9 +288,9 @@ Test(Contact, test_Contact_set_and_getNickName)
 //         phoneBook.addContact(contact0);
 //         for (int i = 0; i <= MAX_NB_CONTACT; i++)
 //         {
-//             std::cout   << phoneBook.getContactArray().getNickName() << " | "
-//                         << phoneBook.getContactArray().getNickName() << " | "
-//                         << phoneBook.getContactArray().getNickName() << " | "
+//             std::cout   << phoneBook.getContactArray().getPhoneNb() << " | "
+//                         << phoneBook.getContactArray().getPhoneNb() << " | "
+//                         << phoneBook.getContactArray().getPhoneNb() << " | "
 //                         << phoneBook.getContactArray().getPhoneNb() << " | "
 //                         << phoneBook.getContactArray().getDarkestSecret() << " | "
 //                         << std::endl;
