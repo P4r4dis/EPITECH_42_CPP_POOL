@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:00:31 by Paradis           #+#    #+#             */
-/*   Updated: 2024/06/30 21:22:19 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/07/02 21:28:02 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void            Contact::setInfoContact(std::string firstName, std::string lastN
                                         std::string nickName, std::string phoneNb,
                                         std::string darkest_secret)
 {
-     _firstName = firstName;
+    _firstName = firstName;
     _lastName = lastName;
     _nickName = nickName;
     _phoneNb = phoneNb;
