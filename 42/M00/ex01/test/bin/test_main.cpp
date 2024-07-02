@@ -28,7 +28,6 @@ Test(Contact, test_Contact_set_and_getFirstName)
     {
         Contact     contact;
 
-        cr_assert_not_null(&contact);
     }
 }
 // Test(Contact, test_Contact_Getters_and_Setters)
