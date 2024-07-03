@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:07:33 by Paradis           #+#    #+#             */
-/*   Updated: 2024/07/01 16:57:40 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/07/03 18:42:44 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,40 @@
 
 #include "../include/PhoneBook.hpp"
 
-PhoneBook::PhoneBook(void)  :   _nbContact(0)
-{
-    for (int  i = 0; i <= MAX_NB_CONTACT; i++)
-        _contactTab[i] = nullptr;
-}
+PhoneBook::PhoneBook(void)  :   _nbContact(0), _index(0)
+{}
 
 PhoneBook::~PhoneBook(void)
-{
-}
+{}
 
 int         PhoneBook::getNbContact(void) const
 {
     return _nbContact;
 }
 
-Contact     *PhoneBook::getPtrContactTab(void) const
+
+const Contact   *PhoneBook::getContactTab(void) const
 {
-    return *_contactTab;
+    return _contactTab;
 }
 
-Contact     *PhoneBook::getContactTab(int index) const
+int             PhoneBook::getIndex(void) const
 {
-    return _contactTab[index];
+    return _index;
 }
-
-void        PhoneBook::setContact(Contact *contact)
+void            PhoneBook::addContact(Contact contact)
 {
-    int index = 0;
-    if (_contactTab[index] == nullptr)
-        _contactTab[index] = contact;
-    while (_contactTab[_nbContact] != nullptr)
-        _nbContact++;
-    index++;
+    if (_index < MAX_NB_CONTACT)
+    {
+        _contactTab[_index] = contact;
+        _index++;
+        _nbContact >= MAX_NB_CONTACT ? _nbContact = MAX_NB_CONTACT : _nbContact++;
+    }
+    else
+    {
+        if (_index >= MAX_NB_CONTACT)
+            _index = 0;
+        _contactTab[_index] = contact;
+        _index++;
+    }
 }

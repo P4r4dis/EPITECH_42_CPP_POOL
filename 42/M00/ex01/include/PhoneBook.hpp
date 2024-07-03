@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:20:29 by Paradis           #+#    #+#             */
-/*   Updated: 2024/07/01 16:57:34 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/07/03 16:47:13 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,22 @@
 
     #include "Contact.hpp"
 
-    #define MAX_NB_CONTACT 7
-    class               PhoneBook
+    #define MAX_NB_CONTACT 8
+    class                   PhoneBook
     {
         public:
             PhoneBook(void);
             ~PhoneBook(void);
 
-            int         getNbContact(void) const;
-            Contact     *getPtrContactTab(void) const;
-            Contact     *getContactTab(int index) const;
+            int             getIndex(void) const;
+            int             getNbContact(void) const;
+            const Contact   *getContactTab(void) const;
 
-            void        setContact(Contact *contact);
-            // void        addContact(Contact contact);
+            void            addContact(Contact contact);
         private:
 
-            int         _nbContact;
-            Contact     *_contactTab[MAX_NB_CONTACT];
+            int             _nbContact;
+            int             _index;
+            Contact         _contactTab[MAX_NB_CONTACT];
     };
 #endif //               __PHONEBOOK_HPP__ END !
