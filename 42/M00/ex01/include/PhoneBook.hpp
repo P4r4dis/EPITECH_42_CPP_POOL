@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:20:29 by Paradis           #+#    #+#             */
-/*   Updated: 2024/07/04 15:52:33 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/07/04 18:51:45 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 
             void            addContact(Contact contact);
             void            search(int index);
+            PhoneBook            exit();
             void            displayAllContact(void);
             void            displayContact(int index);
             std::string     truncString(std::string str);

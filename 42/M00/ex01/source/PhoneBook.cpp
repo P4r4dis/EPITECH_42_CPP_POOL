@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:07:33 by Paradis           #+#    #+#             */
-/*   Updated: 2024/07/04 18:41:00 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/07/04 18:51:41 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,9 @@ void            PhoneBook::search(int index)
 {
     displayAllContact();
     displayContact(index);
+}
+
+PhoneBook            PhoneBook::exit()
+{
+    return PhoneBook();
 }

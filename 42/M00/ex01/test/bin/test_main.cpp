@@ -429,7 +429,6 @@ Test(PhoneBook, test_PhoneBook_DisplayAllContact_with_truncString
     PhoneBook   phoneBook;
     Contact contact;
 
-    std::string result;
         contact.setInfoContact(
             "std::to_string(i)", 
             "std::to_string(i)", 
@@ -447,6 +446,48 @@ Test(PhoneBook, test_PhoneBook_DisplayAllContact_with_truncString
         "         0|std::to_s.|std::to_s.|std::to_s.\n"
     );
     
+}
+
+
+Test(PhoneBook, test_PhoneBook_exit_isDefined
+                        , .init = redirect_all_stdout)
+{
+    {
+        PhoneBook   phoneBook;
+
+        phoneBook = phoneBook.exit();
+        cr_assert_stdout_eq_str
+        (
+            ""
+        );
+    }
+}
+
+Test(PhoneBook, test_PhoneBook_exit_deleteAllContact
+                        , .init = redirect_all_stdout)
+{
+    {
+        PhoneBook   phoneBook;
+        Contact contact;
+
+        contact.setInfoContact(
+            "std::to_string(i)", 
+            "std::to_string(i)", 
+            "std::to_string(i)", 
+            "std::to_string(i)", 
+            "std::to_string(i)");
+        phoneBook.addContact(contact);
+
+        phoneBook.displayAllContact();
+        phoneBook = phoneBook.exit();
+        phoneBook.displayAllContact();
+        cr_assert_stdout_eq_str
+        (
+            "     index|first name| last name|  nickname\n"
+            "         0|std::to_s.|std::to_s.|std::to_s.\n"
+            "     index|first name| last name|  nickname\n"
+        );
+    }
 }
 
 // char rot13_char(char c)
