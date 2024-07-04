@@ -320,6 +320,134 @@ Test(PhoneBook, test_PhoneBook_getIndex)
     }
 }
 
+Test(PhoneBook, test_PhoneBook_search_isDefined, .init = redirect_all_stdout)
+{
+    {
+        PhoneBook   phoneBook;
+        int index = 0;
+        phoneBook.search(index);
+    }
+}
+
+Test(PhoneBook, test_PhoneBook_displayAllContact_without_contact
+                , .init = redirect_all_stdout)
+{
+    PhoneBook   phoneBook;
+
+    phoneBook.displayAllContact();
+    cr_assert_stdout_eq_str
+    (
+        "     index|first name| last name|  nickname\n"
+    );
+}
+
+Test(PhoneBook, test_PhoneBook_displayAllContact_with_contact
+                , .init = redirect_all_stdout)
+{
+    PhoneBook   phoneBook;
+    Contact         contact;
+
+    // int index = 7;
+
+    for (int i = 0 ; i < 8; i++)
+    {
+        contact.setInfoContact(
+            std::to_string(i), 
+            std::to_string(i), 
+            std::to_string(i), 
+            std::to_string(i), 
+            std::to_string(i));
+        phoneBook.addContact(contact);
+    }
+    phoneBook.displayAllContact();
+    cr_assert_stdout_eq_str
+    (
+        "     index|first name| last name|  nickname\n"
+        "         0|         0|         0|         0\n"
+        "         1|         1|         1|         1\n"
+        "         2|         2|         2|         2\n"
+        "         3|         3|         3|         3\n"
+        "         4|         4|         4|         4\n"
+        "         5|         5|         5|         5\n"
+        "         6|         6|         6|         6\n"
+        "         7|         7|         7|         7\n"
+    );
+}
+
+Test(PhoneBook, test_PhoneBook_displayContact
+                , .init = redirect_all_stdout)
+{
+    PhoneBook   phoneBook;
+    Contact         contact;
+
+    int index = 7;
+
+    for (int i = 0 ; i < 8; i++)
+    {
+        contact.setInfoContact(
+            std::to_string(i), 
+            std::to_string(i), 
+            std::to_string(i), 
+            std::to_string(i), 
+            std::to_string(i));
+        phoneBook.addContact(contact);
+    }
+    phoneBook.displayContact(index);
+    cr_assert_stdout_eq_str
+    (
+        "     index|first name| last name|  nickname|phone numb|darkest secret\n"
+        "         7|         7|         7|         7|         7|         7\n"
+    );
+}
+
+Test(PhoneBook, test_PhoneBook_truncString, .init = redirect_all_stdout)
+{
+    PhoneBook   phoneBook;
+    Contact contact;
+
+    std::string result;
+        contact.setInfoContact(
+            "std::to_string(i)", 
+            "std::to_string(i)", 
+            "std::to_string(i)", 
+            "std::to_string(i)", 
+            "std::to_string(i)");
+        phoneBook.addContact(contact);
+
+    result = phoneBook.truncString(contact.getFirstName());
+    std::cout << result << std::endl;
+
+    cr_assert_stdout_eq_str
+    (
+        "std::to_s.\n"
+    );
+}
+
+Test(PhoneBook, test_PhoneBook_DisplayAllContact_with_truncString
+                                    , .init = redirect_all_stdout)
+{
+    PhoneBook   phoneBook;
+    Contact contact;
+
+    std::string result;
+        contact.setInfoContact(
+            "std::to_string(i)", 
+            "std::to_string(i)", 
+            "std::to_string(i)", 
+            "std::to_string(i)", 
+            "std::to_string(i)");
+        phoneBook.addContact(contact);
+
+    phoneBook.displayAllContact();
+
+
+    cr_assert_stdout_eq_str
+    (
+        "     index|first name| last name|  nickname\n"
+        "         0|std::to_s.|std::to_s.|std::to_s.\n"
+    );
+    
+}
 
 // char rot13_char(char c)
 // {

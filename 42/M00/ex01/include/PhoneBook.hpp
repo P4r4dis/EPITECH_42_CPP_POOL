@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:20:29 by Paradis           #+#    #+#             */
-/*   Updated: 2024/07/03 16:47:13 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/07/04 15:52:33 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
             const Contact   *getContactTab(void) const;
 
             void            addContact(Contact contact);
+            void            search(int index);
+            void            displayAllContact(void);
+            void            displayContact(int index);
+            std::string     truncString(std::string str);
         private:
 
             int             _nbContact;
