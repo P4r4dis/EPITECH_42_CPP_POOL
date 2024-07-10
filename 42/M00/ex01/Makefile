@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/26 18:27:36 by Paradis           #+#    #+#              #
-#    Updated: 2024/06/26 18:27:55 by Paradis          ###   ########.fr        #
+#    Updated: 2024/07/10 21:36:39 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ CPPFLAGS	+= 	-Wall -Wextra -Werror -W -Wfatal-errors -std=c++98 $(INCFLAGS)
 
 # # Files sources
 SRCS		=	$(SRC_PATH)/PhoneBook.cpp \
+				$(SRC_PATH)/Contact.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp

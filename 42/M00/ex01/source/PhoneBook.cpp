@@ -6,13 +6,13 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:07:33 by Paradis           #+#    #+#             */
-/*   Updated: 2024/07/10 21:07:54 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/07/10 21:55:20 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <iomanip>
-
+#include <sstream>
 #include "../include/PhoneBook.hpp"
 
 PhoneBook::PhoneBook(void)  :   _nbContact(0), _index(0), _input(""),
@@ -128,6 +128,7 @@ int             PhoneBook::validIndex(std::string input)
     int index = 0;
     bool validInput = false;
 
+    // degree >> x;
     while (!validInput)
     {
         std::cout << "Enter the contact index you wish to display:" << std::endl;
@@ -138,7 +139,8 @@ int             PhoneBook::validIndex(std::string input)
                 validInput = false;
         if (validInput)
         {
-            index = std::stoi(input);
+            std::stringstream convert(input);
+            convert >> index;
             if (index < 0 || index > _nbContact)
             {
                 std::cout << "Index out of range. Please try again." << std::endl;

@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:20:29 by Paradis           #+#    #+#             */
-/*   Updated: 2024/07/10 21:03:10 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/07/10 21:35:18 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
     #define             __PHONEBOOK_HPP__
 
     #include <string>
-
     #include "Contact.hpp"
 
     #define MAX_NB_CONTACT 8
