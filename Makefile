@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/07/10 21:59:51 by Paradis          ###   ########.fr        #
+#    Updated: 2024/07/18 14:34:43 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,9 @@
 # # Files object
 42_EX01_OBJS			=	$(42_EX01_SRC:.cpp=.o)
 ##########################################################################
+42_EX02_PATH 			= 	./42/M00/ex02
+42_EX02_NAME			=	test
+##########################################################################
 # # Compilation and options compilation
 G++ 					= 	g++
 INCFLAGS				= 	-I
@@ -62,7 +65,6 @@ $(42_EX00_NAME)			: 	$(42_EX00_OBJS)
 							$(G++) $(CPPFLAGS) $(INCFLAGS)$(42_EX00_INC_PATH) $(42_EX00_OBJS) -o $(42_EX00_NAME)
 $(42_EX01_NAME)			: 	$(42_EX01_OBJS)
 							$(G++) $(CPPFLAGS) $(INCFLAGS)$(42_EX01_INC_PATH) $(42_EX01_OBJS) -o $(42_EX01_NAME)
-
 # $(NAME)					:	$(OBJS)
 # 							$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME) 
 # # Default rules for Clean, Fclean and RM
@@ -77,7 +79,7 @@ clean					:
 
 # # Rule compiling object files and binaries name
 fclean					:	clean
-							$(RM) $(42_EX00_NAME) $(42_EX01_NAME)
+							$(RM) $(42_EX00_NAME) $(42_EX01_NAME) $(42_EX02_PATH)/$(42_EX02_NAME)
 							@$(MAKE) -s $(FCLEAN) -C $(42_EX00_UT_PATH)
 							@$(MAKE) -s $(FCLEAN) -C $(42_EX00_PATH)
 							@$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
@@ -92,6 +94,9 @@ re						: 	clean fclean all
 42_ex01 				: 	fclean
 							@$(MAKE) -C $(42_EX01_PATH)
 							$(42_EX01_PATH)/$(42_EX01_NAME)
+
+42_ex02 				: 	fclean
+							cd ./42/M00/ex02/ && ./test.sh 42
 
 42_test_run_ex00		:	fclean
 							@$(MAKE) -s -C $(42_EX00_UT_PATH)
