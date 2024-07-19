@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/07/18 14:34:43 by Paradis          ###   ########.fr        #
+#    Updated: 2024/07/19 20:15:05 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,13 +23,21 @@
 							$(42_EX00_BIN_PATH)/main.cpp
 # # Files object
 42_EX00_OBJS			=	$(42_EX00_SRC:.cpp=.o)
-# EPITECH_EX00_PATH 		= 	./Ex0_Fruit
-# EPITECH_EX00_SRC_PATH	=	./Ex0_Fruit/source
-# EPITECH_EX00_UT_PATH	=	./Ex0_Fruit/test
-# EPITECH_EX00_INC_PATH	=	./Ex0_Fruit/include
-# EPITECH_EX00_NAME		=	Ex0
-# EPITECH_EX00_UT_SRC		=	$(42_EX00_UT_PATH)/$(42_EX00_NAME)_test.cpp
-# EPITECH_EX00_UT_NAME 	= 	test_$(42_EX00_NAME)
+
+
+EPITECH_EX00_PATH 		= 	./EPITECH/D06/ex00
+EPITECH_EX00_BIN_PATH 	= 	./EPITECH/D06/ex00/bin
+EPITECH_EX00_SRC_PATH	=	./EPITECH/D06/ex00/source
+EPITECH_EX00_INC_PATH	=	./EPITECH/D06/ex00/include
+EPITECH_EX00_UT_PATH	=	./EPITECH/D06/ex00/test
+EPITECH_EX00_NAME		=	my_cat
+EPITECH_EX00_UT_SRC		=	$(EPITECH_EX00_UT_PATH)/$(EPITECH_EX00_NAME)_test.cpp
+EPITECH_EX00_UT_NAME 	= 	test_$(EPITECH_EX00_NAME)
+# # Files sources
+EPITECH_EX00_SRC		=	$(EPITECH_EX00_SRC_PATH)/MyCat.cpp \
+							$(EPITECH_EX00_BIN_PATH)/main.cpp
+# # Files object
+EPITECH_EX00_OBJS		=	$(EPITECH_EX00_SRC:.cpp=.o)
 ##########################################################################
 42_EX01_PATH 			= 	./42/M00/ex01
 42_EX01_BIN_PATH 		= 	./42/M00/ex01/bin
@@ -58,13 +66,18 @@ CPPFLAGS 				= 	-Wall -Wextra -Werror -W -Wfatal-errors -std=c++98
 
 # # Default rule for compile all
 all						:	$(42_EX00_NAME) \
-							$(42_EX01_NAME)
+							$(42_EX01_NAME) \
+							$(EPITECH_EX00_NAME)
 
 # # Rule for compiling all binaries
 $(42_EX00_NAME)			: 	$(42_EX00_OBJS)
 							$(G++) $(CPPFLAGS) $(INCFLAGS)$(42_EX00_INC_PATH) $(42_EX00_OBJS) -o $(42_EX00_NAME)
 $(42_EX01_NAME)			: 	$(42_EX01_OBJS)
 							$(G++) $(CPPFLAGS) $(INCFLAGS)$(42_EX01_INC_PATH) $(42_EX01_OBJS) -o $(42_EX01_NAME)
+
+$(EPITECH_EX00_NAME)	: 	$(EPITECH_EX00_OBJS)
+							$(G++) $(CPPFLAGS) $(INCFLAGS)$(EPITECH_EX00_INC_PATH) $(EPITECH_EX00_OBJS) -o $(EPITECH_EX00_NAME)
+
 # $(NAME)					:	$(OBJS)
 # 							$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME) 
 # # Default rules for Clean, Fclean and RM
@@ -75,7 +88,13 @@ RM						=	rm -rf
 # # Rule compiling object files
 clean					:	
 							@$(MAKE) -s $(CLEAN) -C $(42_EX00_UT_PATH)
+							@$(MAKE) -s $(CLEAN) -C $(42_EX00_PATH)
 							@$(MAKE) -s $(CLEAN) -C $(42_EX01_UT_PATH)
+							@$(MAKE) -s $(CLEAN) -C $(42_EX01_PATH)
+							@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_UT_PATH)
+							@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_PATH)
+
+							
 
 # # Rule compiling object files and binaries name
 fclean					:	clean
@@ -84,6 +103,8 @@ fclean					:	clean
 							@$(MAKE) -s $(FCLEAN) -C $(42_EX00_PATH)
 							@$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
 							@$(MAKE) -s $(FCLEAN) -C $(42_EX01_PATH)
+							@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_UT_PATH)
+							@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_PATH)
 
 re						: 	clean fclean all
 ##########################################################################
@@ -108,6 +129,12 @@ re						: 	clean fclean all
 							@$(MAKE) -s -C $(42_EX01_UT_PATH)
 							$(42_EX01_UT_PATH)/$(42_EX01_UT_NAME)
 							gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+
+EPITECH_test_run_ex00	:	fclean
+							@$(MAKE) -s -C $(EPITECH_EX00_UT_PATH)
+							$(EPITECH_EX00_UT_PATH)/$(EPITECH_EX00_UT_NAME)
+							gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+
 tests_run				:	fclean
 							@$(MAKE) 42_test_run_ex00
 							@echo "Press Enter to continue to the next test (ex01)..."
