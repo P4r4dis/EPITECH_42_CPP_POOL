@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jul 19 6:34:24 PM 2024 Paradis
-** Last update Thu Jul 24 3:47:36 PM 2024 Paradis
+** Last update Thu Jul 24 4:02:36 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -66,28 +66,28 @@ Test(MyCat, test_MyCat_MyCat_error_file_not_found, .init = redirect_all_stdout)
     );
 }
 
-// #include <cstdlib>
+#include <cstdlib>
             // "mkdir tmp\n"
             // "cd tmp\n"
             // "fakeroot mknod fakeDirectory b 7 0\n"
-// Test(MyCat, test_MyCat_MyCat_error_permission_denied)//, .init = redirect_all_stdout)
-// {
-//     {
-//         MyCat   myCat;
-//         std::string fileName = "testFile";
+Test(MyCat, test_MyCat_MyCat_error_permission_denied, .init = redirect_all_stdout)
+{
+    {
+        MyCat   myCat;
+        std::string fileName = "testFile";
         
-//         std::system(
-//             "touch testFile\n"
-//             "chmod 000 testFile\n"
-//             );
-//         myCat.myCat(fileName);
-//         std::system("rm -rf testFile");
-//     }
-    // cr_assert_stderr_eq_str
-    // (
-    //     "my_cat: fileName: No such file or directory\n"
-    // );
-// }
+        std::system(
+            "touch testFile\n"
+            "chmod 000 testFile\n"
+            );
+        myCat.myCat(fileName);
+        std::system("rm -rf testFile");
+    }
+    cr_assert_stderr_eq_str
+    (
+        "my_cat: testFile: Permission denied\n"
+    );
+}
 
 // #include <iostream>
 // int main(int ac, char **av)
