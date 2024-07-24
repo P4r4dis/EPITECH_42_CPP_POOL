@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jul 19 6:34:24 PM 2024 Paradis
-** Last update Thu Jul 24 4:02:36 PM 2024 Paradis
+** Last update Thu Jul 24 4:55:33 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -89,6 +89,69 @@ Test(MyCat, test_MyCat_MyCat_error_permission_denied, .init = redirect_all_stdou
     );
 }
 
+Test(MyCat, test_MyCat_isDirectory_isDefined, .init = redirect_all_stdout)
+{
+    {
+        MyCat   myCat;
+        std::string fileName = "testDirectory";
+        
+        std::system(
+            "mkdir testDirectory\n"
+            );
+        myCat.isDirectory(fileName);
+        std::system("rm -rf testDirectory");
+    }
+}
+
+Test(MyCat, test_MyCat_isDirectory_return_true, .init = redirect_all_stdout)
+{
+    {
+        MyCat   myCat;
+        std::string fileName = "testDirectory";
+        
+        std::system(
+            "mkdir testDirectory\n"
+            );
+        cr_assert(myCat.isDirectory(fileName) == true);
+        std::system("rm -rf testDirectory");
+    }
+    cr_assert_stderr_eq_str
+    (
+        "my_cat: testDirectory: Is a directory\n"
+    );
+}
+
+Test(MyCat, test_MyCat_isDirectory_return_false)
+{
+    {
+        MyCat   myCat;
+        std::string fileName = "testFile";
+        
+        std::system(
+            "touch testFile\n"
+            );
+        cr_assert(myCat.isDirectory(fileName) == false);
+        std::system("rm -rf testFile");
+    }
+}
+
+Test(MyCat, test_MyCat_MyCat_error_is_a_directory, .init = redirect_all_stdout)
+{
+    {
+        MyCat   myCat;
+        std::string fileName = "testDirectory";
+        
+        std::system(
+            "mkdir testDirectory\n"
+            );
+        myCat.myCat(fileName);
+        std::system("rm -rf testDirectory");
+    }
+    cr_assert_stderr_eq_str
+    (
+        "my_cat: testDirectory: Is a directory\n"
+    );
+}
 // #include <iostream>
 // int main(int ac, char **av)
 // {

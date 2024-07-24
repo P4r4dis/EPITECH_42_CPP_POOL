@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jul 19 6:18:01 PM 2024 Paradis
-** Last update Thu Jul 24 3:18:31 PM 2024 Paradis
+** Last update Thu Jul 24 4:37:36 PM 2024 Paradis
 */
 
 #ifndef         MYCAT_HPP
@@ -20,6 +20,7 @@ class           MyCat
         ~MyCat(void);
 
         void            usage(void);
+        bool            isDirectory(std::string directory);
         void            myCat(std::string fileName);
     protected:
     private:
