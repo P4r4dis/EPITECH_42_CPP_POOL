@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jul 19 6:34:24 PM 2024 Paradis
-** Last update Thu Jul 24 4:55:33 PM 2024 Paradis
+** Last update Thu Jul 24 7:05:59 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -67,9 +67,7 @@ Test(MyCat, test_MyCat_MyCat_error_file_not_found, .init = redirect_all_stdout)
 }
 
 #include <cstdlib>
-            // "mkdir tmp\n"
-            // "cd tmp\n"
-            // "fakeroot mknod fakeDirectory b 7 0\n"
+
 Test(MyCat, test_MyCat_MyCat_error_permission_denied, .init = redirect_all_stdout)
 {
     {
@@ -150,6 +148,23 @@ Test(MyCat, test_MyCat_MyCat_error_is_a_directory, .init = redirect_all_stdout)
     cr_assert_stderr_eq_str
     (
         "my_cat: testDirectory: Is a directory\n"
+    );
+}
+
+Test(MyCat, test_MyCat_MyCat_error_file_name_too_long, .init = redirect_all_stdout)
+{
+    {
+        MyCat   myCat;
+        std::string longFilename(300, 'a');
+        myCat.myCat(longFilename);
+    }
+    cr_assert_stderr_eq_str
+    (
+        "my_cat: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: File name too long\n"
     );
 }
 // #include <iostream>

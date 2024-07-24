@@ -37,6 +37,7 @@ void            MyCat::myCat(std::string fileName)
     std::fstream    fs;
 
     fs.open(fileName.c_str(), std::ios_base::in);
+
     if (!fs.is_open())
         std::cerr << "my_cat: " << fileName << ": " << std::strerror(errno) << std::endl;
     else if (isDirectory(fileName.c_str()))
