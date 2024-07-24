@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jul 19 6:18:01 PM 2024 Paradis
-** Last update Sat Jul 19 8:11:52 PM 2024 Paradis
+** Last update Thu Jul 24 3:18:31 PM 2024 Paradis
 */
 
 #ifndef         MYCAT_HPP
@@ -19,8 +19,8 @@ class           MyCat
         MyCat(void);
         ~MyCat(void);
 
-        void    usage(void);
-
+        void            usage(void);
+        void            myCat(std::string fileName);
     protected:
     private:
 };

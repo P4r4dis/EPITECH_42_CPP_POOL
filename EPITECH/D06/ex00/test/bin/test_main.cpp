@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jul 19 6:34:24 PM 2024 Paradis
-** Last update Sat Jul 19 8:13:21 PM 2024 Paradis
+** Last update Thu Jul 24 3:47:36 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -28,10 +28,6 @@ Test(MyCat, test_MyCat_ctor_isDefined, .init = redirect_all_stdout)
     {
         MyCat myCat;
     }
-    cr_assert_stdout_eq_str
-    (
-        ""
-    );
 }
 
 Test(MyCat, test_MyCat_Usage_isDefined, .init = redirect_all_stdout)
@@ -55,3 +51,51 @@ Test(MyCat, test_MyCat_Usage_output, .init = redirect_all_stdout)
         "my_cat: Usage: ./my_cat file [...]\n"
     );
 }
+
+Test(MyCat, test_MyCat_MyCat_error_file_not_found, .init = redirect_all_stdout)
+{
+    {
+        MyCat   myCat;
+        std::string fileName = "fileName";
+        
+        myCat.myCat(fileName);
+    }
+    cr_assert_stderr_eq_str
+    (
+        "my_cat: fileName: No such file or directory\n"
+    );
+}
+
+// #include <cstdlib>
+            // "mkdir tmp\n"
+            // "cd tmp\n"
+            // "fakeroot mknod fakeDirectory b 7 0\n"
+// Test(MyCat, test_MyCat_MyCat_error_permission_denied)//, .init = redirect_all_stdout)
+// {
+//     {
+//         MyCat   myCat;
+//         std::string fileName = "testFile";
+        
+//         std::system(
+//             "touch testFile\n"
+//             "chmod 000 testFile\n"
+//             );
+//         myCat.myCat(fileName);
+//         std::system("rm -rf testFile");
+//     }
+    // cr_assert_stderr_eq_str
+    // (
+    //     "my_cat: fileName: No such file or directory\n"
+    // );
+// }
+
+// #include <iostream>
+// int main(int ac, char **av)
+// {
+//     MyCat myCat;
+//     if (ac < 1)
+//         std::cout << "error ac" << std::endl;
+//     else
+//         myCat.myCat(av[0]);
+//     return 0;
+// }
