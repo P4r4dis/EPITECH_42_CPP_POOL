@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jul 19 6:34:24 PM 2024 Paradis
-** Last update Thu Jul 24 7:05:59 PM 2024 Paradis
+** Last update Fri Jul 25 5:49:47 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -14,6 +14,7 @@
 #include <criterion/logging.h>
 #include <criterion/parameterized.h>
 #include <signal.h>
+#include <cstdlib>
 
 #include "../../include/MyCat.hpp"
 
@@ -65,8 +66,6 @@ Test(MyCat, test_MyCat_MyCat_error_file_not_found, .init = redirect_all_stdout)
         "my_cat: fileName: No such file or directory\n"
     );
 }
-
-#include <cstdlib>
 
 Test(MyCat, test_MyCat_MyCat_error_permission_denied, .init = redirect_all_stdout)
 {
@@ -167,13 +166,33 @@ Test(MyCat, test_MyCat_MyCat_error_file_name_too_long, .init = redirect_all_stdo
         "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: File name too long\n"
     );
 }
-// #include <iostream>
-// int main(int ac, char **av)
-// {
-//     MyCat myCat;
-//     if (ac < 1)
-//         std::cout << "error ac" << std::endl;
-//     else
-//         myCat.myCat(av[0]);
-//     return 0;
-// }
+
+Test(MyCat, test_MyCat_MyCat_one_file, .init = redirect_all_stdout)
+{
+    {
+        MyCat   myCat;
+        std::string fileName = "D06_ex00_fileTest1.txt";
+
+        myCat.myCat(fileName.c_str());
+    }
+    cr_assert_stdout_eq_str
+    (
+        "I have something in this test"
+    );
+}
+
+Test(MyCat, test_MyCat_MyCat_several_files, .init = redirect_all_stdout)
+{
+    {
+        MyCat   myCat;
+        std::string fileName[] = {"D06_ex00_fileTest1.txt", "D06_ex00_fileTest2.txt"};
+
+        size_t size = sizeof(fileName) / sizeof(fileName[0]);
+        for (size_t i  = 0; i < size; ++i)
+            myCat.myCat(fileName[i]);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "I have something in this testIn this in file i have the other"
+    );
+}

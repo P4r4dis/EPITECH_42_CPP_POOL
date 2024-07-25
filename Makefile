@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/07/23 19:22:15 by Paradis          ###   ########.fr        #
+#    Updated: 2024/07/25 18:05:48 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,9 @@ EPITECH_EX00_UT_NAME 	= 	test_$(EPITECH_EX00_NAME)
 # # Files sources
 EPITECH_EX00_SRC		=	$(EPITECH_EX00_SRC_PATH)/MyCat.cpp \
 							$(EPITECH_EX00_BIN_PATH)/main.cpp
+							
+EPITECH_EX00_FILE_TEST	=	$(EPITECH_EX00_UT_PATH)/D06_ex00_fileTest1.txt \
+							$(EPITECH_EX00_UT_PATH)/D06_ex00_fileTest2.txt
 # # Files object
 EPITECH_EX00_OBJS		=	$(EPITECH_EX00_SRC:.cpp=.o)
 ##########################################################################
@@ -108,6 +111,8 @@ fclean					:	clean
 
 re						: 	clean fclean all
 ##########################################################################
+####### SCHOOL 42 #######
+##########################################################################
 42_ex00 				: 	fclean
 							@$(MAKE) -C $(42_EX00_PATH)
 							$(42_EX00_PATH)/$(42_EX00_NAME)
@@ -129,11 +134,18 @@ re						: 	clean fclean all
 							@$(MAKE) -s -C $(42_EX01_UT_PATH)
 							$(42_EX01_UT_PATH)/$(42_EX01_UT_NAME)
 							gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+##########################################################################
+####### SCHOOL EPITECH #######
+##########################################################################
+EPITECH_ex00 			: 	fclean
+							@$(MAKE) -C $(EPITECH_EX00_PATH)
+							$(EPITECH_EX00_PATH)/$(EPITECH_EX00_NAME) $(EPITECH_EX00_FILE_TEST)
 
 EPITECH_test_run_ex00	:	fclean
 							@$(MAKE) -s -C $(EPITECH_EX00_UT_PATH)
-							$(EPITECH_EX00_UT_PATH)/$(EPITECH_EX00_UT_NAME) --verbose
+# $(EPITECH_EX00_UT_PATH)/$(EPITECH_EX00_UT_NAME) --verbose
 							gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+##########################################################################
 
 tests_run				:	fclean
 							@$(MAKE) 42_test_run_ex00

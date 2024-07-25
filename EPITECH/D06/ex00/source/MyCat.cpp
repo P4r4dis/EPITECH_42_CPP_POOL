@@ -35,11 +35,18 @@ bool            MyCat::isDirectory(std::string directory)
 void            MyCat::myCat(std::string fileName)
 {
     std::fstream    fs;
+    std::string     line;
 
     fs.open(fileName.c_str(), std::ios_base::in);
-
     if (!fs.is_open())
+    {
         std::cerr << "my_cat: " << fileName << ": " << std::strerror(errno) << std::endl;
-    else if (isDirectory(fileName.c_str()))
         return ;
+    }
+    else if (isDirectory(fileName))
+        return ;
+    else
+        while (getline(fs, line, '\0'))
+            std::cout << line << std::flush;
+    fs.close();
 }

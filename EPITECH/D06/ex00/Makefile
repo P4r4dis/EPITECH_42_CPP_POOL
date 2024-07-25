@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Fri Jul 19 6:35:05 PM 2024 Paradis
-## Last update Sat Jul 19 6:49:08 PM 2024 Paradis
+## Last update Fri Jul 25 6:02:50 PM 2024 Paradis
 ##
 
 # # Compilateur
@@ -15,7 +15,8 @@ BIN_PATH	=	./bin
 SRC_PATH	=	./source
 INC_PATH	=	./include
 UT_PATH		=	./test
-
+FILE_TEST	=	$(UT_PATH)/D06_ex00_fileTest1.txt \
+				$(UT_PATH)/D06_ex00_fileTest2.txt
 
 NAME		=	my_cat
 UT_NAME 	= 	test_$(NAME)
@@ -46,7 +47,7 @@ all			:	$(NAME)
 
 $(NAME)		:	$(OBJS)
 				$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME) 
-				@valgrind --leak-check=full --show-leak-kinds=all  --error-exitcode=1 ./$(NAME) 2>&1 | tee valgrind_output.log || true
+				@valgrind --leak-check=full --show-leak-kinds=all  --error-exitcode=1 ./$(NAME) $(FILE_TEST) 2>&1 | tee valgrind_output.log || true
 				@if ! grep -q "definitely lost" valgrind_output.log; \
 				then \
 					echo -e "\033[32mNo memory leaks detected, running binary...\033[0m"; \
