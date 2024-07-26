@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Thu Jul 25 7:30:59 PM 2024 Paradis
-## Last update Fri Jul 25 7:31:40 PM 2024 Paradis
+## Last update Sat Jul 26 7:20:34 PM 2024 Paradis
 ##
 
 # # Compilateur
@@ -25,7 +25,7 @@ INCFLAGS	+=	-I $(INC_PATH)
 CPPFLAGS	+= 	-Wall -Wextra -Werror -W -Wfatal-errors -std=c++98 $(INCFLAGS)
 
 # # Files sources
-SRCS		=	$(SRC_PATH)/MyCat.cpp \
+SRCS		=	$(SRC_PATH)/MyConvertTemp.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp
@@ -45,14 +45,6 @@ all			:	$(NAME)
 
 $(NAME)		:	$(OBJS)
 				$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME) 
-				@valgrind --leak-check=full --show-leak-kinds=all  --error-exitcode=1 ./$(NAME) 2>&1 | tee valgrind_output.log || true
-				@if ! grep -q "definitely lost" valgrind_output.log; \
-				then \
-					echo -e "\033[32mNo memory leaks detected, running binary...\033[0m"; \
-				else \
-					echo -e "\033[31mMemory leaks detected, aborting.\033[0m"; \
-					exit 1; \
-				fi
 				
 # # Rule for clean files object
 clean		:

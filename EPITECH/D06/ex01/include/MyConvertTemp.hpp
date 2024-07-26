@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jul 25 7:34:27 PM 2024 Paradis
-** Last update Sat Jul 26 4:11:46 PM 2024 Paradis
+** Last update Sat Jul 26 5:02:18 PM 2024 Paradis
 */
 
 
@@ -24,6 +24,7 @@ class           MyConvertTemp
         std::string     myConversionToFahrenheit(std::string number);
         std::string     myConversionToCelsius(std::string number);
         void            display(std::string temp, std::string type);
+        void            process(void);
     protected:
     private:
 };

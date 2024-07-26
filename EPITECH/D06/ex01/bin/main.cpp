@@ -5,18 +5,15 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jul 19 6:27:04 PM 2024 Paradis
-** Last update Fri Jul 25 5:57:56 PM 2024 Paradis
+** Last update Sat Jul 26 6:58:17 PM 2024 Paradis
 */
 
-#include "../include/MyCat.hpp"
+#include "../include/MyConvertTemp.hpp"
 
-int main(int ac, char **av)
+int main(void)
 {
-    MyCat   myCat;
-    if (ac < 2)
-        myCat.usage();
-    else
-        for (int i = 1; i < ac; ++i)
-            myCat.myCat(av[i]);
+    MyConvertTemp   convertTemp;
+
+    convertTemp.process();
     return 0;
 }
