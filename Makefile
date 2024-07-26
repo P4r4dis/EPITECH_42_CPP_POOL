@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/07/25 18:05:48 by Paradis          ###   ########.fr        #
+#    Updated: 2024/07/25 19:40:19 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,22 @@ EPITECH_EX00_OBJS		=	$(EPITECH_EX00_SRC:.cpp=.o)
 							$(42_EX01_BIN_PATH)/main.cpp
 # # Files object
 42_EX01_OBJS			=	$(42_EX01_SRC:.cpp=.o)
+
+
+EPITECH_EX01_PATH 		= 	./EPITECH/D06/ex01
+EPITECH_EX01_BIN_PATH 	= 	./EPITECH/D06/ex01/bin
+EPITECH_EX01_SRC_PATH	=	./EPITECH/D06/ex01/source
+EPITECH_EX01_INC_PATH	=	./EPITECH/D06/ex01/include
+EPITECH_EX01_UT_PATH	=	./EPITECH/D06/ex01/test
+EPITECH_EX01_NAME		=	my_convert_temp
+EPITECH_EX01_UT_SRC		=	$(EPITECH_EX01_UT_PATH)/$(EPITECH_EX01_NAME)_test.cpp
+EPITECH_EX01_UT_NAME 	= 	test_$(EPITECH_EX01_NAME)
+# # Files sources
+EPITECH_EX01_SRC		=	$(EPITECH_EX01_SRC_PATH)/my_convert_temp.cpp \
+							$(EPITECH_EX01_BIN_PATH)/main.cpp
+							
+# # Files object
+EPITECH_EX01_OBJS		=	$(EPITECH_EX01_SRC:.cpp=.o)
 ##########################################################################
 42_EX02_PATH 			= 	./42/M00/ex02
 42_EX02_NAME			=	test
@@ -70,7 +86,8 @@ CPPFLAGS 				= 	-Wall -Wextra -Werror -W -Wfatal-errors -std=c++98
 # # Default rule for compile all
 all						:	$(42_EX00_NAME) \
 							$(42_EX01_NAME) \
-							$(EPITECH_EX00_NAME)
+							$(EPITECH_EX00_NAME) \
+							$(EPITECH_EX01_NAME)
 
 # # Rule for compiling all binaries
 $(42_EX00_NAME)			: 	$(42_EX00_OBJS)
@@ -81,6 +98,8 @@ $(42_EX01_NAME)			: 	$(42_EX01_OBJS)
 $(EPITECH_EX00_NAME)	: 	$(EPITECH_EX00_OBJS)
 							$(G++) $(CPPFLAGS) $(INCFLAGS)$(EPITECH_EX00_INC_PATH) $(EPITECH_EX00_OBJS) -o $(EPITECH_EX00_NAME)
 
+$(EPITECH_EX01_NAME)	: 	$(EPITECH_EX01_OBJS)
+							$(G++) $(CPPFLAGS) $(INCFLAGS)$(EPITECH_EX01_INC_PATH) $(EPITECH_EX01_OBJS) -o $(EPITECH_EX01_NAME)
 # $(NAME)					:	$(OBJS)
 # 							$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME) 
 # # Default rules for Clean, Fclean and RM
@@ -96,6 +115,8 @@ clean					:
 							@$(MAKE) -s $(CLEAN) -C $(42_EX01_PATH)
 							@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_UT_PATH)
 							@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_PATH)
+							@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX01_UT_PATH)
+							@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX01_PATH)
 
 							
 
@@ -108,6 +129,8 @@ fclean					:	clean
 							@$(MAKE) -s $(FCLEAN) -C $(42_EX01_PATH)
 							@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_UT_PATH)
 							@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_PATH)
+							@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX01_UT_PATH)
+							@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX01_PATH)
 
 re						: 	clean fclean all
 ##########################################################################
@@ -141,9 +164,17 @@ EPITECH_ex00 			: 	fclean
 							@$(MAKE) -C $(EPITECH_EX00_PATH)
 							$(EPITECH_EX00_PATH)/$(EPITECH_EX00_NAME) $(EPITECH_EX00_FILE_TEST)
 
+EPITECH_ex01 			: 	fclean
+							@$(MAKE) -C $(EPITECH_EX01_PATH)
+							$(EPITECH_EX01_PATH)/$(EPITECH_EX01_NAME)
+
 EPITECH_test_run_ex00	:	fclean
 							@$(MAKE) -s -C $(EPITECH_EX00_UT_PATH)
 # $(EPITECH_EX00_UT_PATH)/$(EPITECH_EX00_UT_NAME) --verbose
+
+EPITECH_test_run_ex01	:	fclean
+							@$(MAKE) -s -C $(EPITECH_EX01_UT_PATH)
+							$(EPITECH_EX01_UT_PATH)/$(EPITECH_EX01_UT_NAME) --verbose
 							gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 ##########################################################################
 
