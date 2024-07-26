@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jul 25 7:33:48 PM 2024 Paradis
-** Last update Sat Jul 26 3:41:38 PM 2024 Paradis
+** Last update Sat Jul 26 4:09:32 PM 2024 Paradis
 */
 
 #include <iostream>
@@ -51,12 +51,15 @@ std::string         MyConvertTemp::myConversionToCelsius(std::string number)
     return outStream.str();
 }
 
-// void                MyConvertTemp::display(std::string temp, std::string type)
-// {
-//     if (type == "Fahrenheit")
-//         std::cout   << std::setw(16) << temp << std::setw(16) << "Fahrenheit"
-//                     << std::endl;
-//     else
-//         std::cout   << std::setw(16) << temp << std::setw(16) << "Celsius"
-//                     << std::endl;
-// }
+void                MyConvertTemp::display(std::string temp, std::string type)
+{
+    if (type == "Fahrenheit")
+        std::cout   << std::setw(16) << temp << std::setw(16) << "Fahrenheit"
+                    << std::endl;
+    else if (type == "Celsius")
+        std::cout   << std::setw(16) << temp << std::setw(16) << "Celsius"
+                    << std::endl;
+    else
+        std::cout   << "You have to enter a number and the Scale (Fahrenheit or Celsius)"
+                    << std::endl;
+}
