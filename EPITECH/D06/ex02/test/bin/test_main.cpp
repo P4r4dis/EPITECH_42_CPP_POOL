@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jul 26 8:02:10 PM 2024 Paradis
-** Last update Sat Jul 26 9:16:36 PM 2024 Paradis
+** Last update Sat Jul 26 9:29:54 PM 2024 Paradis
 */
 
 
@@ -52,4 +52,20 @@ Test(SickKoala, Test_SickKoala_getName, .init = redirect_all_stdout)
 
         cr_assert(patient.getName() == "koala");
     }
+}
+
+
+Test(SickKoala, Test_SickKoala_poke_standard_output, .init = redirect_all_stdout)
+{
+    {
+        std::string name = "koala";
+        SickKoala   patient(name);
+
+        patient.poke();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Mr.koala: Gooeeeeerrk!!\n"
+        "Mr.koala: Kreooogg!! I'm cuuuured!\n"
+    );
 }

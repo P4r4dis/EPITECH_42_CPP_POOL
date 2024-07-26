@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jul 26 8:00:35 PM 2024 Paradis
-** Last update Sat Jul 26 9:08:36 PM 2024 Paradis
+** Last update Sat Jul 26 9:27:26 PM 2024 Paradis
 */
 
 #ifndef         SICKKOALA_HPP
@@ -20,6 +20,9 @@ class           SickKoala
         ~SickKoala(void);
 
         std::string         getName(void) const;
+
+        void                poke(void);
+
     protected:
     private:
         std::string         _name;

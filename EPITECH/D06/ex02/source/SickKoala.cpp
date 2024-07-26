@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jul 26 8:01:29 PM 2024 Paradis
-** Last update Sat Jul 26 9:18:34 PM 2024 Paradis
+** Last update Sat Jul 26 9:28:46 PM 2024 Paradis
 */
 
 
@@ -25,4 +25,9 @@ SickKoala::~SickKoala(void)
 std::string         SickKoala::getName(void) const
 {
     return _name;
+}
+
+void                SickKoala::poke(void)
+{
+    std::cout << "Mr.koala: Gooeeeeerrk!!" << std::endl;
 }
