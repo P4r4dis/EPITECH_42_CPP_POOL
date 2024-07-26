@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jul 25 7:33:48 PM 2024 Paradis
-** Last update Sat Jul 26 3:32:09 PM 2024 Paradis
+** Last update Sat Jul 26 3:41:38 PM 2024 Paradis
 */
 
 #include <iostream>
@@ -36,20 +36,20 @@ std::string         MyConvertTemp::myConversionToFahrenheit(std::string number)
     return outStream.str();
 }
 
-// std::string         MyConvertTemp::myConversionToCelsius(std::string number)
-// {
-//     float               fahrenheit = 0.0;
-//     float               result_cel = 0.0;
-//     std::stringstream   strStream(number);
-//     std::ostringstream  outStream;
+std::string         MyConvertTemp::myConversionToCelsius(std::string number)
+{
+    float               fahrenheit = 0.0;
+    float               result_cel = 0.0;
+    std::stringstream   strStream(number);
+    std::ostringstream  outStream;
     
-//     strStream >> fahrenheit;
-//     strStream.clear();
-//     if (!number.empty())
-//         result_cel = (5.0 / 9.0) * (fahrenheit - 32);
-//     outStream   << std::fixed << std::setprecision(3) << result_cel;
-//     return outStream.str();
-// }
+    strStream >> fahrenheit;
+    strStream.clear();
+    if (!number.empty())
+        result_cel = (5.0 / 9.0) * (fahrenheit - 32);
+    outStream   << std::fixed << std::setprecision(3) << result_cel;
+    return outStream.str();
+}
 
 // void                MyConvertTemp::display(std::string temp, std::string type)
 // {

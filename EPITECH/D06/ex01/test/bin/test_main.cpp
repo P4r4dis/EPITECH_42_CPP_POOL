@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jul 25 7:32:32 PM 2024 Paradis
-** Last update Sat Jul 26 3:31:43 PM 2024 Paradis
+** Last update Sat Jul 26 3:41:32 PM 2024 Paradis
 */
 
 
@@ -46,6 +46,22 @@ Test(MyConvertTemp, Test_MyConvertTemp_myConversionToFahrenheit)
     cr_assert(myConvertTemp.myConversionToFahrenheit(number) == "14.000");
 }
 
+Test(MyConvertTemp, Test_MyConvertTemp_myConversionToCelsius_isDefined)
+{
+    MyConvertTemp   myConvertTemp;
+    std::string     number;
+    
+    myConvertTemp.myConversionToCelsius(number);
+}
+
+Test(MyConvertTemp, Test_MyConvertTemp_myConversionToCelsius)
+{
+    MyConvertTemp   myConvertTemp;
+    std::string     number = "46.400";
+    
+    cr_assert(myConvertTemp.myConversionToCelsius(number) == "8.000");
+}
+
 // Test(MyConvertTemp, Test_MyConvertTemp_display_isDefined,
 //                     .init = redirect_all_stdout)
 // {
@@ -67,20 +83,4 @@ Test(MyConvertTemp, Test_MyConvertTemp_myConversionToFahrenheit)
 //     cr_assert_stdout_eq_str(
 //         "          14.000      Fahrenheit\n"
 //     );
-// }
-
-// Test(MyConvertTemp, Test_MyConvertTemp_myConversionToCelsius_isDefined)
-// {
-//     MyConvertTemp   myConvertTemp;
-//     std::string     number;
-    
-//     myConvertTemp.myConversionToCelsius(number);
-// }
-
-// Test(MyConvertTemp, Test_MyConvertTemp_myConversionToCelsius)
-// {
-//     MyConvertTemp   myConvertTemp;
-//     std::string     number = "-10";
-//     myConvertTemp.myConversionToCelsius(number)
-//     cr_assert(myConvertTemp.myConversionToCelsius(number) == "14.000");
 // }
