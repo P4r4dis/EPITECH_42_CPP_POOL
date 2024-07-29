@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jul 26 8:02:10 PM 2024 Paradis
-** Last update Tue Jul 29 4:26:17 PM 2024 Paradis
+** Last update Tue Jul 29 6:06:39 PM 2024 Paradis
 */
 
 
@@ -151,6 +151,51 @@ Test(SickKoala, Test_SickKoala_matchs_with_Kinder_string_and_return_true_with_st
     cr_assert_stdout_eq_str
     (
         "Mr.koala: There is a toy inside!\n"
+        "Mr.koala: Kreooogg!! I'm cuuuured!\n"
+    );
+}
+
+Test(SickKoala, Test_SickKoala_overDrive, .init = redirect_all_stdout)
+{
+    {
+        std::string name = "koala";
+        std::string str = "Kreog! Im a peace!";
+        SickKoala   patient(name);
+
+        patient.overDrive(str);
+    }
+}
+
+Test(SickKoala, Test_SickKoala_overDrive_replace_one_occurence_Kreog_by_1337
+, .init = redirect_all_stdout)
+{
+    {
+        std::string name = "koala";
+        std::string str = "Kreog! Im a peace!";
+        SickKoala   patient(name);
+
+        patient.overDrive(str);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Mr.koala: 1337! Im a peace!\n"
+        "Mr.koala: Kreooogg!! I'm cuuuured!\n"
+    );
+}
+
+Test(SickKoala, Test_SickKoala_overDrive_replace_several_occurence_Kreog_by_1337
+, .init = redirect_all_stdout)
+{
+    {
+        std::string name = "koala";
+        std::string str = "Kreog! Im a peace, Kreog!";
+        SickKoala   patient(name);
+
+        patient.overDrive(str);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Mr.koala: 1337! Im a peace, 1337!\n"
         "Mr.koala: Kreooogg!! I'm cuuuured!\n"
     );
 }

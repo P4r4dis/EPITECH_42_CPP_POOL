@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jul 26 8:01:29 PM 2024 Paradis
-** Last update Tue Jul 29 4:13:25 PM 2024 Paradis
+** Last update Tue Jul 29 6:04:24 PM 2024 Paradis
 */
 
 
@@ -52,4 +52,12 @@ bool                SickKoala::takeDrug(std::string drug)
                     << std::endl;
         return false;  
     }
+}
+
+void                SickKoala::overDrive(std::string str)
+{
+    while (str.find("Kreog!") != std::string::npos)
+        str.replace(str.find("Kreog!"), sizeof(str.find("Kreog!")) - 2, "1337!");
+
+    std::cout << "Mr." << _name << ": " << str << std::endl;
 }
