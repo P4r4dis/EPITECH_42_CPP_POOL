@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jul 29 6:37:17 PM 2024 Paradis
-** Last update Tue Jul 29 7:54:12 PM 2024 Paradis
+** Last update Tue Jul 29 8:23:40 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -295,5 +295,78 @@ Test(KoalaNurse, Test_KoalaNurse_giveDrug_anything_stdout, .init = redirect_all_
         "Mr.Koala: Goerkreog!\n"
         "Nurse 0: Finally some rest!\n"
         "Mr.Koala: Kreooogg!! I'm cuuuured!\n"
+    );
+}
+
+Test(KoalaNurse, Test_KoalaNurse_timeCheck_isDefined, .init = redirect_all_stdout)
+{
+    {
+        int             id = 0;
+        KoalaNurse      nurse(id);
+
+        nurse.timeCheck();
+    }
+}
+
+Test(KoalaNurse, Test_KoalaNurse_getTimeToWork_return_false
+, .init = redirect_all_stdout)
+{
+    {
+        int             id = 0;
+        KoalaNurse      nurse(id);
+
+        cr_assert(nurse.getTimeToWork() == false);
+    }
+}
+
+Test(KoalaNurse, Test_KoalaNurse_timeCheck_with_timeToWork_return_true
+, .init = redirect_all_stdout)
+{
+    {
+        int             id = 0;
+        KoalaNurse      nurse(id);
+
+        cr_assert(nurse.getTimeToWork() == false);
+        nurse.timeCheck();
+        cr_assert(nurse.getTimeToWork() == true);
+    }
+}
+
+Test(KoalaNurse, Test_KoalaNurse_timeCheck_working_stdout
+, .init = redirect_all_stdout)
+{
+    {
+        int             id = 0;
+        KoalaNurse      nurse(id);
+
+        cr_assert(nurse.getTimeToWork() == false);
+        nurse.timeCheck();
+        cr_assert(nurse.getTimeToWork() == true);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Nurse 0: Time to get to work!\n"
+        "Nurse 0: Finally some rest!\n"
+    );
+}
+
+Test(KoalaNurse, Test_KoalaNurse_timeCheck_not_working_stdout
+, .init = redirect_all_stdout)
+{
+    {
+        int             id = 0;
+        KoalaNurse      nurse(id);
+
+        cr_assert(nurse.getTimeToWork() == false);
+        nurse.timeCheck();
+        cr_assert(nurse.getTimeToWork() == true);
+        nurse.timeCheck();
+        cr_assert(nurse.getTimeToWork() == false);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Nurse 0: Time to get to work!\n"
+        "Nurse 0: Time to go home to my eucalyptus forest!\n"
+        "Nurse 0: Finally some rest!\n"
     );
 }
