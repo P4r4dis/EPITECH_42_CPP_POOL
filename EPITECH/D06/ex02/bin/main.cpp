@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jul 26 7:59:50 PM 2024 Paradis
-** Last update Sat Jul 26 8:00:06 PM 2024 Paradis
+** Last update Tue Jul 29 6:13:39 PM 2024 Paradis
 */
 
 
@@ -14,5 +14,12 @@
 
 int main(void)
 {
+    SickKoala   patient("Koala");
+
+    patient.poke();
+    patient.takeDrug("Mars");
+    patient.takeDrug("Kinder");
+    patient.takeDrug("anything");
+    patient.overDrive("Kreog! How's it going?");
     return 0;
 }
