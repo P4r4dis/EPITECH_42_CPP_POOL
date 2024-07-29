@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jul 26 8:01:29 PM 2024 Paradis
-** Last update Sat Jul 26 9:28:46 PM 2024 Paradis
+** Last update Tue Jul 29 4:13:25 PM 2024 Paradis
 */
 
 
@@ -30,4 +30,26 @@ std::string         SickKoala::getName(void) const
 void                SickKoala::poke(void)
 {
     std::cout << "Mr.koala: Gooeeeeerrk!!" << std::endl;
+}
+
+bool                SickKoala::takeDrug(std::string drug)
+{
+    if (drug == "Mars")
+    {
+        std::cout   << "Mr." << _name << ": Mars, and it kreogs!"
+                    << std::endl;
+        return true;
+    }
+    else if (drug == "Kinder")
+    {
+        std::cout   << "Mr." << _name << ": There is a toy inside!"
+                    << std::endl;
+        return true;       
+    }
+    else
+    {
+        std::cout   << "Mr." << _name << ": Goerkreog!"
+                    << std::endl;
+        return false;  
+    }
 }

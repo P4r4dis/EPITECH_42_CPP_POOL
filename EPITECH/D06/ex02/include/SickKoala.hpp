@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jul 26 8:00:35 PM 2024 Paradis
-** Last update Sat Jul 26 9:27:26 PM 2024 Paradis
+** Last update Tue Jul 29 4:06:38 PM 2024 Paradis
 */
 
 #ifndef         SICKKOALA_HPP
@@ -22,6 +22,7 @@ class           SickKoala
         std::string         getName(void) const;
 
         void                poke(void);
+        bool                takeDrug(std::string drug);
 
     protected:
     private:
