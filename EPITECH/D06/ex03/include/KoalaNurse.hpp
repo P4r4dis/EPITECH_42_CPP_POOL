@@ -5,10 +5,12 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jul 29 6:34:21 PM 2024 Paradis
-** Last update Tue Jul 29 7:34:22 PM 2024 Paradis
+** Last update Tue Jul 29 7:41:18 PM 2024 Paradis
 */
 
 #include <string>
+
+#include "SickKoala.hpp"
 
 #ifndef                 __KOALANURSE_HPP__
     #define             __KOALANURSE_HPP__
@@ -20,6 +22,8 @@ class   KoalaNurse
         ~KoalaNurse(void);
 
         int     getId(void) const;
+
+        void    giveDrug(std::string drug, SickKoala *koala);
 
     protected:
     private:

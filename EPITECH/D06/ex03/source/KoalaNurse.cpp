@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jul 29 6:40:33 PM 2024 Paradis
-** Last update Tue Jul 29 7:34:35 PM 2024 Paradis
+** Last update Tue Jul 29 7:48:58 PM 2024 Paradis
 */
 #include <iostream>
 
@@ -23,4 +23,9 @@ KoalaNurse::~KoalaNurse(void)
 int         KoalaNurse::getId(void) const
 {
     return _id;
+}
+
+void        KoalaNurse::giveDrug(std::string drug, SickKoala *koala)
+{
+    koala->takeDrug(drug);
 }

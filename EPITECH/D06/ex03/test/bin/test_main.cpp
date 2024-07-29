@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jul 29 6:37:17 PM 2024 Paradis
-** Last update Tue Jul 29 7:36:22 PM 2024 Paradis
+** Last update Tue Jul 29 7:54:12 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -219,7 +219,7 @@ Test(KoalaNurse, Test_KoalaNurse_DTOR_output, .init = redirect_all_stdout)
     );
 }
 
-Test(KoalaNurse, Test_KoalaNurse_getId)
+Test(KoalaNurse, Test_KoalaNurse_getId, .init = redirect_all_stdout)
 {
     {
         int          id = 0;
@@ -229,18 +229,71 @@ Test(KoalaNurse, Test_KoalaNurse_getId)
     }
 }
 
-// Test(KoalaNurse, Test_KoalaNurse_giveDrug, .init = redirect_all_stdout)
-// {
-//     {
-//         int             id = 0;
-//         std::string     name = "Koala";
-//         SickKoala       patient(name);
-//         KoalaNurse      nurse(id);
+Test(KoalaNurse, Test_KoalaNurse_giveDrug_isDefined, .init = redirect_all_stdout)
+{
+    {
+        int             id = 0;
+        std::string     name = "Koala";
+        SickKoala       patient(name);
+        KoalaNurse      nurse(id);
 
-//         // nurse.giveDrug("Mars", &patient);
-//     }
-//     cr_assert_stdout_eq_str
-//     (
-//         "Nurse 0: Finally some rest!\n"
-//     );
-// }
+        nurse.giveDrug("Mars", &patient);
+    }
+}
+
+Test(KoalaNurse, Test_KoalaNurse_giveDrug_Mars_stdout, .init = redirect_all_stdout)
+{
+    {
+        int             id = 0;
+        std::string     name = "Koala";
+        std::string     drug = "Mars";
+        SickKoala       patient(name);
+        KoalaNurse      nurse(id);
+
+        nurse.giveDrug(drug, &patient);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Mr.Koala: Mars, and it kreogs!\n"
+        "Nurse 0: Finally some rest!\n"
+        "Mr.Koala: Kreooogg!! I'm cuuuured!\n"
+    );
+}
+
+Test(KoalaNurse, Test_KoalaNurse_giveDrug_Kinder_stdout, .init = redirect_all_stdout)
+{
+    {
+        int             id = 0;
+        std::string     name = "Koala";
+        std::string     drug = "Kinder";
+        SickKoala       patient(name);
+        KoalaNurse      nurse(id);
+
+        nurse.giveDrug(drug, &patient);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Mr.Koala: There is a toy inside!\n"
+        "Nurse 0: Finally some rest!\n"
+        "Mr.Koala: Kreooogg!! I'm cuuuured!\n"
+    );
+}
+
+Test(KoalaNurse, Test_KoalaNurse_giveDrug_anything_stdout, .init = redirect_all_stdout)
+{
+    {
+        int             id = 0;
+        std::string     name = "Koala";
+        std::string     drug = "anything";
+        SickKoala       patient(name);
+        KoalaNurse      nurse(id);
+
+        nurse.giveDrug(drug, &patient);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Mr.Koala: Goerkreog!\n"
+        "Nurse 0: Finally some rest!\n"
+        "Mr.Koala: Kreooogg!! I'm cuuuured!\n"
+    );
+}
