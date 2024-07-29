@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jul 29 6:34:21 PM 2024 Paradis
-** Last update Tue Jul 29 7:02:54 PM 2024 Paradis
+** Last update Tue Jul 29 7:34:22 PM 2024 Paradis
 */
 
 #include <string>
@@ -16,14 +16,14 @@
 class   KoalaNurse 
 {
     public:
-        KoalaNurse(std::string id);
+        KoalaNurse(int id);
         ~KoalaNurse(void);
 
-        std::string     getId(void) const;
+        int     getId(void) const;
 
     protected:
     private:
-        std::string     _id;
+        int     _id;
 };
 
 #endif                  /* !__KOALANURSE_HPP__ */

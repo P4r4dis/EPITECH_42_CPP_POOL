@@ -5,13 +5,13 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jul 29 6:40:33 PM 2024 Paradis
-** Last update Tue Jul 29 7:03:26 PM 2024 Paradis
+** Last update Tue Jul 29 7:34:35 PM 2024 Paradis
 */
 #include <iostream>
 
 #include "../include/KoalaNurse.hpp"
 
-KoalaNurse::KoalaNurse(std::string id)  : _id(id)
+KoalaNurse::KoalaNurse(int id)  : _id(id)
 {
 }
 
@@ -20,7 +20,7 @@ KoalaNurse::~KoalaNurse(void)
     std::cout << "Nurse " << _id << ": Finally some rest!" << std::endl;
 }
 
-std::string         KoalaNurse::getId(void) const
+int         KoalaNurse::getId(void) const
 {
     return _id;
 }

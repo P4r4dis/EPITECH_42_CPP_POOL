@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jul 29 6:37:17 PM 2024 Paradis
-** Last update Tue Jul 29 7:02:33 PM 2024 Paradis
+** Last update Tue Jul 29 7:36:22 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -201,7 +201,7 @@ Test(SickKoala, Test_SickKoala_overDrive_replace_several_occurence_Kreog_by_1337
 
 Test(KoalaNurse, Test_KoalaNurse_CTOR, .init = redirect_all_stdout)
 {
-    std::string id = "0";
+    int          id = 0;
     KoalaNurse   nurse(id);
     
     cr_assert_not_null(&nurse);
@@ -210,7 +210,7 @@ Test(KoalaNurse, Test_KoalaNurse_CTOR, .init = redirect_all_stdout)
 Test(KoalaNurse, Test_KoalaNurse_DTOR_output, .init = redirect_all_stdout)
 {
     {
-        std::string id = "0";
+        int          id = 0;
         KoalaNurse   nurse(id);
     }
     cr_assert_stdout_eq_str
@@ -222,9 +222,25 @@ Test(KoalaNurse, Test_KoalaNurse_DTOR_output, .init = redirect_all_stdout)
 Test(KoalaNurse, Test_KoalaNurse_getId)
 {
     {
-        std::string id = "0";
+        int          id = 0;
         KoalaNurse   nurse(id);
 
-        cr_assert(nurse.getId() == "0");
+        cr_assert(nurse.getId() == 0);
     }
 }
+
+// Test(KoalaNurse, Test_KoalaNurse_giveDrug, .init = redirect_all_stdout)
+// {
+//     {
+//         int             id = 0;
+//         std::string     name = "Koala";
+//         SickKoala       patient(name);
+//         KoalaNurse      nurse(id);
+
+//         // nurse.giveDrug("Mars", &patient);
+//     }
+//     cr_assert_stdout_eq_str
+//     (
+//         "Nurse 0: Finally some rest!\n"
+//     );
+// }
