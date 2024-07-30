@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Jul 30 5:33:47 PM 2024 Paradis
-** Last update Wed Jul 30 6:10:06 PM 2024 Paradis
+** Last update Wed Jul 30 6:26:04 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -470,4 +470,56 @@ Test(KoalaDoctor, Test_KoalaDoctor_getName, .init = redirect_all_stdout)
     KoalaDoctor  doctor("Doc");
     
     cr_assert(doctor.getName() == "Doc");
+}
+
+Test(KoalaDoctor, Test_KoalaDoctor_getTimeCheck, .init = redirect_all_stdout)
+{
+    KoalaDoctor  doctor("Doc");
+    
+    cr_assert(doctor.getTimeCheck() == false);
+}
+
+Test(KoalaDoctor, Test_KoalaDoctor_timeCheck_call_getTimeCheck_return_true,
+                                                .init = redirect_all_stdout)
+{
+    KoalaDoctor  doctor("Doc");
+    
+    cr_assert(doctor.getTimeCheck() == false);
+    doctor.timeCheck();
+    cr_assert(doctor.getTimeCheck() == true);
+}
+
+Test(KoalaDoctor,
+Test_KoalaDoctor_timeCheck_call_getTimeCheck_return_true_with_stdout,
+                                        .init = redirect_all_stdout)
+{
+    KoalaDoctor  doctor("Doc");
+    
+    cr_assert(doctor.getTimeCheck() == false);
+    doctor.timeCheck();
+    cr_assert(doctor.getTimeCheck() == true);
+    cr_assert_stdout_eq_str
+    (
+        "Dr.Doc: I'm Dr.Doc! How do you kreog?\n"
+        "Dr.Doc: Time to get to work!\n"
+    );
+}
+
+Test(KoalaDoctor,
+Test_KoalaDoctor_timeCheck_call_getTimeCheck_return_false_with_stdout,
+                                        .init = redirect_all_stdout)
+{
+    KoalaDoctor  doctor("Doc");
+    
+    cr_assert(doctor.getTimeCheck() == false);
+    doctor.timeCheck();
+    cr_assert(doctor.getTimeCheck() == true);
+    doctor.timeCheck();
+    cr_assert(doctor.getTimeCheck() == false);
+    cr_assert_stdout_eq_str
+    (
+        "Dr.Doc: I'm Dr.Doc! How do you kreog?\n"
+        "Dr.Doc: Time to get to work!\n"\
+        "Dr.Doc: Time to go home to my eucalyptus forest!\n"
+    );
 }

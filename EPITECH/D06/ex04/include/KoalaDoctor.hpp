@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Jul 30 5:58:15 PM 2024 Paradis
-** Last update Wed Jul 30 6:08:59 PM 2024 Paradis
+** Last update Wed Jul 30 6:17:06 PM 2024 Paradis
 */
 
 #include <string>
@@ -18,11 +18,15 @@ class	KoalaDoctor
         KoalaDoctor(std::string name);
         ~KoalaDoctor(void);
 
-        std::string getName(void) const;
+        std::string     getName(void) const;
+        bool            getTimeCheck(void) const;
+
+        void            timeCheck(void);
 
     protected:
     private:
-    std::string     _name;
+        std::string     _name;
+        bool            _timeCheck;
 };
 
 #endif 				/* !__KOALADOCTOR_HPP___ */
