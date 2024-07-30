@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/07/30 17:00:55 by Paradis          ###   ########.fr        #
+#    Updated: 2024/07/30 17:33:22 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,6 +109,23 @@ EPITECH_EX03_SRC		=	$(EPITECH_EX03_SRC_PATH)/SickKoala.cpp \
 # # Files object
 EPITECH_EX03_OBJS		=	$(EPITECH_EX02_SRC:.cpp=.o)
 ##########################################################################
+EPITECH_EX04_PATH 		= 	./EPITECH/D06/ex04
+EPITECH_EX04_BIN_PATH 	= 	./EPITECH/D06/ex04/bin
+EPITECH_EX04_SRC_PATH	=	./EPITECH/D06/ex04/source
+EPITECH_EX04_INC_PATH	=	./EPITECH/D06/ex04/include
+EPITECH_EX04_UT_PATH	=	./EPITECH/D06/ex04/test
+EPITECH_EX04_NAME		=	doctor
+EPITECH_EX04_UT_SRC		=	$(EPITECH_EX04_UT_PATH)/$(EPITECH_EX04_NAME)_test.cpp
+EPITECH_EX04_UT_NAME 	= 	test_$(EPITECH_EX04_NAME)
+# # Files sources
+EPITECH_EX04_SRC		=	$(EPITECH_EX04_SRC_PATH)/SickKoala.cpp \
+							$(EPITECH_EX04_SRC_PATH)/KoalaNurse.cpp \
+							$(EPITECH_EX04_SRC_PATH)/KoalaDoctor.cpp \
+							$(EPITECH_EX04_BIN_PATH)/main.cpp
+							
+# # Files object
+EPITECH_EX04_OBJS		=	$(EPITECH_EX02_SRC:.cpp=.o)
+##########################################################################
 # # Compilation and options compilation
 G++ 					= 	g++
 INCFLAGS				= 	-I
@@ -122,7 +139,8 @@ all						:	$(42_EX00_NAME) \
 							$(EPITECH_EX00_NAME) \
 							$(EPITECH_EX01_NAME) \
 							$(EPITECH_EX02_NAME) \
-							$(EPITECH_EX03_NAME)
+							$(EPITECH_EX03_NAME) \
+							$(EPITECH_EX04_NAME)
 
 # # Rule for compiling all binaries
 $(42_EX00_NAME)			: 	$(42_EX00_OBJS)
@@ -141,6 +159,9 @@ $(EPITECH_EX02_NAME)	: 	$(EPITECH_EX02_OBJS)
 
 $(EPITECH_EX03_NAME)	: 	$(EPITECH_EX03_OBJS)
 							$(G++) $(CPPFLAGS) $(INCFLAGS)$(EPITECH_EX03_INC_PATH) $(EPITECH_EX03_OBJS) -o $(EPITECH_EX03_NAME)
+
+$(EPITECH_EX04_NAME)	: 	$(EPITECH_EX04_OBJS)
+							$(G++) $(CPPFLAGS) $(INCFLAGS)$(EPITECH_EX04_INC_PATH) $(EPITECH_EX04_OBJS) -o $(EPITECH_EX04_NAME)
 # $(NAME)					:	$(OBJS)
 # 							$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME) 
 # # Default rules for Clean, Fclean and RM
@@ -162,6 +183,8 @@ clean					:
 							@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX02_PATH)
 							@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX03_UT_PATH)
 							@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX03_PATH)
+							@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_UT_PATH)
+							@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_PATH)
 							
 
 # # Rule compiling object files and binaries name
@@ -179,6 +202,8 @@ fclean					:	clean
 							@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX02_PATH)
 							@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX03_UT_PATH)
 							@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX03_PATH)
+							@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_UT_PATH)
+							@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_PATH)
 
 re						: 	clean fclean all
 ##########################################################################
@@ -222,8 +247,9 @@ EPITECH_ex02 			: 	fclean
 
 EPITECH_ex03 			: 	fclean
 							cd $(EPITECH_EX03_PATH) && $(MAKE) && ./$(EPITECH_EX03_NAME)
-# @$(MAKE) -C $(EPITECH_EX03_PATH)
-# $(EPITECH_EX03_PATH)/$(EPITECH_EX03_NAME)
+
+EPITECH_ex04 			: 	fclean
+							cd $(EPITECH_EX04_PATH) && $(MAKE) && ./$(EPITECH_EX04_NAME)
 
 EPITECH_test_run_ex00	:	fclean
 							@$(MAKE) -s -C $(EPITECH_EX00_UT_PATH)
@@ -241,8 +267,10 @@ EPITECH_test_run_ex02	:	fclean
 
 EPITECH_test_run_ex03	:	fclean
 							cd $(EPITECH_EX03_UT_PATH) && $(MAKE) && ./$(EPITECH_EX03_UT_NAME) --verbose
-# @$(MAKE) -s -C $(EPITECH_EX03_UT_PATH)
-# $(EPITECH_EX03_UT_PATH)/$(EPITECH_EX03_UT_NAME)
+							gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+
+EPITECH_test_run_ex04	:	fclean
+							cd $(EPITECH_EX04_UT_PATH) && $(MAKE) && ./$(EPITECH_EX04_UT_NAME) --verbose
 							gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 ##########################################################################
 
