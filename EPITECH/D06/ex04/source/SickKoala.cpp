@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Jul 30 6:03:28 PM 2024 Paradis
-** Last update Wed Jul 30 6:03:33 PM 2024 Paradis
+** Last update Wed Jul 30 6:58:31 PM 2024 Paradis
 */
 
 #include <iostream>
@@ -28,7 +28,7 @@ std::string         SickKoala::getName(void) const
 
 void                SickKoala::poke(void)
 {
-    std::cout << "Mr.koala: Gooeeeeerrk!!" << std::endl;
+    std::cout << "Mr." << _name << ": Gooeeeeerrk!!" << std::endl;
 }
 
 bool                SickKoala::takeDrug(std::string drug)

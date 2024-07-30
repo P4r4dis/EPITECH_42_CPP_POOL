@@ -5,9 +5,11 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Jul 30 6:03:42 PM 2024 Paradis
-** Last update Wed Jul 30 6:26:46 PM 2024 Paradis
+** Last update Wed Jul 30 8:33:25 PM 2024 Paradis
 */
 #include <iostream>
+#include <fstream>
+
 #include "KoalaDoctor.hpp"
 
 KoalaDoctor::KoalaDoctor(std::string name)  :   _name(name),
@@ -42,4 +44,22 @@ void                KoalaDoctor::timeCheck(void)
         std::cout   << "Dr." << _name 
                     << ": Time to go home to my eucalyptus forest!"
                     << std::endl;
+}
+
+void                KoalaDoctor::diagnose(SickKoala *patient)
+{
+    std::string     nameFile = patient->getName() + ".report";
+    std::ofstream   report(nameFile);
+    
+    std::cout   << "Dr." << _name << ": So what's goerking you Mr." 
+                << patient->getName() << "?" << std::endl;
+    patient->poke();
+    if (report.is_open())
+    {
+        std::string  drug[5] = {"Mars", "Kinder", "Crunch", "Maroilles"
+                                                    , "Eucalyptus leaf"};
+        report << drug[random() % 5];
+        report.close();
+    }
+    return ;
 }

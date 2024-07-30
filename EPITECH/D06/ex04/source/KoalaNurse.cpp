@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Jul 30 6:03:21 PM 2024 Paradis
-** Last update Wed Jul 30 6:03:23 PM 2024 Paradis
+** Last update Wed Jul 30 8:35:52 PM 2024 Paradis
 */
 
 
@@ -62,7 +62,7 @@ std::string KoalaNurse::readReport(std::string fileName)
     fs.open(fileName.c_str(), std::fstream::in);
     if (fs.is_open())
     {
-        while(std::getline(fs, drug)) ;
+        while(std::getline(fs, drug, '\0')) ;
         if (!namePatient.empty() && !drug.empty())
             std::cout   << "Nurse " << _id << ": Kreog! Mr."
                         << namePatient << " needs a " << drug << "!"

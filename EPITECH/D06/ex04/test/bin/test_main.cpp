@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Jul 30 5:33:47 PM 2024 Paradis
-** Last update Wed Jul 30 6:26:04 PM 2024 Paradis
+** Last update Wed Jul 30 8:41:05 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -521,5 +521,107 @@ Test_KoalaDoctor_timeCheck_call_getTimeCheck_return_false_with_stdout,
         "Dr.Doc: I'm Dr.Doc! How do you kreog?\n"
         "Dr.Doc: Time to get to work!\n"\
         "Dr.Doc: Time to go home to my eucalyptus forest!\n"
+    );
+}
+
+Test(KoalaDoctor, Test_KoalaDoctor_diagnose_isDefined,
+                            .init = redirect_all_stdout)
+{
+    KoalaDoctor     doctor("Doc");
+    SickKoala       patient("Koalax");
+
+    doctor.diagnose(&patient);
+}
+
+// Test(KoalaDoctor, Test_KoalaDoctor_diagnose_stdout,
+//                             .init = redirect_all_stdout)
+// {
+//     {
+//         KoalaDoctor     doctor("Doc");
+//         SickKoala       patient("Koala");
+
+//         doctor.diagnose(&patient);
+//     }
+//     cr_assert_stdout_eq_str
+//     (
+//         "Dr.Doc: I'm Dr.Doc! How do you kreog?\n"
+//         "Dr.Doc: So what's goerking you Mr.Koala?\n"
+//         "Mr.Koala: Kreooogg!! I'm cuuuured!\n"
+//     );
+// }
+
+Test(KoalaDoctor, Test_KoalaDoctor_diagnose_call_SickKoala_poke_stdout,
+                                            .init = redirect_all_stdout)
+{
+    {
+        KoalaDoctor     doctor("Doc");
+        SickKoala       patient("Koalax");
+
+        doctor.diagnose(&patient);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Dr.Doc: I'm Dr.Doc! How do you kreog?\n"
+        "Dr.Doc: So what's goerking you Mr.Koalax?\n"
+        "Mr.Koalax: Gooeeeeerrk!!\n"
+        "Mr.Koalax: Kreooogg!! I'm cuuuured!\n"
+    );
+}
+
+Test(KoalaDoctor, Test_KoalaDoctor_diagnose_create_fileReport,
+                                    .init = redirect_all_stdout)
+{
+    {
+        KoalaDoctor     doctor("Doc");
+        SickKoala       patient("Koalax");
+
+        doctor.diagnose(&patient);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Dr.Doc: I'm Dr.Doc! How do you kreog?\n"
+        "Dr.Doc: So what's goerking you Mr.Koalax?\n"
+        "Mr.Koalax: Gooeeeeerrk!!\n"
+        "Mr.Koalax: Kreooogg!! I'm cuuuured!\n"
+    );
+}
+
+Test(KoalaDoctor, Test_KoalaDoctor_diagnose_open_fileReport,
+                                    .init = redirect_all_stdout)
+{
+    {
+        KoalaDoctor     doctor("Doc");
+        SickKoala       patient("Koalax");
+
+        doctor.diagnose(&patient);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Dr.Doc: I'm Dr.Doc! How do you kreog?\n"
+        "Dr.Doc: So what's goerking you Mr.Koalax?\n"
+        "Mr.Koalax: Gooeeeeerrk!!\n"
+        "Mr.Koalax: Kreooogg!! I'm cuuuured!\n"
+    );
+}
+
+Test(KoalaDoctor, Test_KoalaDoctor_diagnose_write_report,
+.init = redirect_all_stdout)
+{
+    {
+        KoalaDoctor     doctor("Doc");
+        SickKoala       patient("Koalax");
+        KoalaNurse      nurse(0);
+
+        doctor.diagnose(&patient);
+        cr_assert(nurse.readReport(patient.getName() + ".report") == "Maroilles");
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Dr.Doc: I'm Dr.Doc! How do you kreog?\n"
+        "Dr.Doc: So what's goerking you Mr.Koalax?\n"
+        "Mr.Koalax: Gooeeeeerrk!!\n"
+        "Nurse 0: Kreog! Mr.Koalax needs a Maroilles!\n"
+        "Nurse 0: Finally some rest!\n"
+        "Mr.Koalax: Kreooogg!! I'm cuuuured!\n"
     );
 }
