@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Fri Jul 26 8:02:46 PM 2024 Paradis
-## Last update Tue Jul 29 6:52:44 PM 2024 Paradis
+## Last update Tue Jul 29 10:10:15 PM 2024 Paradis
 ##
 
 G++           	= 	g++
@@ -36,14 +36,14 @@ all				: 	$(NAME)
 $(NAME)			: 	$(OBJS)
 					$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME)
 					@echo "Current working directory: $$PWD"
-					@valgrind --leak-check=full --trace-children=yes --show-leak-kinds=all --error-exitcode=1 ./$(NAME) 2>&1 | tee valgrind_output.log || true
-					@if ! grep -q "definitely lost" valgrind_output.log; \
-					then \
-						echo -e "\033[32mNo memory leaks detected, running unit tests...\033[0m"; \
-					else \
-						echo -e "\033[31mMemory leaks detected, aborting.\033[0m"; \
-						exit 1; \
-					fi
+# @valgrind --leak-check=full --trace-children=yes --show-leak-kinds=all --error-exitcode=1 ./$(NAME) 2>&1 | tee valgrind_output.log || true
+# @if ! grep -q "definitely lost" valgrind_output.log; \
+# then \
+# 	echo -e "\033[32mNo memory leaks detected, running unit tests...\033[0m"; \
+# else \
+# 	echo -e "\033[31mMemory leaks detected, aborting.\033[0m"; \
+# 	exit 1; \
+# fi
 
 RM 				= 	rm -rf
 

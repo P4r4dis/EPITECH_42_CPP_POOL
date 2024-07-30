@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/07/29 18:27:56 by Paradis          ###   ########.fr        #
+#    Updated: 2024/07/30 16:10:16 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -239,8 +239,9 @@ EPITECH_test_run_ex02	:	fclean
 							gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 
 EPITECH_test_run_ex03	:	fclean
-							@$(MAKE) -s -C $(EPITECH_EX03_UT_PATH)
-							$(EPITECH_EX03_UT_PATH)/$(EPITECH_EX03_UT_NAME) --verbose
+							cd $(EPITECH_EX03_UT_PATH) && $(MAKE) && ./$(EPITECH_EX03_UT_NAME) --verbose
+# @$(MAKE) -s -C $(EPITECH_EX03_UT_PATH)
+# $(EPITECH_EX03_UT_PATH)/$(EPITECH_EX03_UT_NAME)
 							gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 ##########################################################################
 

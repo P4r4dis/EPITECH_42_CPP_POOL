@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jul 29 6:34:21 PM 2024 Paradis
-** Last update Tue Jul 29 8:11:30 PM 2024 Paradis
+** Last update Tue Jul 29 8:32:47 PM 2024 Paradis
 */
 
 #include <string>
@@ -21,15 +21,16 @@ class   KoalaNurse
         KoalaNurse(int id);
         ~KoalaNurse(void);
 
-        int     getId(void) const;
-        bool    getTimeToWork(void) const;
+        int             getId(void) const;
+        bool            getTimeToWork(void) const;
         
-        void    giveDrug(std::string drug, SickKoala *koala);
-        void    timeCheck(void);
+        void            giveDrug(std::string drug, SickKoala *koala);
+        void            timeCheck(void);
+        std::string     readReport(std::string fileName);
     protected:
     private:
-        int     _id;
-        bool    _timeToWork;
+        int             _id;
+        bool            _timeToWork;
 };
 
 #endif                  /* !__KOALANURSE_HPP__ */

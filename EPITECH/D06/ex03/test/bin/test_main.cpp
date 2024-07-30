@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jul 29 6:37:17 PM 2024 Paradis
-** Last update Tue Jul 29 8:23:40 PM 2024 Paradis
+** Last update Wed Jul 30 4:46:16 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -368,5 +368,81 @@ Test(KoalaNurse, Test_KoalaNurse_timeCheck_not_working_stdout
         "Nurse 0: Time to get to work!\n"
         "Nurse 0: Time to go home to my eucalyptus forest!\n"
         "Nurse 0: Finally some rest!\n"
+    );
+}
+
+Test(KoalaNurse, Test_KoalaNurse_readReport_isDefined
+, .init = redirect_all_stdout)
+{
+    {
+        int             id = 0;
+        std::string     name = "Koala";
+        SickKoala       patient(name);
+        std::string     fileName = patient.getName();
+        KoalaNurse      nurse(id);
+
+        nurse.readReport(fileName);
+    }
+}
+
+Test(KoalaNurse, Test_KoalaNurse_readReport_construct_fileName
+, .init = redirect_all_stdout)
+{
+    {
+        int             id = 0;
+        std::string     name = "koala";
+        SickKoala       patient(name);
+        std::string     fileName = patient.getName();
+        KoalaNurse      nurse(id);
+
+        cr_assert(nurse.readReport(fileName) == "");
+    }
+}
+
+Test(KoalaNurse, Test_KoalaNurse_readReport_not_open_file
+, .init = redirect_all_stdout)
+{
+    {
+        int             id = 0;
+        std::string     name = "koala";
+        SickKoala       patient(name);
+        std::string     fileName = patient.getName();
+        KoalaNurse      nurse(id);
+
+        cr_assert(nurse.readReport(fileName) == "");
+    }
+}
+
+Test(KoalaNurse, Test_KoalaNurse_readReport_openFile_and_readFile
+                , .init = redirect_all_stdout)
+{
+    {
+        int             id = 0;
+        std::string     name = "Koala";
+        SickKoala       patient(name);
+        std::string     fileName = patient.getName();
+        KoalaNurse      nurse(id);
+
+        cr_assert(nurse.readReport("Koala.report") == "Morphine");
+    }
+}
+
+Test(KoalaNurse, Test_KoalaNurse_readReport_output
+, .init = redirect_all_stdout)
+{
+    {
+        int             id = 0;
+        std::string     name = "Koala";
+        SickKoala       patient(name);
+        std::string     fileName = patient.getName() + ".report";
+        KoalaNurse      nurse(id);
+        
+        cr_assert(nurse.readReport(fileName) == "Morphine");
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Nurse 0: Kreog! Mr.Koala needs a Morphine!\n"
+        "Nurse 0: Finally some rest!\n"
+        "Mr.Koala: Kreooogg!! I'm cuuuured!\n"
     );
 }

@@ -5,9 +5,10 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jul 29 6:40:33 PM 2024 Paradis
-** Last update Tue Jul 29 8:23:28 PM 2024 Paradis
+** Last update Wed Jul 30 4:46:01 PM 2024 Paradis
 */
 #include <iostream>
+#include <fstream>
 
 #include "../include/KoalaNurse.hpp"
 
@@ -47,4 +48,26 @@ void        KoalaNurse::timeCheck(void)
         std::cout   << "Nurse " << _id
                     << ": Time to go home to my eucalyptus forest!"
                     << std::endl;
+}
+
+std::string KoalaNurse::readReport(std::string fileName)
+{
+    std::fstream    fs;
+    std::string     drug = "";
+    std::string     namePatient = fileName;
+    
+    namePatient = namePatient.substr(0, namePatient.find(".report"));
+    fs.open(fileName, std::fstream::in);
+    if (fs.is_open())
+    {
+        while(std::getline(fs, drug)) ;
+        if (!namePatient.empty() && !drug.empty())
+            std::cout   << "Nurse " << _id << ": Kreog! Mr."
+                        << namePatient << " needs a " << drug << "!"
+                        << std::endl;
+        fs.close();
+        return drug;
+    }
+    else
+        return drug;
 }
