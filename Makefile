@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/07/30 16:10:16 by Paradis          ###   ########.fr        #
+#    Updated: 2024/07/30 17:00:55 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -221,8 +221,9 @@ EPITECH_ex02 			: 	fclean
 							$(EPITECH_EX02_PATH)/$(EPITECH_EX02_NAME)
 
 EPITECH_ex03 			: 	fclean
-							@$(MAKE) -C $(EPITECH_EX03_PATH)
-							$(EPITECH_EX03_PATH)/$(EPITECH_EX03_NAME)
+							cd $(EPITECH_EX03_PATH) && $(MAKE) && ./$(EPITECH_EX03_NAME)
+# @$(MAKE) -C $(EPITECH_EX03_PATH)
+# $(EPITECH_EX03_PATH)/$(EPITECH_EX03_NAME)
 
 EPITECH_test_run_ex00	:	fclean
 							@$(MAKE) -s -C $(EPITECH_EX00_UT_PATH)

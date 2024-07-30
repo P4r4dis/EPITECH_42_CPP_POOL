@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jul 29 6:40:33 PM 2024 Paradis
-** Last update Wed Jul 30 4:46:01 PM 2024 Paradis
+** Last update Wed Jul 30 4:58:04 PM 2024 Paradis
 */
 #include <iostream>
 #include <fstream>
@@ -57,7 +57,7 @@ std::string KoalaNurse::readReport(std::string fileName)
     std::string     namePatient = fileName;
     
     namePatient = namePatient.substr(0, namePatient.find(".report"));
-    fs.open(fileName, std::fstream::in);
+    fs.open(fileName.c_str(), std::fstream::in);
     if (fs.is_open())
     {
         while(std::getline(fs, drug)) ;

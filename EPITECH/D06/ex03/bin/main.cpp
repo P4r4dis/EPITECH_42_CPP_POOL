@@ -5,10 +5,11 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jul 29 6:33:43 PM 2024 Paradis
-** Last update Tue Jul 29 6:33:46 PM 2024 Paradis
+** Last update Wed Jul 30 5:01:44 PM 2024 Paradis
 */
 
 #include "../include/SickKoala.hpp"
+#include "../include/KoalaNurse.hpp"
 
 int main(void)
 {
@@ -19,6 +20,12 @@ int main(void)
     patient.takeDrug("Kinder");
     patient.takeDrug("anything");
     patient.overDrive("Kreog! How's it going?");
+    
+    KoalaNurse  nurse(0);
+
+    nurse.timeCheck();
+    nurse.giveDrug(nurse.readReport(patient.getName() + ".report"), &patient);
+    nurse.timeCheck();
     
     return 0;
 }
