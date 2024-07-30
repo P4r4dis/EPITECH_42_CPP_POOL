@@ -5,10 +5,11 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Jul 30 6:03:42 PM 2024 Paradis
-** Last update Wed Jul 30 8:33:25 PM 2024 Paradis
+** Last update Wed Jul 30 9:16:49 PM 2024 Paradis
 */
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
 
 #include "KoalaDoctor.hpp"
 
@@ -49,7 +50,7 @@ void                KoalaDoctor::timeCheck(void)
 void                KoalaDoctor::diagnose(SickKoala *patient)
 {
     std::string     nameFile = patient->getName() + ".report";
-    std::ofstream   report(nameFile);
+    std::ofstream   report(nameFile.c_str());
     
     std::cout   << "Dr." << _name << ": So what's goerking you Mr." 
                 << patient->getName() << "?" << std::endl;
