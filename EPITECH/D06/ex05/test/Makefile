@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Wed Jul 31 4:51:42 PM 2024 Paradis
-## Last update Thu Jul 31 8:24:51 PM 2024 Paradis
+## Last update Thu Jul 31 10:31:37 PM 2024 Paradis
 ##
 
 
@@ -33,7 +33,7 @@ OBJS_GCDA    	= 	$(SRCS:.cpp=.gcda)
 OBJS_GCNO    	= 	$(SRCS:.cpp=.gcno)
 COVERAGE	 	= 	../../../../coverage.*
 LOG 			= 	*.log 
-
+VGCORE			=	vgcore.*
 all				: 	$(NAME)
 
 $(NAME)			: 	$(OBJS)
@@ -51,7 +51,7 @@ $(NAME)			: 	$(OBJS)
 RM 				= 	rm -rf
 
 clean			:
-					$(RM) $(OBJS) $(OBJS_GCDA) $(OBJS_GCNO) $(COVERAGE) $(LOG)
+					$(RM) $(OBJS) $(OBJS_GCDA) $(OBJS_GCNO) $(COVERAGE) $(LOG) $(VGCORE)
 
 fclean			: 	clean
 					$(RM) $(NAME)
