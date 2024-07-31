@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:52:25 PM 2024 Paradis
-** Last update Thu Jul 31 5:11:32 PM 2024 Paradis
+** Last update Thu Jul 31 5:40:30 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -653,4 +653,13 @@ Test(SickKoalaList, Test_SickKoalaList_getContent_acces_to_pointer, .init = redi
     SickKoalaList   sick(&patient);
 
     cr_assert(sick.getContent()->getName() == "Koala");
+}
+
+Test(SickKoalaList, Test_SickKoalaList_getNext_return_nullptr, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoalaList   sick(&patient);
+
+    cr_assert_null(sick.getNext());
 }

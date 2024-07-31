@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:56:05 PM 2024 Paradis
-** Last update Thu Jul 31 5:07:34 PM 2024 Paradis
+** Last update Thu Jul 31 5:42:17 PM 2024 Paradis
 */
 
 #include "SickKoala.hpp"
@@ -19,10 +19,12 @@ class	SickKoalaList
         SickKoalaList(SickKoala *sickKoala);
         ~SickKoalaList(void);
 
-        SickKoala   *getContent(void) const;
+        SickKoala       *getContent(void) const;
+        SickKoalaList   *getNext(void) const;
     protected:
     private:
-        SickKoala   *_sickKoala;
+        SickKoala       *_sickKoala; // data
+        SickKoalaList   *_next;
 };
 
 #endif 				/* !__SICKKOALALIST_HPP___ */
