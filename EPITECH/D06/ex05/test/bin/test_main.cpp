@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:52:25 PM 2024 Paradis
-** Last update Thu Jul 31 5:54:50 PM 2024 Paradis
+** Last update Thu Jul 31 10:29:14 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -664,14 +664,14 @@ Test(SickKoalaList, Test_SickKoalaList_getNext_return_nullptr, .init = redirect_
     cr_assert_null(sick.getNext());
 }
 
-Test(SickKoalaList, Test_SickKoalaList_getNext_return_ptr_on_next, .init = redirect_all_stdout)
-{
-    std::string     name = "Koala";
-    SickKoala       patient(name);
-    SickKoalaList   sick(&patient);
+// Test(SickKoalaList, Test_SickKoalaList_getNext_return_ptr_on_next, .init = redirect_all_stdout)
+// {
+//     std::string     name = "Koala";
+//     SickKoala       patient(name);
+//     SickKoalaList   sick(&patient);
 
-    cr_assert_not_null(sick.getNext());
-}
+//     cr_assert_not_null(sick.getNext());
+// }
 
 Test(SickKoalaList, Test_SickKoalaList_isEnd_return_true, .init = redirect_all_stdout)
 {
@@ -682,11 +682,129 @@ Test(SickKoalaList, Test_SickKoalaList_isEnd_return_true, .init = redirect_all_s
     cr_assert(sick.isEnd() == true);
 }
 
-Test(SickKoalaList, Test_SickKoalaList_isEnd_return_false, .init = redirect_all_stdout)
+// Test(SickKoalaList, Test_SickKoalaList_isEnd_return_false, .init = redirect_all_stdout)
+// {
+//     std::string     name = "Koala";
+//     SickKoala       patient(name);
+//     SickKoalaList   sick(&patient);
+
+//     cr_assert(sick.isEnd() == false);
+// }
+
+Test(SickKoalaList, Test_SickKoalaList_append_isDefined, .init = redirect_all_stdout)
 {
     std::string     name = "Koala";
     SickKoala       patient(name);
+    SickKoala       patient2("patient2");
     SickKoalaList   sick(&patient);
+    SickKoalaList   sick2(&patient2);
 
-    cr_assert(sick.isEnd() == false);
+    sick.append(&sick2);
+}
+
+Test(SickKoalaList, Test_SickKoalaList_append_nodeList_is_nullptr
+, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoala       patient2("patient2");
+    SickKoalaList   sick(&patient);
+    SickKoalaList   *sick2 = nullptr;
+
+    cr_assert_null(sick2);
+    sick.append(sick2);
+}
+
+Test(SickKoalaList, Test_SickKoalaList_append_nodeList_is_nullptr_stderr
+, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoala       patient2("patient2");
+    SickKoalaList   sick(&patient);
+    SickKoalaList   *sick2 = nullptr;
+
+    cr_assert_null(sick2);
+    sick.append(sick2);
+    cr_assert_stderr_eq_str
+    (
+        "Error: Trying to append a null node.\n"
+    );
+}
+
+Test(SickKoalaList, Test_SickKoalaList_append_sickKoala_is_nullptr
+, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoala       *patient2 = nullptr;
+    SickKoalaList   sick(&patient);
+    SickKoalaList   sick2(patient2);
+
+    cr_assert_null(patient2);
+    sick2.append(&sick);
+}
+
+Test(SickKoalaList, Test_SickKoalaList_append_one_node
+, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoala       patient2("patient2");
+    SickKoalaList   sick(&patient);
+    SickKoalaList   sick2(&patient2);
+
+    sick2.append(&sick);
+    cr_assert(sick2.getContent()->getName() == "patient2");
+    cr_assert(sick2.getNext()->getContent()->getName() == "Koala");
+}
+
+Test(SickKoalaList, Test_SickKoalaList_append_same_node
+, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoala       patient2("patient2");
+    SickKoalaList   sick(&patient);
+    SickKoalaList   sick2(&patient2);
+
+    sick2.append(&sick);
+    sick2.append(&sick);
+    cr_assert(sick2.getContent()->getName() == "patient2");
+    cr_assert(sick2.getNext()->getContent()->getName() == "Koala");
+}
+
+#include <iostream>
+Test(SickKoalaList, Test_SickKoalaList_append_several_nodes
+, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoala       patient2("patient2");
+    SickKoala       patient3("patient3");
+    SickKoala       patient4("patient4");
+    SickKoalaList   sick(&patient);
+    SickKoalaList   sick2(&patient2);
+    SickKoalaList   sick3(&patient3);
+    SickKoalaList   sick4(&patient4);
+    sick2.append(&sick);
+    sick2.append(&sick3);
+    sick2.append(&sick4);
+    sick2.append(&sick4);
+    SickKoalaList *current = &sick2;
+    std::cout << "printList:" << std::endl;
+
+    // Il manque les CR_ASSERT
+    while (current != nullptr)
+    {
+		if (current->getContent())
+			std::cout << current->getContent()->getName() << std::flush;
+		else
+			std::cout << "[nullptr]" << std::flush;
+		if (current->getNext())
+			std::cout << ", " << std::flush;
+		else
+			std::cout << ".\n"  << std::flush;
+		current = current->getNext();
+    }
 }
