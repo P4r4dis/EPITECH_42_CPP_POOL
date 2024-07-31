@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:52:25 PM 2024 Paradis
-** Last update Thu Jul 31 5:40:30 PM 2024 Paradis
+** Last update Thu Jul 31 5:54:50 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -662,4 +662,31 @@ Test(SickKoalaList, Test_SickKoalaList_getNext_return_nullptr, .init = redirect_
     SickKoalaList   sick(&patient);
 
     cr_assert_null(sick.getNext());
+}
+
+Test(SickKoalaList, Test_SickKoalaList_getNext_return_ptr_on_next, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoalaList   sick(&patient);
+
+    cr_assert_not_null(sick.getNext());
+}
+
+Test(SickKoalaList, Test_SickKoalaList_isEnd_return_true, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoalaList   sick(&patient);
+
+    cr_assert(sick.isEnd() == true);
+}
+
+Test(SickKoalaList, Test_SickKoalaList_isEnd_return_false, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoalaList   sick(&patient);
+
+    cr_assert(sick.isEnd() == false);
 }
