@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:56:58 PM 2024 Paradis
-** Last update Fri Aug 1 9:31:45 PM 2024 Paradis
+** Last update Fri Aug 1 10:22:45 PM 2024 Paradis
 */
 
 #include "SickKoalaList.hpp"
@@ -114,6 +114,42 @@ SickKoalaList   *SickKoalaList::remove(SickKoalaList *nodeList)
             current->_sickKoala = nullptr;
             // update current next
             current->_next = nodeList->_next;
+        }
+        current = current->_next;
+    }
+    return this;
+}
+
+SickKoalaList   *SickKoalaList::removeFromName(std::string sickKoalaName)
+{
+    // 1: Verify if the node is null
+    if (sickKoalaName == "") {
+        std::cerr << "Error: Trying to delete a empty string." << std::endl;
+        return this;
+    }
+
+    // Verify the first node is the same of the new nodeList to remove
+    if (this->_sickKoala->getName() == sickKoalaName)
+    {
+        // clean  data
+        _sickKoala = nullptr;
+        // update the current pointer for point to next;
+        // _next = nodeList->_next;
+        return this;
+    }
+
+    // 3. Through the list
+    // init tempory ptr for trough the list
+    SickKoalaList   *current = this;
+    // scroll through the list until you find the corresponding node or reach the end of the list.
+    while (current->_next)
+    {
+        if (current->_next->_sickKoala->getName() == sickKoalaName)
+        {
+            // clean data
+            current->_sickKoala = nullptr;
+            // update current next
+            current->_next = nullptr;
         }
         current = current->_next;
     }

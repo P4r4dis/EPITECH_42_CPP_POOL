@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:52:25 PM 2024 Paradis
-** Last update Fri Aug 1 9:37:56 PM 2024 Paradis
+** Last update Fri Aug 1 10:18:46 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -1019,7 +1019,8 @@ Test(SickKoalaList, Test_SickKoalaList_remove_a_nodeList
     }
 }
 
-Test(SickKoalaList, Test_SickKoalaList_remove_several_nodeList, .init = redirect_all_stdout)
+Test(SickKoalaList, Test_SickKoalaList_remove_several_nodeList,
+.init = redirect_all_stdout)
 {
     std::string     name = "Koala";
     SickKoala       patient(name);
@@ -1063,4 +1064,45 @@ Test(SickKoalaList, Test_SickKoalaList_remove_several_nodeList, .init = redirect
     //         std::cout << ".\n"  << std::flush;
     //     current = current->getNext();
     // }
+}
+
+#include <iostream>
+Test(SickKoalaList, Test_SickKoalaList_removeFromName_isDefined)
+// , .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoala       patient2("patient2");
+    SickKoala       patient3("patient3");
+    SickKoala       patient4("patient4");
+    SickKoalaList   sick(&patient);
+    SickKoalaList   sick2(&patient2);
+    SickKoalaList   sick3(&patient3);
+    SickKoalaList   sick4(&patient4);
+
+    sick.append(&sick2);
+    sick.append(&sick3);
+    sick.append(&sick4);
+
+    SickKoalaList   *sickTest = nullptr;
+    sickTest = sick.removeFromName("patient3");
+    sick.removeFromName("patient3");
+    std::cout << "TEST: " << sickTest->getContent()->getName() << std::endl;
+    // sick.removeFromName("patient3");
+    // cr_assert(sick2.remove(&sick3)->getName() == "Koala");
+        //     SickKoalaList *current = &sick;
+
+        // std::cout << "printList: " << std::flush;
+        // while (current != nullptr)
+        // {
+        //     if (current->getContent())
+        //         std::cout << current->getContent()->getName() << std::flush;
+        //     else
+        //         std::cout << "[nullptr]" << std::flush;
+        //     if (current->getNext())
+        //         std::cout << ", " << std::flush;
+        //     else
+        //         std::cout << ".\n"  << std::flush;
+        //     current = current->getNext();
+        // }
 }
