@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:56:58 PM 2024 Paradis
-** Last update Thu Jul 31 10:17:29 PM 2024 Paradis
+** Last update Fri Aug 1 4:49:54 PM 2024 Paradis
 */
 
 #include "SickKoalaList.hpp"
@@ -34,36 +34,37 @@ bool            SickKoalaList::isEnd(void)
     return (_next == nullptr);
 }
 
-void            SickKoalaList::append(SickKoalaList *nodeList)
-{
-    if (nodeList == nullptr)
-    {
+void SickKoalaList::append(SickKoalaList *nodeList) {
+    // 1: Verify if the node is null
+    if (nodeList == nullptr) {
         std::cerr << "Error: Trying to append a null node." << std::endl;
-        return ;
+        return;
     }
 
-    if (_sickKoala == nullptr)
-    {
+    // 2: If the current node's data is null, replace it with the new node's data
+    if (_sickKoala == nullptr) {
         _sickKoala = nodeList->_sickKoala;
         _next = nodeList->_next;
-        // clean nodeList;
-        nodeList->_sickKoala = nullptr;
-        nodeList->_next = nullptr;
+        return; // Early return after copying data
     }
-    else
-    {
-        for (SickKoalaList *current = this; current; current = current->_next)
-        {
-            if (current->_sickKoala == nodeList->_sickKoala)
-            {
-                std::cerr << "Error: Trying to append a duplicate node." << std::endl;
-                return ;
-            }
-            if (current->_next == nullptr)
-            {
-                current->_next = nodeList;
-                return;
-            }
+
+    // 3: Traverse the list to find the last node and check for duplicates
+    SickKoalaList *current = this;
+    while (current->_next != nullptr) {
+        if (current->_sickKoala == nodeList->_sickKoala) {
+            std::cerr << "Error: Trying to append a duplicate node." << std::endl;
+            return; // Prevent appending duplicates
         }
+        current = current->_next;
     }
+
+    // 4: Check the last node for duplicate before adding
+    if (current->_sickKoala == nodeList->_sickKoala) {
+        std::cerr << "Error: Trying to append a duplicate node." << std::endl;
+        return;
+    }
+
+    // 5: Add the new node (nodeList) to the end of the list
+    current->_next = nodeList;
+    nodeList->_next = nullptr;
 }

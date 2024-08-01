@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:52:25 PM 2024 Paradis
-** Last update Thu Jul 31 10:29:14 PM 2024 Paradis
+** Last update Fri Aug 1 5:03:40 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -759,23 +759,7 @@ Test(SickKoalaList, Test_SickKoalaList_append_one_node
     cr_assert(sick2.getNext()->getContent()->getName() == "Koala");
 }
 
-Test(SickKoalaList, Test_SickKoalaList_append_same_node
-, .init = redirect_all_stdout)
-{
-    std::string     name = "Koala";
-    SickKoala       patient(name);
-    SickKoala       patient2("patient2");
-    SickKoalaList   sick(&patient);
-    SickKoalaList   sick2(&patient2);
-
-    sick2.append(&sick);
-    sick2.append(&sick);
-    cr_assert(sick2.getContent()->getName() == "patient2");
-    cr_assert(sick2.getNext()->getContent()->getName() == "Koala");
-}
-
-#include <iostream>
-Test(SickKoalaList, Test_SickKoalaList_append_several_nodes
+Test(SickKoalaList, Test_SickKoalaList_append_should_avoid_same_node
 , .init = redirect_all_stdout)
 {
     std::string     name = "Koala";
@@ -791,20 +775,55 @@ Test(SickKoalaList, Test_SickKoalaList_append_several_nodes
     sick2.append(&sick3);
     sick2.append(&sick4);
     sick2.append(&sick4);
-    SickKoalaList *current = &sick2;
-    std::cout << "printList:" << std::endl;
+    sick2.append(&sick3);
 
-    // Il manque les CR_ASSERT
-    while (current != nullptr)
-    {
-		if (current->getContent())
-			std::cout << current->getContent()->getName() << std::flush;
-		else
-			std::cout << "[nullptr]" << std::flush;
-		if (current->getNext())
-			std::cout << ", " << std::flush;
-		else
-			std::cout << ".\n"  << std::flush;
-		current = current->getNext();
+    cr_assert_stderr_eq_str
+    (
+        "Error: Trying to append a duplicate node.\n"
+        "Error: Trying to append a duplicate node.\n"
+    );
+}
+
+#include <iostream> // TODO: delete
+Test(SickKoalaList, Test_SickKoalaList_append_several_nodes
+, .init = redirect_all_stdout)
+{
+    { 
+        std::string     name = "Koala";
+        SickKoala       patient(name);
+        SickKoala       patient2("patient2");
+        SickKoala       patient3("patient3");
+        SickKoala       patient4("patient4");
+        SickKoalaList   sick(&patient);
+        SickKoalaList   sick2(&patient2);
+        SickKoalaList   sick3(&patient3);
+        SickKoalaList   sick4(&patient4);
+        sick2.append(&sick);
+        sick2.append(&sick3);
+        sick2.append(&sick4);
+
+        SickKoalaList *current = &sick2;
+
+        std::cout << "printList: " << std::flush;
+        while (current != nullptr)
+        {
+            if (current->getContent())
+                std::cout << current->getContent()->getName() << std::flush;
+            else
+                std::cout << "[nullptr]" << std::flush;
+            if (current->getNext())
+                std::cout << ", " << std::flush;
+            else
+                std::cout << ".\n"  << std::flush;
+            current = current->getNext();
+        }
     }
+    cr_assert_stdout_eq_str
+    (
+        "printList: patient2, Koala, patient3, patient4.\n"
+        "Mr.patient4: Kreooogg!! I'm cuuuured!\n"
+        "Mr.patient3: Kreooogg!! I'm cuuuured!\n"
+        "Mr.patient2: Kreooogg!! I'm cuuuured!\n"
+        "Mr.Koala: Kreooogg!! I'm cuuuured!\n"
+    );
 }
