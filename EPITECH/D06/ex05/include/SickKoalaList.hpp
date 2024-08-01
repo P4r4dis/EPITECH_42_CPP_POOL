@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:56:05 PM 2024 Paradis
-** Last update Fri Aug 1 5:27:02 PM 2024 Paradis
+** Last update Fri Aug 1 6:09:10 PM 2024 Paradis
 */
 
 #include "SickKoala.hpp"
@@ -25,6 +25,7 @@ class	SickKoalaList
                 
         bool            isEnd(void);
         void            append(SickKoalaList *nodeList); // add at the end a node of list
+        SickKoalaList   *remove(SickKoalaList *nodeList);
     protected:
     private:
         SickKoala       *_sickKoala; // data
