@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:56:05 PM 2024 Paradis
-** Last update Thu Jul 31 10:17:35 PM 2024 Paradis
+** Last update Fri Aug 1 5:27:02 PM 2024 Paradis
 */
 
 #include "SickKoala.hpp"
@@ -21,7 +21,8 @@ class	SickKoalaList
 
         SickKoala       *getContent(void) const;
         SickKoalaList   *getNext(void) const;
-        
+        SickKoala       *getFromName(std::string sickKoalaName) const;
+                
         bool            isEnd(void);
         void            append(SickKoalaList *nodeList); // add at the end a node of list
     protected:

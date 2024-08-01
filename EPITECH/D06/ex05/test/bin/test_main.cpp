@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:52:25 PM 2024 Paradis
-** Last update Fri Aug 1 5:03:40 PM 2024 Paradis
+** Last update Fri Aug 1 6:04:27 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -826,4 +826,70 @@ Test(SickKoalaList, Test_SickKoalaList_append_several_nodes
         "Mr.patient2: Kreooogg!! I'm cuuuured!\n"
         "Mr.Koala: Kreooogg!! I'm cuuuured!\n"
     );
+}
+
+Test(SickKoalaList, Test_SickKoalaList_getFromName_isDefinied
+, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoala       patient2("patient2");
+    SickKoala       patient3("patient3");
+    SickKoala       patient4("patient4");
+    SickKoalaList   sick(&patient);
+    SickKoalaList   sick2(&patient2);
+    SickKoalaList   sick3(&patient3);
+    SickKoalaList   sick4(&patient4);
+    sick2.append(&sick);
+    sick2.append(&sick3);
+    sick2.append(&sick4);
+    sick2.append(&sick4);
+    sick2.append(&sick3);
+
+    sick2.getFromName("Koala");
+}
+
+Test(SickKoalaList, Test_SickKoalaList_getFromName_not_matches_should_nullptr
+, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoala       patient2("patient2");
+    SickKoala       patient3("patient3");
+    SickKoala       patient4("patient4");
+    SickKoalaList   sick(&patient);
+    SickKoalaList   sick2(&patient2);
+    SickKoalaList   sick3(&patient3);
+    SickKoalaList   sick4(&patient4);
+    sick2.append(&sick);
+    sick2.append(&sick3);
+    sick2.append(&sick4);
+    sick2.append(&sick4);
+    sick2.append(&sick3);
+
+    cr_assert(sick2.getFromName("glitch") == nullptr);
+}
+
+Test(SickKoalaList, Test_SickKoalaList_getFromName_matches_should_ptr_to_sickKoala
+, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoala       patient2("patient2");
+    SickKoala       patient3("patient3");
+    SickKoala       patient4("patient4");
+    SickKoalaList   sick(&patient);
+    SickKoalaList   sick2(&patient2);
+    SickKoalaList   sick3(&patient3);
+    SickKoalaList   sick4(&patient4);
+    sick2.append(&sick);
+    sick2.append(&sick3);
+    sick2.append(&sick4);
+    sick2.append(&sick4);
+    sick2.append(&sick3);
+
+    cr_assert(sick2.getFromName("Koala")->getName() == "Koala");
+    cr_assert(sick2.getFromName("patient2")->getName() == "patient2");
+    cr_assert(sick2.getFromName("patient3")->getName() == "patient3");
+    cr_assert(sick2.getFromName("patient4")->getName() == "patient4");
 }

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:56:58 PM 2024 Paradis
-** Last update Fri Aug 1 4:49:54 PM 2024 Paradis
+** Last update Fri Aug 1 6:05:06 PM 2024 Paradis
 */
 
 #include "SickKoalaList.hpp"
@@ -27,6 +27,19 @@ SickKoala       *SickKoalaList::getContent(void) const
 SickKoalaList   *SickKoalaList::getNext(void) const
 {
     return _next;
+}
+
+SickKoala       *SickKoalaList::getFromName(std::string SickKoalaName) const
+{
+    const SickKoalaList   *current = this;
+
+    while (current)
+    {
+        if (current->_sickKoala->getName() == SickKoalaName)
+            return current->_sickKoala;
+        current = current->_next;
+    }
+    return nullptr;
 }
 
 bool            SickKoalaList::isEnd(void)
