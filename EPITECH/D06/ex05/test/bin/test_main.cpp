@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:52:25 PM 2024 Paradis
-** Last update Fri Aug 1 10:18:46 PM 2024 Paradis
+** Last update Sat Aug 2 9:15:48 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -14,6 +14,7 @@
 #include <criterion/logging.h>
 #include <criterion/parameterized.h>
 #include <signal.h>
+#include <iostream>
 
 #include "../../include/SickKoala.hpp"
 #include "../../include/KoalaNurse.hpp"
@@ -664,14 +665,14 @@ Test(SickKoalaList, Test_SickKoalaList_getNext_return_nullptr, .init = redirect_
     cr_assert_null(sick.getNext());
 }
 
-// Test(SickKoalaList, Test_SickKoalaList_getNext_return_ptr_on_next, .init = redirect_all_stdout)
-// {
-//     std::string     name = "Koala";
-//     SickKoala       patient(name);
-//     SickKoalaList   sick(&patient);
+Test(SickKoalaList, Test_SickKoalaList_getNext_return_ptr_on_next, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoalaList   sick(&patient);
 
-//     cr_assert_not_null(sick.getNext());
-// }
+    cr_assert_null(sick.getNext());
+}
 
 Test(SickKoalaList, Test_SickKoalaList_isEnd_return_true, .init = redirect_all_stdout)
 {
@@ -682,14 +683,17 @@ Test(SickKoalaList, Test_SickKoalaList_isEnd_return_true, .init = redirect_all_s
     cr_assert(sick.isEnd() == true);
 }
 
-// Test(SickKoalaList, Test_SickKoalaList_isEnd_return_false, .init = redirect_all_stdout)
-// {
-//     std::string     name = "Koala";
-//     SickKoala       patient(name);
-//     SickKoalaList   sick(&patient);
+Test(SickKoalaList, Test_SickKoalaList_isEnd_return_false, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoala       patient2("patient2");
+    SickKoalaList   sick(&patient);
+    SickKoalaList   sick2(&patient2);
 
-//     cr_assert(sick.isEnd() == false);
-// }
+    sick.append(&sick2);
+    cr_assert(sick.isEnd() == false);
+}
 
 Test(SickKoalaList, Test_SickKoalaList_append_isDefined, .init = redirect_all_stdout)
 {
@@ -898,22 +902,6 @@ Test(SickKoalaList, Test_SickKoalaList_remove_isDefined
     sick2.append(&sick3);
 
     sick2.remove(&sick3);
-    // cr_assert(sick2.remove(&sick3)->getName() == "Koala");
-        //     SickKoalaList *current = &sick2;
-
-        // std::cout << "printList: " << std::flush;
-        // while (current != nullptr)
-        // {
-        //     if (current->getContent())
-        //         std::cout << current->getContent()->getName() << std::flush;
-        //     else
-        //         std::cout << "[nullptr]" << std::flush;
-        //     if (current->getNext())
-        //         std::cout << ", " << std::flush;
-        //     else
-        //         std::cout << ".\n"  << std::flush;
-        //     current = current->getNext();
-        // }
 }
 
 Test(SickKoalaList, Test_SickKoalaList_remove_nodeList_is_nullptr
@@ -1051,24 +1039,10 @@ Test(SickKoalaList, Test_SickKoalaList_remove_several_nodeList,
             cr_assert_null(current->getContent());
         current = current->getNext();
     }
-    // std::cout << "printList: " << std::flush;
-    // while (current != nullptr)
-    // {
-    //     if (current->getContent())
-    //         std::cout << current->getContent()->getName() << std::flush;
-    //     else
-    //         std::cout << "[nullptr]" << std::flush;
-    //     if (current->getNext())
-    //         std::cout << ", " << std::flush;
-    //     else
-    //         std::cout << ".\n"  << std::flush;
-    //     current = current->getNext();
-    // }
 }
 
-#include <iostream>
-Test(SickKoalaList, Test_SickKoalaList_removeFromName_isDefined)
-// , .init = redirect_all_stdout)
+Test(SickKoalaList, Test_SickKoalaList_removeFromName_isDefined
+, .init = redirect_all_stdout)
 {
     std::string     name = "Koala";
     SickKoala       patient(name);
@@ -1084,25 +1058,249 @@ Test(SickKoalaList, Test_SickKoalaList_removeFromName_isDefined)
     sick.append(&sick3);
     sick.append(&sick4);
 
-    SickKoalaList   *sickTest = nullptr;
-    sickTest = sick.removeFromName("patient3");
     sick.removeFromName("patient3");
-    std::cout << "TEST: " << sickTest->getContent()->getName() << std::endl;
-    // sick.removeFromName("patient3");
-    // cr_assert(sick2.remove(&sick3)->getName() == "Koala");
-        //     SickKoalaList *current = &sick;
+}
 
-        // std::cout << "printList: " << std::flush;
-        // while (current != nullptr)
-        // {
-        //     if (current->getContent())
-        //         std::cout << current->getContent()->getName() << std::flush;
-        //     else
-        //         std::cout << "[nullptr]" << std::flush;
-        //     if (current->getNext())
-        //         std::cout << ", " << std::flush;
-        //     else
-        //         std::cout << ".\n"  << std::flush;
-        //     current = current->getNext();
-        // }
+Test(SickKoalaList, Test_SickKoalaList_removeFromName_from_empty_list
+, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoalaList   test(nullptr);
+
+    cr_assert_null(test.removeFromName("Koala")->getContent());
+}
+
+Test(SickKoalaList, Test_SickKoalaList_removeFromName_the_first_node
+, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoalaList   sick(&patient);
+
+    cr_assert_null(sick.removeFromName("Koala")->getContent());
+}
+
+Test(SickKoalaList, Test_SickKoalaList_removeFromName_the_first_node_several_times
+, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoalaList   sick(&patient);
+
+    cr_assert_null(sick.removeFromName("Koala")->getContent());
+    cr_assert_null(sick.removeFromName("Koala")->getContent());
+}
+
+Test(SickKoalaList, Test_SickKoalaList_removeFromName_a_node
+, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoala       patient2("patient2");
+    SickKoala       patient3("patient3");
+    SickKoala       patient4("patient4");
+    SickKoalaList   sick(&patient);
+    SickKoalaList   sick2(&patient2);
+    SickKoalaList   sick3(&patient3);
+    SickKoalaList   sick4(&patient4);
+    
+    sick.append(&sick2);
+    sick.append(&sick3);
+    sick.append(&sick4);
+
+    sick.removeFromName("patient3");
+
+    SickKoalaList *current = &sick;
+
+    std::cout << "patients: " << std::flush;
+    while (current != nullptr)
+    {
+        if (current->getContent())
+            cr_assert_not_null(current->getContent());
+        else
+            cr_assert_null(current->getContent());
+        if (current->getNext())
+            std::cout << ", " << std::flush;
+        else
+            std::cout << ".\n"  << std::flush;
+        current = current->getNext();
+    }
+}
+
+Test(SickKoalaList, Test_SickKoalaList_removeFromName_a_same_node_several_times , .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoala       patient2("patient2");
+    SickKoala       patient3("patient3");
+    SickKoala       patient4("patient4");
+    SickKoalaList   sick(&patient);
+    SickKoalaList   sick2(&patient2);
+    SickKoalaList   sick3(&patient3);
+    SickKoalaList   sick4(&patient4);
+    
+    sick.append(&sick2);
+    sick.append(&sick3);
+    sick.append(&sick4);
+
+    sick.removeFromName("patient3");
+    sick.removeFromName("patient3");
+    sick.removeFromName("patient4");
+    sick.removeFromName("patient3");
+
+    SickKoalaList *current = &sick;
+
+    std::cout << "patients: " << std::flush;
+    while (current != nullptr)
+    {
+        if (current->getContent())
+            cr_assert_not_null(current->getContent());
+        else
+            cr_assert_null(current->getContent());
+        if (current->getNext())
+            std::cout << ", " << std::flush;
+        else
+            std::cout << ".\n"  << std::flush;
+        current = current->getNext();
+    }
+}
+
+Test(SickKoalaList, Test_SickKoalaList_removeFromName_first_node_stdout
+, .init = redirect_all_stdout)
+{
+    {
+        std::string     name = "Koala";
+        SickKoala       patient(name);
+        SickKoala       patient2("patient2");
+        SickKoala       patient3("patient3");
+        SickKoala       patient4("patient4");
+        SickKoalaList   sick(&patient);
+        SickKoalaList   sick2(&patient2);
+        SickKoalaList   sick3(&patient3);
+        SickKoalaList   sick4(&patient4);
+        
+        sick.append(&sick2);
+        sick.append(&sick3);
+        sick.append(&sick4);
+
+        sick.removeFromName("Koala");
+
+        SickKoalaList *current = &sick;
+
+        std::cout << "patients: " << std::flush;
+        while (current != nullptr)
+        {
+            if (current->getContent())
+                std::cout << current->getContent()->getName() << std::flush;
+            else
+                std::cout << "[nullptr]" << std::flush;
+            if (current->getNext())
+                std::cout << ", " << std::flush;
+            else
+                std::cout << ".\n"  << std::flush;
+            current = current->getNext();
+        }
+    }
+    cr_assert_stdout_eq_str
+    (
+        "patients: [nullptr], patient2, patient3, patient4.\n"
+        "Mr.patient4: Kreooogg!! I'm cuuuured!\n"
+        "Mr.patient3: Kreooogg!! I'm cuuuured!\n"
+        "Mr.patient2: Kreooogg!! I'm cuuuured!\n"
+        "Mr.Koala: Kreooogg!! I'm cuuuured!\n"
+    );
+}
+
+Test(SickKoalaList, Test_SickKoalaList_removeFromName_a_node_stdout
+, .init = redirect_all_stdout)
+{
+    {
+        std::string     name = "Koala";
+        SickKoala       patient(name);
+        SickKoala       patient2("patient2");
+        SickKoala       patient3("patient3");
+        SickKoala       patient4("patient4");
+        SickKoalaList   sick(&patient);
+        SickKoalaList   sick2(&patient2);
+        SickKoalaList   sick3(&patient3);
+        SickKoalaList   sick4(&patient4);
+        
+        sick.append(&sick2);
+        sick.append(&sick3);
+        sick.append(&sick4);
+
+        sick.removeFromName("patient3");
+
+        SickKoalaList *current = &sick;
+
+        std::cout << "patients: " << std::flush;
+        while (current != nullptr)
+        {
+            if (current->getContent())
+                std::cout << current->getContent()->getName() << std::flush;
+            else
+                std::cout << "[nullptr]" << std::flush;
+            if (current->getNext())
+                std::cout << ", " << std::flush;
+            else
+                std::cout << ".\n"  << std::flush;
+            current = current->getNext();
+        }
+    }
+    cr_assert_stdout_eq_str
+    (
+        "patients: Koala, patient2, [nullptr], patient4.\n"
+        "Mr.patient4: Kreooogg!! I'm cuuuured!\n"
+        "Mr.patient3: Kreooogg!! I'm cuuuured!\n"
+        "Mr.patient2: Kreooogg!! I'm cuuuured!\n"
+        "Mr.Koala: Kreooogg!! I'm cuuuured!\n"
+    );
+}
+
+Test(SickKoalaList, Test_SickKoalaList_removeFromName_several_node_stdout
+, .init = redirect_all_stdout)
+{
+    {
+        std::string     name = "Koala";
+        SickKoala       patient(name);
+        SickKoala       patient2("patient2");
+        SickKoala       patient3("patient3");
+        SickKoala       patient4("patient4");
+        SickKoalaList   sick(&patient);
+        SickKoalaList   sick2(&patient2);
+        SickKoalaList   sick3(&patient3);
+        SickKoalaList   sick4(&patient4);
+        
+        sick.append(&sick2);
+        sick.append(&sick3);
+        sick.append(&sick4);
+
+        sick.removeFromName("Koala");
+        sick.removeFromName("patient2");
+        sick.removeFromName("patient3");
+        sick.removeFromName("patient4");
+
+        SickKoalaList *current = &sick;
+
+        std::cout << "patients: " << std::flush;
+        while (current != nullptr)
+        {
+            if (!current->getContent())
+                std::cout << "[nullptr]" << std::flush;
+            if (current->getNext())
+                std::cout << ", " << std::flush;
+            else
+                std::cout << ".\n"  << std::flush;
+            current = current->getNext();
+        }
+    }
+    cr_assert_stdout_eq_str
+    (
+        "patients: [nullptr], [nullptr], [nullptr], [nullptr].\n"
+        "Mr.patient4: Kreooogg!! I'm cuuuured!\n"
+        "Mr.patient3: Kreooogg!! I'm cuuuured!\n"
+        "Mr.patient2: Kreooogg!! I'm cuuuured!\n"
+        "Mr.Koala: Kreooogg!! I'm cuuuured!\n"
+    );
 }

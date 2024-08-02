@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:56:58 PM 2024 Paradis
-** Last update Fri Aug 1 10:22:45 PM 2024 Paradis
+** Last update Sat Aug 2 8:58:11 PM 2024 Paradis
 */
 
 #include "SickKoalaList.hpp"
@@ -120,38 +120,23 @@ SickKoalaList   *SickKoalaList::remove(SickKoalaList *nodeList)
     return this;
 }
 
-SickKoalaList   *SickKoalaList::removeFromName(std::string sickKoalaName)
+SickKoalaList* SickKoalaList::removeFromName(std::string sickKoalaName)
 {
-    // 1: Verify if the node is null
-    if (sickKoalaName == "") {
-        std::cerr << "Error: Trying to delete a empty string." << std::endl;
+    // Check if the first node in the list has the matching sickKoalaName
+    if (this->_sickKoala && this->_sickKoala->getName() == sickKoalaName) {
+        this->_sickKoala = nullptr;
         return this;
     }
-
-    // Verify the first node is the same of the new nodeList to remove
-    if (this->_sickKoala->getName() == sickKoalaName)
+    // Iterate through the list and set _sickKoala to nullptr for the matching sickKoalaName
+    SickKoalaList* current = this;
+    while (current->_next != nullptr)
     {
-        // clean  data
-        _sickKoala = nullptr;
-        // update the current pointer for point to next;
-        // _next = nodeList->_next;
-        return this;
-    }
-
-    // 3. Through the list
-    // init tempory ptr for trough the list
-    SickKoalaList   *current = this;
-    // scroll through the list until you find the corresponding node or reach the end of the list.
-    while (current->_next)
-    {
-        if (current->_next->_sickKoala->getName() == sickKoalaName)
-        {
-            // clean data
-            current->_sickKoala = nullptr;
-            // update current next
-            current->_next = nullptr;
-        }
+        if (current->_next->_sickKoala && 
+            current->_next->_sickKoala->getName() == sickKoalaName)
+            current->_next->_sickKoala = nullptr;
         current = current->_next;
     }
+
+    // Return a pointer to the first node of the list
     return this;
 }
