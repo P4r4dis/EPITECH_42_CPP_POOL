@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:52:25 PM 2024 Paradis
-** Last update Sat Aug 2 9:15:48 PM 2024 Paradis
+** Last update Sat Aug 2 9:43:03 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -1298,6 +1298,140 @@ Test(SickKoalaList, Test_SickKoalaList_removeFromName_several_node_stdout
     cr_assert_stdout_eq_str
     (
         "patients: [nullptr], [nullptr], [nullptr], [nullptr].\n"
+        "Mr.patient4: Kreooogg!! I'm cuuuured!\n"
+        "Mr.patient3: Kreooogg!! I'm cuuuured!\n"
+        "Mr.patient2: Kreooogg!! I'm cuuuured!\n"
+        "Mr.Koala: Kreooogg!! I'm cuuuured!\n"
+    );
+}
+
+Test(SickKoalaList, Test_SickKoalaList_dump_isDefined, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoalaList   sick(&patient);
+    
+    sick.dump();
+}
+
+Test(SickKoalaList, Test_SickKoalaList_dump_display_list_stdout, .init = redirect_all_stdout)
+{
+    {
+        std::string     name = "Koala";
+        SickKoala       patient(name);
+        SickKoala       patient2("patient2");
+        SickKoala       patient3("patient3");
+        SickKoala       patient4("patient4");
+        SickKoalaList   sick(&patient);
+        SickKoalaList   sick2(&patient2);
+        SickKoalaList   sick3(&patient3);
+        SickKoalaList   sick4(&patient4);
+        
+        sick.append(&sick2);
+        sick.append(&sick3);
+        sick.append(&sick4);
+        
+        sick.dump();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "patients: Koala, patient2, patient3, patient4.\n"
+        "Mr.patient4: Kreooogg!! I'm cuuuured!\n"
+        "Mr.patient3: Kreooogg!! I'm cuuuured!\n"
+        "Mr.patient2: Kreooogg!! I'm cuuuured!\n"
+        "Mr.Koala: Kreooogg!! I'm cuuuured!\n"
+    );
+}
+
+Test(SickKoalaList, Test_SickKoalaList_dump_display_list_with_first_node_removed_stdout,
+  .init = redirect_all_stdout)
+{
+    {
+        std::string     name = "Koala";
+        SickKoala       patient(name);
+        SickKoala       patient2("patient2");
+        SickKoala       patient3("patient3");
+        SickKoala       patient4("patient4");
+        SickKoalaList   sick(&patient);
+        SickKoalaList   sick2(&patient2);
+        SickKoalaList   sick3(&patient3);
+        SickKoalaList   sick4(&patient4);
+        
+        sick.append(&sick2);
+        sick.append(&sick3);
+        sick.append(&sick4);
+        
+        sick.remove(&sick);
+        sick.dump();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "patients: [nullptr], patient2, patient3, patient4.\n"
+        "Mr.patient4: Kreooogg!! I'm cuuuured!\n"
+        "Mr.patient3: Kreooogg!! I'm cuuuured!\n"
+        "Mr.patient2: Kreooogg!! I'm cuuuured!\n"
+        "Mr.Koala: Kreooogg!! I'm cuuuured!\n"
+    );
+}
+
+Test(SickKoalaList, 
+Test_SickKoalaList_dump_display_list_with_first_node_removedFromName_stdout,
+  .init = redirect_all_stdout)
+{
+    {
+        std::string     name = "Koala";
+        SickKoala       patient(name);
+        SickKoala       patient2("patient2");
+        SickKoala       patient3("patient3");
+        SickKoala       patient4("patient4");
+        SickKoalaList   sick(&patient);
+        SickKoalaList   sick2(&patient2);
+        SickKoalaList   sick3(&patient3);
+        SickKoalaList   sick4(&patient4);
+        
+        sick.append(&sick2);
+        sick.append(&sick3);
+        sick.append(&sick4);
+        
+        sick.removeFromName(name);
+        sick.dump();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "patients: [nullptr], patient2, patient3, patient4.\n"
+        "Mr.patient4: Kreooogg!! I'm cuuuured!\n"
+        "Mr.patient3: Kreooogg!! I'm cuuuured!\n"
+        "Mr.patient2: Kreooogg!! I'm cuuuured!\n"
+        "Mr.Koala: Kreooogg!! I'm cuuuured!\n"
+    );
+}
+
+Test(SickKoalaList,
+Test_SickKoalaList_dump_display_list_with_first_node_removed_with_another_node_stdout,
+.init = redirect_all_stdout)
+{
+    {
+        std::string     name = "Koala";
+        SickKoala       patient(name);
+        SickKoala       patient2("patient2");
+        SickKoala       patient3("patient3");
+        SickKoala       patient4("patient4");
+        SickKoalaList   sick(&patient);
+        SickKoalaList   sick2(&patient2);
+        SickKoalaList   sick3(&patient3);
+        SickKoalaList   sick4(&patient4);
+        
+        sick.append(&sick2);
+        sick.append(&sick3);
+        sick.append(&sick4);
+        
+        sick.remove(&sick3);
+        sick.removeFromName(name);
+        sick.dump();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "patients: [nullptr], patient2, [nullptr], patient4.\n"
         "Mr.patient4: Kreooogg!! I'm cuuuured!\n"
         "Mr.patient3: Kreooogg!! I'm cuuuured!\n"
         "Mr.patient2: Kreooogg!! I'm cuuuured!\n"

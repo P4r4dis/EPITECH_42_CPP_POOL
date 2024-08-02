@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:56:58 PM 2024 Paradis
-** Last update Sat Aug 2 8:58:11 PM 2024 Paradis
+** Last update Sat Aug 2 9:43:17 PM 2024 Paradis
 */
 
 #include "SickKoalaList.hpp"
@@ -120,7 +120,7 @@ SickKoalaList   *SickKoalaList::remove(SickKoalaList *nodeList)
     return this;
 }
 
-SickKoalaList* SickKoalaList::removeFromName(std::string sickKoalaName)
+SickKoalaList   *SickKoalaList::removeFromName(std::string sickKoalaName)
 {
     // Check if the first node in the list has the matching sickKoalaName
     if (this->_sickKoala && this->_sickKoala->getName() == sickKoalaName) {
@@ -139,4 +139,23 @@ SickKoalaList* SickKoalaList::removeFromName(std::string sickKoalaName)
 
     // Return a pointer to the first node of the list
     return this;
+}
+
+void            SickKoalaList::dump(void)
+{
+    SickKoalaList   *current = this;
+    
+    std::cout << "patients: " << std::flush;
+    while (current)
+    {
+        if (current->_sickKoala)
+            std::cout << current->_sickKoala->getName() << std::flush;
+        else
+            std::cout << "[nullptr]" << std::flush;
+        if (current->_next)
+            std::cout << ", " << std::flush;
+        else
+            std::cout << "."  << std::endl;
+        current = current->_next;
+    }
 }
