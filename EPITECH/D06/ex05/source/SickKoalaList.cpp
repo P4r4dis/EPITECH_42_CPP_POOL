@@ -5,13 +5,13 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:56:58 PM 2024 Paradis
-** Last update Sat Aug 2 9:43:17 PM 2024 Paradis
+** Last update Thu Aug 7 9:18:35 PM 2024 Paradis
 */
 
 #include "SickKoalaList.hpp"
 #include <iostream>
 SickKoalaList::SickKoalaList(SickKoala *sickKoala)  :   _sickKoala(sickKoala),
-                                                        _next(nullptr)
+                                                        _next(NULL)
 {
 }
 
@@ -39,32 +39,32 @@ SickKoala       *SickKoalaList::getFromName(std::string SickKoalaName) const
             return current->_sickKoala;
         current = current->_next;
     }
-    return nullptr;
+    return NULL;
 }
 
 bool            SickKoalaList::isEnd(void)
 {
-    return (_next == nullptr);
+    return (_next == NULL);
 }
 
 void            SickKoalaList::append(SickKoalaList *nodeList) 
 {
-    // 1: Verify if the node is null
-    if (nodeList == nullptr) {
+    // 1: Verify if the nodeList is null
+    if (nodeList == NULL) {
         std::cerr << "Error: Trying to append a null node." << std::endl;
         return;
     }
 
-    // 2: If the current node's data is null, replace it with the new node's data
-    if (_sickKoala == nullptr) {
+    // 2: If the current nodeList's _sickKoala->_name is null, replace it with the new nodeList's _sickKoala->_name
+    if (_sickKoala == NULL) {
         _sickKoala = nodeList->_sickKoala;
         _next = nodeList->_next;
-        return; // Early return after copying data
+        return; // Early return after copying _sickKoala->_name
     }
 
-    // 3: Traverse the list to find the last node and check for duplicates
+    // 3: Traverse the list to find the last nodeList and check for duplicates
     SickKoalaList *current = this;
-    while (current->_next != nullptr) {
+    while (current->_next != NULL) {
         if (current->_sickKoala == nodeList->_sickKoala) {
             std::cerr << "Error: Trying to append a duplicate node." << std::endl;
             return; // Prevent appending duplicates
@@ -72,48 +72,49 @@ void            SickKoalaList::append(SickKoalaList *nodeList)
         current = current->_next;
     }
 
-    // 4: Check the last node for duplicate before adding
+    // 4: Check the last nodeList for duplicate before adding
     if (current->_sickKoala == nodeList->_sickKoala) {
         std::cerr << "Error: Trying to append a duplicate node." << std::endl;
         return;
     }
 
-    // 5: Add the new node (nodeList) to the end of the list
+    // 5: Add the new nodeList (nodeList) to the end of the list
     current->_next = nodeList;
-    nodeList->_next = nullptr;
+    nodeList->_next = NULL;
+
 }
 
-
-SickKoalaList   *SickKoalaList::remove(SickKoalaList *nodeList)
+SickKoalaList* SickKoalaList::remove(SickKoalaList *nodeList) 
 {
-    // 1: Verify if the node is null
-    if (nodeList == nullptr) {
+    // 1. Vérifier si le noeud à supprimer est nul
+    if (nodeList == NULL) {
         std::cerr << "Error: Trying to delete a null node." << std::endl;
         return this;
     }
 
-    // Verify the first node is the same of the new nodeList to remove
     if (this == nodeList)
     {
-        // clean  data
-        _sickKoala = nullptr;
-        // update the current pointer for point to next;
-        _next = nodeList->_next;
-        return this;
+        if (this->_next == NULL)
+        {
+            this->_sickKoala = NULL;
+            return this;
+        } 
+        else
+        {
+            this->_sickKoala = NULL;
+            this->_next = nodeList->_next;
+            return this;
+        }
     }
 
-    // 3. Through the list
-    // init tempory ptr for trough the list
-    SickKoalaList   *current = this;
-    // scroll through the list until you find the corresponding node or reach the end of the list.
-    while (current)
+    SickKoalaList* current = this;
+    while (current->_next != NULL)
     {
-        if (current == nodeList)
+        if (current->_next == nodeList)
         {
-            // clean data
-            current->_sickKoala = nullptr;
-            // update current next
             current->_next = nodeList->_next;
+            nodeList->_next = NULL;
+            return this;
         }
         current = current->_next;
     }
@@ -122,22 +123,30 @@ SickKoalaList   *SickKoalaList::remove(SickKoalaList *nodeList)
 
 SickKoalaList   *SickKoalaList::removeFromName(std::string sickKoalaName)
 {
-    // Check if the first node in the list has the matching sickKoalaName
+    // Special case: removing the head node
     if (this->_sickKoala && this->_sickKoala->getName() == sickKoalaName) {
-        this->_sickKoala = nullptr;
-        return this;
+        if (this->_next == NULL) {
+            this->_sickKoala = NULL;
+            return this;
+        } else {
+            this->_sickKoala = NULL;
+            // this->_sickKoala = this->_next->_sickKoala;
+            // this->_next = this->_next->_next;
+            return this;
+        }
     }
-    // Iterate through the list and set _sickKoala to nullptr for the matching sickKoalaName
+
     SickKoalaList* current = this;
-    while (current->_next != nullptr)
-    {
-        if (current->_next->_sickKoala && 
-            current->_next->_sickKoala->getName() == sickKoalaName)
-            current->_next->_sickKoala = nullptr;
+    while (current->_next != NULL) {
+        if (current->_next->_sickKoala && current->_next->_sickKoala->getName() == sickKoalaName) {
+            SickKoalaList* nodeToRemove = current->_next;
+            current->_next = nodeToRemove->_next;
+            nodeToRemove->_next = NULL;
+            return this;
+        }
         current = current->_next;
     }
 
-    // Return a pointer to the first node of the list
     return this;
 }
 

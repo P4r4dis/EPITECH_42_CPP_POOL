@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:52:25 PM 2024 Paradis
-** Last update Sat Aug 2 9:43:03 PM 2024 Paradis
+** Last update Thu Aug 7 8:59:33 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -695,6 +695,32 @@ Test(SickKoalaList, Test_SickKoalaList_isEnd_return_false, .init = redirect_all_
     cr_assert(sick.isEnd() == false);
 }
 
+Test(SickKoalaList, Test_SickKoalaList_isEnd_after_clean_list_return_true, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoala       patient2("patient2");
+    SickKoala       patient3("patient3");
+    SickKoalaList   sick(&patient);
+    SickKoalaList   sick2(&patient2);
+    SickKoalaList   sick3(&patient3);
+
+    sick.append(&sick2);
+    sick.append(&sick3);
+    sick.dump();
+
+    sick.remove(&sick);
+    sick.dump();
+    sick.removeFromName("patient2");
+    sick.dump();
+    sick.remove(&sick3);
+    sick.dump();
+
+
+    cr_assert_null(sick.getNext());
+    cr_assert(sick.isEnd() == true);
+}
+
 Test(SickKoalaList, Test_SickKoalaList_append_isDefined, .init = redirect_all_stdout)
 {
     std::string     name = "Koala";
@@ -1250,7 +1276,7 @@ Test(SickKoalaList, Test_SickKoalaList_removeFromName_a_node_stdout
     }
     cr_assert_stdout_eq_str
     (
-        "patients: Koala, patient2, [nullptr], patient4.\n"
+        "patients: Koala, patient2, patient4.\n"
         "Mr.patient4: Kreooogg!! I'm cuuuured!\n"
         "Mr.patient3: Kreooogg!! I'm cuuuured!\n"
         "Mr.patient2: Kreooogg!! I'm cuuuured!\n"
@@ -1297,7 +1323,7 @@ Test(SickKoalaList, Test_SickKoalaList_removeFromName_several_node_stdout
     }
     cr_assert_stdout_eq_str
     (
-        "patients: [nullptr], [nullptr], [nullptr], [nullptr].\n"
+        "patients: [nullptr].\n"
         "Mr.patient4: Kreooogg!! I'm cuuuured!\n"
         "Mr.patient3: Kreooogg!! I'm cuuuured!\n"
         "Mr.patient2: Kreooogg!! I'm cuuuured!\n"
@@ -1344,7 +1370,7 @@ Test(SickKoalaList, Test_SickKoalaList_dump_display_list_stdout, .init = redirec
 }
 
 Test(SickKoalaList, Test_SickKoalaList_dump_display_list_with_first_node_removed_stdout,
-  .init = redirect_all_stdout)
+ .init = redirect_all_stdout)
 {
     {
         std::string     name = "Koala";
@@ -1431,7 +1457,7 @@ Test_SickKoalaList_dump_display_list_with_first_node_removed_with_another_node_s
     }
     cr_assert_stdout_eq_str
     (
-        "patients: [nullptr], patient2, [nullptr], patient4.\n"
+        "patients: [nullptr], patient2, patient4.\n"
         "Mr.patient4: Kreooogg!! I'm cuuuured!\n"
         "Mr.patient3: Kreooogg!! I'm cuuuured!\n"
         "Mr.patient2: Kreooogg!! I'm cuuuured!\n"

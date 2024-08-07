@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Wed Jul 31 4:51:14 PM 2024 Paradis
-## Last update Thu Jul 31 4:51:34 PM 2024 Paradis
+## Last update Thu Aug 7 9:12:34 PM 2024 Paradis
 ##
 
 
@@ -31,6 +31,7 @@ CPPFLAGS	+= 	-Wall -Wextra -Werror -W -Wfatal-errors -std=c++98 $(INCFLAGS)
 SRCS		=	$(SRC_PATH)/SickKoala.cpp \
 				$(SRC_PATH)/KoalaNurse.cpp \
 				$(SRC_PATH)/KoalaDoctor.cpp \
+				$(SRC_PATH)/SickKoalaList.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp
