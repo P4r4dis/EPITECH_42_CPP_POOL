@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:52:25 PM 2024 Paradis
-** Last update Fri Aug 8 8:54:06 PM 2024 Paradis
+** Last update Fri Aug 8 10:18:36 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -21,6 +21,7 @@
 #include "../../include/KoalaDoctor.hpp"
 
 #include "../../include/SickKoalaList.hpp"
+#include "../../include/KoalaNurseList.hpp"
 #include "../../include/KoalaDoctorList.hpp"
 void redirect_all_stdout(void)
 {
@@ -2333,5 +2334,818 @@ Test_KoalaDoctorList_dump_display_list_with_first_node_removed_with_another_node
         "Dr.Doctor3: I'm Dr.Doctor3! How do you kreog?\n"
         "Dr.Doctor4: I'm Dr.Doctor4! How do you kreog?\n"
         "Doctors: [nullptr], Doctor2, Doctor4.\n"
+    );
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_CTOR_isDefined, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurseList   nurseList(&nurse);
+    
+    cr_assert_not_null(&nurseList);
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_getContent_isDefined, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurseList   nurseList(&nurse);
+
+    cr_assert_not_null(nurseList.getContent());
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_getContent_acces_to_pointer, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurseList   nurseList(&nurse);
+
+    cr_assert(nurseList.getContent()->getId() == 1);
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_getNext_return_nullptr, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurseList   nurseList(&nurse);
+
+    cr_assert_null(nurseList.getNext());
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_getNext_return_ptr_on_next, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurseList   nurseList(&nurse);
+
+    cr_assert_null(nurseList.getNext());
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_isEnd_return_true, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurseList   nurseList(&nurse);
+
+    cr_assert(nurseList.isEnd() == true);
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_isEnd_return_false, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       nurse2(2);
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   nurseList2(&nurse2);
+
+    nurseList.append(&nurseList2);
+    cr_assert(nurseList.isEnd() == false);
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_isEnd_after_clean_list_return_true, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       nurse2(2);
+    KoalaNurse       nurse3(3);
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   nurseList2(&nurse2);
+    KoalaNurseList   nurseList3(&nurse3);
+
+    nurseList.append(&nurseList2);
+    nurseList.append(&nurseList3);
+    nurseList.dump();
+
+    nurseList.remove(&nurseList);
+    nurseList.dump();
+    nurseList.removeFromID(2);
+    nurseList.dump();
+    nurseList.remove(&nurseList3);
+    nurseList.dump();
+
+
+    cr_assert_null(nurseList.getNext());
+    cr_assert(nurseList.isEnd() == true);
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_append_isDefined, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       nurse2(2);
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   nurseList2(&nurse2);
+
+    nurseList.append(&nurseList2);
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_append_nodeList_is_nullptr
+, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       nurse2(2);
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   *nurseList2 = nullptr;
+
+    cr_assert_null(nurseList2);
+    nurseList.append(nurseList2);
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_append_nodeList_is_nullptr_stderr
+, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       nurse2(2);
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   *nurseList2 = nullptr;
+
+    cr_assert_null(nurseList2);
+    nurseList.append(nurseList2);
+    cr_assert_stderr_eq_str
+    (
+        "Error: Trying to append a null node.\n"
+    );
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_append_nurseListNurse_is_nullptr
+, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       *nurse2 = nullptr;
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   nurseList2(nurse2);
+
+    cr_assert_null(nurse2);
+    nurseList2.append(&nurseList);
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_append_one_node
+, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       nurse2(2);
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   nurseList2(&nurse2);
+
+    nurseList2.append(&nurseList);
+    cr_assert(nurseList2.getContent()->getId() == 2);
+    cr_assert(nurseList2.getNext()->getContent()->getId() == 1);
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_append_should_avoid_same_node
+, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       nurse2(2);
+    KoalaNurse       nurse3(3);
+    KoalaNurse       nurse4(4);
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   nurseList2(&nurse2);
+    KoalaNurseList   nurseList3(&nurse3);
+    KoalaNurseList   nurseList4(&nurse4);
+    nurseList2.append(&nurseList);
+    nurseList2.append(&nurseList3);
+    nurseList2.append(&nurseList4);
+    nurseList2.append(&nurseList4);
+    nurseList2.append(&nurseList3);
+
+    cr_assert_stderr_eq_str
+    (
+        "Error: Trying to append a duplicate node.\n"
+        "Error: Trying to append a duplicate node.\n"
+    );
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_append_several_nodes
+, .init = redirect_all_stdout)
+{
+    { 
+        KoalaNurse       nurse(1);
+        KoalaNurse       nurse2(2);
+        KoalaNurse       nurse3(3);
+        KoalaNurse       nurse4(4);
+        KoalaNurseList   nurseList(&nurse);
+        KoalaNurseList   nurseList2(&nurse2);
+        KoalaNurseList   nurseList3(&nurse3);
+        KoalaNurseList   nurseList4(&nurse4);
+        nurseList2.append(&nurseList);
+        nurseList2.append(&nurseList3);
+        nurseList2.append(&nurseList4);
+
+        KoalaNurseList *current = &nurseList2;
+
+        while (current != nullptr)
+        {
+            if (current->getContent())
+                cr_assert(current->getContent()->getId() != 0); //shit test
+
+            current = current->getNext();
+        }
+    }
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_getFromName_isDefinied
+, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       nurse2(2);
+    KoalaNurse       nurse3(3);
+    KoalaNurse       nurse4(4);
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   nurseList2(&nurse2);
+    KoalaNurseList   nurseList3(&nurse3);
+    KoalaNurseList   nurseList4(&nurse4);
+    nurseList2.append(&nurseList);
+    nurseList2.append(&nurseList3);
+    nurseList2.append(&nurseList4);
+    nurseList2.append(&nurseList4);
+    nurseList2.append(&nurseList3);
+
+    nurseList2.getFromID(1);
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_getFromName_not_matches_should_nullptr
+, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       nurse2(2);
+    KoalaNurse       nurse3(3);
+    KoalaNurse       nurse4(4);
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   nurseList2(&nurse2);
+    KoalaNurseList   nurseList3(&nurse3);
+    KoalaNurseList   nurseList4(&nurse4);
+    nurseList2.append(&nurseList);
+    nurseList2.append(&nurseList3);
+    nurseList2.append(&nurseList4);
+    nurseList2.append(&nurseList4);
+    nurseList2.append(&nurseList3);
+
+    cr_assert(nurseList2.getFromID(5) == nullptr);
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_getFromName_matches_should_ptr_to_nurseListNurse
+, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       nurse2(2);
+    KoalaNurse       nurse3(3);
+    KoalaNurse       nurse4(4);
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   nurseList2(&nurse2);
+    KoalaNurseList   nurseList3(&nurse3);
+    KoalaNurseList   nurseList4(&nurse4);
+    nurseList2.append(&nurseList);
+    nurseList2.append(&nurseList3);
+    nurseList2.append(&nurseList4);
+    nurseList2.append(&nurseList4);
+    nurseList2.append(&nurseList3);
+
+    cr_assert(nurseList2.getFromID(1)->getId() == 1);
+    cr_assert(nurseList2.getFromID(2)->getId() == 2);
+    cr_assert(nurseList2.getFromID(3)->getId() == 3);
+    cr_assert(nurseList2.getFromID(4)->getId() == 4);
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_remove_isDefined
+, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       nurse2(2);
+    KoalaNurse       nurse3(3);
+    KoalaNurse       nurse4(4);
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   nurseList2(&nurse2);
+    KoalaNurseList   nurseList3(&nurse3);
+    KoalaNurseList   nurseList4(&nurse4);
+    nurseList2.append(&nurseList);
+    nurseList2.append(&nurseList3);
+    nurseList2.append(&nurseList4);
+    nurseList2.append(&nurseList4);
+    nurseList2.append(&nurseList3);
+
+    nurseList2.remove(&nurseList3);
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_remove_unknow_node
+, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       nurse2(2);
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   nurseList2(&nurse2);
+
+    cr_assert(nurseList.remove(&nurseList2) == &nurseList);
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_remove_nodeList_is_nullptr
+, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       nurse2(2);
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   *nurseList2 = nullptr;
+    KoalaNurse       nurse3(3);
+    KoalaNurse       nurse4(4);
+    KoalaNurseList   nurseList3(&nurse3);
+    KoalaNurseList   nurseList4(&nurse4);
+    nurseList.append(nurseList2);
+    nurseList.append(&nurseList3);
+    nurseList.append(&nurseList4);
+    cr_assert_null(nurseList2);
+    cr_assert(nurseList.remove(nurseList2)->getContent()->getId() == 1);
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_remove_nodeList_is_nullptr_with_output
+, .init = redirect_all_stdout)
+{
+    {
+        KoalaNurse       nurse(1);
+        KoalaNurse       nurse2(2);
+        KoalaNurseList   nurseList(&nurse);
+        KoalaNurseList   *nurseList2 = nullptr;
+        KoalaNurse       nurse3(3);
+        KoalaNurse       nurse4(4);
+        KoalaNurseList   nurseList3(&nurse3);
+        KoalaNurseList   nurseList4(&nurse4);
+        nurseList.append(nurseList2);
+        nurseList.append(&nurseList3);
+        nurseList.append(&nurseList4);
+        cr_assert_null(nurseList2);
+        cr_assert(nurseList.remove(nurseList2)->getContent()->getId() == 1);
+    }
+    cr_assert_stderr_eq_str
+    (
+        "Error: Trying to append a null node.\n"
+        "Error: Trying to delete a null node.\n"
+    );
+    cr_assert_stdout_eq_str
+    (
+        "Nurse 4: Finally some rest!\n"
+        "Nurse 3: Finally some rest!\n"
+        "Nurse 2: Finally some rest!\n"
+        "Nurse 1: Finally some rest!\n"
+    );
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_remove_node_from_list_with_only_one_node
+, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+
+    KoalaNurseList   nurseList(&nurse);
+
+    cr_assert_null(nurseList.remove(&nurseList)->getContent());
+}
+
+
+Test(KoalaNurseList, Test_KoalaNurseList_remove_first_nodeList
+, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       nurse2(2);
+    KoalaNurse       nurse3(3);
+    KoalaNurse       nurse4(4);
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   nurseList2(&nurse2);
+    KoalaNurseList   nurseList3(&nurse3);
+    KoalaNurseList   nurseList4(&nurse4);
+    nurseList.append(&nurseList2);
+    nurseList.append(&nurseList3);
+    nurseList.append(&nurseList4);
+
+    cr_assert_null(nurseList.remove(&nurseList)->getContent());
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_remove_a_nodeList
+, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       nurse2(2);
+    KoalaNurse       nurse3(3);
+    KoalaNurse       nurse4(4);
+    KoalaNurse       nurse5(5);
+
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   nurseList2(&nurse2);
+    KoalaNurseList   nurseList3(&nurse3);
+    KoalaNurseList   nurseList4(&nurse4);
+    KoalaNurseList   nurseList5(&nurse5);
+    nurseList.append(&nurseList2);
+    nurseList.append(&nurseList3);
+    nurseList.append(&nurseList4);
+
+    nurseList.remove(&nurseList3);
+    KoalaNurseList *current = &nurseList;
+
+    while (current != nullptr)
+    {
+        if (current->getContent())
+            cr_assert_not_null(current->getContent());
+
+        current = current->getNext();
+    }
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_remove_several_nodeList,
+.init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       nurse2(2);
+    KoalaNurse       nurse3(3);
+    KoalaNurse       nurse4(4);
+    KoalaNurse       nurse5(5);
+
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   nurseList2(&nurse2);
+    KoalaNurseList   nurseList3(&nurse3);
+    KoalaNurseList   nurseList4(&nurse4);
+    KoalaNurseList   nurseList5(&nurse5);
+    nurseList.append(&nurseList2);
+    nurseList.append(&nurseList3);
+    nurseList.append(&nurseList4);
+
+    nurseList.remove(&nurseList);
+    nurseList.remove(&nurseList2);
+    nurseList.remove(&nurseList3);
+    nurseList.remove(&nurseList4);
+    
+    KoalaNurseList *current = &nurseList;
+
+    while (current != nullptr)
+    {
+        if (!current->getContent())
+            cr_assert_null(current->getContent());
+        current = current->getNext();
+    }
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_removeFromName_isDefined
+, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       nurse2(2);
+    KoalaNurse       nurse3(3);
+    KoalaNurse       nurse4(4);
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   nurseList2(&nurse2);
+    KoalaNurseList   nurseList3(&nurse3);
+    KoalaNurseList   nurseList4(&nurse4);
+
+    nurseList.append(&nurseList2);
+    nurseList.append(&nurseList3);
+    nurseList.append(&nurseList4);
+
+    nurseList.removeFromID(3);
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_removeFromName_from_empty_list
+, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurseList   test(nullptr);
+
+    cr_assert_null(test.removeFromID(1)->getContent());
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_removeFromName_the_first_node
+, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurseList   nurseList(&nurse);
+
+    cr_assert_null(nurseList.removeFromID(1)->getContent());
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_removeFromName_the_first_node_several_times
+, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurseList   nurseList(&nurse);
+
+    cr_assert_null(nurseList.removeFromID(1)->getContent());
+    cr_assert_null(nurseList.removeFromID(1)->getContent());
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_removeFromName_a_node
+, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       nurse2(2);
+    KoalaNurse       nurse3(3);
+    KoalaNurse       nurse4(4);
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   nurseList2(&nurse2);
+    KoalaNurseList   nurseList3(&nurse3);
+    KoalaNurseList   nurseList4(&nurse4);
+    
+    nurseList.append(&nurseList2);
+    nurseList.append(&nurseList3);
+    nurseList.append(&nurseList4);
+
+    nurseList.removeFromID(3);
+
+    KoalaNurseList *current = &nurseList;
+
+    std::cout << "Nurses: " << std::flush;
+    while (current != nullptr)
+    {
+        if (current->getContent())
+            cr_assert_not_null(current->getContent());
+
+        if (current->getNext())
+            std::cout << ", " << std::flush;
+        else
+            std::cout << ".\n"  << std::flush;
+        current = current->getNext();
+    }
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_removeFromName_a_same_node_several_times , .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurse       nurse2(2);
+    KoalaNurse       nurse3(3);
+    KoalaNurse       nurse4(4);
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   nurseList2(&nurse2);
+    KoalaNurseList   nurseList3(&nurse3);
+    KoalaNurseList   nurseList4(&nurse4);
+    
+    nurseList.append(&nurseList2);
+    nurseList.append(&nurseList3);
+    nurseList.append(&nurseList4);
+
+    nurseList.removeFromID(3);
+    nurseList.removeFromID(3);
+    nurseList.removeFromID(4);
+    nurseList.removeFromID(3);
+
+    KoalaNurseList *current = &nurseList;
+
+    std::cout << "Nurses: " << std::flush;
+    while (current != nullptr)
+    {
+        if (current->getContent())
+            cr_assert_not_null(current->getContent());
+
+        if (current->getNext())
+            std::cout << ", " << std::flush;
+        else
+            std::cout << ".\n"  << std::flush;
+        current = current->getNext();
+    }
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_removeFromName_first_node_stdout
+, .init = redirect_all_stdout)
+{
+    {
+        KoalaNurse       nurse(1);
+        KoalaNurse       nurse2(2);
+        KoalaNurse       nurse3(3);
+        KoalaNurse       nurse4(4);
+        KoalaNurseList   nurseList(&nurse);
+        KoalaNurseList   nurseList2(&nurse2);
+        KoalaNurseList   nurseList3(&nurse3);
+        KoalaNurseList   nurseList4(&nurse4);
+        
+        nurseList.append(&nurseList2);
+        nurseList.append(&nurseList3);
+        nurseList.append(&nurseList4);
+
+        nurseList.removeFromID(1);
+
+        KoalaNurseList *current = &nurseList;
+
+        std::cout << "Nurses: " << std::flush;
+        while (current != nullptr)
+        {
+            if (current->getContent())
+                std::cout << current->getContent()->getId() << std::flush;
+            else
+                std::cout << "[nullptr]" << std::flush;
+            if (current->getNext())
+                std::cout << ", " << std::flush;
+            else
+                std::cout << ".\n"  << std::flush;
+            current = current->getNext();
+        }
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Nurses: [nullptr], 2, 3, 4.\n"
+        "Nurse 4: Finally some rest!\n"
+        "Nurse 3: Finally some rest!\n"
+        "Nurse 2: Finally some rest!\n"
+        "Nurse 1: Finally some rest!\n"
+    );
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_removeFromName_a_node_stdout
+, .init = redirect_all_stdout)
+{
+    {
+        KoalaNurse       nurse(1);
+        KoalaNurse       nurse2(2);
+        KoalaNurse       nurse3(3);
+        KoalaNurse       nurse4(4);
+        KoalaNurseList   nurseList(&nurse);
+        KoalaNurseList   nurseList2(&nurse2);
+        KoalaNurseList   nurseList3(&nurse3);
+        KoalaNurseList   nurseList4(&nurse4);
+        
+        nurseList.append(&nurseList2);
+        nurseList.append(&nurseList3);
+        nurseList.append(&nurseList4);
+
+        nurseList.removeFromID(3);
+
+        KoalaNurseList *current = &nurseList;
+
+        std::cout << "Nurses: " << std::flush;
+        while (current != nullptr)
+        {
+            if (current->getContent())
+                std::cout << current->getContent()->getId() << std::flush;
+
+            if (current->getNext())
+                std::cout << ", " << std::flush;
+            else
+                std::cout << ".\n"  << std::flush;
+            current = current->getNext();
+        }
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Nurses: 1, 2, 4.\n"
+        "Nurse 4: Finally some rest!\n"
+        "Nurse 3: Finally some rest!\n"
+        "Nurse 2: Finally some rest!\n"
+        "Nurse 1: Finally some rest!\n"
+    );
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_removeFromName_several_node_stdout
+, .init = redirect_all_stdout)
+{
+    {
+        KoalaNurse       nurse(1);
+        KoalaNurse       nurse2(2);
+        KoalaNurse       nurse3(3);
+        KoalaNurse       nurse4(4);
+        KoalaNurseList   nurseList(&nurse);
+        KoalaNurseList   nurseList2(&nurse2);
+        KoalaNurseList   nurseList3(&nurse3);
+        KoalaNurseList   nurseList4(&nurse4);
+        
+        nurseList.append(&nurseList2);
+        nurseList.append(&nurseList3);
+        nurseList.append(&nurseList4);
+
+        nurseList.removeFromID(1);
+        nurseList.removeFromID(2);
+        nurseList.removeFromID(3);
+        nurseList.removeFromID(4);
+
+        KoalaNurseList *current = &nurseList;
+
+        std::cout << "Nurses: " << std::flush;
+        while (current != nullptr)
+        {
+            if (!current->getContent())
+                std::cout << "[nullptr]" << std::flush;                
+            current = current->getNext();
+        }
+        std::cout << ".\n"  << std::flush;
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Nurses: [nullptr].\n"
+        "Nurse 4: Finally some rest!\n"
+        "Nurse 3: Finally some rest!\n"
+        "Nurse 2: Finally some rest!\n"
+        "Nurse 1: Finally some rest!\n"
+    );
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_dump_isDefined, .init = redirect_all_stdout)
+{
+    KoalaNurse       nurse(1);
+    KoalaNurseList   nurseList(&nurse);
+    
+    nurseList.dump();
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_dump_display_list_stdout, .init = redirect_all_stdout)
+{
+    {
+        KoalaNurse       nurse(1);
+        KoalaNurse       nurse2(2);
+        KoalaNurse       nurse3(3);
+        KoalaNurse       nurse4(4);
+        KoalaNurseList   nurseList(&nurse);
+        KoalaNurseList   nurseList2(&nurse2);
+        KoalaNurseList   nurseList3(&nurse3);
+        KoalaNurseList   nurseList4(&nurse4);
+        
+        nurseList.append(&nurseList2);
+        nurseList.append(&nurseList3);
+        nurseList.append(&nurseList4);
+        
+        nurseList.dump();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Nurses: 1, 2, 3, 4.\n"
+        "Nurse 4: Finally some rest!\n"
+        "Nurse 3: Finally some rest!\n"
+        "Nurse 2: Finally some rest!\n"
+        "Nurse 1: Finally some rest!\n"
+    );
+}
+
+Test(KoalaNurseList, Test_KoalaNurseList_dump_display_list_with_first_node_removed_stdout,
+ .init = redirect_all_stdout)
+{
+    {
+        KoalaNurse       nurse(1);
+        KoalaNurse       nurse2(2);
+        KoalaNurse       nurse3(3);
+        KoalaNurse       nurse4(4);
+        KoalaNurseList   nurseList(&nurse);
+        KoalaNurseList   nurseList2(&nurse2);
+        KoalaNurseList   nurseList3(&nurse3);
+        KoalaNurseList   nurseList4(&nurse4);
+        
+        nurseList.append(&nurseList2);
+        nurseList.append(&nurseList3);
+        nurseList.append(&nurseList4);
+        
+        nurseList.remove(&nurseList);
+        nurseList.dump();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Nurses: [nullptr], 2, 3, 4.\n"
+        "Nurse 4: Finally some rest!\n"
+        "Nurse 3: Finally some rest!\n"
+        "Nurse 2: Finally some rest!\n"
+        "Nurse 1: Finally some rest!\n"
+    );
+}
+
+Test(KoalaNurseList, 
+Test_KoalaNurseList_dump_display_list_with_first_node_removedFromName_stdout,
+  .init = redirect_all_stdout)
+{
+    {
+        KoalaNurse       nurse(1);
+        KoalaNurse       nurse2(2);
+        KoalaNurse       nurse3(3);
+        KoalaNurse       nurse4(4);
+        KoalaNurseList   nurseList(&nurse);
+        KoalaNurseList   nurseList2(&nurse2);
+        KoalaNurseList   nurseList3(&nurse3);
+        KoalaNurseList   nurseList4(&nurse4);
+        
+        nurseList.append(&nurseList2);
+        nurseList.append(&nurseList3);
+        nurseList.append(&nurseList4);
+        
+        nurseList.removeFromID(1);
+        nurseList.dump();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Nurses: [nullptr], 2, 3, 4.\n"
+        "Nurse 4: Finally some rest!\n"
+        "Nurse 3: Finally some rest!\n"
+        "Nurse 2: Finally some rest!\n"
+        "Nurse 1: Finally some rest!\n"
+    );
+}
+
+Test(KoalaNurseList,
+Test_KoalaNurseList_dump_display_list_with_first_node_removed_with_another_node_stdout,
+.init = redirect_all_stdout)
+{
+    {
+        KoalaNurse       nurse(1);
+        KoalaNurse       nurse2(2);
+        KoalaNurse       nurse3(3);
+        KoalaNurse       nurse4(4);
+        KoalaNurseList   nurseList(&nurse);
+        KoalaNurseList   nurseList2(&nurse2);
+        KoalaNurseList   nurseList3(&nurse3);
+        KoalaNurseList   nurseList4(&nurse4);
+        
+        nurseList.append(&nurseList2);
+        nurseList.append(&nurseList3);
+        nurseList.append(&nurseList4);
+        
+        nurseList.remove(&nurseList3);
+        nurseList.removeFromID(1);
+        nurseList.dump();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Nurses: [nullptr], 2, 4.\n"
+        "Nurse 4: Finally some rest!\n"
+        "Nurse 3: Finally some rest!\n"
+        "Nurse 2: Finally some rest!\n"
+        "Nurse 1: Finally some rest!\n"
     );
 }

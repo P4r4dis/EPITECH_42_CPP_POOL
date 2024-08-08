@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Wed Jul 31 4:51:14 PM 2024 Paradis
-## Last update Fri Aug 8 7:11:25 PM 2024 Paradis
+## Last update Fri Aug 8 10:23:51 PM 2024 Paradis
 ##
 
 
@@ -33,6 +33,7 @@ SRCS		=	$(SRC_PATH)/SickKoala.cpp \
 				$(SRC_PATH)/KoalaDoctor.cpp \
 				$(SRC_PATH)/SickKoalaList.cpp \
 				$(SRC_PATH)/KoalaDoctorList.cpp \
+				$(SRC_PATH)/KoalaNurseList.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp

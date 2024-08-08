@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jul 29 6:33:43 PM 2024 Paradis
-** Last update Fri Aug 8 7:17:37 PM 2024 Paradis
+** Last update Fri Aug 8 10:25:54 PM 2024 Paradis
 */
 
 #include "../include/SickKoala.hpp"
@@ -13,6 +13,7 @@
 #include "../include/KoalaDoctor.hpp"
 
 #include "../include/SickKoalaList.hpp"
+#include "../include/KoalaNurseList.hpp"
 #include "../include/KoalaDoctorList.hpp"
 #include <iostream>
 
@@ -26,7 +27,7 @@ int main(void)
     patient.takeDrug("anything");
     patient.overDrive("Kreog! How's it going?");
     
-    KoalaNurse  nurse(0);
+    KoalaNurse  nurse(1);
 
     nurse.timeCheck();
     nurse.giveDrug(nurse.readReport(patient.getName() + ".report"), &patient);
@@ -119,6 +120,47 @@ int main(void)
     doctorList.removeFromName("Doc4");
     doctorList.dump();
     if(doctorList.isEnd())
+        std::cout << "Lists cleaned up." << std::endl;
+    else
+        std::cerr << "You fail ! Boo !" << std::endl;
+
+    std::cout << "NURSES! HELP US!" << std::endl;
+    KoalaNurse       nurse2(2);
+    KoalaNurse       nurse3(3);
+    KoalaNurse       nurse4(4);
+    KoalaNurseList   nurseList(&nurse);
+    KoalaNurseList   nurseList2(&nurse2);
+    KoalaNurseList   nurseList3(&nurse3);
+    KoalaNurseList   nurseList4(&nurse4);
+
+    std::cout << "append one node to the list:" << std::endl;
+    nurseList.append(&nurseList2);
+    nurseList.dump();
+    std::cout << "Verify if the next node is nurse2(2)" << std::endl;
+    if (nurseList.getNext())
+    {
+        std::cout   << "print the next pointer name: "
+                    << nurseList.getNext()->getContent()->getId() << std::endl;
+        std::cout << "The name should be: Nurse2" << std::endl;
+    }
+    std::cout << "append some nodes to the list:" << std::endl;
+    nurseList.append(&nurseList3);
+    nurseList.append(&nurseList4);
+    nurseList.dump();
+    std::cout   << "Verify if we are at the end of the list:" 
+                << std::boolalpha << nurseList.isEnd() << std::endl
+                << "should be return false." << std::endl;
+    std::cout << "Now we are going to clean the list:" << std::endl;
+    nurseList.dump();
+    nurseList.remove(&nurseList);
+    nurseList.dump();
+    nurseList.removeFromID(2);
+    nurseList.dump();
+    nurseList.remove(&nurseList3);
+    nurseList.dump();
+    nurseList.removeFromID(4);
+    nurseList.dump();
+    if(nurseList.isEnd())
         std::cout << "Lists cleaned up." << std::endl;
     else
         std::cerr << "You fail ! Boo !" << std::endl;
