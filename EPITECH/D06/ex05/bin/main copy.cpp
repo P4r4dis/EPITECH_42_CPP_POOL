@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jul 29 6:33:43 PM 2024 Paradis
-** Last update Fri Aug 8 7:17:37 PM 2024 Paradis
+** Last update Thu Aug 7 9:12:18 PM 2024 Paradis
 */
 
 #include "../include/SickKoala.hpp"
@@ -13,7 +13,6 @@
 #include "../include/KoalaDoctor.hpp"
 
 #include "../include/SickKoalaList.hpp"
-#include "../include/KoalaDoctorList.hpp"
 #include <iostream>
 
 int main(void)
@@ -78,47 +77,6 @@ int main(void)
     sick.removeFromName("patient4");
     sick.dump();
     if(sick.isEnd())
-        std::cout << "Lists cleaned up." << std::endl;
-    else
-        std::cerr << "You fail ! Boo !" << std::endl;
-
-    std::cout << "DOCTOR! HELP US!" << std::endl;
-    KoalaDoctor       doctor2("Doc2");
-    KoalaDoctor       doctor3("Doc3");
-    KoalaDoctor       doctor4("Doc4");
-    KoalaDoctorList   doctorList(&doctor);
-    KoalaDoctorList   doctorList2(&doctor2);
-    KoalaDoctorList   doctorList3(&doctor3);
-    KoalaDoctorList   doctorList4(&doctor4);
-
-    std::cout << "append one node to the list:" << std::endl;
-    doctorList.append(&doctorList2);
-    doctorList.dump();
-    std::cout << "Verify if the next node is doctor2(Doc2)" << std::endl;
-    if (doctorList.getNext())
-    {
-        std::cout   << "print the next pointer name: "
-                    << doctorList.getNext()->getContent()->getName() << std::endl;
-        std::cout << "The name should be: Doc2" << std::endl;
-    }
-    std::cout << "append some nodes to the list:" << std::endl;
-    doctorList.append(&doctorList3);
-    doctorList.append(&doctorList4);
-    doctorList.dump();
-    std::cout   << "Verify if we are at the end of the list:" 
-                << std::boolalpha << doctorList.isEnd() << std::endl
-                << "should be return false." << std::endl;
-    std::cout << "Now we are going to clean the list:" << std::endl;
-    doctorList.dump();
-    doctorList.remove(&doctorList);
-    doctorList.dump();
-    doctorList.removeFromName("Doc2");
-    doctorList.dump();
-    doctorList.remove(&doctorList3);
-    doctorList.dump();
-    doctorList.removeFromName("Doc4");
-    doctorList.dump();
-    if(doctorList.isEnd())
         std::cout << "Lists cleaned up." << std::endl;
     else
         std::cerr << "You fail ! Boo !" << std::endl;

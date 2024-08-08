@@ -1,53 +1,56 @@
 /*
-** SickKoalaList.cpp for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/EPITECH/D06/ex05/source
+** KoalaDoctorList.cpp for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/EPITECH/D06/ex05/source
 **
 ** Made by Paradis
 ** Login   <Adil Denia>
 **
-** Started on  Wed Jul 31 4:56:58 PM 2024 Paradis
-** Last update Fri Aug 8 6:56:02 PM 2024 Paradis
+** Started on  Thu Aug 8 6:44:06 PM 2024 Paradis
+** Last update Fri Aug 8 7:51:08 PM 2024 Paradis
 */
 
-#include "SickKoalaList.hpp"
+
+
+
+#include "KoalaDoctorList.hpp"
 #include <iostream>
-SickKoalaList::SickKoalaList(SickKoala *sickKoala)  :   _sickKoala(sickKoala),
-                                                        _next(NULL)
+KoalaDoctorList::KoalaDoctorList(KoalaDoctor *koalaDoctor)  :   _koalaDoctor(koalaDoctor),
+                                                                _next(NULL)
 {
 }
 
-SickKoalaList::~SickKoalaList(void)
+KoalaDoctorList::~KoalaDoctorList(void)
 {
 }
 
-SickKoala       *SickKoalaList::getContent(void) const
+KoalaDoctor       *KoalaDoctorList::getContent(void) const
 {
-    return _sickKoala;
+    return _koalaDoctor;
 }
 
-SickKoalaList   *SickKoalaList::getNext(void) const
+KoalaDoctorList   *KoalaDoctorList::getNext(void) const
 {
     return _next;
 }
 
-SickKoala       *SickKoalaList::getFromName(std::string SickKoalaName) const
+KoalaDoctor       *KoalaDoctorList::getFromName(std::string KoalaDoctorName) const
 {
-    const SickKoalaList   *current = this;
+    const KoalaDoctorList   *current = this;
 
     while (current)
     {
-        if (current->_sickKoala->getName() == SickKoalaName)
-            return current->_sickKoala;
+        if (current->_koalaDoctor->getName() == KoalaDoctorName)
+            return current->_koalaDoctor;
         current = current->_next;
     }
     return NULL;
 }
 
-bool            SickKoalaList::isEnd(void)
+bool            KoalaDoctorList::isEnd(void)
 {
     return (_next == NULL);
 }
 
-void            SickKoalaList::append(SickKoalaList *nodeList) 
+void            KoalaDoctorList::append(KoalaDoctorList *nodeList) 
 {
     // 1: Verify if the nodeList is null
     if (nodeList == NULL) {
@@ -55,17 +58,17 @@ void            SickKoalaList::append(SickKoalaList *nodeList)
         return;
     }
 
-    // 2: If the current nodeList's _sickKoala->_name is null, replace it with the new nodeList's _sickKoala->_name
-    if (_sickKoala == NULL) {
-        _sickKoala = nodeList->_sickKoala;
+    // 2: If the current nodeList's _koalaDoctor->_name is null, replace it with the new nodeList's _koalaDoctor->_name
+    if (_koalaDoctor == NULL) {
+        _koalaDoctor = nodeList->_koalaDoctor;
         _next = nodeList->_next;
-        return; // Early return after copying _sickKoala->_name
+        return; // Early return after copying _koalaDoctor->_name
     }
 
     // 3: Traverse the list to find the last nodeList and check for duplicates
-    SickKoalaList *current = this;
+    KoalaDoctorList *current = this;
     while (current->_next != NULL) {
-        if (current->_sickKoala == nodeList->_sickKoala) {
+        if (current->_koalaDoctor == nodeList->_koalaDoctor) {
             std::cerr << "Error: Trying to append a duplicate node." << std::endl;
             return; // Prevent appending duplicates
         }
@@ -73,7 +76,7 @@ void            SickKoalaList::append(SickKoalaList *nodeList)
     }
 
     // 4: Check the last nodeList for duplicate before adding
-    if (current->_sickKoala == nodeList->_sickKoala) {
+    if (current->_koalaDoctor == nodeList->_koalaDoctor) {
         std::cerr << "Error: Trying to append a duplicate node." << std::endl;
         return;
     }
@@ -84,7 +87,7 @@ void            SickKoalaList::append(SickKoalaList *nodeList)
 
 }
 
-SickKoalaList* SickKoalaList::remove(SickKoalaList *nodeList) 
+KoalaDoctorList* KoalaDoctorList::remove(KoalaDoctorList *nodeList) 
 {
     // 1. Vérifier si le noeud à supprimer est nul
     if (nodeList == NULL) {
@@ -96,18 +99,18 @@ SickKoalaList* SickKoalaList::remove(SickKoalaList *nodeList)
     {
         if (this->_next == NULL)
         {
-            this->_sickKoala = NULL;
+            this->_koalaDoctor = NULL;
             return this;
         } 
         else
         {
-            this->_sickKoala = NULL;
+            this->_koalaDoctor = NULL;
             this->_next = nodeList->_next;
             return this;
         }
     }
 
-    SickKoalaList* current = this;
+    KoalaDoctorList* current = this;
     while (current->_next != NULL)
     {
         if (current->_next == nodeList)
@@ -121,25 +124,25 @@ SickKoalaList* SickKoalaList::remove(SickKoalaList *nodeList)
     return this;
 }
 
-SickKoalaList   *SickKoalaList::removeFromName(std::string sickKoalaName)
+KoalaDoctorList   *KoalaDoctorList::removeFromName(std::string koalaDoctorName)
 {
     // Special case: removing the head node
-    if (this->_sickKoala && this->_sickKoala->getName() == sickKoalaName) {
+    if (this->_koalaDoctor && this->_koalaDoctor->getName() == koalaDoctorName) {
         if (this->_next == NULL) {
-            this->_sickKoala = NULL;
+            this->_koalaDoctor = NULL;
             return this;
         } else {
-            this->_sickKoala = NULL;
-            // this->_sickKoala = this->_next->_sickKoala;
+            this->_koalaDoctor = NULL;
+            // this->_koalaDoctor = this->_next->_koalaDoctor;
             // this->_next = this->_next->_next;
             return this;
         }
     }
 
-    SickKoalaList* current = this;
+    KoalaDoctorList* current = this;
     while (current->_next != NULL) {
-        if (current->_next->_sickKoala && current->_next->_sickKoala->getName() == sickKoalaName) {
-            SickKoalaList* nodeToRemove = current->_next;
+        if (current->_next->_koalaDoctor && current->_next->_koalaDoctor->getName() == koalaDoctorName) {
+            KoalaDoctorList* nodeToRemove = current->_next;
             current->_next = nodeToRemove->_next;
             nodeToRemove->_next = NULL;
             return this;
@@ -150,15 +153,15 @@ SickKoalaList   *SickKoalaList::removeFromName(std::string sickKoalaName)
     return this;
 }
 
-void            SickKoalaList::dump(void)
+void            KoalaDoctorList::dump(void)
 {
-    SickKoalaList   *current = this;
+    KoalaDoctorList   *current = this;
     
-    std::cout << "Patients: " << std::flush;
+    std::cout << "Doctors: " << std::flush;
     while (current)
     {
-        if (current->_sickKoala)
-            std::cout << current->_sickKoala->getName() << std::flush;
+        if (current->_koalaDoctor)
+            std::cout << current->_koalaDoctor->getName() << std::flush;
         else
             std::cout << "[nullptr]" << std::flush;
         if (current->_next)
