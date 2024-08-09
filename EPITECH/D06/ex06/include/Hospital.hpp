@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Aug 9 6:04:18 PM 2024 Paradis
-** Last update Sat Aug 9 7:52:47 PM 2024 Paradis
+** Last update Sat Aug 9 9:30:22 PM 2024 Paradis
 */
 
 #ifndef 			__HOSPITAL_HPP__
@@ -25,7 +25,8 @@ class	Hospital
         KoalaNurseList  *getKoalaNurseList(void) const;
         KoalaDoctorList *getKoalaDoctorList(void) const;
         
-        void        addDoctor(KoalaDoctorList *doctorList);
+        void            addDoctor(KoalaDoctorList *doctorList);
+        void            addSick(SickKoalaList *sickKoalaList);
 
     protected:
     private:

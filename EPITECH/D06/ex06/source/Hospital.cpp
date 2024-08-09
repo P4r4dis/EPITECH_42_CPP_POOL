@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Aug 9 6:04:39 PM 2024 Paradis
-** Last update Sat Aug 9 9:03:17 PM 2024 Paradis
+** Last update Sat Aug 9 9:31:44 PM 2024 Paradis
 */
 
 #include <iostream>
@@ -46,4 +46,16 @@ void                Hospital::addDoctor(KoalaDoctorList *doctorList)
 
     std::cout << "[HOSPITAL] Doctor " << doctorList->getContent()->getName() << " just arrived!" << std::endl;
     doctorList->getContent()->timeCheck();
+}
+
+
+void                Hospital::addSick(SickKoalaList *sickKoalaList)
+{
+
+    if (!_sickKoalaList)
+        _sickKoalaList = sickKoalaList;
+    else if (_sickKoalaList)
+        _sickKoalaList->append(sickKoalaList);
+
+    std::cout << "[HOSPITAL] Patient " << sickKoalaList->getContent()->getName() << " just arrived!" << std::endl;
 }

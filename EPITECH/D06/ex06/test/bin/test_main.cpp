@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Aug 9 5:26:34 PM 2024 Paradis
-** Last update Sat Aug 9 9:03:39 PM 2024 Paradis
+** Last update Sat Aug 9 9:40:59 PM 2024 Paradis
 */
 
 
@@ -3210,6 +3210,121 @@ Test(Hospital, Test_Hospital_addDoctor_several_nodes_koalaDoctorList_not_null, .
     cr_assert(bellevue.getKoalaDoctorList()->getFromName("Boudur-Oulot")->getName() == "Boudur-Oulot");
 }
 
+Test(Hospital, Test_Hospital_addDoctor_output, .init = redirect_all_stdout)
+{
+    Hospital        bellevue;
+    KoalaDoctor     cox("Cox");
+    KoalaDoctor     house("House");
+    KoalaDoctor     tired("Boudur-Oulot");
+    KoalaDoctorList doc1(&cox);
+    KoalaDoctorList doc2(&house);
+    KoalaDoctorList doc3(&tired);
+
+    bellevue.addDoctor(&doc1);
+    bellevue.addDoctor(&doc2);
+    bellevue.addDoctor(&doc3);
+
+    cr_assert_stdout_eq_str
+    (
+        "Dr.Cox: I'm Dr.Cox! How do you kreog?\n"
+        "Dr.House: I'm Dr.House! How do you kreog?\n"
+        "Dr.Boudur-Oulot: I'm Dr.Boudur-Oulot! How do you kreog?\n"
+        "[HOSPITAL] Doctor Cox just arrived!\n"
+        "Dr.Cox: Time to get to work!\n"
+        "[HOSPITAL] Doctor House just arrived!\n"
+        "Dr.House: Time to get to work!\n"
+        "[HOSPITAL] Doctor Boudur-Oulot just arrived!\n"
+        "Dr.Boudur-Oulot: Time to get to work!\n"       
+    );
+}
+
+Test(Hospital, Test_Hospital_addSick_isDefined, .init = redirect_all_stdout)
+{
+    Hospital        bellevue;
+    SickKoala       cancer("Ganepar");
+    SickKoalaList   sick1(&cancer);
+
+    bellevue.addSick(&sick1);
+}
+
+Test(Hospital, Test_Hospital_addSick_one_node_koalaDoctorList_not_null, .init = redirect_all_stdout)
+{
+    Hospital        bellevue;
+    SickKoala       cancer("Ganepar");
+    SickKoalaList   sick1(&cancer);
+
+    bellevue.addSick(&sick1);
+
+    cr_assert_not_null(bellevue.getSickKoalaList());
+}
+
+Test(Hospital, Test_Hospital_addSick_several_nodes_koalaDoctorList_not_null, .init = redirect_all_stdout)
+{
+    Hospital        bellevue;
+    SickKoala       cancer("Ganepar");
+    SickKoala       gangrene("Scarface");
+    SickKoala       measles("RedFace");
+    SickKoala       smallpox("Varia");
+    SickKoala       fracture("Falter");
+    SickKoalaList   sick1(&cancer);
+    SickKoalaList   sick4(&gangrene);
+    SickKoalaList   sick3(&measles);
+    SickKoalaList   sick2(&smallpox);
+    SickKoalaList   sick5(&fracture);
+
+    bellevue.addSick(&sick1);
+    bellevue.addSick(&sick2);
+    bellevue.addSick(&sick3);
+    bellevue.addSick(&sick4);
+    bellevue.addSick(&sick5);
+    cr_assert_not_null(bellevue.getSickKoalaList()->getFromName("Ganepar"));
+    cr_assert_not_null(bellevue.getSickKoalaList()->getFromName("Scarface"));
+    cr_assert_not_null(bellevue.getSickKoalaList()->getFromName("RedFace"));
+    cr_assert_not_null(bellevue.getSickKoalaList()->getFromName("Varia"));
+    cr_assert_not_null(bellevue.getSickKoalaList()->getFromName("Falter"));
+    cr_assert(bellevue.getSickKoalaList()->getFromName("Ganepar")->getName() == "Ganepar");
+    cr_assert(bellevue.getSickKoalaList()->getFromName("Scarface")->getName() == "Scarface");
+    cr_assert(bellevue.getSickKoalaList()->getFromName("RedFace")->getName() == "RedFace");
+    cr_assert(bellevue.getSickKoalaList()->getFromName("Varia")->getName() == "Varia");
+    cr_assert(bellevue.getSickKoalaList()->getFromName("Falter")->getName() == "Falter");
+}
+
+Test(Hospital, Test_Hospital_addSick_output, .init = redirect_all_stdout)
+{
+    {
+        Hospital        bellevue;
+        SickKoala       cancer("Ganepar");
+        SickKoala       gangrene("Scarface");
+        SickKoala       measles("RedFace");
+        SickKoala       smallpox("Varia");
+        SickKoala       fracture("Falter");
+        SickKoalaList   sick1(&cancer);
+        SickKoalaList   sick4(&gangrene);
+        SickKoalaList   sick3(&measles);
+        SickKoalaList   sick2(&smallpox);
+        SickKoalaList   sick5(&fracture);
+
+        bellevue.addSick(&sick1);
+        bellevue.addSick(&sick2);
+        bellevue.addSick(&sick3);
+        bellevue.addSick(&sick4);
+        bellevue.addSick(&sick5);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "[HOSPITAL] Patient Ganepar just arrived!\n"
+        "[HOSPITAL] Patient Varia just arrived!\n"
+        "[HOSPITAL] Patient RedFace just arrived!\n"
+        "[HOSPITAL] Patient Scarface just arrived!\n"
+        "[HOSPITAL] Patient Falter just arrived!\n"
+        "Mr.Falter: Kreooogg!! I'm cuuuured!\n"
+        "Mr.Varia: Kreooogg!! I'm cuuuured!\n"
+        "Mr.RedFace: Kreooogg!! I'm cuuuured!\n"
+        "Mr.Scarface: Kreooogg!! I'm cuuuured!\n"
+        "Mr.Ganepar: Kreooogg!! I'm cuuuured!\n"
+    );
+}
+
 // FINAL MAIN
 Test(Hospital, Test_Hospital_main_function, .init = redirect_all_stdout)
 {
@@ -3240,11 +3355,11 @@ Test(Hospital, Test_Hospital_main_function, .init = redirect_all_stdout)
             bellevue.addDoctor(&doc1);
             bellevue.addDoctor(&doc2);
             bellevue.addDoctor(&doc3);
-        //     bellevue.addSick(&sick1);
-        //     bellevue.addSick(&sick2);
-        //     bellevue.addSick(&sick3);
-        //     bellevue.addSick(&sick4);
-        //     bellevue.addSick(&sick5);
+            bellevue.addSick(&sick1);
+            bellevue.addSick(&sick2);
+            bellevue.addSick(&sick3);
+            bellevue.addSick(&sick4);
+            bellevue.addSick(&sick5);
         //     bellevue.addNurse(&nurse1);
         //     bellevue.addNurse(&nurse2);
         //     bellevue.addSick(&sick4);
@@ -3266,11 +3381,11 @@ Test(Hospital, Test_Hospital_main_function, .init = redirect_all_stdout)
         "Dr.House: Time to get to work!\n"
         "[HOSPITAL] Doctor Boudur-Oulot just arrived!\n"
         "Dr.Boudur-Oulot: Time to get to work!\n"
-    //     "[HOSPITAL] Patient Ganepar just arrived!\n"
-    //     "[HOSPITAL] Patient Varia just arrived!\n"
-    //     "[HOSPITAL] Patient RedFace just arrived!\n"
-    //     "[HOSPITAL] Patient Scarface just arrived!\n"
-    //     "[HOSPITAL] Patient Falter just arrived!\n"
+        "[HOSPITAL] Patient Ganepar just arrived!\n"
+        "[HOSPITAL] Patient Varia just arrived!\n"
+        "[HOSPITAL] Patient RedFace just arrived!\n"
+        "[HOSPITAL] Patient Scarface just arrived!\n"
+        "[HOSPITAL] Patient Falter just arrived!\n"
     //     "[HOSPITAL] Nurse 1 just arrived!\n"
     //     "Nurse 1: Time to get to work!\n"
     //     "[HOSPITAL] Nurse 2 just arrived!\n"
