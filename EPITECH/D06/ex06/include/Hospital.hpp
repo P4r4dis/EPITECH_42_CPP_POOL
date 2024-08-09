@@ -5,20 +5,33 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Aug 9 6:04:18 PM 2024 Paradis
-** Last update Sat Aug 9 6:04:26 PM 2024 Paradis
+** Last update Sat Aug 9 7:52:47 PM 2024 Paradis
 */
 
 #ifndef 			__HOSPITAL_HPP__
 	# define 		__HOSPITAL_HPP__
 
+#include "SickKoalaList.hpp"
+#include "KoalaNurseList.hpp"
+#include "KoalaDoctorList.hpp"
+
 class	Hospital
 {
     public:
-        Hospital();
-        ~Hospital();
+        Hospital(void);
+        ~Hospital(void);
+
+        SickKoalaList   *getSickKoalaList(void) const;
+        KoalaNurseList  *getKoalaNurseList(void) const;
+        KoalaDoctorList *getKoalaDoctorList(void) const;
+        
+        void        addDoctor(KoalaDoctorList *doctorList);
 
     protected:
     private:
+        SickKoalaList   *_sickKoalaList;
+        KoalaNurseList  *_koalaNurseList;
+        KoalaDoctorList *_koalaDoctorList;
 };
 
 #endif 				/* !__HOSPITAL_HPP___ */

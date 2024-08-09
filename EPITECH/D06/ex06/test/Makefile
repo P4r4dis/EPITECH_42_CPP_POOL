@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Wed Jul 31 4:51:42 PM 2024 Paradis
-## Last update Sat Aug 9 6:07:55 PM 2024 Paradis
+## Last update Sat Aug 9 6:19:20 PM 2024 Paradis
 ##
 
 
@@ -15,7 +15,7 @@ SRC_PATH		= 	../source
 INC_PATH 		= 	../include
 BIN_PATH 		= 	./bin
 
-NAME          	= 	test_list
+NAME          	= 	test_hospital
 #############################################
 
 INCFLAGS     	+= 	-I $(INC_PATH)

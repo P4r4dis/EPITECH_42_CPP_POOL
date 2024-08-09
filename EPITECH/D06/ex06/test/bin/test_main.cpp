@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Aug 9 5:26:34 PM 2024 Paradis
-** Last update Sat Aug 9 6:14:19 PM 2024 Paradis
+** Last update Sat Aug 9 9:03:39 PM 2024 Paradis
 */
 
 
@@ -3153,10 +3153,65 @@ Test_KoalaNurseList_dump_display_list_with_first_node_removed_with_another_node_
     );
 }
 
+Test(Hospital, Test_Hospital_CTOR_isDefined, .init = redirect_all_stdout)
+{
+    Hospital    bellevue;
 
+    cr_assert_not_null(&bellevue);
+}
+
+Test(Hospital, Test_Hospital_private_attributs_should_be_nullptr, .init = redirect_all_stdout)
+{
+    Hospital    bellevue;
+
+    cr_assert_null(bellevue.getSickKoalaList());
+    cr_assert_null(bellevue.getKoalaNurseList());
+    cr_assert_null(bellevue.getKoalaDoctorList());
+}
+
+Test(Hospital, Test_Hospital_addDoctor_isDefined, .init = redirect_all_stdout)
+{
+    Hospital        bellevue;
+    KoalaDoctor     cox("Cox");
+    KoalaDoctorList doc1(&cox);
+
+    bellevue.addDoctor(&doc1);
+}
+
+Test(Hospital, Test_Hospital_addDoctor_one_node_koalaDoctorList_not_null, .init = redirect_all_stdout)
+{
+    Hospital        bellevue;
+    KoalaDoctor     cox("Cox");
+    KoalaDoctorList doc1(&cox);
+
+    bellevue.addDoctor(&doc1);
+    cr_assert_not_null(bellevue.getKoalaDoctorList());
+}
+
+Test(Hospital, Test_Hospital_addDoctor_several_nodes_koalaDoctorList_not_null, .init = redirect_all_stdout)
+{
+    Hospital        bellevue;
+    KoalaDoctor     cox("Cox");
+    KoalaDoctor     house("House");
+    KoalaDoctor     tired("Boudur-Oulot");
+    KoalaDoctorList doc1(&cox);
+    KoalaDoctorList doc2(&house);
+    KoalaDoctorList doc3(&tired);
+
+    bellevue.addDoctor(&doc1);
+    bellevue.addDoctor(&doc2);
+    bellevue.addDoctor(&doc3);
+
+    cr_assert_not_null(bellevue.getKoalaDoctorList()->getFromName("Cox"));
+    cr_assert_not_null(bellevue.getKoalaDoctorList()->getFromName("House"));
+    cr_assert_not_null(bellevue.getKoalaDoctorList()->getFromName("Boudur-Oulot"));
+    cr_assert(bellevue.getKoalaDoctorList()->getFromName("Cox")->getName() == "Cox");
+    cr_assert(bellevue.getKoalaDoctorList()->getFromName("House")->getName() == "House");
+    cr_assert(bellevue.getKoalaDoctorList()->getFromName("Boudur-Oulot")->getName() == "Boudur-Oulot");
+}
 
 // FINAL MAIN
-Test(Hospital, Test_Hospital_main_function)//, .init = redirect_all_stdout)
+Test(Hospital, Test_Hospital_main_function, .init = redirect_all_stdout)
 {
     {
         srandom(42);
@@ -3185,32 +3240,32 @@ Test(Hospital, Test_Hospital_main_function)//, .init = redirect_all_stdout)
             bellevue.addDoctor(&doc1);
             bellevue.addDoctor(&doc2);
             bellevue.addDoctor(&doc3);
-            bellevue.addSick(&sick1);
-            bellevue.addSick(&sick2);
-            bellevue.addSick(&sick3);
-            bellevue.addSick(&sick4);
-            bellevue.addSick(&sick5);
-            bellevue.addNurse(&nurse1);
-            bellevue.addNurse(&nurse2);
-            bellevue.addSick(&sick4);
-            bellevue.run();
+        //     bellevue.addSick(&sick1);
+        //     bellevue.addSick(&sick2);
+        //     bellevue.addSick(&sick3);
+        //     bellevue.addSick(&sick4);
+        //     bellevue.addSick(&sick5);
+        //     bellevue.addNurse(&nurse1);
+        //     bellevue.addNurse(&nurse2);
+        //     bellevue.addSick(&sick4);
+        //     bellevue.run();
         }
-        if (nurse1.isEnd() && sick1.isEnd() && doc1.isEnd())
-            std::cout << "Lists cleaned up." << std::endl;
-        else
-            std::cerr << "You fail ! Boo !" << std::endl;
+        // if (nurse1.isEnd() && sick1.isEnd() && doc1.isEnd())
+        //     std::cout << "Lists cleaned up." << std::endl;
+        // else
+        //     std::cerr << "You fail ! Boo !" << std::endl;
     }
-    // cr_assert_stdout_eq_str
-    // (
-    //     "Dr.Cox: I'm Dr.Cox! How do you kreog?\n"
-    //     "Dr.House: I'm Dr.House! How do you kreog?\n"
-    //     "Dr.Boudur-Oulot: I'm Dr.Boudur-Oulot! How do you kreog?\n"
-    //     "[HOSPITAL] Doctor Cox just arrived!\n"
-    //     "Dr.Cox: Time to get to work!\n"
-    //     "[HOSPITAL] Doctor House just arrived!\n"
-    //     "Dr.House: Time to get to work!\n"
-    //     "[HOSPITAL] Doctor Boudur-Oulot just arrived!\n"
-    //     "Dr.Boudur-Oulot: Time to get to work!\n"
+    cr_assert_stdout_eq_str
+    (
+        "Dr.Cox: I'm Dr.Cox! How do you kreog?\n"
+        "Dr.House: I'm Dr.House! How do you kreog?\n"
+        "Dr.Boudur-Oulot: I'm Dr.Boudur-Oulot! How do you kreog?\n"
+        "[HOSPITAL] Doctor Cox just arrived!\n"
+        "Dr.Cox: Time to get to work!\n"
+        "[HOSPITAL] Doctor House just arrived!\n"
+        "Dr.House: Time to get to work!\n"
+        "[HOSPITAL] Doctor Boudur-Oulot just arrived!\n"
+        "Dr.Boudur-Oulot: Time to get to work!\n"
     //     "[HOSPITAL] Patient Ganepar just arrived!\n"
     //     "[HOSPITAL] Patient Varia just arrived!\n"
     //     "[HOSPITAL] Patient RedFace just arrived!\n"
@@ -3250,12 +3305,12 @@ Test(Hospital, Test_Hospital_main_function)//, .init = redirect_all_stdout)
     //     "Dr.House: Time to go home to my eucalyptus forest!\n"
     //     "Dr.Boudur-Oulot: Time to go home to my eucalyptus forest!\n"
     //     "Lists cleaned up.\n"
-    //     "Mr.Falter: Kreooogg!! I'm cuuuured!\n"
-    //     "Mr.Varia: Kreooogg!! I'm cuuuured!\n"
-    //     "Mr.RedFace: Kreooogg!! I'm cuuuured!\n"
-    //     "Mr.Scarface: Kreooogg!! I'm cuuuured!\n"
-    //     "Mr.Ganepar: Kreooogg!! I'm cuuuured!\n"
-    //     "Nurse 2: Finally some rest!\n"
-    //     "Nurse 1: Finally some rest!\n"
-    // );
+        "Mr.Falter: Kreooogg!! I'm cuuuured!\n"
+        "Mr.Varia: Kreooogg!! I'm cuuuured!\n"
+        "Mr.RedFace: Kreooogg!! I'm cuuuured!\n"
+        "Mr.Scarface: Kreooogg!! I'm cuuuured!\n"
+        "Mr.Ganepar: Kreooogg!! I'm cuuuured!\n"
+        "Nurse 2: Finally some rest!\n"
+        "Nurse 1: Finally some rest!\n"
+    );
 }
