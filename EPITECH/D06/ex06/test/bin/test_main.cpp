@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Aug 9 5:26:34 PM 2024 Paradis
-** Last update Sat Aug 9 9:40:59 PM 2024 Paradis
+** Last update Tue Aug 12 6:16:43 PM 2024 Paradis
 */
 
 
@@ -3210,6 +3210,21 @@ Test(Hospital, Test_Hospital_addDoctor_several_nodes_koalaDoctorList_not_null, .
     cr_assert(bellevue.getKoalaDoctorList()->getFromName("Boudur-Oulot")->getName() == "Boudur-Oulot");
 }
 
+Test(Hospital, Test_Hospital_addDoctor_duplicate_node_output, .init = redirect_all_stdout)
+{
+    Hospital        bellevue;
+    KoalaDoctor     cox("Cox");
+    KoalaDoctorList doc1(&cox);
+
+    bellevue.addDoctor(&doc1);
+    bellevue.addDoctor(&doc1);
+
+    cr_assert_stderr_eq_str
+    (
+        "Error: Trying to append a duplicate node.\n"
+    );
+}
+
 Test(Hospital, Test_Hospital_addDoctor_output, .init = redirect_all_stdout)
 {
     Hospital        bellevue;
@@ -3247,7 +3262,7 @@ Test(Hospital, Test_Hospital_addSick_isDefined, .init = redirect_all_stdout)
     bellevue.addSick(&sick1);
 }
 
-Test(Hospital, Test_Hospital_addSick_one_node_koalaDoctorList_not_null, .init = redirect_all_stdout)
+Test(Hospital, Test_Hospital_addSick_one_node_SickKoalaList_not_null, .init = redirect_all_stdout)
 {
     Hospital        bellevue;
     SickKoala       cancer("Ganepar");
@@ -3258,7 +3273,22 @@ Test(Hospital, Test_Hospital_addSick_one_node_koalaDoctorList_not_null, .init = 
     cr_assert_not_null(bellevue.getSickKoalaList());
 }
 
-Test(Hospital, Test_Hospital_addSick_several_nodes_koalaDoctorList_not_null, .init = redirect_all_stdout)
+Test(Hospital, Test_Hospital_addSick_duplicate_node_output, .init = redirect_all_stdout)
+{
+    Hospital        bellevue;
+    SickKoala       cancer("Ganepar");
+    SickKoalaList   sick1(&cancer);
+
+    bellevue.addSick(&sick1);
+    bellevue.addSick(&sick1);
+
+    cr_assert_stderr_eq_str
+    (
+        "Error: Trying to append a duplicate node.\n"
+    );
+}
+
+Test(Hospital, Test_Hospital_addSick_several_nodes_SickKoalaList_not_null, .init = redirect_all_stdout)
 {
     Hospital        bellevue;
     SickKoala       cancer("Ganepar");
@@ -3325,6 +3355,90 @@ Test(Hospital, Test_Hospital_addSick_output, .init = redirect_all_stdout)
     );
 }
 
+
+
+
+
+
+
+Test(Hospital, Test_Hospital_addNurse_isDefined, .init = redirect_all_stdout)
+{
+    Hospital        bellevue;
+    KoalaNurse       nurse(1);
+    KoalaNurseList   nurse1(&nurse);
+
+    bellevue.addNurse(&nurse1);
+}
+
+Test(Hospital, Test_Hospital_addNurse_one_node_KoalaNurseList_not_null, .init = redirect_all_stdout)
+{
+    Hospital        bellevue;
+    KoalaNurse       nurse(1);
+    KoalaNurseList   nurse1(&nurse);
+
+    bellevue.addNurse(&nurse1);
+
+    cr_assert_not_null(bellevue.getKoalaNurseList());
+}
+
+Test(Hospital, Test_Hospital_addSick_several_nodes_addNurse_not_null, .init = redirect_all_stdout)
+{
+    Hospital        bellevue;
+    KoalaNurse       nurse(1);
+    KoalaNurse       nursy(2);
+
+    KoalaNurseList   nurse1(&nurse);
+    KoalaNurseList   nurse2(&nursy);
+
+    bellevue.addNurse(&nurse1);
+    bellevue.addNurse(&nurse2);
+
+    cr_assert_not_null(bellevue.getKoalaNurseList()->getFromID(1));
+    cr_assert_not_null(bellevue.getKoalaNurseList()->getFromID(2));
+
+    cr_assert(bellevue.getKoalaNurseList()->getFromID(1)->getId() == 1);
+    cr_assert(bellevue.getKoalaNurseList()->getFromID(2)->getId() == 2);
+}
+
+Test(Hospital, Test_Hospital_addNurse_duplicate_node_output, .init = redirect_all_stdout)
+{
+    Hospital        bellevue;
+    KoalaNurse       nurse(1);
+    KoalaNurseList   nurse1(&nurse);
+
+    bellevue.addNurse(&nurse1);
+    bellevue.addNurse(&nurse1);
+
+    cr_assert_stderr_eq_str
+    (
+        "Error: Trying to append a duplicate node.\n"
+    );
+}
+
+Test(Hospital, Test_Hospital_addNurse_output, .init = redirect_all_stdout)
+{
+    {
+        Hospital            bellevue;
+        KoalaNurse          nurse(1);
+        KoalaNurse          nursy(2);
+
+        KoalaNurseList      nurse1(&nurse);
+        KoalaNurseList      nurse2(&nursy);
+
+        bellevue.addNurse(&nurse1);
+        bellevue.addNurse(&nurse2);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "[HOSPITAL] Nurse 1 just arrived!\n"
+        "Nurse 1: Time to get to work!\n"
+        "[HOSPITAL] Nurse 2 just arrived!\n"
+        "Nurse 2: Time to get to work!\n"
+        "Nurse 2: Finally some rest!\n"
+        "Nurse 1: Finally some rest!\n"
+    );
+}
+
 // FINAL MAIN
 Test(Hospital, Test_Hospital_main_function, .init = redirect_all_stdout)
 {
@@ -3360,9 +3474,9 @@ Test(Hospital, Test_Hospital_main_function, .init = redirect_all_stdout)
             bellevue.addSick(&sick3);
             bellevue.addSick(&sick4);
             bellevue.addSick(&sick5);
-        //     bellevue.addNurse(&nurse1);
-        //     bellevue.addNurse(&nurse2);
-        //     bellevue.addSick(&sick4);
+            bellevue.addNurse(&nurse1);
+            bellevue.addNurse(&nurse2);
+            bellevue.addSick(&sick4);
         //     bellevue.run();
         }
         // if (nurse1.isEnd() && sick1.isEnd() && doc1.isEnd())
@@ -3386,11 +3500,11 @@ Test(Hospital, Test_Hospital_main_function, .init = redirect_all_stdout)
         "[HOSPITAL] Patient RedFace just arrived!\n"
         "[HOSPITAL] Patient Scarface just arrived!\n"
         "[HOSPITAL] Patient Falter just arrived!\n"
-    //     "[HOSPITAL] Nurse 1 just arrived!\n"
-    //     "Nurse 1: Time to get to work!\n"
-    //     "[HOSPITAL] Nurse 2 just arrived!\n"
-    //     "Nurse 2: Time to get to work!\n"
-    //     "[HOSPITAL] Work starting with:\n"
+        "[HOSPITAL] Nurse 1 just arrived!\n"
+        "Nurse 1: Time to get to work!\n"
+        "[HOSPITAL] Nurse 2 just arrived!\n"
+        "Nurse 2: Time to get to work!\n"
+        // "[HOSPITAL] Work starting with:\n"
     //     "Doctors: Cox, House, Boudur-Oulot.\n"
     //     "Nurses: 1, 2.\n"
     //     "Patients: Ganepar, Varia, RedFace, Scarface, Falter.\n"
