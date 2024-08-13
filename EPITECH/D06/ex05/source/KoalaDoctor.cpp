@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:56:41 PM 2024 Paradis
-** Last update Thu Jul 31 4:56:44 PM 2024 Paradis
+** Last update Wed Aug 13 5:22:01 PM 2024 Paradis
 */
 
 
@@ -13,7 +13,7 @@
 #include <fstream>
 #include <cstdlib>
 
-#include "KoalaDoctor.hpp"
+#include "../include/KoalaDoctor.hpp"
 
 KoalaDoctor::KoalaDoctor(std::string name)  :   _name(name),
                                                 _timeCheck(false)

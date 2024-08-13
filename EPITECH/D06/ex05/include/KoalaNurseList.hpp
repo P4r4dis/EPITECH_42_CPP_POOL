@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Aug 8 9:18:20 PM 2024 Paradis
-** Last update Fri Aug 8 9:21:12 PM 2024 Paradis
+** Last update Wed Aug 13 5:29:58 PM 2024 Paradis
 */
 
 
@@ -26,14 +26,14 @@ class	KoalaNurseList
         KoalaNurse         *getFromID(int koalaNurseID) const;
                 
         bool                isEnd(void);
-        void                append(KoalaNurseList *nodeList); // add at the end a node of list
+        void                append(KoalaNurseList *nodeList);
         KoalaNurseList     *remove(KoalaNurseList *nodeList);
         KoalaNurseList     *removeFromID(int koalaNurseID);
         void                dump(void);
     protected:
     private:
-        KoalaNurse         *_koalaNurse; // data
-        KoalaNurseList     *_next; // ptr on the next node
+        KoalaNurse         *_koalaNurse;
+        KoalaNurseList     *_next;
 };
 
 #endif 				/* !__KOALANURSELIST_HPP___ */

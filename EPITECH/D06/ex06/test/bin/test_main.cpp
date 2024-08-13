@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Aug 9 5:26:34 PM 2024 Paradis
-** Last update Wed Aug 13 4:32:33 PM 2024 Paradis
+** Last update Wed Aug 13 5:50:18 PM 2024 Paradis
 */
 
 
@@ -539,23 +539,6 @@ Test(KoalaDoctor, Test_KoalaDoctor_diagnose_isDefined,
 
     doctor.diagnose(&patient);
 }
-
-// Test(KoalaDoctor, Test_KoalaDoctor_diagnose_stdout,
-//                             .init = redirect_all_stdout)
-// {
-//     {
-//         KoalaDoctor     doctor("Doc");
-//         SickKoala       patient("Koala");
-
-//         doctor.diagnose(&patient);
-//     }
-//     cr_assert_stdout_eq_str
-//     (
-//         "Dr.Doc: I'm Dr.Doc! How do you kreog?\n"
-//         "Dr.Doc: So what's goerking you Mr.Koala?\n"
-//         "Mr.Koala: Kreooogg!! I'm cuuuured!\n"
-//     );
-// }
 
 Test(KoalaDoctor, Test_KoalaDoctor_diagnose_call_SickKoala_poke_stdout,
                                             .init = redirect_all_stdout)
@@ -1113,36 +1096,39 @@ Test(SickKoalaList, Test_SickKoalaList_removeFromName_isDefined
     sick.removeFromName("Koala");
 }
 
-// Test(SickKoalaList, Test_SickKoalaList_removeFromName_from_empty_list
-// , .init = redirect_all_stdout)
-// {
-//     std::string     name = "Koala";
-//     SickKoala       patient(name);
-//     SickKoalaList   test(nullptr);
+Test(SickKoalaList, Test_SickKoalaList_removeFromName_from_empty_list
+, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoalaList   test(nullptr);
 
-//     cr_assert_null(test.removeFromName("Koala")->getContent());
-// }
+    test.removeFromName("Koala");
+    cr_assert_null(test.getContent());
+}
 
-// Test(SickKoalaList, Test_SickKoalaList_removeFromName_the_first_node
-// , .init = redirect_all_stdout)
-// {
-//     std::string     name = "Koala";
-//     SickKoala       patient(name);
-//     SickKoalaList   sick(&patient);
+Test(SickKoalaList, Test_SickKoalaList_removeFromName_the_first_node
+, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoalaList   sick(&patient);
 
-//     cr_assert_null(sick.removeFromName("Koala")->getContent());
-// }
+    sick.removeFromName("Koala");
+    cr_assert_null(sick.getContent());
+}
 
-// Test(SickKoalaList, Test_SickKoalaList_removeFromName_the_first_node_several_times
-// , .init = redirect_all_stdout)
-// {
-//     std::string     name = "Koala";
-//     SickKoala       patient(name);
-//     SickKoalaList   sick(&patient);
+Test(SickKoalaList, Test_SickKoalaList_removeFromName_the_first_node_several_times
+, .init = redirect_all_stdout)
+{
+    std::string     name = "Koala";
+    SickKoala       patient(name);
+    SickKoalaList   sick(&patient);
 
-//     cr_assert_null(sick.removeFromName("Koala")->getContent());
-//     cr_assert_null(sick.removeFromName("Koala")->getContent());
-// }
+    sick.removeFromName("Koala");
+    sick.removeFromName("Koala");
+    cr_assert_null(sick.getContent());
+}
 
 Test(SickKoalaList, Test_SickKoalaList_removeFromName_a_node
 , .init = redirect_all_stdout)
@@ -1397,7 +1383,7 @@ Test(SickKoalaList, Test_SickKoalaList_dump_display_list_with_first_node_removed
     }
     cr_assert_stdout_eq_str
     (
-        "Patients: [nullptr], patient2, patient3, patient4.\n"
+        "Patients: [NULL], patient2, patient3, patient4.\n"
         "Mr.patient4: Kreooogg!! I'm cuuuured!\n"
         "Mr.patient3: Kreooogg!! I'm cuuuured!\n"
         "Mr.patient2: Kreooogg!! I'm cuuuured!\n"
@@ -2243,7 +2229,7 @@ Test(KoalaDoctorList, Test_KoalaDoctorList_dump_display_list_with_first_node_rem
         "Dr.Doctor2: I'm Dr.Doctor2! How do you kreog?\n"
         "Dr.Doctor3: I'm Dr.Doctor3! How do you kreog?\n"
         "Dr.Doctor4: I'm Dr.Doctor4! How do you kreog?\n"
-        "Doctors: [nullptr], Doctor2, Doctor3, Doctor4.\n"
+        "Doctors: [NULL], Doctor2, Doctor3, Doctor4.\n"
     );
 }
 
@@ -3040,7 +3026,7 @@ Test(KoalaNurseList, Test_KoalaNurseList_dump_display_list_with_first_node_remov
     }
     cr_assert_stdout_eq_str
     (
-        "Nurses: [nullptr], 2, 3, 4.\n"
+        "Nurses: [NULL], 2, 3, 4.\n"
         "Nurse 4: Finally some rest!\n"
         "Nurse 3: Finally some rest!\n"
         "Nurse 2: Finally some rest!\n"

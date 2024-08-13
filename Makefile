@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/08/09 18:13:32 by Paradis          ###   ########.fr        #
+#    Updated: 2024/08/13 17:26:46 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ EPITECH_EX01_NAME		=	my_convert_temp
 EPITECH_EX01_UT_SRC		=	$(EPITECH_EX01_UT_PATH)/$(EPITECH_EX01_NAME)_test.cpp
 EPITECH_EX01_UT_NAME 	= 	test_$(EPITECH_EX01_NAME)
 # # Files sources
-EPITECH_EX01_SRC		=	$(EPITECH_EX01_SRC_PATH)/my_convert_temp.cpp \
+EPITECH_EX01_SRC		=	$(EPITECH_EX01_SRC_PATH)/MyConvertTemp.cpp \
 							$(EPITECH_EX01_BIN_PATH)/main.cpp
 							
 # # Files object
@@ -242,7 +242,9 @@ clean					:
 
 # # Rule compiling object files and binaries name
 fclean					:	clean
-							$(RM) $(42_EX00_NAME) $(42_EX01_NAME) $(42_EX02_PATH)/$(42_EX02_NAME)
+							$(RM) $(42_EX00_NAME) $(42_EX01_NAME) $(42_EX02_PATH)/$(42_EX02_NAME) \
+							$(EPITECH_EX00_NAME) $(EPITECH_EX01_NAME) $(EPITECH_EX02_NAME) $(EPITECH_EX03_NAME) \
+							$(EPITECH_EX04_NAME) $(EPITECH_EX05_NAME) $(EPITECH_EX06_NAME)
 							@$(MAKE) -s $(FCLEAN) -C $(42_EX00_UT_PATH)
 							@$(MAKE) -s $(FCLEAN) -C $(42_EX00_PATH)
 							@$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)

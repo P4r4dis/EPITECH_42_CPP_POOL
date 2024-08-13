@@ -5,14 +5,14 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Aug 8 9:16:36 PM 2024 Paradis
-** Last update Fri Aug 8 9:23:36 PM 2024 Paradis
+** Last update Wed Aug 13 5:33:10 PM 2024 Paradis
 */
 
 
 
 
 
-#include "KoalaNurseList.hpp"
+#include "../include/KoalaNurseList.hpp"
 #include <iostream>
 KoalaNurseList::KoalaNurseList(KoalaNurse *koalaNurse)  :   _koalaNurse(koalaNurse),
                                                             _next(NULL)
@@ -53,36 +53,31 @@ bool            KoalaNurseList::isEnd(void)
 
 void            KoalaNurseList::append(KoalaNurseList *nodeList) 
 {
-    // 1: Verify if the nodeList is null
     if (nodeList == NULL) {
         std::cerr << "Error: Trying to append a null node." << std::endl;
         return;
     }
 
-    // 2: If the current nodeList's _koalaNurse->_name is null, replace it with the new nodeList's _koalaNurse->_name
     if (_koalaNurse == NULL) {
         _koalaNurse = nodeList->_koalaNurse;
         _next = nodeList->_next;
-        return; // Early return after copying _koalaNurse->_name
+        return;
     }
 
-    // 3: Traverse the list to find the last nodeList and check for duplicates
     KoalaNurseList *current = this;
     while (current->_next != NULL) {
         if (current->_koalaNurse == nodeList->_koalaNurse) {
             std::cerr << "Error: Trying to append a duplicate node." << std::endl;
-            return; // Prevent appending duplicates
+            return;
         }
         current = current->_next;
     }
 
-    // 4: Check the last nodeList for duplicate before adding
     if (current->_koalaNurse == nodeList->_koalaNurse) {
         std::cerr << "Error: Trying to append a duplicate node." << std::endl;
         return;
     }
 
-    // 5: Add the new nodeList (nodeList) to the end of the list
     current->_next = nodeList;
     nodeList->_next = NULL;
 
@@ -90,7 +85,6 @@ void            KoalaNurseList::append(KoalaNurseList *nodeList)
 
 KoalaNurseList* KoalaNurseList::remove(KoalaNurseList *nodeList) 
 {
-    // 1. Vérifier si le noeud à supprimer est nul
     if (nodeList == NULL) {
         std::cerr << "Error: Trying to delete a null node." << std::endl;
         return this;
@@ -127,15 +121,12 @@ KoalaNurseList* KoalaNurseList::remove(KoalaNurseList *nodeList)
 
 KoalaNurseList   *KoalaNurseList::removeFromID(int koalaNurseID)
 {
-    // Special case: removing the head node
     if (this->_koalaNurse && this->_koalaNurse->getId() == koalaNurseID) {
         if (this->_next == NULL) {
             this->_koalaNurse = NULL;
             return this;
         } else {
             this->_koalaNurse = NULL;
-            // this->_koalaNurse = this->_next->_koalaNurse;
-            // this->_next = this->_next->_next;
             return this;
         }
     }

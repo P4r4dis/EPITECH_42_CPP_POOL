@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Aug 9 5:16:16 PM 2024 Paradis
-** Last update Sat Aug 9 5:24:49 PM 2024 Paradis
+** Last update Wed Aug 13 5:33:37 PM 2024 Paradis
 */
 
 
@@ -25,14 +25,14 @@ class	KoalaDoctorList
         KoalaDoctor         *getFromName(std::string koalaDoctorName) const;
                 
         bool                isEnd(void);
-        void                append(KoalaDoctorList *nodeList); // add at the end a node of list
+        void                append(KoalaDoctorList *nodeList);
         KoalaDoctorList     *remove(KoalaDoctorList *nodeList);
         KoalaDoctorList     *removeFromName(std::string koalaDoctorName);
         void                dump(void);
     protected:
     private:
-        KoalaDoctor         *_koalaDoctor; // data
-        KoalaDoctorList     *_next; // ptr on the next node
+        KoalaDoctor         *_koalaDoctor;
+        KoalaDoctorList     *_next;
 };
 
 #endif 				/* !__KOALADOCTORLIST_HPP___ */

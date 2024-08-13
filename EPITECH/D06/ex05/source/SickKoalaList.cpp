@@ -5,10 +5,10 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:56:58 PM 2024 Paradis
-** Last update Fri Aug 8 6:56:02 PM 2024 Paradis
+** Last update Wed Aug 13 5:33:08 PM 2024 Paradis
 */
 
-#include "SickKoalaList.hpp"
+#include "../include/SickKoalaList.hpp"
 #include <iostream>
 SickKoalaList::SickKoalaList(SickKoala *sickKoala)  :   _sickKoala(sickKoala),
                                                         _next(NULL)
@@ -49,36 +49,31 @@ bool            SickKoalaList::isEnd(void)
 
 void            SickKoalaList::append(SickKoalaList *nodeList) 
 {
-    // 1: Verify if the nodeList is null
     if (nodeList == NULL) {
         std::cerr << "Error: Trying to append a null node." << std::endl;
         return;
     }
 
-    // 2: If the current nodeList's _sickKoala->_name is null, replace it with the new nodeList's _sickKoala->_name
     if (_sickKoala == NULL) {
         _sickKoala = nodeList->_sickKoala;
         _next = nodeList->_next;
-        return; // Early return after copying _sickKoala->_name
+        return;
     }
 
-    // 3: Traverse the list to find the last nodeList and check for duplicates
     SickKoalaList *current = this;
     while (current->_next != NULL) {
         if (current->_sickKoala == nodeList->_sickKoala) {
             std::cerr << "Error: Trying to append a duplicate node." << std::endl;
-            return; // Prevent appending duplicates
+            return;
         }
         current = current->_next;
     }
 
-    // 4: Check the last nodeList for duplicate before adding
     if (current->_sickKoala == nodeList->_sickKoala) {
         std::cerr << "Error: Trying to append a duplicate node." << std::endl;
         return;
     }
 
-    // 5: Add the new nodeList (nodeList) to the end of the list
     current->_next = nodeList;
     nodeList->_next = NULL;
 
@@ -86,7 +81,6 @@ void            SickKoalaList::append(SickKoalaList *nodeList)
 
 SickKoalaList* SickKoalaList::remove(SickKoalaList *nodeList) 
 {
-    // 1. Vérifier si le noeud à supprimer est nul
     if (nodeList == NULL) {
         std::cerr << "Error: Trying to delete a null node." << std::endl;
         return this;
@@ -123,15 +117,12 @@ SickKoalaList* SickKoalaList::remove(SickKoalaList *nodeList)
 
 SickKoalaList   *SickKoalaList::removeFromName(std::string sickKoalaName)
 {
-    // Special case: removing the head node
     if (this->_sickKoala && this->_sickKoala->getName() == sickKoalaName) {
         if (this->_next == NULL) {
             this->_sickKoala = NULL;
             return this;
         } else {
             this->_sickKoala = NULL;
-            // this->_sickKoala = this->_next->_sickKoala;
-            // this->_next = this->_next->_next;
             return this;
         }
     }

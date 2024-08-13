@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:55:40 PM 2024 Paradis
-** Last update Thu Jul 31 4:55:43 PM 2024 Paradis
+** Last update Wed Aug 13 5:29:36 PM 2024 Paradis
 */
 
 #include <string>
@@ -25,15 +25,6 @@ class	KoalaDoctor
 
         void            timeCheck(void);
         void            diagnose(SickKoala *patient);
-
-        // typedef enum    e_drug
-        // {
-        //     Mars,
-        //     Kinder,
-        //     Crunch,
-        //     Maroilles,
-        //     Eucalyptus_leaf
-        // }               t_drug;
 
     protected:
     private:

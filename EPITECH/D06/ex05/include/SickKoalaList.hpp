@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jul 31 4:56:05 PM 2024 Paradis
-** Last update Sat Aug 2 9:18:33 PM 2024 Paradis
+** Last update Wed Aug 13 5:30:09 PM 2024 Paradis
 */
 
 #include "SickKoala.hpp"
@@ -24,14 +24,14 @@ class	SickKoalaList
         SickKoala       *getFromName(std::string sickKoalaName) const;
                 
         bool            isEnd(void);
-        void            append(SickKoalaList *nodeList); // add at the end a node of list
+        void            append(SickKoalaList *nodeList);
         SickKoalaList   *remove(SickKoalaList *nodeList);
         SickKoalaList   *removeFromName(std::string sickKoalaName);
         void            dump(void);
     protected:
     private:
-        SickKoala       *_sickKoala; // data
-        SickKoalaList   *_next; // ptr on the next node
+        SickKoala       *_sickKoala;
+        SickKoalaList   *_next;
 };
 
 #endif 				/* !__SICKKOALALIST_HPP___ */

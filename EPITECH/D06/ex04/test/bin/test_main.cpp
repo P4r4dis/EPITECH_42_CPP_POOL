@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Jul 30 5:33:47 PM 2024 Paradis
-** Last update Wed Jul 30 8:41:05 PM 2024 Paradis
+** Last update Wed Aug 13 5:29:26 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -532,23 +532,6 @@ Test(KoalaDoctor, Test_KoalaDoctor_diagnose_isDefined,
 
     doctor.diagnose(&patient);
 }
-
-// Test(KoalaDoctor, Test_KoalaDoctor_diagnose_stdout,
-//                             .init = redirect_all_stdout)
-// {
-//     {
-//         KoalaDoctor     doctor("Doc");
-//         SickKoala       patient("Koala");
-
-//         doctor.diagnose(&patient);
-//     }
-//     cr_assert_stdout_eq_str
-//     (
-//         "Dr.Doc: I'm Dr.Doc! How do you kreog?\n"
-//         "Dr.Doc: So what's goerking you Mr.Koala?\n"
-//         "Mr.Koala: Kreooogg!! I'm cuuuured!\n"
-//     );
-// }
 
 Test(KoalaDoctor, Test_KoalaDoctor_diagnose_call_SickKoala_poke_stdout,
                                             .init = redirect_all_stdout)

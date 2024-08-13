@@ -5,11 +5,11 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Aug 9 5:25:49 PM 2024 Paradis
-** Last update Wed Aug 13 3:56:36 PM 2024 Paradis
+** Last update Wed Aug 13 5:34:44 PM 2024 Paradis
 */
 
 
-#include "KoalaDoctorList.hpp"
+#include "../include/KoalaDoctorList.hpp"
 #include <iostream>
 KoalaDoctorList::KoalaDoctorList(KoalaDoctor *koalaDoctor)  :   _koalaDoctor(koalaDoctor),
                                                                 _next(NULL)
@@ -50,36 +50,31 @@ bool            KoalaDoctorList::isEnd(void)
 
 void            KoalaDoctorList::append(KoalaDoctorList *nodeList) 
 {
-    // 1: Verify if the nodeList is null
     if (nodeList == NULL) {
         std::cerr << "Error: Trying to append a null node." << std::endl;
         return;
     }
 
-    // 2: If the current nodeList's _koalaDoctor->_name is null, replace it with the new nodeList's _koalaDoctor->_name
     if (_koalaDoctor == NULL) {
         _koalaDoctor = nodeList->_koalaDoctor;
         _next = nodeList->_next;
-        return; // Early return after copying _koalaDoctor->_name
+        return;
     }
 
-    // 3: Traverse the list to find the last nodeList and check for duplicates
     KoalaDoctorList *current = this;
     while (current->_next != NULL) {
         if (current->_koalaDoctor == nodeList->_koalaDoctor) {
             std::cerr << "Error: Trying to append a duplicate node." << std::endl;
-            return; // Prevent appending duplicates
+            return;
         }
         current = current->_next;
     }
 
-    // 4: Check the last nodeList for duplicate before adding
     if (current->_koalaDoctor == nodeList->_koalaDoctor) {
         std::cerr << "Error: Trying to append a duplicate node." << std::endl;
         return;
     }
 
-    // 5: Add the new nodeList (nodeList) to the end of the list
     current->_next = nodeList;
     nodeList->_next = NULL;
 
@@ -87,7 +82,6 @@ void            KoalaDoctorList::append(KoalaDoctorList *nodeList)
 
 KoalaDoctorList* KoalaDoctorList::remove(KoalaDoctorList *nodeList) 
 {
-    // 1. Vérifier si le noeud à supprimer est nul
     if (nodeList == NULL) {
         std::cerr << "Error: Trying to delete a null node." << std::endl;
         return this;
@@ -124,52 +118,23 @@ KoalaDoctorList* KoalaDoctorList::remove(KoalaDoctorList *nodeList)
 
 KoalaDoctorList   *KoalaDoctorList::removeFromName(std::string koalaDoctorName)
 {
-    // // Special case: removing the head node
-    // if (this->_koalaDoctor && this->_koalaDoctor->getName() == koalaDoctorName) {
-    //     if (this->_next == NULL) {
-    //         this->_koalaDoctor = NULL;
-    //         return this;
-    //     } else {
-    //         this->_koalaDoctor = NULL;
-    //         // this->_koalaDoctor = this->_next->_koalaDoctor;
-    //         // this->_next = this->_next->_next;
-    //         return this;
-    //     }
-    // }
-
-    // KoalaDoctorList* current = this;
-    // while (current->_next != NULL) {
-    //     if (current->_next->_koalaDoctor && current->_next->_koalaDoctor->getName() == koalaDoctorName) {
-    //         KoalaDoctorList* nodeToRemove = current->_next;
-    //         current->_next = nodeToRemove->_next;
-    //         nodeToRemove->_next = NULL;
-    //         return this;
-    //     }
-    //     current = current->_next;
-    // }
-
-    // return this;
-
-// Cas spécial : suppression du noeud tête
     if (this->_koalaDoctor && this->_koalaDoctor->getName() == koalaDoctorName) {
-        if (this->_next == nullptr) {
-            // Si c'est le seul noeud de la liste
-            this->_koalaDoctor = nullptr;
-            return nullptr; // Liste maintenant vide
+        if (this->_next == NULL) {
+            this->_koalaDoctor = NULL;
+            return NULL;
         } else {
-            // Si la liste contient plusieurs noeuds
+
             this->_koalaDoctor = this->_next->_koalaDoctor;
             this->_next = this->_next->_next;
-            return this; // Retourner la nouvelle tête de la liste
+            return this;
         }
     }
 
-    // Parcourir la liste pour trouver le noeud à supprimer
     KoalaDoctorList* current = this;
-    while (current->_next != nullptr) {
+    while (current->_next != NULL) {
         if (current->_next->_koalaDoctor && current->_next->_koalaDoctor->getName() == koalaDoctorName) {
-            current->_next = current->_next->_next; // Bypasser le noeud à supprimer
-            return this; // Retourner la tête de la liste
+            current->_next = current->_next->_next;
+            return this;
         }
         current = current->_next;
     }
@@ -187,7 +152,7 @@ void            KoalaDoctorList::dump(void)
         if (current->_koalaDoctor)
             std::cout << current->_koalaDoctor->getName() << std::flush;
         else
-            std::cout << "[nullptr]" << std::flush;
+            std::cout << "[NULL]" << std::flush;
         if (current->_next)
             std::cout << ", " << std::flush;
         else

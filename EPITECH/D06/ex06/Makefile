@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Wed Jul 31 4:51:14 PM 2024 Paradis
-## Last update Fri Aug 8 10:23:51 PM 2024 Paradis
+## Last update Wed Aug 13 5:17:34 PM 2024 Paradis
 ##
 
 
@@ -19,7 +19,7 @@ SRC_PATH	=	./source
 INC_PATH	=	./include
 UT_PATH		=	./test
 
-NAME		=	list
+NAME		=	hospital
 UT_NAME 	= 	test_$(NAME)
 ##############################################
 
@@ -34,6 +34,7 @@ SRCS		=	$(SRC_PATH)/SickKoala.cpp \
 				$(SRC_PATH)/SickKoalaList.cpp \
 				$(SRC_PATH)/KoalaDoctorList.cpp \
 				$(SRC_PATH)/KoalaNurseList.cpp \
+				$(SRC_PATH)/Hospital.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp
@@ -43,6 +44,9 @@ OBJS		=	$(SRCS:.cpp=.o)
 
 # # Log file
 LOG			=	*.log
+
+REPORT		=	*.report
+
 
 CLEAN		=	clean
 FCLEAN		=	fclean
@@ -56,7 +60,7 @@ $(NAME)		:	$(OBJS)
 				
 # # Rule for clean files object
 clean		:
-				$(RM) $(OBJS) $(LOG)
+				$(RM) $(OBJS) $(LOG) $(REPORT)
 				@$(MAKE) -s $(CLEAN) -C $(UT_PATH)
 
 # # Target for clean name and files object
