@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Aug 9 5:26:20 PM 2024 Paradis
-** Last update Sat Aug 9 5:26:22 PM 2024 Paradis
+** Last update Wed Aug 13 3:33:13 PM 2024 Paradis
 */
 
 
@@ -125,32 +125,39 @@ SickKoalaList* SickKoalaList::remove(SickKoalaList *nodeList)
 
 SickKoalaList   *SickKoalaList::removeFromName(std::string sickKoalaName)
 {
-    // Special case: removing the head node
+
+
+
+
+
+// Cas spécial : suppression du noeud tête
     if (this->_sickKoala && this->_sickKoala->getName() == sickKoalaName) {
-        if (this->_next == NULL) {
-            this->_sickKoala = NULL;
-            return this;
+        if (this->_next == nullptr) {
+            // Si c'est le seul noeud de la liste
+            this->_sickKoala = nullptr;
+            return nullptr; // Liste maintenant vide
         } else {
-            this->_sickKoala = NULL;
-            // this->_sickKoala = this->_next->_sickKoala;
-            // this->_next = this->_next->_next;
-            return this;
+            // Si la liste contient plusieurs noeuds
+            this->_sickKoala = this->_next->_sickKoala;
+            this->_next = this->_next->_next;
+            return this; // Retourner la nouvelle tête de la liste
         }
     }
 
+    // Parcourir la liste pour trouver le noeud à supprimer
     SickKoalaList* current = this;
-    while (current->_next != NULL) {
+    while (current->_next != nullptr) {
         if (current->_next->_sickKoala && current->_next->_sickKoala->getName() == sickKoalaName) {
-            SickKoalaList* nodeToRemove = current->_next;
-            current->_next = nodeToRemove->_next;
-            nodeToRemove->_next = NULL;
-            return this;
+            current->_next = current->_next->_next; // Bypasser le noeud à supprimer
+            return this; // Retourner la tête de la liste
         }
         current = current->_next;
     }
 
     return this;
 }
+
+
 
 void            SickKoalaList::dump(void)
 {

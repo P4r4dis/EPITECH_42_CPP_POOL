@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Aug 9 5:26:09 PM 2024 Paradis
-** Last update Tue Aug 12 5:51:47 PM 2024 Paradis
+** Last update Wed Aug 13 3:54:37 PM 2024 Paradis
 */
 
 
@@ -124,26 +124,52 @@ KoalaNurseList* KoalaNurseList::remove(KoalaNurseList *nodeList)
 
 KoalaNurseList   *KoalaNurseList::removeFromID(int koalaNurseID)
 {
-    // Special case: removing the head node
+    // // Special case: removing the head node
+    // if (this->_koalaNurse && this->_koalaNurse->getId() == koalaNurseID) {
+    //     if (this->_next == NULL) {
+    //         this->_koalaNurse = NULL;
+    //         return this;
+    //     } else {
+    //         this->_koalaNurse = NULL;
+    //         // this->_koalaNurse = this->_next->_koalaNurse;
+    //         // this->_next = _next->_next;
+    //         return this;
+    //     }
+    // }
+
+    // KoalaNurseList* current = this;
+    // while (current->_next != NULL) {
+    //     if (current->_next->_koalaNurse && current->_next->_koalaNurse->getId() == koalaNurseID) {
+    //         KoalaNurseList* nodeToRemove = current->_next;
+    //         current->_next = nodeToRemove->_next;
+    //         nodeToRemove->_next = NULL;
+    //         return this;
+    //     }
+    //     current = current->_next;
+    // }
+
+    // return this;
+
+    // Cas spécial : suppression du noeud tête
     if (this->_koalaNurse && this->_koalaNurse->getId() == koalaNurseID) {
-        if (this->_next == NULL) {
-            this->_koalaNurse = NULL;
-            return this;
+        if (this->_next == nullptr) {
+            // Si c'est le seul noeud de la liste
+            this->_koalaNurse = nullptr;
+            return nullptr; // Liste maintenant vide
         } else {
-            this->_koalaNurse = NULL;
-            // this->_koalaNurse = this->_next->_koalaNurse;
-            // this->_next = this->_next->_next;
-            return this;
+            // Si la liste contient plusieurs noeuds
+            this->_koalaNurse = this->_next->_koalaNurse;
+            this->_next = this->_next->_next;
+            return this; // Retourner la nouvelle tête de la liste
         }
     }
 
+    // Parcourir la liste pour trouver le noeud à supprimer
     KoalaNurseList* current = this;
-    while (current->_next != NULL) {
+    while (current->_next != nullptr) {
         if (current->_next->_koalaNurse && current->_next->_koalaNurse->getId() == koalaNurseID) {
-            KoalaNurseList* nodeToRemove = current->_next;
-            current->_next = nodeToRemove->_next;
-            nodeToRemove->_next = NULL;
-            return this;
+            current->_next = current->_next->_next; // Bypasser le noeud à supprimer
+            return this; // Retourner la tête de la liste
         }
         current = current->_next;
     }

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Aug 9 6:04:18 PM 2024 Paradis
-** Last update Tue Aug 12 5:13:27 PM 2024 Paradis
+** Last update Tue Aug 12 6:48:58 PM 2024 Paradis
 */
 
 #ifndef 			__HOSPITAL_HPP__
@@ -28,6 +28,7 @@ class	Hospital
         void            addDoctor(KoalaDoctorList *doctorList);
         void            addNurse(KoalaNurseList *koalaNurseList);
         void            addSick(SickKoalaList *sickKoalaList);
+        void            run(void);
 
     protected:
     private:

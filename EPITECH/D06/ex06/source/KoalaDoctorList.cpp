@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Aug 9 5:25:49 PM 2024 Paradis
-** Last update Sat Aug 9 5:25:51 PM 2024 Paradis
+** Last update Wed Aug 13 3:56:36 PM 2024 Paradis
 */
 
 
@@ -124,26 +124,52 @@ KoalaDoctorList* KoalaDoctorList::remove(KoalaDoctorList *nodeList)
 
 KoalaDoctorList   *KoalaDoctorList::removeFromName(std::string koalaDoctorName)
 {
-    // Special case: removing the head node
+    // // Special case: removing the head node
+    // if (this->_koalaDoctor && this->_koalaDoctor->getName() == koalaDoctorName) {
+    //     if (this->_next == NULL) {
+    //         this->_koalaDoctor = NULL;
+    //         return this;
+    //     } else {
+    //         this->_koalaDoctor = NULL;
+    //         // this->_koalaDoctor = this->_next->_koalaDoctor;
+    //         // this->_next = this->_next->_next;
+    //         return this;
+    //     }
+    // }
+
+    // KoalaDoctorList* current = this;
+    // while (current->_next != NULL) {
+    //     if (current->_next->_koalaDoctor && current->_next->_koalaDoctor->getName() == koalaDoctorName) {
+    //         KoalaDoctorList* nodeToRemove = current->_next;
+    //         current->_next = nodeToRemove->_next;
+    //         nodeToRemove->_next = NULL;
+    //         return this;
+    //     }
+    //     current = current->_next;
+    // }
+
+    // return this;
+
+// Cas spécial : suppression du noeud tête
     if (this->_koalaDoctor && this->_koalaDoctor->getName() == koalaDoctorName) {
-        if (this->_next == NULL) {
-            this->_koalaDoctor = NULL;
-            return this;
+        if (this->_next == nullptr) {
+            // Si c'est le seul noeud de la liste
+            this->_koalaDoctor = nullptr;
+            return nullptr; // Liste maintenant vide
         } else {
-            this->_koalaDoctor = NULL;
-            // this->_koalaDoctor = this->_next->_koalaDoctor;
-            // this->_next = this->_next->_next;
-            return this;
+            // Si la liste contient plusieurs noeuds
+            this->_koalaDoctor = this->_next->_koalaDoctor;
+            this->_next = this->_next->_next;
+            return this; // Retourner la nouvelle tête de la liste
         }
     }
 
+    // Parcourir la liste pour trouver le noeud à supprimer
     KoalaDoctorList* current = this;
-    while (current->_next != NULL) {
+    while (current->_next != nullptr) {
         if (current->_next->_koalaDoctor && current->_next->_koalaDoctor->getName() == koalaDoctorName) {
-            KoalaDoctorList* nodeToRemove = current->_next;
-            current->_next = nodeToRemove->_next;
-            nodeToRemove->_next = NULL;
-            return this;
+            current->_next = current->_next->_next; // Bypasser le noeud à supprimer
+            return this; // Retourner la tête de la liste
         }
         current = current->_next;
     }
