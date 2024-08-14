@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Aug 8 6:44:06 PM 2024 Paradis
-** Last update Wed Aug 13 5:32:26 PM 2024 Paradis
+** Last update Thu Aug 14 3:36:44 PM 2024 Paradis
 */
 
 
@@ -60,7 +60,7 @@ void            KoalaDoctorList::append(KoalaDoctorList *nodeList)
     if (_koalaDoctor == NULL) {
         _koalaDoctor = nodeList->_koalaDoctor;
         _next = nodeList->_next;
-        return;  Early return after copying _koalaDoctor->_name
+        return;
     }
 
     KoalaDoctorList *current = this;
