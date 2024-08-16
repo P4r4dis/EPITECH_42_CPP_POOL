@@ -480,7 +480,6 @@ __Exercise 06 - Hospital__
         return (0);
     }
 
-    Terminal:
     ∼/B-PDG-300> ./a.out
     Dr.Cox: I'm Dr.Cox! How do you kreog?
     Dr.House: I'm Dr.House! How do you kreog?
@@ -543,6 +542,8 @@ __Exercise 06 - Hospital__
 [(Back to top)](#table-of-contents)
 * __Input/Output__
     *   __IOstream__
+    *   __Fstream__
+    *   __IOmanip__
 * __Classes__
 * __Constructor(Default and Custrom)__, __Destructor__
 * __Member Functions__
@@ -571,7 +572,7 @@ __Exercise 06 - Hospital__
 
 
 
-        *   | **Abstraction** | **Header** | **Description** | **Type** |
+        <!-- *   | **Abstraction** | **Header** | **Description** | **Type** |
             |-----------------|------------|-----------------|----------|
             | `ios_base`      | `<ios>`    | Manages formatting flags and input/output exceptions | Class |
             | `basic_ios`     | `<ios>`    | Manages an arbitrary stream buffer | Class template |
@@ -596,8 +597,242 @@ __Exercise 06 - Hospital__
             | `cin`, `wcin` | `<iostream>` | Reads from the standard C input stream `stdin` | Global object |
             | `cout`, `wcout` | `<iostream>` | Writes to the standard C output stream `stdout` | Global object |
             | `cerr`, `wcerr` | `<iostream>` | Writes to the standard C error stream `stderr`, unbuffered | Global object |
-            | `clog`, `wclog` | `<iostream>` | Writes to the standard C error stream `stderr` | Global object |
-    #### IOstream
+            | `clog`, `wclog` | `<iostream>` | Writes to the standard C error stream `stderr` | Global object | -->
+
+    *   #### IOstream:
+        *   ##### What is a Stream in C++ ?
+            1.  **Definition of a Stream:**
+                *   A stream is an abstraction that represents a sequence of data, either coming from an input source (e.g., keyboard) or going to an output destination (e.g., screen or file).
+                *   In C++, streams are handled with the `<iostream>` library, which provides three standard streams:
+                    *   `cin` (standard input): Reads data from the user (usually the keyboard).
+                    *   `cout` (standard output): Writes data to the screen.
+                    *   `cerr` (standard error): Used to display error messages.
+                    *   `clog` (standard logging): Used for logging messages, similar to `cerr`, but it's buffered.
+                    *   | **Predefined standard stream objects** | **Header** | **Description** | **Type** |
+                        |----------------------------------------|------------|-----------------|----------|
+                        | `cin`, `wcin` | `<iostream>` | Reads from the standard C input stream `stdin` | Global object |
+                        | `cout`, `wcout` | `<iostream>` | Writes to the standard C output stream `stdout` | Global object |
+                        | `cerr`, `wcerr` | `<iostream>` | Writes to the standard C error stream `stderr`, unbuffered | Global object |
+                        | `clog`, `wclog` | `<iostream>` | Writes to the standard C error stream `stderr` | Global object |
+            2.  **Why Use Streams?**
+                *   Streams allow for consistent handling of input and output, whether it's from the keyboard, a file, or other sources.
+        *   #### Standard Input and Output Streams:
+            1.  **Output with `cout`:**
+                *   Used to print data to the screen.
+                *   The `<<` operator is used to send data to the output stream.
+                *   `std::endl` stands for "end line" and is used to insert a   newline character and flush the output buffer, ensuring the message is immediately displayed on the screen.
+                *   __Syntax / Example__:
+                    ```C++
+                    #include <iostream>
+                    std::cout << "Message to display" << std::endl;
+                    ```
+            2.  **Input with `cin`:**
+                *   Used to read data from the keyboard.
+                *   The `<<` operator is used to send data to the output stream.
+                *   The `>>` operator is used to extract data from the input stream.
+                *   `std::endl` stands for "end line" and is used to insert a   newline character and flush the output buffer, ensuring the message is immediately displayed on the screen.
+                *   Syntax:
+                    ```C++
+                    #include <iostream>
+                    std::cin >> variable;
+                    ```
+                *   Example:
+                    ```C++
+                    #include <iostream>
+                    int age;
+                    std::cout << "Enter your age: ";
+                    std::cin >> age;
+                    std::cout << "You are " << age << " years old." << std::endl;
+                    ```
+            3.  **Error Output with `cerr`:**
+                *   Used to display error messages. Unlike `cout`, `cerr` is __unbuffered__, meaning the message is displayed immediately without waiting for the buffer to be flushed.
+                *   The `<<` operator is used to send data to the output stream.
+                *   `std::endl` stands for "end line" and is used to insert a   newline character and flush the output buffer, ensuring the message is immediately displayed on the screen.
+                *   __Syntax / Example__:
+                    ```C++
+                    #include <iostream>
+                    std::cerr << "Error: Invalid value!" << std::endl;
+                    ```
+            4.  **Logging Output with `clog`:**
+                *   Used for logging messages. Unlike `cerr`, `clog` is __buffered__, meaning it waits until the buffer is full or `std::endl` is encountered before sending the message to the output. This can be more efficient for logging large amounts of data.
+                *   The `<<` operator is used to send data to the output stream.
+                *   `std::endl` stands for "end line" and is used to insert a   newline character and flush the output buffer, ensuring the message is immediately displayed on the screen.
+                *   __Syntax / Example__:
+                    ```C++
+                    #include <iostream>
+                    std::clog << "Log: Processing data..." << std::endl;
+                    ```
+    *   ####    Fstream
+        In C++, the classes `fstream`, `ifstream`, and `ofstream` are used to handle file input/output operations. They are part of the `<fstream>` library. Here's the main difference between them:
+        1.  **`fstream`:**
+            *   __Definition__: The fstream class is a combination of both `ifstream` (input) and `ofstream` (output). It allows you to open a file for both __reading and writing__.
+            *   __Usage__: You use `fstream` when you want to both __read and write__ to a file.
+            *   __Constructor__:
+                *   `std::fstream file("filename");`
+                *   You can open the file using specific modes (__`std::ios::in`, `std::ios::out`__, etc.).
+                *   By default, it opens the file in read/write mode. You need to specify modes if you want particular behavior (read-only or write-only).
+            *   __Syntax / Example__:
+                ```C++
+                #include <fstream>
+                std::fstream file("example.txt", std::ios::in | std::ios::out);
+                    ```
+        2.  **`ifstream` (Input File Stream):**
+            *   __Definition__: `ifstream` is used only to __read__ data from a file (input).
+            *   __Usage__: You use `ifstream` when you want to __read__ data from a file.
+            *   __Constructor__:
+                *   `std::ifstream file("filename");`
+                *   Opens the file in __read-only__ mode by default (__`std::ios::in`__).
+            *   __Reading from a File:__ Use `ifstream` to __read__ data from a file, using the same operators (`>>` and `getline`) as for `cin`.
+            *   __Checking if a File Opened Successfully:__ Always check if the file opened correctly before trying to __read__ or __write__.
+            *   __Syntax / Example__:
+                ```C++
+                #include <iostream>
+                #include <fstream>
+                std::ifstream readFile("readFile.txt");
+
+                if (!readFile.is_open()) {
+                    std::cerr << "Error: Could not open files." << std::endl;
+                    return 1;
+                }
+
+                std::string line;
+                while (std::getline(readFile, line, '\0')) {
+                    std::cout << line << std::endl;
+                }
+
+                readFile.close();
+                return 0;
+                ```
+        3.  **`ofstream` (Output File Stream):**
+            *   __Definition__: `ofstream` is used only to __write__ data to a file (output).
+            *   __Usage__: You use `ofstream` when you want to __write__ data to a file.
+            *   __Constructor__:
+                *   `std::ofstream file("filename");`
+                *   Opens the file in __write-only__ mode by default (__`std::ios::out`__).
+                *   If the file exists, its content will be __erased__.
+                *   If the file doesn’t exist, `ofstream` will __create__ a new file.
+            *   __Writing to a File:__ Use `ofstream` to __write__ to a file, just like `cout`.
+            *   __Checking if a File Opened Successfully:__ Always check if the file opened correctly before trying to __read__ or __write__.
+            *   __Syntax / Example__:
+                ```C++
+                #include <iostream>
+                #include <fstream>
+                std::ofstream writeFile("writeFile.txt");
+
+                if (!writeFile.is_open()) {
+                    std::cerr << "Error: Could not open files." << std::endl;
+                    return 1;
+                }
+
+                std::string line = "im writting in a file!";
+   
+                writeFile << line << std::endl;
+
+                writeFile.close();
+                ```
+        4.  **Summary of Differences:**
+            *   | Class | Default Opening Mode | Usage |
+                |-------|----------------------|-------|
+                | `fstream` |	Read and write (`std::ios::in` or `std::ios::out`) | To read / write data from a file |
+                | `ifstream` | Read-only (`std::ios::in`)	| To read data from a file |
+                | `ofstream` | Write-only (`std::ios::out`) | To write data to a file |
+    *   #### IOmanip
+        *   The `<iomanip>` library in C++ provides functions and manipulators that help format the input and output of data in a more flexible and readable manner. It is especially useful when working with floating-point numbers, controlling spacing between outputs, and aligning the text in a certain format.
+        *   `<iomanip>` stands for __I/O manipulators__, which help in formatting the output by altering the appearance of printed data without changing the actual values.
+        *   The functions from `<iomanip>` are often used with __`std::cout`__ (standard output) to display data in a particular format (e.g., floating-point precision, alignment of text or numbers).
+        1.  __`setw` Manipulator__
+            *   __Definition:__ The `setw` manipulator stands for __set width__.
+            *   __Usage:__ 
+                *   It is used to specify the minimum number of characters to be used when displaying the next value in the output.
+                *   If the value to be displayed is shorter than the specified width, spaces will be added to the left (by default) to fill the gap.
+            *   __Syntax / Example:__
+                ```C++
+                #include <iostream>
+                #include <iomanip> // Required for setw
+
+                int main() {
+                    std::cout << std::setw(10) << 123 << std::endl;
+                    std::cout << std::setw(10) << 4567 << std::endl;
+                    std::cout << std::setw(10) << "C++" << std::endl;
+
+                    return 0;
+                }
+                output:
+                         123
+                         4567
+                         C++
+                ```
+        2.  __`fixed` Manipulator__
+            *   __Definition__: 
+                *   The `fixed` manipulator is used to display floating-point numbers in __fixed-point notation__.
+                *   By default, floating-point numbers in C++ are printed in scientific notation if the number is too large or too small. 
+            *   __Usage__: Using `fixed` forces the output to show the decimal part as a    fixed number of digits, even if the number is very large or small.
+            *   __Syntax / Example__:
+                ```C++
+                #include <iostream>
+                #include <iomanip> // Required for fixed
+
+                int main() {
+                    double pi = 3.14159265358979;
+                    
+                    std::cout << "Default notation: " << pi << std::endl;
+                    std::cout << std::fixed << "Fixed notation: " << pi << std::endl;
+
+                    return 0;
+                }
+
+                output:
+                Default notation: 3.14159
+                Fixed notation: 3.141593 // with std::fixed
+                ```
+        3.  __`setprecision` Manipulator__
+            *   __Definition:__
+                *   The `setprecision` manipulator controls the number of __significant digits__ or __decimal__ places to display for floating-point numbers.
+                *   It can __work with or without__ the `fixed` manipulator, but its behavior changes depending on whether `fixed` is used.
+            *   __Syntax / Example:__
+                *   Example without `fixed`:
+                    ```C++
+                    // USAGE WITHOUT FIXED
+                    #include <iostream>
+                    #include <iomanip> // Required for setprecision
+
+                    int main() {
+                        double pi = 3.14159265358979;
+                        
+                        std::cout << std::setprecision(4) << pi << std::endl;
+                        std::cout << std::setprecision(8) << pi << std::endl;
+
+                        return 0;
+                    }
+                    output:
+                    3.142
+                    3.1415927
+                    ```
+                *   Example with `fixed`:
+                    ```C++
+                    // USAGE WITH FIXED
+                    #include <iostream>
+                    #include <iomanip> // Required for setprecision and fixed
+
+                    int main() {
+                        double pi = 3.14159265358979;
+
+                        std::cout << std::fixed << std::setprecision(4) << pi << std::endl;
+                        std::cout << std::fixed << std::setprecision(2) << pi << std::endl;
+
+                        return 0;
+                    }
+                    output:
+                    3.1416
+                    3.14
+                    ```
+        4.  __Sunnary__
+            | Manipulator | Description | Example Usage |
+            |-------------|-------------|---------------|
+            | `setw`      |	Sets the minimum width of the next output field. | `std::cout << std::setw(10);` |
+            | `fixed` | Forces floating-point numbers to be printed in fixed-point notation. | `std::cout << std::fixed;` |
+            | `setprecision` | Controls the number of significant digits or decimal places. |`std::cout << std::setprecision(3);` |
+
 
 ## Installation
 [(Back to top)](#table-of-contents)
