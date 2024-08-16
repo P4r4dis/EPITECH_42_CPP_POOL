@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:07:33 by Paradis           #+#    #+#             */
-/*   Updated: 2024/07/10 21:55:20 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/08/16 19:13:23 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ int             PhoneBook::validIndex(std::string input)
     int index = 0;
     bool validInput = false;
 
-    // degree >> x;
     while (!validInput)
     {
         std::cout << "Enter the contact index you wish to display:" << std::endl;
