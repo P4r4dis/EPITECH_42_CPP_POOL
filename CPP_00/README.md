@@ -550,6 +550,9 @@ __Exercise 06 - Hospital__
     * __Initialisation lists__
     * __Visibility/Encapsuslation__
     * __Getter and Setter (Accessors and Mutators)__
+    * __Class vs Struct__
+    * __No member attribute...__
+    * __pointer to member...__
 * __static__, __const__
 * __auto__
 * __string__
