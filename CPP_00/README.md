@@ -545,12 +545,11 @@ __Exercise 06 - Hospital__
     *   __Fstream__
     *   __IOmanip__
 * __Classes__
-* __Constructor(Default and Custrom)__, __Destructor__
-* __Member Functions__
-* __Initialisation lists__
-* __Visibility/Encapsuslation__
-* __Getter and Setter (Accessors and Mutators)__
-* __stdio__, __iostream__, __iomanip__
+    * __Constructor(Default and Custrom)__, __Destructor__
+    * __Member Functions__
+    * __Initialisation lists__
+    * __Visibility/Encapsuslation__
+    * __Getter and Setter (Accessors and Mutators)__
 * __static__, __const__
 * __auto__
 * __string__
@@ -833,6 +832,165 @@ __Exercise 06 - Hospital__
             | `fixed` | Forces floating-point numbers to be printed in fixed-point notation. | `std::cout << std::fixed;` |
             | `setprecision` | Controls the number of significant digits or decimal places. |`std::cout << std::setprecision(3);` |
 
+___
+#### Class
+In C++, __classes__ are one of the fundamental concepts of __object-oriented programming__ (OOP). They allow you to model objects by grouping data and functions (methods) that operate on that data. This course will cover the syntax, key concepts, and advanced topics related to classes in C++.
+*   __What is a Class?__
+    *   A class is a blueprint or template for **creating objects**. It defines the **properties** (data) and **behavior** (methods) of objects. A class may contain:
+        *   **Access Specifiers**:
+            *   **`public`**: Members are accessible from outside the class.
+            *   **`protected`**: Members are accessible within the class and its derived (inherited) classes.
+            *   **`private`**: Members are only accessible within the class itself.
+        *   **Constructor**:
+            *   Is a special method that is **automatically called** when an object is **created**.
+            *   It has the same name as the class and has no return type.
+        *   **Destructor**:
+            *   Is a special method **automatically called** when an object is **destroyed**.
+            *   It is mainly used to **free** resources.
+            *   The **destructor** has the same name as the class, preceded by the **`~`** symbol, and takes no parameters.
+        *   **Attributes** (or data members): **Variables** that represent the object's **properties**.
+        *   **Methods** (or member functions): Functions that manipulate the data or perform specific actions.
+        *   **Keywords `this`**:
+            *   Inside a class method, the keyword **`this` pointer** refers to the **current instance of the class** (the object the method is acting upon).
+            *   It is often used to resolve name conflicts between class attributes and method parameters.
+        *   **Initialization list**: 
+            *   **Definition**:
+                *   An **initialization list** is a mechanism used to directly initialize class members before the constructor body is executed.
+                *   This approach is **cleaner** and **more efficient**, especially in cases where certain members cannot be assigned values in the constructor body.
+            *   **Efficiency**:
+                *   Initialization lists are more **efficient** than assigning values in the constructor body.
+                *   When initializing a member in the constructor body, **the object is first constructed** (possibly using a default constructor), and then **reassigned**.
+                *   Using an initialization list, the member is **initialized directly, avoiding unnecessary reassignments**.
+            *   **Order of Member Initialization**:
+                *   One important aspect is that the order in which members are initialized is **not determined by the order in the initialization list**, but rather by the **order in which they are declared in the class**.
+            *   **Necessary for const and Reference Members.**
+        *   **Visibility and Encapsulation**:
+            *    In C++, **visibility and encapsulation** are core concepts of object-oriented programming (OOP).
+            *   They enable the control of access to class members (attributes and methods) to ensure **data security** and **integrity**.
+            *   **Encapsulation** improves code **modularity** and **maintainability**.
+            *   **Encapsulation**:
+                *   **Definition**:
+                    *   **Encapsulation** is the concept of bundling data (attributes) and methods that operate on that data within a single entity: the **class**.
+                    *   It also **restricts access** to these members, **protecting** them from unauthorized modification or **access** from outside the class.
+                *   **Usage**:
+                    *   The main goal of **encapsulation** is to **prevent** users from directly **modifying the internal attributes of a class** and to **enforce controlled access methods**.
+            *   **Visibility**:
+                *   **Definition**:
+                    *   **Visibility**, or **access specifiers**, define how class members (attributes and methods) can be accessed.
+                    *   **Three levels of visibility**:
+                        *   **`public`**: Members are accessible from outside the class.
+                        *   **`protected`**: Members are accessible within the class and its derived (inherited) classes.
+                        *   **`private`**: Members are only accessible within the class itself.
+            *   **Benefits of Encapsulation and Visibility**
+                *   **Data Protection**
+                *   **Clean Interface**
+                *   **Flexibility and Scalability**
+                *   **Access Control**
+        *   **Getters and Setters**:
+            *   **Usage**:
+                *   To **allow controlled access to private or protected attributes**, **getters** and **setters** are often used.
+            *   **Getter**: Is a method that **returns the value of an attribute**.
+            *   **Setter**: Is a method that **modifies an attribute in a controlled way**.
+    *   **Syntax / Example**:
+        ```C++
+        // file: Example.hpp
+        #ifndef     __EXAMPLE_HPP__
+            #define __EXAMPLE_HPP__
+            
+        #include <string>
+        class Example // Keyword `class` followed by the class name `Example`
+        {
+            public: // Access specifier
+                Example(std::string name, int age); // Constructor
+                ~Example(void); // Destructor
+
+                void                methodExample(void); // Method or Member function
+
+                int                 getAge(void) const; // Getter
+                void                setAge(int age); // Setter
+            protected: // Access specifier
+
+            private: // Access specifier
+                int                 _number; // Attribute or Data member
+                int                 _age;
+                const std::string   _name;
+
+        }; // `;` Very important for close class and avoid some issues.
+
+        #endif //   !__EXAMPLE_HPP__
+
+        // ----------------------------------------------------------------
+        // file: Example.cpp
+        
+        #include <iostream>
+        #include "Example.hpp"
+        // Constrcutor
+        Example::Example(std::string name, int age) :   _age(age), _name(name) // Initialization list with correct order
+        {
+            this->_number = 10; // Attribute with keyword `this`
+            
+            // Error:
+            //this->_name = name; Error: _name is const and can't be assigned;
+            std::cout << "Constructor called!" << std::endl;
+        }
+
+        // Destructor
+        Example::~Example(void)
+        {
+            std::cout << "Destructor called!" << std::endl;
+        }
+
+        // Method or Member function
+        void    Example::methodExample(void)
+        {
+            std::cout << "Attribute number equals to: " << _number << std::endl;
+        }
+
+        // Getter Function
+        int     Example::getAge(void) const
+        {
+            return _age;
+        }
+
+        // Setter Function
+        void    Example::setAge(int age)
+        {
+            _age = age;
+        }
+        // ----------------------------------------------------------------
+        // file: main.cpp
+        #include <iostream>
+        #include "Example.hpp"
+
+        int main(void)
+        {
+            Example     example("Jhon Doe", 18);    // Object created
+        // If constructor has int parameter for example:
+        // Example  example(10);
+
+            example.methodExample(); // method called
+        
+        // Error
+        //  std::cout << "Age equals to: " << example._age << std::endl; // Error: We can't access to _age because is private.
+            std::cout << "Age equals to: " << example.getAge() << std::endl; // With getter we can have access to _age attribute.
+
+            std::cout << "Next year" << std::endl;
+
+        // Error
+        //  example._age = 19; // Error: We can't access to _age and modify because is private.
+            example.setAge(19); // With setter we can modify _age attribute
+            std::cout << "Age equals to: " << example.getAge() << std::endl;
+            return 0;
+        }
+        // ----------------------------------------------------------------
+        output:
+        Constructor called!
+        Attribute number equals to: 10
+        Age equals to: 18
+        Next year
+        Age equals to: 19
+        Destructor called!
+        ```
 
 ## Installation
 [(Back to top)](#table-of-contents)
