@@ -540,20 +540,23 @@ __Exercise 06 - Hospital__
 
 ## Key Learnings
 [(Back to top)](#table-of-contents)
-* __Input/Output__
+*   __Input/Output__
     *   __IOstream__
     *   __Fstream__
     *   __IOmanip__
-* __Classes__
-    * __Constructor(Default and Custrom)__, __Destructor__
-    * __Member Functions__
-    * __Initialisation lists__
-    * __Visibility/Encapsuslation__
-    * __Getter and Setter (Accessors and Mutators)__
-    * __Class vs Struct__
-    * __No member attribute...__
-    * __pointer to member...__
-* __static__, __const__
+*   __Classes__
+    *   __Constructor(Default and Custrom)__, __Destructor__
+    *   __Member Functions__
+    *   __Initialisation lists__
+    *   __Visibility/Encapsuslation__
+    *   __Getter and Setter (Accessors and Mutators)__
+    *   __Class VS Struct__
+* __Non-Member Attribute & Non-Member Function__
+* __Pointer to Members__
+    *   __Pointer to Data Members__
+    *   __Pointer to Members Functions__
+* __const__
+<!-- * __static__  -->
 * __auto__
 * __string__
     
@@ -994,6 +997,256 @@ In C++, __classes__ are one of the fundamental concepts of __object-oriented pro
         Age equals to: 19
         Destructor called!
         ```
+___
+#### Non-Member Attribute & Non-Member Function
+*   **Definition**:
+    *   **Non-member variables**: 
+        *   Variables **defined outside of the class**, often **used to store global** or **shared information** across multiple instances of the class.
+        *   **Non-member variables** are typically **global** or **static variables** defined outside of the class.
+    *   **Non-member functions**: Functions defined **outside of the class that operate on** or **use objects of the class**.
+*   **Usage**:
+    *   **Encapsulation and Abstraction**:
+        *   **Non-member functions & Attributes** allow for **maintaining a separation** between a class’s public **interface** and the **operations** that can be performed on that class.
+        *   This preserves **encapsulation** while providing additional functionality.
+    *   **Reducing Coupling**:
+        *   Using **non-member functions & Attributes** can reduce coupling between classes, meaning that classes are **less dependent** on one another, making the code **more modular** and **easier to maintain.**
+*   **Syntax / Example**:
+    ```C++
+    // file: Example.hpp
+    #ifndef     __EXAMPLE_HPP__
+        #define __EXAMPLE_HPP__
+        
+    #include <string>
+    class Example // Keyword `class` followed by the class name `Example`
+    {
+        public: // Access specifier
+            Example(void); // Constructor
+            ~Example(void); // Destructor
+
+            static int          getNbInstance(void); // Getter and Non-Member Function
+        protected: // Access specifier
+
+        private: // Access specifier
+            static int          _numberInstance; // Non-Member Attribute
+
+    }; // `;` Very important for close class and avoid some issues.
+
+    #endif //   !__EXAMPLE_HPP__
+
+    // ----------------------------------------------------------------
+    // file: Example.cpp
+    
+    #include <iostream>
+    #include "Example.hpp"
+
+    // Non-Member attribute Initialization
+    int  Example::_numberInstance = 0;
+
+
+    // Constrcutor
+    Example::Example(void)
+    {
+        std::cout << "Constructor called!" << std::endl;
+        Example::_numberInstance += 1; // syntax
+    }
+
+    // Destructor
+    Example::~Example(void)
+    {
+        std::cout << "Destructor called!" << std::endl;
+        Example::_numberInstance -= 1;
+    }
+
+    // Getter Non-Member Function
+    int     Example::getNbInstance(void)
+    {
+        return Example::_numberInstance;
+    }
+
+    // ----------------------------------------------------------------
+    // file: main.cpp
+    #include <iostream>
+    #include "Example.hpp"
+
+    void    f0(void)
+    {
+        Example     example;
+        std::cout   << "Number of instances of Example Class: " 
+                    << Example::getNbInstance() << std::endl;
+    }
+
+    void    f1(void)
+    {
+        Example     example;
+        std::cout   << "Number of instances of Example Class: " 
+                    << Example::getNbInstance() << std::endl;
+        f0();
+    }
+
+    int     main(void)
+    {
+        std::cout   << "Number of instances of Example Class: " 
+                    << Example::getNbInstance() << std::endl;
+        f1();
+        std::cout   << "Number of instances of Example Class: " 
+                    << Example::getNbInstance() << std::endl;
+        return 0;
+    }
+    // ----------------------------------------------------------------
+    output:
+    Number of instances of Example Class: 0
+    Constructor called!
+    Number of instances of Example Class: 1
+    Constructor called!
+    Number of instances of Example Class: 2
+    Destructor called!
+    Destructor called!
+    Number of instances of Example Class: 0
+    ```
+*   **Advantages and Disadvantages of Non-Member Attributes & Non-Member Functions:**
+    *   **Advantages**:
+        *   **Flexibility**: **Non-member functions & attributes** can be **added** or **modified** without **changing the class definition**.
+        *   **Encapsulation**: **Non-member functions & attributes** can manipulate objects without exposing their internal details.
+        *   **Reduced Coupling**: Helps **reduce dependencies** between classes.
+    *   **Disadvantages**:
+        *   **Limited Access**: **Non-member functions & attributes** do **not have direct access to private/protected** class members (unless they are `friend` functions).
+        *   **Managing Friend Functions**: Excessive use of `friend` functions can compromise **encapsulation**.
+___
+#### Pointer to Members and Pointer to Members Functions
+*   **Pointer to Members**:
+    *   **Definition**:
+        *   A **member pointer** is a **pointer that doesn't point to a memory address (like a regular pointer), but rather to a specific member (either a variable or a function) of a class**.
+        *   However, this **pointer does not point to a concrete value within a specific object**.
+        *   Instead, it **points** to the "**location**" of a member relative to any object of that class.
+    *   **Syntax and basic example**:
+        ```C++
+        #include <iostream>
+        class Example {
+        public:
+            int x;  // A data member
+            int y;  // Another data member
+        };
+
+        int main() {
+            Example obj1, obj2;  // Two objects of the Example class
+
+            int Example::*ptr = &Example::x;  // Pointer to the `x` member of the Example class
+
+            obj1.x = 10;
+            obj2.x = 20;
+
+            // Using the pointer to access the `x` member of each object
+            std::cout << "obj1.x = " << obj1.*ptr << std::endl;  // Access `x` in obj1
+            std::cout << "obj2.x = " << obj2.*ptr << std::endl;  // Access `x` in obj2
+
+            // We can change the pointer to point to another member
+            ptr = &Example::y;
+            obj1.y = 30;
+            obj2.y = 40;
+
+            std::cout << "obj1.y = " << obj1.*ptr << std::endl;  // Access `y` in obj1
+            std::cout << "obj2.y = " << obj2.*ptr << std::endl;  // Access `y` in obj2
+
+            return 0;
+        }
+        ```
+        *   **Explanation**:
+            *   **Declaration**: **`int Example::*ptr`** declares a pointer **`ptr`** that can **point to an int member in the Example class**.
+            *   **Initialization**: **`ptr = &Example::x`** assigns the **address** of the **`x` member to `ptr`**.
+            *   **Usage**: **`obj1.*ptr`** uses **`ptr` to access `x` in the `obj1` object**.
+    *   **Why is this useful?**
+        *   This allows you to **dynamically manipulate different members of the class without writing specific code for each member**. 
+        *   You can **change** which member is pointed to by the pointer, and the same code can then **access** or **modify** different members.
+*   **Pointer to Members Functions**;
+    *   **Definition**:
+        *   A **member pointer** is a **pointer that doesn't point to a memory address (like a regular pointer), but rather to a specific member (either a variable or a function) of a class**.
+        *   However, this **pointer does not point to a concrete value within a specific object**.
+        *   Instead, it **points** to the "**location**" of a member relative to any object of that class.
+    *   **Syntax and basic example**:
+        ```C++
+        #include <iostream>
+        class Calculator {
+        public:
+            int add(int a, int b) { return a + b; }
+            int subtract(int a, int b) { return a - b; }
+            int multiply(int a, int b) { return a * b; }
+            int divide(int a, int b) { return b != 0 ? a / b : 0; }
+        };
+
+        int main() {
+            Calculator calc;
+
+            // Declaration of a pointer to member function
+            int (Calculator::*op)(int, int) = nullptr;
+
+            char operation = '*';  // Operation determined dynamically, for example.
+
+            // Dynamically choosing which member function to call
+            if (operation == '+')
+                op = &Calculator::add;
+            else if (operation == '-')
+                op = &Calculator::subtract;
+            else if (operation == '*')
+                op = &Calculator::multiply;
+            else if (operation == '/')
+                op = &Calculator::divide;
+
+            // Calling the member function via the pointer
+            if (op) {
+                std::cout << "Result: " << (calc.*op)(10, 5) << std::endl;  // Executes the chosen operation
+            }
+
+            return 0;
+        }
+        ```
+        *   **Explanation**:
+            *   **Declaration**: **`int (Calculator::*op)(int, int)`** declares a pointer **`op`** that can point to a **member function of the `Calculator`** class that takes two **`int`** parameters and returns an **`int`**.
+            *   **Initialization**: **`op = &Calculator::multiply`** assigns the **address of the `multiply` function to `op`**.
+            *   **Usage**: **`(calc.*op)(10, 5)`** calls the member function pointed to **`(multiply)` with arguments 10 and 5**.
+    *   **Why is this useful?**
+        *   This allows you to **dynamically choose which method** of the class will be executed based on the **program's needs**. 
+        *   For example, in a **`calculator`**, you can **choose which operation to apply based on user input**.
+*   **Summary**
+    *  **Member pointers allow you to**:
+        *   **Flexibility**: 
+            *   **Dynamically** choose which member or function of a class to manipulate or call.
+            *   **Reduce Repetitive Code**: Avoid writing specific code for each member or function.
+            *   **Modularity**: Separate the program logic into reusable and dynamic components.
+*   **Conclusion**
+    *   Although member pointers **are not necessary for every program**, they are very **useful** in scenarios where **flexibility** and **dynamic** behavior are needed.
+    *   They are often **used in complex environments**, such as **user interfaces** or **event-driven systems**, where it is **necessary to select specific members to manipulate** or **execute based on runtime conditions**.
+___
+#### Keyword `const`
+*   **Basic Usage of const with Variables**
+    *   The simplest use of **`const`** is to declare a constant variable.
+    *   Once a variable is declared as **`const`**, its value cannot be changed.
+    *   **Syntax / Example**:
+        ```C++
+        const int maxScore = 100;
+        maxScore = 200;  // Error: Cannot modify a const variable
+        ```
+*   **`const` Member Functions**
+    *   In C++, a member function can be declared as **`const`** to indicate that it does not modify the state of the object.
+    *   A **`const`** member function is only allowed to call other **`const`** member functions and cannot modify any non-mutable member variables.
+    *   **Syntax / Example**:
+        ```C++
+        class MyClass {
+        public:
+            int getValue() const {  // This function will not modify any member variables
+                return value;
+            }
+
+            void setValue(int val) {
+                value = val;
+            }
+
+        private:
+            int value;
+        };
+        ```
+
+
+
 
 ## Installation
 [(Back to top)](#table-of-contents)
