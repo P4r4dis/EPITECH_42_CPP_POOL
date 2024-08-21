@@ -542,10 +542,12 @@ __Exercise 06 - Hospital__
 [(Back to top)](#table-of-contents)
 *   [Input/Output](#inputoutput)
     *   [C++ Input/Output Library](#c-inputoutput-library)
-    *   [IOStream](#iostream)
-        *   [Stream in C++?](#stream-in-c)
+    *   [**`IOStream`**](#iostream)
+        *   [Stream in C++?](#iostream-stream-in-c-anchor)
             *   [Definition](#iostream-stream-in-c-definition-anchor)
-        *   __Stream in C++__
+            *   [Why use Streams](#iostream-stream-in-c-why-use-stream-anchor)
+        *   [Standard Input/Output stream](#iostream-standard-inputoutput-stream-anchor)
+            *   [Output with **`std::cout`**](#iostream-standard-inputoutput-stream-output-wuth-cout-anchor)
     *   __Fstream__
     *   __IOmanip__
 *   __Classes__
@@ -578,33 +580,35 @@ __Exercise 06 - Hospital__
     *   The stream-based I/O abstracts input/output devices, allowing uniform __handling of files__, __memory streams__, and __other devices__ (e.g., compression).
 *   __Class Hierarchy__
     ![Standard I/O complete inheritance](https://upload.cppreference.com/mwiki/images/0/06/std-io-complete-inheritance.svg)
-#### IOstream:
-##### Stream in C++?
-*   **<a id="iostream-stream-in-c-definition-anchor"></a>Definition:**
-    *   A **stream** is an abstraction that represents a sequence of data, either coming from an input source (e.g., keyboard) or going to an output destination (e.g., screen or file).
-    *   In C++, streams are handled with the `<iostream>` library, which provides three standard streams:
-        *   `cin` (standard input): Reads data from the user (usually the keyboard).
-        *   `cout` (standard output): Writes data to the screen.
-        *   `cerr` (standard error): Used to display error messages.
-        *   `clog` (standard logging): Used for logging messages, similar to `cerr`, but it's buffered.
-        *   | **Predefined standard stream objects** | **Header** | **Description** | **Type** |
-            |----------------------------------------|------------|-----------------|----------|
-            | `cin`, `wcin` | `<iostream>` | Reads from the standard C input stream `stdin` | Global object |
-            | `cout`, `wcout` | `<iostream>` | Writes to the standard C output stream `stdout` | Global object |
-            | `cerr`, `wcerr` | `<iostream>` | Writes to the standard C error stream `stderr`, unbuffered | Global object |
-            | `clog`, `wclog` | `<iostream>` | Writes to the standard C error stream `stderr` | Global object |
-*  **Why Use Streams?**
-    *   Streams allow for consistent handling of input and output, whether it's from the keyboard, a file, or other sources.
-*   #### Standard Input and Output Streams:
-*  **Output with `cout`:**
-    *   Used to print data to the screen.
-    *   The `<<` operator is used to send data to the output stream.
-    *   `std::endl` stands for "end line" and is used to insert a   newline character and flush the output buffer, ensuring the message is immediately displayed on the screen.
-    *   __Syntax / Example__:
-        ```C++
-        #include <iostream>
-        std::cout << "Message to display" << std::endl;
-        ```
+#### `IOstream`:
+*   **<a id="iostream-stream-in-c-anchor"></a>Stream in C++:**
+    *   **<a id="iostream-stream-in-c-definition-anchor"></a>Definition:**
+        *   A **stream** is an abstraction that represents a sequence of data, either coming from an input source (e.g., keyboard) or going to an output destination (e.g., screen or file).
+        *   In C++, streams are handled with the **`<iostream>`** library, which provides three standard streams:
+            *   **`cin`** (standard input): Reads data from the user (usually the keyboard).
+            *   **`cout`** (standard output): Writes data to the screen.
+            *   **`cerr`** (standard error): Used to display error messages.
+            *   **`clog`** (standard logging): Used for logging messages, similar to **`cerr`**, but it's buffered.
+            *   | **Predefined standard stream objects** | **Header** | **Description** | **Type** |
+                |----------------------------------------|------------|-----------------|----------|
+                | `cin`, `wcin` | `<iostream>` | Reads from the standard C input stream `stdin` | Global object |
+                | `cout`, `wcout` | `<iostream>` | Writes to the standard C output stream `stdout` | Global object |
+                | `cerr`, `wcerr` | `<iostream>` | Writes to the standard C error stream `stderr`, unbuffered | Global object |
+                | `clog`, `wclog` | `<iostream>` | Writes to the standard C error stream `stderr` | Global object |
+
+    *   **<a id="iostream-stream-in-c-why-use-stream-anchor"></a>Why use Streams:**
+        *   Streams allow for consistent handling of input and output, whether it's from the keyboard, a file, or other sources.
+    <br>
+*   **<a id="iostream-standard-inputoutput-stream-anchor"></a>Standard Input/Output stream:**
+    *   **<a id="iostream-standard-inputoutput-stream-output-wuth-cout-anchor"></a>Output with `std::cout`:**
+        *   Used to print data to the screen.
+        *   The `<<` operator is used to send data to the output stream.
+        *   `std::endl` stands for "end line" and is used to insert a   newline character and flush the output buffer, ensuring the message is immediately displayed on the screen.
+        *   __Syntax / Example__:
+            ```C++
+            #include <iostream>
+            std::cout << "Message to display" << std::endl;
+            ```
 2.  **Input with `cin`:**
     *   Used to read data from the keyboard.
     *   The `<<` operator is used to send data to the output stream.
