@@ -40,7 +40,7 @@ ___
         * CMake (for subprojects)
         * pkg-config
         * libffi (libffi-dev)
-        * libgit2 (libgit2-dev __version: libgit2-1:1.5.1-2, new version doesn't work__)
+        * libgit2 (libgit2-dev __version: libgit2-1:*5.1-2, new version doesn't work__)
         * Other runtime dependencies will be bundled if they are not available on the system (BoxFort, debugbreak, klib, nanomsg, nanopb).
     * Clone this repository:
         * ```bash
@@ -473,7 +473,7 @@ __Exercise 06 - Hospital__
             bellevue.addSick(&sick4);
             bellevue.run();
         }
-        if (nurse1.isEnd() && sick1.isEnd() && doc1.isEnd())
+        if (nurse*isEnd() && sick*isEnd() && doc*isEnd())
             std::cout << "Lists cleaned up." << std::endl;
         else
             std::cerr << "You fail! Boo!" << std::endl;
@@ -540,8 +540,12 @@ __Exercise 06 - Hospital__
 
 ## Key Learnings
 [(Back to top)](#table-of-contents)
-*   __Input/Output__
-    *   __IOstream__
+*   [Input/Output](#inputoutput)
+    *   [C++ Input/Output Library](#c-inputoutput-library)
+    *   [IOStream](#iostream)
+        *   [Stream in C++?](#stream-in-c)
+            *   [Definition](#iostream-stream-in-c-definition-anchor)
+        *   __Stream in C++__
     *   __Fstream__
     *   __IOmanip__
 *   __Classes__
@@ -556,7 +560,7 @@ __Exercise 06 - Hospital__
     *   __Pointer to Data Members__
     *   __Pointer to Members Functions__
 * __const__
-<!-- * __static__  -->
+* __static__ 
 * __auto__
 * __string__
     
@@ -565,111 +569,82 @@ __Exercise 06 - Hospital__
 ### Input/Output
 [(Back to top)](#table-of-contents)
 [(Back to Key Learnings)](#key-learnings)
-*   __C++ Input/Output Library__
-    *   C++ offers several types of input/output libraries:
-        *   __Stream-based I/O library__: An object-oriented, stream-based approach to handle various input/output operations.
-        *   __Print-based functions__ (since C++23): Functions for formatted text output.
-        *   __C-style I/O functions__: Compatibility with traditional C I/O functions like fopen, getc, etc.
-    *   __Stream-based I/O__
-        *   The stream-based I/O abstracts input/output devices, allowing uniform __handling of files__, __memory streams__, and __other devices__ (e.g., compression).
-    *   __Class Hierarchy__
-        ![Standard I/O complete inheritance](https://upload.cppreference.com/mwiki/images/0/06/std-io-complete-inheritance.svg)
-
-
-
-        <!-- *   | **Abstraction** | **Header** | **Description** | **Type** |
-            |-----------------|------------|-----------------|----------|
-            | `ios_base`      | `<ios>`    | Manages formatting flags and input/output exceptions | Class |
-            | `basic_ios`     | `<ios>`    | Manages an arbitrary stream buffer | Class template |
-            | `basic_streambuf` | `<streambuf>` | Abstracts a raw device | Class template |
-            | `basic_ostream` | `<ostream>` | Wraps a given abstract device (`std::basic_streambuf`) and provides high-level output interface | Class template |
-            | `basic_istream` | `<istream>` | Wraps a given abstract device (`std::basic_streambuf`) and provides high-level input interface | Class template |
-            | `basic_iostream` | `<istream>` | Wraps a given abstract device (`std::basic_streambuf`) and provides high-level input/output interface | Class template |
-        *   | **File I/O implementation** | **Header** |**Description** | **Type** |
-            |-----------------------------|------------|----------------|----------|
-            | `basic_filebuf` | `<fstream>` | Implements raw file device | Class template |
-            | `basic_ifstream` | `<fstream>` | Implements high-level file stream input operations | Class template |
-            | `basic_ofstream` | `<fstream>` | Implements high-level file stream output operations | Class template |
-            | `basic_fstream` | `<fstream>` | Implements high-level file stream input/output operations | Class template |
-        *   | **String I/O implementation** | **Header** | **Description** | **Type** |
-            |-------------------------------|------------|-----------------|----------|
-            | `basic_stringbuf` | `<sstream>` | Implements raw string device | Class template |
-            | `basic_istringstream` | `<sstream>` | Implements high-level string stream input operations | Class template |
-            | `basic_ostringstream` | `<sstream>` | Implements high-level string stream output operations | Class template |
-            | `basic_stringstream`  | `<sstream>` | Implements high-level string stream input/output operations | Class template |
+#### C++ Input/Output Library
+*   C++ offers several types of input/output libraries:
+    *   __Stream-based I/O library__: An object-oriented, stream-based approach to handle various input/output operations.
+    *   __Print-based functions__ (since C++23): Functions for formatted text output.
+    *   __C-style I/O functions__: Compatibility with traditional C I/O functions like fopen, getc, etc.
+*   __Stream-based I/O__
+    *   The stream-based I/O abstracts input/output devices, allowing uniform __handling of files__, __memory streams__, and __other devices__ (e.g., compression).
+*   __Class Hierarchy__
+    ![Standard I/O complete inheritance](https://upload.cppreference.com/mwiki/images/0/06/std-io-complete-inheritance.svg)
+#### IOstream:
+##### Stream in C++?
+*   **<a id="iostream-stream-in-c-definition-anchor"></a>Definition:**
+    *   A **stream** is an abstraction that represents a sequence of data, either coming from an input source (e.g., keyboard) or going to an output destination (e.g., screen or file).
+    *   In C++, streams are handled with the `<iostream>` library, which provides three standard streams:
+        *   `cin` (standard input): Reads data from the user (usually the keyboard).
+        *   `cout` (standard output): Writes data to the screen.
+        *   `cerr` (standard error): Used to display error messages.
+        *   `clog` (standard logging): Used for logging messages, similar to `cerr`, but it's buffered.
         *   | **Predefined standard stream objects** | **Header** | **Description** | **Type** |
             |----------------------------------------|------------|-----------------|----------|
             | `cin`, `wcin` | `<iostream>` | Reads from the standard C input stream `stdin` | Global object |
             | `cout`, `wcout` | `<iostream>` | Writes to the standard C output stream `stdout` | Global object |
             | `cerr`, `wcerr` | `<iostream>` | Writes to the standard C error stream `stderr`, unbuffered | Global object |
-            | `clog`, `wclog` | `<iostream>` | Writes to the standard C error stream `stderr` | Global object | -->
+            | `clog`, `wclog` | `<iostream>` | Writes to the standard C error stream `stderr` | Global object |
+*  **Why Use Streams?**
+    *   Streams allow for consistent handling of input and output, whether it's from the keyboard, a file, or other sources.
+*   #### Standard Input and Output Streams:
+*  **Output with `cout`:**
+    *   Used to print data to the screen.
+    *   The `<<` operator is used to send data to the output stream.
+    *   `std::endl` stands for "end line" and is used to insert a   newline character and flush the output buffer, ensuring the message is immediately displayed on the screen.
+    *   __Syntax / Example__:
+        ```C++
+        #include <iostream>
+        std::cout << "Message to display" << std::endl;
+        ```
+2.  **Input with `cin`:**
+    *   Used to read data from the keyboard.
+    *   The `<<` operator is used to send data to the output stream.
+    *   The `>>` operator is used to extract data from the input stream.
+    *   `std::endl` stands for "end line" and is used to insert a   newline character and flush the output buffer, ensuring the message is immediately displayed on the screen.
+    *   Syntax:
+        ```C++
+        #include <iostream>
+        std::cin >> variable;
+        ```
+    *   Example:
+        ```C++
+        #include <iostream>
+        int age;
+        std::cout << "Enter your age: ";
+        std::cin >> age;
+        std::cout << "You are " << age << " years old." << std::endl;
+        ```
+3.  **Error Output with `cerr`:**
+    *   Used to display error messages. Unlike `cout`, `cerr` is __unbuffered__, meaning the message is displayed immediately without waiting for the buffer to be flushed.
+    *   The `<<` operator is used to send data to the output stream.
+    *   `std::endl` stands for "end line" and is used to insert a   newline character and flush the output buffer, ensuring the message is immediately displayed on the screen.
+    *   __Syntax / Example__:
+        ```C++
+        #include <iostream>
+        std::cerr << "Error: Invalid value!" << std::endl;
+        ```
+4.  **Logging Output with `clog`:**
+    *   Used for logging messages. Unlike `cerr`, `clog` is __buffered__, meaning it waits until the buffer is full or `std::endl` is encountered before sending the message to the output. This can be more efficient for logging large amounts of data.
+    *   The `<<` operator is used to send data to the output stream.
+    *   `std::endl` stands for "end line" and is used to insert a   newline character and flush the output buffer, ensuring the message is immediately displayed on the screen.
+    *   __Syntax / Example__:
+        ```C++
+        #include <iostream>
+        std::clog << "Log: Processing data..." << std::endl;
+        ```
 
-    *   #### IOstream:
-        *   ##### What is a Stream in C++ ?
-            1.  **Definition of a Stream:**
-                *   A stream is an abstraction that represents a sequence of data, either coming from an input source (e.g., keyboard) or going to an output destination (e.g., screen or file).
-                *   In C++, streams are handled with the `<iostream>` library, which provides three standard streams:
-                    *   `cin` (standard input): Reads data from the user (usually the keyboard).
-                    *   `cout` (standard output): Writes data to the screen.
-                    *   `cerr` (standard error): Used to display error messages.
-                    *   `clog` (standard logging): Used for logging messages, similar to `cerr`, but it's buffered.
-                    *   | **Predefined standard stream objects** | **Header** | **Description** | **Type** |
-                        |----------------------------------------|------------|-----------------|----------|
-                        | `cin`, `wcin` | `<iostream>` | Reads from the standard C input stream `stdin` | Global object |
-                        | `cout`, `wcout` | `<iostream>` | Writes to the standard C output stream `stdout` | Global object |
-                        | `cerr`, `wcerr` | `<iostream>` | Writes to the standard C error stream `stderr`, unbuffered | Global object |
-                        | `clog`, `wclog` | `<iostream>` | Writes to the standard C error stream `stderr` | Global object |
-            2.  **Why Use Streams?**
-                *   Streams allow for consistent handling of input and output, whether it's from the keyboard, a file, or other sources.
-        *   #### Standard Input and Output Streams:
-            1.  **Output with `cout`:**
-                *   Used to print data to the screen.
-                *   The `<<` operator is used to send data to the output stream.
-                *   `std::endl` stands for "end line" and is used to insert a   newline character and flush the output buffer, ensuring the message is immediately displayed on the screen.
-                *   __Syntax / Example__:
-                    ```C++
-                    #include <iostream>
-                    std::cout << "Message to display" << std::endl;
-                    ```
-            2.  **Input with `cin`:**
-                *   Used to read data from the keyboard.
-                *   The `<<` operator is used to send data to the output stream.
-                *   The `>>` operator is used to extract data from the input stream.
-                *   `std::endl` stands for "end line" and is used to insert a   newline character and flush the output buffer, ensuring the message is immediately displayed on the screen.
-                *   Syntax:
-                    ```C++
-                    #include <iostream>
-                    std::cin >> variable;
-                    ```
-                *   Example:
-                    ```C++
-                    #include <iostream>
-                    int age;
-                    std::cout << "Enter your age: ";
-                    std::cin >> age;
-                    std::cout << "You are " << age << " years old." << std::endl;
-                    ```
-            3.  **Error Output with `cerr`:**
-                *   Used to display error messages. Unlike `cout`, `cerr` is __unbuffered__, meaning the message is displayed immediately without waiting for the buffer to be flushed.
-                *   The `<<` operator is used to send data to the output stream.
-                *   `std::endl` stands for "end line" and is used to insert a   newline character and flush the output buffer, ensuring the message is immediately displayed on the screen.
-                *   __Syntax / Example__:
-                    ```C++
-                    #include <iostream>
-                    std::cerr << "Error: Invalid value!" << std::endl;
-                    ```
-            4.  **Logging Output with `clog`:**
-                *   Used for logging messages. Unlike `cerr`, `clog` is __buffered__, meaning it waits until the buffer is full or `std::endl` is encountered before sending the message to the output. This can be more efficient for logging large amounts of data.
-                *   The `<<` operator is used to send data to the output stream.
-                *   `std::endl` stands for "end line" and is used to insert a   newline character and flush the output buffer, ensuring the message is immediately displayed on the screen.
-                *   __Syntax / Example__:
-                    ```C++
-                    #include <iostream>
-                    std::clog << "Log: Processing data..." << std::endl;
-                    ```
     *   ####    Fstream
         In C++, the classes `fstream`, `ifstream`, and `ofstream` are used to handle file input/output operations. They are part of the `<fstream>` library. Here's the main difference between them:
-        1.  **`fstream`:**
+        *  **`fstream`:**
             *   __Definition__: The fstream class is a combination of both `ifstream` (input) and `ofstream` (output). It allows you to open a file for both __reading and writing__.
             *   __Usage__: You use `fstream` when you want to both __read and write__ to a file.
             *   __Constructor__:
@@ -745,7 +720,7 @@ __Exercise 06 - Hospital__
         *   The `<iomanip>` library in C++ provides functions and manipulators that help format the input and output of data in a more flexible and readable manner. It is especially useful when working with floating-point numbers, controlling spacing between outputs, and aligning the text in a certain format.
         *   `<iomanip>` stands for __I/O manipulators__, which help in formatting the output by altering the appearance of printed data without changing the actual values.
         *   The functions from `<iomanip>` are often used with __`std::cout`__ (standard output) to display data in a particular format (e.g., floating-point precision, alignment of text or numbers).
-        1.  __`setw` Manipulator__
+        *  __`setw` Manipulator__
             *   __Definition:__ The `setw` manipulator stands for __set width__.
             *   __Usage:__ 
                 *   It is used to specify the minimum number of characters to be used when displaying the next value in the output.
@@ -1132,19 +1107,19 @@ ___
 
             int Example::*ptr = &Example::x;  // Pointer to the `x` member of the Example class
 
-            obj1.x = 10;
+            obj*x = 10;
             obj2.x = 20;
 
             // Using the pointer to access the `x` member of each object
-            std::cout << "obj1.x = " << obj1.*ptr << std::endl;  // Access `x` in obj1
+            std::cout << "obj*x = " << obj**ptr << std::endl;  // Access `x` in obj1
             std::cout << "obj2.x = " << obj2.*ptr << std::endl;  // Access `x` in obj2
 
             // We can change the pointer to point to another member
             ptr = &Example::y;
-            obj1.y = 30;
+            obj*y = 30;
             obj2.y = 40;
 
-            std::cout << "obj1.y = " << obj1.*ptr << std::endl;  // Access `y` in obj1
+            std::cout << "obj*y = " << obj**ptr << std::endl;  // Access `y` in obj1
             std::cout << "obj2.y = " << obj2.*ptr << std::endl;  // Access `y` in obj2
 
             return 0;
@@ -1153,7 +1128,7 @@ ___
         *   **Explanation**:
             *   **Declaration**: **`int Example::*ptr`** declares a pointer **`ptr`** that can **point to an int member in the Example class**.
             *   **Initialization**: **`ptr = &Example::x`** assigns the **address** of the **`x` member to `ptr`**.
-            *   **Usage**: **`obj1.*ptr`** uses **`ptr` to access `x` in the `obj1` object**.
+            *   **Usage**: **`obj**ptr`** uses **`ptr` to access `x` in the `obj1` object**.
     *   **Why is this useful?**
         *   This allows you to **dynamically manipulate different members of the class without writing specific code for each member**. 
         *   You can **change** which member is pointed to by the pointer, and the same code can then **access** or **modify** different members.
@@ -1244,9 +1219,431 @@ ___
             int value;
         };
         ```
+___
 
+#### `static` Keyword
+*   **`static` Local Variables**
+    *   When a variable is declared as **`static`** inside a function, it retains its value between function calls.
+    *   Unlike regular local variables, which are created and destroyed each time a function is called, a **`static` local variable is initialized only once and persists for the lifetime of the program**.
+    *   **Syntax / Example**:
+        ```C++
+        #include <iostream>
+        void counter() {
+            static int count = 0;  // Static local variable
+            count++;
+            std::cout << "Count: " << count << std::endl;
+        }
 
+        int main() {
+            counter();  // Outputs: Count: 1
+            counter();  // Outputs: Count: 2
+            counter();  // Outputs: Count: 3
+            return 0;
+        }
+        ```
+        *   **Explanation**:
+            *   **Initialization**: The `count` variable is initialized only once, when the function is called for the first time.
+            *   **Persistence**: The value of `count` persists between subsequent calls to `counter()`.
+*   **static Global Variables**
+    *   When a **global variable** is declared as **`static`**, its scope is limited to the file in which it is declared.
+    *   This means that it **cannot be accessed or modified from other files** (translation units), even if they are part of the same program.
+    *   **Syntax / Example**:
+        ```C++
+        #include <iostream>
+        // File*cpp
+        static int globalVar = 10;  // Static global variable
 
+        void printVar() {
+            std::cout << "globalVar: " << globalVar << std::endl;
+        }
+
+        // File2.cpp
+        extern void printVar();
+
+        int main() {
+            printVar();  // This works
+            // std::cout << globalVar << std::endl;  // Error: globalVar is not accessible here
+            return 0;
+        }
+        ```
+        *   **Explanation**:
+            *   **File Scope**: 
+                *   The `globalVar` is only accessible within File*cpp.
+                *   It cannot be accessed directly from File2.cpp, which helps to prevent naming conflicts and accidental modifications.
+*   **`static` with Functions**
+    *   **`static` Member Functions**
+        *   In a class, a member function can be declared as **`static`**.
+        *   This means that the function c**an be called without an instance of the class**.
+        *   **`static` member functions do not have access to non-static member variables or this pointer** because they do not belong to any particular instance of the class.
+        *   **Syntax / Example**:
+            ```C++
+            #include <iostream>
+            class Example {
+            public:
+                static void displayMessage() {
+                    std::cout << "Hello from static function!" << std::endl;
+                }
+            };
+
+            int main() {
+                Example::displayMessage();  // Calling static member function without an object
+                return 0;
+            }
+            ```
+            *   **Explanation**:
+                *   **No Instance Required**: `displayMessage()` is called directly on the class, not on an instance of the class.
+                *   **No Access to Non-Static Members**: The **`static`** function cannot access instance-specific data (non-static members).
+*   **`static` Global Functions**
+    *   A function defined as **`static`** at global scope has internal linkage.
+    *   This means **it can only be called within the file it is defined in**, preventing other files from using it directly.
+    *   **Syntax / Example**:
+        ```C++
+        #include <iostream>
+        // File*cpp
+        static void hiddenFunction() {
+            std::cout << "This function is hidden from other files." << std::endl;
+        }
+
+        int main() {
+            hiddenFunction();  // This works
+            return 0;
+        }
+
+        // File2.cpp
+        extern void hiddenFunction();
+
+        int main() {
+            hiddenFunction();  // Error: hiddenFunction() is not visible here
+            return 0;
+        }
+        ```
+        *   **Explanation**:
+            *   **Internal Linkage**: The `hiddenFunction` is only accessible within File*cpp, providing a f**orm of encapsulation** at the file level.
+*   **`static` with Class Members**
+    *   **``static`` Member Variables**
+        *   **`static` member variables** belong to the class rather than any particular instance.
+        *   This means that **all instances of the class share the same `static` member variable**.
+        *   The **`static` variable** is initialized only once, and its **lifetime is the entire program duration**.
+    *   **`static` Member Functions**
+        *   **`static` member functions** can only access **`static` member variables** because they do not operate on a specific instance of the class.
+        *   This is **useful** for functions that need to work with **shared data** or **provide utility functions** related to the class.
+    *   **Syntax / Example**:
+        ```C++
+        #include <iostream>
+        class Example {
+        public:
+            static int count;  // Static member variable
+
+            Example() {
+                count++;
+            }
+
+            ~Example() {
+                count--;
+            }
+
+            static int getCount() {  // Static member function
+                return count;
+            }
+        };
+
+        int Example::count = 0;  // Definition and initialization of static member variable
+
+        int main() {
+            Example ex1;
+            Example ex2;
+
+            std::cout << "Count: " << Example::getCount() << std::endl;  // Outputs: Count: 2
+
+            return 0;
+        }
+        ```
+        *   **Explanation**:
+            *   **Shared Among All Instances**: 
+                *   `count` is **shared by all instances** of `Example`. 
+                *   **Each time** an `Example` object is **created** or **destroyed**, `count` is **incremented** or **decremented**, respectively.
+            *   **Global Lifetime**: `count` **exists for the entire duration of the program** and is initialized outside the class definition.
+*   **Advantages of Using `static`**
+    *   **Memory Efficiency**: **`static` variables and functions** reduce memory usage by avoiding duplication across multiple instances or files.
+    *   **Encapsulation**: **`static` global variables and functions** help encapsulate data and functions within a single file, preventing unintended access or modification from other files.
+    *   **Utility Functions**: **`static` member functions** can be used to provide utility methods that are related to a class but do not require an instance of the class to operate.
+*   **Common Use Cases**
+    *   **Counters**: Keeping track of the number of instances of a class.
+    *   **Singletons**: Ensuring a class has only one instance by using static member variables and functions.
+    *   **File-Scope Functions**: Encapsulating helper functions within a single file to avoid polluting the global namespace.
+    *   **Configuration or Settings**: Storing global settings or configurations that should be shared across all instances of a class.
+___
+####    `auto` Keyword
+*   **Basic Usage of `auto`**
+    *   The **`auto`** keyword is used in place of a type name in variable declarations. The compiler deduces the type of the variable from the type of the initializer.
+    *   **Syntax / Example**:
+        ```C++
+        #include <iostream>
+        int main() {
+            auto x = 10;     // `x` is deduced as `int`
+            auto y = 3.14;   // `y` is deduced as `double`
+            auto s = "Hello"; // `s` is deduced as `const char*`
+
+            std::cout << x << ", " << y << ", " << s << std::endl;
+            return 0;
+        }
+        ```
+*   **``auto`` with Complex Types**
+    *   One of the most powerful uses of **`auto`** is with **complex types**, such as **iterators**, **function return types**, or **template types**, where manually specifying the type would be cumbersome or unclear.
+    *   **Syntax / Example**:
+        ```C++
+        #include <vector>
+        #include <iostream>
+
+        int main() {
+            std::vector<int> numbers = {1, 2, 3, 4, 5};
+
+            for (auto it = numbers.begin(); it != numbers.end(); ++it) {
+                std::cout << *it << " ";
+            }
+            std::cout << std::endl;
+            return 0;
+        }
+        ```
+___
+
+####    `std::string`
+*   **Definition**:
+    *   **`std::string`** is a part of the **C++ Standard Library**, provided by the **`<string>` header**.
+    *   It is one of the most commonly used data types in C++ because it offers a convenient way to **work with sequences of characters**, **providing many features** and **functions to manipulate** and **handle strings**.
+    *   A **`std::string`** is a sequence of characters (like a **`char` array**).
+    *   It **automatically manages memory**,** handles string concatenation**, and **provides a range of methods to manipulate strings**.
+    *   **Syntax / Example**:
+        ```C++
+        #include <iostream>
+        #include <string>
+
+        int main() {
+            std::string s1;               // Default constructor: empty string
+            std::string s2("Hello");      // Initialization with a C-string literal
+            std::string s3 = "World";     // Copy initialization
+            std::string s4(s2);           // Copy constructor
+            std::string s5(5, 'a');       // 5 repetitions of the character 'a'
+
+            std::cout << s1 << std::endl; // Outputs: (empty string)
+            std::cout << s2 << std::endl; // Outputs: Hello
+            std::cout << s3 << std::endl; // Outputs: World
+            std::cout << s4 << std::endl; // Outputs: Hello
+            std::cout << s5 << std::endl; // Outputs: aaaaa
+
+            return 0;
+        }
+        ```
+    
+*   **Common Operations on `std::string`**
+    *   **Concatenation**:
+        *   Strings can be concatenated using the **`+`** operator or the **`+=`** operator.
+        *   **Syntax / Example**:
+            ```cpp
+            #include <string>
+            #include <iostream>
+            std::string s1 = "Hello";
+            std::string s2 = "World";
+
+            std::string s3 = s1 + " " + s2;   // Concatenation using +
+            s1 += " Everyone";                // Concatenation using +=
+
+            std::cout << s3 << std::endl;     // Outputs: Hello World
+            std::cout << s1 << std::endl;     // Outputs: Hello Everyone
+            ```
+    *   **Accessing Characters**:
+        *   You can access individual characters in a string using the **`[]`** operator or the **`.at()`** method.
+        *   **`.at()`** performs bounds checking and throws an exception if the index is out of range, while **`[]`** does not.
+        *   **Syntax / Example**:
+            ```cpp
+            #include <string>
+            #include <iostream>
+            std::string s = "Hello";
+
+            char first = s[0];            // Access first character using []
+            char last = s.at(s.size() - 1); // Access last character using .at()
+
+            std::cout << first << std::endl;  // Outputs: H
+            std::cout << last << std::endl;   // Outputs: o
+            ```
+    *   **String Length**:
+        *   The length (or size) of a string can be determined using **`.size()`** or **`.length()`** methods.
+        *   Both **`.size()`** and **`.length()`** are interchangeable and provide the number of characters in the string.
+        *   **Syntax / Example**:
+            ```cpp
+            #include <string>
+            #include <iostream>
+            std::string s = "Hello";
+            std::cout << "Length: " << s.size() << std::endl; // Outputs: Length: 5
+            std::cout << "Length: " << s.length() << std::endl; // Outputs: Length: 5
+            ```
+*   **Modifying Strings**:
+    *   **Appending and Inserting**:
+        *   **Appending**:
+            *   Add characters or strings to the end of an existing string.
+            *   **Syntax / Example**:
+                ```cpp
+                #include <string>
+                #include <iostream>
+                std::string s = "Hello";
+                s.append(" World");       // Appends " World" to s
+                s.append(3, '!');         // Appends "!!!" to s
+                std::cout << s << std::endl;  // Outputs: Hello World!!!
+                ```
+        *   **Inserting**:
+            *   Insert characters or strings at a specified position.
+            *   **Syntax / Example**:
+                ```cpp
+                #include <string>
+                #include <iostream>
+                std::string s = "Hello";
+                s.insert(5, " Everyone");  // Inserts " Everyone" at position 5
+                std::cout << s << std::endl; // Outputs: Hello Everyone
+                ```
+*   **Replacing and Erasing**:
+    *   **Replacing**: 
+        *   Replace a portion of the string with another string.
+        *   **Syntax / Example**:
+            ```cpp
+            #include <string>
+            #include <iostream>
+            std::string s = "Hello World";
+            s.replace(6, 5, "C++"); // Replaces "World" with "C++" starting at position 6
+            std::cout << s << std::endl; // Outputs: Hello C++
+            ```
+    *   **Erasing**:
+        *   Remove characters from the string.
+        *   **Syntax / Example**:
+            ```cpp
+            #include <string>
+            #include <iostream>
+            std::string s = "Hello World";
+            s.erase(5, 6);            // Erases " World" starting at position 5
+            std::cout << s << std::endl; // Outputs: Hello
+            ```
+*   **Clearing a String**:
+    *   **Clearing**:
+        *   To remove all content from a string, use the **`.clear()`** method.
+        *   **Syntax / Example**:
+            ```cpp
+            #include <string>
+            #include <iostream>
+            std::string s = "Hello";
+            s.clear();
+            std::cout << s.empty() << std::endl; // Outputs: 1 (true)
+            ```
+*   **Searching and Substrings**:
+    *   **Finding Substrings**:
+        *   You can search for a substring within a string using the **`.find()`** method.
+        *   **`std::string::npos`** is a constant representing the end of the string, returned if the substring is not found.
+        *   **Syntax / Example**:
+            ```cpp
+            #include <string>
+            #include <iostream>
+            std::string s = "Hello World";
+            std::size_t pos = s.find("World");
+
+            if (pos != std::string::npos) {  // Check if the substring is found
+                std::cout << "Found 'World' at position: " << pos << std::endl;
+            } else {
+                std::cout << "'World' not found" << std::endl;
+            }
+            ```
+    *   **Extracting Substrings**:
+        *   The **`.substr()`** method allows you to extract a substring from a string.
+        *   **Syntax / Example**:
+            ```cpp
+            #include <string>
+            #include <iostream>
+            std::string s = "Hello World";
+            std::string sub = s.substr(6, 5); // Extracts "World" starting at position 6
+
+            std::cout << sub << std::endl;  // Outputs: World
+            ```
+*   **Comparison of Strings**:
+    *   Strings can be compared using comparison operators (**`==`**, **`!=`**, **`<`**, **`>`**, **`<=`**, **`>=`**), or the **`.compare()`** method.
+    *   Comparisons are case-sensitive and performed lexicographically (dictionary order).
+    *   **Syntax / Example**:
+        ```cpp
+        #include <string>
+        #include <iostream>
+        std::string s1 = "Hello";
+        std::string s2 = "World";
+
+        if (s1 == s2) {
+            std::cout << "Strings are equal" << std::endl;
+        } else if (s1 < s2) {
+            std::cout << s1 << " is less than " << s2 << std::endl;
+        } else {
+            std::cout << s1 << " is greater than " << s2 << std::endl;
+        }
+        ```
+*   **C-String Compatibility**:
+    *   **`std::string`** can be converted to a C-string (**`const char*`**) using the **`.c_str()`** method, which is useful for compatibility with C-style functions.
+    *   **Syntax / Example**:
+        ```cpp
+        #include <string>
+        #include <iostream>
+        std::string s = "Hello";
+        const char* cstr = s.c_str();
+
+        std::cout << cstr << std::endl; // Outputs: Hello
+        ```
+*   **Advanced Features**:
+    *   **Iterating Over Stringstream**:
+        *   **Iterating**:
+            *   You can iterate over a string using a for loop, a range-based for loop, or iterators.
+            *   **Syntax / Example**:
+                ```cpp
+                #include <string>
+                #include <iostream>
+                std::string s = "Hello";
+
+                // Range-based for loop
+                for (char c : s) {
+                    std::cout << c << " ";
+                }
+                std::cout << std::endl;
+
+                // Iterator-based loop
+                for (std::string::iterator it = s.begin(); it != s.end(); ++it) {
+                    std::cout << *it << " ";
+                }
+                std::cout << std::endl;
+                ```
+        *   **String Streams**:
+            *   **`std::stringstream`** can be used for string manipulation and conversion, providing functionality similar to input/output streams.
+            *   **Syntax / Example**:
+                ```cpp
+                #include <string>
+                #include <iostream>
+                #include <sstream>
+
+                int main() {
+                    std::stringstream ss;
+                    ss << "Hello" << " " << "World!";
+                    
+                    std::string s = ss.str();  // Combines all output into a single string
+                    std::cout << s << std::endl; // Outputs: Hello World!
+                    
+                    return 0;
+                }
+                ```
+*   **Memory Management and Performance**
+    *   **`std::string`** manages its **memory dynamically**, meaning it can grow or shrink as needed.
+    *   The underlying memory is managed by the C++ Standard Library, but there are some considerations:
+        *   **Capacity and Reserve**:
+            *   You can pre-allocate memory using the **`.reserve()`** method to improve performance if you know the size in advance.
+            *   **Syntax / Example**:
+                ```cpp
+                #include <string>
+                #include <iostream>
+                std::string s;
+                s.reserve(100);  // Reserves space for 100 characters
+                ```
+        *   **Efficiency**: 
+            *   Small strings are often optimized in modern C++ compilers using the "short string optimization" (SSO), which avoids dynamic memory allocation for short strings.
+___
 
 ## Installation
 [(Back to top)](#table-of-contents)
