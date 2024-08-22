@@ -548,24 +548,66 @@ __Exercise 06 - Hospital__
             *   [Why use Streams](#iostream-stream-in-c-why-use-stream-anchor)
         *   [Standard Input/Output stream](#iostream-standard-inputoutput-stream-anchor)
             *   [Output with **`std::cout`**](#iostream-standard-inputoutput-stream-output-wuth-cout-anchor)
-    *   __Fstream__
-    *   __IOmanip__
-*   __Classes__
-    *   __Constructor(Default and Custrom)__, __Destructor__
-    *   __Member Functions__
-    *   __Initialisation lists__
-    *   __Visibility/Encapsuslation__
-    *   __Getter and Setter (Accessors and Mutators)__
-    *   __Class VS Struct__
-* __Non-Member Attribute & Non-Member Function__
-* __Pointer to Members__
-    *   __Pointer to Data Members__
-    *   __Pointer to Members Functions__
-* __const__
-* __static__ 
-* __auto__
-* __string__
-    
+            *   [Input with **`std::cin`**](#iostream-standard-inputoutput-stream-input-with-cin-anchor)
+            *   [Error Output with **`std::cerr`**](#iostream-standard-inputoutput-stream-error-output-with-cerr-anchor)
+            *   [Logging Output with **`std::clog`**](#iostream-standard-inputoutput-stream-logging-output-with-clog-anchor)
+    *   [**`FStream`**](#fstream)
+        *   [**`fstream`**](#fstream-file-inputoutput-stream-fstream-anchor)
+        *   [**`ifsteram`**](#fsteram-file-inputoutput-stream-ifstream-anchor)
+        *   [**`ofstream`**](#fsteram-file-inputoutput-stream-ofstream-anchor)
+        *   [Summary of Differences](#fsteram-file-inputoutput-stream-summary-anchor)
+    *   [**`IOmanip`**](#iomanip)
+        *   [**`setw`** Manipulator](#setw-manipulator-iomanip-inputoutput-stream-anchor)
+        *   [**`setw`** Manipulator](#iomanip-inputoutput-stream-setw-manipulator-anchor)
+        *   [**`fixed` Manipulator**](#fixed-manipulator-iomanip-inputoutput-stream-anchor)
+        *   [**`setprecision` Manipulator**](#setprecision-manipulator-iomanip-inputoutput-stream-anchor)
+        *   [Summary of Differences](#summary-manipulator-iomanip-inputoutput-stream-anchor)
+*   [Class](#class)
+    *   [What is a class](#class-what-is-a-class-anchor)
+        *   [Class Vs Structure](#class-class-vs-struct-anchor)
+        *   [Constructor](#class-constructor-anchor)
+        *   [Destructor](#class-destructor-anchor)
+        *   [Attributes or Data Members](#class-attributes-anchor)
+        *   [Methods or Member Functions](#class-methods-anchor)
+        *   [Keyword **`this`**](#class-this-anchor)
+        *   [Initialization List](#class-initialization-list-anchor)
+        *   [Visibility and Encapsulation](#class-visibility-and-encapsulation-encapsulation-anchor)
+            *   [Encapsulation](#class-visibility-and-encapsulation-encapsulation-anchor)
+            *   [Visibility](#class-visibility-and-encapsulation-visibility-anchor)
+            *   [Benefits of Visibility and Encapsulation](#class-visibility-and-encapsulation-befenits-anchor)
+        *   [Getters and Setters](#class-getters-setters-anchor)
+        *   [Syntax / Example](#class-syntax-example-anchor)
+*   [Non-Member Attribute & Non-Member Function](#non-member-attribute--non-member-function)
+*   [Pointer to Members and Pointer to Members Functions](#pointer-to-members-and-pointer-to-members-functions)
+    *   [Pointer to Members](#pointer-to-members-and-pointer-to-members-functions-pointer-to-members-anchor)
+    *   [Pointer to Members Functions](#pointer-to-members-and-pointer-to-members-functions-pointer-to-members-functions-anchor)
+*   [Keyword **`const`**](#keyword-const)
+*   [Keyword **`static`**](#keyword-static)
+*   [Keyword **`auto`**](#keyword-auto)
+*   [**`std::string`**](#keyword-auto)
+    *   [Common Operations on **`std::string`**](#string-common-operations-on-string-anchor)
+        *   [Concatenation](#string-common-operations-on-string-concatenation-anchor)
+        *   [Accessing Characters](#string-common-operations-on-string-accessing-characters-anchor)
+        *   [String Length](#string-common-operations-on-string-string-length-anchor)
+    *   [Modifying Strings](#string-modifying-strings-anchor)
+        *   [Appending / Inserting](#string-modifying-strings-appending-inserting-anchor)
+            *   [Appending](#string-modifying-strings-appending-inserting-appending-anchor)
+            *   [Inserting](#string-modifying-strings-appending-inserting-inserting-anchor)
+        *   [Replacing / Erasing](#string-replacing-erasing-anchor)
+            *   [Replacing](#string-replacing-erasing-replacing-anchor)
+            *   [Erasing](#string-replacing-erasing-erasing-anchor)
+    *   [Clearing a String](#string-clearing-a-string-anchor)
+        *   [Clearing](#string-clearing-a-string-clearing-anchor)
+    *   [Searching / Substring](#string-searching-substrings-anchor)
+        *   [Finding Substring](#string-searching-substrings-finding-substring-anchor)
+        *   [Extracting Substring](#string-searching-substrings-extracting-substring-anchor)
+    *   [Comparaison of String](#string-comparison-of-strings-anchor)
+    *   [C-String Compatibility](#string-c-string-compatibility-anchor)
+    *   [Advanced Features](#string-advanced-features-anchor)
+        *   [Iterating Over StringStream](#string-advanced-features-iterating-over-stringstream-anchor)
+            *   [Iterating](#string-advanced-features-iterating-over-stringstream-iterating-anchor)
+            *   [**`std::stringsteram`**](#string-advanced-features-iterating-over-stringstream-stringstream-anchor)
+    *   [Memory Managment and Performance](#string-memory-performance-anchor)
 ## Lessons Learned
 [(Back to top)](#table-of-contents)
 ### Input/Output
@@ -600,283 +642,308 @@ __Exercise 06 - Hospital__
         *   Streams allow for consistent handling of input and output, whether it's from the keyboard, a file, or other sources.
     <br>
 *   **<a id="iostream-standard-inputoutput-stream-anchor"></a>Standard Input/Output stream:**
-    *   **<a id="iostream-standard-inputoutput-stream-output-wuth-cout-anchor"></a>Output with `std::cout`:**
+    *   **<a id="iostream-standard-inputoutput-stream-output-with-cout-anchor"></a>Output with `std::cout`:**
         *   Used to print data to the screen.
-        *   The `<<` operator is used to send data to the output stream.
-        *   `std::endl` stands for "end line" and is used to insert a   newline character and flush the output buffer, ensuring the message is immediately displayed on the screen.
+        *   The **`<<`** operator is used to send data to the output stream.
+        *   **`std::endl`** stands for "end line" and is used to insert a **newline character** and **flush** the output buffer, ensuring the message is immediately displayed on the screen.
         *   __Syntax / Example__:
             ```C++
             #include <iostream>
             std::cout << "Message to display" << std::endl;
             ```
-2.  **Input with `cin`:**
-    *   Used to read data from the keyboard.
-    *   The `<<` operator is used to send data to the output stream.
-    *   The `>>` operator is used to extract data from the input stream.
-    *   `std::endl` stands for "end line" and is used to insert a   newline character and flush the output buffer, ensuring the message is immediately displayed on the screen.
-    *   Syntax:
+    *   **<a id="iostream-standard-inputoutput-stream-input-with-cin-anchor"></a>Input with `std::cin`:**
+        *   Used to read data from the keyboard.
+        *   The **`<<`** operator is used to send data to the output stream.
+        *   The **`>>`** operator is used to extract data from the input stream.
+        *   **`std::endl`** stands for "end line" and is used to insert a **newline character** and **flush** the output buffer, ensuring the message is immediately displayed on the screen.
+        *   **Syntax**:
+            ```C++
+            #include <iostream>
+            std::cin >> variable;
+            ```
+        *   **Example**:
+            ```C++
+            #include <iostream>
+            int age;
+            std::cout << "Enter your age: ";
+            std::cin >> age;
+            std::cout << "You are " << age << " years old." << std::endl;
+            ```
+    *   **<a id="iostream-standard-inputoutput-stream-error-output-with-cerr-anchor"></a>Error Output with `std::cerr`:**
+        *   Used to display error messages.
+        *   Unlike **`std::cout`**, **`std::cerr`** is __unbuffered__, meaning the message is displayed immediately without waiting for the buffer to be flushed.
+        *   The **`<<`** operator is used to send data to the output stream.
+        *   **`std::endl`** stands for "end line" and is used to insert a **newline character** and **flush** the output buffer, ensuring the message is immediately displayed on the screen.
+        *   __Syntax / Example__:
+            ```C++
+            #include <iostream>
+            std::cerr << "Error: Invalid value!" << std::endl;
+            ```
+    *   **<a id="iostream-standard-inputoutput-stream-logging-output-with-clog-anchor"></a>Logging Output with `std::clog`:**
+        *   Used for logging messages. Unlike **`std::cerr`**, **`std::clog`** is __buffered__, meaning it waits until the buffer is full or **`std::endl`** is encountered before sending the message to the output.
+        *   This can be more efficient for logging large amounts of data.
+        *   The **`<<`** operator is used to send data to the output stream.
+        *   **`std::endl`** stands for "end line" and is used to insert a **newline character** and **flush** the output buffer, ensuring the message is immediately displayed on the screen.
+        *   __Syntax / Example__:
+            ```C++
+            #include <iostream>
+            std::clog << "Log: Processing data..." << std::endl;
+            ```
+
+#### FStream
+In C++, the classes **`fstream`**, **`ifstream`**, and **`ofstream`** are used to handle file input/output operations.
+They are part of the **`<fstream>`** library. Here's the main difference between them:
+*   **<a id="fstream-file-inputoutput-stream-fstream-anchor"></a>`fstream`:**
+    *   __Definition__:
+        *   The **`fstream`** class is a combination of both **`ifstream`** (input) and **`ofstream`** (output).
+        *   It allows you to open a file for both __reading and writing__.
+    *   __Usage__: 
+        *   You use **`fstream`** when you want to both __read and write__ to a file.
+    *   __Constructor__:
+        *   **`std::fstream file("filename");`**
+        *   You can open the file using specific modes (__`std::ios::in`, `std::ios::out`__, etc.).
+        *   By default, it opens the file in **read/write** mode.
+        *   You need to specify modes if you want particular behavior (read-only or write-only).
+    *   __Syntax / Example__:
         ```C++
-        #include <iostream>
-        std::cin >> variable;
+        #include <fstream>
+        std::fstream file("example.txt", std::ios::in | std::ios::out);
         ```
-    *   Example:
-        ```C++
-        #include <iostream>
-        int age;
-        std::cout << "Enter your age: ";
-        std::cin >> age;
-        std::cout << "You are " << age << " years old." << std::endl;
-        ```
-3.  **Error Output with `cerr`:**
-    *   Used to display error messages. Unlike `cout`, `cerr` is __unbuffered__, meaning the message is displayed immediately without waiting for the buffer to be flushed.
-    *   The `<<` operator is used to send data to the output stream.
-    *   `std::endl` stands for "end line" and is used to insert a   newline character and flush the output buffer, ensuring the message is immediately displayed on the screen.
+*   **<a id="fsteram-file-inputoutput-stream-ifstream-anchor"></a>`ifstream`:**
+    *   __Definition__: 
+        *   **`ifstream`** is used only to __read__ data from a file (input).
+    *   __Usage__: 
+        *   You use **`ifstream`** when you want to __read__ data from a file.
+    *   __Constructor__:
+        *   **`std::ifstream file("filename");`**
+        *   Opens the file in __read-only__ mode by default (__`std::ios::in`__).
+    *   __Reading from a File:__ 
+        *   Use **`ifstream`** to __read__ data from a file, using the same operators (**`>>`** and **`getline`**) as for **`std::cin`**.
+    *   __Checking if a File Opened Successfully:__
+        *   Always check if the file opened correctly before trying to __read__ or __write__.
     *   __Syntax / Example__:
         ```C++
         #include <iostream>
-        std::cerr << "Error: Invalid value!" << std::endl;
+        #include <fstream>
+        std::ifstream readFile("readFile.txt");
+
+        if (!readFile.is_open()) {
+            std::cerr << "Error: Could not open files." << std::endl;
+            return 1;
+        }
+
+        std::string line;
+        while (std::getline(readFile, line, '\0')) {
+            std::cout << line << std::endl;
+        }
+
+        readFile.close();
+        return 0;
         ```
-4.  **Logging Output with `clog`:**
-    *   Used for logging messages. Unlike `cerr`, `clog` is __buffered__, meaning it waits until the buffer is full or `std::endl` is encountered before sending the message to the output. This can be more efficient for logging large amounts of data.
-    *   The `<<` operator is used to send data to the output stream.
-    *   `std::endl` stands for "end line" and is used to insert a   newline character and flush the output buffer, ensuring the message is immediately displayed on the screen.
+*   **<a id="fsteram-file-inputoutput-stream-ofstream-anchor"></a>`ofstream`:**
+    *   __Definition__: 
+        *   **`ofstream`** is used only to __write__ data to a file (output).
+    *   __Usage__: 
+        *   You use **`ofstream`** when you want to __write__ data to a file.
+    *   __Constructor__:
+        *   **`std::ofstream file("filename");`**
+        *   Opens the file in __write-only__ mode by default (__`std::ios::out`__).
+        *   If the file exists, its content will be __erased__.
+        *   If the file doesn’t exist, **`ofstream`** will __create__ a new file.
+    *   __Writing to a File:__ 
+        *   Use **`ofstream`** to __write__ to a file, just like **`std::cout`**.
+    *   __Checking if a File Opened Successfully:__ Always check if the file opened correctly before trying to __read__ or __write__.
     *   __Syntax / Example__:
         ```C++
         #include <iostream>
-        std::clog << "Log: Processing data..." << std::endl;
+        #include <fstream>
+        std::ofstream writeFile("writeFile.txt");
+
+        if (!writeFile.is_open()) {
+            std::cerr << "Error: Could not open files." << std::endl;
+            return 1;
+        }
+
+        std::string line = "im writting in a file!";
+
+        writeFile << line << std::endl;
+
+        writeFile.close();
         ```
+*   **<a id="fsteram-file-inputoutput-stream-summary-anchor"></a>Summary of Differences:**
+    *   | Class | Default Opening Mode | Usage |
+        |-------|----------------------|-------|
+        | `fstream` |	Read and write (`std::ios::in` or `std::ios::out`) | To read / write data from a file |
+        | `ifstream` | Read-only (`std::ios::in`)	| To read data from a file |
+        | `ofstream` | Write-only (`std::ios::out`) | To write data to a file |
+#### IOmanip
+*   The **`<iomanip>`** library in C++ provides **functions** and **manipulators** that help format the input and output of data in a more flexible and readable manner.
+*   It is especially useful when working with **floating-point numbers**, **controlling spacing between outputs**, and **aligning the text in a certain format**.
+*   **`<iomanip>`** stands for __I/O manipulators__, which help in formatting the output by altering the appearance of printed data without changing the actual values.
+*   The functions from **`<iomanip>`** are often used with __`std::cout`__ (standard output) to display data in a particular format (e.g., floating-point precision, alignment of text or numbers).
+*   **<a id="setw-manipulator-iomanip-inputoutput-stream-anchor"></a>`setw` Manipulator:**
+    *   __Definition:__ 
+        *   The **`setw`** manipulator stands for __set width__.
+    *   __Usage:__ 
+        *   It is used to specify the minimum number of characters to be used when displaying the next value in the output.
+        *   If the value to be displayed is shorter than the specified width, spaces will be added to the left (by default) to fill the gap.
+    *   __Syntax / Example:__
+        ```C++
+        #include <iostream>
+        #include <iomanip> // Required for setw
 
-    *   ####    Fstream
-        In C++, the classes `fstream`, `ifstream`, and `ofstream` are used to handle file input/output operations. They are part of the `<fstream>` library. Here's the main difference between them:
-        *  **`fstream`:**
-            *   __Definition__: The fstream class is a combination of both `ifstream` (input) and `ofstream` (output). It allows you to open a file for both __reading and writing__.
-            *   __Usage__: You use `fstream` when you want to both __read and write__ to a file.
-            *   __Constructor__:
-                *   `std::fstream file("filename");`
-                *   You can open the file using specific modes (__`std::ios::in`, `std::ios::out`__, etc.).
-                *   By default, it opens the file in read/write mode. You need to specify modes if you want particular behavior (read-only or write-only).
-            *   __Syntax / Example__:
-                ```C++
-                #include <fstream>
-                std::fstream file("example.txt", std::ios::in | std::ios::out);
-                    ```
-        2.  **`ifstream` (Input File Stream):**
-            *   __Definition__: `ifstream` is used only to __read__ data from a file (input).
-            *   __Usage__: You use `ifstream` when you want to __read__ data from a file.
-            *   __Constructor__:
-                *   `std::ifstream file("filename");`
-                *   Opens the file in __read-only__ mode by default (__`std::ios::in`__).
-            *   __Reading from a File:__ Use `ifstream` to __read__ data from a file, using the same operators (`>>` and `getline`) as for `cin`.
-            *   __Checking if a File Opened Successfully:__ Always check if the file opened correctly before trying to __read__ or __write__.
-            *   __Syntax / Example__:
-                ```C++
-                #include <iostream>
-                #include <fstream>
-                std::ifstream readFile("readFile.txt");
+        int main() {
+            std::cout << std::setw(10) << 123 << std::endl;
+            std::cout << std::setw(10) << 4567 << std::endl;
+            std::cout << std::setw(10) << "C++" << std::endl;
 
-                if (!readFile.is_open()) {
-                    std::cerr << "Error: Could not open files." << std::endl;
-                    return 1;
-                }
+            return 0;
+        }
+        output:
+                    123
+                    4567
+                    C++
+        ```
+*   **<a id="fixed-manipulator-iomanip-inputoutput-stream-anchor"></a>`fixed` Manipulator:**
+    *   __Definition__: 
+        *   The **`fixed`** manipulator is used to display floating-point numbers in __fixed-point notation__.
+        *   **By default, floating-point numbers in C++ are printed in scientific notation if the number is too large or too small.** 
+    *   __Usage__: 
+        *   Using **`fixed`** forces the output to show the decimal part as a fixed number of digits, even if the number is very large or small.
+    *   __Syntax / Example__:
+        ```C++
+        #include <iostream>
+        #include <iomanip> // Required for fixed
 
-                std::string line;
-                while (std::getline(readFile, line, '\0')) {
-                    std::cout << line << std::endl;
-                }
+        int main() {
+            double pi = 3.14159265358979;
+            
+            std::cout << "Default notation: " << pi << std::endl;
+            std::cout << std::fixed << "Fixed notation: " << pi << std::endl;
 
-                readFile.close();
+            return 0;
+        }
+
+        output:
+        Default notation: 3.14159
+        Fixed notation: 3.141593 // with std::fixed
+        ```
+*   **<a id="setprecision-manipulator-iomanip-inputoutput-stream-anchor"></a>`setprecision` Manipulator:**
+    *   __Definition:__
+        *   The **`setprecision`** manipulator controls the number of __significant digits__ or __decimal__ places to display for floating-point numbers.
+        *   It can __work with or without__ the **`fixed`** manipulator, but its behavior changes depending on whether **`fixed`** is used.
+    *   __Syntax / Example:__
+        *   Example without **`fixed`**:
+            ```C++
+            // USAGE WITHOUT FIXED
+            #include <iostream>
+            #include <iomanip> // Required for setprecision
+
+            int main() {
+                double pi = 3.14159265358979;
+                
+                std::cout << std::setprecision(4) << pi << std::endl;
+                std::cout << std::setprecision(8) << pi << std::endl;
+
                 return 0;
-                ```
-        3.  **`ofstream` (Output File Stream):**
-            *   __Definition__: `ofstream` is used only to __write__ data to a file (output).
-            *   __Usage__: You use `ofstream` when you want to __write__ data to a file.
-            *   __Constructor__:
-                *   `std::ofstream file("filename");`
-                *   Opens the file in __write-only__ mode by default (__`std::ios::out`__).
-                *   If the file exists, its content will be __erased__.
-                *   If the file doesn’t exist, `ofstream` will __create__ a new file.
-            *   __Writing to a File:__ Use `ofstream` to __write__ to a file, just like `cout`.
-            *   __Checking if a File Opened Successfully:__ Always check if the file opened correctly before trying to __read__ or __write__.
-            *   __Syntax / Example__:
-                ```C++
-                #include <iostream>
-                #include <fstream>
-                std::ofstream writeFile("writeFile.txt");
+            }
+            output:
+            3.142
+            3.1415927
+            ```
+        *   Example with **`fixed`**:
+            ```C++
+            // USAGE WITH FIXED
+            #include <iostream>
+            #include <iomanip> // Required for setprecision and fixed
 
-                if (!writeFile.is_open()) {
-                    std::cerr << "Error: Could not open files." << std::endl;
-                    return 1;
-                }
+            int main() {
+                double pi = 3.14159265358979;
 
-                std::string line = "im writting in a file!";
-   
-                writeFile << line << std::endl;
+                std::cout << std::fixed << std::setprecision(4) << pi << std::endl;
+                std::cout << std::fixed << std::setprecision(2) << pi << std::endl;
 
-                writeFile.close();
-                ```
-        4.  **Summary of Differences:**
-            *   | Class | Default Opening Mode | Usage |
-                |-------|----------------------|-------|
-                | `fstream` |	Read and write (`std::ios::in` or `std::ios::out`) | To read / write data from a file |
-                | `ifstream` | Read-only (`std::ios::in`)	| To read data from a file |
-                | `ofstream` | Write-only (`std::ios::out`) | To write data to a file |
-    *   #### IOmanip
-        *   The `<iomanip>` library in C++ provides functions and manipulators that help format the input and output of data in a more flexible and readable manner. It is especially useful when working with floating-point numbers, controlling spacing between outputs, and aligning the text in a certain format.
-        *   `<iomanip>` stands for __I/O manipulators__, which help in formatting the output by altering the appearance of printed data without changing the actual values.
-        *   The functions from `<iomanip>` are often used with __`std::cout`__ (standard output) to display data in a particular format (e.g., floating-point precision, alignment of text or numbers).
-        *  __`setw` Manipulator__
-            *   __Definition:__ The `setw` manipulator stands for __set width__.
-            *   __Usage:__ 
-                *   It is used to specify the minimum number of characters to be used when displaying the next value in the output.
-                *   If the value to be displayed is shorter than the specified width, spaces will be added to the left (by default) to fill the gap.
-            *   __Syntax / Example:__
-                ```C++
-                #include <iostream>
-                #include <iomanip> // Required for setw
-
-                int main() {
-                    std::cout << std::setw(10) << 123 << std::endl;
-                    std::cout << std::setw(10) << 4567 << std::endl;
-                    std::cout << std::setw(10) << "C++" << std::endl;
-
-                    return 0;
-                }
-                output:
-                         123
-                         4567
-                         C++
-                ```
-        2.  __`fixed` Manipulator__
-            *   __Definition__: 
-                *   The `fixed` manipulator is used to display floating-point numbers in __fixed-point notation__.
-                *   By default, floating-point numbers in C++ are printed in scientific notation if the number is too large or too small. 
-            *   __Usage__: Using `fixed` forces the output to show the decimal part as a    fixed number of digits, even if the number is very large or small.
-            *   __Syntax / Example__:
-                ```C++
-                #include <iostream>
-                #include <iomanip> // Required for fixed
-
-                int main() {
-                    double pi = 3.14159265358979;
-                    
-                    std::cout << "Default notation: " << pi << std::endl;
-                    std::cout << std::fixed << "Fixed notation: " << pi << std::endl;
-
-                    return 0;
-                }
-
-                output:
-                Default notation: 3.14159
-                Fixed notation: 3.141593 // with std::fixed
-                ```
-        3.  __`setprecision` Manipulator__
-            *   __Definition:__
-                *   The `setprecision` manipulator controls the number of __significant digits__ or __decimal__ places to display for floating-point numbers.
-                *   It can __work with or without__ the `fixed` manipulator, but its behavior changes depending on whether `fixed` is used.
-            *   __Syntax / Example:__
-                *   Example without `fixed`:
-                    ```C++
-                    // USAGE WITHOUT FIXED
-                    #include <iostream>
-                    #include <iomanip> // Required for setprecision
-
-                    int main() {
-                        double pi = 3.14159265358979;
-                        
-                        std::cout << std::setprecision(4) << pi << std::endl;
-                        std::cout << std::setprecision(8) << pi << std::endl;
-
-                        return 0;
-                    }
-                    output:
-                    3.142
-                    3.1415927
-                    ```
-                *   Example with `fixed`:
-                    ```C++
-                    // USAGE WITH FIXED
-                    #include <iostream>
-                    #include <iomanip> // Required for setprecision and fixed
-
-                    int main() {
-                        double pi = 3.14159265358979;
-
-                        std::cout << std::fixed << std::setprecision(4) << pi << std::endl;
-                        std::cout << std::fixed << std::setprecision(2) << pi << std::endl;
-
-                        return 0;
-                    }
-                    output:
-                    3.1416
-                    3.14
-                    ```
-        4.  __Sunnary__
-            | Manipulator | Description | Example Usage |
-            |-------------|-------------|---------------|
-            | `setw`      |	Sets the minimum width of the next output field. | `std::cout << std::setw(10);` |
-            | `fixed` | Forces floating-point numbers to be printed in fixed-point notation. | `std::cout << std::fixed;` |
-            | `setprecision` | Controls the number of significant digits or decimal places. |`std::cout << std::setprecision(3);` |
+                return 0;
+            }
+            output:
+            3.1416
+            3.14
+            ```
+*   **<a id="summary-manipulator-iomanip-inputoutput-stream-anchor"></a>Summary of Differences:**
+    | Manipulator | Description | Example Usage |
+    |-------------|-------------|---------------|
+    | `setw`      |	Sets the minimum width of the next output field. | `std::cout << std::setw(10);` |
+    | `fixed` | Forces floating-point numbers to be printed in fixed-point notation. | `std::cout << std::fixed;` |
+    | `setprecision` | Controls the number of significant digits or decimal places. |`std::cout << std::setprecision(3);` |
 
 ___
 #### Class
-In C++, __classes__ are one of the fundamental concepts of __object-oriented programming__ (OOP). They allow you to model objects by grouping data and functions (methods) that operate on that data. This course will cover the syntax, key concepts, and advanced topics related to classes in C++.
-*   __What is a Class?__
+In C++, __classes__ are one of the fundamental concepts of __object-oriented programming__ (OOP). They allow you to model objects by grouping data and functions (methods) that operate on that data.
+This course will cover the syntax, key concepts, and advanced topics related to classes in C++.
+*   **<a id="class-what-is-a-class-anchor"></a>What is a Class:**
     *   A class is a blueprint or template for **creating objects**. It defines the **properties** (data) and **behavior** (methods) of objects. A class may contain:
-        *   **Access Specifiers**:
+        *   **<a id="class-class-vs-struct-anchor"></a>Class vs Structure:**
+            *   | Structures | Classes |
+                |------------|---------|
+                | Keyword **`struct`** | Keyword **`class`** |
+                | Default access is **public** | Default access is **private** |
+        *   **<a id="class-access-specifiers-anchor"></a>Access Specifiers:**
             *   **`public`**: Members are accessible from outside the class.
             *   **`protected`**: Members are accessible within the class and its derived (inherited) classes.
             *   **`private`**: Members are only accessible within the class itself.
-        *   **Constructor**:
+        *   **<a id="class-constructor-anchor"></a>Constructor:**
             *   Is a special method that is **automatically called** when an object is **created**.
             *   It has the same name as the class and has no return type.
-        *   **Destructor**:
+        *   **<a id="class-destructor-anchor"></a>Destructor:**
             *   Is a special method **automatically called** when an object is **destroyed**.
             *   It is mainly used to **free** resources.
             *   The **destructor** has the same name as the class, preceded by the **`~`** symbol, and takes no parameters.
-        *   **Attributes** (or data members): **Variables** that represent the object's **properties**.
-        *   **Methods** (or member functions): Functions that manipulate the data or perform specific actions.
-        *   **Keywords `this`**:
+        *   **<a id="class-attributes-anchor"></a>Attributes or Data Members:**
+            *   **Variables** that represent the object's **properties**.
+        *   **<a id="class-methods-anchor"></a>Methods or Member Functions:**
+            *   Functions that manipulate the data or perform specific actions.
+        *   **<a id="class-this-anchor"></a>Keyword `this`:**
             *   Inside a class method, the keyword **`this` pointer** refers to the **current instance of the class** (the object the method is acting upon).
             *   It is often used to resolve name conflicts between class attributes and method parameters.
-        *   **Initialization list**: 
-            *   **Definition**:
+        *   **<a id="class-initialization-list-anchor"></a>Initialization list:**
+            *   **Definition:**
                 *   An **initialization list** is a mechanism used to directly initialize class members before the constructor body is executed.
                 *   This approach is **cleaner** and **more efficient**, especially in cases where certain members cannot be assigned values in the constructor body.
-            *   **Efficiency**:
+            *   **Efficiency:**
                 *   Initialization lists are more **efficient** than assigning values in the constructor body.
                 *   When initializing a member in the constructor body, **the object is first constructed** (possibly using a default constructor), and then **reassigned**.
                 *   Using an initialization list, the member is **initialized directly, avoiding unnecessary reassignments**.
-            *   **Order of Member Initialization**:
+            *   **Order of Members Initialization:**
                 *   One important aspect is that the order in which members are initialized is **not determined by the order in the initialization list**, but rather by the **order in which they are declared in the class**.
-            *   **Necessary for const and Reference Members.**
-        *   **Visibility and Encapsulation**:
+                *   Necessary for **const** and **Reference Members.**
+        *   **<a id="class-visibility-and-encapsulation-anchor"></a>Visibility and Encapsulation:**
             *    In C++, **visibility and encapsulation** are core concepts of object-oriented programming (OOP).
             *   They enable the control of access to class members (attributes and methods) to ensure **data security** and **integrity**.
             *   **Encapsulation** improves code **modularity** and **maintainability**.
-            *   **Encapsulation**:
+            *   **<a id="class-visibility-and-encapsulation-encapsulation-anchor"></a>Encapsulation:**
                 *   **Definition**:
                     *   **Encapsulation** is the concept of bundling data (attributes) and methods that operate on that data within a single entity: the **class**.
                     *   It also **restricts access** to these members, **protecting** them from unauthorized modification or **access** from outside the class.
                 *   **Usage**:
                     *   The main goal of **encapsulation** is to **prevent** users from directly **modifying the internal attributes of a class** and to **enforce controlled access methods**.
-            *   **Visibility**:
+            *   **<a id="class-visibility-and-encapsulation-visibility-anchor"></a>Visibility:**
                 *   **Definition**:
                     *   **Visibility**, or **access specifiers**, define how class members (attributes and methods) can be accessed.
                     *   **Three levels of visibility**:
                         *   **`public`**: Members are accessible from outside the class.
                         *   **`protected`**: Members are accessible within the class and its derived (inherited) classes.
                         *   **`private`**: Members are only accessible within the class itself.
-            *   **Benefits of Encapsulation and Visibility**
+            *   **<a id="class-visibility-and-encapsulation-befenits-anchor"></a>Benefits of Encapsulation and Visibility:**
                 *   **Data Protection**
                 *   **Clean Interface**
                 *   **Flexibility and Scalability**
                 *   **Access Control**
-        *   **Getters and Setters**:
+        *   **<a id="class-getters-setters-anchor"></a>Getters and Setters**
             *   **Usage**:
                 *   To **allow controlled access to private or protected attributes**, **getters** and **setters** are often used.
             *   **Getter**: Is a method that **returns the value of an attribute**.
             *   **Setter**: Is a method that **modifies an attribute in a controlled way**.
-    *   **Syntax / Example**:
+    *   **<a id="class-syntax-example-anchor"></a>Syntax / Example:**
         ```C++
         // file: Example.hpp
         #ifndef     __EXAMPLE_HPP__
@@ -989,6 +1056,14 @@ ___
         *   This preserves **encapsulation** while providing additional functionality.
     *   **Reducing Coupling**:
         *   Using **non-member functions & Attributes** can reduce coupling between classes, meaning that classes are **less dependent** on one another, making the code **more modular** and **easier to maintain.**
+*   **Advantages and Disadvantages of Non-Member Attributes & Non-Member Functions:**
+    *   **Advantages**:
+        *   **Flexibility**: **Non-member functions & attributes** can be **added** or **modified** without **changing the class definition**.
+        *   **Encapsulation**: **Non-member functions & attributes** can manipulate objects without exposing their internal details.
+        *   **Reduced Coupling**: Helps **reduce dependencies** between classes.
+    *   **Disadvantages**:
+        *   **Limited Access**: **Non-member functions & attributes** do **not have direct access to private/protected** class members (unless they are `friend` functions).
+        *   **Managing Friend Functions**: Excessive use of `friend` functions can compromise **encapsulation**.
 *   **Syntax / Example**:
     ```C++
     // file: Example.hpp
@@ -1082,17 +1157,9 @@ ___
     Destructor called!
     Number of instances of Example Class: 0
     ```
-*   **Advantages and Disadvantages of Non-Member Attributes & Non-Member Functions:**
-    *   **Advantages**:
-        *   **Flexibility**: **Non-member functions & attributes** can be **added** or **modified** without **changing the class definition**.
-        *   **Encapsulation**: **Non-member functions & attributes** can manipulate objects without exposing their internal details.
-        *   **Reduced Coupling**: Helps **reduce dependencies** between classes.
-    *   **Disadvantages**:
-        *   **Limited Access**: **Non-member functions & attributes** do **not have direct access to private/protected** class members (unless they are `friend` functions).
-        *   **Managing Friend Functions**: Excessive use of `friend` functions can compromise **encapsulation**.
 ___
 #### Pointer to Members and Pointer to Members Functions
-*   **Pointer to Members**:
+*   **<a id="pointer-to-members-and-pointer-to-members-functions-pointer-to-members-anchor"></a>Pointer to Members:**
     *   **Definition**:
         *   A **member pointer** is a **pointer that doesn't point to a memory address (like a regular pointer), but rather to a specific member (either a variable or a function) of a class**.
         *   However, this **pointer does not point to a concrete value within a specific object**.
@@ -1136,7 +1203,7 @@ ___
     *   **Why is this useful?**
         *   This allows you to **dynamically manipulate different members of the class without writing specific code for each member**. 
         *   You can **change** which member is pointed to by the pointer, and the same code can then **access** or **modify** different members.
-*   **Pointer to Members Functions**;
+*   **<a id="pointer-to-members-and-pointer-to-members-functions-pointer-to-members-functions-anchor"></a>Pointer to Members Functions:**
     *   **Definition**:
         *   A **member pointer** is a **pointer that doesn't point to a memory address (like a regular pointer), but rather to a specific member (either a variable or a function) of a class**.
         *   However, this **pointer does not point to a concrete value within a specific object**.
@@ -1225,7 +1292,7 @@ ___
         ```
 ___
 
-#### `static` Keyword
+#### Keyword `static`
 *   **`static` Local Variables**
     *   When a variable is declared as **`static`** inside a function, it retains its value between function calls.
     *   Unlike regular local variables, which are created and destroyed each time a function is called, a **`static` local variable is initialized only once and persists for the lifetime of the program**.
@@ -1377,7 +1444,7 @@ ___
     *   **File-Scope Functions**: Encapsulating helper functions within a single file to avoid polluting the global namespace.
     *   **Configuration or Settings**: Storing global settings or configurations that should be shared across all instances of a class.
 ___
-####    `auto` Keyword
+#### Keyword `auto`
 *   **Basic Usage of `auto`**
     *   The **`auto`** keyword is used in place of a type name in variable declarations. The compiler deduces the type of the variable from the type of the initializer.
     *   **Syntax / Example**:
@@ -1411,7 +1478,7 @@ ___
         ```
 ___
 
-####    `std::string`
+#### `std::string`
 *   **Definition**:
     *   **`std::string`** is a part of the **C++ Standard Library**, provided by the **`<string>` header**.
     *   It is one of the most commonly used data types in C++ because it offers a convenient way to **work with sequences of characters**, **providing many features** and **functions to manipulate** and **handle strings**.
@@ -1438,9 +1505,8 @@ ___
             return 0;
         }
         ```
-    
-*   **Common Operations on `std::string`**
-    *   **Concatenation**:
+*   **<a id="string-common-operations-on-string-anchor"></a>Common Operations on `std::string`:**
+    *   **<a id="string-common-operations-on-string-concatenation-anchor"></a>Concatenation:**
         *   Strings can be concatenated using the **`+`** operator or the **`+=`** operator.
         *   **Syntax / Example**:
             ```cpp
@@ -1455,7 +1521,7 @@ ___
             std::cout << s3 << std::endl;     // Outputs: Hello World
             std::cout << s1 << std::endl;     // Outputs: Hello Everyone
             ```
-    *   **Accessing Characters**:
+    *   **<a id="string-common-operations-on-string-accessing-characters-anchor"></a>Accessing Characters:**
         *   You can access individual characters in a string using the **`[]`** operator or the **`.at()`** method.
         *   **`.at()`** performs bounds checking and throws an exception if the index is out of range, while **`[]`** does not.
         *   **Syntax / Example**:
@@ -1470,7 +1536,7 @@ ___
             std::cout << first << std::endl;  // Outputs: H
             std::cout << last << std::endl;   // Outputs: o
             ```
-    *   **String Length**:
+    *   **<a id="string-common-operations-on-string-string-length-anchor"></a>String Length:**
         *   The length (or size) of a string can be determined using **`.size()`** or **`.length()`** methods.
         *   Both **`.size()`** and **`.length()`** are interchangeable and provide the number of characters in the string.
         *   **Syntax / Example**:
@@ -1481,9 +1547,9 @@ ___
             std::cout << "Length: " << s.size() << std::endl; // Outputs: Length: 5
             std::cout << "Length: " << s.length() << std::endl; // Outputs: Length: 5
             ```
-*   **Modifying Strings**:
-    *   **Appending and Inserting**:
-        *   **Appending**:
+*   **<a id="string-modifying-strings-anchor"></a>Modifying Strings:**
+    *   **<a id="string-modifying-strings-appending-inserting-anchor"></a>Appending / Inserting:**
+        *   **<a id="string-modifying-strings-appending-inserting-appending-anchor"></a>Appending:**
             *   Add characters or strings to the end of an existing string.
             *   **Syntax / Example**:
                 ```cpp
@@ -1494,7 +1560,7 @@ ___
                 s.append(3, '!');         // Appends "!!!" to s
                 std::cout << s << std::endl;  // Outputs: Hello World!!!
                 ```
-        *   **Inserting**:
+        *   **<a id="string-modifying-strings-appending-inserting-inserting-anchor"></a>Inserting:**
             *   Insert characters or strings at a specified position.
             *   **Syntax / Example**:
                 ```cpp
@@ -1504,8 +1570,8 @@ ___
                 s.insert(5, " Everyone");  // Inserts " Everyone" at position 5
                 std::cout << s << std::endl; // Outputs: Hello Everyone
                 ```
-*   **Replacing and Erasing**:
-    *   **Replacing**: 
+*   **<a id="string-replacing-erasing-anchor"></a>Replacing / Erasing:**
+    *   **<a id="string-replacing-erasing-replacing-anchor"></a>Replacing:**
         *   Replace a portion of the string with another string.
         *   **Syntax / Example**:
             ```cpp
@@ -1515,7 +1581,7 @@ ___
             s.replace(6, 5, "C++"); // Replaces "World" with "C++" starting at position 6
             std::cout << s << std::endl; // Outputs: Hello C++
             ```
-    *   **Erasing**:
+    *   **<a id="string-replacing-erasing-erasing-anchor"></a>Erasing:**
         *   Remove characters from the string.
         *   **Syntax / Example**:
             ```cpp
@@ -1525,8 +1591,8 @@ ___
             s.erase(5, 6);            // Erases " World" starting at position 5
             std::cout << s << std::endl; // Outputs: Hello
             ```
-*   **Clearing a String**:
-    *   **Clearing**:
+*   **<a id="string-clearing-a-string-anchor"></a>Clearing a String:**
+    *   **<a id="string-clearing-a-string-clearing-anchor"></a>Clearing:**
         *   To remove all content from a string, use the **`.clear()`** method.
         *   **Syntax / Example**:
             ```cpp
@@ -1536,8 +1602,8 @@ ___
             s.clear();
             std::cout << s.empty() << std::endl; // Outputs: 1 (true)
             ```
-*   **Searching and Substrings**:
-    *   **Finding Substrings**:
+*   **<a id="string-searching-substrings-anchor"></a>Searching / Substrings:**
+    *   **<a id="string-searching-substrings-finding-substring-anchor"></a>Finding Substring:**
         *   You can search for a substring within a string using the **`.find()`** method.
         *   **`std::string::npos`** is a constant representing the end of the string, returned if the substring is not found.
         *   **Syntax / Example**:
@@ -1553,7 +1619,7 @@ ___
                 std::cout << "'World' not found" << std::endl;
             }
             ```
-    *   **Extracting Substrings**:
+    *   **<a id="string-searching-substrings-extracting-substring-anchor"></a>Extracting Substring:**
         *   The **`.substr()`** method allows you to extract a substring from a string.
         *   **Syntax / Example**:
             ```cpp
@@ -1564,7 +1630,7 @@ ___
 
             std::cout << sub << std::endl;  // Outputs: World
             ```
-*   **Comparison of Strings**:
+*   **<a id="string-comparison-of-strings-anchor"></a>Comparison of Strings:**
     *   Strings can be compared using comparison operators (**`==`**, **`!=`**, **`<`**, **`>`**, **`<=`**, **`>=`**), or the **`.compare()`** method.
     *   Comparisons are case-sensitive and performed lexicographically (dictionary order).
     *   **Syntax / Example**:
@@ -1582,7 +1648,7 @@ ___
             std::cout << s1 << " is greater than " << s2 << std::endl;
         }
         ```
-*   **C-String Compatibility**:
+*   **<a id="string-c-string-compatibility-anchor"></a>C-String Compatibility:**
     *   **`std::string`** can be converted to a C-string (**`const char*`**) using the **`.c_str()`** method, which is useful for compatibility with C-style functions.
     *   **Syntax / Example**:
         ```cpp
@@ -1593,9 +1659,9 @@ ___
 
         std::cout << cstr << std::endl; // Outputs: Hello
         ```
-*   **Advanced Features**:
-    *   **Iterating Over Stringstream**:
-        *   **Iterating**:
+*   **<a id="string-advanced-features-anchor"></a>Advanced Features:**
+    *   **<a id="string-advanced-features-iterating-over-stringstream-anchor"></a>Iterating Over Stringstream:**
+        *   **<a id="string-advanced-features-iterating-over-stringstream-iterating-anchor"></a>Iterating:**
             *   You can iterate over a string using a for loop, a range-based for loop, or iterators.
             *   **Syntax / Example**:
                 ```cpp
@@ -1615,8 +1681,9 @@ ___
                 }
                 std::cout << std::endl;
                 ```
-        *   **String Streams**:
+        *   **<a id="string-advanced-features-iterating-over-stringstream-stringstream-anchor"></a>`std::stringstream`:**
             *   **`std::stringstream`** can be used for string manipulation and conversion, providing functionality similar to input/output streams.
+            *   header **`<<sstream>>`**
             *   **Syntax / Example**:
                 ```cpp
                 #include <string>
@@ -1633,7 +1700,7 @@ ___
                     return 0;
                 }
                 ```
-*   **Memory Management and Performance**
+*   **<a id="string-memory-performance-anchor"></a>Memory Management and Performance:**
     *   **`std::string`** manages its **memory dynamically**, meaning it can grow or shrink as needed.
     *   The underlying memory is managed by the C++ Standard Library, but there are some considerations:
         *   **Capacity and Reserve**:
