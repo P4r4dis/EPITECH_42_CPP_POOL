@@ -15,7 +15,74 @@ ___
     * [42 Module 00 Objectifs](#42-module-00-objectifs)
     * [EPITECH Day 06 Objectifs](#epitech-day-06-objectifs)
 * [Key Learnings](#key-learnings)
-    * [Input/Output](#inputoutput)
+    *   [Input/Output](#inputoutput)
+        *   [C++ Input/Output Library](#c-inputoutput-library)
+        *   [**`IOStream`**](#iostream)
+            *   [Stream in C++?](#iostream-stream-in-c-anchor)
+                *   [Definition](#iostream-stream-in-c-definition-anchor)
+                *   [Why use Streams](#iostream-stream-in-c-why-use-stream-anchor)
+            *   [Standard Input/Output stream](#iostream-standard-inputoutput-stream-anchor)
+                *   [Output with **`std::cout`**](#iostream-standard-inputoutput-stream-output-wuth-cout-anchor)
+                *   [Input with **`std::cin`**](#iostream-standard-inputoutput-stream-input-with-cin-anchor)
+                *   [Error Output with **`std::cerr`**](#iostream-standard-inputoutput-stream-error-output-with-cerr-anchor)
+                *   [Logging Output with **`std::clog`**](#iostream-standard-inputoutput-stream-logging-output-with-clog-anchor)
+        *   [**`FStream`**](#fstream)
+            *   [**`fstream`**](#fstream-file-inputoutput-stream-fstream-anchor)
+            *   [**`ifsteram`**](#fsteram-file-inputoutput-stream-ifstream-anchor)
+            *   [**`ofstream`**](#fsteram-file-inputoutput-stream-ofstream-anchor)
+            *   [Summary of Differences](#fsteram-file-inputoutput-stream-summary-anchor)
+        *   [**`IOmanip`**](#iomanip)
+            *   [**`setw`** Manipulator](#setw-manipulator-iomanip-inputoutput-stream-anchor)
+            *   [**`setw`** Manipulator](#iomanip-inputoutput-stream-setw-manipulator-anchor)
+            *   [**`fixed`** Manipulator](#fixed-manipulator-iomanip-inputoutput-stream-anchor)
+            *   [**`setprecision`** Manipulator](#setprecision-manipulator-iomanip-inputoutput-stream-anchor)
+            *   [Summary of Differences](#summary-manipulator-iomanip-inputoutput-stream-anchor)
+    *   [Class](#class)
+        *   [What is a class](#class-what-is-a-class-anchor)
+            *   [Class Vs Structure](#class-class-vs-struct-anchor)
+            *   [Constructor](#class-constructor-anchor)
+            *   [Destructor](#class-destructor-anchor)
+            *   [Attributes or Data Members](#class-attributes-anchor)
+            *   [Methods or Member Functions](#class-methods-anchor)
+            *   [Keyword **`this`**](#class-this-anchor)
+            *   [Initialization List](#class-initialization-list-anchor)
+            *   [Visibility and Encapsulation](#class-visibility-and-encapsulation-encapsulation-anchor)
+                *   [Encapsulation](#class-visibility-and-encapsulation-encapsulation-anchor)
+                *   [Visibility](#class-visibility-and-encapsulation-visibility-anchor)
+                *   [Benefits of Visibility and Encapsulation](#class-visibility-and-encapsulation-befenits-anchor)
+            *   [Getters and Setters](#class-getters-setters-anchor)
+            *   [Syntax / Example](#class-syntax-example-anchor)
+    *   [Non-Member Attribute & Non-Member Function](#non-member-attribute--non-member-function)
+    *   [Pointer to Members and Pointer to Members Functions](#pointer-to-members-and-pointer-to-members-functions)
+        *   [Pointer to Members](#pointer-to-members-and-pointer-to-members-functions-pointer-to-members-anchor)
+        *   [Pointer to Members Functions](#pointer-to-members-and-pointer-to-members-functions-pointer-to-members-functions-anchor)
+    *   [Keyword **`const`**](#keyword-const)
+    *   [Keyword **`static`**](#keyword-static)
+    *   [Keyword **`auto`**](#keyword-auto)
+    *   [**`std::string`**](#keyword-auto)
+        *   [Common Operations on **`std::string`**](#string-common-operations-on-string-anchor)
+            *   [Concatenation](#string-common-operations-on-string-concatenation-anchor)
+            *   [Accessing Characters](#string-common-operations-on-string-accessing-characters-anchor)
+            *   [String Length](#string-common-operations-on-string-string-length-anchor)
+        *   [Modifying Strings](#string-modifying-strings-anchor)
+            *   [Appending / Inserting](#string-modifying-strings-appending-inserting-anchor)
+                *   [Appending](#string-modifying-strings-appending-inserting-appending-anchor)
+                *   [Inserting](#string-modifying-strings-appending-inserting-inserting-anchor)
+            *   [Replacing / Erasing](#string-replacing-erasing-anchor)
+                *   [Replacing](#string-replacing-erasing-replacing-anchor)
+                *   [Erasing](#string-replacing-erasing-erasing-anchor)
+        *   [Clearing a String](#string-clearing-a-string-anchor)
+            *   [Clearing](#string-clearing-a-string-clearing-anchor)
+        *   [Searching / Substring](#string-searching-substrings-anchor)
+            *   [Finding Substring](#string-searching-substrings-finding-substring-anchor)
+            *   [Extracting Substring](#string-searching-substrings-extracting-substring-anchor)
+        *   [Comparaison of String](#string-comparison-of-strings-anchor)
+        *   [C-String Compatibility](#string-c-string-compatibility-anchor)
+        *   [Advanced Features](#string-advanced-features-anchor)
+            *   [Iterating Over StringStream](#string-advanced-features-iterating-over-stringstream-anchor)
+                *   [Iterating](#string-advanced-features-iterating-over-stringstream-iterating-anchor)
+                *   [**`std::stringsteram`**](#string-advanced-features-iterating-over-stringstream-stringstream-anchor)
+        *   [Memory Managment and Performance](#string-memory-performance-anchor)
 * [Lessons](#lessons)
 * [Installation](#installation)
 * [Usage / Examples](#usage-/-examples)
@@ -559,8 +626,8 @@ __Exercise 06 - Hospital__
     *   [**`IOmanip`**](#iomanip)
         *   [**`setw`** Manipulator](#setw-manipulator-iomanip-inputoutput-stream-anchor)
         *   [**`setw`** Manipulator](#iomanip-inputoutput-stream-setw-manipulator-anchor)
-        *   [**`fixed` Manipulator**](#fixed-manipulator-iomanip-inputoutput-stream-anchor)
-        *   [**`setprecision` Manipulator**](#setprecision-manipulator-iomanip-inputoutput-stream-anchor)
+        *   [**`fixed`** Manipulator](#fixed-manipulator-iomanip-inputoutput-stream-anchor)
+        *   [**`setprecision`** Manipulator](#setprecision-manipulator-iomanip-inputoutput-stream-anchor)
         *   [Summary of Differences](#summary-manipulator-iomanip-inputoutput-stream-anchor)
 *   [Class](#class)
     *   [What is a class](#class-what-is-a-class-anchor)
@@ -608,6 +675,12 @@ __Exercise 06 - Hospital__
             *   [Iterating](#string-advanced-features-iterating-over-stringstream-iterating-anchor)
             *   [**`std::stringsteram`**](#string-advanced-features-iterating-over-stringstream-stringstream-anchor)
     *   [Memory Managment and Performance](#string-memory-performance-anchor)
+*   [C++ How to convert **`std::string`** to **`int`**/**`float`**](#c98-how-to-convert-stdstring-to-intfloat)
+    *   [Using **`<cstdlib>`** and **`std::atoi`**/**`std::atof`**](#convert-string-to-int-float-cstdlib-anchor)
+    *   [Using **`<sstream>`** and **`std::stringstream`**](#convert-string-to-int-float-sstream-anchor)
+*   [C++98 How to convert **`int`**/**`float`** to **`std::string`**](#c98-how-to-convert-intfloat-to-stdstring)
+    *   [Using **`<sstream>`** and **`std::stringstream`**](#convert-numeric-to-string-sstream-anchor)
+    *   [Mordern C++ (C++11 and the latest version), Using **`std::to_string`**](#convert-numeric-to-string-std::to_string-anchor)
 ## Lessons Learned
 [(Back to top)](#table-of-contents)
 ### Input/Output
@@ -623,6 +696,8 @@ __Exercise 06 - Hospital__
 *   __Class Hierarchy__
     ![Standard I/O complete inheritance](https://upload.cppreference.com/mwiki/images/0/06/std-io-complete-inheritance.svg)
 #### `IOstream`:
+[(Back to top)](#table-of-contents)
+[(Back to Key Learnings)](#key-learnings)
 *   **<a id="iostream-stream-in-c-anchor"></a>Stream in C++:**
     *   **<a id="iostream-stream-in-c-definition-anchor"></a>Definition:**
         *   A **stream** is an abstraction that represents a sequence of data, either coming from an input source (e.g., keyboard) or going to an output destination (e.g., screen or file).
@@ -691,6 +766,8 @@ __Exercise 06 - Hospital__
             ```
 
 #### FStream
+[(Back to top)](#table-of-contents)
+[(Back to Key Learnings)](#key-learnings)
 In C++, the classes **`fstream`**, **`ifstream`**, and **`ofstream`** are used to handle file input/output operations.
 They are part of the **`<fstream>`** library. Here's the main difference between them:
 *   **<a id="fstream-file-inputoutput-stream-fstream-anchor"></a>`fstream`:**
@@ -777,6 +854,8 @@ They are part of the **`<fstream>`** library. Here's the main difference between
         | `ifstream` | Read-only (`std::ios::in`)	| To read data from a file |
         | `ofstream` | Write-only (`std::ios::out`) | To write data to a file |
 #### IOmanip
+[(Back to top)](#table-of-contents)
+[(Back to Key Learnings)](#key-learnings)
 *   The **`<iomanip>`** library in C++ provides **functions** and **manipulators** that help format the input and output of data in a more flexible and readable manner.
 *   It is especially useful when working with **floating-point numbers**, **controlling spacing between outputs**, and **aligning the text in a certain format**.
 *   **`<iomanip>`** stands for __I/O manipulators__, which help in formatting the output by altering the appearance of printed data without changing the actual values.
@@ -878,6 +957,8 @@ They are part of the **`<fstream>`** library. Here's the main difference between
 
 ___
 #### Class
+[(Back to top)](#table-of-contents)
+[(Back to Key Learnings)](#key-learnings)
 In C++, __classes__ are one of the fundamental concepts of __object-oriented programming__ (OOP). They allow you to model objects by grouping data and functions (methods) that operate on that data.
 This course will cover the syntax, key concepts, and advanced topics related to classes in C++.
 *   **<a id="class-what-is-a-class-anchor"></a>What is a Class:**
@@ -1045,6 +1126,8 @@ This course will cover the syntax, key concepts, and advanced topics related to 
         ```
 ___
 #### Non-Member Attribute & Non-Member Function
+[(Back to top)](#table-of-contents)
+[(Back to Key Learnings)](#key-learnings)
 *   **Definition**:
     *   **Non-member variables**: 
         *   Variables **defined outside of the class**, often **used to store global** or **shared information** across multiple instances of the class.
@@ -1159,6 +1242,8 @@ ___
     ```
 ___
 #### Pointer to Members and Pointer to Members Functions
+[(Back to top)](#table-of-contents)
+[(Back to Key Learnings)](#key-learnings)
 *   **<a id="pointer-to-members-and-pointer-to-members-functions-pointer-to-members-anchor"></a>Pointer to Members:**
     *   **Definition**:
         *   A **member pointer** is a **pointer that doesn't point to a memory address (like a regular pointer), but rather to a specific member (either a variable or a function) of a class**.
@@ -1263,6 +1348,8 @@ ___
     *   They are often **used in complex environments**, such as **user interfaces** or **event-driven systems**, where it is **necessary to select specific members to manipulate** or **execute based on runtime conditions**.
 ___
 #### Keyword `const`
+[(Back to top)](#table-of-contents)
+[(Back to Key Learnings)](#key-learnings)
 *   **Basic Usage of const with Variables**
     *   The simplest use of **`const`** is to declare a constant variable.
     *   Once a variable is declared as **`const`**, its value cannot be changed.
@@ -1293,6 +1380,8 @@ ___
 ___
 
 #### Keyword `static`
+[(Back to top)](#table-of-contents)
+[(Back to Key Learnings)](#key-learnings)
 *   **`static` Local Variables**
     *   When a variable is declared as **`static`** inside a function, it retains its value between function calls.
     *   Unlike regular local variables, which are created and destroyed each time a function is called, a **`static` local variable is initialized only once and persists for the lifetime of the program**.
@@ -1445,6 +1534,8 @@ ___
     *   **Configuration or Settings**: Storing global settings or configurations that should be shared across all instances of a class.
 ___
 #### Keyword `auto`
+[(Back to top)](#table-of-contents)
+[(Back to Key Learnings)](#key-learnings)
 *   **Basic Usage of `auto`**
     *   The **`auto`** keyword is used in place of a type name in variable declarations. The compiler deduces the type of the variable from the type of the initializer.
     *   **Syntax / Example**:
@@ -1479,6 +1570,8 @@ ___
 ___
 
 #### `std::string`
+[(Back to top)](#table-of-contents)
+[(Back to Key Learnings)](#key-learnings)
 *   **Definition**:
     *   **`std::string`** is a part of the **C++ Standard Library**, provided by the **`<string>` header**.
     *   It is one of the most commonly used data types in C++ because it offers a convenient way to **work with sequences of characters**, **providing many features** and **functions to manipulate** and **handle strings**.
@@ -1715,16 +1808,94 @@ ___
         *   **Efficiency**: 
             *   Small strings are often optimized in modern C++ compilers using the "short string optimization" (SSO), which avoids dynamic memory allocation for short strings.
 ___
+#### C++98 How to convert `std::string` to `int`/`float`
+[(Back to top)](#table-of-contents)
+[(Back to Key Learnings)](#key-learnings)
+*   In C++98, there is no direct function in the standard library to convert a **`std::string`** to **`int`** or **`float`**.
+*   However, you can use functions from the **`<cstdlib>`** library like **`std::atoi`** (for **integers**) and **`std::atof`** (for **floats**):
+*   Also, you can use another way with **`<sstream>`** for the conversion, but if
+*   **<a id="convert-string-to-int-float-cstdlib-anchor"></a>Using `<cstdlib>` and `std::atoi` / `std::atof`:**
+    ```C++
+    #include <iostream>
+    #include <cstdlib> // For std::atoi
 
+    int main() {
+        std::string str = "123";
+        int num = std::atoi(str.c_str()); // Convert string to int
+        std::cout << "The number is: " << num << std::endl;
+        return 0;
+    }
+    ```
+    *   **`<cstdlib>`** and **`std::atof`**
+    ```C++
+    #include <iostream>
+    #include <cstdlib> // For std::atof
+
+    int main() {
+        std::string str = "123.45";
+        float num = std::atof(str.c_str()); // Convert string to float
+        std::cout << "The number is: " << num << std::endl;
+        return 0;
+    }
+    ```
+*   **<a id="convert-string-to-int-float-sstream-anchor"></a>Using `<sstream>` and `std::stringstream`:**
+    ```C++
+    #include <iostream>
+    #include <sstream>  // for use std::stringstream
+
+    int main() {
+        std::string str = "123";
+        int num; // or float
+        
+        std::stringstream ss(str);  // create stream
+        ss >> num;                  // extract data and convert
+        
+        std::cout << "The number is: " << num << std::endl;
+        return 0;
+    }
+    ```
+#### C++98 How to convert `int`/`float` to `std::string`
+[(Back to top)](#table-of-contents)
+[(Back to Key Learnings)](#key-learnings)
+*   In C++98, converting numeric types to **`std::string`** can be done using header **`<sstream`** and **`std::stringstream`**.
+*   **<a id="convert-numeric-to-string-sstream-anchor"></a>Using `<sstream>` and `std::stringstream`:**
+    ```C++
+    #include <iostream>
+    #include <sstream> // For std::stringstream
+
+    int main() {
+        int num = 123; // for float, double, etc...
+        std::stringstream ss;
+        ss << num; // Convert int to string
+        std::string str = ss.str();
+        std::cout << "The string is: " << str << std::endl;
+        return 0;
+    }
+    ```
+
+*   **<a id="convert-numeric-to-string-std::to_string-anchor"></a>Mordern C++ (C++11 and the latest version), Using `std::to_string`:**
+    ```C++
+    #include <iostream>
+    #include <string> // For std::to_string
+
+    int main() {
+        int num = 123;
+        std::string str = std::to_string(num); // Convert int to string
+        std::cout << "The string is: " << str << std::endl;
+        return 0;
+    }
+    ```
+___
 ## Installation
 [(Back to top)](#table-of-contents)
 
 * Dowmload the project:
-```
+```bash
+
 # Clone this repository
 $ git clone https://github.com/P4r4dis/The_hospital.git
 
-$ cd project
+$ cd CPP_00
 ```
 
 * After downloaded the project and gone to the root path SimpleCatCommand repository you can use the __Makefile__ for compile the program or the units tests and generate a __bynary__:

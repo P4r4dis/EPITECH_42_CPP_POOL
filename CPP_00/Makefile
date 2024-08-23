@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/08/13 17:26:46 by Paradis          ###   ########.fr        #
+#    Updated: 2024/08/23 21:11:04 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -271,6 +271,9 @@ re						: 	clean fclean all
 							@$(MAKE) -C $(42_EX00_PATH)
 							$(42_EX00_PATH)/$(42_EX00_NAME)
 
+42_valgrind_ex00 				: 	fclean
+							@$(MAKE) -C $(42_EX00_PATH) VALGRIND
+							$(42_EX00_PATH)/$(42_EX00_NAME)
 42_ex01 				: 	fclean
 							@$(MAKE) -C $(42_EX01_PATH)
 							$(42_EX01_PATH)/$(42_EX01_NAME)
@@ -283,6 +286,10 @@ re						: 	clean fclean all
 							$(42_EX00_UT_PATH)/$(42_EX00_UT_NAME)
 							gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 # @brave coverage.html
+42_test_run_valgrind_ex00		:	fclean
+							@$(MAKE) -s -C $(42_EX00_UT_PATH) VALGRIND
+							$(42_EX00_UT_PATH)/$(42_EX00_UT_NAME)
+							gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 
 42_test_run_ex01		:	fclean
 							@$(MAKE) -s -C $(42_EX01_UT_PATH)

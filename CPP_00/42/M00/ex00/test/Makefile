@@ -24,6 +24,9 @@ all				: 	$(NAME)
 
 $(NAME)			: 	$(OBJS)
 					$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME)
+
+VALGRIND		: 	$(OBJS)
+					$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME)
 					@valgrind --leak-check=full --show-leak-kinds=all  --error-exitcode=1 ./$(NAME) 2>&1 | tee valgrind_output.log || true
 					@if ! grep -q "definitely lost" valgrind_output.log; \
 					then \
