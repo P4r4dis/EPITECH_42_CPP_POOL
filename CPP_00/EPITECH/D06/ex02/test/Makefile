@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Fri Jul 26 8:02:46 PM 2024 Paradis
-## Last update Tue Jul 29 6:04:45 PM 2024 Paradis
+## Last update Tue Aug 26 4:58:45 PM 2024 Paradis
 ##
 
 G++           	= 	g++
@@ -33,6 +33,9 @@ LOG 			= 	*.log
 all				: 	$(NAME)
 
 $(NAME)			: 	$(OBJS)
+					$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME)
+
+VALGRIND		:	$(OBJS)
 					$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME)
 					@echo "Current working directory: $$PWD"
 					@valgrind --leak-check=full --trace-children=yes --show-leak-kinds=all --error-exitcode=1 ./$(NAME) 2>&1 | tee valgrind_output.log || true

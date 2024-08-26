@@ -83,9 +83,8 @@ ___
                 *   [Iterating](#string-advanced-features-iterating-over-stringstream-iterating-anchor)
                 *   [**`std::stringsteram`**](#string-advanced-features-iterating-over-stringstream-stringstream-anchor)
         *   [Memory Managment and Performance](#string-memory-performance-anchor)
-* [Lessons](#lessons)
 * [Installation](#installation)
-* [Usage / Examples](#usage-/-examples)
+* [Usage / Examples](#usageexamples)
 * [Running Tests](#running-tests)
 
 ___
@@ -1891,35 +1890,73 @@ ___
 
 * Dowmload the project:
 ```bash
-
 # Clone this repository
-$ git clone https://github.com/P4r4dis/The_hospital.git
+$ git clone git@github.com:P4r4dis/EPITECH_42_CPP_POOL.git
+# or 
+$ git clone https://github.com/P4r4dis/EPITECH_42_CPP_POOL.git
+
 
 $ cd CPP_00
 ```
-
-* After downloaded the project and gone to the root path SimpleCatCommand repository you can use the __Makefile__ for compile the program or the units tests and generate a __bynary__:
-
-    * ```bash 
-        $ make ex00
-    * ```bash
-         $ make test_run_ex00
+___
 ## Usage/Examples
 [(Back to top)](#table-of-contents)
-```javascript
-import Component from 'my-project'
+* After downloaded the project and gone to the root path CPP_00 folder, you can use the __Makefile__ for compile the programs and generate a __bynary__ and run it directly.
+*   __run the following command__:
 
-function App() {
-  return <Component />
-}
-```
+    *   
+        ```bash 
+        $ cd EPITECH_42_CPP_POOL/CPP_00
 
+        # Choose an 42 or EPITECH exercise:
+        # 42 example:
+        $ make 42_ex00
 
+        # EPITECH example:
+        $ make EPITECH_ex00
+        ```
+    *   
+        ```bash
+        $ cd EPITECH_42_CPP_POOL/CPP_00
+
+        # You can check if there are memory leak:
+        # Choose an 42 or EPITECH exercise:
+        # 42 example:
+        $ make 42_valgrind_ex00
+
+        # EPITECH example:
+        $ make EPITECH_valgrind_ex00
+        ```
+
+___
 ## Running Tests
 [(Back to top)](#table-of-contents)
+* After downloaded the project and gone to the root path CPP_00 folder, you can use the __Makefile__ for compile the units tests and generate a unit test __binary__ and run it directly.
+* To run tests, run the following command:
 
-To run tests, run the following command
+    *   
+        ```bash 
+        $ cd EPITECH_42_CPP_POOL/CPP_00
 
-```bash
-  npm run test
-```
+        # Choose an 42 or EPITECH exercise:
+        # 42 example:
+        $ make 42_test_run_ex00
+
+        # EPITECH example:
+        $ make EPITECH_test_run_ex00
+
+        # you can run units tests for all 42 and EPITECH exercices:
+        $ make tests_run
+        ```
+    *   
+        ```bash
+        $ cd EPITECH_42_CPP_POOL/CPP_00
+
+        # You can check if there are memory leak:
+        # Choose an 42 or EPITECH exercise:
+        # 42 example:
+        $ make 42_valgrind_test_run_ex00
+
+        # EPITECH example:
+        $ make EPITECH_valgrind_test_run_ex00
+        ```
