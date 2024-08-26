@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jul 19 6:34:24 PM 2024 Paradis
-** Last update Fri Jul 25 5:49:47 PM 2024 Paradis
+** Last update Tue Aug 26 6:20:56 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -172,7 +172,6 @@ Test(MyCat, test_MyCat_MyCat_one_file, .init = redirect_all_stdout)
     {
         MyCat   myCat;
         std::string fileName = "D06_ex00_fileTest1.txt";
-
         myCat.myCat(fileName.c_str());
     }
     cr_assert_stdout_eq_str
