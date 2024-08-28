@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/08/26 21:03:51 by Paradis          ###   ########.fr        #
+#    Updated: 2024/08/28 15:54:26 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,14 +36,15 @@
 									@$(MAKE) -C $(42_EX00_PATH)
 									$(42_EX00_PATH)/$(42_EX00_NAME)
 
-42_valgrind_ex00 				: 	fclean
-									@$(MAKE) -C $(42_EX00_PATH) VALGRIND
-
 42_test_run_ex00				:	fclean
 									@$(MAKE) -s -C $(42_EX00_UT_PATH)
 									$(42_EX00_UT_PATH)/$(42_EX00_UT_NAME)
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 # @brave coverage.html
+
+42_valgrind_ex00 				: 	fclean
+									@$(MAKE) -C $(42_EX00_PATH) VALGRIND
+									
 42_valgrind_test_run_ex00		:	fclean
 									@$(MAKE) -s -C $(42_EX00_UT_PATH) VALGRIND
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
@@ -55,7 +56,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2024 Paradis
-## Last update Tue Aug 26 9:03:51 PM 2024 Paradis
+## Last update Thu Aug 28 3:54:26 PM 2024 Paradis
 ##
 
 ## RULES FOR EPITECH SCHOOL

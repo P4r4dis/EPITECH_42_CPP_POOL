@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 21:14:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/08/19 21:15:25 by Paradis          ###   ########.fr        #
+#    Updated: 2024/08/28 15:43:28 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,14 +16,14 @@ SRC_PATH		= 	../source
 INC_PATH 		= 	../include
 BIN_PATH 		= 	./bin
 
-NAME          	= 	test_
+NAME          	= 	test_Pony
 #############################################
 
 INCFLAGS     	+= 	-I $(INC_PATH)
 CRITFLAGS    	+=  --coverage -lcriterion
 CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -std=c++11 $(INCFLAGS) $(CRITFLAGS)
 
-SRCS         	= 	\
+SRCS         	= 	$(SRC_PATH)/Pony.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)
@@ -36,6 +36,8 @@ all				: 	$(NAME)
 
 $(NAME)			: 	$(OBJS)
 					$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME)
+
+VALGRIND		:	$(NAME)
 					@valgrind --leak-check=full --show-leak-kinds=all  --error-exitcode=1 ./$(NAME) 2>&1 | tee valgrind_output.log || true
 					@if ! grep -q "definitely lost" valgrind_output.log; \
 					then \
@@ -44,6 +46,7 @@ $(NAME)			: 	$(OBJS)
 						echo -e "\033[31mMemory leaks detected, aborting.\033[0m"; \
 						exit 1; \
 					fi
+
 RM 				= 	rm -rf
 
 clean			:

@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 21:14:07 by Paradis           #+#    #+#              #
-#    Updated: 2024/08/19 21:15:32 by Paradis          ###   ########.fr        #
+#    Updated: 2024/08/28 15:53:50 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,9 @@ RM			=	rm -rf
 all			:	$(NAME)
 
 $(NAME)		:	$(OBJS)
-				$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME) 
+				$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME)
+
+valgrind	:	$(NAME)
 				@valgrind --leak-check=full --show-leak-kinds=all  --error-exitcode=1 ./$(NAME) 2>&1 | tee valgrind_output.log || true
 				@if ! grep -q "definitely lost" valgrind_output.log; \
 				then \
