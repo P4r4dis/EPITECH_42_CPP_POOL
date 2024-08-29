@@ -252,27 +252,30 @@ derived from your good old friend C, we have chosen the C++ language.
         ```
     ___
 
-*   | ex02                  | The Job Of Your Dreams    |
+*   | ex02                  | BraiiiiiiinnnzzzZ         |
     | -------               | --------                  |
     | Turn-in directory     | ex02/                     |
-    | Files to turn-in      | Makefile, Account.cpp, Account.hpp, tests.cpp    |
+    | Files to turn-in      | Makefile<br>Zombie.cpp/hpp<br>newZombie.cpp<br>randomChump.cpp    |
     | Forbidden functions   | None                      |
     | Remarks               | n/a                       |
-    * It's your first day at _GlobalBanksters United_. 
-    After successfully completing the various recruitment process (thanks to this friend who had the good idea of showing you some _Microsoft Office_ tips), you've joined the dev team.
-    You know that your lightning installation of _Adobe Reader_ made a big impression.
-    This little extra made all the difference and enabled you to beat your enemies (yes, the other candidates)! You've done it!
-    * That's not all, but your manager has just given you a job. 
-    Your first mission: to __recreate a missing file__. Something has gone wrong and a source file has been deleted by mistake.
-    Unfortunately, your colleagues don't know Git and are using USB sticks to share the code.
-    It would make sense to get out of there now.
-    Despite this, you decide to stay and take up the challenge.
-    * You are sent some files. Compiling __tests.cpp__ confirms that the missing is __Account.cpp__.
-    Fortunately, the header file __Account.hpp__ is unharmed, as is a __log file__.
-    Perhaps you could use the latter to understand how the Account (bank account) class was implemented.
-    * You start to __remake the Account.cpp file__. In just a few minutes, you typed out some genius lines of C++.
-    After a few failed compilations, your program passes the tests. Its output corresponds perfectly to that contained in the log (except for the __timestamp__, which is bound to be different because the tests saved in the log were run long before you arrived).
-    Bloody hell, what a talent!
+    
+    *   First, implement a **`Zombie class`**.
+        *   It has a string private attribute name.
+        *   Add a member function **`void announce(void);`** to the **`Zombie class`**.
+            *   Zombies announce themselves as follows:
+                *   `<name>: BraiiiiiiinnnzzzZ...`
+                    *   Don’t print the angle brackets (< and >).
+                *   For a zombie named Foo, the message would be:
+                    *   `Foo: BraiiiiiiinnnzzzZ...`
+    *   Then, implement the two following functions:
+        *   **`Zombie* newZombie(std::string name);`**
+            *   It **creates a zombie**, **`name`** it, and **return it** so you can use it outside of the function scope.
+        *   **`void randomChump(std::string name);`**
+            *   It **creates a zombie**, **`name`** it, and the **zombie announces itself**.
+    *   Now, what is the actual point of the exercise?
+        *   You have to **determine in what case it’s better to allocate the zombies on the stack or heap**.
+        *   Zombies must be **destroyed** when you don’t need them anymore.
+        *   The **destructor** must **print a message with the `name` of the zombie** for debugging purposes.
 
 #### EPITECH Day 07 Objectifs
 [(Back to top)](#table-of-contents)
