@@ -5,17 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 20:20:06 by Paradis           #+#    #+#             */
-/*   Updated: 2024/08/28 15:50:44 by Paradis          ###   ########.fr       */
+/*   Created: 2024/08/28 17:20:59 by Paradis           #+#    #+#             */
+/*   Updated: 2024/08/29 17:01:15 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include <criterion/criterion.h>
 #include <criterion/new/assert.h>
 #include <criterion/redirect.h>
-#include <criterion/logging.h>
-#include <criterion/parameterized.h>
-#include <signal.h>
 
 #include "../../include/Pony.hpp"
 
@@ -59,4 +57,25 @@ Test(Pony, Test_Pony_setName_modify_name, .init = redirect_all_stdout)
     cr_assert(pony.getName() == "Pony");
     pony.setName("NewPony");
     cr_assert(pony.getName() == "NewPony");
+    // cr_assert(eq(str,"test", "test"));
+}
+
+Test(ponyOnTheStack, Test_Pony_PonyOnTheStack_isDefinied, .init = redirect_all_stdout)
+{
+    ponyOnTheStack("Chocolat");
+}
+
+Test(ponyOnTheStack,
+    Test_Pony_PonyOnTheStack_allocates_Pony_on_the_stack_with_output,
+    .init = redirect_all_stdout)
+{
+    {
+        ponyOnTheStack("Chocolat");
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Pony name: Chocolat is born!\n"
+        "Pony name: Chocolat is died!\n"
+    );
+    
 }
