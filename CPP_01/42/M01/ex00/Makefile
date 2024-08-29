@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 21:14:07 by Paradis           #+#    #+#              #
-#    Updated: 2024/08/28 15:53:50 by Paradis          ###   ########.fr        #
+#    Updated: 2024/08/29 17:37:41 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ INC_PATH	=	./include
 UT_PATH		=	./test
 
 
-NAME		=	
+NAME		=	Pony
 UT_NAME 	= 	test_$(NAME)
 ##############################################
 
@@ -28,7 +28,7 @@ INCFLAGS	+=	-I $(INC_PATH)
 CPPFLAGS	+= 	-Wall -Wextra -Werror -W -Wfatal-errors -std=c++98 $(INCFLAGS)
 
 # # Files sources
-SRCS		=	 \
+SRCS		=	$(SRC_PATH)/Pony.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp
@@ -49,7 +49,7 @@ all			:	$(NAME)
 $(NAME)		:	$(OBJS)
 				$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
-valgrind	:	$(NAME)
+VALGRIND	:	$(NAME)
 				@valgrind --leak-check=full --show-leak-kinds=all  --error-exitcode=1 ./$(NAME) 2>&1 | tee valgrind_output.log || true
 				@if ! grep -q "definitely lost" valgrind_output.log; \
 				then \

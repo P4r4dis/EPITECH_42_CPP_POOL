@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:20:59 by Paradis           #+#    #+#             */
-/*   Updated: 2024/08/29 17:07:33 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/08/29 17:13:09 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ Test(ponyOnTheHeap, Test_Pony_PonyOnTheHeap_isDefinied, .init = redirect_all_std
 }
 
 Test(ponyOnTheHeap,
-    Test_Pony_PonyOnTheHeap_allocates_Pony_on_the_stack_with_output,
+    Test_Pony_PonyOnTheHeap_allocates_Pony_on_the_Heap_with_output,
     .init = redirect_all_stdout)
 {
     {

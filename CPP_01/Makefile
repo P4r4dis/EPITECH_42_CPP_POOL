@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/08/28 15:54:26 by Paradis          ###   ########.fr        #
+#    Updated: 2024/08/29 18:00:25 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2024 Paradis
-## Last update Thu Aug 28 3:54:26 PM 2024 Paradis
+## Last update Fri Aug 29 6:00:25 PM 2024 Paradis
 ##
 
 ## RULES FOR EPITECH SCHOOL

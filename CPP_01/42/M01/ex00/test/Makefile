@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 21:14:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/08/28 20:41:14 by Paradis          ###   ########.fr        #
+#    Updated: 2024/08/29 17:35:16 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ NAME          	= 	test_Pony
 #############################################
 
 INCFLAGS     	+= 	-I $(INC_PATH)
-CRITFLAGS    	+=  --coverage -lcriterion -Wno-redundant-decls -Wno-unused-function
+CRITFLAGS    	+=  --coverage -lcriterion
 CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -std=c++11  $(INCFLAGS) $(CRITFLAGS)
 
 SRCS         	= 	$(SRC_PATH)/Pony.cpp \
