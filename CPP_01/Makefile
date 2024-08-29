@@ -6,12 +6,11 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/08/29 18:00:25 by Paradis          ###   ########.fr        #
+#    Updated: 2024/08/29 18:59:22 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ## RULES FOR 42 SCHOOL
-
 # **************************************************************************** #
 #																			   #
 #								42 EX00										   #
@@ -48,6 +47,43 @@
 42_valgrind_test_run_ex00		:	fclean
 									@$(MAKE) -s -C $(42_EX00_UT_PATH) VALGRIND
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+									
+# **************************************************************************** #
+#																			   #
+#								42 EX01										   #
+#																			   #
+# **************************************************************************** #
+42_EX01_PATH 					= 	./42/M01/ex01
+42_EX01_BIN_PATH 				= 	./42/M01/ex01/bin
+42_EX01_SRC_PATH				=	./42/M01/ex01/source
+42_EX01_INC_PATH				=	./42/M01/ex01/include
+42_EX01_UT_PATH					=	./42/M01/ex01/test
+
+42_EX01_NAME					=	memoryLeak
+
+42_EX01_UT_SRC					=	$(42_EX01_UT_PATH)/$(42_EX01_NAME)_test.cpp
+42_EX01_UT_NAME 				= 	test_$(42_EX01_NAME)
+
+42_EX01_SRC						=	$(42_EX01_SRC_PATH)/Megaphone.cpp \
+									$(42_EX01_BIN_PATH)/main.cpp
+42_EX01_OBJS					=	$(42_EX01_SRC:.cpp=.o)
+
+42_ex01 						: 	fclean
+									@$(MAKE) -C $(42_EX01_PATH)
+									$(42_EX01_PATH)/$(42_EX01_NAME)
+
+42_test_run_ex01				:	fclean
+									@$(MAKE) -s -C $(42_EX01_UT_PATH)
+									$(42_EX01_UT_PATH)/$(42_EX01_UT_NAME)
+									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+# @brave coverage.html
+
+42_valgrind_ex01 				: 	fclean
+									@$(MAKE) -C $(42_EX01_PATH) VALGRIND
+									
+42_valgrind_test_run_ex01		:	fclean
+									@$(MAKE) -s -C $(42_EX01_UT_PATH) VALGRIND
+									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 
 ##
 ## Makefile for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_01
@@ -56,14 +92,14 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2024 Paradis
-## Last update Fri Aug 29 6:00:25 PM 2024 Paradis
+## Last update Fri Aug 29 6:59:22 PM 2024 Paradis
 ##
 
 ## RULES FOR EPITECH SCHOOL
 
 # **************************************************************************** #
 #																			   #
-#								EPITECH EX00								   #
+#								EPITECH EX01								   #
 #																			   #
 # **************************************************************************** #
 
@@ -80,21 +116,21 @@ CLEAN							=	clean
 FCLEAN							=	fclean
 RM								=	rm -rf
 
-all								:	$(42_EX00_NAME)
+all								:	$(42_EX01_NAME)
 
-$(42_EX00_NAME)					: 	$(42_EX00_OBJS)
-									$(G++) $(CPPFLAGS) $(INCFLAGS)$(42_EX00_INC_PATH) $(42_EX00_OBJS) -o $(42_EX00_NAME)
+$(42_EX01_NAME)					: 	$(42_EX01_OBJS)
+									$(G++) $(CPPFLAGS) $(INCFLAGS)$(42_EX01_INC_PATH) $(42_EX01_OBJS) -o $(42_EX01_NAME)
 
 clean							:	
-									@$(MAKE) -s $(CLEAN) -C $(42_EX00_UT_PATH)
-									@$(MAKE) -s $(CLEAN) -C $(42_EX00_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX01_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX01_PATH)
 
 fclean							:	clean
-									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_UT_PATH)
-									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_PATH)
 
 tests_run						:	fclean \
-									42_test_run_ex00
+									42_test_run_ex01
 
 .PHONY							: 	all clean fclean re \
 									tests_run \

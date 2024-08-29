@@ -231,30 +231,25 @@ derived from your good old friend C, we have chosen the C++ language.
     *   In both cases, the **`Pony`** objects must not exist after the function hands off control.
     (Your main will also have to demonstrate this during the correction !)
     ___
-*   | ex01                  | My Awesome PhoneBook      |
+*   | ex01                  | Plumbing problem          |
     | -------               | --------                  |
     | Turn-in directory     | ex01/                     |
-    | Files to turn-in      | Makefile, *.cpp, *.hpp    |
+    | Files to turn-in      | Makefile<br>ex01.cpp/hpp  |
     | Forbidden functions   | None                      |
     | Remarks               | n/a                       |
+    *   Again, a simple exercise.
+    *   You must turn in the following function, after **correcting the memory leak** contained in it.
+    *   Of course, you must play with the **memory allocation/deallocation** here.
+    *   Simply re-moving the variable, or otherwise fiddling around the problem without actually sorting it out, will be considered a wrong answer...
 
-    Welcome in the 80s and its unbelievable technology !
-    * Write a program that behaves like a crappy awesome phonebook software. Please take some time to give your executable a relevant name.
-    * When the program starts, the user is prompted for input: you should accept the __ADD command__, the __SEARCH command__ or the __EXIT command__. Any other input is discarded.
-    * The program __starts empty (no contacts)__, __doesn’t use any dynamic allocation__ and can’t store more than __8 contacts__. If the user tries to add a 9th contact, replace the oldest with this one.
-    * If the command is __EXIT__:
-        * The program quits and the contacts are lost forever.
-    * Else if the command is __ADD__:
-        * The program will prompt the user to __input a new contact’s informations__, one field at a time, until every field is accounted for.
-        * A contact is defined by the following fields : __first name, last name, nickname, login, postal address, email address, phone number, birthday date, favorite meal, underwear color and darkest secret__.
-        * A contact __MUST__ be represented as an __instance of a class__ in your code. You’re free to design the class as you like, but the peer evaluation will check the consistency of your choices. Go look at today’s videos again if you don’t understand what I mean (and I don’t mean "use everything" before you ask).
-    * Else if the command is __SEARCH__:
-        * The program will display a list of the available non-empty contacts in 4 columns : __index, first name, last name and nickname__.
-        * Each column __must be 10 chars wide, right aligned and separated by a ’|’ character__. Any output longer than the columns’ width is truncated and the last displayable character is replaced by a dot (’.’).
-        * Then the program will prompt again for the index of the desired entry and displays the contact’s information, one field per line. If the input makes no sense, define a relevant behavior.
-    * Else the input is __discarded__.
-    * When a command has been correctly executed, the program waits for another __ADD or SEARCH command until an EXIT command__.
-    * Once done, ask students around you to test your ADD command. That way you’ll know their darkest secret by using the SEARCH command after they left, which is obviously the only relevant part of this exercice. They will have no clue of your evil plot, huehehe.
+    *   
+        ```C++
+        void memoryLeak()
+        {
+            std::string* panthere = new std::string("String panthere");
+            std::cout << *panthere << std::endl;
+        }
+        ```
     ___
 
 *   | ex02                  | The Job Of Your Dreams    |
