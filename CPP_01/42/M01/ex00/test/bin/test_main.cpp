@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:20:59 by Paradis           #+#    #+#             */
-/*   Updated: 2024/08/29 17:01:15 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/08/29 17:07:33 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ Test(Pony, Test_Pony_setName_modify_name, .init = redirect_all_stdout)
     cr_assert(pony.getName() == "Pony");
     pony.setName("NewPony");
     cr_assert(pony.getName() == "NewPony");
-    // cr_assert(eq(str,"test", "test"));
 }
 
 Test(ponyOnTheStack, Test_Pony_PonyOnTheStack_isDefinied, .init = redirect_all_stdout)
@@ -71,6 +70,26 @@ Test(ponyOnTheStack,
 {
     {
         ponyOnTheStack("Chocolat");
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Pony name: Chocolat is born!\n"
+        "Pony name: Chocolat is died!\n"
+    );
+    
+}
+
+Test(ponyOnTheHeap, Test_Pony_PonyOnTheHeap_isDefinied, .init = redirect_all_stdout)
+{
+    ponyOnTheHeap("Chocolat");
+}
+
+Test(ponyOnTheHeap,
+    Test_Pony_PonyOnTheHeap_allocates_Pony_on_the_stack_with_output,
+    .init = redirect_all_stdout)
+{
+    {
+        ponyOnTheHeap("Chocolat");
     }
     cr_assert_stdout_eq_str
     (

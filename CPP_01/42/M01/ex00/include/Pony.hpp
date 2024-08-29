@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:36:16 by Paradis           #+#    #+#             */
-/*   Updated: 2024/08/28 21:17:59 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/08/29 17:09:25 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@
     };
 
     void            ponyOnTheStack(std::string ponyName);
+    void            ponyOnTheHeap(std::string ponyName);
 #endif  //          !_PONY_HPP__
     

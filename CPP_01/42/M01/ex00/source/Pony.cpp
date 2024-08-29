@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:38:58 by Paradis           #+#    #+#             */
-/*   Updated: 2024/08/28 21:29:25 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/08/29 17:08:42 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,10 @@ void            Pony::setName(std::string name)
 void            ponyOnTheStack(std::string ponyName)
 {
     Pony        pony(ponyName);
+}
+
+void            ponyOnTheHeap(std::string ponyName)
+{
+    Pony        *pony = new Pony(ponyName);
+    delete pony;
 }
