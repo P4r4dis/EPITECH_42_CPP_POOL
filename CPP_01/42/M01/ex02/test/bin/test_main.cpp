@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:20:59 by Paradis           #+#    #+#             */
-/*   Updated: 2024/08/30 15:41:46 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/08/30 16:10:38 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,20 @@ Test(Zombie, Test_Zombie_announce_output, .init = redirect_all_stdout)
         "unknown: BraiiiiiiinnnzzzZ...\n"
     );
 }
+
+Test(newZombie, Test_newZombie_isDefinied, .init = redirect_all_stdout)
+{
+    newZombie("unknown");
+}
+
+Test(newZombie, Test_newZombie_created_outside_of_scope, .init = redirect_all_stdout)
+{
+    Zombie  *ptrZombie = nullptr;
+    
+    ptrZombie = newZombie("unknown");
+    cr_assert(ptrZombie->getName() == "unknown");
+}
+
 // Test(memoryLeak, Test_memoryLeak_output, .init = redirect_all_stdout)
 // {
 //     memoryLeak();

@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:32:03 by Paradis           #+#    #+#             */
-/*   Updated: 2024/08/30 15:42:11 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/08/30 15:54:33 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,6 @@
         private:
             std::string _name;
     };
+
+    Zombie              *newZombie(std::string name);
 #endif //               !_ZOMBIE_HPP__
