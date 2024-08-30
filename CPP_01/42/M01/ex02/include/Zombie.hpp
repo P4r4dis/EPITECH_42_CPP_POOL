@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:32:03 by Paradis           #+#    #+#             */
-/*   Updated: 2024/08/29 20:47:14 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/08/30 15:42:11 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
             std::string getName(void) const;
 
             void        setName(std::string name);
+
+            void        announce(void);
         private:
             std::string _name;
     };

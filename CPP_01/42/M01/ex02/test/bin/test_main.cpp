@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:20:59 by Paradis           #+#    #+#             */
-/*   Updated: 2024/08/29 21:05:27 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/08/30 15:41:46 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,31 @@ Test(Zombie, Test_Zombie_setName_correctly, .init = redirect_all_stdout)
     zombie.setName("newName");
     cr_assert(zombie.getName() == "newName");
 }
+
+Test(Zombie, Test_Zombie_announce_isDefinied, .init = redirect_all_stdout)
+{
+    Zombie  zombie("unknown");
+
+    zombie.announce();
+}
+
+Test(Zombie, Test_Zombie_announce_output, .init = redirect_all_stdout)
+{
+    Zombie  zombie("unknown");
+
+    zombie.announce();
+
+    cr_assert_stdout_eq_str
+    (
+        "unknown: BraiiiiiiinnnzzzZ...\n"
+    );
+}
 // Test(memoryLeak, Test_memoryLeak_output, .init = redirect_all_stdout)
 // {
 //     memoryLeak();
 
-//     cr_assert_stdout_eq_str
-//     (
-//         "String panthere\n"
-//     );
+    // cr_assert_stdout_eq_str
+    // (
+    //     "String panthere\n"
+    // );
 // }
