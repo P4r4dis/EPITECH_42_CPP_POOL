@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Fri Jul 19 6:35:05 PM 2024 Paradis
-## Last update Tue Aug 26 4:11:53 PM 2024 Paradis
+## Last update Sat Aug 30 5:22:14 PM 2024 Paradis
 ##
 
 # # Compilateur
@@ -50,7 +50,7 @@ $(NAME)		:	$(OBJS)
 
 VALGRIND	:	$(OBJS)
 				$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME)
-				@valgrind --leak-check=full --show-leak-kinds=all  --error-exitcode=1 ./$(NAME) $(FILE_TEST) 2>&1 | tee valgrind_output.log || true
+				@valgrind --trace-children=yes --quiet --leak-check=full --show-leak-kinds=all  --error-exitcode=1 ./$(NAME) $(FILE_TEST) 2>&1 | tee valgrind_output.log || true
 				@if ! grep -q "definitely lost" valgrind_output.log; \
 				then \
 					echo -e "\033[32mNo memory leaks detected, running binary...\033[0m"; \

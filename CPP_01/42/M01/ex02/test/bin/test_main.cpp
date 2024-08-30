@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:20:59 by Paradis           #+#    #+#             */
-/*   Updated: 2024/08/30 16:13:36 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/08/30 18:21:15 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ Test(Zombie, Test_Zombie_announce_output, .init = redirect_all_stdout)
 
 Test(newZombie, Test_newZombie_isDefinied, .init = redirect_all_stdout)
 {
-    newZombie("unknown");
+    Zombie  *ptrZombie = nullptr;
+    
+    ptrZombie = newZombie("unknown");
+    delete ptrZombie;
 }
 
 Test(newZombie, Test_newZombie_created_outside_of_scope, .init = redirect_all_stdout)
@@ -87,14 +90,19 @@ Test(newZombie, Test_newZombie_created_outside_of_scope, .init = redirect_all_st
     
     ptrZombie = newZombie("unknown");
     cr_assert(ptrZombie->getName() == "unknown");
+    delete ptrZombie;
 }
 
-// Test(memoryLeak, Test_memoryLeak_output, .init = redirect_all_stdout)
-// {
-//     memoryLeak();
+Test(randomChump, Test_randomChump_isDefinied, .init = redirect_all_stdout)
+{
+    randomChump("unknown");
+}
 
-    // cr_assert_stdout_eq_str
-    // (
-    //     "String panthere\n"
-    // );
-// }
+Test(randomChump, Test_randomChump_output, .init = redirect_all_stdout)
+{
+    randomChump("unknown");
+    cr_assert_stdout_eq_str
+    (
+        "unknown: BraiiiiiiinnnzzzZ...\n"
+    );
+}

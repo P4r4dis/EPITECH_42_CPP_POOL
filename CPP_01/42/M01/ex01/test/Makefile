@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 21:14:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/08/29 18:56:35 by Paradis          ###   ########.fr        #
+#    Updated: 2024/08/30 17:22:14 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ $(NAME)			: 	$(OBJS)
 					$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
 VALGRIND		:	$(NAME)
-					@valgrind --leak-check=full --show-leak-kinds=all  --error-exitcode=1 ./$(NAME) 2>&1 | tee valgrind_output.log || true
+					@valgrind --trace-children=yes --quiet --leak-check=full --show-leak-kinds=all  --error-exitcode=1 ./$(NAME) 2>&1 | tee valgrind_output.log || true
 					@if ! grep -q "definitely lost" valgrind_output.log; \
 					then \
 						echo -e "\033[32mNo memory leaks detected, running unit tests...\033[0m"; \
