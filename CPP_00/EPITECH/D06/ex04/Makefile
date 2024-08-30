@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue Jul 30 5:30:32 PM 2024 Paradis
-## Last update Sat Aug 30 5:22:14 PM 2024 Paradis
+## Last update Sat Aug 30 6:58:43 PM 2024 Paradis
 ##
 
 
@@ -23,7 +23,7 @@ UT_NAME 	= 	test_$(NAME)
 
 # # Options de compilation
 INCFLAGS	+=	-I $(INC_PATH)
-CPPFLAGS	+= 	-Wall -Wextra -Werror -W -Wfatal-errors -std=c++98 $(INCFLAGS)
+CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -std=c++98 $(INCFLAGS)
 
 # # Files sources
 SRCS		=	$(SRC_PATH)/SickKoala.cpp \

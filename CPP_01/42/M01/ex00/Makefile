@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 21:14:07 by Paradis           #+#    #+#              #
-#    Updated: 2024/08/30 17:22:14 by Paradis          ###   ########.fr        #
+#    Updated: 2024/08/30 18:58:43 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ UT_NAME 	= 	test_$(NAME)
 
 # # Options de compilation
 INCFLAGS	+=	-I $(INC_PATH)
-CPPFLAGS	+= 	-Wall -Wextra -Werror -W -Wfatal-errors -std=c++98 $(INCFLAGS)
+CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -std=c++98 $(INCFLAGS)
 
 # # Files sources
 SRCS		=	$(SRC_PATH)/Pony.cpp \
