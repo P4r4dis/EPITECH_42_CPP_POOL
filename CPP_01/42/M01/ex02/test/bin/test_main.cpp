@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:20:59 by Paradis           #+#    #+#             */
-/*   Updated: 2024/08/30 18:21:15 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/08/30 18:35:34 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,18 @@ Test(Zombie, Test_Zombie_class_isDefinied, .init = redirect_all_stdout)
 {
     Zombie  zombie("unknown");
 }
+
+Test(Zombie, Test_Zombie_destructor_output, .init = redirect_all_stdout)
+{
+    {
+        Zombie  zombie("unknown");
+    }
+    cr_assert_stdout_eq_str
+    (
+        "unknown: Destroyed!\n"
+    );
+}
+
 
 Test(Zombie, Test_Zombie_getName_isDefinied, .init = redirect_all_stdout)
 {
@@ -66,13 +78,15 @@ Test(Zombie, Test_Zombie_announce_isDefinied, .init = redirect_all_stdout)
 
 Test(Zombie, Test_Zombie_announce_output, .init = redirect_all_stdout)
 {
-    Zombie  zombie("unknown");
+    {
+        Zombie  zombie("unknown");
 
-    zombie.announce();
-
+        zombie.announce();
+    }
     cr_assert_stdout_eq_str
     (
         "unknown: BraiiiiiiinnnzzzZ...\n"
+        "unknown: Destroyed!\n"
     );
 }
 
@@ -104,5 +118,6 @@ Test(randomChump, Test_randomChump_output, .init = redirect_all_stdout)
     cr_assert_stdout_eq_str
     (
         "unknown: BraiiiiiiinnnzzzZ...\n"
+        "unknown: Destroyed!\n"
     );
 }
