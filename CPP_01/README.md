@@ -40,6 +40,11 @@ ___
             *   [Delete a single instance with **`delete`** Operator](#dynamic-memory-allocation-delete-single-instance-anchor)
             *  [Delete Dynamic Arrays with **`delete`** Operator](#dynamic-memory-allocation-delete-dynamic-array-anchor)
         *   [**`new`** and **`delete`** Operator Complete Example](#dynamic-memory-allocation-example-anchor)
+    *   [Reference **`&`** Operator](#reference--operator)
+        *   [Definition](#reference-definition)
+        *   [Reference vs Pointer](#reference-reference-vs-pointer)
+        *   [Types of References](#reference-types)
+        *   [Usage of References](#reference-usage)
     *   Parametric Polymorphism // Todo
     *   Default values // Todo
     *   namespaces // Todo
@@ -293,6 +298,31 @@ ___
         *   Implement your own tests to ensure your **`zombieHorde()`** function works as expected.
         *   Try to call **`announce()`** for each one of the zombies.
         *   Don’t forget to **delete all the zombies** and check for **memory leaks**.
+___
+*   | ex04                  | HI THIS IS BRAIN          |
+    | -------               | --------                  |
+    | Turn-in directory     | ex04/                     |
+    | Files to turn-in      | Makefile<br>main.cpp      |
+    | Forbidden functions   | None                      |
+    | Remarks               | n/a                       |
+
+    *   Write a program that contains:
+        *   A **string variable initialized to "`HI THIS IS BRAIN`"**.
+        *   **`stringPTR`**: A pointer to the string.
+        *   **`stringREF`**: A reference to the string.
+    *   Your program has to print:
+        *   The **memory address** of the string variable.
+        *   The **memory address** held by **`stringPTR`**.
+        *   The **memory address** held by **`stringREF`**.
+    *   And then:
+        *   The **value** of the string variable.
+        *   The **value** pointed to by **`stringPTR`**.
+        *   The **value** pointed to by **`stringREF`**.
+
+    *   That’s all, no tricks.
+    *   **The goal of this exercise is to demystify references which can
+seem completely new**.
+    *   Although there are some little differences, this is another syntax for something you already do: **address manipulation**.
 ___
 #### EPITECH Day 07 Objectifs
 [(Back to top)](#table-of-contents)
@@ -676,6 +706,11 @@ __Exercise 06 - Hospital__
         *   [Delete a single instance with **`delete`** Operator](#dynamic-memory-allocation-delete-single-instance-anchor)
         *  [Delete Dynamic Arrays with **`delete`** Operator](#dynamic-memory-allocation-delete-dynamic-array-anchor)
     *   [**`new`** and **`delete`** Operator Complete Example](#dynamic-memory-allocation-example-anchor)
+*   [Reference **`&`** Operator](#reference--operator)
+    *   [Definition](#reference-definition)
+    *   [Reference vs Pointer](#reference-reference-vs-pointer)
+    *   [Types of References](#reference-types)
+    *   [Usage of References](#reference-usage)
 *   [Input/Output](#inputoutput)
     *   [C++ Input/Output Library](#c-inputoutput-library)
     *   [**`IOStream`**](#iostream)
@@ -1021,9 +1056,110 @@ ___
         Student Bob destroyed! // Automatically free, no need delete operator
         ```
 ___
+### Reference `&` Operator
+[(Back to top)](#table-of-contents)
+[(Back to Key Learnings)](#key-learnings)
+*   **<a id="reference-definition"></a>Definition:**
+    *   A reference is defined using the **`&`** operator.
+    *   A reference in C++ is an **alias** for an existing variable.
+    *   A reference is a **constant pointer**, which is **always dereferenced** and a reference is **never `NULL` / `nullptr`**.
+    *   **Syntax:**
+        ```C++
+        int a = 5;
+        int& ref = a; // 'ref' is a reference to 'a'
+        ```
+*   **<a id="reference-reference-vs-pointer"></a>Reference vs Pointer:**
+    *   **Pointers**:
+        *   Can be **reassigned to point to different variables**.
+        *   They can also be **`nullptr`**.
+        *   You have to **dereferenced pointer to have access to value**.
+    *   **References**:
+        *   **Cannot be reassigned once initialized**.
+        *   **They are always bound to the variable they were initialized with**.
+        *   A reference is **always dereferenced**.
+    *   **Example**:
+        ```C++
+        int y = 5;
+        int* p = &y;
+        int& r = y;
+        *p = 10;   // changes y to 10
+        r = 15;    // also changes y to 15
+        ```
+*   **<a id="reference-types"></a>Types of References:**
+    *   **Lvalue References**:
+        *   **Definition**:
+            *   The standard **reference** type that binds to **lvalues** (variables with a specific memory location).
+            *   **Example**:
+                ```C++
+                int x = 100;
+                int& ref = x;  // lvalue reference
+                ```
+    *   **Rvalue References**:
+        *   **Definition**:
+            *   Introduced in **C++11** to enable **`move` semantics**.
+            *   They **bind** to **rvalues** (temporary objects).
+            *   **Rvalue references** are used to **optimize performance** by enabling **`move` semantics**.
+        *   **Syntax / Example**:
+            ```C++
+            int&& rref = 10;  // rvalue reference to a temporary integer
+            void process(int&& value) {
+                // Do something with value
+            }
 
+            process(20);  // 20 is an rvalue and optimize performance by move semantic
+            ```
+    *   **Const References**:
+        *   **Definition**:
+            *   Used to create a **read-only reference** to a variable.
+            *   You **cannot modify the value of the variable through a const reference**.
+        *   **Syntax / Example**:
+            ```C++
+            const int x = 10;
+            const int& ref = x;
+            // ERROR:
+            // ref = 6; ref is const, impossible to modify the value.
+            ```
+*   **<a id="reference-usage"></a>Usage of References:**
+    *   **Passing by Reference**:
+        *   **Function Arguments**:
+            *   **Non-const Reference**:
+                *   Allows **modification** of the **argument**.
+                *   **Syntax / Example**:
+                    ```C++
+                    void increment(int& value) {
+                        value++;
+                    }
 
-    
+                    int num = 5;
+                    increment(num);  // num becomes 6
+                    ```
+            *   **Const Reference**:
+                *   **Prevents modification** of the argument.
+                *   Useful for passing large objects to **avoid copying**.
+                *   **Syntax / Example**:
+                    ```C++
+                    void print(const std::string& str) {
+                        std::cout << str << std::endl;
+                    }
+
+                    std::string text = "Hello, World!";
+                    print(text);  // text remains unchanged\
+                    ```
+    *   **Returning by Reference**:
+        *   **Returning by Reference**:
+            *   Can be used to **return** a **reference to a variable or object**.
+            *   Be careful not to **return a reference to a local variable as it will be destroyed once the function exits**.
+            *   **Syntax / Example**:
+                ```C++
+                int global = 100;
+
+                int& getGlobal() {
+                    return global;
+                }
+
+                int& ref = getGlobal();
+                ```
+___
 
 ### Input/Output
 [(Back to top)](#table-of-contents)
