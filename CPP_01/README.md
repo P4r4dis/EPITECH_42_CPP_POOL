@@ -276,7 +276,24 @@ derived from your good old friend C, we have chosen the C++ language.
         *   You have to **determine in what case it’s better to allocate the zombies on the stack or heap**.
         *   Zombies must be **destroyed** when you don’t need them anymore.
         *   The **destructor** must **print a message with the `name` of the zombie** for debugging purposes.
-
+___
+*   | ex03                  | Moar brainz!              |
+    | -------               | --------                  |
+    | Turn-in directory     | ex03/                     |
+    | Files to turn-in      | Makefile<br>Zombie.cpp/hpp<br>newZombie.cpp<br>randomChump.cpp<br>zombieHorde.cpp    |
+    | Forbidden functions   | None                      |
+    | Remarks               | n/a                       |
+    
+    *   Time to create a **horde of Zombies**!
+    *   Implement the following function in the appropriate file:
+        *   **`Zombie* zombieHorde(int N, std::string name);`**
+        *   It must **allocate N Zombie objects in a single allocation**.
+        *   Then, it has to **initialize** the zombies, giving each one of them the **`name`** passed as parameter.
+        *   The function **returns a pointer to the first zombie**.
+        *   Implement your own tests to ensure your **`zombieHorde()`** function works as expected.
+        *   Try to call **`announce()`** for each one of the zombies.
+        *   Don’t forget to **delete all the zombies** and check for **memory leaks**.
+___
 #### EPITECH Day 07 Objectifs
 [(Back to top)](#table-of-contents)
 
