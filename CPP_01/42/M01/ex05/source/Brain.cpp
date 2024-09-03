@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:03:50 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/03 17:39:38 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/03 18:06:52 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Brain::Brain(void)
 Brain::~Brain(void)
 {}
 
-std::string     Brain::identify(void)
+std::string     Brain::identify(void) const
 {
     std::ostringstream oss;
     std::string str;

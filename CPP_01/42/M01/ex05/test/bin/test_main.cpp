@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:20:59 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/03 17:44:51 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/03 18:08:47 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,18 @@ Test(Brain, Test_Brain_identify_return_validAddress)//, .init = redirect_all_std
 Test(Human, Test_Human_CTOR_isDefined, .init = redirect_all_stdout)
 {
     Human   human;
+}
+
+Test(Human, Test_Human_identify_isDefined, .init = redirect_all_stdout)
+{
+    Human   human;
+
+    human.identify();
+}
+
+Test(Human, Test_Human_identify_calls_Brain_identify_return_validAddress)//, .init = redirect_all_stdout)
+{
+    Human   human;
+
+    cr_assert(human.identify().substr(0, 2) == "0x");
 }
