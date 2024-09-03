@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 20:17:31 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/03 20:38:12 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/03 21:00:32 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@
 
             void            setName(std::string name);
             void            setWeapon(const Weapon &weapon);
+
+            void            attack(void) const;
         private:
             std::string     _name;
-            const Weapon    _weapon;
+            Weapon    _weapon;
 
     };
 #endif //               !_HUMANA_HPP__

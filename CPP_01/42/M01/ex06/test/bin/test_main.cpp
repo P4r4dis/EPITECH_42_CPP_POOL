@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:20:59 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/03 20:52:50 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/03 21:05:31 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void redirect_all_stdout(void)
 
 Test(Weapon, Test_Weapon_CTOR_isDefined, .init = redirect_all_stdout)
 {
-    Weapon  weapon = Weapon("crude spiked club");
+    Weapon weapon = Weapon("crude spiked club");
 }
 
 Test(Weapon, Test_Weapon_getType_isDefined, .init = redirect_all_stdout)
@@ -61,13 +61,13 @@ Test(Weapon, Test_Weapon_setType_new_type_string, .init = redirect_all_stdout)
 Test(HumanA, Test_HumanA_CTOR_isDefined, .init = redirect_all_stdout)
 {
     Weapon weapon = Weapon("crude spiked club");
-    HumanA  humanA = HumanA("bob", weapon);
+    HumanA humanA = HumanA("bob", weapon);
 }
 
 Test(HumanA, Test_HumanA_getName_isDefined, .init = redirect_all_stdout)
 {
     Weapon weapon = Weapon("crude spiked club");
-    HumanA  humanA = HumanA("bob", weapon);
+    HumanA humanA = HumanA("bob", weapon);
 
     humanA.getName();
 }
@@ -83,7 +83,7 @@ Test(HumanA, Test_HumanA_getName_return_name, .init = redirect_all_stdout)
 Test(HumanA, Test_HumanA_setName_isDefined, .init = redirect_all_stdout)
 {
     Weapon weapon = Weapon("crude spiked club");
-    HumanA  humanA = HumanA("bob", weapon);
+    HumanA humanA = HumanA("bob", weapon);
 
     humanA.setName("boby");
 }
@@ -91,7 +91,7 @@ Test(HumanA, Test_HumanA_setName_isDefined, .init = redirect_all_stdout)
 Test(HumanA, Test_HumanA_setName_new_name, .init = redirect_all_stdout)
 {
     Weapon weapon = Weapon("crude spiked club");
-    HumanA  humanA = HumanA("bob", weapon);
+    HumanA humanA = HumanA("bob", weapon);
 
     cr_assert(humanA.getName() == "bob");
     humanA.setName("boby");
@@ -108,8 +108,49 @@ Test(HumanA, Test_HumanA_getWeapon_isDefined, .init = redirect_all_stdout)
 
 Test(HumanA, Test_HumanA_getWeapon_return_weapon, .init = redirect_all_stdout)
 {
-    const Weapon &weapon = Weapon("crude spiked club");
+    Weapon weapon = Weapon("crude spiked club");
     HumanA humanA = HumanA("bob", weapon);
 
+    cr_assert(humanA.getWeapon().getType() == "crude spiked club");
     cr_assert(humanA.getWeapon().getType() == weapon.getType());
+}
+
+Test(HumanA, Test_HumanA_setWeapon_isDefined, .init = redirect_all_stdout)
+{
+    Weapon weapon = Weapon("crude spiked club");\
+    Weapon weapon2 = Weapon("crude");
+
+    HumanA  humanA = HumanA("bob", weapon);
+
+    humanA.setWeapon(weapon2);
+}
+
+Test(HumanA, Test_HumanA_setWeapon_new_weapon, .init = redirect_all_stdout)
+{
+    Weapon weapon = Weapon("crude spiked club");
+    Weapon weapon2 = Weapon("crude");
+    HumanA humanA = HumanA("bob", weapon);
+
+    cr_assert(humanA.getWeapon().getType() == "crude spiked club");
+    humanA.setWeapon(weapon2);
+    cr_assert(humanA.getWeapon().getType() == "crude");
+}
+
+Test(HumanA, Test_HumanA_attack_isDefined, .init = redirect_all_stdout)
+{
+    Weapon weapon = Weapon("crude spiked club");
+    HumanA humanA = HumanA("bob", weapon);
+
+    humanA.attack();
+}
+
+Test(HumanA, Test_HumanA_attack_output, .init = redirect_all_stdout)
+{
+    Weapon weapon = Weapon("crude spiked club");
+    HumanA humanA = HumanA("bob", weapon);
+
+    humanA.attack();
+    cr_assert_stdout_eq_str(
+        "bob attacks with their crude spiked club\n"
+    );
 }
