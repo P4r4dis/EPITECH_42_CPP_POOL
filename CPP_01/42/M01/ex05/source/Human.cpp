@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Brain.hpp                                          :+:      :+:    :+:   */
+/*   Human.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/03 16:01:05 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/03 17:46:27 by Paradis          ###   ########.fr       */
+/*   Created: 2024/09/03 17:47:06 by Paradis           #+#    #+#             */
+/*   Updated: 2024/09/03 17:49:43 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef                 __BRAIN_HPP__
-    #define             __BRAIN_HPP__
+#include "../include/Human.hpp"
 
-    #include <string>
-    class               Brain
-    {
-        public:
-            Brain(void);
-            ~Brain(void);
+Human::Human(void)
+{}
 
-            std::string identify(void);
-    };
-#endif //               !_BRAIN_HPP__
+Human::~Human(void)
+{}

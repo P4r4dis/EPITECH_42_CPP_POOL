@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2054/06/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/09/03 16:07:03 by Paradis          ###   ########.fr        #
+#    Updated: 2024/09/03 17:51:40 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -214,6 +214,7 @@
 42_EX05_UT_NAME 				= 	test_$(42_EX05_NAME)
 
 42_EX05_SRC						=	$(42_EX05_SRC_PATH)/Brain.cpp \
+									$(42_EX05_SRC_PATH)/Human.cpp \
 									$(42_EX05_BIN_PATH)/main.cpp
 42_EX05_OBJS					=	$(42_EX05_SRC:.cpp=.o)
 
@@ -241,7 +242,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2054 Paradis
-## Last update Wed Sep 3 4:07:03 PM 2024 Paradis
+## Last update Wed Sep 3 5:51:40 PM 2024 Paradis
 ##
 
 ## RULES FOR EPITECH SCHOOL

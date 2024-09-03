@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 21:14:07 by Paradis           #+#    #+#              #
-#    Updated: 2024/09/03 15:56:29 by Paradis          ###   ########.fr        #
+#    Updated: 2024/09/03 17:51:21 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,9 @@ INCFLAGS	+=	-I $(INC_PATH)
 CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -std=c++98 $(INCFLAGS)
 
 # # Files sources
-SRCS		=	$(BIN_PATH)/main.cpp
+SRCS		=	$(SRC_PATH)/Brain.cpp \
+				$(SRC_PATH)/Human.cpp \
+				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp
 
