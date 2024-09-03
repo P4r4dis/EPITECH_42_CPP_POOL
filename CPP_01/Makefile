@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2054/06/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/09/03 17:51:40 by Paradis          ###   ########.fr        #
+#    Created: 2064/06/18 19:07:51 by Paradis           #+#    #+#              #
+#    Updated: 2024/09/03 19:44:12 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -235,21 +235,58 @@
 									@$(MAKE) -s -C $(42_EX05_UT_PATH) VALGRIND
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 
+# **************************************************************************** #
+#																			   #
+#								42 EX06										   #
+#																			   #
+# **************************************************************************** #
+42_EX06_PATH 					= 	./42/M01/ex06
+42_EX06_BIN_PATH 				= 	./42/M01/ex06/bin
+42_EX06_SRC_PATH				=	./42/M01/ex06/source
+42_EX06_INC_PATH				=	./42/M01/ex06/include
+42_EX06_UT_PATH					=	./42/M01/ex06/test
+
+42_EX06_NAME					=	weapon
+
+42_EX06_UT_SRC					=	$(42_EX06_UT_PATH)/$(42_EX06_NAME)_test.cpp
+42_EX06_UT_NAME 				= 	test_$(42_EX06_NAME)
+
+42_EX06_SRC						=	$(42_EX06_SRC_PATH)/Weapon.cpp \
+									$(42_EX06_BIN_PATH)/main.cpp
+42_EX06_OBJS					=	$(42_EX06_SRC:.cpp=.o)
+
+42_ex06 						: 	fclean
+									@$(MAKE) -C $(42_EX06_PATH)
+									$(42_EX06_PATH)/$(42_EX06_NAME)
+
+42_test_run_ex06				:	fclean
+									@$(MAKE) -s -C $(42_EX06_UT_PATH)
+									$(42_EX06_UT_PATH)/$(42_EX06_UT_NAME)
+									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+# @brave coverage.html
+
+42_valgrind_ex06 				: 	fclean
+									@$(MAKE) -C $(42_EX06_PATH) VALGRIND
+									
+42_valgrind_test_run_ex06		:	fclean
+									@$(MAKE) -s -C $(42_EX06_UT_PATH) VALGRIND
+									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+
 ##
-## Makefile for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_05
+## Makefile for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_06
 ##
 ## Made by Paradis
 ## Login   <Adil Denia>
 ##
-## Started on  Mon Aug 26 8:17:58 PM 2054 Paradis
-## Last update Wed Sep 3 5:51:40 PM 2024 Paradis
+## Started on  Mon Aug 26 8:17:58 PM 2064 Paradis
+## Last update Wed Sep 3 7:44:12 PM 2024 Paradis
 ##
 
 ## RULES FOR EPITECH SCHOOL
 
 # **************************************************************************** #
 #																			   #
-#								EPITECH EX05								   #
+#								EPITECH EX06								   #
 #																			   #
 # **************************************************************************** #
 
@@ -266,18 +303,18 @@ CLEAN							=	clean
 FCLEAN							=	fclean
 RM								=	rm -rf
 
-all								:	$(42_EX05_NAME)
+all								:	$(42_EX06_NAME)
 
-$(42_EX05_NAME)					: 	$(42_EX05_OBJS)
-									$(G++) $(CPPFLAGS) $(INCFLAGS)$(42_EX05_INC_PATH) $(42_EX05_OBJS) -o $(42_EX05_NAME)
+$(42_EX06_NAME)					: 	$(42_EX06_OBJS)
+									$(G++) $(CPPFLAGS) $(INCFLAGS)$(42_EX06_INC_PATH) $(42_EX06_OBJS) -o $(42_EX06_NAME)
 
 clean							:	
 									@$(MAKE) -s $(CLEAN) -C $(42_EX00_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX00_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_UT_PATH)
-									@$(MAKE) -s $(CLEAN) -C $(42_EX05_PATH)
-									@$(MAKE) -s $(CLEAN) -C $(42_EX05_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX06_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX06_UT_PATH)
 									
 
 fclean							:	clean
@@ -285,11 +322,11 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
-									@$(MAKE) -s $(FCLEAN) -C $(42_EX05_PATH)
-									@$(MAKE) -s $(FCLEAN) -C $(42_EX05_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX06_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX06_UT_PATH)
 
 tests_run						:	fclean \
-									42_test_run_ex05
+									42_test_run_ex06
 
 .PHONY							: 	all clean fclean re \
 									tests_run \
