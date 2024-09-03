@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:20:59 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/03 18:25:04 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/03 18:29:11 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <criterion/criterion.h>
 #include <criterion/new/assert.h>
 #include <criterion/redirect.h>
+
+#include <iostream>
 
 #include "../../include/Brain.hpp"
 #include "../../include/Human.hpp"
@@ -84,4 +86,13 @@ Test(Human, Test_Human_getBrain_return_same_address_of_Brain_Instance, .init = r
     const Brain &ref2 = human.getBrain();
 
     cr_assert_eq(&ref, &ref2);
+}
+
+Test(main, Test_main, .init = redirect_all_stdout)
+{
+    Human bob;
+    std::cout << bob.identify() << std::endl;
+    std::cout << bob.getBrain().identify() << std::endl;
+
+    cr_assert(bob.identify() == bob.getBrain().identify());
 }
