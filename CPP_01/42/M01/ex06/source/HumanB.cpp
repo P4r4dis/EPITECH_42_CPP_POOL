@@ -1,48 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.cpp                                         :+:      :+:    :+:   */
+/*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 20:25:41 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/03 21:14:08 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/03 21:33:24 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/HumanA.hpp"
+#include "../include/HumanB.hpp"
 #include <iostream>
 #include <string>
 
-HumanA::HumanA(std::string name, Weapon &weapon)    :   _name(name),
-                                                        _weapon(weapon)
+HumanB::HumanB(std::string name)    :   _name(name),
+                                        _weapon(NULL)
 {}
 
-HumanA::~HumanA(void)
+HumanB::~HumanB(void)
 {}
 
-std::string     HumanA::getName(void) const
+std::string     HumanB::getName(void) const
 {
     return _name;
 }
 
-void            HumanA::setName(std::string name)
+void            HumanB::setName(std::string name)
 {
     _name = name;
 }
 
-const Weapon    &HumanA::getWeapon(void) const
+const Weapon    *HumanB::getWeapon(void) const
 {
     return _weapon;
 }
 
-void            HumanA::setWeapon(Weapon &weapon)
+void            HumanB::setWeapon(Weapon &weapon)
 {
-    _weapon = weapon;
+    _weapon = &weapon;
 }
 
-void            HumanA::attack(void) const
+void            HumanB::attack(void) const
 {
-    std::cout   << _name << " attacks with their "
-                << _weapon.getType() << std::endl;
+    if (_weapon)
+        std::cout   << _name << " attacks with their "
+                << _weapon->getType() << std::endl;
+    else
+        return ;
 }

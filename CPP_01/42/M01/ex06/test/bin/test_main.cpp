@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:20:59 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/03 21:05:31 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/03 21:34:15 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 #include "../../include/Weapon.hpp"
 #include "../../include/HumanA.hpp"
+#include "../../include/HumanB.hpp"
 void redirect_all_stdout(void)
 {
     cr_redirect_stdout();
@@ -152,5 +153,102 @@ Test(HumanA, Test_HumanA_attack_output, .init = redirect_all_stdout)
     humanA.attack();
     cr_assert_stdout_eq_str(
         "bob attacks with their crude spiked club\n"
+    );
+}
+
+Test(HumanB, Test_HumanB_CTOR_isDefined, .init = redirect_all_stdout)
+{
+    HumanB humanB = HumanB("jim");
+}
+
+Test(HumanB, Test_HumanB_getName_isDefined, .init = redirect_all_stdout)
+{
+    HumanB humanB = HumanB("jim");
+
+    humanB.getName();
+}
+
+Test(HumanB, Test_HumanB_getName_return_name, .init = redirect_all_stdout)
+{
+    HumanB  humanB = HumanB("jim");
+
+    cr_assert(humanB.getName() == "jim");
+}
+
+Test(HumanB, Test_HumanB_setName_isDefined, .init = redirect_all_stdout)
+{
+    HumanB humanB = HumanB("jim");
+
+    humanB.setName("boby");
+}
+
+Test(HumanB, Test_HumanB_setName_new_name, .init = redirect_all_stdout)
+{
+    HumanB humanB = HumanB("jim");
+
+    cr_assert(humanB.getName() == "jim");
+    humanB.setName("boby");
+    cr_assert(humanB.getName() == "boby");
+}
+
+Test(HumanB, Test_HumanB_getWeapon_isDefined, .init = redirect_all_stdout)
+{
+    HumanB  humanB = HumanB("jim");
+
+    humanB.getWeapon();
+}
+
+Test(HumanB, Test_HumanB_getWeapon_return_weapon_NULL, .init = redirect_all_stdout)
+{
+    HumanB humanB = HumanB("jim");
+
+    cr_assert_null(humanB.getWeapon());
+}
+
+Test(HumanB, Test_HumanB_setWeapon_isDefined, .init = redirect_all_stdout)
+{
+    Weapon weapon = Weapon("some other type of club");
+    HumanB  humanB = HumanB("jim");
+
+    humanB.setWeapon(weapon);
+}
+
+Test(HumanB, Test_HumanB_setWeapon_new_weapon, .init = redirect_all_stdout)
+{
+    Weapon weapon = Weapon("some other type of club");
+    HumanB humanB = HumanB("jim");
+
+    cr_assert_null(humanB.getWeapon());
+    humanB.setWeapon(weapon);
+    cr_assert_not_null(humanB.getWeapon());
+    cr_assert(humanB.getWeapon()->getType() == "some other type of club");
+}
+
+Test(HumanB, Test_HumanB_attack_isDefined, .init = redirect_all_stdout)
+{
+    HumanB humanB = HumanB("jim");
+
+    humanB.attack();
+}
+
+Test(HumanB, Test_HumanB_attack_output_with_no_weapon, .init = redirect_all_stdout)
+{
+    HumanB humanB = HumanB("jim");
+
+    humanB.attack();
+    cr_assert_stdout_eq_str(
+        ""
+    );
+}
+
+Test(HumanB, Test_HumanB_attack_output, .init = redirect_all_stdout)
+{
+    Weapon weapon = Weapon("some other type of club");
+    HumanB humanB = HumanB("jim");
+
+    humanB.setWeapon(weapon);
+    humanB.attack();
+    cr_assert_stdout_eq_str(
+        "jim attacks with their some other type of club\n"
     );
 }

@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 21:14:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/09/03 20:15:24 by Paradis          ###   ########.fr        #
+#    Updated: 2024/09/03 21:27:15 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -std=c++11  $(INCFL
 
 SRCS         	= 	$(SRC_PATH)/Weapon.cpp \
 					$(SRC_PATH)/HumanA.cpp \
+					$(SRC_PATH)/HumanB.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)
