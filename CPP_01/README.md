@@ -324,6 +324,27 @@ ___
 seem completely new**.
     *   Although there are some little differences, this is another syntax for something you already do: **address manipulation**.
 ___
+*   | ex05                  | HI BRAIN THIS IS HUMAN    |
+    | -------               | --------                  |
+    | Turn-in directory     | ex05/                     |
+    | Files to turn-in      | Makefile<br>Brain.cpp/hpp<br>Human.cpp/hpp<br>main.cpp      |
+    | Forbidden functions   | None                      |
+    | Remarks               | n/a                       |
+    *   Create a **Brain class**, with whatever you think befits a brain.
+        *   It will have an **`identify()`** function, that returns a **`string`** containing the brain’s **address in memory**, in **hexadecimal** format, prefixed by **0x (For example, "0x194F87EA")**.
+    *   Then, make a **Human class**, that has a **constant Brain attribute**, with the same lifetime.
+        *   It has an **`identify()`** function, that just calls the **`identify()`** function of its **Brain** and **returns its result**.
+    *   Now, make it so this code compiles and displays two identical adresses :
+        ```C++
+        int main()
+        {
+            Human bob;
+            std::cout << bob.identify() << std::endl;
+            std::cout << bob.getBrain().identify() << std::endl;
+        }
+        ```
+        *   This code must be turned in as your **main**, and whatever you add to the **Human** or **Brain classes** in order to make it work must be **justified** (With another argument than "Er, yeah, well, i fiddled with it until it worked").
+___
 #### EPITECH Day 07 Objectifs
 [(Back to top)](#table-of-contents)
 

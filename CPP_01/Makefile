@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2044/06/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/09/02 18:24:40 by Paradis          ###   ########.fr        #
+#    Created: 2054/06/18 19:07:51 by Paradis           #+#    #+#              #
+#    Updated: 2024/09/03 16:07:03 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -132,12 +132,15 @@
 42_EX03_INC_PATH				=	./42/M01/ex03/include
 42_EX03_UT_PATH					=	./42/M01/ex03/test
 
-42_EX03_NAME					=	zombie
+42_EX03_NAME					=	zombieHorde
 
 42_EX03_UT_SRC					=	$(42_EX03_UT_PATH)/$(42_EX03_NAME)_test.cpp
 42_EX03_UT_NAME 				= 	test_$(42_EX03_NAME)
 
 42_EX03_SRC						=	$(42_EX03_SRC_PATH)/Zombie.cpp \
+									$(42_EX03_SRC_PATH)/newZombie.cpp \
+									$(42_EX03_SRC_PATH)/randomChump.cpp \
+									$(42_EX03_SRC_PATH)/zombieHorde.cpp \
 									$(42_EX03_BIN_PATH)/main.cpp
 42_EX03_OBJS					=	$(42_EX03_SRC:.cpp=.o)
 
@@ -169,7 +172,7 @@
 42_EX04_INC_PATH				=	./42/M01/ex04/include
 42_EX04_UT_PATH					=	./42/M01/ex04/test
 
-42_EX04_NAME					=	zombie
+42_EX04_NAME					=	addressMemory
 
 42_EX04_UT_SRC					=	$(42_EX04_UT_PATH)/$(42_EX04_NAME)_test.cpp
 42_EX04_UT_NAME 				= 	test_$(42_EX04_NAME)
@@ -194,21 +197,58 @@
 									@$(MAKE) -s -C $(42_EX04_UT_PATH) VALGRIND
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 
+# **************************************************************************** #
+#																			   #
+#								42 EX05										   #
+#																			   #
+# **************************************************************************** #
+42_EX05_PATH 					= 	./42/M01/ex05
+42_EX05_BIN_PATH 				= 	./42/M01/ex05/bin
+42_EX05_SRC_PATH				=	./42/M01/ex05/source
+42_EX05_INC_PATH				=	./42/M01/ex05/include
+42_EX05_UT_PATH					=	./42/M01/ex05/test
+
+42_EX05_NAME					=	brain
+
+42_EX05_UT_SRC					=	$(42_EX05_UT_PATH)/$(42_EX05_NAME)_test.cpp
+42_EX05_UT_NAME 				= 	test_$(42_EX05_NAME)
+
+42_EX05_SRC						=	$(42_EX05_SRC_PATH)/Brain.cpp \
+									$(42_EX05_BIN_PATH)/main.cpp
+42_EX05_OBJS					=	$(42_EX05_SRC:.cpp=.o)
+
+42_ex05 						: 	fclean
+									@$(MAKE) -C $(42_EX05_PATH)
+									$(42_EX05_PATH)/$(42_EX05_NAME)
+
+42_test_run_ex05				:	fclean
+									@$(MAKE) -s -C $(42_EX05_UT_PATH)
+									$(42_EX05_UT_PATH)/$(42_EX05_UT_NAME)
+									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+# @brave coverage.html
+
+42_valgrind_ex05 				: 	fclean
+									@$(MAKE) -C $(42_EX05_PATH) VALGRIND
+									
+42_valgrind_test_run_ex05		:	fclean
+									@$(MAKE) -s -C $(42_EX05_UT_PATH) VALGRIND
+									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+
 ##
-## Makefile for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_04
+## Makefile for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_05
 ##
 ## Made by Paradis
 ## Login   <Adil Denia>
 ##
-## Started on  Mon Aug 26 8:17:58 PM 2044 Paradis
-## Last update Tue Sep 2 6:24:40 PM 2024 Paradis
+## Started on  Mon Aug 26 8:17:58 PM 2054 Paradis
+## Last update Wed Sep 3 4:07:03 PM 2024 Paradis
 ##
 
 ## RULES FOR EPITECH SCHOOL
 
 # **************************************************************************** #
 #																			   #
-#								EPITECH EX04								   #
+#								EPITECH EX05								   #
 #																			   #
 # **************************************************************************** #
 
@@ -225,18 +265,18 @@ CLEAN							=	clean
 FCLEAN							=	fclean
 RM								=	rm -rf
 
-all								:	$(42_EX04_NAME)
+all								:	$(42_EX05_NAME)
 
-$(42_EX04_NAME)					: 	$(42_EX04_OBJS)
-									$(G++) $(CPPFLAGS) $(INCFLAGS)$(42_EX04_INC_PATH) $(42_EX04_OBJS) -o $(42_EX04_NAME)
+$(42_EX05_NAME)					: 	$(42_EX05_OBJS)
+									$(G++) $(CPPFLAGS) $(INCFLAGS)$(42_EX05_INC_PATH) $(42_EX05_OBJS) -o $(42_EX05_NAME)
 
 clean							:	
 									@$(MAKE) -s $(CLEAN) -C $(42_EX00_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX00_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_UT_PATH)
-									@$(MAKE) -s $(CLEAN) -C $(42_EX04_PATH)
-									@$(MAKE) -s $(CLEAN) -C $(42_EX04_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX05_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX05_UT_PATH)
 									
 
 fclean							:	clean
@@ -244,11 +284,11 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
-									@$(MAKE) -s $(FCLEAN) -C $(42_EX04_PATH)
-									@$(MAKE) -s $(FCLEAN) -C $(42_EX04_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX05_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX05_UT_PATH)
 
 tests_run						:	fclean \
-									42_test_run_ex04
+									42_test_run_ex05
 
 .PHONY							: 	all clean fclean re \
 									tests_run \

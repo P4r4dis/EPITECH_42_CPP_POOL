@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 21:14:07 by Paradis           #+#    #+#              #
-#    Updated: 2024/09/02 18:23:03 by Paradis          ###   ########.fr        #
+#    Updated: 2024/09/03 15:54:55 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ INC_PATH	=	./include
 UT_PATH		=	./test
 
 
-NAME		=	zombie
+NAME		=	addressMemory
 UT_NAME 	= 	test_$(NAME)
 ##############################################
 

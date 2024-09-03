@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 21:14:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/09/02 14:47:54 by Paradis          ###   ########.fr        #
+#    Updated: 2024/09/03 15:53:05 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC_PATH		= 	../source
 INC_PATH 		= 	../include
 BIN_PATH 		= 	./bin
 
-NAME          	= 	test_zombie
+NAME          	= 	test_zombieHorde
 #############################################
 
 INCFLAGS     	+= 	-I $(INC_PATH)

@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 21:14:07 by Paradis           #+#    #+#              #
-#    Updated: 2024/09/03 15:14:44 by Paradis          ###   ########.fr        #
+#    Updated: 2024/09/03 15:56:29 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ INC_PATH	=	./include
 UT_PATH		=	./test
 
 
-NAME		=	zombieHorde
+NAME		=	brain
 UT_NAME 	= 	test_$(NAME)
 ##############################################
 
@@ -28,11 +28,7 @@ INCFLAGS	+=	-I $(INC_PATH)
 CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -std=c++98 $(INCFLAGS)
 
 # # Files sources
-SRCS		=	$(SRC_PATH)/Zombie.cpp \
-				$(SRC_PATH)/newZombie.cpp \
-				$(SRC_PATH)/randomChump.cpp \
-				$(SRC_PATH)/zombieHorde.cpp \
-				$(BIN_PATH)/main.cpp
+SRCS		=	$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp
 
