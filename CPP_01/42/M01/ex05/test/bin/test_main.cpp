@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:20:59 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/03 16:07:37 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/03 17:40:21 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <criterion/new/assert.h>
 #include <criterion/redirect.h>
 
-#include "../include/Brain.hpp"
+#include "../../include/Brain.hpp"
 
 void redirect_all_stdout(void)
 {
@@ -26,4 +26,18 @@ void redirect_all_stdout(void)
 Test(Brain, Test_Brain_CTOR_isDefined, .init = redirect_all_stdout)
 {
     Brain   brain;
+}
+
+Test(Brain, Test_Brain_identify_isDefined, .init = redirect_all_stdout)
+{
+    Brain   brain;
+
+    brain.identify();
+}
+
+Test(Brain, Test_Brain_identify_return_validAddress)//, .init = redirect_all_stdout)
+{
+    Brain   brain;
+
+    cr_assert(brain.identify().substr(0, 2) == "0x");
 }
