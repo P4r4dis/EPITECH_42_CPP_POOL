@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:47:06 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/03 18:07:13 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/03 18:13:20 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,9 @@ Human::~Human(void)
 std::string Human::identify(void) const
 {
     return _brain.identify();
+}
+
+const Brain       &Human::getBrain(void) const
+{
+    return _brain;
 }

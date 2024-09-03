@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:20:59 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/03 18:08:47 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/03 18:25:04 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,28 @@ Test(Human, Test_Human_identify_calls_Brain_identify_return_validAddress)//, .in
     Human   human;
 
     cr_assert(human.identify().substr(0, 2) == "0x");
+}
+
+Test(Human, Test_Human_getBrain_isDefined, .init = redirect_all_stdout)
+{
+    Human   human;
+
+    human.getBrain();
+}
+
+Test(Human, Test_Human_getBrain_reference_is_not_null, .init = redirect_all_stdout)
+{
+    Human   human;
+
+    cr_assert_not_null(&human.getBrain());
+}
+
+Test(Human, Test_Human_getBrain_return_same_address_of_Brain_Instance, .init = redirect_all_stdout)
+{
+    Human   human;
+
+    const Brain &ref = human.getBrain();
+    const Brain &ref2 = human.getBrain();
+
+    cr_assert_eq(&ref, &ref2);
 }
