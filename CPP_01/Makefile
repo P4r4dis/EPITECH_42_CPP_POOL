@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2064/06/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/09/03 19:44:12 by Paradis          ###   ########.fr        #
+#    Updated: 2024/09/03 20:15:46 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -252,6 +252,7 @@
 42_EX06_UT_NAME 				= 	test_$(42_EX06_NAME)
 
 42_EX06_SRC						=	$(42_EX06_SRC_PATH)/Weapon.cpp \
+									$(42_EX06_SRC_PATH)/HumanA.cpp \
 									$(42_EX06_BIN_PATH)/main.cpp
 42_EX06_OBJS					=	$(42_EX06_SRC:.cpp=.o)
 
@@ -279,7 +280,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2064 Paradis
-## Last update Wed Sep 3 7:44:12 PM 2024 Paradis
+## Last update Wed Sep 3 8:15:46 PM 2024 Paradis
 ##
 
 ## RULES FOR EPITECH SCHOOL
