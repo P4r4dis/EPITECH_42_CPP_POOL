@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:20:59 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/03 21:34:15 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/04 16:28:47 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,4 +251,23 @@ Test(HumanB, Test_HumanB_attack_output, .init = redirect_all_stdout)
     cr_assert_stdout_eq_str(
         "jim attacks with their some other type of club\n"
     );
+}
+
+Test(main, Test_main)//, .init = redirect_all_stdout)
+{
+    {
+        Weapon club = Weapon("crude spiked club");
+        HumanA bob("Bob", club);
+        bob.attack();
+        club.setType("some other type of club");
+        bob.attack();
+    }
+    {
+        Weapon club = Weapon("crude spiked club");
+        HumanB jim("Jim");
+        jim.setWeapon(club);
+        jim.attack();
+        club.setType("some other type of club");
+        jim.attack();
+    }
 }

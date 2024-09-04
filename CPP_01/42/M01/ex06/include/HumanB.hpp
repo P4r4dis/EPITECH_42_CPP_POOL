@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 20:17:31 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/03 21:33:19 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/04 16:11:03 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
             const Weapon    *getWeapon(void) const;
 
             void            setName(std::string name);
-            void            setWeapon(Weapon &weapon);
+            void            setWeapon(Weapon &weapon); // need ref because _weapon is on the stack and at the end of the function _weapon is disalocatted
 
             void            attack(void) const;
         private:
