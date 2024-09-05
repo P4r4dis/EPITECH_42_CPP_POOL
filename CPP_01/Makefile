@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2074/07/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/09/04 17:54:57 by Paradis          ###   ########.fr        #
+#    Updated: 2024/09/04 21:04:21 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -299,8 +299,9 @@
 									$(42_EX07_PATH)/$(42_EX07_NAME)
 
 42_test_run_ex07				:	fclean
-									@$(MAKE) -s -C $(42_EX07_UT_PATH)
-									$(42_EX07_UT_PATH)/$(42_EX07_UT_NAME)
+									cd $(42_EX07_UT_PATH) && $(MAKE) && ./$(42_EX07_UT_NAME) --verbose
+# @$(MAKE) -s -C $(42_EX07_UT_PATH)
+# $(42_EX07_UT_PATH)/$(42_EX07_UT_NAME)
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 # @brave coverage.html
 
@@ -318,7 +319,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2074 Paradis
-## Last update Thu Sep 4 5:54:57 PM 2024 Paradis
+## Last update Thu Sep 4 9:04:21 PM 2024 Paradis
 ##
 
 ## RULES FOR EPITECH SCHOOL
