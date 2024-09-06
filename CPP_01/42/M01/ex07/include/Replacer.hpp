@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:08:51 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/06 17:48:08 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/06 19:47:40 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
             std::ifstream   openFile(std::string file);
             std::string     readFile(std::ifstream &inputSteram);
             std::string     replace(std::string line);
+            std::ofstream   createFile(std::string path);
         private:
             std::string _fileName;
             std::string _s1;

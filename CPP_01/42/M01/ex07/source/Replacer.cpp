@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:10:56 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/06 18:17:46 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/06 20:29:24 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,23 @@ std::string         Replacer::replace(std::string line)
     return line;
 }
 
+std::ofstream       Replacer::createFile(std::string path)
+{
+    std::ofstream   outputStream;
+    if (!_fileName.empty())
+    {
+        _fileName += ".replace";
+        outputStream.open(path + _fileName);
 
+        if (!outputStream)
+            std::cerr << "Error open file <" << _fileName << ">" << std::endl;
+        
+        return outputStream;
+    }
+    else
+    {
+        std::cerr << "Error creating file <" << _fileName << ">" << std::endl;
+        return outputStream;
+    }
+
+}

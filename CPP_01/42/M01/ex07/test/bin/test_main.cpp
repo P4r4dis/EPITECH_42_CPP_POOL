@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:20:59 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/06 18:24:38 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/06 20:33:31 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,5 +275,45 @@ Test(Replacer, Test_Replacer_replace_one_txt, .init = redirect_all_stdout)
         "Aliquam vel Hello my new world  venenatis ante.\n"
         "Hello my new world Donec tristique metus in turpis tincidunt rhoncus.\n"
         "Hello my new world Praesent in laoreet mi, sit amet efficitur leo.\n"
+    );
+}
+
+Test(Replacer, Test_Replacer_createFile_isDefined, .init = redirect_all_stdout)
+{
+    std::string file = "one_letter_to_replace.txt";
+    std::string s1 = "a";
+    std::string s2 = "Hello my new world";
+
+    Replacer    replacer(file, s1, s2);
+    
+    replacer.createFile("42/M01/ex07/test/");
+}
+
+Test(Replacer, Test_Replacer_createFile_create_file_with_extention)//, .init = redirect_all_stdout)
+{
+    std::string file = "one_letter_to_replace.txt";
+    std::string s1 = "a";
+    std::string s2 = "Hello my new world";
+    std::ofstream outputStream;
+
+    Replacer    replacer(file, s1, s2);
+    
+    outputStream = replacer.createFile("42/M01/ex07/test/");
+    cr_assert(outputStream.is_open() == true);
+}
+
+Test(Replacer, Test_Replacer_createFile_error_std_output, .init = redirect_all_stdout)
+{
+    std::string file = "";
+    std::string s1 = "a";
+    std::string s2 = "Hello my new world";
+    std::ofstream outputStream;
+
+    Replacer    replacer(file, s1, s2);
+    
+    outputStream = replacer.createFile("42/M01/ex07/test/");
+    cr_assert(outputStream.is_open() == false);
+    cr_assert_stderr_eq_str(
+        "Error creating file <>\n"
     );
 }
