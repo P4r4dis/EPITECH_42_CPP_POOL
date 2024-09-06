@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:10:56 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/06 16:34:41 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/06 18:17:46 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,20 @@ std::string         Replacer::readFile(std::ifstream &inputStream)
     return line;
 }
 
+std::string         Replacer::replace(std::string line)
+{
+    if (!line.empty() && !_s1.empty() && !_s2.empty())
+    {
+        std::size_t pos = line.find(_s1);
+        while (pos != std::string::npos)
+        {
+            line.erase(pos, _s1.length());
+            line.insert(pos, _s2);
+            pos = line.find(_s1, ++pos);
+        }
+    }
+
+    return line;
+}
 
 
