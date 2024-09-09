@@ -6,10 +6,11 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:10:56 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/06 20:29:24 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/09 17:47:41 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <fstream>
 #include <iostream>
 #include <string>
 
@@ -66,18 +67,37 @@ std::ofstream       Replacer::createFile(std::string path)
     std::ofstream   outputStream;
     if (!_fileName.empty())
     {
-        _fileName += ".replace";
-        outputStream.open(path + _fileName);
+        std::string     tmpName = _fileName + ".replace";
+        outputStream.open(path + tmpName);
 
         if (!outputStream)
-            std::cerr << "Error open file <" << _fileName << ">" << std::endl;
+            std::cerr << "Error open file <" << tmpName << ">" << std::endl;
         
         return outputStream;
     }
     else
     {
-        std::cerr << "Error creating file <" << _fileName << ">" << std::endl;
+        std::cerr << "Error creating file <>" << std::endl;
         return outputStream;
     }
+}
 
+void       Replacer::writeFile(std::ofstream &outputStream)
+{
+    if (outputStream.is_open())
+    {
+        std::cout << _fileName << std::endl;
+        std::ifstream   inputStream = openFile("42/M01/ex07/test/" + _fileName);
+        std::string content = readFile(inputStream);
+        content = replace(content);
+        outputStream = createFile(_fileName);
+        std::cout << content << std::endl;
+        outputStream << content;
+        return ;
+    }
+    else
+    {
+        std::cerr << "Error write in file <" << _fileName << ">" << std::endl;
+        return ;   
+    }
 }
