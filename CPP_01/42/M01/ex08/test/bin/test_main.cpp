@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:20:59 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/16 18:04:07 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/16 18:48:30 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ void redirect_all_stdout(void)
 Test(Human, Test_Human_class_isDefined, .init = redirect_all_stdout)
 {
     Human human;
+    cr_assert_not_null(&human);
 }
