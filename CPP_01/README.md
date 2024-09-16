@@ -389,7 +389,43 @@ ___
     *   In which case do you think it would be best to use a **pointer** to
         Weapon? And a **reference** to Weapon? Why? Think about it before
         starting this exercise.
-
+___
+*   | ex07                  | Sed is for losers         |
+    | -------               | --------                  |
+    | Turn-in directory     | ex07/                     |
+    | Files to turn-in      | Makefile<br>*.cpp/hpp<br>main.cpp |
+    | Forbidden functions   | std::string::replace      |
+    | Remarks               | n/a                       |
+    *   Create a program that takes three parameters in the following order:
+        *   a **filename** and two **`strings`**, **s1** and **s2**.
+    *   It will **open the file` <filename>`** and **copies its content into a new file `<filename>.replace`**, **replacing every occurrence of s1 with s2**.
+    *   Using **C file manipulation functions is forbidden** and will be considered cheating.
+    *   All the member functions of the class **`std::string`** are allowed, **except replace**.
+    *   Use them wisely!
+    *   Of course, **handle unexpected inputs and errors**.
+    *   You have to create and turn in your own tests to ensure your program works as expected.
+___
+*   | ex08                  | I ain’t heard of no fancy switches |
+    | -------               | --------                  |
+    | Turn-in directory     | ex08/                     |
+    | Files to turn-in      | Makefile<br>Human.cpp/hpp<br>main.cpp      |
+    | Forbidden functions   | None                      |
+    | Remarks               | n/a                       |
+    *   Use the following Human class :
+        ```C++
+        class Human
+        {
+            private:
+                void meleeAttack(std::string const & target);
+                void rangedAttack(std::string const & target);
+                void intimidatingShout(std::string const & target);
+            public:
+                void action(std::string const & action_name, std::string const & target);
+        };
+        ```
+    *   **Implement all these functions**, the first three will simply output something to the standard output so you can see they’ve been called, and the last one will have to call the appropriate action on the appropriate target.
+    *   You must use an **array of pointers to members** to select which function to call:
+        *   **using multiple if statements, or switch statements, is forbidden.**
 ___
 #### EPITECH Day 07 Objectifs
 [(Back to top)](#table-of-contents)

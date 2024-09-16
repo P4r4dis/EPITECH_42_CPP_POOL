@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2074/07/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/09/16 17:00:33 by Paradis          ###   ########.fr        #
+#    Created: 2084/08/18 19:08:51 by Paradis           #+#    #+#              #
+#    Updated: 2024/09/16 18:00:51 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -297,8 +297,7 @@
 
 42_ex07 						: 	fclean
 									@$(MAKE) -C $(42_EX07_PATH)
-									@echo "Running $(42_EX07_NAME) with arguments: $(filter-out $@,$(MAKECMDGOALS))"
-									@$(42_EX07_PATH)/$(42_EX07_NAME) $(filter-out $@,$(MAKECMDGOALS)) # Right path: 42/M01/ex07/nameFile
+									$(42_EX07_PATH)/$(42_EX07_NAME)
 				
 42_test_run_ex07				:	fclean
 									cd $(42_EX07_UT_PATH) && $(MAKE) && ./$(42_EX07_UT_NAME)
@@ -314,21 +313,60 @@
 # @$(MAKE) -s -C $(42_EX07_UT_PATH) VALGRIND
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 
+# **************************************************************************** #
+#																			   #
+#								42 EX08										   #
+#																			   #
+# **************************************************************************** #
+42_EX08_PATH 					= 	./42/M01/ex08
+42_EX08_BIN_PATH 				= 	./42/M01/ex08/bin
+42_EX08_SRC_PATH				=	./42/M01/ex08/source
+42_EX08_INC_PATH				=	./42/M01/ex08/include
+42_EX08_UT_PATH					=	./42/M01/ex08/test
+
+42_EX08_NAME					=	fancySwitches
+
+42_EX08_UT_SRC					=	$(42_EX08_UT_PATH)/$(42_EX08_NAME)_test.cpp
+42_EX08_UT_NAME 				= 	test_$(42_EX08_NAME)
+
+42_EX08_SRC						=	$(SRC_PATH)/Human.cpp \
+									$(42_EX08_BIN_PATH)/main.cpp
+									
+42_EX08_OBJS					=	$(42_EX08_SRC:.cpp=.o)
+
+42_ex08 						: 	fclean
+									@$(MAKE) -C $(42_EX08_PATH)
+									@$(42_EX08_PATH)/$(42_EX08_NAME) $(filter-out $@,$(MAKECMDGOALS)) # Right path: 42/M01/ex08/nameFile
+				
+42_test_run_ex08				:	fclean
+									@$(MAKE) -s -C $(42_EX08_UT_PATH)
+									$(42_EX08_UT_PATH)/$(42_EX08_UT_NAME)
+									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+# @brave coverage.html
+
+42_valgrind_ex08 				: 	fclean
+									@$(MAKE) -C $(42_EX08_PATH) VALGRIND
+									
+42_valgrind_test_run_ex08		:	fclean
+									@$(MAKE) -s -C $(42_EX08_UT_PATH) VALGRIND
+									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+
+
 ##
-## Makefile for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_07
+## Makefile for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_08
 ##
 ## Made by Paradis
 ## Login   <Adil Denia>
 ##
-## Started on  Mon Aug 26 8:17:58 PM 2074 Paradis
-## Last update Tue Sep 16 5:00:33 PM 2024 Paradis
+## Started on  Mon Aug 26 8:17:58 PM 2084 Paradis
+## Last update Tue Sep 16 6:00:51 PM 2024 Paradis
 ##
 
 ## RULES FOR EPITECH SCHOOL
 
 # **************************************************************************** #
 #																			   #
-#								EPITECH EX07								   #
+#								EPITECH EX08								   #
 #																			   #
 # **************************************************************************** #
 
@@ -347,18 +385,30 @@ RM								=	rm -rf
 %								: 	capture
 									@:
 
-all								:	$(42_EX07_NAME)
+all								:	$(42_EX08_NAME)
 
-$(42_EX07_NAME)					: 	$(42_EX07_OBJS)
-									$(G++) $(CPPFLAGS) $(INCFLAGS)$(42_EX07_INC_PATH) $(42_EX07_OBJS) -o $(42_EX07_NAME)
+$(42_EX08_NAME)					: 	$(42_EX08_OBJS)
+									$(G++) $(CPPFLAGS) $(INCFLAGS)$(42_EX08_INC_PATH) $(42_EX08_OBJS) -o $(42_EX08_NAME)
 
 clean							:	
 									@$(MAKE) -s $(CLEAN) -C $(42_EX00_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX00_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX02_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX03_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX03_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX04_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX04_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX05_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX05_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX06_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX06_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX07_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX07_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX08_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX08_UT_PATH)
 									
 
 fclean							:	clean
@@ -366,11 +416,23 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX03_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX03_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX04_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX04_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX05_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX05_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX06_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX06_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX07_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX07_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX08_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX08_UT_PATH)
 
 tests_run						:	fclean \
-									42_test_run_ex07
+									42_test_run_ex08
 
 capture							:
 									@:
