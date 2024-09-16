@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 21:14:07 by Paradis           #+#    #+#              #
-#    Updated: 2024/09/04 17:42:22 by Paradis          ###   ########.fr        #
+#    Updated: 2024/09/16 16:55:07 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ INCFLAGS	+=	-I $(INC_PATH)
 CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -std=c++98 $(INCFLAGS)
 
 # # Files sources
-SRCS		=	$(BIN_PATH)/main.cpp
+SRCS		=	$(SRC_PATH)/Replacer.cpp \
+				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp
 
@@ -37,6 +38,8 @@ OBJS		=	$(SRCS:.cpp=.o)
 
 # # Log file
 LOG			=	*.log
+
+FILE		=	*.replace
 
 CLEAN		=	clean
 FCLEAN		=	fclean
@@ -48,8 +51,10 @@ all			:	$(NAME)
 $(NAME)		:	$(OBJS)
 				$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
+ARGS		=	"$(filter-out $@,$(MAKECMDGOALS))"
+
 VALGRIND	:	$(NAME)
-				@valgrind --trace-children=yes  --leak-check=full --show-leak-kinds=all  --error-exitcode=1 ./$(NAME) 2>&1 | tee valgrind_output.log || true
+				@valgrind --trace-children=yes  --leak-check=full --show-leak-kinds=all  --error-exitcode=1 ./$(NAME) $(ARGS) 2>&1 | tee valgrind_output.log || true
 				@if ! grep -q "definitely lost" valgrind_output.log; \
 				then \
 					echo -e "\033[32mNo memory leaks detected, running binary...\033[0m"; \
@@ -60,7 +65,7 @@ VALGRIND	:	$(NAME)
 				
 # # Rule for clean files object
 clean		:
-				$(RM) $(OBJS) $(LOG)
+				$(RM) $(OBJS) $(LOG) $(FILE)
 				@$(MAKE) -s $(CLEAN) -C $(UT_PATH)
 
 # # Target for clean name and files object

@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2074/07/18 19:07:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/09/06 16:53:02 by Paradis          ###   ########.fr        #
+#    Updated: 2024/09/16 17:00:33 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -290,26 +290,28 @@
 42_EX07_UT_SRC					=	$(42_EX07_UT_PATH)/$(42_EX07_NAME)_test.cpp
 42_EX07_UT_NAME 				= 	test_$(42_EX07_NAME)
 
-42_EX07_SRC						=	$(42_EX07_BIN_PATH)/main.cpp
+42_EX07_SRC						=	$(SRC_PATH)/Replacer.cpp \
+									$(42_EX07_BIN_PATH)/main.cpp
 									
 42_EX07_OBJS					=	$(42_EX07_SRC:.cpp=.o)
 
 42_ex07 						: 	fclean
 									@$(MAKE) -C $(42_EX07_PATH)
-									$(42_EX07_PATH)/$(42_EX07_NAME)
-
+									@echo "Running $(42_EX07_NAME) with arguments: $(filter-out $@,$(MAKECMDGOALS))"
+									@$(42_EX07_PATH)/$(42_EX07_NAME) $(filter-out $@,$(MAKECMDGOALS)) # Right path: 42/M01/ex07/nameFile
+				
 42_test_run_ex07				:	fclean
-# cd $(42_EX07_UT_PATH) && $(MAKE) && ./$(42_EX07_UT_NAME)
-									@$(MAKE) -s -C $(42_EX07_UT_PATH)
-									$(42_EX07_UT_PATH)/$(42_EX07_UT_NAME)
+									cd $(42_EX07_UT_PATH) && $(MAKE) && ./$(42_EX07_UT_NAME)
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 # @brave coverage.html
 
 42_valgrind_ex07 				: 	fclean
-									@$(MAKE) -C $(42_EX07_PATH) VALGRIND
+									@echo "Running $(42_EX07_NAME) with arguments: $(filter-out $@,$(MAKECMDGOALS))"
+									cd $(42_EX07_PATH) && $(MAKE) VALGRIND ARGS="$(filter-out $@,$(MAKECMDGOALS))"
 									
 42_valgrind_test_run_ex07		:	fclean
-									@$(MAKE) -s -C $(42_EX07_UT_PATH) VALGRIND
+									cd $(42_EX07_UT_PATH) && $(MAKE) VALGRIND
+# @$(MAKE) -s -C $(42_EX07_UT_PATH) VALGRIND
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 
 ##
@@ -319,7 +321,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2074 Paradis
-## Last update Sat Sep 6 4:53:02 PM 2024 Paradis
+## Last update Tue Sep 16 5:00:33 PM 2024 Paradis
 ##
 
 ## RULES FOR EPITECH SCHOOL
@@ -342,6 +344,8 @@ CPPFLAGS 						= 	-Wall -Wextra -Werror -W -Wfatal-errors -std=c++98
 CLEAN							=	clean
 FCLEAN							=	fclean
 RM								=	rm -rf
+%								: 	capture
+									@:
 
 all								:	$(42_EX07_NAME)
 
@@ -368,5 +372,8 @@ fclean							:	clean
 tests_run						:	fclean \
 									42_test_run_ex07
 
+capture							:
+									@:
+									
 .PHONY							: 	all clean fclean re \
-									tests_run \
+									tests_run capture

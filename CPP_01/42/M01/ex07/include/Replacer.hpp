@@ -6,26 +6,26 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:08:51 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/06 19:47:40 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/11 17:08:13 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef                 __REPLACER_HPP__
     #define             __REPLACER_HPP__
 
-    #include <fstream>
     #include <string>
     
     class               Replacer
     {
         public:
-            Replacer(std::string fileName, std::string s1, std::string s2);
+            Replacer(std::string fileName,
+                    std::string s1, std::string s2);
             ~Replacer(void);
 
-            std::ifstream   openFile(std::string file);
-            std::string     readFile(std::ifstream &inputSteram);
-            std::string     replace(std::string line);
-            std::ofstream   createFile(std::string path);
+            void            sed(void);
+            // std::string     readFile(std::ifstream &inputSteram);
+            // std::string     replace(std::string line);
+            // std::ofstream   createFile(std::string path);
         private:
             std::string _fileName;
             std::string _s1;

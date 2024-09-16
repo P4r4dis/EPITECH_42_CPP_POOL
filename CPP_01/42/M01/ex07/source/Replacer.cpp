@@ -6,78 +6,51 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:10:56 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/06 20:29:24 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/11 18:23:39 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <cstddef>
+#include <fstream>
 #include <iostream>
 #include <string>
 
 #include "../include/Replacer.hpp"
 
 Replacer::Replacer(std::string fileName, std::string s1, std::string s2)
-                    :   _fileName(fileName), _s1(s1), _s2(s2)
+                                                :   _fileName(fileName),
+                                                    _s1(s1),
+                                                    _s2(s2)
 {}
 
 Replacer::~Replacer(void)
 {}
 
-std::ifstream       Replacer::openFile(std::string file)
+void            Replacer::sed(void)
 {
-    std::ifstream   inputStream;
-
-    inputStream.open(file);
-    if (!inputStream.is_open())
-        std::cerr << "Error: Cannot open file <" << file << ">" << std::endl;
-  
-    return inputStream;
-}
-
-std::string         Replacer::readFile(std::ifstream &inputStream)
-{
-    std::string     line;
-    if (!inputStream.is_open())
-        std::cerr << "Error: Cannot open file <" << _fileName << ">" << std::endl;
+    std::ifstream   ifs(_fileName.c_str());
+    std::string     newFileName = (_fileName + ".replace").c_str();
     
-    if (!std::getline(inputStream, line, '\0'))
-        std::cerr << "Error: Cannot read file <" << _fileName << ">" << std::endl;
-
-    return line;
-}
-
-std::string         Replacer::replace(std::string line)
-{
-    if (!line.empty() && !_s1.empty() && !_s2.empty())
-    {
-        std::size_t pos = line.find(_s1);
-        while (pos != std::string::npos)
-        {
-            line.erase(pos, _s1.length());
-            line.insert(pos, _s2);
-            pos = line.find(_s1, ++pos);
-        }
-    }
-
-    return line;
-}
-
-std::ofstream       Replacer::createFile(std::string path)
-{
-    std::ofstream   outputStream;
-    if (!_fileName.empty())
-    {
-        _fileName += ".replace";
-        outputStream.open(path + _fileName);
-
-        if (!outputStream)
-            std::cerr << "Error open file <" << _fileName << ">" << std::endl;
-        
-        return outputStream;
-    }
+    if (!ifs.is_open())
+        std::cerr << "Error: File <" << _fileName.c_str() << "> is not open." << std::endl;
     else
     {
-        std::cerr << "Error creating file <" << _fileName << ">" << std::endl;
-        return outputStream;
+        std::string line;
+        if (std::getline(ifs, line, '\0'))
+        {
+            size_t pos = line.find(_s1);
+            while (pos != std::string::npos)
+            {
+                line.erase(pos, _s1.size());   // Supprimer _s1 à la position trouvée
+                line.insert(pos, _s2);           // Insérer _s2 à la même position
+                pos = line.find(_s1, pos + _s2.size());
+            }
+            std::ofstream   ofs(newFileName.c_str());
+            if (!ofs.is_open())
+                std::cerr << "Error: File <" << newFileName << "> is not open." << std::endl;
+            ofs << line;
+            ofs.close();
+        }
     }
-
+    ifs.close();
 }
