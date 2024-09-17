@@ -427,6 +427,19 @@ ___
     *   You must use an **array of pointers to members** to select which function to call:
         *   **using multiple if statements, or switch statements, is forbidden.**
 ___
+*   | ex09                  | I ain’t heard of no fancy switches |
+    | -------               | --------                  |
+    | Turn-in directory     | ex09/                     |
+    | Files to turn-in      | Makefile<br>Logger.cpp/hpp<br>main.cpp |
+    | Forbidden functions   | None                      |
+    | Remarks               | n/a                       |
+    *   Make a **`Logger` class** that must, well, do some logging.
+    *   It will have two **private functions**, **`logToConsole`** and **`logToFile`**, that both take a **`string`** and will respectively **write** it to the **standard output** and **append** it to a **file**, **which name will be stored in the Logger at creation time**.
+    *   You will also make a **private function** called **`makeLogEntry`** that will take a simple message as a **`string`**, and return a new **`string`** containing the **message formatted to look like a legitimate log entry**.
+    *   At the very minimum, **add the current date before the message**, so we see when it’s been logged.
+    *   Finally, create a **`log(std::string const & dest, std::string const & message)`**, that will make a log entry with the message, and pass it to **`logToFile`** or **`logToConsole`**, depending on the **`dest`** parameter.
+    *   As in the previous exercise, **you have to use pointers to members** to select which function to call.
+___
 #### EPITECH Day 07 Objectifs
 [(Back to top)](#table-of-contents)
 
