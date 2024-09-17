@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:08:51 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/17 17:06:18 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/17 17:17:07 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
         private:
             std::string     _fileName;
             std::ofstream   _fileStream;
+
+            void                    logToConsole(std::string msg);
     };
 
 #endif //               !_LOGGER_HPP__

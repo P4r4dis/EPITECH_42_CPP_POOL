@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:10:56 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/17 17:06:46 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/17 17:26:41 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,9 @@ const std::ofstream     &Logger::getFileStream(void) const
     return _fileStream;
 }
 
+void                    Logger::logToConsole(std::string msg)
+{
+    std::cout << msg << std::endl;
+}
 
 
