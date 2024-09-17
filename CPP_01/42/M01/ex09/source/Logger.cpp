@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:10:56 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/17 17:26:41 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/17 17:37:10 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,11 @@ void                    Logger::logToConsole(std::string msg)
     std::cout << msg << std::endl;
 }
 
-
+void                    Logger::logToFile(std::string msg)
+{
+    if (!_fileStream.is_open())
+        std::cout   << "Error: file <" << _fileName 
+                    << "> is not open." << std::endl;
+    else
+        _fileStream << msg;
+}
