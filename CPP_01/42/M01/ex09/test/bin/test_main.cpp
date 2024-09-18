@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:20:59 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/17 19:49:14 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/18 18:38:03 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,39 @@ void redirect_all_stdout(void)
 
 Test(Logger, Test_Logger_class_isDefined, .init = redirect_all_stdout)
 {
-    std::string     fileName = "42/M01/ex09/test/logger.log";
+    std::string     fileName = "logger.log"; // "42/M01/ex09/test/logger.log"
     Logger          logger(fileName);
     cr_assert_not_null(&logger);
+}
+
+Test(Logger, Test_Logger_class_error_CTOR_open_file, .init = redirect_all_stdout)
+{
+    std::string     fileName = "invalide/path/logger.log";
+    Logger          logger(fileName);
+
+    cr_assert_stderr_eq_str(
+        ("Error: Could not open the file <" + fileName + ">\n").c_str()
+    );
 }
 
 Test(Logger, Test_Logger_class_basics, .init = redirect_all_stdout)
 {
-    std::string     fileName = "42/M01/ex09/test/logger.log";
-    Logger          logger(fileName);
+ 
+        std::string     fileName = "logger.log";
+    {
+        Logger          logger(fileName);
 
-    cr_assert_not_null(&logger);
+        cr_assert_not_null(&logger);
 
-    cr_assert(logger.getFileName() == fileName);
-    cr_assert(logger.getFileStream().is_open() == true);
+        cr_assert(logger.getFileName() == fileName);
+        cr_assert(logger.getFileStream().is_open() == true);
+        logger.getFileStream().close();
+    }
 }
 
 Test(Logger, Test_Logger_log_isDefined, .init = redirect_all_stdout)
 {
-    std::string     fileName = "42/M01/ex09/test/logger.log";
+    std::string     fileName = "logger.log";
     Logger          logger(fileName);
 
     logger.log("", "");
@@ -53,7 +67,7 @@ Test(Logger, Test_Logger_log_isDefined, .init = redirect_all_stdout)
 
 Test(Logger, Test_Logger_log_logToConsole, .init = redirect_all_stdout)
 {
-    std::string     fileName = "42/M01/ex09/test/logger.log";
+    std::string     fileName = "logger.log";
     Logger          logger(fileName);
     std::ostringstream oss;
     time_t t = time(nullptr);
@@ -69,7 +83,7 @@ Test(Logger, Test_Logger_log_logToConsole, .init = redirect_all_stdout)
 
 Test(Logger, Test_Logger_log_logToFile, .init = redirect_all_stdout)
 {
-    std::string     fileName = "42/M01/ex09/test/logger.log";
+    std::string     fileName = "logger.log";
     Logger          logger(fileName);
 
     logger.log("File", "Hello");
@@ -88,7 +102,7 @@ Test(Logger, Test_Logger_log_logToFile, .init = redirect_all_stdout)
 Test(Logger, Test_Logger_log_logToFile_Error_file_not_open,
     .init = redirect_all_stdout)
 {
-    std::string     fileName = "42/M01/ex09/test/logger.log";
+    std::string     fileName = "logger.log";
     Logger          logger(fileName);
 
     logger.log("File", "Hello");
@@ -104,7 +118,7 @@ Test(Logger, Test_Logger_log_logToFile_Error_file_not_open,
 Test(Logger, Test_Logger_log_unknown_destination,
     .init = redirect_all_stdout)
 {
-    std::string     fileName = "42/M01/ex09/test/logger.log";
+    std::string     fileName = "logger.log";
     Logger          logger(fileName);
     std::string     dest = "Anything";
     

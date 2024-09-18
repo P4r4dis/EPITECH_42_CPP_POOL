@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 21:14:07 by Paradis           #+#    #+#              #
-#    Updated: 2024/09/16 20:33:42 by Paradis          ###   ########.fr        #
+#    Updated: 2024/09/18 18:49:42 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ VALGRIND	:	$(NAME)
 				
 # # Rule for clean files object
 clean		:
-				$(RM) $(OBJS) $(LOG) $(FILE)
+				$(RM) $(OBJS) $(LOG)
 				@$(MAKE) -s $(CLEAN) -C $(UT_PATH)
 
 # # Target for clean name and files object

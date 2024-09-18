@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:10:56 by Paradis           #+#    #+#             */
-/*   Updated: 2024/09/17 19:46:04 by Paradis          ###   ########.fr       */
+/*   Updated: 2024/09/18 18:44:35 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@
 #include "../include/Logger.hpp"
 
 Logger::Logger(std::string fileName)    :   _fileName(fileName),
-                                            _fileStream(_fileName,
-                                            std::ios::in | std::ios::app)
-{}
+                                            _fileStream(_fileName.c_str(),
+                                            std::ios::out | std::ios::app)
+{
+    if (!_fileStream.is_open())
+        std::cerr << "Error: Could not open the file <" << _fileName << ">" << std::endl;
+}
 
 Logger::~Logger(void)
 {
@@ -56,7 +59,7 @@ void                    Logger::logToFile(std::string msg)
 std::string             Logger::makeLogEntry(std::string msg)
 {
     std::ostringstream oss;
-    std::time_t t = std::time(nullptr);
+    std::time_t t = std::time(NULL);
     std::string result = std::asctime(std::localtime(&t));
     
     result.erase(result.length() - 1);
