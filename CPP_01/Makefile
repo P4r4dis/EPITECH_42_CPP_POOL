@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2114/11/18 19:11:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/09/19 17:34:52 by Paradis          ###   ########.fr        #
+#    Updated: 2024/09/19 19:51:22 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -460,8 +460,8 @@
 # @brave coverage.html
 
 42_valgrind_ex11 				: 	fclean
-									@$(MAKE) -C $(42_EX11_PATH) VALGRIND
-									
+									@$(MAKE) -C $(42_EX11_PATH) VALGRIND ARGS="$(filter-out $@,$(MAKECMDGOALS))"
+																		
 42_valgrind_test_run_ex11		:	fclean
 									@$(MAKE) -s -C $(42_EX11_UT_PATH) VALGRIND
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
@@ -473,7 +473,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2114 Paradis
-## Last update Fri Sep 19 5:34:52 PM 2024 Paradis
+## Last update Fri Sep 19 7:51:22 PM 2024 Paradis
 ##
 
 ## RULES FOR EPITECH SCHOOL
