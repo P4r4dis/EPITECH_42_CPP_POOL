@@ -440,7 +440,7 @@ ___
     *   Finally, create a **`log(std::string const & dest, std::string const & message)`**, that will make a log entry with the message, and pass it to **`logToFile`** or **`logToConsole`**, depending on the **`dest`** parameter.
     *   As in the previous exercise, **you have to use pointers to members** to select which function to call.
 ___
-*   | ex10                  | Harl2.0 |
+*   | ex10                  | Harl 2.0 |
     | -------               | --------                  |
     | Turn-in directory     | ex10/                     |
     | Files to turn-in      | Makefile<br>Harl.cpp/hpp<br>main.cpp |
@@ -483,6 +483,43 @@ ___
     *   It doesn’t think twice!
     *   Create and turn in tests to show that Harl complains a lot.
     *   You can use the examples of comments listed above in the subject or choose to use comments of your own.
+___
+*   | ex11                  | Harl filter |
+    | -------               | --------                  |
+    | Turn-in directory     | ex11/                     |
+    | Files to turn-in      | Makefile<br>Harl.cpp/hpp<br>main.cpp |
+    | Forbidden functions   | None                      |
+    | Remarks               | n/a                       |
+    *   Sometimes you don’t want to pay attention to everything Harl says.
+    *   Implement a system to filter what Harl says depending on the log levels you want to listen to.
+    *   **Create a program that takes as parameter one of the four levels.**
+    *   **It will display all messages from this level and above.**
+    *   For example:
+        ```
+        $> ./harlFilter "WARNING"
+        [ WARNING ]
+        I think I deserve to have some extra bacon for free.
+        I've been coming for years whereas you started working here since last month.
+
+        [ ERROR ]
+        This is unacceptable, I want to speak to the manager now.
+
+        $> ./harlFilter "I am not sure how tired I am today..."
+        [ Probably complaining about insignificant problems ]
+        ```
+    *   Although there are several ways to deal with Harl, **one of the most effective is to `SWITCH` it off**.
+    *   Give the name **harlFilter** to your executable.
+    *   You must use, and maybe discover, the **`switch` statement** in this exercise.
+___
+*   | ex12                  | Cat o’ nine tails |
+    | -------               | --------                  |
+    | Turn-in directory     | ex12/                     |
+    | Files to turn-in      | Makefile<br>*.cpp/hpp<br>main.cpp |
+    | Forbidden functions   | None                      |
+    | Remarks               | n/a                       |
+    *   Make a **cato9tails** program that does the same thing as the system’s **`cat`** command without options.
+    *   It can take **read from files and/or the standard input**.
+    * Be thorough in your testing, this is not as simple as it seems.
 ___
 #### EPITECH Day 07 Objectifs
 [(Back to top)](#table-of-contents)

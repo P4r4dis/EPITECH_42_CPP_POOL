@@ -1,12 +1,16 @@
-/*
-** test_main.cpp for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/EPITECH/D06/ex00/test/bin
-**
-** Made by Paradis
-** Login   <Adil Denia>
-**
-** Started on  Fri Jul 19 6:34:24 PM 2024 Paradis
-** Last update Fri Sep 19 8:53:54 PM 2024 Paradis
-*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_main.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/19 19:59:36 by Paradis           #+#    #+#             */
+/*   Updated: 2024/09/19 20:54:16 by Paradis          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 
 #include <criterion/criterion.h>
 #include <criterion/new/assert.h>
@@ -14,6 +18,7 @@
 #include <criterion/logging.h>
 #include <criterion/parameterized.h>
 #include <cstdlib>
+#include <sys/stat.h>
 
 #include "../../include/MyCat.hpp"
 
@@ -65,7 +70,7 @@ Test(MyCat, test_MyCat_MyCat_error_file_not_found, .init = redirect_all_stdout)
         "my_cat: fileName: No such file or directory\n"
     );
 }
-#include <sys/stat.h>
+
 Test(MyCat, test_MyCat_MyCat_error_permission_denied, .init = redirect_all_stdout)
 {
     {
