@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2124/12/18 19:12:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/09/19 20:25:51 by Paradis          ###   ########.fr        #
+#    Updated: 2024/09/20 21:18:32 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -503,6 +503,25 @@
 									@$(MAKE) -s -C $(42_EX12_UT_PATH) VALGRIND
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 
+# **************************************************************************** #
+#																			   #
+#								42 END										   #
+#																			   #
+# **************************************************************************** #
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ##
 ## Makefile for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_12
 ##
@@ -510,17 +529,44 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2124 Paradis
-## Last update Fri Sep 19 8:25:51 PM 2024 Paradis
+## Last update Sat Sep 20 9:18:32 PM 2024 Paradis
 ##
-
-## RULES FOR EPITECH SCHOOL
 
 # **************************************************************************** #
 #																			   #
 #								EPITECH EX00								   #
 #																			   #
 # **************************************************************************** #
+EPITECH_EX00_PATH 				= 	./EPITECH/D07/ex00
+EPITECH_EX00_BIN_PATH 			= 	./EPITECH/D07/ex00/bin
+EPITECH_EX00_SRC_PATH			=	./EPITECH/D07/ex00/source
+EPITECH_EX00_INC_PATH			=	./EPITECH/D07/ex00/include
+EPITECH_EX00_UT_PATH			=	./EPITECH/D07/ex00/test
 
+EPITECH_EX00_NAME				=	Federation
+
+EPITECH_EX00_UT_SRC				=	$(EPITECH_EX00_UT_PATH)/$(EPITECH_EX00_NAME)_test.cpp
+EPITECH_EX00_UT_NAME 			= 	test_$(EPITECH_EX00_NAME)
+
+EPITECH_EX00_SRC				=	$(EPITECH_EX00_SRC_PATH)/Federation.cpp \
+									$(EPITECH_EX00_BIN_PATH)/main.cpp
+EPITECH_EX00_OBJS				=	$(EPITECH_EX00_SRC:.cpp=.o)
+
+EPITECH_ex00 					: 	fclean
+									@$(MAKE) -C $(EPITECH_EX00_PATH)
+									$(EPITECH_EX00_PATH)/$(EPITECH_EX00_NAME)
+
+EPITECH_valgrind_ex00 			: 	fclean
+									@$(MAKE) -C $(EPITECH_EX00_PATH) VALGRIND
+
+EPITECH_test_run_ex00			:	fclean
+									@$(MAKE) -s -C $(EPITECH_EX00_UT_PATH)
+									$(EPITECH_EX00_UT_PATH)/$(EPITECH_EX00_UT_NAME)
+									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+						
+EPITECH_valgrind_test_run_ex00	:	fclean
+									@$(MAKE) -s -C $(EPITECH_EX00_UT_PATH) VALGRIND
+									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 
 # **************************************************************************** #
 #																			   #
@@ -560,9 +606,18 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(42_EX06_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX07_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX07_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX08_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX08_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX09_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX09_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX10_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX10_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX11_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX11_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX12_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX12_UT_PATH)
-									
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_UT_PATH)								
 
 fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_PATH)
@@ -581,8 +636,18 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX06_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX07_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX07_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX08_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX08_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX09_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX09_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX10_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX10_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX11_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX11_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX12_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX12_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_UT_PATH)
 
 tests_run						:	fclean \
 									42_test_run_ex12

@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Fri Sep 20 7:47:52 PM 2024 Paradis
-## Last update Sat Sep 20 7:50:33 PM 2024 Paradis
+## Last update Sat Sep 20 9:18:32 PM 2024 Paradis
 ##
 
 
@@ -18,7 +18,7 @@ INC_PATH	=	./include
 UT_PATH		=	./test
 
 
-NAME		=	
+NAME		=	Federation
 UT_NAME 	= 	test_$(NAME)
 ##############################################
 
@@ -28,7 +28,7 @@ CPP_VERSION	+=	-std=c++23
 CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAGS)
 
 # # Files sources
-SRCS		=	$(SRC_PATH)/.cpp \
+SRCS		=	$(SRC_PATH)/Federation.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp

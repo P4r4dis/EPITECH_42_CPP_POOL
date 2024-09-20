@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Fri Sep 20 7:47:13 PM 2024 Paradis
-## Last update Sat Sep 20 7:51:14 PM 2024 Paradis
+## Last update Sat Sep 20 9:18:32 PM 2024 Paradis
 ##
 
 
@@ -15,7 +15,7 @@ SRC_PATH		= 	../source
 INC_PATH 		= 	../include
 BIN_PATH 		= 	./bin
 
-NAME          	= 	test_
+NAME          	= 	test_Federation
 #############################################
 
 INCFLAGS     	+= 	-I $(INC_PATH)
@@ -23,7 +23,7 @@ CPP_VERSION		+=	-std=c++23
 CRITFLAGS    	+=  --coverage -lcriterion
 CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAGS) $(CRITFLAGS)
 
-SRCS         	= 	$(SRC_PATH)/.cpp \
+SRCS         	= 	$(SRC_PATH)/Federation.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)
