@@ -45,87 +45,35 @@ ___
         *   [Reference vs Pointer](#reference-reference-vs-pointer)
         *   [Types of References](#reference-types)
         *   [Usage of References](#reference-usage)
-    *   Parametric Polymorphism // Todo
-    *   Default values // Todo
-    *   namespaces // Todo
-    *   Pointer to Member variable // copy
-    *   Pointer to member function // copy
-    *   Static // copy and maybe improve
-    *   Explicit // todo
-
-    *   Smart Pointers // todo
-    *   Smart Pointer in stdlib // todo
-    *   Const methods // copy and maybe improve
-    *   References // todo
-
-    <!-- *   [Input/Output](#inputoutput)
-        *   [C++ Input/Output Library](#c-inputoutput-library)
-        *   [**`IOStream`**](#iostream)
-            *   [Stream in C++?](#iostream-stream-in-c-anchor)
-                *   [Definition](#iostream-stream-in-c-definition-anchor)
-                *   [Why use Streams](#iostream-stream-in-c-why-use-stream-anchor)
-            *   [Standard Input/Output stream](#iostream-standard-inputoutput-stream-anchor)
-                *   [Output with **`std::cout`**](#iostream-standard-inputoutput-stream-output-wuth-cout-anchor)
-                *   [Input with **`std::cin`**](#iostream-standard-inputoutput-stream-input-with-cin-anchor)
-                *   [Error Output with **`std::cerr`**](#iostream-standard-inputoutput-stream-error-output-with-cerr-anchor)
-                *   [Logging Output with **`std::clog`**](#iostream-standard-inputoutput-stream-logging-output-with-clog-anchor)
-        *   [**`FStream`**](#fstream)
-            *   [**`fstream`**](#fstream-file-inputoutput-stream-fstream-anchor)
-            *   [**`ifsteram`**](#fsteram-file-inputoutput-stream-ifstream-anchor)
-            *   [**`ofstream`**](#fsteram-file-inputoutput-stream-ofstream-anchor)
-            *   [Summary of Differences](#fsteram-file-inputoutput-stream-summary-anchor)
-        *   [**`IOmanip`**](#iomanip)
-            *   [**`setw`** Manipulator](#setw-manipulator-iomanip-inputoutput-stream-anchor)
-            *   [**`setw`** Manipulator](#iomanip-inputoutput-stream-setw-manipulator-anchor)
-            *   [**`fixed`** Manipulator](#fixed-manipulator-iomanip-inputoutput-stream-anchor)
-            *   [**`setprecision`** Manipulator](#setprecision-manipulator-iomanip-inputoutput-stream-anchor)
-            *   [Summary of Differences](#summary-manipulator-iomanip-inputoutput-stream-anchor)
-    *   [Class](#class)
-        *   [What is a class](#class-what-is-a-class-anchor)
-            *   [Class Vs Structure](#class-class-vs-struct-anchor)
-            *   [Constructor](#class-constructor-anchor)
-            *   [Destructor](#class-destructor-anchor)
-            *   [Attributes or Data Members](#class-attributes-anchor)
-            *   [Methods or Member Functions](#class-methods-anchor)
-            *   [Keyword **`this`**](#class-this-anchor)
-            *   [Initialization List](#class-initialization-list-anchor)
-            *   [Visibility and Encapsulation](#class-visibility-and-encapsulation-encapsulation-anchor)
-                *   [Encapsulation](#class-visibility-and-encapsulation-encapsulation-anchor)
-                *   [Visibility](#class-visibility-and-encapsulation-visibility-anchor)
-                *   [Benefits of Visibility and Encapsulation](#class-visibility-and-encapsulation-befenits-anchor)
-            *   [Getters and Setters](#class-getters-setters-anchor)
-            *   [Syntax / Example](#class-syntax-example-anchor)
-    *   [Non-Member Attribute & Non-Member Function](#non-member-attribute--non-member-function)
+    *   [**`FStream`**](#fstream)
+        *   [**`fstream`**](#fstream-file-inputoutput-stream-fstream-anchor)
+        *   [**`ifsteram`**](#fsteram-file-inputoutput-stream-ifstream-anchor)
+        *   [**`ofstream`**](#fsteram-file-inputoutput-stream-ofstream-anchor)
+        *   [Summary of Differences](#fsteram-file-inputoutput-stream-summary-anchor)
     *   [Pointer to Members and Pointer to Members Functions](#pointer-to-members-and-pointer-to-members-functions)
         *   [Pointer to Members](#pointer-to-members-and-pointer-to-members-functions-pointer-to-members-anchor)
         *   [Pointer to Members Functions](#pointer-to-members-and-pointer-to-members-functions-pointer-to-members-functions-anchor)
-    *   [Keyword **`const`**](#keyword-const)
-    *   [Keyword **`static`**](#keyword-static)
-    *   [Keyword **`auto`**](#keyword-auto)
-    *   [**`std::string`**](#keyword-auto)
-        *   [Common Operations on **`std::string`**](#string-common-operations-on-string-anchor)
-            *   [Concatenation](#string-common-operations-on-string-concatenation-anchor)
-            *   [Accessing Characters](#string-common-operations-on-string-accessing-characters-anchor)
-            *   [String Length](#string-common-operations-on-string-string-length-anchor)
-        *   [Modifying Strings](#string-modifying-strings-anchor)
-            *   [Appending / Inserting](#string-modifying-strings-appending-inserting-anchor)
-                *   [Appending](#string-modifying-strings-appending-inserting-appending-anchor)
-                *   [Inserting](#string-modifying-strings-appending-inserting-inserting-anchor)
-            *   [Replacing / Erasing](#string-replacing-erasing-anchor)
-                *   [Replacing](#string-replacing-erasing-replacing-anchor)
-                *   [Erasing](#string-replacing-erasing-erasing-anchor)
-        *   [Clearing a String](#string-clearing-a-string-anchor)
-            *   [Clearing](#string-clearing-a-string-clearing-anchor)
-        *   [Searching / Substring](#string-searching-substrings-anchor)
-            *   [Finding Substring](#string-searching-substrings-finding-substring-anchor)
-            *   [Extracting Substring](#string-searching-substrings-extracting-substring-anchor)
-        *   [Comparaison of String](#string-comparison-of-strings-anchor)
-        *   [C-String Compatibility](#string-c-string-compatibility-anchor)
-        *   [Advanced Features](#string-advanced-features-anchor)
-            *   [Iterating Over StringStream](#string-advanced-features-iterating-over-stringstream-anchor)
-                *   [Iterating](#string-advanced-features-iterating-over-stringstream-iterating-anchor)
-                *   [**`std::stringsteram`**](#string-advanced-features-iterating-over-stringstream-stringstream-anchor)
-        *   [Memory Managment and Performance](#string-memory-performance-anchor) -->
+    *   [Parametric Polymorphism](#parametric-polymorphism)
+        *   [How Does it Work](#parametric-polymorphism-how-does-it-work-anchor)
+        *   [Advantages](#parametric-polymorphism-advantages-anchor)
+    *   [Default values](#default-values)
+        *   [Advantages](#default-value-advantages-anchor)
+    *   [**`static`** Keyword](#static-keyword)
+        *   [**`static`** Global Variables](#static-global-variables-anchor)
+        *   [**`static`** with Functions](#static-functions-anchor)
+        *   [**`static`** Global Functions](#static-global-functions-anchor)
+        *   [**`static`** with Class Members](#static-class-members-anchor)
+    *   [**`explicit`** Keyword](#explicit-keyword)
+        *   [The Problem of Implicit Conversions](#explicit-problem-implicit-conversion-anchor)
+        *   [Avoid Implicit Conversion With **`explicit`**](#explicit-avoid-implicit-conversion-anchor)
+        *   [Advantages of `explicit`](#explicit-advantages-anchor)
+    *   [**`const`** Keyword](#const-keyword)
+    *   [Smart Pointers](#smart-pointers)
+    *   [Why Use Smart Pointers](#smart-pointers-why-use-smart-pointers-anchor)
+    *   [Types of Smart Pointers](#smart-pointers-types-smart-pointers-anchor)
+        *   [**`std::unique_ptr`**](#smart-pointers-types-smart-pointers-unique-ptr-anchor)
+        *   [**`std::shared_ptr`**](#smart-pointers-types-smart-pointers-shared-ptr-anchor)
+        *   [**`std::weak_ptr`**](#smart-pointers-types-smart-pointers-weak-ptr-anchor)
 * [Installation](#installation)
 * [Usage / Examples](#usageexamples)
 * [Running Tests](#running-tests)
@@ -908,83 +856,38 @@ __Exercise 06 - Hospital__
     *   [Reference vs Pointer](#reference-reference-vs-pointer)
     *   [Types of References](#reference-types)
     *   [Usage of References](#reference-usage)
-*   [Input/Output](#inputoutput)
-    *   [C++ Input/Output Library](#c-inputoutput-library)
-    *   [**`IOStream`**](#iostream)
-        *   [Stream in C++?](#iostream-stream-in-c-anchor)
-            *   [Definition](#iostream-stream-in-c-definition-anchor)
-            *   [Why use Streams](#iostream-stream-in-c-why-use-stream-anchor)
-        *   [Standard Input/Output stream](#iostream-standard-inputoutput-stream-anchor)
-            *   [Output with **`std::cout`**](#iostream-standard-inputoutput-stream-output-wuth-cout-anchor)
-            *   [Input with **`std::cin`**](#iostream-standard-inputoutput-stream-input-with-cin-anchor)
-            *   [Error Output with **`std::cerr`**](#iostream-standard-inputoutput-stream-error-output-with-cerr-anchor)
-            *   [Logging Output with **`std::clog`**](#iostream-standard-inputoutput-stream-logging-output-with-clog-anchor)
-    *   [**`FStream`**](#fstream)
-        *   [**`fstream`**](#fstream-file-inputoutput-stream-fstream-anchor)
-        *   [**`ifsteram`**](#fsteram-file-inputoutput-stream-ifstream-anchor)
-        *   [**`ofstream`**](#fsteram-file-inputoutput-stream-ofstream-anchor)
-        *   [Summary of Differences](#fsteram-file-inputoutput-stream-summary-anchor)
-    *   [**`IOmanip`**](#iomanip)
-        *   [**`setw`** Manipulator](#setw-manipulator-iomanip-inputoutput-stream-anchor)
-        *   [**`setw`** Manipulator](#iomanip-inputoutput-stream-setw-manipulator-anchor)
-        *   [**`fixed`** Manipulator](#fixed-manipulator-iomanip-inputoutput-stream-anchor)
-        *   [**`setprecision`** Manipulator](#setprecision-manipulator-iomanip-inputoutput-stream-anchor)
-        *   [Summary of Differences](#summary-manipulator-iomanip-inputoutput-stream-anchor)
-*   [Class](#class)
-    *   [What is a class](#class-what-is-a-class-anchor)
-        *   [Class Vs Structure](#class-class-vs-struct-anchor)
-        *   [Constructor](#class-constructor-anchor)
-        *   [Destructor](#class-destructor-anchor)
-        *   [Attributes or Data Members](#class-attributes-anchor)
-        *   [Methods or Member Functions](#class-methods-anchor)
-        *   [Keyword **`this`**](#class-this-anchor)
-        *   [Initialization List](#class-initialization-list-anchor)
-        *   [Visibility and Encapsulation](#class-visibility-and-encapsulation-encapsulation-anchor)
-            *   [Encapsulation](#class-visibility-and-encapsulation-encapsulation-anchor)
-            *   [Visibility](#class-visibility-and-encapsulation-visibility-anchor)
-            *   [Benefits of Visibility and Encapsulation](#class-visibility-and-encapsulation-befenits-anchor)
-        *   [Getters and Setters](#class-getters-setters-anchor)
-        *   [Syntax / Example](#class-syntax-example-anchor)
-*   [Non-Member Attribute & Non-Member Function](#non-member-attribute--non-member-function)
+*   [**`FStream`**](#fstream)
+    *   [**`fstream`**](#fstream-file-inputoutput-stream-fstream-anchor)
+    *   [**`ifsteram`**](#fsteram-file-inputoutput-stream-ifstream-anchor)
+    *   [**`ofstream`**](#fsteram-file-inputoutput-stream-ofstream-anchor)
+    *   [Summary of Differences](#fsteram-file-inputoutput-stream-summary-anchor)
 *   [Pointer to Members and Pointer to Members Functions](#pointer-to-members-and-pointer-to-members-functions)
     *   [Pointer to Members](#pointer-to-members-and-pointer-to-members-functions-pointer-to-members-anchor)
     *   [Pointer to Members Functions](#pointer-to-members-and-pointer-to-members-functions-pointer-to-members-functions-anchor)
-*   [Keyword **`const`**](#keyword-const)
-*   [Keyword **`static`**](#keyword-static)
-*   [Keyword **`auto`**](#keyword-auto)
-*   [**`std::string`**](#keyword-auto)
-    *   [Common Operations on **`std::string`**](#string-common-operations-on-string-anchor)
-        *   [Concatenation](#string-common-operations-on-string-concatenation-anchor)
-        *   [Accessing Characters](#string-common-operations-on-string-accessing-characters-anchor)
-        *   [String Length](#string-common-operations-on-string-string-length-anchor)
-    *   [Modifying Strings](#string-modifying-strings-anchor)
-        *   [Appending / Inserting](#string-modifying-strings-appending-inserting-anchor)
-            *   [Appending](#string-modifying-strings-appending-inserting-appending-anchor)
-            *   [Inserting](#string-modifying-strings-appending-inserting-inserting-anchor)
-        *   [Replacing / Erasing](#string-replacing-erasing-anchor)
-            *   [Replacing](#string-replacing-erasing-replacing-anchor)
-            *   [Erasing](#string-replacing-erasing-erasing-anchor)
-    *   [Clearing a String](#string-clearing-a-string-anchor)
-        *   [Clearing](#string-clearing-a-string-clearing-anchor)
-    *   [Searching / Substring](#string-searching-substrings-anchor)
-        *   [Finding Substring](#string-searching-substrings-finding-substring-anchor)
-        *   [Extracting Substring](#string-searching-substrings-extracting-substring-anchor)
-    *   [Comparaison of String](#string-comparison-of-strings-anchor)
-    *   [C-String Compatibility](#string-c-string-compatibility-anchor)
-    *   [Advanced Features](#string-advanced-features-anchor)
-        *   [Iterating Over StringStream](#string-advanced-features-iterating-over-stringstream-anchor)
-            *   [Iterating](#string-advanced-features-iterating-over-stringstream-iterating-anchor)
-            *   [**`std::stringsteram`**](#string-advanced-features-iterating-over-stringstream-stringstream-anchor)
-    *   [Memory Managment and Performance](#string-memory-performance-anchor)
-*   [C++ How to convert **`std::string`** to **`int`**/**`float`**](#c98-how-to-convert-stdstring-to-intfloat)
-    *   [Using **`<cstdlib>`** and **`std::atoi`**/**`std::atof`**](#convert-string-to-int-float-cstdlib-anchor)
-    *   [Using **`<sstream>`** and **`std::stringstream`**](#convert-string-to-int-float-sstream-anchor)
-*   [C++98 How to convert **`int`**/**`float`** to **`std::string`**](#c98-how-to-convert-intfloat-to-stdstring)
-    *   [Using **`<sstream>`** and **`std::stringstream`**](#convert-numeric-to-string-sstream-anchor)
-    *   [Mordern C++ (C++11 and the latest version), Using **`std::to_string`**](#convert-numeric-to-string-std::to_string-anchor)
+*   [Parametric Polymorphism](#parametric-polymorphism)
+    *   [How Does it Work](#parametric-polymorphism-how-does-it-work-anchor)
+    *   [Advantages](#parametric-polymorphism-advantages-anchor)
+*   [Default values](#default-values)
+    *   [Advantages](#default-value-advantages-anchor)
+*   [**`static`** Keyword](#static-keyword)
+    *   [**`static`** Global Variables](#static-global-variables-anchor)
+    *   [**`static`** with Functions](#static-functions-anchor)
+    *   [**`static`** Global Functions](#static-global-functions-anchor)
+    *   [**`static`** with Class Members](#static-class-members-anchor)
+*   [**`explicit`** Keyword](#explicit-keyword)
+    *   [The Problem of Implicit Conversions](#explicit-problem-implicit-conversion-anchor)
+    *   [Avoid Implicit Conversion With **`explicit`**](#explicit-avoid-implicit-conversion-anchor)
+    *   [Advantages of `explicit`](#explicit-advantages-anchor)
+*   [**`const`** Keyword](#const-keyword)
+*   [Smart Pointers](#smart-pointers)
+*   [Why Use Smart Pointers](#smart-pointers-why-use-smart-pointers-anchor)
+*   [Types of Smart Pointers](#smart-pointers-types-smart-pointers-anchor)
+    *   [**`std::unique_ptr`**](#smart-pointers-types-smart-pointers-unique-ptr-anchor)
+    *   [**`std::shared_ptr`**](#smart-pointers-types-smart-pointers-shared-ptr-anchor)
+    *   [**`std::weak_ptr`**](#smart-pointers-types-smart-pointers-weak-ptr-anchor)
 ## Lessons Learned
 [(Back to top)](#table-of-contents)
-### Memory Managment
+#### Memory Managment
 [(Back to top)](#table-of-contents)
 [(Back to Key Learnings)](#key-learnings)
 *   In C++, __memory__ is divided into several regions:
@@ -1357,90 +1260,7 @@ ___
                 int& ref = getGlobal();
                 ```
 ___
-
-### Input/Output
-[(Back to top)](#table-of-contents)
-[(Back to Key Learnings)](#key-learnings)
-#### C++ Input/Output Library
-*   C++ offers several types of input/output libraries:
-    *   __Stream-based I/O library__: An object-oriented, stream-based approach to handle various input/output operations.
-    *   __Print-based functions__ (since C++23): Functions for formatted text output.
-    *   __C-style I/O functions__: Compatibility with traditional C I/O functions like fopen, getc, etc.
-*   __Stream-based I/O__
-    *   The stream-based I/O abstracts input/output devices, allowing uniform __handling of files__, __memory streams__, and __other devices__ (e.g., compression).
-*   __Class Hierarchy__
-    ![Standard I/O complete inheritance](https://upload.cppreference.com/mwiki/images/0/06/std-io-complete-inheritance.svg)
-#### `IOstream`:
-[(Back to top)](#table-of-contents)
-[(Back to Key Learnings)](#key-learnings)
-*   **<a id="iostream-stream-in-c-anchor"></a>Stream in C++:**
-    *   **<a id="iostream-stream-in-c-definition-anchor"></a>Definition:**
-        *   A **stream** is an abstraction that represents a sequence of data, either coming from an input source (e.g., keyboard) or going to an output destination (e.g., screen or file).
-        *   In C++, streams are handled with the **`<iostream>`** library, which provides three standard streams:
-            *   **`cin`** (standard input): Reads data from the user (usually the keyboard).
-            *   **`cout`** (standard output): Writes data to the screen.
-            *   **`cerr`** (standard error): Used to display error messages.
-            *   **`clog`** (standard logging): Used for logging messages, similar to **`cerr`**, but it's buffered.
-            *   | **Predefined standard stream objects** | **Header** | **Description** | **Type** |
-                |----------------------------------------|------------|-----------------|----------|
-                | `cin`, `wcin` | `<iostream>` | Reads from the standard C input stream `stdin` | Global object |
-                | `cout`, `wcout` | `<iostream>` | Writes to the standard C output stream `stdout` | Global object |
-                | `cerr`, `wcerr` | `<iostream>` | Writes to the standard C error stream `stderr`, unbuffered | Global object |
-                | `clog`, `wclog` | `<iostream>` | Writes to the standard C error stream `stderr` | Global object |
-
-    *   **<a id="iostream-stream-in-c-why-use-stream-anchor"></a>Why use Streams:**
-        *   Streams allow for consistent handling of input and output, whether it's from the keyboard, a file, or other sources.
-    <br>
-*   **<a id="iostream-standard-inputoutput-stream-anchor"></a>Standard Input/Output stream:**
-    *   **<a id="iostream-standard-inputoutput-stream-output-with-cout-anchor"></a>Output with `std::cout`:**
-        *   Used to print data to the screen.
-        *   The **`<<`** operator is used to send data to the output stream.
-        *   **`std::endl`** stands for "end line" and is used to insert a **newline character** and **flush** the output buffer, ensuring the message is immediately displayed on the screen.
-        *   __Syntax / Example__:
-            ```C++
-            #include <iostream>
-            std::cout << "Message to display" << std::endl;
-            ```
-    *   **<a id="iostream-standard-inputoutput-stream-input-with-cin-anchor"></a>Input with `std::cin`:**
-        *   Used to read data from the keyboard.
-        *   The **`<<`** operator is used to send data to the output stream.
-        *   The **`>>`** operator is used to extract data from the input stream.
-        *   **`std::endl`** stands for "end line" and is used to insert a **newline character** and **flush** the output buffer, ensuring the message is immediately displayed on the screen.
-        *   **Syntax**:
-            ```C++
-            #include <iostream>
-            std::cin >> variable;
-            ```
-        *   **Example**:
-            ```C++
-            #include <iostream>
-            int age;
-            std::cout << "Enter your age: ";
-            std::cin >> age;
-            std::cout << "You are " << age << " years old." << std::endl;
-            ```
-    *   **<a id="iostream-standard-inputoutput-stream-error-output-with-cerr-anchor"></a>Error Output with `std::cerr`:**
-        *   Used to display error messages.
-        *   Unlike **`std::cout`**, **`std::cerr`** is __unbuffered__, meaning the message is displayed immediately without waiting for the buffer to be flushed.
-        *   The **`<<`** operator is used to send data to the output stream.
-        *   **`std::endl`** stands for "end line" and is used to insert a **newline character** and **flush** the output buffer, ensuring the message is immediately displayed on the screen.
-        *   __Syntax / Example__:
-            ```C++
-            #include <iostream>
-            std::cerr << "Error: Invalid value!" << std::endl;
-            ```
-    *   **<a id="iostream-standard-inputoutput-stream-logging-output-with-clog-anchor"></a>Logging Output with `std::clog`:**
-        *   Used for logging messages. Unlike **`std::cerr`**, **`std::clog`** is __buffered__, meaning it waits until the buffer is full or **`std::endl`** is encountered before sending the message to the output.
-        *   This can be more efficient for logging large amounts of data.
-        *   The **`<<`** operator is used to send data to the output stream.
-        *   **`std::endl`** stands for "end line" and is used to insert a **newline character** and **flush** the output buffer, ensuring the message is immediately displayed on the screen.
-        *   __Syntax / Example__:
-            ```C++
-            #include <iostream>
-            std::clog << "Log: Processing data..." << std::endl;
-            ```
-
-#### FStream
+### FStream
 [(Back to top)](#table-of-contents)
 [(Back to Key Learnings)](#key-learnings)
 In C++, the classes **`fstream`**, **`ifstream`**, and **`ofstream`** are used to handle file input/output operations.
@@ -1528,395 +1348,8 @@ They are part of the **`<fstream>`** library. Here's the main difference between
         | `fstream` |	Read and write (`std::ios::in` or `std::ios::out`) | To read / write data from a file |
         | `ifstream` | Read-only (`std::ios::in`)	| To read data from a file |
         | `ofstream` | Write-only (`std::ios::out`) | To write data to a file |
-#### IOmanip
-[(Back to top)](#table-of-contents)
-[(Back to Key Learnings)](#key-learnings)
-*   The **`<iomanip>`** library in C++ provides **functions** and **manipulators** that help format the input and output of data in a more flexible and readable manner.
-*   It is especially useful when working with **floating-point numbers**, **controlling spacing between outputs**, and **aligning the text in a certain format**.
-*   **`<iomanip>`** stands for __I/O manipulators__, which help in formatting the output by altering the appearance of printed data without changing the actual values.
-*   The functions from **`<iomanip>`** are often used with __`std::cout`__ (standard output) to display data in a particular format (e.g., floating-point precision, alignment of text or numbers).
-*   **<a id="setw-manipulator-iomanip-inputoutput-stream-anchor"></a>`setw` Manipulator:**
-    *   __Definition:__ 
-        *   The **`setw`** manipulator stands for __set width__.
-    *   __Usage:__ 
-        *   It is used to specify the minimum number of characters to be used when displaying the next value in the output.
-        *   If the value to be displayed is shorter than the specified width, spaces will be added to the left (by default) to fill the gap.
-    *   __Syntax / Example:__
-        ```C++
-        #include <iostream>
-        #include <iomanip> // Required for setw
-
-        int main() {
-            std::cout << std::setw(10) << 123 << std::endl;
-            std::cout << std::setw(10) << 4567 << std::endl;
-            std::cout << std::setw(10) << "C++" << std::endl;
-
-            return 0;
-        }
-        output:
-                    123
-                    4567
-                    C++
-        ```
-*   **<a id="fixed-manipulator-iomanip-inputoutput-stream-anchor"></a>`fixed` Manipulator:**
-    *   __Definition__: 
-        *   The **`fixed`** manipulator is used to display floating-point numbers in __fixed-point notation__.
-        *   **By default, floating-point numbers in C++ are printed in scientific notation if the number is too large or too small.** 
-    *   __Usage__: 
-        *   Using **`fixed`** forces the output to show the decimal part as a fixed number of digits, even if the number is very large or small.
-    *   __Syntax / Example__:
-        ```C++
-        #include <iostream>
-        #include <iomanip> // Required for fixed
-
-        int main() {
-            double pi = 3.14159265358979;
-            
-            std::cout << "Default notation: " << pi << std::endl;
-            std::cout << std::fixed << "Fixed notation: " << pi << std::endl;
-
-            return 0;
-        }
-
-        output:
-        Default notation: 3.14159
-        Fixed notation: 3.141593 // with std::fixed
-        ```
-*   **<a id="setprecision-manipulator-iomanip-inputoutput-stream-anchor"></a>`setprecision` Manipulator:**
-    *   __Definition:__
-        *   The **`setprecision`** manipulator controls the number of __significant digits__ or __decimal__ places to display for floating-point numbers.
-        *   It can __work with or without__ the **`fixed`** manipulator, but its behavior changes depending on whether **`fixed`** is used.
-    *   __Syntax / Example:__
-        *   Example without **`fixed`**:
-            ```C++
-            // USAGE WITHOUT FIXED
-            #include <iostream>
-            #include <iomanip> // Required for setprecision
-
-            int main() {
-                double pi = 3.14159265358979;
-                
-                std::cout << std::setprecision(4) << pi << std::endl;
-                std::cout << std::setprecision(8) << pi << std::endl;
-
-                return 0;
-            }
-            output:
-            3.142
-            3.1415927
-            ```
-        *   Example with **`fixed`**:
-            ```C++
-            // USAGE WITH FIXED
-            #include <iostream>
-            #include <iomanip> // Required for setprecision and fixed
-
-            int main() {
-                double pi = 3.14159265358979;
-
-                std::cout << std::fixed << std::setprecision(4) << pi << std::endl;
-                std::cout << std::fixed << std::setprecision(2) << pi << std::endl;
-
-                return 0;
-            }
-            output:
-            3.1416
-            3.14
-            ```
-*   **<a id="summary-manipulator-iomanip-inputoutput-stream-anchor"></a>Summary of Differences:**
-    | Manipulator | Description | Example Usage |
-    |-------------|-------------|---------------|
-    | `setw`      |	Sets the minimum width of the next output field. | `std::cout << std::setw(10);` |
-    | `fixed` | Forces floating-point numbers to be printed in fixed-point notation. | `std::cout << std::fixed;` |
-    | `setprecision` | Controls the number of significant digits or decimal places. |`std::cout << std::setprecision(3);` |
-
 ___
-#### Class
-[(Back to top)](#table-of-contents)
-[(Back to Key Learnings)](#key-learnings)
-In C++, __classes__ are one of the fundamental concepts of __object-oriented programming__ (OOP). They allow you to model objects by grouping data and functions (methods) that operate on that data.
-This course will cover the syntax, key concepts, and advanced topics related to classes in C++.
-*   **<a id="class-what-is-a-class-anchor"></a>What is a Class:**
-    *   A class is a blueprint or template for **creating objects**. It defines the **properties** (data) and **behavior** (methods) of objects. A class may contain:
-        *   **<a id="class-class-vs-struct-anchor"></a>Class vs Structure:**
-            *   | Structures | Classes |
-                |------------|---------|
-                | Keyword **`struct`** | Keyword **`class`** |
-                | Default access is **public** | Default access is **private** |
-        *   **<a id="class-access-specifiers-anchor"></a>Access Specifiers:**
-            *   **`public`**: Members are accessible from outside the class.
-            *   **`protected`**: Members are accessible within the class and its derived (inherited) classes.
-            *   **`private`**: Members are only accessible within the class itself.
-        *   **<a id="class-constructor-anchor"></a>Constructor:**
-            *   Is a special method that is **automatically called** when an object is **created**.
-            *   It has the same name as the class and has no return type.
-        *   **<a id="class-destructor-anchor"></a>Destructor:**
-            *   Is a special method **automatically called** when an object is **destroyed**.
-            *   It is mainly used to **free** resources.
-            *   The **destructor** has the same name as the class, preceded by the **`~`** symbol, and takes no parameters.
-        *   **<a id="class-attributes-anchor"></a>Attributes or Data Members:**
-            *   **Variables** that represent the object's **properties**.
-        *   **<a id="class-methods-anchor"></a>Methods or Member Functions:**
-            *   Functions that manipulate the data or perform specific actions.
-        *   **<a id="class-this-anchor"></a>Keyword `this`:**
-            *   Inside a class method, the keyword **`this` pointer** refers to the **current instance of the class** (the object the method is acting upon).
-            *   It is often used to resolve name conflicts between class attributes and method parameters.
-        *   **<a id="class-initialization-list-anchor"></a>Initialization list:**
-            *   **Definition:**
-                *   An **initialization list** is a mechanism used to directly initialize class members before the constructor body is executed.
-                *   This approach is **cleaner** and **more efficient**, especially in cases where certain members cannot be assigned values in the constructor body.
-            *   **Efficiency:**
-                *   Initialization lists are more **efficient** than assigning values in the constructor body.
-                *   When initializing a member in the constructor body, **the object is first constructed** (possibly using a default constructor), and then **reassigned**.
-                *   Using an initialization list, the member is **initialized directly, avoiding unnecessary reassignments**.
-            *   **Order of Members Initialization:**
-                *   One important aspect is that the order in which members are initialized is **not determined by the order in the initialization list**, but rather by the **order in which they are declared in the class**.
-                *   Necessary for **const** and **Reference Members.**
-        *   **<a id="class-visibility-and-encapsulation-anchor"></a>Visibility and Encapsulation:**
-            *    In C++, **visibility and encapsulation** are core concepts of object-oriented programming (OOP).
-            *   They enable the control of access to class members (attributes and methods) to ensure **data security** and **integrity**.
-            *   **Encapsulation** improves code **modularity** and **maintainability**.
-            *   **<a id="class-visibility-and-encapsulation-encapsulation-anchor"></a>Encapsulation:**
-                *   **Definition**:
-                    *   **Encapsulation** is the concept of bundling data (attributes) and methods that operate on that data within a single entity: the **class**.
-                    *   It also **restricts access** to these members, **protecting** them from unauthorized modification or **access** from outside the class.
-                *   **Usage**:
-                    *   The main goal of **encapsulation** is to **prevent** users from directly **modifying the internal attributes of a class** and to **enforce controlled access methods**.
-            *   **<a id="class-visibility-and-encapsulation-visibility-anchor"></a>Visibility:**
-                *   **Definition**:
-                    *   **Visibility**, or **access specifiers**, define how class members (attributes and methods) can be accessed.
-                    *   **Three levels of visibility**:
-                        *   **`public`**: Members are accessible from outside the class.
-                        *   **`protected`**: Members are accessible within the class and its derived (inherited) classes.
-                        *   **`private`**: Members are only accessible within the class itself.
-            *   **<a id="class-visibility-and-encapsulation-befenits-anchor"></a>Benefits of Encapsulation and Visibility:**
-                *   **Data Protection**
-                *   **Clean Interface**
-                *   **Flexibility and Scalability**
-                *   **Access Control**
-        *   **<a id="class-getters-setters-anchor"></a>Getters and Setters**
-            *   **Usage**:
-                *   To **allow controlled access to private or protected attributes**, **getters** and **setters** are often used.
-            *   **Getter**: Is a method that **returns the value of an attribute**.
-            *   **Setter**: Is a method that **modifies an attribute in a controlled way**.
-    *   **<a id="class-syntax-example-anchor"></a>Syntax / Example:**
-        ```C++
-        // file: Example.hpp
-        #ifndef     __EXAMPLE_HPP__
-            #define __EXAMPLE_HPP__
-            
-        #include <string>
-        class Example // Keyword `class` followed by the class name `Example`
-        {
-            public: // Access specifier
-                Example(std::string name, int age); // Constructor
-                ~Example(void); // Destructor
-
-                void                methodExample(void); // Method or Member function
-
-                int                 getAge(void) const; // Getter
-                void                setAge(int age); // Setter
-            protected: // Access specifier
-
-            private: // Access specifier
-                int                 _number; // Attribute or Data member
-                int                 _age;
-                const std::string   _name;
-
-        }; // `;` Very important for close class and avoid some issues.
-
-        #endif //   !__EXAMPLE_HPP__
-
-        // ----------------------------------------------------------------
-        // file: Example.cpp
-        
-        #include <iostream>
-        #include "Example.hpp"
-        // Constrcutor
-        Example::Example(std::string name, int age) :   _age(age), _name(name) // Initialization list with correct order
-        {
-            this->_number = 10; // Attribute with keyword `this`
-            
-            // Error:
-            //this->_name = name; Error: _name is const and can't be assigned;
-            std::cout << "Constructor called!" << std::endl;
-        }
-
-        // Destructor
-        Example::~Example(void)
-        {
-            std::cout << "Destructor called!" << std::endl;
-        }
-
-        // Method or Member function
-        void    Example::methodExample(void)
-        {
-            std::cout << "Attribute number equals to: " << _number << std::endl;
-        }
-
-        // Getter Function
-        int     Example::getAge(void) const
-        {
-            return _age;
-        }
-
-        // Setter Function
-        void    Example::setAge(int age)
-        {
-            _age = age;
-        }
-        // ----------------------------------------------------------------
-        // file: main.cpp
-        #include <iostream>
-        #include "Example.hpp"
-
-        int main(void)
-        {
-            Example     example("Jhon Doe", 18);    // Object created
-        // If constructor has int parameter for example:
-        // Example  example(10);
-
-            example.methodExample(); // method called
-        
-        // Error
-        //  std::cout << "Age equals to: " << example._age << std::endl; // Error: We can't access to _age because is private.
-            std::cout << "Age equals to: " << example.getAge() << std::endl; // With getter we can have access to _age attribute.
-
-            std::cout << "Next year" << std::endl;
-
-        // Error
-        //  example._age = 19; // Error: We can't access to _age and modify because is private.
-            example.setAge(19); // With setter we can modify _age attribute
-            std::cout << "Age equals to: " << example.getAge() << std::endl;
-            return 0;
-        }
-        // ----------------------------------------------------------------
-        output:
-        Constructor called!
-        Attribute number equals to: 10
-        Age equals to: 18
-        Next year
-        Age equals to: 19
-        Destructor called!
-        ```
-___
-#### Non-Member Attribute & Non-Member Function
-[(Back to top)](#table-of-contents)
-[(Back to Key Learnings)](#key-learnings)
-*   **Definition**:
-    *   **Non-member variables**: 
-        *   Variables **defined outside of the class**, often **used to store global** or **shared information** across multiple instances of the class.
-        *   **Non-member variables** are typically **global** or **static variables** defined outside of the class.
-    *   **Non-member functions**: Functions defined **outside of the class that operate on** or **use objects of the class**.
-*   **Usage**:
-    *   **Encapsulation and Abstraction**:
-        *   **Non-member functions & Attributes** allow for **maintaining a separation** between a class’s public **interface** and the **operations** that can be performed on that class.
-        *   This preserves **encapsulation** while providing additional functionality.
-    *   **Reducing Coupling**:
-        *   Using **non-member functions & Attributes** can reduce coupling between classes, meaning that classes are **less dependent** on one another, making the code **more modular** and **easier to maintain.**
-*   **Advantages and Disadvantages of Non-Member Attributes & Non-Member Functions:**
-    *   **Advantages**:
-        *   **Flexibility**: **Non-member functions & attributes** can be **added** or **modified** without **changing the class definition**.
-        *   **Encapsulation**: **Non-member functions & attributes** can manipulate objects without exposing their internal details.
-        *   **Reduced Coupling**: Helps **reduce dependencies** between classes.
-    *   **Disadvantages**:
-        *   **Limited Access**: **Non-member functions & attributes** do **not have direct access to private/protected** class members (unless they are `friend` functions).
-        *   **Managing Friend Functions**: Excessive use of `friend` functions can compromise **encapsulation**.
-*   **Syntax / Example**:
-    ```C++
-    // file: Example.hpp
-    #ifndef     __EXAMPLE_HPP__
-        #define __EXAMPLE_HPP__
-        
-    #include <string>
-    class Example // Keyword `class` followed by the class name `Example`
-    {
-        public: // Access specifier
-            Example(void); // Constructor
-            ~Example(void); // Destructor
-
-            static int          getNbInstance(void); // Getter and Non-Member Function
-        protected: // Access specifier
-
-        private: // Access specifier
-            static int          _numberInstance; // Non-Member Attribute
-
-    }; // `;` Very important for close class and avoid some issues.
-
-    #endif //   !__EXAMPLE_HPP__
-
-    // ----------------------------------------------------------------
-    // file: Example.cpp
-    
-    #include <iostream>
-    #include "Example.hpp"
-
-    // Non-Member attribute Initialization
-    int  Example::_numberInstance = 0;
-
-
-    // Constrcutor
-    Example::Example(void)
-    {
-        std::cout << "Constructor called!" << std::endl;
-        Example::_numberInstance += 1; // syntax
-    }
-
-    // Destructor
-    Example::~Example(void)
-    {
-        std::cout << "Destructor called!" << std::endl;
-        Example::_numberInstance -= 1;
-    }
-
-    // Getter Non-Member Function
-    int     Example::getNbInstance(void)
-    {
-        return Example::_numberInstance;
-    }
-
-    // ----------------------------------------------------------------
-    // file: main.cpp
-    #include <iostream>
-    #include "Example.hpp"
-
-    void    f0(void)
-    {
-        Example     example;
-        std::cout   << "Number of instances of Example Class: " 
-                    << Example::getNbInstance() << std::endl;
-    }
-
-    void    f1(void)
-    {
-        Example     example;
-        std::cout   << "Number of instances of Example Class: " 
-                    << Example::getNbInstance() << std::endl;
-        f0();
-    }
-
-    int     main(void)
-    {
-        std::cout   << "Number of instances of Example Class: " 
-                    << Example::getNbInstance() << std::endl;
-        f1();
-        std::cout   << "Number of instances of Example Class: " 
-                    << Example::getNbInstance() << std::endl;
-        return 0;
-    }
-    // ----------------------------------------------------------------
-    output:
-    Number of instances of Example Class: 0
-    Constructor called!
-    Number of instances of Example Class: 1
-    Constructor called!
-    Number of instances of Example Class: 2
-    Destructor called!
-    Destructor called!
-    Number of instances of Example Class: 0
-    ```
-___
-#### Pointer to Members and Pointer to Members Functions
+### Pointer to Members and Pointer to Members Functions
 [(Back to top)](#table-of-contents)
 [(Back to Key Learnings)](#key-learnings)
 *   **<a id="pointer-to-members-and-pointer-to-members-functions-pointer-to-members-anchor"></a>Pointer to Members:**
@@ -2022,39 +1455,88 @@ ___
     *   Although member pointers **are not necessary for every program**, they are very **useful** in scenarios where **flexibility** and **dynamic** behavior are needed.
     *   They are often **used in complex environments**, such as **user interfaces** or **event-driven systems**, where it is **necessary to select specific members to manipulate** or **execute based on runtime conditions**.
 ___
-#### Keyword `const`
+### Parametric Polymorphism
 [(Back to top)](#table-of-contents)
 [(Back to Key Learnings)](#key-learnings)
-*   **Basic Usage of const with Variables**
-    *   The simplest use of **`const`** is to declare a constant variable.
-    *   Once a variable is declared as **`const`**, its value cannot be changed.
-    *   **Syntax / Example**:
-        ```C++
-        const int maxScore = 100;
-        maxScore = 200;  // Error: Cannot modify a const variable
-        ```
-*   **`const` Member Functions**
-    *   In C++, a member function can be declared as **`const`** to indicate that it does not modify the state of the object.
-    *   A **`const`** member function is only allowed to call other **`const`** member functions and cannot modify any non-mutable member variables.
-    *   **Syntax / Example**:
-        ```C++
-        class MyClass {
-        public:
-            int getValue() const {  // This function will not modify any member variables
-                return value;
-            }
+*   In C++, you can **create multiple functions with the same name but different parameter types**.
+*   This is called **function overloading**.
+*   It allows handling different types of **arguments**, which is a straightforward form of **polymorphism**.
 
-            void setValue(int val) {
-                value = val;
-            }
+*   **Example**:
+    ```C++
+    #include <iostream>
 
-        private:
-            int value;
-        };
-        ```
+    void add(int a, int b) {
+        int result = a + b;
+        std::cout << "Addition of int: " << result << std::endl;
+    }
+
+    void add(float a, float b) {
+        float result = a + b;
+        std::cout << "Addition of float: " << result << std::endl;
+    }
+
+    void add(double a, double b) {
+        double result = a + b;
+        std::cout << "Addition of double: " << result << std::endl;
+    }
+
+    int main() {
+        add(3, 4);         // Calls the int version
+        add(3.2f, 4.3f);   // Calls the float version
+        add(3.14, 2.71);   // Calls the double version
+
+        return 0;
+    }
+    ```
+*   **<a id="parametric-polymorphism-how-does-it-work-anchor"></a> How Does it Work:**
+    *   **Function overloading**:
+        *   You write **multiple functions with the same name**, but with **different parameter types** (**`int`**, **`float`**, **`double`**, etc...).
+        *   The compiler selects the correct function based on the argument types you pass.
+        *   The same function name, add, can be used for different data types.
+*   **<a id="parametric-polymorphism-advantages-anchor"></a>Advantages:**
+    *   **Simple and efficient**:
+        *   No need to dive into complex concepts like templates.
+    *   **Flexible**:
+        *   You can easily add more versions of the function for other **types**, like **`long`**, **`short`**, etc.
 ___
+### Default Values
+*   A **default value** is a **value assigned to a function parameter**.
+*   If an **argument is not provided for that parameter during the function call, the default value will be used**.
+*   In C++, you can specify default values for parameters directly in the **function declaration**.
+*   **Example**:
+    ```C++
+    #include <iostream>
 
-#### Keyword `static`
+    void greet(const std::string& name = "Guest") {
+        std::cout << "Hello, " << name << "!" << std::endl;
+    }
+
+    int main() {
+        greet("Alice");   // Call with an argument: "Alice"
+        greet();          // Call without an argument, uses default value "Guest"
+
+        return 0;
+    }
+    ```
+*   **Parameters with default values must be placed after parameters without default values in the function definition**.
+*   **Example**:
+    ```C++
+    // ERROR:
+    void example(int a = 10, int b);  // Error: b has no default value but comes after a which has one.
+
+    // CORRECT:
+    void example(int a, int b = 10);  // Correct: a must be provided, b can be omitted.
+    ```
+*   **<a id="default-value-advantages-anchor"></a>Advantages:**
+    *   **Simplicity**:
+        *   You don’t have to provide values every time, especially if they are often the same.
+    *   **Clarity**:
+        *   The code is **more readable** when you don’t have to specify non-essential arguments in every function call.
+    *   **Flexibility**:
+        *   You can easily modify the function’s behavior without overloading it for simple variations.
+___
+### `static` Keyword
 [(Back to top)](#table-of-contents)
 [(Back to Key Learnings)](#key-learnings)
 *   **`static` Local Variables**
@@ -2079,7 +1561,7 @@ ___
         *   **Explanation**:
             *   **Initialization**: The `count` variable is initialized only once, when the function is called for the first time.
             *   **Persistence**: The value of `count` persists between subsequent calls to `counter()`.
-*   **static Global Variables**
+*   **<a id="static-global-variables-anchor"></a>static Global Variables:**
     *   When a **global variable** is declared as **`static`**, its scope is limited to the file in which it is declared.
     *   This means that it **cannot be accessed or modified from other files** (translation units), even if they are part of the same program.
     *   **Syntax / Example**:
@@ -2105,7 +1587,7 @@ ___
             *   **File Scope**: 
                 *   The `globalVar` is only accessible within File*cpp.
                 *   It cannot be accessed directly from File2.cpp, which helps to prevent naming conflicts and accidental modifications.
-*   **`static` with Functions**
+*   **<a id="static-functions-anchor"></a>`static` with Functions:**
     *   **`static` Member Functions**
         *   In a class, a member function can be declared as **`static`**.
         *   This means that the function c**an be called without an instance of the class**.
@@ -2128,7 +1610,7 @@ ___
             *   **Explanation**:
                 *   **No Instance Required**: `displayMessage()` is called directly on the class, not on an instance of the class.
                 *   **No Access to Non-Static Members**: The **`static`** function cannot access instance-specific data (non-static members).
-*   **`static` Global Functions**
+*   **<a id="static-global-functions-anchor"></a>`static` Global Functions:**
     *   A function defined as **`static`** at global scope has internal linkage.
     *   This means **it can only be called within the file it is defined in**, preventing other files from using it directly.
     *   **Syntax / Example**:
@@ -2153,8 +1635,8 @@ ___
         }
         ```
         *   **Explanation**:
-            *   **Internal Linkage**: The `hiddenFunction` is only accessible within File*cpp, providing a f**orm of encapsulation** at the file level.
-*   **`static` with Class Members**
+            *   **Internal Linkage**: The `hiddenFunction` is only accessible within File.cpp, providing a **form of encapsulation** at the file level.
+*   **<a id="static-class-members-anchor"></a>`static` with Class Members:**
     *   **``static`` Member Variables**
         *   **`static` member variables** belong to the class rather than any particular instance.
         *   This means that **all instances of the class share the same `static` member variable**.
@@ -2208,358 +1690,202 @@ ___
     *   **File-Scope Functions**: Encapsulating helper functions within a single file to avoid polluting the global namespace.
     *   **Configuration or Settings**: Storing global settings or configurations that should be shared across all instances of a class.
 ___
-#### Keyword `auto`
+### `explicit` Keyword
 [(Back to top)](#table-of-contents)
 [(Back to Key Learnings)](#key-learnings)
-*   **Basic Usage of `auto`**
-    *   The **`auto`** keyword is used in place of a type name in variable declarations. The compiler deduces the type of the variable from the type of the initializer.
-    *   **Syntax / Example**:
+*   The **`explicit` keyword** in C++ is used to **prevent unwanted implicit conversions** and **accidental calls to constructors that take a single argument**.
+*   It **provides more control** and **clarity** regarding when type conversions or function calls should occur.
+*   **<a id="explicit-problem-implicit-conversion-anchor"></a>The Problem of Implicit Conversions:**
+    *   In C++, when a constructor accepts a single argument, **the compiler may automatically convert one type to another by calling that constructor, sometimes unintentionally**.
+    *   This can lead to **unexpected behaviors**.
+    *   **Example**:
         ```C++
         #include <iostream>
-        int main() {
-            auto x = 10;     // `x` is deduced as `int`
-            auto y = 3.14;   // `y` is deduced as `double`
-            auto s = "Hello"; // `s` is deduced as `const char*`
 
-            std::cout << x << ", " << y << ", " << s << std::endl;
+        class MyClass {
+        public:
+            MyClass(int x) { std::cout << "Constructor called with " << x << std::endl; }
+        };
+
+        void func(MyClass obj) {
+            std::cout << "Function called" << std::endl;
+        }
+
+        int main() {
+            func(5);  // Implicit conversion: int -> MyClass
             return 0;
         }
         ```
-*   **``auto`` with Complex Types**
-    *   One of the most powerful uses of **`auto`** is with **complex types**, such as **iterators**, **function return types**, or **template types**, where manually specifying the type would be cumbersome or unclear.
-    *   **Syntax / Example**:
+    *   **Explanation**:
+        *   Here, **`func` expects an object of type `MyClass`**.
+        *   When you pass **`5`**, **the compiler automatically converts the integer `5` to a `MyClass` object by calling the constructor with that argument**.
+        *   **The constructor is called implicitly**, even though that may not have been the intention.
+Introducing the explicit Keyword
+*   **<a id="explicit-avoid-implicit-conversion-anchor"></a>Avoid Implicit Conversion With `explicit` keyword:**
+    *   To **avoid these implicit conversions**, you can use the **`explicit` keyword** before constructors that take a single argument.
+    *   **This forces conversions to be done explicitly**, making the code **safer** and **clearer**.
+    *   **Example**:
         ```C++
-        #include <vector>
         #include <iostream>
 
-        int main() {
-            std::vector<int> numbers = {1, 2, 3, 4, 5};
+        class MyClass {
+        public:
+            explicit MyClass(int x) { std::cout << "Constructor called with " << x << std::endl; }
+        };
 
-            for (auto it = numbers.begin(); it != numbers.end(); ++it) {
-                std::cout << *it << " ";
-            }
-            std::cout << std::endl;
+        void func(MyClass obj) {
+            std::cout << "Function called" << std::endl;
+        }
+
+        int main() {
+            // func(5);  // Error: no implicit conversion possible
+
+            MyClass obj(5);  // Correct: explicit construction
+            func(obj);       // Pass an object explicitly
             return 0;
         }
         ```
+        *   **Explanation**:
+            *   By adding **`explicit`** to the **constructor**, the implicit conversion from int to **`MyClass`** is forbidden.
+            *   To call **`func`**, you must first explicitly create a MyClass object with **`MyClass obj(5);`**.
+            *   This makes the code **clearer**:
+                *   it is evident that a **`MyClass`** object is being created, rather than an implicit conversion from an integer.
+*   **<a id="explicit-advantages-anchor"></a>Advantages of `explicit`:**
+    *   **Prevents Unintentional Conversions**:
+        *   The **`explicit` keyword** ensures that type conversions do **not occur automatically**.
+        *   This **prevents bugs** due to accidental calls of constructors or **implicit conversions**.
+    *   **Improves Readability**:
+        *   The **code is more `explicit`** (hence the name of the keyword), making it easier to understand exactly what the program is doing.
+    *   **Enhances Type Safety**:
+        *   You **gain better control over the types used** and **how objects are created and passed to functions**.
 ___
-
-#### `std::string`
+### `const` Keyword
 [(Back to top)](#table-of-contents)
 [(Back to Key Learnings)](#key-learnings)
-*   **Definition**:
-    *   **`std::string`** is a part of the **C++ Standard Library**, provided by the **`<string>` header**.
-    *   It is one of the most commonly used data types in C++ because it offers a convenient way to **work with sequences of characters**, **providing many features** and **functions to manipulate** and **handle strings**.
-    *   A **`std::string`** is a sequence of characters (like a **`char` array**).
-    *   It **automatically manages memory**,** handles string concatenation**, and **provides a range of methods to manipulate strings**.
+*   **Basic Usage of const with Variables**
+    *   The simplest use of **`const`** is to declare a constant variable.
+    *   Once a variable is declared as **`const`**, its value cannot be changed.
     *   **Syntax / Example**:
         ```C++
-        #include <iostream>
-        #include <string>
-
-        int main() {
-            std::string s1;               // Default constructor: empty string
-            std::string s2("Hello");      // Initialization with a C-string literal
-            std::string s3 = "World";     // Copy initialization
-            std::string s4(s2);           // Copy constructor
-            std::string s5(5, 'a');       // 5 repetitions of the character 'a'
-
-            std::cout << s1 << std::endl; // Outputs: (empty string)
-            std::cout << s2 << std::endl; // Outputs: Hello
-            std::cout << s3 << std::endl; // Outputs: World
-            std::cout << s4 << std::endl; // Outputs: Hello
-            std::cout << s5 << std::endl; // Outputs: aaaaa
-
-            return 0;
-        }
+        const int maxScore = 100;
+        maxScore = 200;  // Error: Cannot modify a const variable
         ```
-*   **<a id="string-common-operations-on-string-anchor"></a>Common Operations on `std::string`:**
-    *   **<a id="string-common-operations-on-string-concatenation-anchor"></a>Concatenation:**
-        *   Strings can be concatenated using the **`+`** operator or the **`+=`** operator.
-        *   **Syntax / Example**:
-            ```cpp
-            #include <string>
-            #include <iostream>
-            std::string s1 = "Hello";
-            std::string s2 = "World";
+*   **`const` Member Functions**
+    *   In C++, a member function can be declared as **`const`** to indicate that it does not modify the state of the object.
+    *   A **`const`** member function is only allowed to call other **`const`** member functions and cannot modify any non-mutable member variables.
+    *   **Syntax / Example**:
+        ```C++
+        class MyClass {
+        public:
+            int getValue() const {  // This function will not modify any member variables
+                return value;
+            }
 
-            std::string s3 = s1 + " " + s2;   // Concatenation using +
-            s1 += " Everyone";                // Concatenation using +=
+            void setValue(int val) {
+                value = val;
+            }
 
-            std::cout << s3 << std::endl;     // Outputs: Hello World
-            std::cout << s1 << std::endl;     // Outputs: Hello Everyone
-            ```
-    *   **<a id="string-common-operations-on-string-accessing-characters-anchor"></a>Accessing Characters:**
-        *   You can access individual characters in a string using the **`[]`** operator or the **`.at()`** method.
-        *   **`.at()`** performs bounds checking and throws an exception if the index is out of range, while **`[]`** does not.
-        *   **Syntax / Example**:
-            ```cpp
-            #include <string>
+        private:
+            int value;
+        };
+        ```
+        test
+___
+### Smart Pointers
+[(Back to top)](#table-of-contents)
+[(Back to Key Learnings)](#key-learnings)
+*   **Smart pointers** in C++ **are objects that automatically manage memory**.
+*   They are **used to handle the lifetime of dynamic objects** and to **avoid memory leaks** and **management errors**.
+*   Here’s an overview of the most common types of smart pointers and their usage.
+*   **<a id="smart-pointers-why-use-smart-pointers-anchor"></a>Why Use Smart Pointers:**
+    *   **Automatic Memory Management**:
+        *   **Smart pointers** **automatically release memory** when they are no longer needed.
+    *   **Prevention of Memory Leaks**:
+        *   They **help avoid memory leaks** caused by forgetting to call **`delete`**.
+    *   **Safety**:
+        *   **They reduce the risk of accessing invalid pointers (dangling pointers)**.
+*   **<a id="smart-pointers-types-smart-pointers-anchor"></a>Types of Smart Pointers:**
+    *   **<a id="smart-pointers-types-smart-pointers-unique-ptr-anchor"></a>`std::unique_ptr`:**
+        *   **Description**:
+            *   A **smart pointer** that **exclusively owns an object**.
+            *   No other **`unique_ptr`** can own the same object.
+        *   **Usage**:
+            *   **Ideal for managing the lifetime of objects that you own exclusively**.
+        *   **Example**:
+            ```C++
             #include <iostream>
-            std::string s = "Hello";
+            #include <memory>
 
-            char first = s[0];            // Access first character using []
-            char last = s.at(s.size() - 1); // Access last character using .at()
+            class MyClass {
+            public:
+                MyClass() { std::cout << "MyClass created\n"; }
+                ~MyClass() { std::cout << "MyClass destroyed\n"; }
+            };
 
-            std::cout << first << std::endl;  // Outputs: H
-            std::cout << last << std::endl;   // Outputs: o
-            ```
-    *   **<a id="string-common-operations-on-string-string-length-anchor"></a>String Length:**
-        *   The length (or size) of a string can be determined using **`.size()`** or **`.length()`** methods.
-        *   Both **`.size()`** and **`.length()`** are interchangeable and provide the number of characters in the string.
-        *   **Syntax / Example**:
-            ```cpp
-            #include <string>
-            #include <iostream>
-            std::string s = "Hello";
-            std::cout << "Length: " << s.size() << std::endl; // Outputs: Length: 5
-            std::cout << "Length: " << s.length() << std::endl; // Outputs: Length: 5
-            ```
-*   **<a id="string-modifying-strings-anchor"></a>Modifying Strings:**
-    *   **<a id="string-modifying-strings-appending-inserting-anchor"></a>Appending / Inserting:**
-        *   **<a id="string-modifying-strings-appending-inserting-appending-anchor"></a>Appending:**
-            *   Add characters or strings to the end of an existing string.
-            *   **Syntax / Example**:
-                ```cpp
-                #include <string>
-                #include <iostream>
-                std::string s = "Hello";
-                s.append(" World");       // Appends " World" to s
-                s.append(3, '!');         // Appends "!!!" to s
-                std::cout << s << std::endl;  // Outputs: Hello World!!!
-                ```
-        *   **<a id="string-modifying-strings-appending-inserting-inserting-anchor"></a>Inserting:**
-            *   Insert characters or strings at a specified position.
-            *   **Syntax / Example**:
-                ```cpp
-                #include <string>
-                #include <iostream>
-                std::string s = "Hello";
-                s.insert(5, " Everyone");  // Inserts " Everyone" at position 5
-                std::cout << s << std::endl; // Outputs: Hello Everyone
-                ```
-*   **<a id="string-replacing-erasing-anchor"></a>Replacing / Erasing:**
-    *   **<a id="string-replacing-erasing-replacing-anchor"></a>Replacing:**
-        *   Replace a portion of the string with another string.
-        *   **Syntax / Example**:
-            ```cpp
-            #include <string>
-            #include <iostream>
-            std::string s = "Hello World";
-            s.replace(6, 5, "C++"); // Replaces "World" with "C++" starting at position 6
-            std::cout << s << std::endl; // Outputs: Hello C++
-            ```
-    *   **<a id="string-replacing-erasing-erasing-anchor"></a>Erasing:**
-        *   Remove characters from the string.
-        *   **Syntax / Example**:
-            ```cpp
-            #include <string>
-            #include <iostream>
-            std::string s = "Hello World";
-            s.erase(5, 6);            // Erases " World" starting at position 5
-            std::cout << s << std::endl; // Outputs: Hello
-            ```
-*   **<a id="string-clearing-a-string-anchor"></a>Clearing a String:**
-    *   **<a id="string-clearing-a-string-clearing-anchor"></a>Clearing:**
-        *   To remove all content from a string, use the **`.clear()`** method.
-        *   **Syntax / Example**:
-            ```cpp
-            #include <string>
-            #include <iostream>
-            std::string s = "Hello";
-            s.clear();
-            std::cout << s.empty() << std::endl; // Outputs: 1 (true)
-            ```
-*   **<a id="string-searching-substrings-anchor"></a>Searching / Substrings:**
-    *   **<a id="string-searching-substrings-finding-substring-anchor"></a>Finding Substring:**
-        *   You can search for a substring within a string using the **`.find()`** method.
-        *   **`std::string::npos`** is a constant representing the end of the string, returned if the substring is not found.
-        *   **Syntax / Example**:
-            ```cpp
-            #include <string>
-            #include <iostream>
-            std::string s = "Hello World";
-            std::size_t pos = s.find("World");
-
-            if (pos != std::string::npos) {  // Check if the substring is found
-                std::cout << "Found 'World' at position: " << pos << std::endl;
-            } else {
-                std::cout << "'World' not found" << std::endl;
+            int main() {
+                std::unique_ptr<MyClass> ptr = std::make_unique<MyClass>();
+                // MyClass will be destroyed automatically when ptr goes out of scope.
+                return 0;
             }
             ```
-    *   **<a id="string-searching-substrings-extracting-substring-anchor"></a>Extracting Substring:**
-        *   The **`.substr()`** method allows you to extract a substring from a string.
-        *   **Syntax / Example**:
-            ```cpp
-            #include <string>
+    *   **<a id="smart-pointers-types-smart-pointers-shared-ptr-anchor"></a>`std::shared_ptr`:**
+        *   **Description**:
+            *   A **smart pointer** that allows **multiple `shared_ptr` instances to share ownership of the same object**.
+            *   A **reference** count is used to **track how many `shared_ptr` point to the same object**.
+        *   **Usage**:
+            *   **Ideal when multiple parts of the code need to share ownership of the same object**.
+        *   **Example**:
+            ```C++
             #include <iostream>
-            std::string s = "Hello World";
-            std::string sub = s.substr(6, 5); // Extracts "World" starting at position 6
+            #include <memory>
 
-            std::cout << sub << std::endl;  // Outputs: World
+            int main() {
+                std::shared_ptr<int> ptr1 = std::make_shared<int>(42);
+                {
+                    std::shared_ptr<int> ptr2 = ptr1; // ptr2 shares ownership with ptr1
+                    std::cout << "Value: " << *ptr2 << ", Count: " << ptr2.use_count() << std::endl; // Count: 2
+                } // ptr2 is destroyed here, but ptr1 still exists
+                std::cout << "Count after ptr2 goes out of scope: " << ptr1.use_count() << std::endl; // Count: 1
+                return 0;
+            }
             ```
-*   **<a id="string-comparison-of-strings-anchor"></a>Comparison of Strings:**
-    *   Strings can be compared using comparison operators (**`==`**, **`!=`**, **`<`**, **`>`**, **`<=`**, **`>=`**), or the **`.compare()`** method.
-    *   Comparisons are case-sensitive and performed lexicographically (dictionary order).
-    *   **Syntax / Example**:
-        ```cpp
-        #include <string>
-        #include <iostream>
-        std::string s1 = "Hello";
-        std::string s2 = "World";
+    *   **<a id="smart-pointers-types-smart-pointers-weak-ptr-anchor"></a>`std::weak_ptr`:**
+        *   **Description**:
+            *   A **smart pointer** that provides a **non-owning reference to an object** managed by a **`shared_ptr`**.
+            *   It is used to **avoid reference cycles**.
+        *   **Usage**:
+            *   **Ideal for referencing an object without taking ownership, thus preventing memory leaks due to reference cycles**.
+        *   **Example**:
+            ```C++
+            #include <iostream>
+            #include <memory>
 
-        if (s1 == s2) {
-            std::cout << "Strings are equal" << std::endl;
-        } else if (s1 < s2) {
-            std::cout << s1 << " is less than " << s2 << std::endl;
-        } else {
-            std::cout << s1 << " is greater than " << s2 << std::endl;
-        }
-        ```
-*   **<a id="string-c-string-compatibility-anchor"></a>C-String Compatibility:**
-    *   **`std::string`** can be converted to a C-string (**`const char*`**) using the **`.c_str()`** method, which is useful for compatibility with C-style functions.
-    *   **Syntax / Example**:
-        ```cpp
-        #include <string>
-        #include <iostream>
-        std::string s = "Hello";
-        const char* cstr = s.c_str();
+            class MyClass {
+            public:
+                MyClass() { std::cout << "MyClass created\n"; }
+                ~MyClass() { std::cout << "MyClass destroyed\n"; }
+            };
 
-        std::cout << cstr << std::endl; // Outputs: Hello
-        ```
-*   **<a id="string-advanced-features-anchor"></a>Advanced Features:**
-    *   **<a id="string-advanced-features-iterating-over-stringstream-anchor"></a>Iterating Over Stringstream:**
-        *   **<a id="string-advanced-features-iterating-over-stringstream-iterating-anchor"></a>Iterating:**
-            *   You can iterate over a string using a for loop, a range-based for loop, or iterators.
-            *   **Syntax / Example**:
-                ```cpp
-                #include <string>
-                #include <iostream>
-                std::string s = "Hello";
+            int main() {
+                std::shared_ptr<MyClass> sharedPtr = std::make_shared<MyClass>();
+                std::weak_ptr<MyClass> weakPtr = sharedPtr; // weakPtr does not change the reference count
 
-                // Range-based for loop
-                for (char c : s) {
-                    std::cout << c << " ";
+                if (auto sp = weakPtr.lock()) { // Checks if the object still exists
+                    std::cout << "MyClass is still alive\n";
+                } else {
+                    std::cout << "MyClass has been destroyed\n";
                 }
-                std::cout << std::endl;
 
-                // Iterator-based loop
-                for (std::string::iterator it = s.begin(); it != s.end(); ++it) {
-                    std::cout << *it << " ";
+                sharedPtr.reset(); // MyClass object is destroyed here
+                if (auto sp = weakPtr.lock()) {
+                    std::cout << "MyClass is still alive\n";
+                } else {
+                    std::cout << "MyClass has been destroyed\n";
                 }
-                std::cout << std::endl;
-                ```
-        *   **<a id="string-advanced-features-iterating-over-stringstream-stringstream-anchor"></a>`std::stringstream`:**
-            *   **`std::stringstream`** can be used for string manipulation and conversion, providing functionality similar to input/output streams.
-            *   header **`<<sstream>>`**
-            *   **Syntax / Example**:
-                ```cpp
-                #include <string>
-                #include <iostream>
-                #include <sstream>
 
-                int main() {
-                    std::stringstream ss;
-                    ss << "Hello" << " " << "World!";
-                    
-                    std::string s = ss.str();  // Combines all output into a single string
-                    std::cout << s << std::endl; // Outputs: Hello World!
-                    
-                    return 0;
-                }
-                ```
-*   **<a id="string-memory-performance-anchor"></a>Memory Management and Performance:**
-    *   **`std::string`** manages its **memory dynamically**, meaning it can grow or shrink as needed.
-    *   The underlying memory is managed by the C++ Standard Library, but there are some considerations:
-        *   **Capacity and Reserve**:
-            *   You can pre-allocate memory using the **`.reserve()`** method to improve performance if you know the size in advance.
-            *   **Syntax / Example**:
-                ```cpp
-                #include <string>
-                #include <iostream>
-                std::string s;
-                s.reserve(100);  // Reserves space for 100 characters
-                ```
-        *   **Efficiency**: 
-            *   Small strings are often optimized in modern C++ compilers using the "short string optimization" (SSO), which avoids dynamic memory allocation for short strings.
-___
-#### C++98 How to convert `std::string` to `int`/`float`
-[(Back to top)](#table-of-contents)
-[(Back to Key Learnings)](#key-learnings)
-*   In C++98, there is no direct function in the standard library to convert a **`std::string`** to **`int`** or **`float`**.
-*   However, you can use functions from the **`<cstdlib>`** library like **`std::atoi`** (for **integers**) and **`std::atof`** (for **floats**):
-*   Also, you can use another way with **`<sstream>`** for the conversion, but if
-*   **<a id="convert-string-to-int-float-cstdlib-anchor"></a>Using `<cstdlib>` and `std::atoi` / `std::atof`:**
-    ```C++
-    #include <iostream>
-    #include <cstdlib> // For std::atoi
-
-    int main() {
-        std::string str = "123";
-        int num = std::atoi(str.c_str()); // Convert string to int
-        std::cout << "The number is: " << num << std::endl;
-        return 0;
-    }
-    ```
-    *   **`<cstdlib>`** and **`std::atof`**
-    ```C++
-    #include <iostream>
-    #include <cstdlib> // For std::atof
-
-    int main() {
-        std::string str = "123.45";
-        float num = std::atof(str.c_str()); // Convert string to float
-        std::cout << "The number is: " << num << std::endl;
-        return 0;
-    }
-    ```
-*   **<a id="convert-string-to-int-float-sstream-anchor"></a>Using `<sstream>` and `std::stringstream`:**
-    ```C++
-    #include <iostream>
-    #include <sstream>  // for use std::stringstream
-
-    int main() {
-        std::string str = "123";
-        int num; // or float
-        
-        std::stringstream ss(str);  // create stream
-        ss >> num;                  // extract data and convert
-        
-        std::cout << "The number is: " << num << std::endl;
-        return 0;
-    }
-    ```
-#### C++98 How to convert `int`/`float` to `std::string`
-[(Back to top)](#table-of-contents)
-[(Back to Key Learnings)](#key-learnings)
-*   In C++98, converting numeric types to **`std::string`** can be done using header **`<sstream`** and **`std::stringstream`**.
-*   **<a id="convert-numeric-to-string-sstream-anchor"></a>Using `<sstream>` and `std::stringstream`:**
-    ```C++
-    #include <iostream>
-    #include <sstream> // For std::stringstream
-
-    int main() {
-        int num = 123; // for float, double, etc...
-        std::stringstream ss;
-        ss << num; // Convert int to string
-        std::string str = ss.str();
-        std::cout << "The string is: " << str << std::endl;
-        return 0;
-    }
-    ```
-
-*   **<a id="convert-numeric-to-string-std::to_string-anchor"></a>Mordern C++ (C++11 and the latest version), Using `std::to_string`:**
-    ```C++
-    #include <iostream>
-    #include <string> // For std::to_string
-
-    int main() {
-        int num = 123;
-        std::string str = std::to_string(num); // Convert int to string
-        std::cout << "The string is: " << str << std::endl;
-        return 0;
-    }
-    ```
+                return 0;
+            }
+            ```
 ___
 ## Installation
 [(Back to top)](#table-of-contents)
