@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 9:17:29 PM 2024 Paradis
-** Last update Sat Sep 20 9:17:35 PM 2024 Paradis
+** Last update Tue Sep 23 7:25:53 PM 2024 Paradis
 */
 
 #include "../include/Federation.hpp"
@@ -24,4 +24,25 @@ Federation::Starfleet::Ship::Ship(
 
 Federation::Starfleet::Ship::~Ship()
 {
+}
+
+void        Federation::Starfleet::Ship::setupCore(WarpSystem::Core *coreReactor)
+{
+    _coreReactor = coreReactor;
+    if (_coreReactor)
+        std::cout   << "USS " << _name << ": The core is set." << std::endl;
+    else
+        std::cerr   << "USS " << _name << ": The core is not set." << std::endl;
+}
+
+void
+Federation::Starfleet::Ship::setupCore(
+    std::unique_ptr<WarpSystem::Core> coreReactor
+)
+{
+    _smP_coreReactor = std::move(coreReactor);
+    if (_smP_coreReactor)
+        std::cout   << "USS " << _name << ": The core is set." << std::endl;
+    else
+        std::cerr   << "USS " << _name << ": The core is not set." << std::endl;
 }

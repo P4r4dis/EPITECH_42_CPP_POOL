@@ -5,13 +5,16 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 9:12:42 PM 2024 Paradis
-** Last update Sat Sep 20 9:13:36 PM 2024 Paradis
+** Last update Tue Sep 23 7:23:52 PM 2024 Paradis
 */
 
 #ifndef 			__FEDERATION_HPP__
 	# define 		__FEDERATION_HPP__
 
     #include <string>
+    #include <memory>
+    #include "WarpSystem.hpp"
+    
     namespace       Federation
     {
         namespace   Starfleet
@@ -22,12 +25,16 @@
                     Ship(int length, int width, std::string name, short maxWarp);
                     ~Ship(void);
 
+                    void    setupCore(WarpSystem::Core *coreReactor);
+                    void    setupCore(std::unique_ptr<WarpSystem::Core> coreReactor);
                 protected:
                 private:
-                    int         _length;
-                    int         _width;
-                    std::string _name;
-                    short       _maxWarp;
+                    int                                 _length;
+                    int                                 _width;
+                    std::string                         _name;
+                    short                               _maxWarp;
+                    WarpSystem::Core                    *_coreReactor;
+                    std::unique_ptr<WarpSystem::Core>   _smP_coreReactor;
             };
         }
     }

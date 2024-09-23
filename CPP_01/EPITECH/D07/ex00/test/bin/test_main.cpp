@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 7:46:17 PM 2024 Paradis
-** Last update Tue Sep 23 6:30:40 PM 2024 Paradis
+** Last update Tue Sep 23 7:40:26 PM 2024 Paradis
 */
 
 
@@ -45,6 +45,92 @@ test_Federation_Starfleet_Ship_CTOR_std_output,
         "The ship USS Kreog has been finished.\n"
         "It is 289 m in length and 132 m in width.\n"
         "It can go to Warp 6!\n"
+    );
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_setupCore_std_output,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+
+        UssKreog.setupCore(&core);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "The ship USS Kreog has been finished.\n"
+        "It is 289 m in length and 132 m in width.\n"
+        "It can go to Warp 6!\n"
+        "USS Kreog: The core is set.\n"
+    );
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_setupCore_with_NULLPTR_stderr_output,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
+
+        UssKreog.setupCore(NULL);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "The ship USS Kreog has been finished.\n"
+        "It is 289 m in length and 132 m in width.\n"
+        "It can go to Warp 6!\n"
+    );
+    cr_assert_stderr_eq_str
+    (
+        "USS Kreog: The core is not set.\n"
+    );
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_setupCore_smartPointer_std_output,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
+        WarpSystem::QuantumReactor QR;
+        std::unique_ptr<WarpSystem::Core> core = std::make_unique<WarpSystem::Core>(&QR);
+
+        UssKreog.setupCore(std::move(core));
+    }
+    cr_assert_stdout_eq_str
+    (
+        "The ship USS Kreog has been finished.\n"
+        "It is 289 m in length and 132 m in width.\n"
+        "It can go to Warp 6!\n"
+        "USS Kreog: The core is set.\n"
+    );
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_setupCore_smartPointer_with_NULLPTR_stderr_output,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
+        std::unique_ptr<WarpSystem::Core> core = nullptr;
+        UssKreog.setupCore(std::move(core));
+    }
+    cr_assert_stdout_eq_str
+    (
+        "The ship USS Kreog has been finished.\n"
+        "It is 289 m in length and 132 m in width.\n"
+        "It can go to Warp 6!\n"
+    );
+    cr_assert_stderr_eq_str
+    (
+        "USS Kreog: The core is not set.\n"
     );
 }
 
