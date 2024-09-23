@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 9:17:29 PM 2024 Paradis
-** Last update Tue Sep 23 7:25:53 PM 2024 Paradis
+** Last update Tue Sep 23 9:01:50 PM 2024 Paradis
 */
 
 #include "../include/Federation.hpp"
@@ -45,4 +45,22 @@ Federation::Starfleet::Ship::setupCore(
         std::cout   << "USS " << _name << ": The core is set." << std::endl;
     else
         std::cerr   << "USS " << _name << ": The core is not set." << std::endl;
+}
+
+void        Federation::Starfleet::Ship::checkCore(void)
+{
+    if (_smP_coreReactor)
+    {
+        if (_smP_coreReactor->checkReactor()->isStable())
+            std::cout << "USS " << _name << ": The core is stable at the time." << std::endl;
+        else
+            std::cout << "USS " << _name << ": The core is unstable at the time." << std::endl;
+    }
+    else if (_coreReactor)
+    {
+        if (_coreReactor->checkReactor()->isStable())
+            std::cout << "USS " << _name << ": The core is stable at the time." << std::endl;
+        else
+            std::cout << "USS " << _name << ": The core is unstable at the time." << std::endl;
+    }
 }

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 9:12:42 PM 2024 Paradis
-** Last update Tue Sep 23 7:23:52 PM 2024 Paradis
+** Last update Tue Sep 23 7:49:15 PM 2024 Paradis
 */
 
 #ifndef 			__FEDERATION_HPP__
@@ -27,6 +27,7 @@
 
                     void    setupCore(WarpSystem::Core *coreReactor);
                     void    setupCore(std::unique_ptr<WarpSystem::Core> coreReactor);
+                    void    checkCore(void);
                 protected:
                 private:
                     int                                 _length;
