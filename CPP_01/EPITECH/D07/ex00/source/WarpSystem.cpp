@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 9:32:25 PM 2024 Paradis
-** Last update Tue Sep 23 6:01:00 PM 2024 Paradis
+** Last update Tue Sep 23 6:27:05 PM 2024 Paradis
 */
 
 #include "../include/WarpSystem.hpp"
@@ -28,4 +28,20 @@ bool        WarpSystem::QuantumReactor::isStable(void) const
 void        WarpSystem::QuantumReactor::setStability(bool stability)
 {
     _stability = stability;
+}
+
+
+/*****************************************************************************/
+/*                                CORE CLASS                                 */
+/*****************************************************************************/
+WarpSystem::Core::Core(QuantumReactor *coreReactor)
+    :   _coreReactor(coreReactor)
+{}
+
+WarpSystem::Core::~Core(void)
+{}
+
+WarpSystem::QuantumReactor  *WarpSystem::Core::checkReactor(void)
+{
+    return _coreReactor;
 }

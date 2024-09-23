@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 7:46:17 PM 2024 Paradis
-** Last update Tue Sep 23 5:59:01 PM 2024 Paradis
+** Last update Tue Sep 23 6:30:40 PM 2024 Paradis
 */
 
 
@@ -77,4 +77,31 @@ test_WarpSystem_QuantumReactor_setStability,
     cr_assert(QR.isStable() == true);
     QR.setStability(false);
     cr_assert(QR.isStable() == false);
+}
+
+Test(
+WarpSystem_Core,
+test_Warpsystem_Core_isDefined,
+.init = redirect_all_stdout)
+{
+    WarpSystem::QuantumReactor QR;
+    cr_assert_not_null(&QR);
+    cr_assert(QR.isStable() == true);
+
+    WarpSystem::Core core(&QR);
+    cr_assert_not_null(&core);
+
+}
+
+Test(
+WarpSystem_Core,
+test_Warpsystem_Core_checkReactor_allow_provide_access_to_pointer_QuantumReactor,
+.init = redirect_all_stdout)
+{
+    WarpSystem::QuantumReactor QR;
+    WarpSystem::Core core(&QR);
+
+    cr_assert(core.checkReactor()->isStable() == true);
+    core.checkReactor()->setStability(false);
+    cr_assert(core.checkReactor()->isStable() == false);
 }
