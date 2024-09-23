@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Fri Sep 20 7:47:52 PM 2024 Paradis
-## Last update Sat Sep 20 9:18:32 PM 2024 Paradis
+## Last update Tue Sep 23 6:02:00 PM 2024 Paradis
 ##
 
 
@@ -29,6 +29,7 @@ CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAG
 
 # # Files sources
 SRCS		=	$(SRC_PATH)/Federation.cpp \
+				$(SRC_PATH)/WarpSystem.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp

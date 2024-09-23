@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Fri Sep 20 7:47:13 PM 2024 Paradis
-## Last update Sat Sep 20 9:18:32 PM 2024 Paradis
+## Last update Tue Sep 23 6:01:40 PM 2024 Paradis
 ##
 
 
@@ -24,6 +24,7 @@ CRITFLAGS    	+=  --coverage -lcriterion
 CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAGS) $(CRITFLAGS)
 
 SRCS         	= 	$(SRC_PATH)/Federation.cpp \
+					$(SRC_PATH)/WarpSystem.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)

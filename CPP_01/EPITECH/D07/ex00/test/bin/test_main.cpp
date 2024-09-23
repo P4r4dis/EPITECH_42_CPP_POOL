@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 7:46:17 PM 2024 Paradis
-** Last update Sat Sep 20 9:14:58 PM 2024 Paradis
+** Last update Tue Sep 23 5:59:01 PM 2024 Paradis
 */
 
 
@@ -15,6 +15,7 @@
 #include <criterion/redirect.h>
 
 #include "../../include/Federation.hpp"
+#include "../../include/WarpSystem.hpp"
 
 void redirect_all_stdout(void)
 {
@@ -45,4 +46,35 @@ test_Federation_Starfleet_Ship_CTOR_std_output,
         "It is 289 m in length and 132 m in width.\n"
         "It can go to Warp 6!\n"
     );
+}
+
+Test(
+WarpSystem_QuantumReactor,
+test_WarpSystem_QuantumReactor_isDefined,
+.init = redirect_all_stdout)
+{
+    WarpSystem::QuantumReactor QR;
+    cr_assert_not_null(&QR);
+}
+
+Test(
+WarpSystem_QuantumReactor,
+test_WarpSystem_QuantumReactor_isStable,
+.init = redirect_all_stdout)
+{
+    WarpSystem::QuantumReactor QR;
+
+    cr_assert(QR.isStable() == true);
+}
+
+Test(
+WarpSystem_QuantumReactor,
+test_WarpSystem_QuantumReactor_setStability,
+.init = redirect_all_stdout)
+{
+    WarpSystem::QuantumReactor QR;
+
+    cr_assert(QR.isStable() == true);
+    QR.setStability(false);
+    cr_assert(QR.isStable() == false);
 }
