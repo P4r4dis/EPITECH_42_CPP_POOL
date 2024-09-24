@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 9:17:29 PM 2024 Paradis
-** Last update Wed Sep 24 3:54:14 PM 2024 Paradis
+** Last update Wed Sep 24 5:29:07 PM 2024 Paradis
 */
 
 #include "../include/Federation.hpp"
@@ -34,28 +34,9 @@ void        Federation::Starfleet::Ship::setupCore(WarpSystem::Core *coreReactor
         std::cerr   << "USS " << _name << ": The core is not set." << std::endl;
 }
 
-void
-Federation::Starfleet::Ship::setupCore(
-    std::unique_ptr<WarpSystem::Core> coreReactor
-)
-{
-    _smP_coreReactor = std::move(coreReactor);
-    if (_smP_coreReactor)
-        std::cout   << "USS " << _name << ": The core is set." << std::endl;
-    else
-        std::cerr   << "USS " << _name << ": The core is not set." << std::endl;
-}
-
 void        Federation::Starfleet::Ship::checkCore(void)
 {
-    if (_smP_coreReactor)
-    {
-        if (_smP_coreReactor->checkReactor()->isStable())
-            std::cout << "USS " << _name << ": The core is stable at the time." << std::endl;
-        else
-            std::cout << "USS " << _name << ": The core is unstable at the time." << std::endl;
-    }
-    else if (_coreReactor)
+    if (_coreReactor)
     {
         if (_coreReactor->checkReactor()->isStable())
             std::cout << "USS " << _name << ": The core is stable at the time." << std::endl;
@@ -93,28 +74,9 @@ void        Federation::Ship::setupCore(WarpSystem::Core *coreReactor)
         std::cerr   << _name << ": The core is not set." << std::endl;
 }
 
-void
-Federation::Ship::setupCore(
-    std::unique_ptr<WarpSystem::Core> coreReactor
-)
-{
-    _smP_coreReactor = std::move(coreReactor);
-    if (_smP_coreReactor)
-        std::cout   << _name << ": The core is set." << std::endl;
-    else
-        std::cerr   << _name << ": The core is not set." << std::endl;
-}
-
 void        Federation::Ship::checkCore(void)
 {
-    if (_smP_coreReactor)
-    {
-        if (_smP_coreReactor->checkReactor()->isStable())
-            std::cout << _name << ": The core is stable at the time." << std::endl;
-        else
-            std::cout << _name << ": The core is unstable at the time." << std::endl;
-    }
-    else if (_coreReactor)
+    if (_coreReactor)
     {
         if (_coreReactor->checkReactor()->isStable())
             std::cout << _name << ": The core is stable at the time." << std::endl;

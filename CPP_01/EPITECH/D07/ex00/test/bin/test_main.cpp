@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 7:46:17 PM 2024 Paradis
-** Last update Wed Sep 24 3:58:22 PM 2024 Paradis
+** Last update Wed Sep 24 5:30:08 PM 2024 Paradis
 */
 
 
@@ -93,48 +93,6 @@ test_Federation_Starfleet_Ship_setupCore_with_NULLPTR_stderr_output,
 
 Test(
 Federation_Starfleet_Ship,
-test_Federation_Starfleet_Ship_setupCore_smartPointer_std_output,
-.init = redirect_all_stdout)
-{
-    {
-        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
-        WarpSystem::QuantumReactor QR;
-        std::unique_ptr<WarpSystem::Core> core = std::make_unique<WarpSystem::Core>(&QR);
-        UssKreog.setupCore(std::move(core));
-    }
-    cr_assert_stdout_eq_str
-    (
-        "The ship USS Kreog has been finished.\n"
-        "It is 289 m in length and 132 m in width.\n"
-        "It can go to Warp 6!\n"
-        "USS Kreog: The core is set.\n"
-    );
-}
-
-Test(
-Federation_Starfleet_Ship,
-test_Federation_Starfleet_Ship_setupCore_smartPointer_with_NULLPTR_stderr_output,
-.init = redirect_all_stdout)
-{
-    {
-        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
-        std::unique_ptr<WarpSystem::Core> core = nullptr;
-        UssKreog.setupCore(std::move(core));
-    }
-    cr_assert_stdout_eq_str
-    (
-        "The ship USS Kreog has been finished.\n"
-        "It is 289 m in length and 132 m in width.\n"
-        "It can go to Warp 6!\n"
-    );
-    cr_assert_stderr_eq_str
-    (
-        "USS Kreog: The core is not set.\n"
-    );
-}
-
-Test(
-Federation_Starfleet_Ship,
 test_Federation_Starfleet_Ship_checkCore_is_stable_std_output,
 .init = redirect_all_stdout)
 {
@@ -181,53 +139,6 @@ test_Federation_Starfleet_Ship_checkCore_is_unstable_std_output,
     );
 }
 
-Test(
-Federation_Starfleet_Ship,
-test_Federation_Starfleet_Ship_checkCore_with_smartPointer_is_stable_std_output,
-.init = redirect_all_stdout)
-{
-    {
-        Federation::Starfleet::Ship UssKreog(289, 132, "Kreog", 6);
-        WarpSystem::QuantumReactor QR;
-        std::unique_ptr<WarpSystem::Core> core(std::make_unique<WarpSystem::Core>(&QR));
-        UssKreog.setupCore(std::move(core));
-        UssKreog.checkCore();
-
-    }
-    cr_assert_stdout_eq_str
-    (
-        "The ship USS Kreog has been finished.\n"
-        "It is 289 m in length and 132 m in width.\n"
-        "It can go to Warp 6!\n"
-        "USS Kreog: The core is set.\n"
-        "USS Kreog: The core is stable at the time.\n"
-    );
-}
-
-Test(
-Federation_Starfleet_Ship,
-test_Federation_Starfleet_Ship_checkCore_with_smartPointer_is_unstable_std_output,
-.init = redirect_all_stdout)
-{
-    {
-        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
-        WarpSystem::QuantumReactor QR;
-
-        QR.setStability(false);
-        std::unique_ptr<WarpSystem::Core> core(std::make_unique<WarpSystem::Core>(&QR));
-
-        UssKreog.setupCore(std::move(core));
-        UssKreog.checkCore();
-    }
-    cr_assert_stdout_eq_str
-    (
-        "The ship USS Kreog has been finished.\n"
-        "It is 289 m in length and 132 m in width.\n"
-        "It can go to Warp 6!\n"
-        "USS Kreog: The core is set.\n"
-        "USS Kreog: The core is unstable at the time.\n"
-    );
-}
 ///////////////////////////////////////////////////////////////////////////////
 Test(
 WarpSystem_QuantumReactor,
@@ -365,46 +276,6 @@ test_Federation_Ship_setupCore_with_NULLPTR_stderr_output,
 
 Test(
 Federation_Ship,
-test_Federation_Ship_setupCore_smartPointer_std_output,
-.init = redirect_all_stdout)
-{
-    {
-        Federation::Ship     Independent(150, 230, "Greok");
-        WarpSystem::QuantumReactor QR;
-        std::unique_ptr<WarpSystem::Core> core = std::make_unique<WarpSystem::Core>(&QR);
-        Independent.setupCore(std::move(core));
-    }
-    cr_assert_stdout_eq_str
-    (
-        "The independent ship Greok just finished its construction.\n"
-        "It is 150 m in length and 230 m in width.\n"
-        "Greok: The core is set.\n"
-    );
-}
-
-Test(
-Federation_Ship,
-test_Federation_Ship_setupCore_smartPointer_with_NULLPTR_stderr_output,
-.init = redirect_all_stdout)
-{
-    {
-        Federation::Ship     Independent(150, 230, "Greok");
-        std::unique_ptr<WarpSystem::Core> core = nullptr;
-        Independent.setupCore(std::move(core));
-    }
-    cr_assert_stdout_eq_str
-    (
-        "The independent ship Greok just finished its construction.\n"
-        "It is 150 m in length and 230 m in width.\n"
-    );
-    cr_assert_stderr_eq_str
-    (
-        "Greok: The core is not set.\n"
-    );
-}
-
-Test(
-Federation_Ship,
 test_Federation_Ship_checkCore_is_stable_std_output,
 .init = redirect_all_stdout)
 {
@@ -449,48 +320,41 @@ test_Federation_Ship_checkCore_is_unstable_std_output,
     );
 }
 
+///////////////////////////////////////////////////////////////////////////////
 Test(
-Federation_Ship,
-test_Federation_Ship_checkCore_with_smartPointer_is_stable_std_output,
+main,
+test_main,
 .init = redirect_all_stdout)
 {
     {
-        Federation::Ship     Independent(150, 230, "Greok");
+        Federation::Starfleet::Ship UssKreog (289, 132, "Kreog", 6);
+        Federation::Ship Independent (150, 230, "Greok");
         WarpSystem::QuantumReactor QR;
-        std::unique_ptr<WarpSystem::Core> core(std::make_unique<WarpSystem::Core>(&QR));
-        Independent.setupCore(std::move(core));
-        Independent.checkCore();
+        WarpSystem::QuantumReactor QR2;
+        WarpSystem::Core core(&QR);
+        WarpSystem::Core core2 (&QR2);
 
+        UssKreog.setupCore(&core);
+        UssKreog.checkCore();
+        Independent.setupCore(&core2);
+        Independent.checkCore();
+        QR.setStability(false);
+        QR2.setStability(false);
+        UssKreog.checkCore();
+        Independent.checkCore();
     }
     cr_assert_stdout_eq_str
     (
+        "The ship USS Kreog has been finished.\n"
+        "It is 289 m in length and 132 m in width.\n"
+        "It can go to Warp 6!\n"
         "The independent ship Greok just finished its construction.\n"
         "It is 150 m in length and 230 m in width.\n"
+        "USS Kreog: The core is set.\n"
+        "USS Kreog: The core is stable at the time.\n"
         "Greok: The core is set.\n"
         "Greok: The core is stable at the time.\n"
-    );
-}
-
-Test(
-Federation_Ship,
-test_Federation_Ship_checkCore_with_smartPointer_is_unstable_std_output,
-.init = redirect_all_stdout)
-{
-    {
-        Federation::Ship     Independent(150, 230, "Greok");
-        WarpSystem::QuantumReactor QR;
-
-        QR.setStability(false);
-        std::unique_ptr<WarpSystem::Core> core(std::make_unique<WarpSystem::Core>(&QR));
-
-        Independent.setupCore(std::move(core));
-        Independent.checkCore();
-    }
-    cr_assert_stdout_eq_str
-    (
-        "The independent ship Greok just finished its construction.\n"
-        "It is 150 m in length and 230 m in width.\n"
-        "Greok: The core is set.\n"
+        "USS Kreog: The core is unstable at the time.\n"
         "Greok: The core is unstable at the time.\n"
     );
 }
