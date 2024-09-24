@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 7:46:17 PM 2024 Paradis
-** Last update Tue Sep 23 9:04:09 PM 2024 Paradis
+** Last update Wed Sep 24 3:58:22 PM 2024 Paradis
 */
 
 
@@ -285,4 +285,212 @@ test_Warpsystem_Core_checkReactor_allow_provide_access_to_pointer_QuantumReactor
     cr_assert(core.checkReactor()->isStable() == true);
     core.checkReactor()->setStability(false);
     cr_assert(core.checkReactor()->isStable() == false);
+}
+///////////////////////////////////////////////////////////////////////////////
+Test(
+Federation_Ship,
+test_Federation_Ship_isDefined,
+.init = redirect_all_stdout)
+{
+    Federation::Ship     Independent(150, 230, "Greok");
+    cr_assert_not_null(&Independent);
+}
+
+Test(
+Federation_Ship,
+test_Federation_Ship_CTOR_std_output,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Ship     Independent(150, 230, "Greok");
+    }
+    cr_assert_stdout_eq_str
+    (
+        "The independent ship Greok just finished its construction.\n"
+        "It is 150 m in length and 230 m in width.\n"
+    );
+}
+
+Test(
+Federation_Ship,
+test_Federation_Ship_getMaxWarp,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Ship     Independent(150, 230, "Greok");
+        cr_assert(Independent.getMaxWarp() == 1);
+    }
+}
+
+Test(
+Federation_Ship,
+test_Federation_Ship_setupCore_std_output,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Ship     Independent(150, 230, "Greok");
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+
+        Independent.setupCore(&core);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "The independent ship Greok just finished its construction.\n"
+        "It is 150 m in length and 230 m in width.\n"
+        "Greok: The core is set.\n"
+    );
+}
+
+Test(
+Federation_Ship,
+test_Federation_Ship_setupCore_with_NULLPTR_stderr_output,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Ship     Independent(150, 230, "Greok");
+
+        Independent.setupCore(NULL);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "The independent ship Greok just finished its construction.\n"
+        "It is 150 m in length and 230 m in width.\n"
+    );
+    cr_assert_stderr_eq_str
+    (
+        "Greok: The core is not set.\n"
+    );
+}
+
+Test(
+Federation_Ship,
+test_Federation_Ship_setupCore_smartPointer_std_output,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Ship     Independent(150, 230, "Greok");
+        WarpSystem::QuantumReactor QR;
+        std::unique_ptr<WarpSystem::Core> core = std::make_unique<WarpSystem::Core>(&QR);
+        Independent.setupCore(std::move(core));
+    }
+    cr_assert_stdout_eq_str
+    (
+        "The independent ship Greok just finished its construction.\n"
+        "It is 150 m in length and 230 m in width.\n"
+        "Greok: The core is set.\n"
+    );
+}
+
+Test(
+Federation_Ship,
+test_Federation_Ship_setupCore_smartPointer_with_NULLPTR_stderr_output,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Ship     Independent(150, 230, "Greok");
+        std::unique_ptr<WarpSystem::Core> core = nullptr;
+        Independent.setupCore(std::move(core));
+    }
+    cr_assert_stdout_eq_str
+    (
+        "The independent ship Greok just finished its construction.\n"
+        "It is 150 m in length and 230 m in width.\n"
+    );
+    cr_assert_stderr_eq_str
+    (
+        "Greok: The core is not set.\n"
+    );
+}
+
+Test(
+Federation_Ship,
+test_Federation_Ship_checkCore_is_stable_std_output,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Ship     Independent(150, 230, "Greok");
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+
+        Independent.setupCore(&core);
+        Independent.checkCore();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "The independent ship Greok just finished its construction.\n"
+        "It is 150 m in length and 230 m in width.\n"
+        "Greok: The core is set.\n"
+        "Greok: The core is stable at the time.\n"
+    );
+}
+
+Test(
+Federation_Ship,
+test_Federation_Ship_checkCore_is_unstable_std_output,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Ship     Independent(150, 230, "Greok");
+        WarpSystem::QuantumReactor QR;
+
+        QR.setStability(false);
+        WarpSystem::Core core(&QR);
+
+        Independent.setupCore(&core);
+        Independent.checkCore();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "The independent ship Greok just finished its construction.\n"
+        "It is 150 m in length and 230 m in width.\n"
+        "Greok: The core is set.\n"
+        "Greok: The core is unstable at the time.\n"
+    );
+}
+
+Test(
+Federation_Ship,
+test_Federation_Ship_checkCore_with_smartPointer_is_stable_std_output,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Ship     Independent(150, 230, "Greok");
+        WarpSystem::QuantumReactor QR;
+        std::unique_ptr<WarpSystem::Core> core(std::make_unique<WarpSystem::Core>(&QR));
+        Independent.setupCore(std::move(core));
+        Independent.checkCore();
+
+    }
+    cr_assert_stdout_eq_str
+    (
+        "The independent ship Greok just finished its construction.\n"
+        "It is 150 m in length and 230 m in width.\n"
+        "Greok: The core is set.\n"
+        "Greok: The core is stable at the time.\n"
+    );
+}
+
+Test(
+Federation_Ship,
+test_Federation_Ship_checkCore_with_smartPointer_is_unstable_std_output,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Ship     Independent(150, 230, "Greok");
+        WarpSystem::QuantumReactor QR;
+
+        QR.setStability(false);
+        std::unique_ptr<WarpSystem::Core> core(std::make_unique<WarpSystem::Core>(&QR));
+
+        Independent.setupCore(std::move(core));
+        Independent.checkCore();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "The independent ship Greok just finished its construction.\n"
+        "It is 150 m in length and 230 m in width.\n"
+        "Greok: The core is set.\n"
+        "Greok: The core is unstable at the time.\n"
+    );
 }
