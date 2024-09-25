@@ -5,11 +5,12 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 9:17:29 PM 2024 Paradis
-** Last update Wed Sep 24 5:29:07 PM 2024 Paradis
+** Last update Thu Sep 25 5:03:21 PM 2024 Paradis
 */
 
 #include "../include/Federation.hpp"
 #include <iostream>
+#include <string>
 Federation::Starfleet::Ship::Ship(
     int length, int width, std::string name, short maxWarp)
     :   _length(length), _width(width), _name(name), _maxWarp(maxWarp)
@@ -43,6 +44,28 @@ void        Federation::Starfleet::Ship::checkCore(void)
         else
             std::cout << "USS " << _name << ": The core is unstable at the time." << std::endl;
     }
+}
+///////////////////////////////////////////////////////////////////////////////
+Federation::Starfleet::Captain::Captain(std::string name)   :   _name(name),
+                                                                _age(0)
+{}
+
+Federation::Starfleet::Captain::~Captain(void)
+{}
+
+std::string Federation::Starfleet::Captain::getName(void) const
+{
+    return _name;
+}
+
+int         Federation::Starfleet::Captain::getAge(void) const
+{
+    return _age;
+}
+
+void        Federation::Starfleet::Captain::setAge(int age)
+{
+    _age = age;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

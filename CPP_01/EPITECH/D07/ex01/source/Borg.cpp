@@ -5,13 +5,13 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Sep 24 7:19:34 PM 2024 Paradis
-** Last update Wed Sep 24 7:40:29 PM 2024 Paradis
+** Last update Thu Sep 25 5:12:24 PM 2024 Paradis
 */
 
 #include "../include/Borg.hpp"
 #include <iostream>
 
-Borg::Ship::Ship(void)  :   _side(300), _maxWarp(9)
+Borg::Ship::Ship(void)  :   _side(300), _maxWarp(9), _coreReactor(nullptr)
 {
     std::cout   << "We are the Borgs. "
                 << "Lower your shields and surrender yourselves unconditionally."

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 7:46:17 PM 2024 Paradis
-** Last update Wed Sep 24 7:42:46 PM 2024 Paradis
+** Last update Thu Sep 25 5:00:44 PM 2024 Paradis
 */
 
 
@@ -23,6 +23,11 @@ void redirect_all_stdout(void)
     cr_redirect_stdout();
     cr_redirect_stderr();
 }
+
+
+///////////////////////////////////////////////////////////////////////////////
+//                      Federation::Starfleet::Ship                          //
+///////////////////////////////////////////////////////////////////////////////
 
 Test(
 Federation_Starfleet_Ship,
@@ -139,8 +144,57 @@ test_Federation_Starfleet_Ship_checkCore_is_unstable_std_output,
         "USS Kreog: The core is unstable at the time.\n"
     );
 }
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+//                      Federation::Starfleet::Captain                          //
+///////////////////////////////////////////////////////////////////////////////
+
+Test(
+Federation_Starfleet_Captain,
+test_Federation_Starfleet_Captain_isDefined,
+.init = redirect_all_stdout)
+{
+    Federation::Starfleet::Captain James("James T. Kirk");
+    cr_assert_not_null(&James);
+}
+
+Test(
+Federation_Starfleet_Captain,
+test_Federation_Starfleet_Captain_getName,
+.init = redirect_all_stdout)
+{
+    Federation::Starfleet::Captain James("James T. Kirk");
+
+    cr_assert(James.getName() == "James T. Kirk");
+}
+
+
+Test(
+Federation_Starfleet_Captain,
+test_Federation_Starfleet_Captain_setAge,
+.init = redirect_all_stdout)
+{
+    Federation::Starfleet::Captain James("James T. Kirk");
+
+    cr_assert(James.getAge() == 0);
+    James.setAge(50);
+    cr_assert(James.getAge() == 50);
+}
+
+Test(
+Federation_Starfleet_Captain,
+test_Federation_Starfleet_Captain_getAge,
+.init = redirect_all_stdout)
+{
+    Federation::Starfleet::Captain James("James T. Kirk");
+    cr_assert(James.getAge() == 0);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+//                      WarpSystem::QuantumReactor                           //
+///////////////////////////////////////////////////////////////////////////////
+
 Test(
 WarpSystem_QuantumReactor,
 test_WarpSystem_QuantumReactor_isDefined,
@@ -199,6 +253,10 @@ test_Warpsystem_Core_checkReactor_allow_provide_access_to_pointer_QuantumReactor
     cr_assert(core.checkReactor()->isStable() == false);
 }
 ///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+//                             Federation::Ship                              //
+///////////////////////////////////////////////////////////////////////////////
+
 Test(
 Federation_Ship,
 test_Federation_Ship_isDefined,
@@ -321,6 +379,10 @@ test_Federation_Ship_checkCore_is_unstable_std_output,
     );
 }
 ///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+//                                 Borg::Ship                                //
+///////////////////////////////////////////////////////////////////////////////
+
 Test(Borg_Ship, Test_Borg_Ship_class_isDefinied, .init = redirect_all_stdout)
 {
     Borg::Ship Cube;
@@ -410,7 +472,7 @@ Test_Borg_Ship_checkCore_stable_stdout_output,
 }
 
 Test(
-Federation_Ship,
+Borg_Ship,
 Test_Borg_Ship_checkCore_unstable_tdout_output,
 .init = redirect_all_stdout)
 {
@@ -434,7 +496,7 @@ Test_Borg_Ship_checkCore_unstable_tdout_output,
 }
 
 Test(
-Federation_Ship,
+Borg_Ship,
 Test_Borg_Ship_checkCore_unstable_with_setupCore_NULLPTR_stdout_output,
 .init = redirect_all_stdout)
 {
@@ -458,6 +520,10 @@ Test_Borg_Ship_checkCore_unstable_with_setupCore_NULLPTR_stdout_output,
     );
 }
 ///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+//                                      MAIN                                 //
+///////////////////////////////////////////////////////////////////////////////
+
 Test(
 main,
 test_main,

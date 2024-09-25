@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 9:12:42 PM 2024 Paradis
-** Last update Wed Sep 24 5:29:15 PM 2024 Paradis
+** Last update Thu Sep 25 5:01:44 PM 2024 Paradis
 */
 
 #ifndef 			__FEDERATION_HPP__
@@ -33,6 +33,20 @@
                     std::string                         _name;
                     short                               _maxWarp;
                     WarpSystem::Core                    *_coreReactor;
+            };
+
+            class   Captain
+            {
+                public:
+                    Captain(std::string name);
+                    ~Captain(void);
+
+                    std::string     getName(void) const;
+                    int             getAge(void) const;
+                    void            setAge(int age);
+                private:
+                    std::string     _name;
+                    int             _age;
             };
         }
 
