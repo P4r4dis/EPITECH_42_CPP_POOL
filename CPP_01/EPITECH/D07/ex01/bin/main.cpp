@@ -5,16 +5,19 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 7:45:48 PM 2024 Paradis
-** Last update Wed Sep 24 5:31:34 PM 2024 Paradis
+** Last update Thu Sep 25 7:33:52 PM 2024 Paradis
 */
 
-#include "../include/WarpSystem.hpp"
 #include "../include/Federation.hpp"
+#include "../include/WarpSystem.hpp"
+#include "../include/Borg.hpp"
+
 
 int     main(void)
 {
-    Federation::Starfleet::Ship UssKreog (289, 132, "Kreog", 6);
-    Federation::Ship Independent (150, 230, "Greok");
+    Federation::Starfleet::Ship UssKreog(289, 132, "Kreog", 6);
+    Federation::Starfleet::Captain James("James T. Kirk");
+    Federation::Starfleet::Ensign Ensign("Pavel Chekov");
     WarpSystem::QuantumReactor QR;
     WarpSystem::QuantumReactor QR2;
     WarpSystem::Core core(&QR);
@@ -22,11 +25,10 @@ int     main(void)
 
     UssKreog.setupCore(&core);
     UssKreog.checkCore();
-    Independent.setupCore(&core2);
-    Independent.checkCore();
-    QR.setStability(false);
-    QR2.setStability(false);
-    UssKreog.checkCore();
-    Independent.checkCore();
+    UssKreog.promote(&James);
+
+    Borg::Ship  Cube;
+    Cube.setupCore(&core2);
+    Cube.checkCore();
     return 0;
 }

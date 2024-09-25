@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 7:46:17 PM 2024 Paradis
-** Last update Thu Sep 25 7:17:28 PM 2024 Paradis
+** Last update Thu Sep 25 7:31:29 PM 2024 Paradis
 */
 
 
@@ -609,8 +609,9 @@ test_main,
 .init = redirect_all_stdout)
 {
     {
-        Federation::Starfleet::Ship UssKreog (289, 132, "Kreog", 6);
-        Federation::Ship Independent (150, 230, "Greok");
+        Federation::Starfleet::Ship UssKreog(289, 132, "Kreog", 6);
+        Federation::Starfleet::Captain James("James T. Kirk");
+        Federation::Starfleet::Ensign Ensign("Pavel Chekov");
         WarpSystem::QuantumReactor QR;
         WarpSystem::QuantumReactor QR2;
         WarpSystem::Core core(&QR);
@@ -618,25 +619,25 @@ test_main,
 
         UssKreog.setupCore(&core);
         UssKreog.checkCore();
-        Independent.setupCore(&core2);
-        Independent.checkCore();
-        QR.setStability(false);
-        QR2.setStability(false);
-        UssKreog.checkCore();
-        Independent.checkCore();
+        UssKreog.promote(&James);
+
+        Borg::Ship  Cube;
+        Cube.setupCore(&core2);
+        Cube.checkCore();
     }
     cr_assert_stdout_eq_str
     (
         "The ship USS Kreog has been finished.\n"
         "It is 289 m in length and 132 m in width.\n"
         "It can go to Warp 6!\n"
-        "The independent ship Greok just finished its construction.\n"
-        "It is 150 m in length and 230 m in width.\n"
+        "Ensign Pavel Chekov, awaiting orders.\n"
         "USS Kreog: The core is set.\n"
         "USS Kreog: The core is stable at the time.\n"
-        "Greok: The core is set.\n"
-        "Greok: The core is stable at the time.\n"
-        "USS Kreog: The core is unstable at the time.\n"
-        "Greok: The core is unstable at the time.\n"
+        "James T. Kirk: I'm glad to be the captain of the USS Kreog.\n"
+        "We are the Borgs. "
+        "Lower your shields and surrender yourselves unconditionally.\n"
+        "Your biological characteristics and technologies will be assimilated.\n"
+        "Resistance is futile.\n"
+        "Everything is in order.\n"
     );
 }
