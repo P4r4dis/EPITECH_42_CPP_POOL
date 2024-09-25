@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2124/12/18 19:12:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/09/24 19:24:20 by Paradis          ###   ########.fr        #
+#    Updated: 2024/09/25 19:47:30 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -529,7 +529,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2124 Paradis
-## Last update Wed Sep 24 7:24:20 PM 2024 Paradis
+## Last update Thu Sep 25 7:47:30 PM 2024 Paradis
 ##
 # **************************************************************************** #
 #																			   #
@@ -567,7 +567,7 @@ EPITECH_test_run_ex00			:	fclean
 EPITECH_valgrind_test_run_ex00	:	fclean
 									@$(MAKE) -s -C $(EPITECH_EX00_UT_PATH) VALGRIND
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
-									
+
 # **************************************************************************** #
 #																			   #
 #								EPITECH_EX01								   #
@@ -604,6 +604,45 @@ EPITECH_test_run_ex01			:	fclean
 						
 EPITECH_valgrind_test_run_ex01	:	fclean
 									@$(MAKE) -s -C $(EPITECH_EX01_UT_PATH) VALGRIND
+									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+
+
+# **************************************************************************** #
+#																			   #
+#								EPITECH_EX02								   #
+#																			   #
+# **************************************************************************** #
+EPITECH_EX02_PATH 				= 	./EPITECH/D07/ex02
+EPITECH_EX02_BIN_PATH 			= 	./EPITECH/D07/ex02/bin
+EPITECH_EX02_SRC_PATH			=	./EPITECH/D07/ex02/source
+EPITECH_EX02_INC_PATH			=	./EPITECH/D07/ex02/include
+EPITECH_EX02_UT_PATH			=	./EPITECH/D07/ex02/test
+
+EPITECH_EX02_NAME				=	Move
+
+EPITECH_EX02_UT_SRC				=	$(EPITECH_EX02_UT_PATH)/$(EPITECH_EX02_NAME)_test.cpp
+EPITECH_EX02_UT_NAME 			= 	test_$(EPITECH_EX02_NAME)
+
+EPITECH_EX02_SRC				=	$(EPITECH_EX02_SRC_PATH)/Federation.cpp \
+									$(EPITECH_EX02_SRC_PATH)/WarpSystem.cpp \
+									$(EPITECH_EX02_SRC_PATH)/Borg.cpp \
+									$(EPITECH_EX02_BIN_PATH)/main.cpp
+EPITECH_EX02_OBJS				=	$(EPITECH_EX02_SRC:.cpp=.o)
+
+EPITECH_ex02 					: 	fclean
+									@$(MAKE) -C $(EPITECH_EX02_PATH)
+									$(EPITECH_EX02_PATH)/$(EPITECH_EX02_NAME)
+
+EPITECH_valgrind_ex02 			: 	fclean
+									@$(MAKE) -C $(EPITECH_EX02_PATH) VALGRIND
+
+EPITECH_test_run_ex02			:	fclean
+									@$(MAKE) -s -C $(EPITECH_EX02_UT_PATH)
+									$(EPITECH_EX02_UT_PATH)/$(EPITECH_EX02_UT_NAME)
+									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+						
+EPITECH_valgrind_test_run_ex02	:	fclean
+									@$(MAKE) -s -C $(EPITECH_EX02_UT_PATH) VALGRIND
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 
 # **************************************************************************** #
@@ -656,8 +695,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(42_EX12_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_UT_PATH)	
-									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX01_PATH)
-									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX01_UT_PATH)								
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX02_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX02_UT_PATH)								
 
 fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_PATH)
@@ -688,8 +727,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX12_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_UT_PATH)
-									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX01_PATH)
-									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX01_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX02_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX02_UT_PATH)
 
 tests_run						:	fclean \
 									42_test_run_ex12
