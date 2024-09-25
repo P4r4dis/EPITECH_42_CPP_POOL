@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 9:12:42 PM 2024 Paradis
-** Last update Thu Sep 25 6:24:46 PM 2024 Paradis
+** Last update Thu Sep 25 7:15:04 PM 2024 Paradis
 */
 
 #ifndef 			__FEDERATION_HPP__
@@ -62,6 +62,15 @@
                 private:
                     std::string     _name;
                     int             _age;
+            };
+
+            class   Ensign
+            {
+                public:
+                    Ensign(std::string name);
+                    ~Ensign(void);
+                private:
+                    std::string _name;
             };
         }
 

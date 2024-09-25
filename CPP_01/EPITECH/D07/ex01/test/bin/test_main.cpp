@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 7:46:17 PM 2024 Paradis
-** Last update Thu Sep 25 6:40:56 PM 2024 Paradis
+** Last update Thu Sep 25 7:17:28 PM 2024 Paradis
 */
 
 
@@ -202,7 +202,7 @@ test_Federation_Starfleet_Ship_promote_captain_stdout_output,
 }
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-//                      Federation::Starfleet::Captain                          //
+//                      Federation::Starfleet::Captain                       //
 ///////////////////////////////////////////////////////////////////////////////
 
 Test(
@@ -244,6 +244,29 @@ test_Federation_Starfleet_Captain_getAge,
 {
     Federation::Starfleet::Captain James("James T. Kirk");
     cr_assert(James.getAge() == 0);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//                      Federation::Starfleet::Ensign                        //
+///////////////////////////////////////////////////////////////////////////////
+
+Test(
+Federation_Starfleet_Ensign,
+test_Federation_Starfleet_Ensign_isDefined,
+.init = redirect_all_stdout)
+{
+    Federation::Starfleet::Ensign Ensign("Pavel Chekov");
+    cr_assert_not_null(&Ensign);
+}
+Test(
+Federation_Starfleet_Ensign,
+test_Federation_Starfleet_Ensign_CTOR_stdout_output,
+.init = redirect_all_stdout)
+{
+    Federation::Starfleet::Ensign Ensign("Pavel Chekov");
+    cr_assert_stdout_eq_str(
+        "Ensign Pavel Chekov, awaiting orders.\n"
+    );
 }
 
 ///////////////////////////////////////////////////////////////////////////////

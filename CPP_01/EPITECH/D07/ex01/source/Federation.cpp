@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 9:17:29 PM 2024 Paradis
-** Last update Thu Sep 25 6:40:58 PM 2024 Paradis
+** Last update Thu Sep 25 7:18:27 PM 2024 Paradis
 */
 
 #include "../include/Federation.hpp"
@@ -89,7 +89,14 @@ void        Federation::Starfleet::Captain::setAge(int age)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+Federation::Starfleet::Ensign::Ensign(std::string name) :   _name(name)
+{
+    std::cout   << "Ensign " << _name << ", awaiting orders." << std::endl;
+}
 
+Federation::Starfleet::Ensign::~Ensign(void)
+{}
+///////////////////////////////////////////////////////////////////////////////
 Federation::Ship::Ship(int length, int width, std::string name)
     :   _length(length), _width(width), _name(name), _maxWarp(1)
 {
