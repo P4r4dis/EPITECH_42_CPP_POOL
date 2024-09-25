@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 9:12:42 PM 2024 Paradis
-** Last update Thu Sep 25 5:01:44 PM 2024 Paradis
+** Last update Thu Sep 25 6:24:46 PM 2024 Paradis
 */
 
 #ifndef 			__FEDERATION_HPP__
@@ -13,6 +13,17 @@
 
     #include <string>
     #include "WarpSystem.hpp"
+    
+    namespace Federation
+    {
+        namespace Starfleet
+        {
+            class Ship;
+            class Captain;
+        }
+
+        class Ship;
+    }
     
     namespace       Federation
     {
@@ -24,8 +35,11 @@
                     Ship(int length, int width, std::string name, short maxWarp);
                     ~Ship(void);
 
-                    void    setupCore(WarpSystem::Core *coreReactor);
-                    void    checkCore(void);
+                    void        setupCore(WarpSystem::Core *coreReactor);
+                    void        checkCore(void);
+                    void        promote(Federation::Starfleet::Captain *captain);
+                    std::string getName(void) const;
+                    
                 protected:
                 private:
                     int                                 _length;
@@ -33,6 +47,7 @@
                     std::string                         _name;
                     short                               _maxWarp;
                     WarpSystem::Core                    *_coreReactor;
+                    Federation::Starfleet::Captain      *_captain;
             };
 
             class   Captain

@@ -5,15 +5,17 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 9:17:29 PM 2024 Paradis
-** Last update Thu Sep 25 5:03:21 PM 2024 Paradis
+** Last update Thu Sep 25 6:40:58 PM 2024 Paradis
 */
 
 #include "../include/Federation.hpp"
 #include <iostream>
 #include <string>
+
 Federation::Starfleet::Ship::Ship(
     int length, int width, std::string name, short maxWarp)
-    :   _length(length), _width(width), _name(name), _maxWarp(maxWarp)
+    :   _length(length), _width(width), _name(name), _maxWarp(maxWarp),
+        _captain(nullptr)
 {
     std::cout   << "The ship USS " << _name << " has been finished."
                 << std::endl << "It is " << _length
@@ -44,6 +46,24 @@ void        Federation::Starfleet::Ship::checkCore(void)
         else
             std::cout << "USS " << _name << ": The core is unstable at the time." << std::endl;
     }
+}
+
+void        Federation::Starfleet::Ship::promote(Captain *captain)
+{
+    if (captain)
+    {
+        _captain = captain;
+        std::cout   << _captain->getName() 
+                    << ": I'm glad to be the captain of the USS "
+                    << _name << "." << std::endl;
+    }
+    else
+        std::cerr   << "Error: No Captain to promote." << std::endl;
+}
+
+std::string Federation::Starfleet::Ship::getName(void) const
+{
+    return _name;
 }
 ///////////////////////////////////////////////////////////////////////////////
 Federation::Starfleet::Captain::Captain(std::string name)   :   _name(name),

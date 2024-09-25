@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 7:46:17 PM 2024 Paradis
-** Last update Thu Sep 25 5:00:44 PM 2024 Paradis
+** Last update Thu Sep 25 6:40:56 PM 2024 Paradis
 */
 
 
@@ -143,6 +143,62 @@ test_Federation_Starfleet_Ship_checkCore_is_unstable_std_output,
         "USS Kreog: The core is set.\n"
         "USS Kreog: The core is unstable at the time.\n"
     );
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_promote_no_captain_stderr_output,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
+        UssKreog.promote(nullptr);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "The ship USS Kreog has been finished.\n"
+        "It is 289 m in length and 132 m in width.\n"
+        "It can go to Warp 6!\n"
+    );
+    cr_assert_stderr_eq_str
+    (
+        "Error: No Captain to promote.\n"
+    );
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_getName,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
+
+        cr_assert(UssKreog.getName() == "Kreog");
+    }
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_promote_captain_stdout_output,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
+        Federation::Starfleet::Captain  James("James T. Kirk");
+
+        UssKreog.promote(&James);
+        cr_assert_stdout_eq_str
+        (
+            (
+                "The ship USS Kreog has been finished.\n"
+                "It is 289 m in length and 132 m in width.\n"
+                "It can go to Warp 6!\n"
+                "James T. Kirk: I'm glad to be the captain of the USS " + UssKreog.getName() + ".\n"
+            ).c_str()
+        );
+    }
+
 }
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
