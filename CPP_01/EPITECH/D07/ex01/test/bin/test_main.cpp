@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 7:46:17 PM 2024 Paradis
-** Last update Thu Sep 25 7:31:29 PM 2024 Paradis
+** Last update Fri Sep 26 6:23:51 PM 2024 Paradis
 */
 
 
@@ -612,10 +612,15 @@ test_main,
         Federation::Starfleet::Ship UssKreog(289, 132, "Kreog", 6);
         Federation::Starfleet::Captain James("James T. Kirk");
         Federation::Starfleet::Ensign Ensign("Pavel Chekov");
+        Federation::Ship     Independent(150, 230, "Greok");
         WarpSystem::QuantumReactor QR;
         WarpSystem::QuantumReactor QR2;
+        WarpSystem::QuantumReactor QR3;
+
         WarpSystem::Core core(&QR);
-        WarpSystem::Core core2 (&QR2);
+        WarpSystem::Core core2(&QR2);
+        WarpSystem::Core core3(&QR3);
+
 
         UssKreog.setupCore(&core);
         UssKreog.checkCore();
@@ -624,6 +629,9 @@ test_main,
         Borg::Ship  Cube;
         Cube.setupCore(&core2);
         Cube.checkCore();
+
+        Independent.setupCore(&core3);
+        Independent.checkCore();
     }
     cr_assert_stdout_eq_str
     (
@@ -631,6 +639,8 @@ test_main,
         "It is 289 m in length and 132 m in width.\n"
         "It can go to Warp 6!\n"
         "Ensign Pavel Chekov, awaiting orders.\n"
+        "The independent ship Greok just finished its construction.\n"
+        "It is 150 m in length and 230 m in width.\n"
         "USS Kreog: The core is set.\n"
         "USS Kreog: The core is stable at the time.\n"
         "James T. Kirk: I'm glad to be the captain of the USS Kreog.\n"
@@ -639,5 +649,7 @@ test_main,
         "Your biological characteristics and technologies will be assimilated.\n"
         "Resistance is futile.\n"
         "Everything is in order.\n"
+        "Greok: The core is set.\n"
+        "Greok: The core is stable at the time.\n"
     );
 }

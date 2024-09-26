@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2124/12/18 19:12:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/09/25 19:47:30 by Paradis          ###   ########.fr        #
+#    Updated: 2024/09/26 18:34:56 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -529,7 +529,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2124 Paradis
-## Last update Thu Sep 25 7:47:30 PM 2024 Paradis
+## Last update Fri Sep 26 6:34:56 PM 2024 Paradis
 ##
 # **************************************************************************** #
 #																			   #
@@ -695,6 +695,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(42_EX12_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_UT_PATH)	
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX01_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX01_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX02_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX02_UT_PATH)								
 
@@ -727,6 +729,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX12_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX01_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX01_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX02_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX02_UT_PATH)
 

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 9:12:42 PM 2024 Paradis
-** Last update Thu Sep 25 7:29:15 PM 2024 Paradis
+** Last update Fri Sep 26 6:30:15 PM 2024 Paradis
 */
 
 #ifndef 			__FEDERATION_HPP__
@@ -20,6 +20,7 @@
         {
             class Ship;
             class Captain;
+            class Ensign;
         }
 
         class Ship;
