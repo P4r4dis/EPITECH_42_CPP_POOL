@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 9:17:29 PM 2024 Paradis
-** Last update Thu Sep 25 8:06:59 PM 2024 Paradis
+** Last update Fri Sep 26 5:19:03 PM 2024 Paradis
 */
 
 #include "../include/Federation.hpp"
@@ -64,6 +64,43 @@ void        Federation::Starfleet::Ship::promote(Captain *captain)
 std::string Federation::Starfleet::Ship::getName(void) const
 {
     return _name;
+}
+
+Destination Federation::Starfleet::Ship::getLocation(void) const
+{
+    return _location;
+}
+
+short       Federation::Starfleet::Ship::getMaxWarp(void) const
+{
+    return _maxWarp;
+}
+
+bool        Federation::Starfleet::Ship::move(int warp, Destination d)
+{
+    if (warp <= _maxWarp && _location != d &&
+        (_coreReactor && _coreReactor->checkReactor()->isStable()))
+    {
+        _location = d;
+        return true;
+    }
+    else
+        return false;
+}
+
+bool        Federation::Starfleet::Ship::move(int warp)
+{
+    return move(warp, _home);
+}
+
+bool        Federation::Starfleet::Ship::move(Destination d)
+{
+    return move(_maxWarp, d);
+}
+
+bool        Federation::Starfleet::Ship::move(void)
+{
+    return move(_maxWarp, _home);
 }
 ///////////////////////////////////////////////////////////////////////////////
 Federation::Starfleet::Captain::Captain(std::string name)   :   _name(name),
@@ -134,4 +171,36 @@ void        Federation::Ship::checkCore(void)
         else
             std::cout << _name << ": The core is unstable at the time." << std::endl;
     }
+}
+
+Destination Federation::Ship::getLocation(void) const
+{
+    return _location;
+}
+
+bool        Federation::Ship::move(int warp, Destination d)
+{
+    if (warp <= _maxWarp && _location != d &&
+        (_coreReactor && _coreReactor->checkReactor()->isStable()))
+    {
+        _location = d;
+        return true;
+    }
+    else
+        return false;
+}
+
+bool        Federation::Ship::move(int warp)
+{
+    return move(warp, _home);
+}
+
+bool        Federation::Ship::move(Destination d)
+{
+    return move(_maxWarp, d);
+}
+
+bool        Federation::Ship::move(void)
+{
+    return move(_maxWarp, _home);
 }

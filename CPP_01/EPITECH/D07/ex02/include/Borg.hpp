@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Sep 24 7:17:49 PM 2024 Paradis
-** Last update Thu Sep 25 8:07:48 PM 2024 Paradis
+** Last update Fri Sep 26 5:36:37 PM 2024 Paradis
 */
 
 #ifndef 			__BORG_HPP__
@@ -23,8 +23,15 @@
                 ~Ship(void);
 
 
-                void    setupCore(WarpSystem::Core *coreReactor);
-                void    checkCore(void);
+            void            setupCore(WarpSystem::Core *coreReactor);
+            void            checkCore(void);
+
+                Destination getLocation(void) const;
+                
+                bool        move(int warp, Destination d);
+                bool        move(int warp);
+                bool        move(Destination d);
+                bool        move(void);
             protected:
             private:
                 int     _side;

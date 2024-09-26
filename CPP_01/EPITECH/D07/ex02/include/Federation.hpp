@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 9:12:42 PM 2024 Paradis
-** Last update Thu Sep 25 8:06:11 PM 2024 Paradis
+** Last update Fri Sep 26 5:17:37 PM 2024 Paradis
 */
 
 #ifndef 			__FEDERATION_HPP__
@@ -39,8 +39,15 @@
                     void        setupCore(WarpSystem::Core *coreReactor);
                     void        checkCore(void);
                     void        promote(Federation::Starfleet::Captain *captain);
-                    std::string getName(void) const;
                     
+                    std::string getName(void) const;
+                    Destination getLocation(void) const;
+                    short       getMaxWarp(void) const;
+                    
+                    bool        move(int warp, Destination d);
+                    bool        move(int warp);
+                    bool        move(Destination d);
+                    bool        move(void);
                 protected:
                 private:
                     int                                 _length;
@@ -84,9 +91,16 @@
                 Ship(int length, int width, std::string name);
                 ~Ship(void);
 
-                short   getMaxWarp(void) const;
-                void    setupCore(WarpSystem::Core *coreReactor);
-                void    checkCore(void);
+                short       getMaxWarp(void) const;
+                void        setupCore(WarpSystem::Core *coreReactor);
+                void        checkCore(void);
+
+                Destination getLocation(void) const;
+                
+                bool        move(int warp, Destination d);
+                bool        move(int warp);
+                bool        move(Destination d);
+                bool        move(void);
             protected:
             private:
                 int                                 _length;

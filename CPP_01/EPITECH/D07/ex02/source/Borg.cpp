@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Sep 24 7:19:34 PM 2024 Paradis
-** Last update Thu Sep 25 8:08:23 PM 2024 Paradis
+** Last update Fri Sep 26 5:37:25 PM 2024 Paradis
 */
 
 #include "../include/Borg.hpp"
@@ -45,4 +45,37 @@ void        Borg::Ship::checkCore(void)
     }
     else
         std::cout << "Critical failure imminent." << std::endl;
+}
+
+
+Destination Borg::Ship::getLocation(void) const
+{
+    return _location;
+}
+
+bool        Borg::Ship::move(int warp, Destination d)
+{
+    if (warp <= _maxWarp && _location != d &&
+        (_coreReactor && _coreReactor->checkReactor()->isStable()))
+    {
+        _location = d;
+        return true;
+    }
+    else
+        return false;
+}
+
+bool        Borg::Ship::move(int warp)
+{
+    return move(warp, _home);
+}
+
+bool        Borg::Ship::move(Destination d)
+{
+    return move(_maxWarp, d);
+}
+
+bool        Borg::Ship::move(void)
+{
+    return move(_maxWarp, _home);
 }

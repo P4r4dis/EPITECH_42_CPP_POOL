@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 7:46:17 PM 2024 Paradis
-** Last update Thu Sep 25 8:02:10 PM 2024 Paradis
+** Last update Fri Sep 26 5:53:59 PM 2024 Paradis
 */
 
 
@@ -181,6 +181,30 @@ test_Federation_Starfleet_Ship_getName,
 
 Test(
 Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_getLocation,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
+
+        cr_assert(UssKreog.getLocation() == Destination::EARTH);
+    }
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_getMaxWarp,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
+
+        cr_assert(UssKreog.getMaxWarp() == 6);
+    }
+}
+
+Test(
+Federation_Starfleet_Ship,
 test_Federation_Starfleet_Ship_promote_captain_stdout_output,
 .init = redirect_all_stdout)
 {
@@ -200,6 +224,135 @@ test_Federation_Starfleet_Ship_promote_captain_stdout_output,
         );
     }
 
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_error_move_because_warp_superior_to_maxWarp,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        
+        UssKreog.setupCore(&core);
+        cr_assert(UssKreog.move(30, Destination::VULCAN) == false);
+        cr_assert(UssKreog.getLocation() != Destination::VULCAN);
+        cr_assert(UssKreog.getLocation() == Destination::EARTH);
+    }
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_error_move_because_destination_is_not_different_of_the_current_location_of_the_ship,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+
+        UssKreog.setupCore(&core);
+        cr_assert(UssKreog.move(30, Destination::VULCAN) == false);
+        cr_assert(UssKreog.move(1, Destination::EARTH) == false);
+        cr_assert(UssKreog.getLocation() != Destination::VULCAN);
+        cr_assert(UssKreog.getLocation() == Destination::EARTH);
+    }
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_error_move_because_coreReactor_is_not_stable,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        core.checkReactor()->setStability(false);
+        UssKreog.setupCore(&core);
+        cr_assert(UssKreog.move(30, Destination::VULCAN) == false);
+        cr_assert(UssKreog.move(1, Destination::EARTH) == false);
+        cr_assert(UssKreog.move(1, Destination::VULCAN) == false);
+
+        cr_assert(UssKreog.getLocation() != Destination::VULCAN);
+        cr_assert(UssKreog.getLocation() == Destination::EARTH);
+    }
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_function_move_with_warp_param_and_destination_param,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        UssKreog.setupCore(&core);
+
+        cr_assert(UssKreog.getLocation() == Destination::EARTH);
+        cr_assert(UssKreog.move(1, Destination::VULCAN) == true);
+        cr_assert(UssKreog.getLocation() == Destination::VULCAN);
+    }
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_function_move_with_warp_param,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        UssKreog.setupCore(&core);
+
+        cr_assert(UssKreog.getLocation() == Destination::EARTH);
+        cr_assert(UssKreog.move(1, Destination::VULCAN) == true);
+        cr_assert(UssKreog.getLocation() == Destination::VULCAN);
+        cr_assert(UssKreog.move(1) == true);
+    }
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_function_move_with_destination_param,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        UssKreog.setupCore(&core);
+
+        cr_assert(UssKreog.getLocation() == Destination::EARTH);
+        cr_assert(UssKreog.move(1, Destination::VULCAN) == true);
+        cr_assert(UssKreog.getLocation() == Destination::VULCAN);
+        cr_assert(UssKreog.move(1) == true);
+        cr_assert(UssKreog.getLocation() == Destination::EARTH);
+        cr_assert(UssKreog.move(Destination::VULCAN) == true);
+    }
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_function_move_without_param,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        UssKreog.setupCore(&core);
+
+        cr_assert(UssKreog.getLocation() == Destination::EARTH);
+        cr_assert(UssKreog.move(1, Destination::VULCAN) == true);
+        cr_assert(UssKreog.getLocation() == Destination::VULCAN);
+        cr_assert(UssKreog.move() == true);
+        cr_assert(UssKreog.getLocation() == Destination::EARTH);
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -458,6 +611,151 @@ test_Federation_Ship_checkCore_is_unstable_std_output,
         "Greok: The core is unstable at the time.\n"
     );
 }
+
+
+Test(
+Federation_Ship,
+test_Federation_Ship_getLocation,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Ship     Independent(150, 230, "Greok");
+
+        cr_assert(Independent.getLocation() == Destination::VULCAN);
+    }
+}
+
+Test(
+Federation_Ship,
+test_Federation_Ship_error_move_because_warp_superior_to_maxWarp,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Ship     Independent(150, 230, "Greok");
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        
+        Independent.setupCore(&core);
+        cr_assert(Independent.move(30, Destination::UNICOMPLEX) == false);
+        cr_assert(Independent.getLocation() == Destination::VULCAN);
+        cr_assert(Independent.getLocation() != Destination::EARTH);
+    }
+}
+
+Test(
+Federation_Ship,
+test_Federation_Ship_error_move_because_destination_is_not_different_of_the_current_location_of_the_ship,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Ship     Independent(150, 230, "Greok");
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+
+        Independent.setupCore(&core);
+        cr_assert(Independent.move(30, Destination::VULCAN) == false);
+        cr_assert(Independent.move(1, Destination::VULCAN) == false);
+        cr_assert(Independent.getLocation() == Destination::VULCAN);
+        cr_assert(Independent.getLocation() != Destination::EARTH);
+    }
+}
+
+Test(
+Federation_Ship,
+test_Federation_Ship_error_move_because_coreReactor_is_not_stable,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Ship     Independent(150, 230, "Greok");
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        core.checkReactor()->setStability(false);
+        Independent.setupCore(&core);
+        cr_assert(Independent.move(30, Destination::VULCAN) == false);
+        cr_assert(Independent.move(1, Destination::EARTH) == false);
+        cr_assert(Independent.move(1, Destination::VULCAN) == false);
+
+        cr_assert(Independent.getLocation() == Destination::VULCAN);
+        cr_assert(Independent.getLocation() != Destination::EARTH);
+    }
+}
+
+Test(
+Federation_Ship,
+test_Federation_Ship_function_move_with_warp_param_and_destination_param,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Ship     Independent(150, 230, "Greok");
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        Independent.setupCore(&core);
+
+        cr_assert(Independent.getLocation() == Destination::VULCAN);
+        cr_assert(Independent.move(1, Destination::EARTH) == true);
+        cr_assert(Independent.getLocation() == Destination::EARTH);
+    }
+}
+
+Test(
+Federation_Ship,
+test_Federation_Ship_function_move_with_warp_param,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Ship     Independent(150, 230, "Greok");
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        Independent.setupCore(&core);
+
+        cr_assert(Independent.getLocation() == Destination::VULCAN);
+        cr_assert(Independent.move(1, Destination::EARTH) == true);
+        cr_assert(Independent.getLocation() == Destination::EARTH);
+        cr_assert(Independent.move(1) == true);
+        cr_assert(Independent.getLocation() == Destination::VULCAN);
+
+    }
+}
+
+Test(
+Federation_Ship,
+test_Federation_Ship_function_move_with_destination_param,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Ship     Independent(150, 230, "Greok");
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        Independent.setupCore(&core);
+
+        cr_assert(Independent.getLocation() == Destination::VULCAN);
+        cr_assert(Independent.move(1, Destination::EARTH) == true);
+        cr_assert(Independent.getLocation() == Destination::EARTH);
+        cr_assert(Independent.move(1) == true);
+        cr_assert(Independent.getLocation() == Destination::VULCAN);
+        cr_assert(Independent.move(Destination::UNICOMPLEX) == true);
+        cr_assert(Independent.getLocation() == Destination::UNICOMPLEX);
+    }
+}
+
+Test(
+Federation_Ship,
+test_Federation_Ship_function_move_without_param,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Ship     Independent(150, 230, "Greok");
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        Independent.setupCore(&core);
+
+        cr_assert(Independent.getLocation() == Destination::VULCAN);
+        cr_assert(Independent.move(1, Destination::EARTH) == true);
+        cr_assert(Independent.getLocation() == Destination::EARTH);
+        cr_assert(Independent.move() == true);
+        cr_assert(Independent.getLocation() == Destination::VULCAN);
+    }
+}
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 //                                 Borg::Ship                                //
@@ -600,6 +898,138 @@ Test_Borg_Ship_checkCore_unstable_with_setupCore_NULLPTR_stdout_output,
     );
 }
 
+
+Test(
+Borg_Ship,
+test_Borg_Ship_error_move_because_warp_superior_to_maxWarp,
+.init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube;
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        
+        Cube.setupCore(&core);
+        cr_assert(Cube.move(30, Destination::VULCAN) == false);
+        cr_assert(Cube.getLocation() != Destination::VULCAN);
+        cr_assert(Cube.getLocation() == Destination::UNICOMPLEX);
+    }
+}
+
+Test(
+Borg_Ship,
+test_Borg_Ship_error_move_because_destination_is_not_different_of_the_current_location_of_the_ship,
+.init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube;
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+
+        Cube.setupCore(&core);
+        cr_assert(Cube.move(30, Destination::VULCAN) == false);
+        cr_assert(Cube.move(1, Destination::UNICOMPLEX) == false);
+        cr_assert(Cube.getLocation() != Destination::VULCAN);
+        cr_assert(Cube.getLocation() == Destination::UNICOMPLEX);
+    }
+}
+
+Test(
+Borg_Ship,
+test_Borg_Ship_error_move_because_coreReactor_is_not_stable,
+.init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube;
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        core.checkReactor()->setStability(false);
+        Cube.setupCore(&core);
+        cr_assert(Cube.move(30, Destination::VULCAN) == false);
+        cr_assert(Cube.move(1, Destination::UNICOMPLEX) == false);
+        cr_assert(Cube.move(1, Destination::EARTH) == false);
+
+        cr_assert(Cube.getLocation() != Destination::EARTH);
+        cr_assert(Cube.getLocation() == Destination::UNICOMPLEX);
+    }
+}
+
+Test(
+Borg_Ship,
+test_Borg_Ship_function_move_with_warp_param_and_destination_param,
+.init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube;
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        Cube.setupCore(&core);
+
+        cr_assert(Cube.getLocation() == Destination::UNICOMPLEX);
+        cr_assert(Cube.move(1, Destination::VULCAN) == true);
+        cr_assert(Cube.getLocation() == Destination::VULCAN);
+    }
+}
+
+Test(
+Borg_Ship,
+test_Borg_Ship_function_move_with_warp_param,
+.init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube;
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        Cube.setupCore(&core);
+
+        cr_assert(Cube.getLocation() == Destination::UNICOMPLEX);
+        cr_assert(Cube.move(1, Destination::VULCAN) == true);
+        cr_assert(Cube.getLocation() == Destination::VULCAN);
+        cr_assert(Cube.move(1) == true);
+        cr_assert(Cube.getLocation() == Destination::UNICOMPLEX);
+    }
+}
+
+Test(
+Borg_Ship,
+test_Borg_Ship_function_move_with_destination_param,
+.init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube;
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        Cube.setupCore(&core);
+
+        cr_assert(Cube.getLocation() == Destination::UNICOMPLEX);
+        cr_assert(Cube.move(1, Destination::VULCAN) == true);
+        cr_assert(Cube.getLocation() == Destination::VULCAN);
+        cr_assert(Cube.move(1) == true);
+        cr_assert(Cube.getLocation() == Destination::UNICOMPLEX);
+        cr_assert(Cube.move(Destination::VULCAN) == true);
+        cr_assert(Cube.getLocation() == Destination::VULCAN);
+    }
+}
+
+Test(
+Borg_Ship,
+test_Borg_Ship_function_move_without_param,
+.init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube;
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        Cube.setupCore(&core);
+
+        cr_assert(Cube.getLocation() == Destination::UNICOMPLEX);
+        cr_assert(Cube.move(1, Destination::VULCAN) == true);
+        cr_assert(Cube.getLocation() == Destination::VULCAN);
+        cr_assert(Cube.move() == true);
+        cr_assert(Cube.getLocation() == Destination::UNICOMPLEX);
+    }
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 //                               Destination                                 //
@@ -618,26 +1048,61 @@ Test(Destination, Test_Destination_enum_isDefined)
 ///////////////////////////////////////////////////////////////////////////////
 
 Test(
-main,
-test_main,
-.init = redirect_all_stdout)
+main, test_main, .init = redirect_all_stdout)
 {
     {
         Federation::Starfleet::Ship UssKreog(289, 132, "Kreog", 6);
         Federation::Starfleet::Captain James("James T. Kirk");
         Federation::Starfleet::Ensign Ensign("Pavel Chekov");
+        Federation::Ship     Independent(150, 230, "Greok");
         WarpSystem::QuantumReactor QR;
         WarpSystem::QuantumReactor QR2;
+        WarpSystem::QuantumReactor QR3;
+
         WarpSystem::Core core(&QR);
-        WarpSystem::Core core2 (&QR2);
+        WarpSystem::Core core2(&QR2);
+        WarpSystem::Core core3(&QR3);
+
 
         UssKreog.setupCore(&core);
         UssKreog.checkCore();
         UssKreog.promote(&James);
 
+        cr_assert(UssKreog.getLocation() == Destination::EARTH);
+        cr_assert(UssKreog.move(1, Destination::VULCAN) == true);
+        cr_assert(UssKreog.getLocation() == Destination::VULCAN);
+        cr_assert(UssKreog.move(1) == true);
+        cr_assert(UssKreog.getLocation() == Destination::EARTH);
+        cr_assert(UssKreog.move(Destination::VULCAN) == true);
+        cr_assert(UssKreog.getLocation() == Destination::VULCAN);
+        cr_assert(UssKreog.move() == true);
+        cr_assert(UssKreog.getLocation() == Destination::EARTH);
+
         Borg::Ship  Cube;
         Cube.setupCore(&core2);
         Cube.checkCore();
+
+        cr_assert(Cube.getLocation() == Destination::UNICOMPLEX);
+        cr_assert(Cube.move(1, Destination::EARTH) == true);
+        cr_assert(Cube.getLocation() == Destination::EARTH);
+        cr_assert(Cube.move(1) == true);
+        cr_assert(Cube.getLocation() == Destination::UNICOMPLEX);
+        cr_assert(Cube.move(Destination::VULCAN) == true);
+        cr_assert(Cube.getLocation() == Destination::VULCAN);
+        cr_assert(Cube.move() == true);
+        cr_assert(Cube.getLocation() == Destination::UNICOMPLEX);
+
+        Independent.setupCore(&core3);
+        Independent.checkCore();
+        cr_assert(Independent.getLocation() == Destination::VULCAN);
+        cr_assert(Independent.move(1, Destination::EARTH) == true);
+        cr_assert(Independent.getLocation() == Destination::EARTH);
+        cr_assert(Independent.move(1) == true);
+        cr_assert(Independent.getLocation() == Destination::VULCAN);
+        cr_assert(Independent.move(Destination::UNICOMPLEX) == true);
+        cr_assert(Independent.getLocation() == Destination::UNICOMPLEX);
+        cr_assert(Independent.move() == true);
+        cr_assert(Independent.getLocation() == Destination::VULCAN);
     }
     cr_assert_stdout_eq_str
     (
@@ -645,6 +1110,8 @@ test_main,
         "It is 289 m in length and 132 m in width.\n"
         "It can go to Warp 6!\n"
         "Ensign Pavel Chekov, awaiting orders.\n"
+        "The independent ship Greok just finished its construction.\n"
+        "It is 150 m in length and 230 m in width.\n"
         "USS Kreog: The core is set.\n"
         "USS Kreog: The core is stable at the time.\n"
         "James T. Kirk: I'm glad to be the captain of the USS Kreog.\n"
@@ -653,5 +1120,7 @@ test_main,
         "Your biological characteristics and technologies will be assimilated.\n"
         "Resistance is futile.\n"
         "Everything is in order.\n"
+        "Greok: The core is set.\n"
+        "Greok: The core is stable at the time.\n"
     );
 }
