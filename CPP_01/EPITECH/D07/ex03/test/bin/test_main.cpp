@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Sep 26 6:43:34 PM 2024 Paradis
-** Last update Fri Sep 26 7:32:53 PM 2024 Paradis
+** Last update Fri Sep 26 7:58:45 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -814,6 +814,22 @@ test_Federation_Ship_function_move_without_param,
         cr_assert(Independent.getLocation() == Destination::EARTH);
         cr_assert(Independent.move() == true);
         cr_assert(Independent.getLocation() == Destination::VULCAN);
+    }
+}
+
+Test(
+Federation_Ship,
+test_Federation_Ship_function_getCore,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Ship     Independent(150, 230, "Greok");
+
+        cr_assert_null(Independent.getCore());
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        Independent.setupCore(&core);
+        cr_assert_not_null(Independent.getCore());
     }
 }
 ///////////////////////////////////////////////////////////////////////////////

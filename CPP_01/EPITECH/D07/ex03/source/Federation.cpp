@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Sep 26 7:07:13 PM 2024 Paradis
-** Last update Fri Sep 26 7:31:59 PM 2024 Paradis
+** Last update Fri Sep 26 7:58:14 PM 2024 Paradis
 */
 
 #include "../include/Federation.hpp"
@@ -159,7 +159,7 @@ Federation::Starfleet::Ensign::~Ensign(void)
 ///////////////////////////////////////////////////////////////////////////////
 Federation::Ship::Ship(int length, int width, std::string name)
     :   _length(length), _width(width), _name(name), _maxWarp(1),
-        _home(VULCAN), _location(_home)
+        _coreReactor(nullptr), _home(VULCAN), _location(_home)
 {
     std::cout   << "The independent ship " << _name << " just finished its construction."
                 << std::endl << "It is " << _length
@@ -171,12 +171,12 @@ Federation::Ship::~Ship()
 {
 }
 
-short       Federation::Ship::getMaxWarp(void) const
+short               Federation::Ship::getMaxWarp(void) const
 {
     return _maxWarp;
 }
 
-void        Federation::Ship::setupCore(WarpSystem::Core *coreReactor)
+void                Federation::Ship::setupCore(WarpSystem::Core *coreReactor)
 {
     _coreReactor = coreReactor;
     if (_coreReactor)
@@ -185,7 +185,7 @@ void        Federation::Ship::setupCore(WarpSystem::Core *coreReactor)
         std::cerr   << _name << ": The core is not set." << std::endl;
 }
 
-void        Federation::Ship::checkCore(void)
+void                Federation::Ship::checkCore(void)
 {
     if (_coreReactor)
     {
@@ -196,12 +196,12 @@ void        Federation::Ship::checkCore(void)
     }
 }
 
-Destination Federation::Ship::getLocation(void) const
+Destination         Federation::Ship::getLocation(void) const
 {
     return _location;
 }
 
-bool        Federation::Ship::move(int warp, Destination d)
+bool                Federation::Ship::move(int warp, Destination d)
 {
     if (warp <= _maxWarp && _location != d &&
         (_coreReactor && _coreReactor->checkReactor()->isStable()))
@@ -213,17 +213,22 @@ bool        Federation::Ship::move(int warp, Destination d)
         return false;
 }
 
-bool        Federation::Ship::move(int warp)
+bool                Federation::Ship::move(int warp)
 {
     return move(warp, _home);
 }
 
-bool        Federation::Ship::move(Destination d)
+bool                Federation::Ship::move(Destination d)
 {
     return move(_maxWarp, d);
 }
 
-bool        Federation::Ship::move(void)
+bool                Federation::Ship::move(void)
 {
     return move(_maxWarp, _home);
+}
+
+WarpSystem::Core    *Federation::Ship::getCore(void) const
+{
+    return _coreReactor;
 }
