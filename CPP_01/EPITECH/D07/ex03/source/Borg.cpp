@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Sep 24 7:19:34 PM 2024 Paradis
-** Last update Sat Sep 27 5:47:49 PM 2024 Paradis
+** Last update Sat Sep 27 6:42:20 PM 2024 Paradis
 */
 
 #include "../include/Borg.hpp"
@@ -111,4 +111,20 @@ void        Borg::Ship::setWeaponFrequency(int weaponFrequency)
 void        Borg::Ship::setRepair(short repair)
 {
     _repair = repair;
+}
+
+void        Borg::Ship::fire(Federation::Starfleet::Ship *target)
+{
+    target->setShield(target->getShield() - _weaponFrequency);
+    if (target->getShield() < 0)
+         target->setShield(0);
+    std::cout   << "Firing on target with " << _weaponFrequency
+                << "GW frequency." << std::endl;
+}
+
+void        Borg::Ship::fire(Federation::Ship *target)
+{
+    std::cout   << "Firing on target with " << _weaponFrequency
+                << "GW frequency." << std::endl;
+    target->getCore()->checkReactor()->setStability(false);
 }

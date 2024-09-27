@@ -5,13 +5,14 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Sep 24 7:17:49 PM 2024 Paradis
-** Last update Sat Sep 27 5:44:13 PM 2024 Paradis
+** Last update Sat Sep 27 6:26:43 PM 2024 Paradis
 */
 
 #ifndef 			__BORG_HPP__
 	# define 		__BORG_HPP__
 
-    #include "WarpSystem.hpp"
+    #include "Federation.hpp"
+#include "WarpSystem.hpp"
     #include "Destination.hpp"
 
     namespace       Borg
@@ -39,6 +40,8 @@
                 bool            move(int warp);
                 bool            move(Destination d);
                 bool            move(void);
+                void            fire(Federation::Starfleet::Ship *target);
+                void            fire(Federation::Ship *target);
             protected:
             private:
                 int                 _side;

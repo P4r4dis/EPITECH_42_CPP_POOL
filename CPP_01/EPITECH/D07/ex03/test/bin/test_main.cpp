@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Sep 26 6:43:34 PM 2024 Paradis
-** Last update Sat Sep 27 5:50:59 PM 2024 Paradis
+** Last update Sat Sep 27 7:03:09 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -1172,6 +1172,110 @@ test_Borg_Ship_function_move_without_param,
         cr_assert(Cube.getLocation() == Destination::VULCAN);
         cr_assert(Cube.move() == true);
         cr_assert(Cube.getLocation() == Destination::UNICOMPLEX);
+    }
+}
+
+Test(
+Borg_Ship,
+test_Borg_Ship_function_fire_reduces_Federation_Starfleet_Ship_shield_by_weaponFrequency,
+.init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube(20);
+        Federation::Starfleet::Ship UssKreeog;
+
+        cr_assert(UssKreeog.getShield() == 100);
+        Cube.fire(&UssKreeog);
+        cr_assert(UssKreeog.getShield() == 80);
+    }
+}
+
+Test(
+Borg_Ship,
+test_Borg_Ship_function_fire_reduces_Federation_Starfleet_Ship_shield_but_shield_cant_be_negative,
+.init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube(200);
+        Federation::Starfleet::Ship UssKreeog;
+
+        cr_assert(UssKreeog.getShield() == 100);
+        Cube.fire(&UssKreeog);
+        cr_assert(UssKreeog.getShield() == 0);
+    }
+}
+
+Test(
+Borg_Ship,
+test_Borg_Ship_function_fire_stdout_output,
+.init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube(200);
+        Federation::Starfleet::Ship UssKreeog;
+
+        cr_assert(UssKreeog.getShield() == 100);
+        Cube.fire(&UssKreeog);
+        cr_assert(UssKreeog.getShield() == 0);
+
+        cr_assert_stdout_eq_str(
+            "We are the Borgs. "
+            "Lower your shields and surrender yourselves unconditionally.\n"
+            "Your biological characteristics and technologies will be assimilated.\n"
+            "Resistance is futile.\n"
+            "The ship USS Kreog has been finished.\n"
+            "It is 289 m in length and 132 m in width.\n"
+            "It can go to Warp 6!\n"
+            "Firing on target with 200GW frequency.\n"
+        );
+    }
+}
+
+Test(
+Borg_Ship,
+test_Borg_Ship_function_fire_make_Federation_Ship_coreReactor_unstable,
+.init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube(20);
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        Federation::Ship Independent(150, 230, "Greok");
+
+        Independent.setupCore(&core);
+
+        cr_assert(Independent.getCore()->checkReactor()->isStable() == true);
+        Cube.fire(&Independent);
+        cr_assert(Independent.getCore()->checkReactor()->isStable() == false);
+    }
+}
+
+Test(
+Borg_Ship,
+test_Borg_Ship_function_fire_Federation_Ship_stdout_output,
+.init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube(20);
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        Federation::Ship Independent(150, 230, "Greok");
+
+        Independent.setupCore(&core);
+
+        cr_assert(Independent.getCore()->checkReactor()->isStable() == true);
+        Cube.fire(&Independent);
+        cr_assert(Independent.getCore()->checkReactor()->isStable() == false);
+        cr_assert_stdout_eq_str(
+            "We are the Borgs. "
+            "Lower your shields and surrender yourselves unconditionally.\n"
+            "Your biological characteristics and technologies will be assimilated.\n"
+            "Resistance is futile.\n"
+            "The independent ship Greok just finished its construction.\n"
+            "It is 150 m in length and 230 m in width.\n"
+            "Greok: The core is set.\n"
+            "Firing on target with 20GW frequency.\n"
+        );
     }
 }
 
