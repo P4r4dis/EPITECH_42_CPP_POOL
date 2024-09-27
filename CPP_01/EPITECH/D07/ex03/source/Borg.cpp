@@ -5,14 +5,17 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Sep 24 7:19:34 PM 2024 Paradis
-** Last update Fri Sep 26 5:37:25 PM 2024 Paradis
+** Last update Sat Sep 27 5:47:49 PM 2024 Paradis
 */
 
 #include "../include/Borg.hpp"
 #include <iostream>
 
-Borg::Ship::Ship(void)  :   _side(300), _maxWarp(9), _coreReactor(nullptr),
-                            _home(UNICOMPLEX), _location(_home)
+Borg::Ship::Ship(int weaponFrequency, short repair)
+                :   _side(300), _maxWarp(9), _coreReactor(nullptr),
+                    _home(UNICOMPLEX), _location(_home),
+                    _shield(100), _weaponFrequency(weaponFrequency),
+                    _repair(repair)
 {
     std::cout   << "We are the Borgs. "
                 << "Lower your shields and surrender yourselves unconditionally."
@@ -78,4 +81,34 @@ bool        Borg::Ship::move(Destination d)
 bool        Borg::Ship::move(void)
 {
     return move(_maxWarp, _home);
+}
+
+int         Borg::Ship::getShield(void) const
+{
+    return _shield;
+}
+
+int         Borg::Ship::getWeaponFrequency(void) const
+{
+    return _weaponFrequency;
+}
+
+short       Borg::Ship::getRepair(void) const
+{
+    return _repair;
+}
+
+void        Borg::Ship::setShield(int shield)
+{
+    _shield = shield;
+}
+
+void        Borg::Ship::setWeaponFrequency(int weaponFrequency)
+{
+    _weaponFrequency = weaponFrequency;
+}
+
+void        Borg::Ship::setRepair(short repair)
+{
+    _repair = repair;
 }

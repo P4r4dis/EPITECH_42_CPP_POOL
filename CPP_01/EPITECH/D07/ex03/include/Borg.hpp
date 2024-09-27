@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Sep 24 7:17:49 PM 2024 Paradis
-** Last update Fri Sep 26 5:36:37 PM 2024 Paradis
+** Last update Sat Sep 27 5:44:13 PM 2024 Paradis
 */
 
 #ifndef 			__BORG_HPP__
@@ -19,26 +19,36 @@
         class	    Ship
         {
             public:
-                Ship(void);
+                Ship(int weaponFrequency, short repair = 3);
                 ~Ship(void);
 
 
-            void            setupCore(WarpSystem::Core *coreReactor);
-            void            checkCore(void);
+                void            setupCore(WarpSystem::Core *coreReactor);
+                void            checkCore(void);
 
-                Destination getLocation(void) const;
+                Destination     getLocation(void) const;
+                int             getShield(void) const;
+                int             getWeaponFrequency(void) const;
+                short           getRepair(void) const;
+
+                void            setShield(int shield);
+                void            setWeaponFrequency(int weaponFrequency);
+                void            setRepair(short repair);
                 
-                bool        move(int warp, Destination d);
-                bool        move(int warp);
-                bool        move(Destination d);
-                bool        move(void);
+                bool            move(int warp, Destination d);
+                bool            move(int warp);
+                bool            move(Destination d);
+                bool            move(void);
             protected:
             private:
-                int     _side;
-                short   _maxWarp;
-                WarpSystem::Core *_coreReactor;
-                Destination      _home;
-                Destination      _location;
+                int                 _side;
+                short               _maxWarp;
+                WarpSystem::Core    *_coreReactor;
+                Destination         _home;
+                Destination         _location;
+                int                 _shield;
+                int                 _weaponFrequency;
+                short               _repair;
         };
     }
 

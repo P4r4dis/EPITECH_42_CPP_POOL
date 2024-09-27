@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Sep 26 6:43:34 PM 2024 Paradis
-** Last update Fri Sep 26 7:58:45 PM 2024 Paradis
+** Last update Sat Sep 27 5:50:59 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -839,15 +839,17 @@ test_Federation_Ship_function_getCore,
 
 Test(Borg_Ship, Test_Borg_Ship_class_isDefinied, .init = redirect_all_stdout)
 {
-    Borg::Ship Cube;
-
+    Borg::Ship Cube(20, 10);
+    Borg::Ship Cube2(20);
     cr_assert_not_null(&Cube);
+    cr_assert_not_null(&Cube2);
 }
 
 Test(Borg_Ship, Test_Borg_Ship_CTOR_std_output, .init = redirect_all_stdout)
 {
     {
-        Borg::Ship Cube;
+        Borg::Ship Cube(20, 10);
+        Borg::Ship Cube2(20);
     }
 
     cr_assert_stdout_eq_str(
@@ -855,8 +857,76 @@ Test(Borg_Ship, Test_Borg_Ship_CTOR_std_output, .init = redirect_all_stdout)
         "Lower your shields and surrender yourselves unconditionally.\n"
         "Your biological characteristics and technologies will be assimilated.\n"
         "Resistance is futile.\n"
+        "We are the Borgs. "
+        "Lower your shields and surrender yourselves unconditionally.\n"
+        "Your biological characteristics and technologies will be assimilated.\n"
+        "Resistance is futile.\n"
     );
 }
+
+Test(Borg_Ship, Test_Borg_Ship_getShield, .init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube(20, 10);
+
+        cr_assert(Cube.getShield() == 100);
+    }
+}
+
+
+Test(Borg_Ship, Test_Borg_Ship_setShield, .init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube(20, 10);
+
+        cr_assert(Cube.getShield() == 100);
+        Cube.setShield(50);
+        cr_assert(Cube.getShield() == 50);
+    }
+}
+
+Test(Borg_Ship, Test_Borg_Ship_getWeaponFrequency, .init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube(20, 10);
+
+        cr_assert(Cube.getWeaponFrequency() == 20);
+    }
+}
+
+
+Test(Borg_Ship, Test_Borg_Ship_setWeaponFrequency, .init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube(20, 10);
+
+        cr_assert(Cube.getWeaponFrequency() == 20);
+        Cube.setWeaponFrequency(50);
+        cr_assert(Cube.getWeaponFrequency() == 50);
+    }
+}
+
+Test(Borg_Ship, Test_Borg_Ship_getRepair, .init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube(20, 10);
+
+        cr_assert(Cube.getRepair() == 10);
+    }
+}
+
+
+Test(Borg_Ship, Test_Borg_Ship_setRepair, .init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube(20, 10);
+
+        cr_assert(Cube.getRepair() == 10);
+        Cube.setRepair(50);
+        cr_assert(Cube.getRepair() == 50);
+    }
+}
+
 
 Test(
 Borg_Ship,
@@ -864,7 +934,7 @@ Test_Borg_Ship_setupCore_stdout_output,
 .init = redirect_all_stdout)
 {
     {
-        Borg::Ship Cube;
+        Borg::Ship Cube(20);
         WarpSystem::QuantumReactor QR;
         WarpSystem::Core core(&QR);
 
@@ -885,8 +955,7 @@ Test_Borg_Ship_setupCore_with_NULLPTR_stderr_output,
 .init = redirect_all_stdout)
 {
     {
-        Borg::Ship Cube;
-
+        Borg::Ship Cube(20);
         Cube.setupCore(NULL);
     }
     cr_assert_stdout_eq_str
@@ -908,7 +977,7 @@ Test_Borg_Ship_checkCore_stable_stdout_output,
 .init = redirect_all_stdout)
 {
     {
-        Borg::Ship Cube;
+        Borg::Ship Cube(20);
         WarpSystem::QuantumReactor QR;
         WarpSystem::Core core(&QR);
 
@@ -931,7 +1000,7 @@ Test_Borg_Ship_checkCore_unstable_tdout_output,
 .init = redirect_all_stdout)
 {
     {
-        Borg::Ship Cube;
+        Borg::Ship Cube(20);
         WarpSystem::QuantumReactor QR;
         WarpSystem::Core core(&QR);
         
@@ -955,7 +1024,7 @@ Test_Borg_Ship_checkCore_unstable_with_setupCore_NULLPTR_stdout_output,
 .init = redirect_all_stdout)
 {
     {
-        Borg::Ship Cube;
+        Borg::Ship Cube(20);
 
         Cube.setupCore(NULL);
         Cube.checkCore();
@@ -981,7 +1050,7 @@ test_Borg_Ship_error_move_because_warp_superior_to_maxWarp,
 .init = redirect_all_stdout)
 {
     {
-        Borg::Ship Cube;
+        Borg::Ship Cube(20);
         WarpSystem::QuantumReactor QR;
         WarpSystem::Core core(&QR);
         
@@ -998,7 +1067,7 @@ test_Borg_Ship_error_move_because_destination_is_not_different_of_the_current_lo
 .init = redirect_all_stdout)
 {
     {
-        Borg::Ship Cube;
+        Borg::Ship Cube(20);
         WarpSystem::QuantumReactor QR;
         WarpSystem::Core core(&QR);
 
@@ -1016,7 +1085,7 @@ test_Borg_Ship_error_move_because_coreReactor_is_not_stable,
 .init = redirect_all_stdout)
 {
     {
-        Borg::Ship Cube;
+        Borg::Ship Cube(20);
         WarpSystem::QuantumReactor QR;
         WarpSystem::Core core(&QR);
         core.checkReactor()->setStability(false);
@@ -1036,7 +1105,7 @@ test_Borg_Ship_function_move_with_warp_param_and_destination_param,
 .init = redirect_all_stdout)
 {
     {
-        Borg::Ship Cube;
+        Borg::Ship Cube(20);
         WarpSystem::QuantumReactor QR;
         WarpSystem::Core core(&QR);
         Cube.setupCore(&core);
@@ -1053,7 +1122,7 @@ test_Borg_Ship_function_move_with_warp_param,
 .init = redirect_all_stdout)
 {
     {
-        Borg::Ship Cube;
+        Borg::Ship Cube(20);
         WarpSystem::QuantumReactor QR;
         WarpSystem::Core core(&QR);
         Cube.setupCore(&core);
@@ -1072,7 +1141,7 @@ test_Borg_Ship_function_move_with_destination_param,
 .init = redirect_all_stdout)
 {
     {
-        Borg::Ship Cube;
+        Borg::Ship Cube(20);
         WarpSystem::QuantumReactor QR;
         WarpSystem::Core core(&QR);
         Cube.setupCore(&core);
@@ -1093,7 +1162,7 @@ test_Borg_Ship_function_move_without_param,
 .init = redirect_all_stdout)
 {
     {
-        Borg::Ship Cube;
+        Borg::Ship Cube(20);
         WarpSystem::QuantumReactor QR;
         WarpSystem::Core core(&QR);
         Cube.setupCore(&core);
@@ -1105,6 +1174,7 @@ test_Borg_Ship_function_move_without_param,
         cr_assert(Cube.getLocation() == Destination::UNICOMPLEX);
     }
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -1154,7 +1224,7 @@ main, test_main, .init = redirect_all_stdout)
         cr_assert(UssKreog.move() == true);
         cr_assert(UssKreog.getLocation() == Destination::EARTH);
 
-        Borg::Ship  Cube;
+        Borg::Ship Cube(20);
         Cube.setupCore(&core2);
         Cube.checkCore();
 
