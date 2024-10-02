@@ -5,14 +5,19 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Sep 24 7:17:49 PM 2024 Paradis
-** Last update Sat Sep 27 6:26:43 PM 2024 Paradis
+** Last update Sat Sep 27 8:05:03 PM 2024 Paradis
 */
 
 #ifndef 			__BORG_HPP__
 	# define 		__BORG_HPP__
 
+    namespace       Borg
+    {
+        class       Ship;
+    }
+    
     #include "Federation.hpp"
-#include "WarpSystem.hpp"
+    #include "WarpSystem.hpp"
     #include "Destination.hpp"
 
     namespace       Borg

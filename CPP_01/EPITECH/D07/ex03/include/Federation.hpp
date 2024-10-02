@@ -5,16 +5,13 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 9:12:42 PM 2024 Paradis
-** Last update Fri Sep 26 7:54:55 PM 2024 Paradis
+** Last update Sat Sep 27 8:11:53 PM 2024 Paradis
 */
 
 #ifndef 			__FEDERATION_HPP__
 	# define 		__FEDERATION_HPP__
 
-    #include <string>
-    #include "WarpSystem.hpp"
-    #include "Destination.hpp"
-    
+
     namespace Federation
     {
         namespace Starfleet
@@ -27,6 +24,12 @@
         class Ship;
     }
     
+    #include <string>
+    
+    #include "WarpSystem.hpp"
+    #include "Destination.hpp"
+    #include "Borg.hpp"
+
     namespace       Federation
     {
         namespace   Starfleet
@@ -34,7 +37,10 @@
             class   Ship
             {
                 public:
-                    Ship(int length = 289, int width = 132, std::string name = "Kreog", short maxWarp = 6, int torpedo = 0);
+                    Ship(
+                        int length = 289, int width = 132,
+                        std::string name = "Kreog",
+                        short maxWarp = 6, int torpedo = 0);
                     ~Ship(void);
 
                     void        setupCore(WarpSystem::Core *coreReactor);
@@ -46,6 +52,7 @@
                     short       getMaxWarp(void) const;
                     int         getShield(void) const;
                     int         getTorpedo(void) const;
+                    Federation::Starfleet::Captain  *getCaptain(void) const;
 
                     void        setShield(int shield);
                     void        setTorpedo(int torpedo);
@@ -54,6 +61,8 @@
                     bool        move(int warp);
                     bool        move(Destination d);
                     bool        move(void);
+                    void        fire(Borg::Ship *target);
+                    void        fire(int torpedoes, Borg::Ship *target);
                 protected:
                 private:
                     int                                 _length;

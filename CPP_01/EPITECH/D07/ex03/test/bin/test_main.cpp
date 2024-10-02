@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Sep 26 6:43:34 PM 2024 Paradis
-** Last update Sat Sep 27 7:03:09 PM 2024 Paradis
+** Last update Thu Oct 2 5:44:31 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -412,6 +412,165 @@ test_Federation_Starfleet_Ship_setTorpedo,
         UssKreog.setTorpedo(1);
          cr_assert(UssKreog.getTorpedo() == 1);
        
+    }
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_functions_fire_error_captain_and_target_cannot_be_nullptr,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
+
+        UssKreog.fire(nullptr);
+
+        cr_assert_stdout_eq_str(
+            "The ship USS Kreog has been finished.\n"
+            "It is 289 m in length and 132 m in width.\n"
+            "It can go to Warp 6!\n"
+        );
+        cr_assert_stderr_eq_str(
+            "Error: Captain and target must be set, cannot be nullptr.\n"
+        );
+    }
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_functions_fire_not_enough_torpedoes,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6);
+        Federation::Starfleet::Captain James("James T. Kirk");
+        Borg::Ship Cube(20);
+
+        UssKreog.promote(&James);
+        UssKreog.fire(&Cube);
+        cr_assert_stdout_eq_str(
+            (
+                "The ship USS Kreog has been finished.\n"
+                "It is 289 m in length and 132 m in width.\n"
+                "It can go to Warp 6!\n"
+                "We are the Borgs. "
+                "Lower your shields and surrender yourselves unconditionally.\n"
+                "Your biological characteristics and technologies will be assimilated.\n"
+                "Resistance is futile.\n"
+                "James T. Kirk: I'm glad to be the captain of the USS " + UssKreog.getName() + ".\n"
+                "Kreog: No enough torpedoes to fire, " + UssKreog.getCaptain()->getName() + "!\n"
+            ).c_str()
+        );
+    }
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_functions_fire_with_not_enough_torpedoes,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6, 1);
+        Federation::Starfleet::Captain James("James T. Kirk");
+        Borg::Ship Cube(20);
+
+        UssKreog.promote(&James);
+        UssKreog.fire(&Cube);
+        UssKreog.fire(&Cube);
+        cr_assert_stdout_eq_str(
+            (
+                "The ship USS Kreog has been finished.\n"
+                "It is 289 m in length and 132 m in width.\n"
+                "It can go to Warp 6!\n"
+                "Weapons are set: 1 torpedoes ready.\n"
+                "We are the Borgs. "
+                "Lower your shields and surrender yourselves unconditionally.\n"
+                "Your biological characteristics and technologies will be assimilated.\n"
+                "Resistance is futile.\n"
+                "James T. Kirk: I'm glad to be the captain of the USS " + UssKreog.getName() + ".\n"
+                "Kreog: Firing on target. 1 torpedoes remaining.\n"
+                "Kreog: No enough torpedoes to fire, " + UssKreog.getCaptain()->getName() + "!\n"
+            ).c_str()
+        );
+    }
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_functions_fire_reduces_target_shield,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6, 1);
+        Federation::Starfleet::Captain James("James T. Kirk");
+        Borg::Ship Cube(20);
+
+        UssKreog.promote(&James);
+
+        cr_assert(Cube.getShield() == 100);
+        UssKreog.fire(&Cube);
+        cr_assert(Cube.getShield() == 50);
+        cr_assert_stdout_eq_str(
+            (
+                "The ship USS Kreog has been finished.\n"
+                "It is 289 m in length and 132 m in width.\n"
+                "It can go to Warp 6!\n"
+                "Weapons are set: 1 torpedoes ready.\n"
+                "We are the Borgs. "
+                "Lower your shields and surrender yourselves unconditionally.\n"
+                "Your biological characteristics and technologies will be assimilated.\n"
+                "Resistance is futile.\n"
+                "James T. Kirk: I'm glad to be the captain of the USS " + UssKreog.getName() + ".\n"
+                "Kreog: Firing on target. 1 torpedoes remaining.\n"
+            ).c_str()
+        );
+    }
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_functions_fire_reduces_target_shield_with_std_output,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6, 1);
+        Federation::Starfleet::Captain James("James T. Kirk");
+        Borg::Ship Cube(20);
+
+        UssKreog.promote(&James);
+
+        cr_assert(Cube.getShield() == 100);
+        UssKreog.fire(&Cube);
+        cr_assert(Cube.getShield() == 50);
+    }
+}
+
+Test(
+Federation_Starfleet_Ship,
+test_Federation_Starfleet_Ship_functions_fire_runs_out_of_torpedoes,
+.init = redirect_all_stdout)
+{
+    {
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6, 1);
+        Federation::Starfleet::Captain James("James T. Kirk");
+        Borg::Ship Cube(20);
+
+        UssKreog.promote(&James);
+        UssKreog.fire(10, &Cube);
+        cr_assert_stdout_eq_str(
+            (
+                "The ship USS Kreog has been finished.\n"
+                "It is 289 m in length and 132 m in width.\n"
+                "It can go to Warp 6!\n"
+                "Weapons are set: 1 torpedoes ready.\n"
+                "We are the Borgs. "
+                "Lower your shields and surrender yourselves unconditionally.\n"
+                "Your biological characteristics and technologies will be assimilated.\n"
+                "Resistance is futile.\n"
+                "James T. Kirk: I'm glad to be the captain of the USS " + UssKreog.getName() + ".\n"
+                "Kreog: No more torpedo to fire, " + UssKreog.getCaptain()->getName() + "!\n"
+            ).c_str()
+        );
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -1182,11 +1341,11 @@ test_Borg_Ship_function_fire_reduces_Federation_Starfleet_Ship_shield_by_weaponF
 {
     {
         Borg::Ship Cube(20);
-        Federation::Starfleet::Ship UssKreeog;
+        Federation::Starfleet::Ship UssKreog;
 
-        cr_assert(UssKreeog.getShield() == 100);
-        Cube.fire(&UssKreeog);
-        cr_assert(UssKreeog.getShield() == 80);
+        cr_assert(UssKreog.getShield() == 100);
+        Cube.fire(&UssKreog);
+        cr_assert(UssKreog.getShield() == 80);
     }
 }
 
@@ -1197,11 +1356,11 @@ test_Borg_Ship_function_fire_reduces_Federation_Starfleet_Ship_shield_but_shield
 {
     {
         Borg::Ship Cube(200);
-        Federation::Starfleet::Ship UssKreeog;
+        Federation::Starfleet::Ship UssKreog;
 
-        cr_assert(UssKreeog.getShield() == 100);
-        Cube.fire(&UssKreeog);
-        cr_assert(UssKreeog.getShield() == 0);
+        cr_assert(UssKreog.getShield() == 100);
+        Cube.fire(&UssKreog);
+        cr_assert(UssKreog.getShield() == 0);
     }
 }
 
@@ -1212,11 +1371,11 @@ test_Borg_Ship_function_fire_stdout_output,
 {
     {
         Borg::Ship Cube(200);
-        Federation::Starfleet::Ship UssKreeog;
+        Federation::Starfleet::Ship UssKreog;
 
-        cr_assert(UssKreeog.getShield() == 100);
-        Cube.fire(&UssKreeog);
-        cr_assert(UssKreeog.getShield() == 0);
+        cr_assert(UssKreog.getShield() == 100);
+        Cube.fire(&UssKreog);
+        cr_assert(UssKreog.getShield() == 0);
 
         cr_assert_stdout_eq_str(
             "We are the Borgs. "
