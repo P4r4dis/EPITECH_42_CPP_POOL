@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Sep 26 6:43:34 PM 2024 Paradis
-** Last update Thu Oct 2 6:52:48 PM 2024 Paradis
+** Last update Thu Oct 2 7:59:05 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -1558,7 +1558,7 @@ Test(
 main, test_main, .init = redirect_all_stdout)
 {
     {
-        Federation::Starfleet::Ship UssKreog(289, 132, "Kreog", 6);
+        Federation::Starfleet::Ship UssKreog(289, 132, "Kreog", 6, 2);
         Federation::Starfleet::Captain James("James T. Kirk");
         Federation::Starfleet::Ensign Ensign("Pavel Chekov");
         Federation::Ship     Independent(150, 230, "Greok");
@@ -1610,12 +1610,41 @@ main, test_main, .init = redirect_all_stdout)
         cr_assert(Independent.getLocation() == Destination::UNICOMPLEX);
         cr_assert(Independent.move() == true);
         cr_assert(Independent.getLocation() == Destination::VULCAN);
+
+        cr_assert(UssKreog.getTorpedo() == 2);
+        cr_assert(Cube.getRepair() == 3);
+        cr_assert(Cube.getShield() == 100);
+        UssKreog.fire(&Cube);
+        cr_assert(Cube.getShield() == 50);
+        cr_assert(UssKreog.getTorpedo() == 1);
+        UssKreog.fire(2, &Cube);
+        cr_assert(Cube.getShield() == 50);
+        UssKreog.fire(1, &Cube);
+        cr_assert(Cube.getShield() == 0);
+        UssKreog.fire(1, &Cube);
+        cr_assert(Cube.getShield() == 0);
+        UssKreog.setTorpedo(20);
+        UssKreog.fire(20, &Cube);
+        cr_assert(Cube.getShield() == 0);
+        Cube.repair();
+        cr_assert(Cube.getRepair() == 2);
+        cr_assert(Cube.getShield() == 100);
+
+        cr_assert(UssKreog.getShield() == 100);
+        Cube.fire(&UssKreog);
+        cr_assert(UssKreog.getShield() == 80);
+
+        cr_assert(Independent.getCore()->checkReactor()->isStable() == true);
+        Cube.fire(&Independent);
+        cr_assert(Independent.getCore()->checkReactor()->isStable() == false);
+
     }
     cr_assert_stdout_eq_str
     (
         "The ship USS Kreog has been finished.\n"
         "It is 289 m in length and 132 m in width.\n"
         "It can go to Warp 6!\n"
+        "Weapons are set: 2 torpedoes ready.\n"
         "Ensign Pavel Chekov, awaiting orders.\n"
         "The independent ship Greok just finished its construction.\n"
         "It is 150 m in length and 230 m in width.\n"
@@ -1629,5 +1658,13 @@ main, test_main, .init = redirect_all_stdout)
         "Everything is in order.\n"
         "Greok: The core is set.\n"
         "Greok: The core is stable at the time.\n"
+        "Kreog: Firing on target. 1 torpedoes remaining.\n"
+        "Kreog: No more torpedo to fire, James T. Kirk!\n"
+        "Kreog: Firing on target. 1 torpedoes remaining.\n"
+        "Kreog: No enough torpedoes to fire, James T. Kirk!\n"
+        "Kreog: Firing on target. 20 torpedoes remaining.\n"
+        "Begin shield re-initialisation... Done. Awaiting further instructions.\n"
+        "Firing on target with 20GW frequency.\n"
+        "Firing on target with 20GW frequency.\n"
     );
 }

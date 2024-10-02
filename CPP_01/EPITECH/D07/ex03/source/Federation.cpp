@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Sep 26 7:07:13 PM 2024 Paradis
-** Last update Thu Oct 2 5:47:01 PM 2024 Paradis
+** Last update Thu Oct 2 7:40:16 PM 2024 Paradis
 */
 
 #include "../include/Federation.hpp"
@@ -144,9 +144,8 @@ void        Federation::Starfleet::Ship::fire(int torpedoes, Borg::Ship *target)
         {
             std::cout   << _name << ": No enough torpedoes to fire, "
                         << _captain->getName() << "!" << std::endl;
-            
         }
-        if (_photonTorpedo > 0)
+        else if (_photonTorpedo > 0)
         {
             if (torpedoes > _photonTorpedo)
             {
@@ -156,10 +155,12 @@ void        Federation::Starfleet::Ship::fire(int torpedoes, Borg::Ship *target)
             }
             _photonTorpedo -= torpedoes;
             target->setShield(target->getShield() - (50 * torpedoes));
+            if (target->getShield() < 0)
+                target->setShield(0);
+
             std::cout   << _name << ": Firing on target. " 
                         << torpedoes <<  " torpedoes remaining."
                         << std::endl;
-
         }
     }
     else
