@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Sep 24 7:19:34 PM 2024 Paradis
-** Last update Sat Sep 27 6:42:20 PM 2024 Paradis
+** Last update Thu Oct 2 6:09:21 PM 2024 Paradis
 */
 
 #include "../include/Borg.hpp"
@@ -127,4 +127,18 @@ void        Borg::Ship::fire(Federation::Ship *target)
     std::cout   << "Firing on target with " << _weaponFrequency
                 << "GW frequency." << std::endl;
     target->getCore()->checkReactor()->setStability(false);
+}
+
+void        Borg::Ship::repair(void)
+{
+    if (_repair > 0)
+    {
+        _shield = 100;
+        _repair--;
+        std::cout   << "Begin shield re-initialisation... "
+                    << "Done. Awaiting further instructions."
+                    << std::endl;
+    }
+    else
+        std::cout << "Energy cells depleted, shield weakening." << std::endl;
 }

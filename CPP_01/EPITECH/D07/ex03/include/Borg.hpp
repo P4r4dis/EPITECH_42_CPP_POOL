@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Sep 24 7:17:49 PM 2024 Paradis
-** Last update Sat Sep 27 8:05:03 PM 2024 Paradis
+** Last update Thu Oct 2 5:55:04 PM 2024 Paradis
 */
 
 #ifndef 			__BORG_HPP__
@@ -47,6 +47,7 @@
                 bool            move(void);
                 void            fire(Federation::Starfleet::Ship *target);
                 void            fire(Federation::Ship *target);
+                void            repair(void);
             protected:
             private:
                 int                 _side;

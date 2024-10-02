@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Sep 26 6:43:34 PM 2024 Paradis
-** Last update Thu Oct 2 5:44:31 PM 2024 Paradis
+** Last update Thu Oct 2 6:52:48 PM 2024 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -1438,7 +1438,105 @@ test_Borg_Ship_function_fire_Federation_Ship_stdout_output,
     }
 }
 
+Test(
+Borg_Ship,
+test_Borg_Ship_function_repair,
+.init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube(20);
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6, 1);
+        Federation::Starfleet::Captain captain("James T. Kirk");
 
+        UssKreog.promote(&captain);
+
+        cr_assert(Cube.getShield() == 100);
+        cr_assert(Cube.getRepair() == 3);
+        UssKreog.fire(&Cube);
+        cr_assert(Cube.getShield() == 50);
+        Cube.repair();
+        cr_assert(Cube.getRepair() == 2);
+        cr_assert(Cube.getShield() == 100);
+    }
+}
+
+Test(
+Borg_Ship,
+test_Borg_Ship_function_repair_with_no_enough_energy,
+.init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube(20, 0);
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6, 1);
+        Federation::Starfleet::Captain captain("James T. Kirk");
+
+        UssKreog.promote(&captain);
+
+        cr_assert(Cube.getShield() == 100);
+        cr_assert(Cube.getRepair() == 0);
+        UssKreog.fire(&Cube);
+        cr_assert(Cube.getShield() == 50);
+        Cube.repair();
+        cr_assert(Cube.getRepair() == 0);
+        cr_assert(Cube.getShield() == 50);
+
+
+        cr_assert_stdout_eq_str(
+            "We are the Borgs. Lower your shields and surrender yourselves unconditionally.\n"
+            "Your biological characteristics and technologies will be assimilated.\n"
+            "Resistance is futile.\n"
+            "The ship USS Kreog has been finished.\n"
+            "It is 289 m in length and 132 m in width.\n"
+            "It can go to Warp 6!\n"
+            "Weapons are set: 1 torpedoes ready.\n"
+            "James T. Kirk: I'm glad to be the captain of the USS Kreog.\n"
+            "Kreog: Firing on target. 1 torpedoes remaining.\n"
+            "Energy cells depleted, shield weakening.\n"
+        );
+    }
+}
+
+Test(
+Borg_Ship,
+test_Borg_Ship_function_repair_std_output,
+.init = redirect_all_stdout)
+{
+    {
+        Borg::Ship Cube(20);
+        WarpSystem::QuantumReactor QR;
+        WarpSystem::Core core(&QR);
+        Federation::Starfleet::Ship     UssKreog(289, 132, "Kreog", 6, 1);
+        Federation::Starfleet::Captain captain("James T. Kirk");
+
+        UssKreog.promote(&captain);
+
+        cr_assert(Cube.getShield() == 100);
+        cr_assert(Cube.getRepair() == 3);
+        UssKreog.fire(&Cube);
+        cr_assert(Cube.getShield() == 50);
+        Cube.repair();
+        cr_assert(Cube.getRepair() == 2);
+        cr_assert(Cube.getShield() == 100);
+
+
+        cr_assert_stdout_eq_str(
+            "We are the Borgs. Lower your shields and surrender yourselves unconditionally.\n"
+            "Your biological characteristics and technologies will be assimilated.\n"
+            "Resistance is futile.\n"
+            "The ship USS Kreog has been finished.\n"
+            "It is 289 m in length and 132 m in width.\n"
+            "It can go to Warp 6!\n"
+            "Weapons are set: 1 torpedoes ready.\n"
+            "James T. Kirk: I'm glad to be the captain of the USS Kreog.\n"
+            "Kreog: Firing on target. 1 torpedoes remaining.\n"
+            "Begin shield re-initialisation... Done. Awaiting further instructions.\n"
+        );
+    }
+}
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 //                               Destination                                 //
