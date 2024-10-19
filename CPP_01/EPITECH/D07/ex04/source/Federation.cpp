@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Sep 26 7:07:13 PM 2024 Paradis
-** Last update Fri Oct 3 3:26:50 PM 2024 Paradis
+** Last update Thu Oct 2 7:40:16 PM 2024 Paradis
 */
 
 #include "../include/Federation.hpp"
@@ -274,5 +274,7 @@ WarpSystem::Core    *Federation::Ship::getCore(void) const
 {
     return _coreReactor;
 }
-
+// Implement the following member functions for the Starfleet’s Ships:
+// void fire(Borg::Ship *target);
+// void fire(int torpedoes , Borg::Ship *target);
 
