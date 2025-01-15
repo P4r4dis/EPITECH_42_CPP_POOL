@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Sat Oct 19 3:25:20 PM 2024 Paradis
-** Last update Sun Oct 19 3:38:56 PM 2024 Paradis
+** Last update Thu Jan 15 7:18:35 PM 2025 Paradis
 */
 
 
@@ -16,7 +16,6 @@
     {
             class   BorgQueen;
     }
-    #include <string>
 
     #include "Borg.hpp"
     #include "Destination.hpp"
@@ -26,7 +25,6 @@ namespace           Borg
         class	    BorgQueen
         {
             private:
-                std::string     _name;
 
             public:
                 BorgQueen(void);

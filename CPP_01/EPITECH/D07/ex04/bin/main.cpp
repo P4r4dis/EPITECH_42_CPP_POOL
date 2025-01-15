@@ -5,12 +5,14 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Sep 20 7:45:48 PM 2024 Paradis
-** Last update Thu Oct 2 8:58:39 PM 2024 Paradis
+** Last update Thu Jan 15 7:45:24 PM 2025 Paradis
 */
 
 #include "../include/Federation.hpp"
 #include "../include/WarpSystem.hpp"
 #include "../include/Borg.hpp"
+#include "../include/Admiral.hpp"
+#include "../include/BorgQueen.hpp"
 
 #include <iostream>
 int     main(void)
@@ -40,10 +42,10 @@ int     main(void)
     if (UssKreog.getLocation() == 1)
         std::cout << "USS Kreog: Current location is VULCAN." << std::endl;
 
-    std::cout << "USS Kreog: move to EARTH." << std::endl;
-    UssKreog.move(1);
+    std::cout << "USS Kreog: move to UNICOMPLEX." << std::endl;
+    UssKreog.move(2);
     if (UssKreog.getLocation() == 0)
-        std::cout << "USS Kreog: Current location is EARTH." << std::endl;
+        std::cout << "USS Kreog: Current location is UNICOMPLEX." << std::endl;
 
     std::cout << "USS Kreog: move to VULCAN." << std::endl;
     UssKreog.move(Destination::VULCAN);
@@ -182,6 +184,40 @@ int     main(void)
     Cube.fire(&Independent);
     Independent.checkCore();
     std::cout << "End of War!!!" << std::endl;
+
+    std::cout << "The Commanders take the control of the situation!" << std::endl;
+    Federation::Starfleet::Admiral admiral("Picard");
+    Borg::BorgQueen borgQueen;
+
+    std::cout << "Picard is trying to attack Borg's Ship!" << std::endl;
+    UssKreog.setTorpedo(20);
+    admiral.fire(&UssKreog,&Cube);
+    std::cout   << "The value of the Borg's Ship is " << Cube.getShield()
+                << "%" << std::endl;
+
+    std::cout << "BorgQueen is trying to counter attack the Admiral!" << std::endl;
+    borgQueen.fire(&Cube, &UssKreog);
+    std::cout   << "The value of the Admiral's Ship is " << UssKreog.getShield()
+                << "%" << std::endl;
+    std::cout << "BorgQueen is trying to attack the Independent's Ship!" << std::endl;
+    borgQueen.destroy(&Cube, &Independent);
+    if (Independent.getCore()->checkReactor()->isStable() == false)
+            std::cout << "The Independent's Ship collapse!" << std::endl;
+
+    std::cout << "USS Kreog: move to EARTH." << std::endl;
+    admiral.move(&UssKreog, Destination::EARTH);
+    if (UssKreog.getLocation() == 0)
+        std::cout << "USS Kreog: Current location is EARTH." << std::endl;
+
+    std::cout << "The Admiral escapes to BorgQueen!" << std::endl;
+
+    std::cout << "BorgQueen: move to UNICOMPLEX." << std::endl;
+    borgQueen.move(&Cube, Destination::UNICOMPLEX);
+    if (Cube.getLocation() == Destination::UNICOMPLEX)
+        std::cout << "BorgQueen: Current location is UNICOMPLEX." << std::endl;
+
+    std::cout << "The BorgQueen escapes to the Admiral!" << std::endl;
+    std::cout << "End of War!!!... For the moment..." << std::endl;
 
     return 0;
 }
