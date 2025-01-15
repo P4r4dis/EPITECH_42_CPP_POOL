@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Wed Oct 2 9:25:30 PM 2024 Paradis
-## Last update Sun Oct 19 2:37:04 PM 2024 Paradis
+## Last update Thu Jan 15 7:01:34 PM 2025 Paradis
 ##
 
 G++           	= 	g++
@@ -14,7 +14,7 @@ SRC_PATH		= 	../source
 INC_PATH 		= 	../include
 BIN_PATH 		= 	./bin
 
-NAME          	= 	test_Admiral
+NAME          	= 	test_Commanders
 #############################################
 
 INCFLAGS     	+= 	-I $(INC_PATH)
@@ -26,6 +26,7 @@ SRCS         	= 	$(SRC_PATH)/Federation.cpp \
 					$(SRC_PATH)/WarpSystem.cpp \
 					$(SRC_PATH)/Borg.cpp \
 					$(SRC_PATH)/Admiral.cpp \
+					$(SRC_PATH)/BorgQueen.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)

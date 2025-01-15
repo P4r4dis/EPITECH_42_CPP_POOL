@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Sep 26 6:43:34 PM 2024 Paradis
-** Last update Sun Oct 19 3:19:52 PM 2024 Paradis
+** Last update Thu Jan 15 6:58:03 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -17,6 +17,8 @@
 #include "../../include/Borg.hpp"
 #include "../../include/Destination.hpp"
 #include "../../include/Admiral.hpp"
+#include "../../include/BorgQueen.hpp"
+
 
 void redirect_all_stdout(void)
 {
@@ -1605,8 +1607,8 @@ Test(Admiral, Test_Admiral_fire_on_borg_std_output, .init = redirect_all_stdout)
         "Your biological characteristics and technologies will be assimilated.\n"
         "Resistance is futile.\n"
         "James T. Kirk: I'm glad to be the captain of the USS Kreog.\n"
+        "On order from Admiral Picard:\n"
         "Kreog: Firing on target. 1 torpedoes remaining.\n"
-        "On order from Admiral Picard\n"
     );
 }
 
@@ -1649,6 +1651,133 @@ Test(Admiral, Test_Admiral_move_go_to_dest_std_output, .init = redirect_all_stdo
     );
 }
 ///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+//                      Borg::BorgQueen::BorgQueen                           //
+///////////////////////////////////////////////////////////////////////////////
+Test(BorgQueen, Test_BorgQueen_isDefined, .init = redirect_all_stdout)
+{
+    Borg::BorgQueen borgQueen;
+    cr_assert_not_null(&borgQueen);
+}
+
+Test(BorgQueen, Test_BorgQueen_fire_on_Starfleet_ship, .init = redirect_all_stdout)
+{
+    Federation::Starfleet::Ship    UssKreog(289, 132, "Kreog", 6, 1);
+    Federation::Starfleet::Captain captain("James T. Kirk");
+    Federation::Starfleet::Admiral admiral("Picard");
+    Borg::Ship Cube(20);
+
+    UssKreog.promote(&captain);
+    cr_assert(Cube.getShield() == 100);
+    admiral.fire(&UssKreog,&Cube);
+    cr_assert(Cube.getShield() == 50);
+
+    Borg::BorgQueen borgQueen;
+    borgQueen.fire(&Cube, &UssKreog);
+    cr_assert(UssKreog.getShield() == 80);
+}
+
+Test(BorgQueen, Test_BorgQueen_fire_on_Starfleet_ship_stdoutput, .init = redirect_all_stdout)
+{
+    Federation::Starfleet::Ship    UssKreog(289, 132, "Kreog", 6, 1);
+    Federation::Starfleet::Captain captain("James T. Kirk");
+    Federation::Starfleet::Admiral admiral("Picard");
+    Borg::Ship Cube(20);
+
+    UssKreog.promote(&captain);
+    cr_assert(Cube.getShield() == 100);
+    admiral.fire(&UssKreog,&Cube);
+    cr_assert(Cube.getShield() == 50);
+
+    Borg::BorgQueen borgQueen;
+    borgQueen.fire(&Cube, &UssKreog);
+    cr_assert(UssKreog.getShield() == 80);
+    cr_assert_stdout_eq_str(
+        "The ship USS Kreog has been finished.\n"
+        "It is 289 m in length and 132 m in width.\n"
+        "It can go to Warp 6!\n"
+        "Weapons are set: 1 torpedoes ready.\n"
+        "Admiral Picard ready for action.\n"
+        "We are the Borgs. Lower your shields and surrender yourselves unconditionally.\n"
+        "Your biological characteristics and technologies will be assimilated.\n"
+        "Resistance is futile.\n"
+        "James T. Kirk: I'm glad to be the captain of the USS Kreog.\n"
+        "On order from Admiral Picard:\n"
+        "Kreog: Firing on target. 1 torpedoes remaining.\n"
+        "Firing on target with 20GW frequency.\n"
+    );
+}
+
+Test(BorgQueen, Test_BorgQueen_destroys_Federation_ship, .init = redirect_all_stdout)
+{
+    Federation::Ship    Independent(150, 230, "Greok");
+    WarpSystem::QuantumReactor QR;
+    WarpSystem::Core core(&QR);
+    Borg::Ship          Cube(20);
+    Borg::BorgQueen     borgQueen;
+
+    Independent.setupCore(&core);
+    cr_assert(Independent.getCore()->checkReactor()->isStable() == true);
+    borgQueen.destroy(&Cube, &Independent);
+    cr_assert(Independent.getCore()->checkReactor()->isStable() == false);
+}
+
+Test(BorgQueen, Test_BorgQueen_destroys_Federation_ship_stdoutput, .init = redirect_all_stdout)
+{
+    Federation::Ship    Independent(150, 230, "Greok");
+    WarpSystem::QuantumReactor QR;
+    WarpSystem::Core core(&QR);
+    Borg::Ship          Cube(20);
+    Borg::BorgQueen     borgQueen;
+
+    Independent.setupCore(&core);
+    cr_assert(Independent.getCore()->checkReactor()->isStable() == true);
+    borgQueen.destroy(&Cube, &Independent);
+    cr_assert(Independent.getCore()->checkReactor()->isStable() == false);
+
+    cr_assert_stdout_eq_str(
+        "The independent ship Greok just finished its construction.\n"
+        "It is 150 m in length and 230 m in width.\n"
+        "We are the Borgs. Lower your shields and surrender yourselves unconditionally.\n"
+        "Your biological characteristics and technologies will be assimilated.\n"
+        "Resistance is futile.\n"
+        "Greok: The core is set.\n"
+        "Firing on target with 20GW frequency.\n"
+    );
+}
+
+Test(BorgQueen, Test_BorgQueen_move_go_to_dest, .init = redirect_all_stdout)
+{
+    Borg::Ship                  Cube(20);
+    WarpSystem::QuantumReactor  QR;
+    WarpSystem::Core            core(&QR);
+    Borg::BorgQueen             borgQueen;
+
+    Cube.setupCore(&core);
+    cr_assert(Cube.getLocation() == UNICOMPLEX);
+    cr_assert(borgQueen.move(&Cube, EARTH) == true);
+    cr_assert(Cube.getLocation() == EARTH);
+}
+
+Test(BorgQueen, Test_BorgQueen_move_go_to_dest_stdout, .init = redirect_all_stdout)
+{
+    Borg::Ship                  Cube(20);
+    WarpSystem::QuantumReactor  QR;
+    WarpSystem::Core            core(&QR);
+    Borg::BorgQueen             borgQueen;
+
+    Cube.setupCore(&core);
+    cr_assert(Cube.getLocation() == UNICOMPLEX);
+    cr_assert(borgQueen.move(&Cube, EARTH) == true);
+    cr_assert(Cube.getLocation() == EARTH);
+    
+    cr_assert_stdout_eq_str(
+        "We are the Borgs. Lower your shields and surrender yourselves unconditionally.\n"
+        "Your biological characteristics and technologies will be assimilated.\n"
+        "Resistance is futile.\n"
+    );
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //                                      MAIN                                 //
 ///////////////////////////////////////////////////////////////////////////////
@@ -1737,6 +1866,34 @@ main, test_main, .init = redirect_all_stdout)
         Cube.fire(&Independent);
         cr_assert(Independent.getCore()->checkReactor()->isStable() == false);
 
+
+        Federation::Starfleet::Admiral admiral("Picard");
+        Cube.repair();
+        UssKreog.setTorpedo(20);
+        cr_assert(UssKreog.getLocation() == EARTH);
+        cr_assert(UssKreog.getTorpedo() == 20);
+        admiral.move(&UssKreog, UNICOMPLEX);
+        cr_assert(UssKreog.getLocation() == UNICOMPLEX);
+        cr_assert(Cube.getShield() == 100);
+        admiral.fire(&UssKreog,&Cube);
+        cr_assert(Cube.getShield() == 50);
+        admiral.move(&UssKreog, EARTH);
+        cr_assert(UssKreog.getLocation() == EARTH);
+
+        Borg::BorgQueen borgQueen;
+        cr_assert(Cube.getLocation() == UNICOMPLEX);
+        borgQueen.move(&Cube, EARTH);
+        cr_assert(UssKreog.getShield() == 80);
+        borgQueen.fire(&Cube, &UssKreog);
+        cr_assert(UssKreog.getShield() == 60);
+        cr_assert(Independent.getLocation() == Destination::VULCAN);
+        borgQueen.move(&Cube, VULCAN);
+        cr_assert(Cube.getLocation() == Destination::VULCAN);
+        Independent.getCore()->checkReactor()->setStability(true);
+        cr_assert(Independent.getCore()->checkReactor()->isStable() == true);
+        borgQueen.destroy(&Cube, &Independent);
+        cr_assert(Independent.getCore()->checkReactor()->isStable() == false);
+
     }
     cr_assert_stdout_eq_str
     (
@@ -1763,6 +1920,12 @@ main, test_main, .init = redirect_all_stdout)
         "Kreog: No enough torpedoes to fire, James T. Kirk!\n"
         "Kreog: Firing on target. 20 torpedoes remaining.\n"
         "Begin shield re-initialisation... Done. Awaiting further instructions.\n"
+        "Firing on target with 20GW frequency.\n"
+        "Firing on target with 20GW frequency.\n"
+        "Admiral Picard ready for action.\n"
+        "Begin shield re-initialisation... Done. Awaiting further instructions.\n"
+        "On order from Admiral Picard:\n"
+        "Kreog: Firing on target. 1 torpedoes remaining.\n"
         "Firing on target with 20GW frequency.\n"
         "Firing on target with 20GW frequency.\n"
     );

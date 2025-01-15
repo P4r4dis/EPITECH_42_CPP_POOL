@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Oct 3 3:46:31 PM 2024 Paradis
-** Last update Fri Oct 3 4:10:52 PM 2024 Paradis
+** Last update Thu Jan 15 7:08:45 PM 2025 Paradis
 */
 
 #include "../include/Admiral.hpp"
@@ -23,12 +23,11 @@ Federation::Starfleet::Admiral::~Admiral(void)
 {
 }
 
-void    Federation::Starfleet::Admiral::fire(
-    Federation::Starfleet::Ship *ship,
-    Borg::Ship *target)
+void    Federation::Starfleet::Admiral::fire(Federation::Starfleet::Ship *ship,
+                                                            Borg::Ship *target)
 {
+    std::cout << "On order from Admiral " << _name << ":" << std::endl;
     (ship->*firePtr)(target);
-    std::cout << "On order from Admiral " << _name << std::endl;
 }
 
 bool    Federation::Starfleet::Admiral::move(

@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2124/12/18 19:12:51 by Paradis           #+#    #+#              #
-#    Updated: 2024/10/19 14:40:11 by Paradis          ###   ########.fr        #
+#    Updated: 2025/01/15 19:01:50 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -529,7 +529,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2124 Paradis
-## Last update Sun Oct 19 2:40:11 PM 2024 Paradis
+## Last update Thu Jan 15 7:01:50 PM 2025 Paradis
 ##
 # **************************************************************************** #
 #																			   #
@@ -694,7 +694,7 @@ EPITECH_EX04_SRC_PATH			=	./EPITECH/D07/ex04/source
 EPITECH_EX04_INC_PATH			=	./EPITECH/D07/ex04/include
 EPITECH_EX04_UT_PATH			=	./EPITECH/D07/ex04/test
 
-EPITECH_EX04_NAME				=	Admiral
+EPITECH_EX04_NAME				=	Commanders
 
 EPITECH_EX04_UT_SRC				=	$(EPITECH_EX04_UT_PATH)/$(EPITECH_EX04_NAME)_test.cpp
 EPITECH_EX04_UT_NAME 			= 	test_$(EPITECH_EX04_NAME)
@@ -703,6 +703,7 @@ EPITECH_EX04_SRC				=	$(EPITECH_EX04_SRC_PATH)/Federation.cpp \
 									$(EPITECH_EX04_SRC_PATH)/WarpSystem.cpp \
 									$(EPITECH_EX04_SRC_PATH)/Borg.cpp \
 									$(EPITECH_EX04_SRC_PATH)/Admiral.cpp \
+									$(EPITECH_EX04_SRC_PATH)/BorgQueen.cpp \
 									$(EPITECH_EX04_BIN_PATH)/main.cpp
 EPITECH_EX04_OBJS				=	$(EPITECH_EX04_SRC:.cpp=.o)
 

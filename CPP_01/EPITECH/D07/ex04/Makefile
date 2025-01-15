@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Wed Oct 2 9:25:52 PM 2024 Paradis
-## Last update Sun Oct 19 2:38:10 PM 2024 Paradis
+## Last update Thu Jan 15 7:01:43 PM 2025 Paradis
 ##
 
 # # Compilateur
@@ -17,7 +17,7 @@ INC_PATH	=	./include
 UT_PATH		=	./test
 
 
-NAME		=	Admiral
+NAME		=	Commanders
 UT_NAME 	= 	test_$(NAME)
 ##############################################
 
@@ -31,6 +31,7 @@ SRCS		=	$(SRC_PATH)/Federation.cpp \
 				$(SRC_PATH)/WarpSystem.cpp \
 				$(SRC_PATH)/Borg.cpp \
 				$(SRC_PATH)/Admiral.cpp \
+				$(SRC_PATH)/BorgQueen.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp
