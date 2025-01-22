@@ -5,11 +5,11 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Sep 25 7:47:56 PM 2024 Paradis
-** Last update Thu Sep 25 7:52:11 PM 2024 Paradis
+** Last update Wed Jan 21 3:24:32 PM 2025 Paradis
 */
 
 #ifndef 			__DESTINATION_HPP__
-	# define 		__DESTINATION_HPP__
+	#define 		__DESTINATION_HPP__
 
     typedef enum    Destination
     {
