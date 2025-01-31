@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jan 30 5:22:42 PM 2025 Paradis
-** Last update Fri Jan 30 6:09:00 PM 2025 Paradis
+** Last update Fri Jan 30 7:46:39 PM 2025 Paradis
 */
 
 
@@ -17,10 +17,10 @@
 class	Skat
 {
     public:
-        Skat(const std::string &name, int stimPaks);
+        Skat(const std::string &name = "Bob", int stimPaks = 15);
         ~Skat(void);
         
-        int                 stimPaks(void) const;
+        int                 &stimPaks(void);
         const std::string   &name(void);
         void                shareStimPaks(int number, int stock);
         void                addStimPaks(unsigned int number);

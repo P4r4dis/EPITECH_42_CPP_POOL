@@ -5,10 +5,11 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jan 30 5:23:03 PM 2025 Paradis
-** Last update Fri Jan 30 6:11:00 PM 2025 Paradis
+** Last update Fri Jan 30 7:46:44 PM 2025 Paradis
 */
 
 #include "../include/Skat.hpp"
+#include <string>
 
 Skat::Skat(const std::string &name, int stimPaks)   :   _name(name),
                                                         _stimPaks(stimPaks)
@@ -17,4 +18,14 @@ Skat::Skat(const std::string &name, int stimPaks)   :   _name(name),
 
 Skat::~Skat()
 {
+}
+
+const std::string   &Skat::name(void)
+{
+    return _name;
+}
+
+int                 &Skat::stimPaks(void)
+{
+    return _stimPaks;
 }
