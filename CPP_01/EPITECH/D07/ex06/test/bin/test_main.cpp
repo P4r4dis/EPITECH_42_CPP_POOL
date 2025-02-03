@@ -5,10 +5,11 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jan 30 5:26:48 PM 2025 Paradis
-** Last update Tue Feb 3 7:10:46 PM 2025 Paradis
+** Last update Tue Feb 3 9:06:11 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
+// #include <criterion/internal/redirect.h>
 #include <criterion/new/assert.h>
 #include <criterion/redirect.h>
 
@@ -58,7 +59,6 @@ Test(Skat, Test_CTOR_Catch_stimpaks_parameter, .init = redirect_all_stdout)
     cr_assert(stimPaks == 5);
 }
 
-// TO DO: stimpack function can modify _stimPaks variable;
 Test(Skat, Test_stimPaks_function_can_modify__stimPaks_private_variable,
  .init = redirect_all_stdout)
 {
@@ -71,6 +71,68 @@ Test(Skat, Test_stimPaks_function_can_modify__stimPaks_private_variable,
     cr_assert(skat.stimPaks() == 10);
 }
 
+Test(Skat, Test_shareStimPaks_isDefinied,
+.init = redirect_all_stdout)
+{
+    Skat    skat("Junior", 5);
+
+    int stock = 0;
+    int number = 2;
+    skat.shareStimPaks(number, stock);
+}
+
+Test(Skat, Test_shareStimPaks_func_increments_by_number_the_stock,
+.init = redirect_all_stdout)
+{
+    Skat    skat("Junior", 5);
+
+    int stock = 0;
+    int number = 2;
+    skat.shareStimPaks(number, stock);
+    cr_assert(stock == 2);
+}
+
+Test(Skat, Test_shareStimPaks_func_decrements_by_number_the_personal_stock,
+.init = redirect_all_stdout)
+{
+    Skat    skat("Junior", 5);
+
+    int stock = 0;
+    int number = 2;
+    skat.shareStimPaks(number, stock);
+    cr_assert(stock == 2);
+    cr_assert(skat.stimPaks() == 3);
+}
+
+Test(Skat, Test_shareStimPaks_func_do_nothing_if_nb_stimPak_shared_is_too_big,
+.init = redirect_all_stdout)
+{
+    Skat    skat("Junior", 5);
+
+    int stock = 0;
+    int number = 6;
+    skat.shareStimPaks(number, stock);
+    cr_assert(stock == 0);
+    cr_assert(skat.stimPaks() == 5);
+    cr_assert_stdout_eq_str(
+        "Don't be greedy\n"
+    );
+}
+
+Test(Skat, Test_shareStimPaks_func_can_share_stimPaks_print_on_stdout,
+.init = redirect_all_stdout)
+{
+    Skat    skat("Junior", 5);
+
+    int stock = 0;
+    int number = 3;
+    skat.shareStimPaks(number, stock);
+    cr_assert(stock == 3);
+    cr_assert(skat.stimPaks() == 2);
+    cr_assert_stdout_eq_str(
+        "Keep the change.\n"
+    );
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                                      MAIN                                 //
 ///////////////////////////////////////////////////////////////////////////////

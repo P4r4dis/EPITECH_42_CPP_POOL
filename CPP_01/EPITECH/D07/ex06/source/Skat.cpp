@@ -5,11 +5,11 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jan 30 5:23:03 PM 2025 Paradis
-** Last update Fri Jan 30 7:46:44 PM 2025 Paradis
+** Last update Tue Feb 3 9:06:39 PM 2025 Paradis
 */
 
 #include "../include/Skat.hpp"
-#include <string>
+#include <iostream>
 
 Skat::Skat(const std::string &name, int stimPaks)   :   _name(name),
                                                         _stimPaks(stimPaks)
@@ -28,4 +28,16 @@ const std::string   &Skat::name(void)
 int                 &Skat::stimPaks(void)
 {
     return _stimPaks;
+}
+
+void                Skat::shareStimPaks(int number, int &stock)
+{
+    if (number > _stimPaks)
+        std::cout << "Don't be greedy" << std::endl;
+    else
+    {
+        stock += number;
+        _stimPaks -= number;
+        std::cout << "Keep the change." << std::endl;
+    }
 }

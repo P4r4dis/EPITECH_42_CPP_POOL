@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jan 30 5:22:42 PM 2025 Paradis
-** Last update Fri Jan 30 7:46:39 PM 2025 Paradis
+** Last update Tue Feb 3 8:50:16 PM 2025 Paradis
 */
 
 
@@ -22,7 +22,7 @@ class	Skat
         
         int                 &stimPaks(void);
         const std::string   &name(void);
-        void                shareStimPaks(int number, int stock);
+        void                shareStimPaks(int number, int &stock);
         void                addStimPaks(unsigned int number);
         void                useStimPaks(void);
         void                status();
@@ -31,8 +31,6 @@ class	Skat
 
         const std::string   &_name;
         int                 _stimPaks;
-        int                 _number;
-        int                 _stock;
 
 };
 
