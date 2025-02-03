@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jan 30 5:23:03 PM 2025 Paradis
-** Last update Tue Feb 3 9:06:39 PM 2025 Paradis
+** Last update Tue Feb 3 10:08:26 PM 2025 Paradis
 */
 
 #include "../include/Skat.hpp"
@@ -32,7 +32,7 @@ int                 &Skat::stimPaks(void)
 
 void                Skat::shareStimPaks(int number, int &stock)
 {
-    if (number > _stimPaks)
+    if (number >= _stimPaks)
         std::cout << "Don't be greedy" << std::endl;
     else
     {
@@ -40,4 +40,20 @@ void                Skat::shareStimPaks(int number, int &stock)
         _stimPaks -= number;
         std::cout << "Keep the change." << std::endl;
     }
+}
+
+void                Skat::addStimPaks(unsigned int number)
+{
+    if (number == 0)
+        std::cout << "Hey boya, did you forget something?" << std::endl;
+    else
+        _stimPaks += number;
+}
+
+void                Skat::addStimPaks(int number)
+{
+    if (number < 0)
+        std::cout << "Hey boya, did you forget something?" << std::endl;
+    else
+        addStimPaks(static_cast<unsigned int>(number));
 }
