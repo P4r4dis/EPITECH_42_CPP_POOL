@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jan 30 5:26:48 PM 2025 Paradis
-** Last update Sat Jan 31 1:04:33 AM 2025 Paradis
+** Last update Tue Feb 3 7:10:46 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -59,6 +59,18 @@ Test(Skat, Test_CTOR_Catch_stimpaks_parameter, .init = redirect_all_stdout)
 }
 
 // TO DO: stimpack function can modify _stimPaks variable;
+Test(Skat, Test_stimPaks_function_can_modify__stimPaks_private_variable,
+ .init = redirect_all_stdout)
+{
+    Skat    skat("Junior", 5);
+    
+
+    skat.stimPaks();
+    cr_assert(skat.stimPaks() == 5);
+    skat.stimPaks() = 10;
+    cr_assert(skat.stimPaks() == 10);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //                                      MAIN                                 //
 ///////////////////////////////////////////////////////////////////////////////
