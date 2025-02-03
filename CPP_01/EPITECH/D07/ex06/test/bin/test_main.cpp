@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jan 30 5:26:48 PM 2025 Paradis
-** Last update Tue Feb 3 10:05:56 PM 2025 Paradis
+** Last update Tue Feb 3 10:19:07 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -167,6 +167,44 @@ Test(Skat, Test_addStimPaks_print_on_stdout_if_nb_of_stimPaks_cant_be_negative,
     skat.addStimPaks(-10);
     cr_assert_stdout_eq_str("Hey boya, did you forget something?\n");
 }
+
+Test(Skat, Test_useStimPaks_isDefinied,
+.init = redirect_all_stdout)
+{
+    Skat    skat("Junior", 5);
+    skat.useStimPaks();
+}
+
+Test(Skat, Test_useStimPaks_decrements_stimPaks_personal_stock,
+.init = redirect_all_stdout)
+{
+    Skat    skat("Junior", 5);
+
+    cr_assert(skat.stimPaks() == 5);
+    skat.useStimPaks();
+    cr_assert(skat.stimPaks() == 4);
+}
+
+Test(Skat, Test_useStimPaks_print_msg_on_stdout_if_unit_can_use_stimPak,
+.init = redirect_all_stdout)
+{
+    Skat    skat("Junior", 5);
+
+    cr_assert(skat.stimPaks() == 5);
+    skat.useStimPaks();
+    cr_assert(skat.stimPaks() == 4);
+    cr_assert_stdout_eq_str("Time to kick some ass and chew bubble gum.\n");
+}
+
+Test(Skat, Test_useStimPaks_print_msg_on_stdout_if_unit_cant_use_stimPak,
+.init = redirect_all_stdout)
+{
+    Skat    skat("Junior", 0);
+
+    skat.useStimPaks();
+    cr_assert_stdout_eq_str("Mediiiiiic\n");
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //                                      MAIN                                 //
 ///////////////////////////////////////////////////////////////////////////////
