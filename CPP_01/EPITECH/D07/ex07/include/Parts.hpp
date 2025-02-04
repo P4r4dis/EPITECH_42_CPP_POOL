@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Feb 4 1:31:20 PM 2025 Paradis
-** Last update Wed Feb 4 1:48:26 PM 2025 Paradis
+** Last update Wed Feb 4 2:07:40 PM 2025 Paradis
 */
 
 
@@ -20,6 +20,7 @@ class	Arms
         Arms(std::string serial = "A-01", bool functionnal = true);
         ~Arms(void);
 
+        bool            isFunctionnal(void) const;
     protected:
     private:
         std::string     _serial;

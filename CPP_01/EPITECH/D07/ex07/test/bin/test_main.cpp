@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jan 30 5:26:48 PM 2025 Paradis
-** Last update Wed Feb 4 1:56:14 PM 2025 Paradis
+** Last update Wed Feb 4 2:06:49 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -29,16 +29,32 @@ Test(Parts_Arms_class, Test_CTOR_isDefined, .init = redirect_all_stdout)
     cr_assert_not_null(&arms);
 }
 
-// Test(Parts_Arms_class,
-// Test_isFunctionnal_func_Catch_functionnal_default_parameter_of_CTOR,
-// .init = redirect_all_stdout)
-// {
-//     Arms    arms;
+Test(Parts_Arms_class,
+Test_isFunctionnal_func_Catch_functionnal_default_parameter_of_CTOR,
+.init = redirect_all_stdout)
+{
+    Arms    arms;
     
-//     cr_assert(arms.isFunctionnal() == true);
-// }
+    cr_assert(arms.isFunctionnal() == true);
+}
 
+Test(Parts_Arms_class,
+Test_isFunctionnal_func_Catch_functionnal_parameter_of_CTOR,
+.init = redirect_all_stdout)
+{
+    Arms    arms("A-01", true);
+    
+    cr_assert(arms.isFunctionnal() == true);
+}
 
+Test(Parts_Arms_class,
+Test_isFunctionnal_func_Catch_functionnal_parameter_of_CTOR_return_false,
+.init = redirect_all_stdout)
+{
+    Arms    arms("A-01", false);
+    
+    cr_assert(arms.isFunctionnal() == false);
+}
     // cr_assert_stdout_eq_str((
     //     "Soldier " + skat.name() + " reporting " 
     //     + std::to_string(skat.stimPaks()) 

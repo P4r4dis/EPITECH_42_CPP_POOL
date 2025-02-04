@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Feb 4 1:31:38 PM 2025 Paradis
-** Last update Wed Feb 4 1:50:03 PM 2025 Paradis
+** Last update Wed Feb 4 2:08:11 PM 2025 Paradis
 */
 
 #include "../include/Parts.hpp"
@@ -17,3 +17,8 @@ Arms::Arms(std::string serial, bool functionnal)
 
 Arms::~Arms(void)
 {}
+
+bool        Arms::isFunctionnal(void) const
+{
+    return _functionnal;
+}
