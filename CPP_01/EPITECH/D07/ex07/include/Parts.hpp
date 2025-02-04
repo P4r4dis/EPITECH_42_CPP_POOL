@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Feb 4 1:31:20 PM 2025 Paradis
-** Last update Wed Feb 4 2:37:53 PM 2025 Paradis
+** Last update Wed Feb 4 3:11:53 PM 2025 Paradis
 */
 
 
@@ -19,6 +19,22 @@ class	Arms
     public:
         Arms(std::string serial = "A-01", bool functionnal = true);
         ~Arms(void);
+
+        bool            isFunctionnal(void) const;
+        std::string     serial(void) const;
+        void            informations(void);
+        
+    protected:
+    private:
+        std::string     _serial;
+        bool            _functionnal;
+};
+
+class	Legs
+{
+    public:
+        Legs(std::string serial = "L-01", bool functionnal = true);
+        ~Legs(void);
 
         bool            isFunctionnal(void) const;
         std::string     serial(void) const;
