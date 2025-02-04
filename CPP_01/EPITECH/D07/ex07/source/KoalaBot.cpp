@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Feb 4 3:42:52 PM 2025 Paradis
-** Last update Wed Feb 4 7:01:06 PM 2025 Paradis
+** Last update Wed Feb 4 9:07:26 PM 2025 Paradis
 */
 
 #include "../include/KoalaBot.hpp"
@@ -87,4 +87,14 @@ void            KoalaBot::informations(void)
     _arms->informations();
     _legs->informations();
     _head->informations();
+}
+
+bool            KoalaBot::status(void)
+{
+    if (_arms->isFunctionnal() &&
+        _legs->isFunctionnal() &&
+        _head->isFunctionnal())
+        return true;
+    else
+        return false;
 }

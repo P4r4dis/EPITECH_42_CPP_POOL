@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jan 30 5:26:48 PM 2025 Paradis
-** Last update Wed Feb 4 6:58:11 PM 2025 Paradis
+** Last update Wed Feb 4 7:33:19 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -406,6 +406,31 @@ Test_informations_func_print_informations_of_each_parts_on_stdout,
         );
     }
 }
+
+Test(KoalaBot_class,
+Test_status_func_return_true_if_all_parts_are_functionnal, 
+.init = redirect_all_stdout)
+{
+    {
+        KoalaBot    koalabot;
+
+        cr_assert(koalabot.status() == true);
+    }
+}
+
+Test(KoalaBot_class,
+Test_status_func_return_false_if_one_of_parts_is_not_functionnal, 
+.init = redirect_all_stdout)
+{
+    {
+        KoalaBot    koalabot;
+
+        Arms newArm("A-99", false);
+
+        koalabot.swapParts(newArm);
+        cr_assert(koalabot.status() == false);
+    }
+}
 //////////////////////////////////////////////////////////////
     // cr_assert_stdout_eq_str((
     //     "Soldier " + skat.name() + " reporting " 
@@ -419,16 +444,16 @@ Test_informations_func_print_informations_of_each_parts_on_stdout,
 Test(main, test_main, .init = redirect_all_stdout)
 {
     {
-        // KoalaBot kb;
-        // std::cout << std::boolalpha << kb.status() << std::endl;
-        // kb.informations();
+        KoalaBot kb;
+        std::cout << std::boolalpha << kb.status() << std::endl;
+        kb.informations();
     }
     cr_assert_stdout_eq_str
     (
         "true\n"
         "[KoalaBot] Bob-01\n"
-        "     [Parts] Head A-01 status : OK\n"
-        "     [Parts] Head L-01 status : OK\n"
-        "     [Parts] Head H-01 status : OK\n"
+        "\t[Parts] Arms A-01 status : OK\n"
+        "\t[Parts] Legs L-01 status : OK\n"
+        "\t[Parts] Head H-01 status : OK\n"
     );
 }

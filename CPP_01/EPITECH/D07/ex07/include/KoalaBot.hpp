@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Feb 4 3:40:13 PM 2025 Paradis
-** Last update Wed Feb 4 6:58:30 PM 2025 Paradis
+** Last update Wed Feb 4 7:15:10 PM 2025 Paradis
 */
 
 #ifndef 			__KOALABOT_HPP__
@@ -34,6 +34,8 @@ class	            KoalaBot
         void        swapParts(Head &head);
 
         void        informations(void);
+
+        bool        status(void);
     protected:
     private:
         std::string _serial;
