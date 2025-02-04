@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jan 30 5:23:03 PM 2025 Paradis
-** Last update Tue Feb 3 10:18:28 PM 2025 Paradis
+** Last update Wed Feb 4 11:43:10 AM 2025 Paradis
 */
 
 #include "../include/Skat.hpp"
@@ -67,4 +67,10 @@ void                Skat::useStimPaks(void)
     }
     else
         std::cout << "Mediiiiiic" << std::endl;
+}
+
+void                Skat::status(void)
+{
+    std::cout   << "Soldier " + _name + " reporting " 
+                << _stimPaks << " stimpaks remaining sir!" << std::endl;
 }

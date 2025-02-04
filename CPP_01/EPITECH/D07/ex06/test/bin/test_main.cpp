@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jan 30 5:26:48 PM 2025 Paradis
-** Last update Tue Feb 3 10:19:07 PM 2025 Paradis
+** Last update Wed Feb 4 11:48:58 AM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -205,6 +205,26 @@ Test(Skat, Test_useStimPaks_print_msg_on_stdout_if_unit_cant_use_stimPak,
     cr_assert_stdout_eq_str("Mediiiiiic\n");
 }
 
+Test(Skat, Test_status_func_isDefinied,
+.init = redirect_all_stdout)
+{
+    Skat    skat("Junior", 5);
+    skat.status();
+}
+
+Test(Skat, Test_status_func_print_msg_on_stdout,
+.init = redirect_all_stdout)
+{
+    Skat    skat("Junior", 5);
+    skat.status();
+
+    cr_assert_stdout_eq_str((
+        "Soldier " + skat.name() + " reporting " 
+        + std::to_string(skat.stimPaks()) 
+        + " stimpaks remaining sir!\n").c_str()
+    );
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //                                      MAIN                                 //
 ///////////////////////////////////////////////////////////////////////////////
@@ -212,10 +232,10 @@ Test(Skat, Test_useStimPaks_print_msg_on_stdout_if_unit_cant_use_stimPak,
 Test(main, test_main, .init = redirect_all_stdout)
 {
     {
-        Skat s( "Junior", 5);
+        Skat s("Junior", 5);
         std::cout << "Soldier " << s.name() << std::endl;
-        // s.status();
-        // s.useStimPaks(); 
+        s.status();
+        s.useStimPaks(); 
     }
     cr_assert_stdout_eq_str
     (
