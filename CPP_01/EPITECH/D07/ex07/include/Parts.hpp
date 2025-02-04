@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Feb 4 1:31:20 PM 2025 Paradis
-** Last update Wed Feb 4 2:13:16 PM 2025 Paradis
+** Last update Wed Feb 4 2:37:53 PM 2025 Paradis
 */
 
 
@@ -22,6 +22,7 @@ class	Arms
 
         bool            isFunctionnal(void) const;
         std::string     serial(void) const;
+        void            informations(void);
         
     protected:
     private:

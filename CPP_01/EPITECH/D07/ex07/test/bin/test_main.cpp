@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jan 30 5:26:48 PM 2025 Paradis
-** Last update Wed Feb 4 2:12:18 PM 2025 Paradis
+** Last update Wed Feb 4 3:05:10 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -74,6 +74,29 @@ Test_serial_func_Catch_functionnal_parameter_of_CTOR,
     cr_assert(arms.serial() == "A-01");
 }
 
+Test(Parts_Arms_class,
+Test_information_func_print_functionnal_msg_on_stdout_with_tabulation,
+.init = redirect_all_stdout)
+{
+    Arms    arms("A-01", true);
+    
+    arms.informations();
+    cr_assert_stdout_eq_str(
+        ("\t[Parts] Arms " + arms.serial() + " status : OK\n").c_str()
+    );
+}
+
+Test(Parts_Arms_class,
+Test_information_func_print_not_functionnal_msg_on_stdout_with_tabulation,
+.init = redirect_all_stdout)
+{
+    Arms    arms("A-01", false);
+    
+    arms.informations();
+    cr_assert_stdout_eq_str(
+        ("\t[Parts] Arms " + arms.serial() + " status : KO\n").c_str()
+    );
+}
 //////////////////////////////////////////////////////////////
     // cr_assert_stdout_eq_str((
     //     "Soldier " + skat.name() + " reporting " 

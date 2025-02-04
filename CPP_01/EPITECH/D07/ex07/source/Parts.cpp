@@ -5,10 +5,11 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Feb 4 1:31:38 PM 2025 Paradis
-** Last update Wed Feb 4 2:13:53 PM 2025 Paradis
+** Last update Wed Feb 4 3:04:38 PM 2025 Paradis
 */
 
 #include "../include/Parts.hpp"
+#include <iostream>
 #include <string>
 
 Arms::Arms(std::string serial, bool functionnal)
@@ -27,4 +28,10 @@ bool        Arms::isFunctionnal(void) const
 std::string Arms::serial(void) const
 {
     return _serial;
+}
+
+void        Arms::informations(void)
+{
+    std::cout   << "\t[Parts] Arms " << _serial << " status : " 
+                << (_functionnal ? "OK" : "KO") << std::endl;
 }
