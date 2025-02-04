@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jan 30 5:26:48 PM 2025 Paradis
-** Last update Wed Feb 4 6:37:40 PM 2025 Paradis
+** Last update Wed Feb 4 6:58:11 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -387,6 +387,23 @@ Test(KoalaBot_class, test_swapParts_Head) {
         kb.swapParts(newHead);
         cr_assert(kb.getHead()->serial() == "H-99");
         cr_assert(newHead.serial() == "H-01");
+    }
+}
+
+Test(KoalaBot_class,
+Test_informations_func_print_informations_of_each_parts_on_stdout, 
+.init = redirect_all_stdout)
+{
+    {
+        KoalaBot    koalabot;
+    
+        koalabot.informations();
+        cr_assert_stdout_eq_str(
+            "[KoalaBot] Bob-01\n"
+            "\t[Parts] Arms A-01 status : OK\n"
+            "\t[Parts] Legs L-01 status : OK\n"
+            "\t[Parts] Head H-01 status : OK\n"
+        );
     }
 }
 //////////////////////////////////////////////////////////////
