@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jan 30 5:26:48 PM 2025 Paradis
-** Last update Wed Feb 4 3:14:54 PM 2025 Paradis
+** Last update Wed Feb 4 3:21:15 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -176,6 +176,86 @@ Test_information_func_print_not_functionnal_msg_on_stdout_with_tabulation,
         ("\t[Parts] Legs " + legs.serial() + " status : KO\n").c_str()
     );
 }
+
+///////////////////////////////////////////////////////////////////////////////
+//                                      Head                                 //
+///////////////////////////////////////////////////////////////////////////////
+Test(Parts_Head_class, Test_CTOR_isDefined, .init = redirect_all_stdout)
+{
+    Head    head;
+    cr_assert_not_null(&head);
+}
+
+Test(Parts_Head_class,
+Test_isFunctionnal_func_Catch_functionnal_default_parameter_of_CTOR,
+.init = redirect_all_stdout)
+{
+    Head    head;
+    
+    cr_assert(head.isFunctionnal() == true);
+}
+
+Test(Parts_Head_class,
+Test_isFunctionnal_func_Catch_functionnal_parameter_of_CTOR,
+.init = redirect_all_stdout)
+{
+    Head    head("H-01", true);
+    
+    cr_assert(head.isFunctionnal() == true);
+}
+
+Test(Parts_Head_class,
+Test_isFunctionnal_func_Catch_functionnal_parameter_of_CTOR_return_false,
+.init = redirect_all_stdout)
+{
+    Head    head("H-01", false);
+    
+    cr_assert(head.isFunctionnal() == false);
+}
+
+Test(Parts_Head_class,
+Test_serial_func_Catch_functionnal_default_parameter_of_CTOR,
+.init = redirect_all_stdout)
+{
+    Head    head;
+    
+    cr_assert(head.serial() == "H-01");
+}
+
+Test(Parts_Head_class,
+Test_serial_func_Catch_functionnal_parameter_of_CTOR,
+.init = redirect_all_stdout)
+{
+    Head    head("H-01", true);
+    
+    cr_assert(head.serial() == "H-01");
+}
+
+Test(Parts_Head_class,
+Test_information_func_print_functionnal_msg_on_stdout_with_tabulation,
+.init = redirect_all_stdout)
+{
+    Head    head("H-01", true);
+    
+    head.informations();
+    cr_assert_stdout_eq_str(
+        ("\t[Parts] Head " + head.serial() + " status : OK\n").c_str()
+    );
+}
+
+Test(Parts_Head_class,
+Test_information_func_print_not_functionnal_msg_on_stdout_with_tabulation,
+.init = redirect_all_stdout)
+{
+    Head    head("H-01", false);
+    
+    head.informations();
+    cr_assert_stdout_eq_str(
+        ("\t[Parts] Head " + head.serial() + " status : KO\n").c_str()
+    );
+}
+
+
 //////////////////////////////////////////////////////////////
     // cr_assert_stdout_eq_str((
     //     "Soldier " + skat.name() + " reporting " 
@@ -197,8 +277,8 @@ Test(main, test_main, .init = redirect_all_stdout)
     (
         "true\n"
         "[KoalaBot] Bob-01\n"
-        "     [Parts] Legs A-01 status : OK\n"
-        "     [Parts] Legs L-01 status : OK\n"
+        "     [Parts] Head A-01 status : OK\n"
+        "     [Parts] Head L-01 status : OK\n"
         "     [Parts] Head H-01 status : OK\n"
     );
 }

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Feb 4 1:31:38 PM 2025 Paradis
-** Last update Wed Feb 4 3:12:22 PM 2025 Paradis
+** Last update Wed Feb 4 3:19:42 PM 2025 Paradis
 */
 
 #include "../include/Parts.hpp"
@@ -57,5 +57,29 @@ std::string Legs::serial(void) const
 void        Legs::informations(void)
 {
     std::cout   << "\t[Parts] Legs " << _serial << " status : " 
+                << (_functionnal ? "OK" : "KO") << std::endl;
+}
+
+Head::Head(std::string serial, bool functionnal)
+                                                :   _serial(serial),
+                                                    _functionnal(functionnal)
+{}
+
+Head::~Head(void)
+{}
+
+bool        Head::isFunctionnal(void) const
+{
+    return _functionnal;
+}
+
+std::string Head::serial(void) const
+{
+    return _serial;
+}
+
+void        Head::informations(void)
+{
+    std::cout   << "\t[Parts] Head " << _serial << " status : " 
                 << (_functionnal ? "OK" : "KO") << std::endl;
 }
