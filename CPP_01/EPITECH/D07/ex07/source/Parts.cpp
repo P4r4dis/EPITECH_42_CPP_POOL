@@ -5,10 +5,11 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Feb 4 1:31:38 PM 2025 Paradis
-** Last update Wed Feb 4 2:08:11 PM 2025 Paradis
+** Last update Wed Feb 4 2:13:53 PM 2025 Paradis
 */
 
 #include "../include/Parts.hpp"
+#include <string>
 
 Arms::Arms(std::string serial, bool functionnal)
                                                 :   _serial(serial),
@@ -21,4 +22,9 @@ Arms::~Arms(void)
 bool        Arms::isFunctionnal(void) const
 {
     return _functionnal;
+}
+
+std::string Arms::serial(void) const
+{
+    return _serial;
 }

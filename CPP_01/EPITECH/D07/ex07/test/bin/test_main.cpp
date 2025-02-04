@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jan 30 5:26:48 PM 2025 Paradis
-** Last update Wed Feb 4 2:06:49 PM 2025 Paradis
+** Last update Wed Feb 4 2:12:18 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -55,6 +55,26 @@ Test_isFunctionnal_func_Catch_functionnal_parameter_of_CTOR_return_false,
     
     cr_assert(arms.isFunctionnal() == false);
 }
+
+Test(Parts_Arms_class,
+Test_serial_func_Catch_functionnal_default_parameter_of_CTOR,
+.init = redirect_all_stdout)
+{
+    Arms    arms;
+    
+    cr_assert(arms.serial() == "A-01");
+}
+
+Test(Parts_Arms_class,
+Test_serial_func_Catch_functionnal_parameter_of_CTOR,
+.init = redirect_all_stdout)
+{
+    Arms    arms("A-01", true);
+    
+    cr_assert(arms.serial() == "A-01");
+}
+
+//////////////////////////////////////////////////////////////
     // cr_assert_stdout_eq_str((
     //     "Soldier " + skat.name() + " reporting " 
     //     + std::to_string(skat.stimPaks()) 
