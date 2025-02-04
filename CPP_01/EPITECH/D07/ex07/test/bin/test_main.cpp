@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jan 30 5:26:48 PM 2025 Paradis
-** Last update Wed Feb 4 5:41:37 PM 2025 Paradis
+** Last update Wed Feb 4 6:37:40 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -351,6 +351,42 @@ Test(KoalaBot_class, test_setParts_Head) {
         cr_assert(kb.getHead()->serial() == "H-01");
         kb.setParts(newHead);
         cr_assert(kb.getHead()->serial() == "H-99");
+    }
+}
+
+Test(KoalaBot_class, test_swapParts_Arms) {
+    {
+        KoalaBot kb;
+        Arms newArm("A-99", false);
+
+        cr_assert(kb.getArms()->serial() == "A-01");
+        kb.swapParts(newArm);
+        cr_assert(kb.getArms()->serial() == "A-99");
+        cr_assert(newArm.serial() == "A-01");
+    }
+}
+
+Test(KoalaBot_class, test_swapParts_Legs) {
+    {
+        KoalaBot kb;
+        Legs newLegs("L-99", false);
+
+        cr_assert(kb.getLegs()->serial() == "L-01");
+        kb.swapParts(newLegs);
+        cr_assert(kb.getLegs()->serial() == "L-99");
+        cr_assert(newLegs.serial() == "L-01");
+    }
+}
+
+Test(KoalaBot_class, test_swapParts_Head) {
+    {
+        KoalaBot kb;
+        Head newHead("H-99", false);
+
+        cr_assert(kb.getHead()->serial() == "H-01");
+        kb.swapParts(newHead);
+        cr_assert(kb.getHead()->serial() == "H-99");
+        cr_assert(newHead.serial() == "H-01");
     }
 }
 //////////////////////////////////////////////////////////////

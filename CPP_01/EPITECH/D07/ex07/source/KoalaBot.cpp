@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Feb 4 3:42:52 PM 2025 Paradis
-** Last update Wed Feb 4 5:45:03 PM 2025 Paradis
+** Last update Wed Feb 4 6:36:07 PM 2025 Paradis
 */
 
 #include "../include/KoalaBot.hpp"
@@ -63,4 +63,19 @@ void            KoalaBot::setParts(Legs &legs)
 void            KoalaBot::setParts(Head &head)
 {
     *_head = head;
+}
+
+void            KoalaBot::swapParts(Arms &arms)
+{
+    std::swap(*_arms, arms);
+}
+
+void            KoalaBot::swapParts(Legs &legs)
+{
+    std::swap(*_legs, legs);
+}
+
+void            KoalaBot::swapParts(Head &head)
+{
+    std::swap(*_head, head);
 }
