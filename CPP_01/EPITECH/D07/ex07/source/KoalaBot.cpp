@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Feb 4 3:42:52 PM 2025 Paradis
-** Last update Wed Feb 4 4:34:23 PM 2025 Paradis
+** Last update Wed Feb 4 5:45:03 PM 2025 Paradis
 */
 
 #include "../include/KoalaBot.hpp"
@@ -21,6 +21,12 @@ KoalaBot::KoalaBot(std::string serial)  :   _serial(serial),
 
 KoalaBot::~KoalaBot()
 {
+    if (_arms)
+        delete _arms;
+    if (_legs)
+        delete _legs;
+    if (_head)
+        delete _head;
 }
 
 std::string     KoalaBot::getSerial(void) const
@@ -41,4 +47,20 @@ Legs            *KoalaBot::getLegs(void) const
 Head            *KoalaBot::getHead(void) const
 {
     return _head;
+}
+
+
+void            KoalaBot::setParts(Arms &arms)
+{
+    *_arms = arms;
+}
+
+void            KoalaBot::setParts(Legs &legs)
+{
+    *_legs = legs;
+}
+
+void            KoalaBot::setParts(Head &head)
+{
+    *_head = head;
 }
