@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue Feb 4 1:38:44 PM 2025 Paradis
-## Last update Wed Feb 4 1:38:48 PM 2025 Paradis
+## Last update Wed Feb 4 4:35:03 PM 2025 Paradis
 ##
 
 
@@ -24,6 +24,7 @@ CRITFLAGS    	+=  --coverage -lcriterion
 CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAGS) $(CRITFLAGS)
 
 SRCS         	= 	$(SRC_PATH)/Parts.cpp \
+					$(SRC_PATH)/KoalaBot.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)

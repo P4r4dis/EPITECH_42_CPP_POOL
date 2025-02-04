@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2124/12/18 19:12:51 by Paradis           #+#    #+#              #
-#    Updated: 2025/02/04 13:42:27 by Paradis          ###   ########.fr        #
+#    Updated: 2025/02/04 16:35:48 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -529,7 +529,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2124 Paradis
-## Last update Wed Feb 4 1:42:27 PM 2025 Paradis
+## Last update Wed Feb 4 4:35:48 PM 2025 Paradis
 ##
 # **************************************************************************** #
 #																			   #
@@ -814,6 +814,7 @@ EPITECH_EX07_UT_SRC				=	$(EPITECH_EX07_UT_PATH)/$(EPITECH_EX07_NAME)_test.cpp
 EPITECH_EX07_UT_NAME 			= 	test_$(EPITECH_EX07_NAME)
 
 EPITECH_EX07_SRC				=	$(EPITECH_EX07_SRC_PATH)/Parts.cpp \
+									$(EPITECH_EX07_SRC_PATH)/KoalaBot.cpp \
 									$(EPITECH_EX07_BIN_PATH)/main.cpp
 
 EPITECH_EX07_OBJS				=	$(EPITECH_EX07_SRC:.cpp=.o)

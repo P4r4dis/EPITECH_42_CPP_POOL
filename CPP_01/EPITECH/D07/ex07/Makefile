@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue Feb 4 1:38:57 PM 2025 Paradis
-## Last update Wed Feb 4 1:39:22 PM 2025 Paradis
+## Last update Wed Feb 4 4:35:24 PM 2025 Paradis
 ##
 
 # # Compilateur
@@ -28,6 +28,7 @@ CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAG
 
 # # Files sources
 SRCS		=	$(SRC_PATH)/Parts.cpp \
+				$(SRC_PATH)/KoalaBot.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp
