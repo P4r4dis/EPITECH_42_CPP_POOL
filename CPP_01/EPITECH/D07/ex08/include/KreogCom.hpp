@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 5 3:49:21 PM 2025 Paradis
-** Last update Thu Feb 5 4:10:28 PM 2025 Paradis
+** Last update Thu Feb 5 4:42:01 PM 2025 Paradis
 */
 
 #ifndef 			__KREOGCOM_HPP__
@@ -17,7 +17,7 @@ class	            KreogCom
         KreogCom(int x, int y, int serial);
         ~KreogCom(void);
 
-        // void        addCom (int x, int y, int serial);
+        void        addCom(int x, int y, int serial);
         // void        removeCom();
         // KreogCom    *getCom();
 
@@ -29,6 +29,7 @@ class	            KreogCom
         const int   m_serial;
         int         _x;
         int         _y;
+        KreogCom    *_next;
 };
 
 #endif 				/* !__KREOGCOM_HPP__ */

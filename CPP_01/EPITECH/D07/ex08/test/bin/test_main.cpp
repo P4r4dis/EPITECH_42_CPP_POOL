@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 5 3:53:37 PM 2025 Paradis
-** Last update Thu Feb 5 4:13:08 PM 2025 Paradis
+** Last update Thu Feb 5 4:41:07 PM 2025 Paradis
 */
 
 
@@ -28,6 +28,28 @@ Test(KreogCom_class, Test_CTOR_isDefined, .init = redirect_all_stdout)
 
     cr_assert_not_null(&k);
 }
+
+Test(KreogCom_class, Test_CTOR_print_msg_when_CTOR_is_created_and_destroyed,
+.init = redirect_all_stdout)
+{
+    {
+        KreogCom    k(42, 42, 101010);
+    }
+    cr_assert_stdout_eq_str(
+        "KreogCom 101010 initialized\n"
+        "KreogCom 101010 shutting down\n"
+    );
+}
+
+Test(KreogCom_class, Test_addCom_func_which_adds_a_new_node_to_the_linked_list,
+ .init = redirect_all_stdout)
+{
+    KreogCom    k(42, 42, 101010);
+
+
+}
+
+
 
 //////////////////////////////////////////////////////////////
     // cr_assert_stdout_eq_str((
