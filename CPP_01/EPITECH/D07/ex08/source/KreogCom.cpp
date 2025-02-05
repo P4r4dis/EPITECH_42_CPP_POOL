@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 5 3:53:11 PM 2025 Paradis
-** Last update Thu Feb 5 6:27:10 PM 2025 Paradis
+** Last update Thu Feb 5 6:47:10 PM 2025 Paradis
 */
 
 #include "../include/KreogCom.hpp"
@@ -32,4 +32,9 @@ void        KreogCom::addCom(int x, int y, int serial)
 
     newKreogCom->_next = _next;
     _next = newKreogCom;
+}
+
+KreogCom    *KreogCom::getCom(void)
+{
+    return _next;
 }
