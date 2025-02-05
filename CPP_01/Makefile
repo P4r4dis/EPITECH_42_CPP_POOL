@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2124/12/18 19:12:51 by Paradis           #+#    #+#              #
-#    Updated: 2025/02/04 16:35:48 by Paradis          ###   ########.fr        #
+#    Updated: 2025/02/05 16:03:22 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -529,7 +529,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2124 Paradis
-## Last update Wed Feb 4 4:35:48 PM 2025 Paradis
+## Last update Thu Feb 5 4:03:22 PM 2025 Paradis
 ##
 # **************************************************************************** #
 #																			   #
@@ -837,6 +837,43 @@ EPITECH_valgrind_test_run_ex07	:	fclean
 
 # **************************************************************************** #
 #																			   #
+#								EPITECH_EX08								   #
+#																			   #
+# **************************************************************************** #
+EPITECH_EX08_PATH 				= 	./EPITECH/D07/ex08
+EPITECH_EX08_BIN_PATH 			= 	./EPITECH/D07/ex08/bin
+EPITECH_EX08_SRC_PATH			=	./EPITECH/D07/ex08/source
+EPITECH_EX08_INC_PATH			=	./EPITECH/D07/ex08/include
+EPITECH_EX08_UT_PATH			=	./EPITECH/D07/ex08/test
+
+EPITECH_EX08_NAME				=	KreogCom
+
+EPITECH_EX08_UT_SRC				=	$(EPITECH_EX08_UT_PATH)/$(EPITECH_EX08_NAME)_test.cpp
+EPITECH_EX08_UT_NAME 			= 	test_$(EPITECH_EX08_NAME)
+
+EPITECH_EX08_SRC				=	$(EPITECH_EX08_SRC_PATH)/KreogCom.cpp \
+									$(EPITECH_EX08_BIN_PATH)/main.cpp
+
+EPITECH_EX08_OBJS				=	$(EPITECH_EX08_SRC:.cpp=.o)
+
+EPITECH_ex08 					: 	fclean
+									@$(MAKE) -C $(EPITECH_EX08_PATH)
+									$(EPITECH_EX08_PATH)/$(EPITECH_EX08_NAME)
+
+EPITECH_valgrind_ex08 			: 	fclean
+									@$(MAKE) -C $(EPITECH_EX08_PATH) VALGRIND
+
+EPITECH_test_run_ex08			:	fclean
+									@$(MAKE) -s -C $(EPITECH_EX08_UT_PATH)
+									$(EPITECH_EX08_UT_PATH)/$(EPITECH_EX08_UT_NAME)
+									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+						
+EPITECH_valgrind_test_run_ex08	:	fclean
+									@$(MAKE) -s -C $(EPITECH_EX08_UT_PATH) VALGRIND
+									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+
+# **************************************************************************** #
+#																			   #
 #								GLOBAL RULES MAKEFILE						   #
 #																			   #
 # **************************************************************************** #
@@ -899,6 +936,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX06_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX07_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX07_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX08_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX08_UT_PATH)
 
 fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_PATH)
@@ -943,6 +982,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX06_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX07_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX07_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX08_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX08_UT_PATH)
 
 tests_run						:	fclean \
 
