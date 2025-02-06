@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 5 3:53:11 PM 2025 Paradis
-** Last update Thu Feb 5 6:47:10 PM 2025 Paradis
+** Last update Thu Feb 5 9:50:46 PM 2025 Paradis
 */
 
 #include "../include/KreogCom.hpp"
@@ -34,7 +34,24 @@ void        KreogCom::addCom(int x, int y, int serial)
     _next = newKreogCom;
 }
 
+int         KreogCom::getX() const
+{
+    return _x;
+}
+
 KreogCom    *KreogCom::getCom(void)
 {
     return _next;
+}
+
+
+void        KreogCom::removeCom(void)
+{
+    if (_next) {
+        KreogCom* nodeToDelete = _next;
+        
+        _next = _next->_next;
+        nodeToDelete->_next = nullptr;
+        delete nodeToDelete;
+    }
 }

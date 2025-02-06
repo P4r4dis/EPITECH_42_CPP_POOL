@@ -5,12 +5,12 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 5 3:49:21 PM 2025 Paradis
-** Last update Thu Feb 5 6:44:03 PM 2025 Paradis
+** Last update Fri Feb 6 8:18:58 PM 2025 Paradis
 */
 
 #ifndef 			__KREOGCOM_HPP__
 	# define 		__KREOGCOM_HPP__
-#include <iostream>
+    
 class	            KreogCom
 {
     public:
@@ -18,26 +18,43 @@ class	            KreogCom
         ~KreogCom(void);
 
         void        addCom(int x, int y, int serial);
-        // void        removeCom();
+        void        removeCom();
         KreogCom    *getCom(void);
 
         // void        ping();
         // void        locateSquad();
-        void display()
-        {
-            KreogCom* current = this;
-            while (current) {
-                std::cout << "KreogCom " << current->m_serial << " at ("
-                << current->_x << ", " << current->_y << ")" << std::endl;
-                current = current->_next;
-            }
-        }
+        // void display()
+        // {
+        //     KreogCom* current = _next;
+        //     while (current) {
+        //         std::cout << "KreogCom " << current->m_serial << std::endl;
+        //         // << " at ("
+        //         // << current->_x << ", " << current->_y << ")" << std::endl;
+        //         current = current->_next;
+        //     }
+        // }
 
-        int     getX() const
-        {
-            return _x;
-        }
+        int         getX() const;
+// void ping() const {
+//     std::cout << "KreogCom " << m_serial << " currently at " 
+//               << _x << " " << _y << std::endl;
+// }
 
+// void locateSquad() const {
+
+//     // if (_next) {
+//     //     _next->locateSquad();
+//     // }
+//     // ping();
+// ///////////////
+//  KreogCom* current = _next;
+//     while (current != nullptr) {
+//         current->ping();
+//         current = current->_next;
+//     }
+//     // Affiche le KreogCom actuel à la fin
+//     ping();
+// }
     protected:
     private:
         const int   m_serial;
