@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 5 3:53:11 PM 2025 Paradis
-** Last update Thu Feb 5 9:50:46 PM 2025 Paradis
+** Last update Tue Feb 10 6:49:35 PM 2025 Paradis
 */
 
 #include "../include/KreogCom.hpp"
@@ -54,4 +54,10 @@ void        KreogCom::removeCom(void)
         nodeToDelete->_next = nullptr;
         delete nodeToDelete;
     }
+}
+
+void        KreogCom::ping(void)
+{
+    std::cout   <<  "KreogCom " << m_serial << " currently at "
+                << _x << " " << _y << std::endl;
 }

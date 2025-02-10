@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 5 3:53:37 PM 2025 Paradis
-** Last update Fri Feb 6 8:17:41 PM 2025 Paradis
+** Last update Tue Feb 10 6:47:17 PM 2025 Paradis
 */
 
 
@@ -156,6 +156,32 @@ Test_removeCom_func_delete_the_current_KreogCom_linked,
         "KreogCom 101010 initialized\n"
         "KreogCom 65 initialized\n"
         "KreogCom 51 initialized\n"
+        "KreogCom 51 shutting down\n"
+        "KreogCom 65 shutting down\n"
+        "KreogCom 101010 shutting down\n"
+    );
+}
+
+Test(KreogCom_class,
+Test_ping_func_prints_current_KreogCom_informations_to_stdout,
+.init = redirect_all_stdout)
+{
+    {
+        KreogCom    k(42, 42, 101010);
+
+        k.addCom(56, 25, 65);
+        k.addCom(73, 34, 51);
+
+        k.ping();
+        
+        k.removeCom();
+        k.removeCom();
+    }
+    cr_assert_stdout_eq_str(
+        "KreogCom 101010 initialized\n"
+        "KreogCom 65 initialized\n"
+        "KreogCom 51 initialized\n"
+        "KreogCom 101010 currently at 42 42\n"
         "KreogCom 51 shutting down\n"
         "KreogCom 65 shutting down\n"
         "KreogCom 101010 shutting down\n"
