@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 5 3:53:37 PM 2025 Paradis
-** Last update Tue Feb 10 7:01:34 PM 2025 Paradis
+** Last update Tue Feb 10 7:23:21 PM 2025 Paradis
 */
 
 
@@ -215,12 +215,7 @@ Test_locateSquad_func_prints_linked_and_current_KreogCom_infos_to_stdout,
             "KreogCom 101010 shutting down\n"
         );
     }
-//////////////////////////////////////////////////////////////
-    // cr_assert_stdout_eq_str((
-    //     "Soldier " + skat.name() + " reporting " 
-    //     + std::to_string(skat.stimPaks()) 
-    //     + " stimpaks remaining sir!\n").c_str()
-    // );
+
 ///////////////////////////////////////////////////////////////////////////////
 //                                      MAIN                                 //
 ///////////////////////////////////////////////////////////////////////////////
