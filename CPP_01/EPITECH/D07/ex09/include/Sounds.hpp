@@ -5,19 +5,20 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 7:43:41 PM 2025 Paradis
-** Last update Tue Feb 10 7:54:43 PM 2025 Paradis
+** Last update Tue Feb 10 9:19:34 PM 2025 Paradis
 */
 
 #ifndef 			__SOUNDS_HPP__
 	# define 		__SOUNDS_HPP__
 
     #include <string>
+    
 class	            Sounds
 {
     public:
-        static std::string  Regular;
-        static std::string  Plasma;
-        static std::string  Rocket;
+        static const std::string  Regular;
+        static const std::string  Plasma;
+        static const std::string  Rocket;
 
     protected:
     private:
