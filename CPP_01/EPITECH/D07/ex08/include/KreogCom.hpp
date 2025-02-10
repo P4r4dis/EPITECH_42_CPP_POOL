@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 5 3:49:21 PM 2025 Paradis
-** Last update Tue Feb 10 6:51:15 PM 2025 Paradis
+** Last update Tue Feb 10 7:01:15 PM 2025 Paradis
 */
 
 #ifndef 			__KREOGCOM_HPP__
@@ -22,35 +22,10 @@ class	            KreogCom
         KreogCom    *getCom(void);
 
         void        ping();
-        // void        locateSquad();
-        // void display()
-        // {
-        //     KreogCom* current = _next;
-        //     while (current) {
-        //         std::cout << "KreogCom " << current->m_serial << std::endl;
-        //         // << " at ("
-        //         // << current->_x << ", " << current->_y << ")" << std::endl;
-        //         current = current->_next;
-        //     }
-        // }
+        void        locateSquad();
 
         int         getX() const;
 
-// void locateSquad() const {
-
-//     // if (_next) {
-//     //     _next->locateSquad();
-//     // }
-//     // ping();
-// ///////////////
-//  KreogCom* current = _next;
-//     while (current != nullptr) {
-//         current->ping();
-//         current = current->_next;
-//     }
-//     // Affiche le KreogCom actuel à la fin
-//     ping();
-// }
     protected:
     private:
         const int   m_serial;

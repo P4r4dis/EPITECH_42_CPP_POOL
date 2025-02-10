@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 5 3:53:37 PM 2025 Paradis
-** Last update Tue Feb 10 6:47:17 PM 2025 Paradis
+** Last update Tue Feb 10 7:01:34 PM 2025 Paradis
 */
 
 
@@ -187,6 +187,34 @@ Test_ping_func_prints_current_KreogCom_informations_to_stdout,
         "KreogCom 101010 shutting down\n"
     );
 }
+
+Test(KreogCom_class,
+Test_locateSquad_func_prints_linked_and_current_KreogCom_infos_to_stdout,
+.init = redirect_all_stdout)
+    {
+        {
+            KreogCom    k(42, 42, 101010);
+    
+            k.addCom(56, 25, 65);
+            k.addCom(73, 34, 51);
+    
+            k.locateSquad();
+            
+            k.removeCom();
+            k.removeCom();
+        }
+        cr_assert_stdout_eq_str(
+            "KreogCom 101010 initialized\n"
+            "KreogCom 65 initialized\n"
+            "KreogCom 51 initialized\n"
+            "KreogCom 51 currently at 73 34\n"
+            "KreogCom 65 currently at 56 25\n"
+            "KreogCom 101010 currently at 42 42\n"
+            "KreogCom 51 shutting down\n"
+            "KreogCom 65 shutting down\n"
+            "KreogCom 101010 shutting down\n"
+        );
+    }
 //////////////////////////////////////////////////////////////
     // cr_assert_stdout_eq_str((
     //     "Soldier " + skat.name() + " reporting " 
@@ -196,29 +224,29 @@ Test_ping_func_prints_current_KreogCom_informations_to_stdout,
 ///////////////////////////////////////////////////////////////////////////////
 //                                      MAIN                                 //
 ///////////////////////////////////////////////////////////////////////////////
-// Test(main, test_main, .init = redirect_all_stdout)
-// {
-//     {
-//         KreogCom k(42, 42, 101010);
+Test(main, test_main, .init = redirect_all_stdout)
+{
+    {
+        KreogCom k(42, 42, 101010);
 
-//         k.addCom(56, 25, 65);
-//         k.addCom(73, 34, 51);
+        k.addCom(56, 25, 65);
+        k.addCom(73, 34, 51);
 
-//         // k.locateSquad();
+        k.locateSquad();
 
-//         k.removeCom();
-//         k.removeCom();
-//     }
-//     cr_assert_stdout_eq_str
-//     (
-//         "KreogCom 101010 initialized\n"
-//         "KreogCom 65 initialized\n"
-//         "KreogCom 51 initialized\n"
-//         "KreogCom 51 currently at 73 34\n"
-//         "KreogCom 65 currently at 56 25\n"
-//         "KreogCom 101010 currently at 42 42\n"
-//         "KreogCom 51 shutting down\n"
-//         "KreogCom 65 shutting down\n"
-//         "KreogCom 101010 shutting down\n"
-//     );
-// }
+        k.removeCom();
+        k.removeCom();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "KreogCom 101010 initialized\n"
+        "KreogCom 65 initialized\n"
+        "KreogCom 51 initialized\n"
+        "KreogCom 51 currently at 73 34\n"
+        "KreogCom 65 currently at 56 25\n"
+        "KreogCom 101010 currently at 42 42\n"
+        "KreogCom 51 shutting down\n"
+        "KreogCom 65 shutting down\n"
+        "KreogCom 101010 shutting down\n"
+    );
+}
