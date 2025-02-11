@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 9:24:41 PM 2025 Paradis
-** Last update Wed Feb 11 7:03:39 PM 2025 Paradis
+** Last update Wed Feb 11 7:15:55 PM 2025 Paradis
 */
 
 #include "../include/Phaser.hpp"
@@ -66,7 +66,10 @@ void                Phaser::fire(void)
         return ;
     }
 
-    switch (_type)
+    for (int i = 0; i < _nbAmmos - 1; ++i)
+        _magazine[i] = _magazine[i + 1];
+    
+    switch (_magazine[0])
     {
         case REGULAR:
             std::cout << Sounds::Regular << std::endl;

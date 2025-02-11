@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 7:32:56 PM 2025 Paradis
-** Last update Wed Feb 11 7:04:13 PM 2025 Paradis
+** Last update Wed Feb 11 7:19:44 PM 2025 Paradis
 */
 
 
@@ -147,14 +147,31 @@ Test(Phaser_class, Test_fire_func_print_to_stdout_if_magazine_is_empty,
         Phaser p(0, Phaser::PLASMA);
 
         p.fire();
-        Phaser::AmmoType *magazine = p.getMagazine();
-        cr_assert(magazine[0] != p.getType());
+        cr_assert(p.getNbAmmos() == 0);
     }
     cr_assert_stdout_eq_str(
         "Clip empty, please reload\n"
     );
 
 }
+
+Test(Phaser_class, Test_fire_func_magazine_is_shifted_by_one,
+.init = redirect_all_stdout)
+{
+    {
+        Phaser p(2, Phaser::ROCKET);
+
+        cr_assert(p.getNbAmmos() == 2);
+        p.fire();
+        cr_assert(p.getNbAmmos() == 1);
+        cr_assert(p.getMagazine()[0] == p.getType());
+    }
+    cr_assert_stdout_eq_str(
+        "Booooooom\n"
+    );
+
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //                                  Main
 ///////////////////////////////////////////////////////////////////////////////
