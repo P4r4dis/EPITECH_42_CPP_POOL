@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 7:32:56 PM 2025 Paradis
-** Last update Wed Feb 11 7:26:50 PM 2025 Paradis
+** Last update Wed Feb 11 7:54:44 PM 2025 Paradis
 */
 
 
@@ -93,7 +93,6 @@ Test(Phaser_class, Test_fire_func_print_to_stdout_REGULAR_sounds_Ammo_loaded,
     cr_assert_stdout_eq_str(
         "Piouuuuuu\n"
     );
-
 }
 
 Test(Phaser_class, Test_fire_func_print_to_stdout_PLASMA_sounds_Ammo_loaded,
@@ -107,7 +106,6 @@ Test(Phaser_class, Test_fire_func_print_to_stdout_PLASMA_sounds_Ammo_loaded,
     cr_assert_stdout_eq_str(
         "Fiouuuuuz\n"
     );
-
 }
 
 Test(Phaser_class, Test_fire_func_print_to_stdout_ROCKET_sounds_Ammo_loaded,
@@ -121,7 +119,6 @@ Test(Phaser_class, Test_fire_func_print_to_stdout_ROCKET_sounds_Ammo_loaded,
     cr_assert_stdout_eq_str(
         "Booooooom\n"
     );
-
 }
 
 Test(Phaser_class, Test_fire_func_nbAmmos_decrements,
@@ -137,7 +134,6 @@ Test(Phaser_class, Test_fire_func_nbAmmos_decrements,
     cr_assert_stdout_eq_str(
         "Booooooom\n"
     );
-
 }
 
 Test(Phaser_class, Test_fire_func_print_to_stdout_if_magazine_is_empty,
@@ -152,7 +148,6 @@ Test(Phaser_class, Test_fire_func_print_to_stdout_if_magazine_is_empty,
     cr_assert_stdout_eq_str(
         "Clip empty, please reload\n"
     );
-
 }
 
 Test(Phaser_class, Test_fire_func_magazine_is_shifted_by_one,
@@ -169,7 +164,6 @@ Test(Phaser_class, Test_fire_func_magazine_is_shifted_by_one,
     cr_assert_stdout_eq_str(
         "Booooooom\n"
     );
-
 }
 
 Test(Phaser_class,
@@ -188,7 +182,82 @@ Test_ejectClip_ejects_magazine_and_reduces_amount_of_munition_to_0,
     }
 }
 
+Test(Phaser_class,
+Test_changeType_changes_the_default_type_for_the_Phaser,
+.init = redirect_all_stdout)
+{
+    {
+        Phaser p(2, Phaser::ROCKET);
 
+        cr_assert(p.getType() == Phaser::ROCKET);
+        p.changeType(Phaser::REGULAR);
+        cr_assert(p.getType() == Phaser::REGULAR);
+    }
+}
+
+Test(Phaser_class,
+Test_changeType_changes_default_type_to_REGULAR_type_and_print_msg_to_stdout,
+.init = redirect_all_stdout)
+{
+    {
+        Phaser p(2, Phaser::ROCKET);
+
+        cr_assert(p.getType() == Phaser::ROCKET);
+        p.changeType(Phaser::REGULAR);
+        cr_assert(p.getType() == Phaser::REGULAR);
+    }
+    cr_assert_stdout_eq_str(
+        "Switching ammo to type: regular\n"
+    );
+}
+
+Test(Phaser_class,
+Test_changeType_changes_default_type_to_PLASMA_type_and_print_msg_to_stdout,
+.init = redirect_all_stdout)
+{
+    {
+        Phaser p(2, Phaser::ROCKET);
+
+        cr_assert(p.getType() == Phaser::ROCKET);
+        p.changeType(Phaser::PLASMA);
+        cr_assert(p.getType() == Phaser::PLASMA);
+    }
+    cr_assert_stdout_eq_str(
+        "Switching ammo to type: plasma\n"
+    );
+}
+
+Test(Phaser_class,
+Test_changeType_changes_default_type_to_ROCKET_type_and_print_msg_to_stdout,
+.init = redirect_all_stdout)
+{
+    {
+        Phaser p(2, Phaser::REGULAR);
+
+        cr_assert(p.getType() == Phaser::REGULAR);
+        p.changeType(Phaser::ROCKET);
+        cr_assert(p.getType() == Phaser::ROCKET);
+    }
+    cr_assert_stdout_eq_str(
+        "Switching ammo to type: rocket\n"
+    );
+}
+
+Test(Phaser_class,
+    Test_changeType_changes_default_type_to_same_type_and_print_msg_to_stdout,
+    .init = redirect_all_stdout)
+    {
+        {
+            Phaser p(2, Phaser::ROCKET);
+    
+            cr_assert(p.getType() == Phaser::ROCKET);
+            p.changeType(Phaser::ROCKET);
+            cr_assert(p.getType() == Phaser::ROCKET);
+        }
+        cr_assert_stdout_eq_str(
+            "Switching ammo to type: rocket\n"
+        );
+    }
 ///////////////////////////////////////////////////////////////////////////////
 //                                  Main
 ///////////////////////////////////////////////////////////////////////////////

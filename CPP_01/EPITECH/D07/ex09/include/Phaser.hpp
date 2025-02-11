@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 9:18:53 PM 2025 Paradis
-** Last update Wed Feb 11 7:27:26 PM 2025 Paradis
+** Last update Wed Feb 11 7:50:41 PM 2025 Paradis
 */
 
 #ifndef 			__PHASER_HPP__
@@ -33,6 +33,7 @@ class	            Phaser
 
         void                fire(void);
         void                ejectClip(void);
+        void                changeType(AmmoType type);
 
     protected:
     private:

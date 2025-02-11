@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 9:24:41 PM 2025 Paradis
-** Last update Wed Feb 11 7:33:05 PM 2025 Paradis
+** Last update Wed Feb 11 7:53:14 PM 2025 Paradis
 */
 
 #include "../include/Phaser.hpp"
@@ -94,5 +94,23 @@ void                Phaser::ejectClip(void)
         delete [] _magazine;
         _magazine = nullptr;
         _nbAmmos = Empty;
+    }
+}
+
+void                Phaser::changeType(AmmoType type)
+{
+    _type = type;
+    std::cout << "Switching ammo to type: ";
+    switch (_type)
+    {
+        case 0:
+            std::cout << "regular" << std::endl;
+            break;
+        case 1:
+            std::cout << "plasma" << std::endl;
+            break;
+        case 2:
+            std::cout << "rocket" << std::endl;
+            break;
     }
 }
