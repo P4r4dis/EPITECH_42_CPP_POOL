@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 9:18:53 PM 2025 Paradis
-** Last update Wed Feb 11 7:50:41 PM 2025 Paradis
+** Last update Wed Feb 11 8:15:55 PM 2025 Paradis
 */
 
 #ifndef 			__PHASER_HPP__
@@ -25,7 +25,7 @@ class	            Phaser
         Phaser(int maxAmmo = 20, AmmoType type = REGULAR);
         ~Phaser(void);
 
-        int                 getNbAmmos(void) const;
+        int                 getCurrentAmmos(void) const;
         int                 getMaxAmmo(void) const;
         AmmoType            getType(void) const;
         static int          getEmptyMagazine(void);
@@ -34,6 +34,7 @@ class	            Phaser
         void                fire(void);
         void                ejectClip(void);
         void                changeType(AmmoType type);
+        void                reload(void);
 
     protected:
     private:

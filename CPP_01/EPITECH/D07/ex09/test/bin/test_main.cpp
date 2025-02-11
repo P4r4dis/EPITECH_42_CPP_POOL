@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 7:32:56 PM 2025 Paradis
-** Last update Wed Feb 11 7:54:44 PM 2025 Paradis
+** Last update Wed Feb 11 8:19:44 PM 2025 Paradis
 */
 
 
@@ -66,7 +66,7 @@ Test(Phaser_class, Test_constructor_default_parameter,
     Phaser p;
 
     cr_assert(p.getMaxAmmo() == 20);
-    cr_assert(p.getNbAmmos() == 20);
+    cr_assert(p.getCurrentAmmos() == 20);
     cr_assert(p.getType() == Phaser::AmmoType::REGULAR);
     cr_assert(p.getEmptyMagazine() == 0);
     cr_assert_not_null(p.getMagazine());
@@ -127,9 +127,9 @@ Test(Phaser_class, Test_fire_func_nbAmmos_decrements,
     {
         Phaser p(1, Phaser::ROCKET);
 
-        cr_assert(p.getNbAmmos() == 1);
+        cr_assert(p.getCurrentAmmos() == 1);
         p.fire();
-        cr_assert(p.getNbAmmos() == 0);
+        cr_assert(p.getCurrentAmmos() == 0);
     }
     cr_assert_stdout_eq_str(
         "Booooooom\n"
@@ -143,7 +143,7 @@ Test(Phaser_class, Test_fire_func_print_to_stdout_if_magazine_is_empty,
         Phaser p(0, Phaser::PLASMA);
 
         p.fire();
-        cr_assert(p.getNbAmmos() == 0);
+        cr_assert(p.getCurrentAmmos() == 0);
     }
     cr_assert_stdout_eq_str(
         "Clip empty, please reload\n"
@@ -156,9 +156,9 @@ Test(Phaser_class, Test_fire_func_magazine_is_shifted_by_one,
     {
         Phaser p(2, Phaser::ROCKET);
 
-        cr_assert(p.getNbAmmos() == 2);
+        cr_assert(p.getCurrentAmmos() == 2);
         p.fire();
-        cr_assert(p.getNbAmmos() == 1);
+        cr_assert(p.getCurrentAmmos() == 1);
         cr_assert(p.getMagazine()[0] == p.getType());
     }
     cr_assert_stdout_eq_str(
@@ -173,9 +173,9 @@ Test_ejectClip_ejects_magazine_and_reduces_amount_of_munition_to_0,
     {
         Phaser p(2, Phaser::ROCKET);
 
-        cr_assert(p.getNbAmmos() == 2);
+        cr_assert(p.getCurrentAmmos() == 2);
         p.ejectClip();
-        cr_assert(p.getNbAmmos() == 0);
+        cr_assert(p.getCurrentAmmos() == 0);
         cr_assert_null(p.getMagazine());
 
 
@@ -244,20 +244,79 @@ Test_changeType_changes_default_type_to_ROCKET_type_and_print_msg_to_stdout,
 }
 
 Test(Phaser_class,
-    Test_changeType_changes_default_type_to_same_type_and_print_msg_to_stdout,
-    .init = redirect_all_stdout)
+Test_changeType_changes_default_type_to_same_type_and_print_msg_to_stdout,
+.init = redirect_all_stdout)
+{
     {
-        {
-            Phaser p(2, Phaser::ROCKET);
-    
-            cr_assert(p.getType() == Phaser::ROCKET);
-            p.changeType(Phaser::ROCKET);
-            cr_assert(p.getType() == Phaser::ROCKET);
-        }
-        cr_assert_stdout_eq_str(
-            "Switching ammo to type: rocket\n"
-        );
+        Phaser p(2, Phaser::ROCKET);
+
+        cr_assert(p.getType() == Phaser::ROCKET);
+        p.changeType(Phaser::ROCKET);
+        cr_assert(p.getType() == Phaser::ROCKET);
     }
+    cr_assert_stdout_eq_str(
+        "Switching ammo to type: rocket\n"
+    );
+}
+
+Test(Phaser_class,
+Test_reload_func_reload_the_weapon_with_its_default_ammunition_type,
+.init = redirect_all_stdout)
+{
+    {
+        Phaser p(2, Phaser::ROCKET);
+
+        cr_assert(p.getCurrentAmmos() == 2);
+        cr_assert(p.getType() == Phaser::ROCKET);
+        for (int i = 0; i < p.getMaxAmmo(); ++i)
+            p.fire();
+        cr_assert(p.getCurrentAmmos() == 0);
+        p.reload();
+        cr_assert(p.getCurrentAmmos() == 2);
+        cr_assert(p.getType() == Phaser::ROCKET);
+    }
+    cr_assert_stdout_eq_str(
+        "Booooooom\n"
+        "Booooooom\n"
+        "Reloading...\n"
+    );
+}
+
+Test(Phaser_class,
+Test_reload_func_reload_weapon_with_default_ammunition_type_after_ejectClip,
+.init = redirect_all_stdout)
+{
+    {
+        Phaser p(2, Phaser::ROCKET);
+
+        cr_assert(p.getCurrentAmmos() == 2);
+        cr_assert(p.getType() == Phaser::ROCKET);
+        p.ejectClip();
+        cr_assert(p.getCurrentAmmos() == 0);
+        p.reload();
+        cr_assert(p.getCurrentAmmos() == 2);
+        cr_assert(p.getType() == Phaser::ROCKET);
+    }
+    cr_assert_stdout_eq_str(
+        "Reloading...\n"
+    );
+}
+
+Test(Phaser_class,
+Test_reload_func_reload_weapon_and_prints_msg_to_stdout,
+.init = redirect_all_stdout)
+{
+    {
+        Phaser p(2, Phaser::ROCKET);
+
+        p.reload();
+        cr_assert(p.getCurrentAmmos() == 2);
+        cr_assert(p.getType() == Phaser::ROCKET);
+    }
+    cr_assert_stdout_eq_str(
+        "Reloading...\n"
+    );
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                                  Main
 ///////////////////////////////////////////////////////////////////////////////
@@ -267,11 +326,11 @@ Test(main, Test_main, .init = redirect_all_stdout)
         Phaser p(5, Phaser::ROCKET);
 
         p.fire();
-        // p.reload();
+        p.reload();
 
-        // std::cout << "Firing all ammunition" << std::endl;
-        // while (p.getCurrentAmmos() > 0)
-        //     p.fire();
+        std::cout << "Firing all ammunitions" << std::endl;
+        while (p.getCurrentAmmos() > 0)
+            p.fire();
     }
     cr_assert_stdout_eq_str(
         "Booooooom\n"

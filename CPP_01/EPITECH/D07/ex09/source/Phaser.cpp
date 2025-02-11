@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 9:24:41 PM 2025 Paradis
-** Last update Wed Feb 11 7:53:14 PM 2025 Paradis
+** Last update Wed Feb 11 8:16:31 PM 2025 Paradis
 */
 
 #include "../include/Phaser.hpp"
@@ -36,7 +36,7 @@ Phaser::~Phaser()
     }
 }
 
-int                 Phaser::getNbAmmos(void) const
+int                 Phaser::getCurrentAmmos(void) const
 {
     return _nbAmmos;
 }
@@ -113,4 +113,14 @@ void                Phaser::changeType(AmmoType type)
             std::cout << "rocket" << std::endl;
             break;
     }
+}
+
+void                Phaser::reload(void)
+{
+    if (!_magazine)
+        _magazine = new AmmoType[_maxAmmo];
+    _nbAmmos = _maxAmmo;
+    for (int i = 0; i < _maxAmmo; ++i)
+        _magazine[i] = _type;
+    std::cout << "Reloading..." << std::endl;
 }
