@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Feb 10 7:33:45 PM 2025 Paradis
-## Last update Tue Feb 10 7:33:59 PM 2025 Paradis
+## Last update Wed Feb 11 9:28:19 PM 2025 Paradis
 ##
 
 
@@ -29,7 +29,7 @@ CPP_VERSION	+=	-std=c++23
 CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAGS)
 
 # # Files sources
-SRCS		=	$(SRC_PATH)/.cpp \
+SRCS		=	$(SRC_PATH)/Phaser.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp
