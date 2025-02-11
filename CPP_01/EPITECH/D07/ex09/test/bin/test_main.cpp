@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 7:32:56 PM 2025 Paradis
-** Last update Wed Feb 11 4:28:00 PM 2025 Paradis
+** Last update Wed Feb 11 7:04:13 PM 2025 Paradis
 */
 
 
@@ -82,41 +82,102 @@ Test(Phaser_class, Test_if_magazine_is_correctly_filled,
         cr_assert(magazine[i] == p.getType());
 }
 
-// Test(Phaser_class, Test_constructor_default_parameter,
-//     .init = redirect_all_stdout)
-//     {
-//         Phaser p;
-    
-//         cr_assert(p.getMaxAmmo() == 20);
-//         cr_assert(p.getNbAmmos() == 20);
-//         cr_assert(p.getType() == Phaser::AmmoType::REGULAR);
-//         cr_assert(p.getEmptyMagazine() == 0);
-//         cr_assert_not_null(p.getMagazine());
-//     }
+Test(Phaser_class, Test_fire_func_print_to_stdout_REGULAR_sounds_Ammo_loaded,
+.init = redirect_all_stdout)
+{
+    {
+        Phaser p(1, Phaser::REGULAR);
 
+        p.fire();
+    }
+    cr_assert_stdout_eq_str(
+        "Piouuuuuu\n"
+    );
+
+}
+
+Test(Phaser_class, Test_fire_func_print_to_stdout_PLASMA_sounds_Ammo_loaded,
+.init = redirect_all_stdout)
+{
+    {
+        Phaser p(1, Phaser::PLASMA);
+
+        p.fire();
+    }
+    cr_assert_stdout_eq_str(
+        "Fiouuuuuz\n"
+    );
+
+}
+
+Test(Phaser_class, Test_fire_func_print_to_stdout_ROCKET_sounds_Ammo_loaded,
+.init = redirect_all_stdout)
+{
+    {
+        Phaser p(1, Phaser::ROCKET);
+
+        p.fire();
+    }
+    cr_assert_stdout_eq_str(
+        "Booooooom\n"
+    );
+
+}
+
+Test(Phaser_class, Test_fire_func_nbAmmos_decrements,
+.init = redirect_all_stdout)
+{
+    {
+        Phaser p(1, Phaser::ROCKET);
+
+        cr_assert(p.getNbAmmos() == 1);
+        p.fire();
+        cr_assert(p.getNbAmmos() == 0);
+    }
+    cr_assert_stdout_eq_str(
+        "Booooooom\n"
+    );
+
+}
+
+Test(Phaser_class, Test_fire_func_print_to_stdout_if_magazine_is_empty,
+.init = redirect_all_stdout)
+{
+    {
+        Phaser p(0, Phaser::PLASMA);
+
+        p.fire();
+        Phaser::AmmoType *magazine = p.getMagazine();
+        cr_assert(magazine[0] != p.getType());
+    }
+    cr_assert_stdout_eq_str(
+        "Clip empty, please reload\n"
+    );
+
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                                  Main
 ///////////////////////////////////////////////////////////////////////////////
-// Test(main, Test_main, .init = redirect_all_stdout)
-// {
-//     {
-//         Phaser p(5, Phaser::ROCKET);
+Test(main, Test_main, .init = redirect_all_stdout)
+{
+    {
+        Phaser p(5, Phaser::ROCKET);
 
-//         p.fire();
-//         p.reload();
+        p.fire();
+        // p.reload();
 
-//         std::cout << "Firing all ammunition" << std::endl;
-//         while (p.getCurrentAmmos() > 0)
-//             p.fire();
-//     }
-//     cr_assert_stdout_eq_str(
-//         "Booooooom\n"
-//         "Reloading...\n"
-//         "Firing all ammunitions\n"
-//         "Booooooom\n"
-//         "Booooooom\n"
-//         "Booooooom\n"
-//         "Booooooom\n"
-//         "Booooooom\n"
-//     );
-// }
+        // std::cout << "Firing all ammunition" << std::endl;
+        // while (p.getCurrentAmmos() > 0)
+        //     p.fire();
+    }
+    cr_assert_stdout_eq_str(
+        "Booooooom\n"
+        "Reloading...\n"
+        "Firing all ammunitions\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+    );
+}

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 9:18:53 PM 2025 Paradis
-** Last update Wed Feb 11 4:05:32 PM 2025 Paradis
+** Last update Wed Feb 11 5:40:26 PM 2025 Paradis
 */
 
 #ifndef 			__PHASER_HPP__
@@ -30,6 +30,8 @@ class	            Phaser
         AmmoType            getType(void) const;
         static int          getEmptyMagazine(void);
         AmmoType            *getMagazine(void) const;
+
+        void                fire(void);
 
     protected:
     private:

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 9:24:41 PM 2025 Paradis
-** Last update Wed Feb 11 4:05:37 PM 2025 Paradis
+** Last update Wed Feb 11 7:03:39 PM 2025 Paradis
 */
 
 #include "../include/Phaser.hpp"
@@ -24,10 +24,7 @@ Phaser::Phaser(int maxAmmo, AmmoType type)
                                             _magazine(new AmmoType[_maxAmmo])
 {
     for (int i = 0; i < _maxAmmo; ++i)
-    {
-        std::cout << i << std::endl;
         _magazine[i] = _type;
-    }
 }
 
 Phaser::~Phaser()
@@ -59,4 +56,27 @@ int                 Phaser::getEmptyMagazine(void)
 Phaser::AmmoType    *Phaser::getMagazine(void) const
 {
     return _magazine;
+}
+
+void                Phaser::fire(void)
+{
+    if (_nbAmmos == Empty)
+    {
+        std::cout << "Clip empty, please reload" << std::endl;
+        return ;
+    }
+
+    switch (_type)
+    {
+        case REGULAR:
+            std::cout << Sounds::Regular << std::endl;
+            break;
+        case PLASMA:
+            std::cout << Sounds::Plasma << std::endl;
+            break;
+        case ROCKET:
+            std::cout << Sounds::Rocket << std::endl;
+            break;
+    }
+    _nbAmmos--;
 }
