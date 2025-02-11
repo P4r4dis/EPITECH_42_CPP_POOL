@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 7:32:56 PM 2025 Paradis
-** Last update Wed Feb 11 7:19:44 PM 2025 Paradis
+** Last update Wed Feb 11 7:26:50 PM 2025 Paradis
 */
 
 
@@ -171,6 +171,23 @@ Test(Phaser_class, Test_fire_func_magazine_is_shifted_by_one,
     );
 
 }
+
+Test(Phaser_class,
+Test_ejectClip_ejects_magazine_and_reduces_amount_of_munition_to_0,
+.init = redirect_all_stdout)
+{
+    {
+        Phaser p(2, Phaser::ROCKET);
+
+        cr_assert(p.getNbAmmos() == 2);
+        p.ejectClip();
+        cr_assert(p.getNbAmmos() == 0);
+        cr_assert_null(p.getMagazine());
+
+
+    }
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //                                  Main

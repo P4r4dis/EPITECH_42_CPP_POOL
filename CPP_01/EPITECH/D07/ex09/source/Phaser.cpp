@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 9:24:41 PM 2025 Paradis
-** Last update Wed Feb 11 7:15:55 PM 2025 Paradis
+** Last update Wed Feb 11 7:33:05 PM 2025 Paradis
 */
 
 #include "../include/Phaser.hpp"
@@ -30,7 +30,10 @@ Phaser::Phaser(int maxAmmo, AmmoType type)
 Phaser::~Phaser()
 {
     if (_magazine)
+    {
         delete [] _magazine;
+        _magazine = nullptr;
+    }
 }
 
 int                 Phaser::getNbAmmos(void) const
@@ -82,4 +85,14 @@ void                Phaser::fire(void)
             break;
     }
     _nbAmmos--;
+}
+
+void                Phaser::ejectClip(void)
+{
+    if (_magazine)
+    {
+        delete [] _magazine;
+        _magazine = nullptr;
+        _nbAmmos = Empty;
+    }
 }
