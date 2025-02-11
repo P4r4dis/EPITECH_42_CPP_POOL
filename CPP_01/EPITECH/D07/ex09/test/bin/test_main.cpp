@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 7:32:56 PM 2025 Paradis
-** Last update Wed Feb 11 4:12:46 PM 2025 Paradis
+** Last update Wed Feb 11 4:28:00 PM 2025 Paradis
 */
 
 
@@ -71,6 +71,29 @@ Test(Phaser_class, Test_constructor_default_parameter,
     cr_assert(p.getEmptyMagazine() == 0);
     cr_assert_not_null(p.getMagazine());
 }
+
+Test(Phaser_class, Test_if_magazine_is_correctly_filled,
+.init = redirect_all_stdout)
+{
+    Phaser p;
+
+    Phaser::AmmoType *magazine = p.getMagazine();
+    for (int i = 0; i < p.getMaxAmmo(); ++i)
+        cr_assert(magazine[i] == p.getType());
+}
+
+// Test(Phaser_class, Test_constructor_default_parameter,
+//     .init = redirect_all_stdout)
+//     {
+//         Phaser p;
+    
+//         cr_assert(p.getMaxAmmo() == 20);
+//         cr_assert(p.getNbAmmos() == 20);
+//         cr_assert(p.getType() == Phaser::AmmoType::REGULAR);
+//         cr_assert(p.getEmptyMagazine() == 0);
+//         cr_assert_not_null(p.getMagazine());
+//     }
+
 ///////////////////////////////////////////////////////////////////////////////
 //                                  Main
 ///////////////////////////////////////////////////////////////////////////////
