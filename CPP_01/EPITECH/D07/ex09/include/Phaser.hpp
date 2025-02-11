@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 9:18:53 PM 2025 Paradis
-** Last update Tue Feb 10 9:49:39 PM 2025 Paradis
+** Last update Wed Feb 11 4:05:32 PM 2025 Paradis
 */
 
 #ifndef 			__PHASER_HPP__
@@ -17,16 +17,27 @@ class	            Phaser
     public:
         enum        AmmoType
         {
-            Regular,
-            Plasma,
-            Rocket
+            REGULAR,
+            PLASMA,
+            ROCKET
         };
 
-        Phaser();
-        ~Phaser();
+        Phaser(int maxAmmo = 20, AmmoType type = REGULAR);
+        ~Phaser(void);
+
+        int                 getNbAmmos(void) const;
+        int                 getMaxAmmo(void) const;
+        AmmoType            getType(void) const;
+        static int          getEmptyMagazine(void);
+        AmmoType            *getMagazine(void) const;
 
     protected:
     private:
+        static const int    Empty;
+        int                 _maxAmmo;
+        int                 _nbAmmos;
+        AmmoType            _type;
+        AmmoType            *_magazine;
 };
 
 #endif 				/* !__PHASER_HPP___ */

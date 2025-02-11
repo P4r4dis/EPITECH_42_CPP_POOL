@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 7:32:56 PM 2025 Paradis
-** Last update Tue Feb 10 9:46:21 PM 2025 Paradis
+** Last update Wed Feb 11 4:12:46 PM 2025 Paradis
 */
 
 
@@ -24,42 +24,53 @@ void redirect_all_stdout(void)
     cr_redirect_stderr();
 }
 
-Test(Sounds_class, Test_Regular_const_class_variable,
+Test(Sounds_class, Test_REGULAR_const_class_variable,
 .init = redirect_all_stdout)
 {
     cr_assert(Sounds::Regular == "Piouuuuuu");
 }
 
-Test(Sounds_class, Test_Plasma_const_class_variable,
+Test(Sounds_class, Test_PLASMA_const_class_variable,
 .init = redirect_all_stdout)
 {
     cr_assert(Sounds::Plasma == "Fiouuuuuz");
 }
 
-Test(Sounds_class, Test_Rocket_const_class_variable,
+Test(Sounds_class, Test_ROCKET_const_class_variable,
 .init = redirect_all_stdout)
 {
     cr_assert(Sounds::Rocket == "Booooooom");
 }
 
-Test(Phaser_class, Test_Enum_AmmoType_Regular_const_variable,
+Test(Phaser_class, Test_Enum_AmmoType_REGULAR_const_variable,
 .init = redirect_all_stdout)
 {
-    cr_assert(Phaser::AmmoType::Regular == 0);
+    cr_assert(Phaser::AmmoType::REGULAR == 0);
 }
 
-Test(Phaser_class, Test_Enum_AmmoType_Plasma_const_variable,
+Test(Phaser_class, Test_Enum_AmmoType_PLASMA_const_variable,
 .init = redirect_all_stdout)
 {
-    cr_assert(Phaser::AmmoType::Plasma == 1);
+    cr_assert(Phaser::AmmoType::PLASMA == 1);
 }
 
-Test(Phaser_class, Test_Enum_AmmoType_Rocket_const_variable,
+Test(Phaser_class, Test_Enum_AmmoType_ROCKET_const_variable,
 .init = redirect_all_stdout)
 {
-    cr_assert(Phaser::AmmoType::Rocket == 2);
+    cr_assert(Phaser::AmmoType::ROCKET == 2);
 }
 
+Test(Phaser_class, Test_constructor_default_parameter,
+.init = redirect_all_stdout)
+{
+    Phaser p;
+
+    cr_assert(p.getMaxAmmo() == 20);
+    cr_assert(p.getNbAmmos() == 20);
+    cr_assert(p.getType() == Phaser::AmmoType::REGULAR);
+    cr_assert(p.getEmptyMagazine() == 0);
+    cr_assert_not_null(p.getMagazine());
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                                  Main
 ///////////////////////////////////////////////////////////////////////////////
