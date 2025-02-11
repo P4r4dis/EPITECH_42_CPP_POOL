@@ -5,10 +5,11 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 9:24:41 PM 2025 Paradis
-** Last update Wed Feb 11 8:16:31 PM 2025 Paradis
+** Last update Wed Feb 11 9:12:19 PM 2025 Paradis
 */
 
 #include "../include/Phaser.hpp"
+#include "../include/Sounds.hpp"
 #include <iostream>
 
 const int Phaser::Empty = 0;
@@ -69,10 +70,10 @@ void                Phaser::fire(void)
         return ;
     }
 
-    for (int i = 0; i < _nbAmmos - 1; ++i)
-        _magazine[i] = _magazine[i + 1];
+    // for (int i = 0; i < _nbAmmos - 1; ++i)
+    //     _magazine[i] = _magazine[i + 1];
     
-    switch (_magazine[0])
+    switch (_magazine[_nbAmmos - 1])//(_magazine[0])
     {
         case REGULAR:
             std::cout << Sounds::Regular << std::endl;
@@ -123,4 +124,15 @@ void                Phaser::reload(void)
     for (int i = 0; i < _maxAmmo; ++i)
         _magazine[i] = _type;
     std::cout << "Reloading..." << std::endl;
+}
+
+void                Phaser::addAmmo(AmmoType type)
+{
+    if (_nbAmmos >= _maxAmmo)
+    {
+        std::cout << "Clip full" << std::endl;
+        return ;
+    }
+
+    _magazine[_nbAmmos++] = type;
 }

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 7:32:56 PM 2025 Paradis
-** Last update Wed Feb 11 8:19:44 PM 2025 Paradis
+** Last update Wed Feb 11 9:16:23 PM 2025 Paradis
 */
 
 
@@ -17,6 +17,7 @@
 #include <iostream>
 
 #include "../../include/Phaser.hpp"
+#include "../../include/Sounds.hpp"
 
 void redirect_all_stdout(void)
 {
@@ -150,7 +151,7 @@ Test(Phaser_class, Test_fire_func_print_to_stdout_if_magazine_is_empty,
     );
 }
 
-Test(Phaser_class, Test_fire_func_magazine_is_shifted_by_one,
+Test(Phaser_class, Test_fire_func_magazine_is_shifted_as_LIFO,
 .init = redirect_all_stdout)
 {
     {
@@ -167,7 +168,7 @@ Test(Phaser_class, Test_fire_func_magazine_is_shifted_by_one,
 }
 
 Test(Phaser_class,
-Test_ejectClip_ejects_magazine_and_reduces_amount_of_munition_to_0,
+Test_ejectClip_ejects_magazine_and_reduces_amount_of_ammunition_to_0,
 .init = redirect_all_stdout)
 {
     {
@@ -315,6 +316,97 @@ Test_reload_func_reload_weapon_and_prints_msg_to_stdout,
     }
     cr_assert_stdout_eq_str(
         "Reloading...\n"
+    );
+}
+
+Test(Phaser_class,
+Test_addAmmo_func_prints_msg_to_stdout_if_clip_is_full,
+.init = redirect_all_stdout)
+{
+    {
+        Phaser p(2, Phaser::ROCKET);
+
+        p.addAmmo(Phaser::ROCKET);
+    }
+    cr_assert_stdout_eq_str(
+        "Clip full\n"
+    );
+}
+
+Test(Phaser_class,
+Test_addAmmo_func_adds_ammunition_with_the_same_type,
+.init = redirect_all_stdout)
+{
+    {
+        Phaser p(5, Phaser::ROCKET);
+
+        cr_assert(p.getCurrentAmmos() == 5);
+        p.fire();
+        cr_assert(p.getCurrentAmmos() == 4);
+        p.addAmmo(Phaser::ROCKET);
+        cr_assert(p.getCurrentAmmos() == 5);
+
+    }
+    cr_assert_stdout_eq_str(
+        "Booooooom\n"
+    );
+}
+
+Test(Phaser_class,
+Test_addAmmo_func_adds_several_ammunitions_with_the_same_type,
+.init = redirect_all_stdout)
+{
+    {
+        Phaser p(5, Phaser::ROCKET);
+
+        cr_assert(p.getCurrentAmmos() == 5);
+        p.fire();
+        p.fire();
+        p.fire();
+        cr_assert(p.getCurrentAmmos() == 2);
+        p.addAmmo(Phaser::ROCKET);
+        p.addAmmo(Phaser::ROCKET);
+        p.addAmmo(Phaser::ROCKET);
+        cr_assert(p.getCurrentAmmos() == 5);
+
+    }
+    cr_assert_stdout_eq_str(
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+    );
+}
+
+Test(Phaser_class,
+Test_addAmmo_func_adds_several_ammunitions_with_other_types,
+.init = redirect_all_stdout)
+{
+    {
+        Phaser p(5, Phaser::ROCKET);
+
+        cr_assert(p.getCurrentAmmos() == 5);
+        p.fire();
+        p.fire();
+        p.fire();
+        cr_assert(p.getCurrentAmmos() == 2);
+        p.addAmmo(Phaser::REGULAR);
+        p.addAmmo(Phaser::PLASMA);
+        p.addAmmo(Phaser::ROCKET);
+        cr_assert(p.getCurrentAmmos() == 5);
+        std::cout << "Firing all ammunitions" << std::endl;
+        while (p.getCurrentAmmos() > 0)
+            p.fire();
+    }
+    cr_assert_stdout_eq_str(
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Firing all ammunitions\n"
+        "Booooooom\n"
+        "Fiouuuuuz\n"
+        "Piouuuuuu\n"
+        "Booooooom\n"
+        "Booooooom\n"
     );
 }
 ///////////////////////////////////////////////////////////////////////////////

@@ -5,13 +5,12 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Feb 10 9:18:53 PM 2025 Paradis
-** Last update Wed Feb 11 8:15:55 PM 2025 Paradis
+** Last update Wed Feb 11 9:11:38 PM 2025 Paradis
 */
 
 #ifndef 			__PHASER_HPP__
 	# define 		__PHASER_HPP__
 
-    #include "Sounds.hpp"
 class	            Phaser
 {
     public:
@@ -35,6 +34,7 @@ class	            Phaser
         void                ejectClip(void);
         void                changeType(AmmoType type);
         void                reload(void);
+        void                addAmmo(AmmoType type);
 
     protected:
     private:
