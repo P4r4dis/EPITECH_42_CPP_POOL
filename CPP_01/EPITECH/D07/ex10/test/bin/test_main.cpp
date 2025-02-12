@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 4:08:44 PM 2025 Paradis
-** Last update Thu Feb 12 10:05:17 PM 2025 Paradis
+** Last update Thu Feb 12 10:26:12 PM 2025 Paradis
 */
 
 
@@ -283,4 +283,43 @@ Test_reload_func_reload_weapon_and_prints_msg_to_stdout,
         "Reloading...\n"
         "KreogCom 101010 shutting down\n"
     );
+}
+
+Test(Skat_class, test_com_returns_valid_reference, .init = redirect_all_stdout)
+{
+    Skat    skat("Junior", 5, 101010, 42, 42, Phaser::ROCKET);
+    
+    KreogCom &comRef = skat.com();
+
+    cr_assert_eq(&comRef, &skat.com());
+
+    cr_assert_eq(comRef.getX(), 42);
+}
+
+Test(Skat_class, test_com_allows_method_calls, .init = redirect_all_stdout)
+{
+    {
+        Skat    skat("Junior", 5, 101010, 42, 42, Phaser::ROCKET);
+
+        KreogCom &comRef = skat.com();
+
+        comRef.ping();
+    }
+    cr_assert_stdout_eq_str(
+        "KreogCom 101010 initialized\n"
+        "KreogCom 101010 currently at 42 42\n"
+        "KreogCom 101010 shutting down\n"
+    );
+}
+
+Test(Skat_class, test_com_reference_persistence, .init = redirect_all_stdout) {
+    Skat    skat("Junior", 5, 101010, 42, 42, Phaser::ROCKET);
+
+    KreogCom &comRef1 = skat.com();
+
+    // Create another Skat
+    Skat    skat2("Junior2", 15, 323232, 32, 32, Phaser::PLASMA);
+
+    // Ensure comRef1 is still pointing to the correct KreogCom
+    cr_assert_eq(comRef1.getX(), 42);
 }
