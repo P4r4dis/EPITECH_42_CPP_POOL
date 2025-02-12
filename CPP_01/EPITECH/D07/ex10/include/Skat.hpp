@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 3:54:32 PM 2025 Paradis
-** Last update Thu Feb 12 5:15:56 PM 2025 Paradis
+** Last update Thu Feb 12 6:38:27 PM 2025 Paradis
 */
 
 #ifndef 			__SKAT_HPP__
@@ -38,6 +38,8 @@ class	Skat
         Phaser::AmmoType    getSkatType(void) const;
         KreogCom            *getPtrKreogCom(void) const;
         Phaser              *getPtrPhaser(void) const;
+
+        void                fire(void);
     protected:
     private:
 

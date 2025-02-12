@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 4:08:44 PM 2025 Paradis
-** Last update Thu Feb 12 5:03:05 PM 2025 Paradis
+** Last update Thu Feb 12 6:59:02 PM 2025 Paradis
 */
 
 
@@ -40,7 +40,9 @@ Test(Skat, Test_CTOR_Catchs_all_parameters, .init = redirect_all_stdout)
     int                 y = skat.getSkatY();
     Phaser::AmmoType    type = skat.getSkatType();
     KreogCom            *ptrKreogCom = skat.getPtrKreogCom();
-    Phaser              *ptrPhaser = skat.getPtrPhaser();
+    Phaser              *ptrSkat = skat.getPtrPhaser();
+    int                 maxAmmunition = ptrSkat->getMaxAmmo();
+    int                 ammunition = ptrSkat->getCurrentAmmos();
 
     cr_assert(name == "Junior");
     cr_assert(stimPaks == 5);
@@ -49,11 +51,13 @@ Test(Skat, Test_CTOR_Catchs_all_parameters, .init = redirect_all_stdout)
     cr_assert(y == 42);
     cr_assert(type == Phaser::REGULAR);
     cr_assert_not_null(&ptrKreogCom);
-    cr_assert_not_null(&ptrPhaser);
+    cr_assert_not_null(&ptrSkat);
+    cr_assert(maxAmmunition == 20);
+    cr_assert(ammunition == 20);
 }
 
 Test(Skat, Test_stimPaks_function_can_modify__stimPaks_private_variable,
- .init = redirect_all_stdout)
+.init = redirect_all_stdout)
 {
     Skat    skat("Junior", 5, 101010, 42, 42, Phaser::REGULAR);
     
@@ -62,4 +66,122 @@ Test(Skat, Test_stimPaks_function_can_modify__stimPaks_private_variable,
     cr_assert(skat.stimPaks() == 5);
     skat.stimPaks() = 10;
     cr_assert(skat.stimPaks() == 10);
+}
+
+
+Test(Skat_class, Test_fire_func_print_to_stdout_REGULAR_sounds_Ammo_loaded,
+.init = redirect_all_stdout)
+    {
+        {
+            Skat    skat("Junior", 5, 101010, 42, 42, Phaser::REGULAR);
+    
+            skat.fire();
+        }
+        cr_assert_stdout_eq_str(
+            "KreogCom 101010 initialized\n"
+            "Bang\n"
+            "KreogCom 101010 shutting down\n"
+        );
+    }
+    
+Test(Skat_class, Test_fire_func_print_to_stdout_PLASMA_sounds_Ammo_loaded,
+.init = redirect_all_stdout)
+{
+    {
+        Skat    skat("Junior", 5, 101010, 42, 42, Phaser::PLASMA);
+
+        skat.fire();
+    }
+    cr_assert_stdout_eq_str(
+        "KreogCom 101010 initialized\n"
+        "Fwooosh\n"
+        "KreogCom 101010 shutting down\n"
+    );
+}
+
+Test(Skat_class, Test_fire_func_print_to_stdout_ROCKET_sounds_Ammo_loaded,
+.init = redirect_all_stdout)
+{
+    {
+        Skat    skat("Junior", 5, 101010, 42, 42, Phaser::ROCKET);
+
+        skat.fire();
+    }
+    cr_assert_stdout_eq_str(
+        "KreogCom 101010 initialized\n"
+        "Booooooom\n"
+        "KreogCom 101010 shutting down\n"
+    );
+}
+
+Test(Skat_class, Test_fire_func_nbAmmos_decrements,
+.init = redirect_all_stdout)
+{
+    {
+        Skat    skat("Junior", 5, 101010, 42, 42, Phaser::ROCKET);
+
+        cr_assert(skat.getPtrPhaser()->getCurrentAmmos() == 20);
+        skat.fire();
+        cr_assert(skat.getPtrPhaser()->getCurrentAmmos() == 19);
+    }
+    cr_assert_stdout_eq_str(
+        "KreogCom 101010 initialized\n"
+        "Booooooom\n"
+        "KreogCom 101010 shutting down\n"    );
+}
+
+Test(Skat_class, Test_fire_func_print_to_stdout_if_magazine_is_empty,
+.init = redirect_all_stdout)
+{
+    {
+        Skat    skat("Junior", 5, 101010, 42, 42, Phaser::ROCKET);
+
+        for (; skat.getPtrPhaser()->getCurrentAmmos() != 0;)
+            skat.fire();
+        cr_assert(skat.getPtrPhaser()->getCurrentAmmos() == 0);
+        skat.fire();
+    }
+    cr_assert_stdout_eq_str(
+        "KreogCom 101010 initialized\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Clip empty, please reload\n"
+        "KreogCom 101010 shutting down\n"
+    );
+}
+
+Test(Skat_class, Test_fire_func_magazine_is_shifted_as_LIFO,
+.init = redirect_all_stdout)
+{
+    {
+        Skat    skat("Junior", 5, 101010, 42, 42, Phaser::ROCKET);
+
+        cr_assert(skat.getPtrPhaser()->getCurrentAmmos() == 20);
+        skat.fire();
+        cr_assert(skat.getPtrPhaser()->getCurrentAmmos() == 19);
+        cr_assert(skat.getPtrPhaser()->getMagazine()[0] == skat.getSkatType());
+    }
+    cr_assert_stdout_eq_str(
+        "KreogCom 101010 initialized\n"
+        "Booooooom\n"
+        "KreogCom 101010 shutting down\n"
+    );
 }

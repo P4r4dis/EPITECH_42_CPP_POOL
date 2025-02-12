@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Wed Feb 12 4:10:41 PM 2025 Paradis
-## Last update Thu Feb 12 4:54:14 PM 2025 Paradis
+## Last update Thu Feb 12 7:57:55 PM 2025 Paradis
 ##
 
 
@@ -26,6 +26,7 @@ CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(IN
 SRCS         	= 	$(SRC_PATH)/Skat.cpp \
 					$(SRC_PATH)/KreogCom.cpp \
 					$(SRC_PATH)/Phaser.cpp \
+					$(SRC_PATH)/Squad.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)

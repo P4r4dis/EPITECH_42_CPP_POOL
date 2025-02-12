@@ -5,18 +5,15 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 4:08:21 PM 2025 Paradis
-** Last update Thu Feb 12 4:08:25 PM 2025 Paradis
+** Last update Thu Feb 12 7:57:00 PM 2025 Paradis
 */
 
 #include "../include/Phaser.hpp"
 #include "../include/Sounds.hpp"
+
 #include <iostream>
 
-const int Phaser::Empty = 0;
-
-const std::string Sounds::Regular = "Piouuuuuu";
-const std::string Sounds::Plasma = "Fiouuuuuz";
-const std::string Sounds::Rocket = "Booooooom";
+const int           Phaser::Empty = 0;
 
 Phaser::Phaser(int maxAmmo, AmmoType type)
                                         :   _maxAmmo(maxAmmo),
@@ -70,10 +67,7 @@ void                Phaser::fire(void)
         return ;
     }
 
-    // for (int i = 0; i < _nbAmmos - 1; ++i)
-    //     _magazine[i] = _magazine[i + 1];
-    
-    switch (_magazine[_nbAmmos - 1])//(_magazine[0])
+    switch (_magazine[_nbAmmos - 1])
     {
         case REGULAR:
             std::cout << Sounds::Regular << std::endl;

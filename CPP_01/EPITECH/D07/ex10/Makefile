@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Wed Feb 12 4:11:12 PM 2025 Paradis
-## Last update Thu Feb 12 4:54:12 PM 2025 Paradis
+## Last update Thu Feb 12 7:58:09 PM 2025 Paradis
 ##
 
 
@@ -31,6 +31,7 @@ CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAG
 SRCS		=	$(SRC_PATH)/Skat.cpp \
 				$(SRC_PATH)/KreogCom.cpp \
 				$(SRC_PATH)/Phaser.cpp \
+				$(SRC_PATH)/Squad.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp
