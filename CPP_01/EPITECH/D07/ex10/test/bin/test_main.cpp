@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 4:08:44 PM 2025 Paradis
-** Last update Thu Feb 12 6:59:02 PM 2025 Paradis
+** Last update Thu Feb 12 9:03:24 PM 2025 Paradis
 */
 
 
@@ -185,3 +185,19 @@ Test(Skat_class, Test_fire_func_magazine_is_shifted_as_LIFO,
         "KreogCom 101010 shutting down\n"
     );
 }
+
+Test(Skat,
+Test_locate_func_prints_linked_and_current_KreogCom_infos_to_stdout,
+.init = redirect_all_stdout)
+    {
+        {
+            Skat    skat("Junior", 5, 101010, 42, 42, Phaser::ROCKET);
+
+            skat.locate();
+        }
+        cr_assert_stdout_eq_str(
+            "KreogCom 101010 initialized\n"
+            "KreogCom 101010 currently at 42 42\n"
+            "KreogCom 101010 shutting down\n"
+        );
+    }

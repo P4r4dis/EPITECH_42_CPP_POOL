@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 3:56:39 PM 2025 Paradis
-** Last update Thu Feb 12 7:57:31 PM 2025 Paradis
+** Last update Thu Feb 12 9:51:37 PM 2025 Paradis
 */
 
 
@@ -122,4 +122,9 @@ Phaser              *Skat::getPtrPhaser(void) const
 void                Skat::fire(void)
 {
     _Phaser->fire();
+}
+
+void                Skat::locate(void)
+{
+    _KreogCom->ping();
 }
