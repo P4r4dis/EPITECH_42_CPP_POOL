@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 3:56:39 PM 2025 Paradis
-** Last update Thu Feb 12 9:51:37 PM 2025 Paradis
+** Last update Thu Feb 12 10:00:49 PM 2025 Paradis
 */
 
 
@@ -127,4 +127,9 @@ void                Skat::fire(void)
 void                Skat::locate(void)
 {
     _KreogCom->ping();
+}
+
+void                Skat::reload(void)
+{
+    _Phaser->reload();
 }

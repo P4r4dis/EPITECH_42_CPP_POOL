@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 4:08:44 PM 2025 Paradis
-** Last update Thu Feb 12 9:03:24 PM 2025 Paradis
+** Last update Thu Feb 12 10:05:17 PM 2025 Paradis
 */
 
 
@@ -189,15 +189,98 @@ Test(Skat_class, Test_fire_func_magazine_is_shifted_as_LIFO,
 Test(Skat,
 Test_locate_func_prints_linked_and_current_KreogCom_infos_to_stdout,
 .init = redirect_all_stdout)
+{
     {
-        {
-            Skat    skat("Junior", 5, 101010, 42, 42, Phaser::ROCKET);
+        Skat    skat("Junior", 5, 101010, 42, 42, Phaser::ROCKET);
 
-            skat.locate();
-        }
-        cr_assert_stdout_eq_str(
-            "KreogCom 101010 initialized\n"
-            "KreogCom 101010 currently at 42 42\n"
-            "KreogCom 101010 shutting down\n"
-        );
+        skat.locate();
     }
+    cr_assert_stdout_eq_str(
+        "KreogCom 101010 initialized\n"
+        "KreogCom 101010 currently at 42 42\n"
+        "KreogCom 101010 shutting down\n"
+    );
+}
+
+Test(Skat,
+Test_reload_func_reload_the_weapon_with_its_default_ammunition_type,
+.init = redirect_all_stdout)
+{
+    {
+        Skat    skat("Junior", 5, 101010, 42, 42, Phaser::ROCKET);
+
+        cr_assert(skat.getPtrPhaser()->getCurrentAmmos() == 20);
+        cr_assert(skat.getSkatType() == Phaser::ROCKET);
+        for (int i = 0; i < skat.getPtrPhaser()->getMaxAmmo(); ++i)
+            skat.getPtrPhaser()->fire();
+        cr_assert(skat.getPtrPhaser()->getCurrentAmmos() == 0);
+        skat.reload();
+        cr_assert(skat.getPtrPhaser()->getCurrentAmmos() == 20);
+        cr_assert(skat.getSkatType() == Phaser::ROCKET);
+    }
+    cr_assert_stdout_eq_str(
+        "KreogCom 101010 initialized\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Booooooom\n"
+        "Reloading...\n"
+        "KreogCom 101010 shutting down\n"
+    );
+}
+
+Test(Skat,
+Test_reload_func_reload_weapon_with_default_ammunition_type_after_ejectClip,
+.init = redirect_all_stdout)
+{
+    {
+        Skat    skat("Junior", 5, 101010, 42, 42, Phaser::ROCKET);
+
+        cr_assert(skat.getPtrPhaser()->getCurrentAmmos() == 20);
+        cr_assert(skat.getSkatType() == Phaser::ROCKET);
+        skat.getPtrPhaser()->ejectClip();
+        cr_assert(skat.getPtrPhaser()->getCurrentAmmos() == 0);
+        skat.reload();
+        cr_assert(skat.getPtrPhaser()->getCurrentAmmos() == 20);
+        cr_assert(skat.getSkatType() == Phaser::ROCKET);
+    }
+    cr_assert_stdout_eq_str(
+        "KreogCom 101010 initialized\n"
+        "Reloading...\n"
+        "KreogCom 101010 shutting down\n"
+    );
+}
+
+Test(Skat,
+Test_reload_func_reload_weapon_and_prints_msg_to_stdout,
+.init = redirect_all_stdout)
+{
+    {
+        Skat    skat("Junior", 5, 101010, 42, 42, Phaser::ROCKET);
+
+        skat.reload();
+        cr_assert(skat.getPtrPhaser()->getCurrentAmmos() == 20);
+        cr_assert(skat.getSkatType() == Phaser::ROCKET);
+    }
+    cr_assert_stdout_eq_str(
+        "KreogCom 101010 initialized\n"
+        "Reloading...\n"
+        "KreogCom 101010 shutting down\n"
+    );
+}

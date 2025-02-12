@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 3:54:32 PM 2025 Paradis
-** Last update Thu Feb 12 9:00:44 PM 2025 Paradis
+** Last update Thu Feb 12 10:00:21 PM 2025 Paradis
 */
 
 #ifndef 			__SKAT_HPP__
@@ -41,6 +41,7 @@ class	Skat
 
         void                fire(void);
         void                locate(void);
+        void                reload(void);
     protected:
     private:
 
