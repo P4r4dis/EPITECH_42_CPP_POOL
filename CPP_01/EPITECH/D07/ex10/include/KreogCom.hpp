@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 3:57:24 PM 2025 Paradis
-** Last update Thu Feb 12 3:57:29 PM 2025 Paradis
+** Last update Fri Feb 13 4:28:55 PM 2025 Paradis
 */
 
 #ifndef 			__KREOGCOM_HPP__
@@ -18,6 +18,7 @@ class	            KreogCom
         ~KreogCom(void);
 
         void        addCom(int x, int y, int serial);
+        void        addCom(KreogCom *com);
         void        removeCom();
         KreogCom    *getCom(void);
 
@@ -25,6 +26,7 @@ class	            KreogCom
         void        locateSquad();
 
         int         getX() const;
+        KreogCom    *getNext(void) const;
 
     protected:
     private:

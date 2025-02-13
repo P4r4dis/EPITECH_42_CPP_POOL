@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 4:08:44 PM 2025 Paradis
-** Last update Thu Feb 12 10:26:12 PM 2025 Paradis
+** Last update Fri Feb 13 4:33:42 PM 2025 Paradis
 */
 
 
@@ -322,4 +322,51 @@ Test(Skat_class, test_com_reference_persistence, .init = redirect_all_stdout) {
 
     // Ensure comRef1 is still pointing to the correct KreogCom
     cr_assert_eq(comRef1.getX(), 42);
+}
+
+
+Test(KreogCom_class,
+Test_addCom_func_which_adds_a_new_node_to_the_linked_list,
+.init = redirect_all_stdout)
+{
+    {
+        Skat    skat("Junior", 5, 101010, 42, 42, Phaser::ROCKET);
+        KreogCom    *k = new KreogCom(56, 25, 65);
+
+        skat.com().addCom(k);
+        cr_assert(skat.com().getNext() == k);
+    }
+    cr_assert_stdout_eq_str(
+        "KreogCom 101010 initialized\n"
+        "KreogCom 65 initialized\n"
+        "KreogCom 65 shutting down\n"
+        "KreogCom 101010 shutting down\n"
+    );
+}
+
+Test(KreogCom_class,
+Test_addCom_func_which_adds_a_several_new_nodes_to_the_linked_list,
+.init = redirect_all_stdout)
+{
+    {
+        Skat    skat("Junior", 5, 101010, 42, 42, Phaser::ROCKET);
+        KreogCom    *k = new KreogCom(56, 25, 65);
+        KreogCom    *k2 = new KreogCom(73, 34, 51);
+        
+        skat.com().addCom(k);
+        skat.com().addCom(k2);
+
+        cr_assert(skat.com().getNext() == k2);
+        cr_assert(skat.com().getNext()->getNext() == k);
+
+
+    }
+    cr_assert_stdout_eq_str(
+        "KreogCom 101010 initialized\n"
+        "KreogCom 65 initialized\n"
+        "KreogCom 51 initialized\n"
+        "KreogCom 65 shutting down\n"
+        "KreogCom 51 shutting down\n"
+        "KreogCom 101010 shutting down\n"
+    );
 }

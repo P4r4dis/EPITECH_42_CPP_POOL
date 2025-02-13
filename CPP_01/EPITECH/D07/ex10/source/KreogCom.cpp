@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 3:57:52 PM 2025 Paradis
-** Last update Thu Feb 12 3:57:57 PM 2025 Paradis
+** Last update Fri Feb 13 4:29:33 PM 2025 Paradis
 */
 
 
@@ -33,6 +33,12 @@ void        KreogCom::addCom(int x, int y, int serial)
 
     newKreogCom->_next = _next;
     _next = newKreogCom;
+}
+
+void        KreogCom::addCom(KreogCom *com)
+{
+    com->_next = _next;
+    _next = com;
 }
 
 int         KreogCom::getX() const
@@ -73,4 +79,9 @@ void        KreogCom::locateSquad(void)
         current = current->_next;
     }
     ping();
+}
+
+KreogCom    *KreogCom::getNext(void) const
+{
+    return _next;
 }
