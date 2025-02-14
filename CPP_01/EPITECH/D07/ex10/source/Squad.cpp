@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 7:49:34 PM 2025 Paradis
-** Last update Sat Feb 14 2:50:13 PM 2025 Paradis
+** Last update Sat Feb 14 4:49:11 PM 2025 Paradis
 */
 
 #include "../include/Squad.hpp"
@@ -76,4 +76,9 @@ void                Squad::foreach(int beginIdx,
 void                Squad::fire(void)
 {
     foreach(0, &Skat::fire);
+}
+
+void                Squad::localisation(void)
+{
+    foreach(0, &Skat::locate);
 }
