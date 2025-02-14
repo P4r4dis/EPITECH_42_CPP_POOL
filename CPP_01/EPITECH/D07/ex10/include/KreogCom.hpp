@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 3:57:24 PM 2025 Paradis
-** Last update Fri Feb 13 4:28:55 PM 2025 Paradis
+** Last update Sat Feb 14 6:36:02 PM 2025 Paradis
 */
 
 #ifndef 			__KREOGCOM_HPP__

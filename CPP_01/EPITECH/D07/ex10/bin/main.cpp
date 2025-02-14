@@ -5,12 +5,15 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 3:51:59 PM 2025 Paradis
-** Last update Thu Feb 12 3:53:49 PM 2025 Paradis
+** Last update Sat Feb 14 6:29:35 PM 2025 Paradis
 */
 
-
+#include "../include/Squad.hpp"
 
 int     main(void)
 {
+    Squad   s(0, 0, Phaser::REGULAR);
+
+    s.fire();
     return 0;
 }
