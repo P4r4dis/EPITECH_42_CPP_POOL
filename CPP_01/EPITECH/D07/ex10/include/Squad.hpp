@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 7:50:00 PM 2025 Paradis
-** Last update Sat Feb 14 6:06:59 PM 2025 Paradis
+** Last update Sat Feb 14 6:24:14 PM 2025 Paradis
 */
 
 #ifndef 			__SQUAD_HPP__
@@ -25,7 +25,7 @@ class	            Squad
         int                 getPosXBegin(void) const;
         int                 getPosYBegin(void) const;
         Phaser::AmmoType    getAmmoType(void) const;
-        Skat                **getPtrSkat(void) const;
+        Skat                **skats(void) const;
         
         int                 size(void) const;
 

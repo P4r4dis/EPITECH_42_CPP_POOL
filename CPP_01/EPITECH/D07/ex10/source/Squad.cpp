@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 7:49:34 PM 2025 Paradis
-** Last update Sat Feb 14 6:17:14 PM 2025 Paradis
+** Last update Sat Feb 14 6:24:23 PM 2025 Paradis
 */
 
 #include "../include/Squad.hpp"
@@ -54,7 +54,7 @@ Phaser::AmmoType    Squad::getAmmoType(void) const
     return _ammoType;
 }
 
-Skat                **Squad::getPtrSkat(void) const
+Skat                **Squad::skats(void) const
 {
     return _Skat;
 }

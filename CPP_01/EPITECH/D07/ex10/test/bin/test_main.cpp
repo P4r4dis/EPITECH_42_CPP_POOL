@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 4:08:44 PM 2025 Paradis
-** Last update Sat Feb 14 6:20:54 PM 2025 Paradis
+** Last update Sat Feb 14 6:25:05 PM 2025 Paradis
 */
 
 
@@ -379,7 +379,6 @@ Test(Squad, Test_CTOR_not_null,
     cr_assert_not_null(&squad);
 }
 
-#include <iostream>
 Test(Squad, Test_CTOR_Catchs_default_all_parameters,
 .init = redirect_all_stdout)
 {
@@ -390,7 +389,7 @@ Test(Squad, Test_CTOR_Catchs_default_all_parameters,
         int                 posYBegin = squad.getPosYBegin();
         Phaser::AmmoType    type = squad.getAmmoType();
         int                 size = squad.size();
-        Skat                **skat = squad.getPtrSkat();
+        Skat                **skat = squad.skats();
 
         cr_assert(posXBegin == 0);
         cr_assert(posYBegin == 0);
@@ -429,7 +428,7 @@ Test(Squad, Test_CTOR_Catchs_all_parameters,
         int                 posYBegin = squad.getPosYBegin();
         Phaser::AmmoType    type = squad.getAmmoType();
         int                 size = squad.size();
-        Skat                **skat = squad.getPtrSkat();
+        Skat                **skat = squad.skats();
 
         cr_assert(posXBegin == 0);
         cr_assert(posYBegin == 0);
