@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 4:08:44 PM 2025 Paradis
-** Last update Sat Feb 14 2:22:02 PM 2025 Paradis
+** Last update Sat Feb 14 2:49:19 PM 2025 Paradis
 */
 
 
@@ -545,3 +545,29 @@ Test(Squad, Test_forEach_funct_use_other_function_for_each_Skat,
         "KreogCom 4 shutting down\n"
     );
 }
+
+Test(Squad, Test_fire_funct_prints_to_stdout,
+    .init = redirect_all_stdout)
+    {
+        {
+            Squad   squad(0, 0, Phaser::REGULAR);
+            squad.fire();
+        }
+        cr_assert_stdout_eq_str(
+            "KreogCom 0 initialized\n"
+            "KreogCom 1 initialized\n"
+            "KreogCom 2 initialized\n"
+            "KreogCom 3 initialized\n"
+            "KreogCom 4 initialized\n"
+            "Bang\n"
+            "Bang\n"
+            "Bang\n"
+            "Bang\n"
+            "Bang\n"
+            "KreogCom 0 shutting down\n"
+            "KreogCom 1 shutting down\n"
+            "KreogCom 2 shutting down\n"
+            "KreogCom 3 shutting down\n"
+            "KreogCom 4 shutting down\n"
+        );
+    }

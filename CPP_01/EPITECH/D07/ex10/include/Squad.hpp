@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 7:50:00 PM 2025 Paradis
-** Last update Sat Feb 14 1:57:27 PM 2025 Paradis
+** Last update Sat Feb 14 2:48:04 PM 2025 Paradis
 */
 
 #ifndef 			__SQUAD_HPP__
@@ -31,11 +31,7 @@ class	            Squad
 
         void                foreach(int beginIdx,
                                     void (Skat::*actionPtr)(void));
-
-        void    mockFire()
-        {
-            foreach(0, &Skat::fire);
-        }
+        void                fire(void);
     protected:
     private:
         int                 _posXBegin;

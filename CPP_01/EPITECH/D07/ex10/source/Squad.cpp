@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 7:49:34 PM 2025 Paradis
-** Last update Sat Feb 14 2:16:55 PM 2025 Paradis
+** Last update Sat Feb 14 2:50:13 PM 2025 Paradis
 */
 
 #include "../include/Squad.hpp"
@@ -71,4 +71,9 @@ void                Squad::foreach(int beginIdx,
         return ;
     for (; beginIdx < _size; ++beginIdx)
         (*_Skat[beginIdx].*actionPtr)();
+}
+
+void                Squad::fire(void)
+{
+    foreach(0, &Skat::fire);
 }
