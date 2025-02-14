@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 4:08:44 PM 2025 Paradis
-** Last update Fri Feb 13 4:33:42 PM 2025 Paradis
+** Last update Sat Feb 14 12:51:54 PM 2025 Paradis
 */
 
 
@@ -14,7 +14,7 @@
 #include <criterion/new/assert.h>
 #include <criterion/redirect.h>
 
-#include "../../include/Skat.hpp"
+#include "../../include/Squad.hpp"
 
 void redirect_all_stdout(void)
 {
@@ -368,5 +368,112 @@ Test_addCom_func_which_adds_a_several_new_nodes_to_the_linked_list,
         "KreogCom 65 shutting down\n"
         "KreogCom 51 shutting down\n"
         "KreogCom 101010 shutting down\n"
+    );
+}
+
+Test(Squad, Test_CTOR_not_null,
+.init = redirect_all_stdout)
+{
+    Squad   squad;
+    
+    cr_assert_not_null(&squad);
+}
+
+#include <iostream>
+Test(Squad, Test_CTOR_Catchs_default_all_parameters,
+.init = redirect_all_stdout)
+{
+    {
+        Squad   squad;
+        
+        int                 posXBegin = squad.getPosXBegin();
+        int                 posYBegin = squad.getPosYBegin();
+        Phaser::AmmoType    type = squad.getAmmoType();
+        int                 size = squad.size();
+        Skat                **skat = squad.getPtrSkat();
+
+        cr_assert(posXBegin == 0);
+        cr_assert(posYBegin == 0);
+        cr_assert(type == Phaser::ROCKET);
+        cr_assert(size == 5);
+        cr_assert_not_null(skat);
+        for (int i = 0; i < squad.size(); ++i)
+        {
+            cr_assert(skat[i]->getSkatX() == i * 10);
+            cr_assert(skat[i]->getSkatY() == i * 15);
+            cr_assert_not_null(skat[i]);
+        }
+        cr_assert_null(skat[size]);
+    }
+    cr_assert_stdout_eq_str(
+        "KreogCom 0 initialized\n"
+        "KreogCom 1 initialized\n"
+        "KreogCom 2 initialized\n"
+        "KreogCom 3 initialized\n"
+        "KreogCom 4 initialized\n"
+        "KreogCom 0 shutting down\n"
+        "KreogCom 1 shutting down\n"
+        "KreogCom 2 shutting down\n"
+        "KreogCom 3 shutting down\n"
+        "KreogCom 4 shutting down\n"
+    );
+}
+
+Test(Squad, Test_CTOR_Catchs_all_parameters,
+.init = redirect_all_stdout)
+{
+    {
+        Squad   squad(0, 0, Phaser::REGULAR);
+        
+        int                 posXBegin = squad.getPosXBegin();
+        int                 posYBegin = squad.getPosYBegin();
+        Phaser::AmmoType    type = squad.getAmmoType();
+        int                 size = squad.size();
+        Skat                **skat = squad.getPtrSkat();
+
+        cr_assert(posXBegin == 0);
+        cr_assert(posYBegin == 0);
+        cr_assert(type == Phaser::REGULAR);
+        cr_assert(size == 5);
+        cr_assert_not_null(skat);
+        for (int i = 0; i < squad.size(); ++i)
+        {
+            cr_assert(skat[i]->getSkatX() == i * 10);
+            cr_assert(skat[i]->getSkatY() == i * 15);
+            cr_assert_not_null(skat[i]);
+        }
+        cr_assert_null(skat[size]);
+    }
+    cr_assert_stdout_eq_str(
+        "KreogCom 0 initialized\n"
+        "KreogCom 1 initialized\n"
+        "KreogCom 2 initialized\n"
+        "KreogCom 3 initialized\n"
+        "KreogCom 4 initialized\n"
+        "KreogCom 0 shutting down\n"
+        "KreogCom 1 shutting down\n"
+        "KreogCom 2 shutting down\n"
+        "KreogCom 3 shutting down\n"
+        "KreogCom 4 shutting down\n"
+    );
+}
+
+Test(Squad, Test_CTOR_prints_to_stdout,
+.init = redirect_all_stdout)
+{
+    {
+        Squad   squad(0, 0, Phaser::REGULAR);
+    }
+    cr_assert_stdout_eq_str(
+        "KreogCom 0 initialized\n"
+        "KreogCom 1 initialized\n"
+        "KreogCom 2 initialized\n"
+        "KreogCom 3 initialized\n"
+        "KreogCom 4 initialized\n"
+        "KreogCom 0 shutting down\n"
+        "KreogCom 1 shutting down\n"
+        "KreogCom 2 shutting down\n"
+        "KreogCom 3 shutting down\n"
+        "KreogCom 4 shutting down\n"
     );
 }
