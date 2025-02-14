@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 7:49:34 PM 2025 Paradis
-** Last update Sat Feb 14 4:49:11 PM 2025 Paradis
+** Last update Sat Feb 14 6:17:14 PM 2025 Paradis
 */
 
 #include "../include/Squad.hpp"
@@ -81,4 +81,12 @@ void                Squad::fire(void)
 void                Squad::localisation(void)
 {
     foreach(0, &Skat::locate);
+}
+
+Skat                *Squad::at(int idx)
+{
+    if (idx < 0 || idx > _size)
+        return nullptr;
+
+    return (_Skat) ?  _Skat[idx] :  nullptr;
 }

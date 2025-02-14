@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 4:08:44 PM 2025 Paradis
-** Last update Sat Feb 14 4:50:16 PM 2025 Paradis
+** Last update Sat Feb 14 6:20:54 PM 2025 Paradis
 */
 
 
@@ -597,3 +597,74 @@ Test(Squad, Test_localisation_funct_prints_position_to_stdout,
         "KreogCom 4 shutting down\n"
     );
 }
+
+Test(Squad, Test_at_funct_return_nullptr_because_idx_is_negatif,
+.init = redirect_all_stdout)
+{
+    {
+        Squad   squad(0, 0, Phaser::REGULAR);
+        Skat *ptr = squad.at(-1);
+
+        cr_assert_null(ptr);
+    }
+    cr_assert_stdout_eq_str(
+        "KreogCom 0 initialized\n"
+        "KreogCom 1 initialized\n"
+        "KreogCom 2 initialized\n"
+        "KreogCom 3 initialized\n"
+        "KreogCom 4 initialized\n"
+        "KreogCom 0 shutting down\n"
+        "KreogCom 1 shutting down\n"
+        "KreogCom 2 shutting down\n"
+        "KreogCom 3 shutting down\n"
+        "KreogCom 4 shutting down\n"
+    );
+}
+
+Test(Squad, Test_at_funct_return_nullptr_because_idx_is__out_of_range,
+.init = redirect_all_stdout)
+{
+    {
+        Squad   squad(0, 0, Phaser::REGULAR);
+        Skat *ptr = squad.at(10);
+
+        cr_assert_null(ptr);
+    }
+    cr_assert_stdout_eq_str(
+        "KreogCom 0 initialized\n"
+        "KreogCom 1 initialized\n"
+        "KreogCom 2 initialized\n"
+        "KreogCom 3 initialized\n"
+        "KreogCom 4 initialized\n"
+        "KreogCom 0 shutting down\n"
+        "KreogCom 1 shutting down\n"
+        "KreogCom 2 shutting down\n"
+        "KreogCom 3 shutting down\n"
+        "KreogCom 4 shutting down\n"
+    );
+}
+
+Test(Squad, Test_at_funct_returns_Skat_at_the_index,
+    .init = redirect_all_stdout)
+    {
+        {
+            Squad   squad(0, 0, Phaser::REGULAR);
+            for (int i = 0; i < squad.size(); ++i)
+            {
+                Skat *ptr = squad.at(i);
+                cr_assert_not_null(&ptr[i]);
+            }
+        }
+        cr_assert_stdout_eq_str(
+            "KreogCom 0 initialized\n"
+            "KreogCom 1 initialized\n"
+            "KreogCom 2 initialized\n"
+            "KreogCom 3 initialized\n"
+            "KreogCom 4 initialized\n"
+            "KreogCom 0 shutting down\n"
+            "KreogCom 1 shutting down\n"
+            "KreogCom 2 shutting down\n"
+            "KreogCom 3 shutting down\n"
+            "KreogCom 4 shutting down\n"
+        );
+    }
