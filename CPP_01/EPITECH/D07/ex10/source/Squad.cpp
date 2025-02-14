@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Feb 12 7:49:34 PM 2025 Paradis
-** Last update Sat Feb 14 12:56:07 PM 2025 Paradis
+** Last update Sat Feb 14 2:16:55 PM 2025 Paradis
 */
 
 #include "../include/Squad.hpp"
@@ -62,4 +62,13 @@ Skat                **Squad::getPtrSkat(void) const
 int                 Squad::size(void) const
 {
     return _size;
+}
+
+void                Squad::foreach(int beginIdx,
+                                    void (Skat::*actionPtr) (void))
+{
+    if (beginIdx < 0 || beginIdx > _size)
+        return ;
+    for (; beginIdx < _size; ++beginIdx)
+        (*_Skat[beginIdx].*actionPtr)();
 }
