@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 19:58:37 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/18 21:24:01 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/18 21:33:40 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,4 +144,12 @@ Test(Fixed_class, Test_setRawBits_allows_to_change_fixedPointValue,
     cr_assert(a.getRawBits() == 0);
     a.setRawBits(42);
     cr_assert(a.getRawBits() == 42);
+}
+
+Test(Fixed_class, Test_getFractionalBits_func_returns_fractionalBits,
+.init = redirect_all_stdout)
+{
+    Fixed a;
+
+    cr_assert(a.getFractionalBits() == 8);
 }
