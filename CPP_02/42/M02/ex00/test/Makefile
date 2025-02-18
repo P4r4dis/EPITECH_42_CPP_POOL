@@ -1,12 +1,14 @@
-##
-## Makefile for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_01/EPITECH/D07/ex00/test
-##
-## Made by Paradis
-## Login   <Adil Denia>
-##
-## Started on  Fri Sep 20 7:47:13 PM 2024 Paradis
-## Last update Sat Sep 20 7:51:14 PM 2024 Paradis
-##
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/02/18 19:58:09 by Paradis           #+#    #+#              #
+#    Updated: 2025/02/18 19:58:29 by Paradis          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 
 G++           	= 	g++
@@ -15,7 +17,7 @@ SRC_PATH		= 	../source
 INC_PATH 		= 	../include
 BIN_PATH 		= 	./bin
 
-NAME          	= 	test_
+NAME          	= 	test_First_class_in_canoncial_form
 #############################################
 
 INCFLAGS     	+= 	-I $(INC_PATH)
@@ -23,7 +25,7 @@ CPP_VERSION		+=	-std=c++23
 CRITFLAGS    	+=  --coverage -lcriterion
 CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAGS) $(CRITFLAGS)
 
-SRCS         	= 	$(SRC_PATH)/.cpp \
+SRCS         	= 	$(SRC_PATH)/Fixed.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)

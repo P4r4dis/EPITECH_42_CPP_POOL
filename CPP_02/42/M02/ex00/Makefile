@@ -1,12 +1,16 @@
-##
-## Makefile for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_01/EPITECH/D07/ex00
-##
-## Made by Paradis
-## Login   <Adil Denia>
-##
-## Started on  Fri Sep 20 7:47:52 PM 2024 Paradis
-## Last update Sat Sep 20 7:50:33 PM 2024 Paradis
-##
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/02/18 19:57:43 by Paradis           #+#    #+#              #
+#    Updated: 2025/02/18 19:58:00 by Paradis          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+
 
 
 # # Compilateur
@@ -18,7 +22,7 @@ INC_PATH	=	./include
 UT_PATH		=	./test
 
 
-NAME		=	
+NAME		=	First_class_in_canoncial_form
 UT_NAME 	= 	test_$(NAME)
 ##############################################
 
@@ -28,7 +32,7 @@ CPP_VERSION	+=	-std=c++23
 CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAGS)
 
 # # Files sources
-SRCS		=	$(SRC_PATH)/.cpp \
+SRCS		=	$(SRC_PATH)/Fixed.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp
