@@ -6,12 +6,14 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:19:18 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/18 21:11:22 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/18 21:25:16 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "../include/Fixed.hpp"
+
+const int    _fractionalBits = 8;
 
 Fixed::Fixed(void)  : _fixedPointValue(0)
 {
@@ -41,5 +43,10 @@ Fixed               &Fixed::operator=(const Fixed &src)
 int     Fixed::getRawBits(void) const
 {
     std::cout << "getRawBits member function called" << std::endl;
-    return this->_fixedPointValue;
+    return _fixedPointValue;
 }
+
+void    Fixed::setRawBits(int fixedPointValue)
+{
+    _fixedPointValue = fixedPointValue;
+} 

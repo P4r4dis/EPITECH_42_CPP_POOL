@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:01:46 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/18 20:07:03 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/18 21:22:47 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@
             Fixed               &operator=(const Fixed &src); // Assignation operator -> Canonical
 
             int                 getRawBits(void) const;
+            int                 getFractionalBits(void) const;
             void                setRawBits(int const raw);
 
         private:
             int                 _fixedPointValue;
-            static const int    _fractionalBits = 8;
+            static const int    _fractionalBits;
     };
 #endif //               !_FIXED_HPP__
