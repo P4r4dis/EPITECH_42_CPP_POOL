@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 20:19:18 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/18 21:25:16 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/18 21:28:41 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int     Fixed::getRawBits(void) const
     return _fixedPointValue;
 }
 
-void    Fixed::setRawBits(int fixedPointValue)
+void    Fixed::setRawBits(int const raw)
 {
-    _fixedPointValue = fixedPointValue;
+    _fixedPointValue = raw;
 } 
