@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 19:58:37 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/18 21:33:40 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/18 22:03:45 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ Test(Fixed_class, Test_assigment_operator_prints_msg_to_stdout,
         "Copy assignment operator called\n"
         "getRawBits member function called\n"
         "getRawBits member function called\n"
+        "getRawBits member function called\n"
         "Destructor called\n"
         "Destructor called\n"
     );
@@ -131,6 +132,8 @@ Test(Fixed_class, Test_CopyCTOR_and_CTOR_and_DTOR_prints_msg_to_stdout,
     cr_assert_stdout_eq_str(
         "Default constructor called\n"
         "Copy constructor called\n"
+        "Copy assignment operator called\n"
+        "getRawBits member function called\n"
         "Destructor called\n"
         "Destructor called\n"
     );
@@ -152,4 +155,43 @@ Test(Fixed_class, Test_getFractionalBits_func_returns_fractionalBits,
     Fixed a;
 
     cr_assert(a.getFractionalBits() == 8);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//                            TEST main                                      //
+///////////////////////////////////////////////////////////////////////////////
+#include <iostream>
+
+Test(main, Test_main, .init = redirect_all_stdout)
+{
+    {
+        Fixed a;
+        Fixed b(a);
+        Fixed c;
+
+        c = b;
+
+        std::cout << a.getRawBits() << std::endl;
+        std::cout << b.getRawBits() << std::endl;
+        std::cout << c.getRawBits() << std::endl;
+    }
+    cr_assert_stdout_eq_str(
+        "Default constructor called\n"
+        "Copy constructor called\n"
+        "Copy assignment operator called\n"
+        "getRawBits member function called\n"
+        "Default constructor called\n"
+        "Copy assignment operator called\n"
+        "getRawBits member function called\n"
+        "getRawBits member function called\n"
+        "0\n"
+        "getRawBits member function called\n"
+        "0\n"
+        "getRawBits member function called\n"
+        "0\n"
+        "Destructor called\n"
+        "Destructor called\n"
+        "Destructor called\n"
+    );
 }
