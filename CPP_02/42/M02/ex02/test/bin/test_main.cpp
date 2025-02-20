@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:13:40 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/20 18:53:32 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/20 19:18:33 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -404,6 +404,56 @@ Test(Fixed_class, Test_less_than_or_equal_operator_overload_with_large_values,
 
     cr_assert(a <= b);
     cr_assert_not(b <= a);
+}
+
+Test(Fixed_class, Test_equal_equal_operator_basic_overload,
+.init = redirect_all_stdout)
+{
+    Fixed a(5);
+    Fixed b(10);
+    
+    cr_assert_not(a == b);
+    cr_assert_not(b == a);
+}
+
+Test(Fixed_class, Test_equal_equal_operator_overload_with_equal_values,
+.init = redirect_all_stdout)
+{
+    Fixed a(7);
+    Fixed b(7);
+
+    cr_assert(a == b);
+    cr_assert(b == a);
+}
+
+Test(Fixed_class, Test_equal_equal_operator_overload_with_negative_values,
+.init = redirect_all_stdout)
+{
+    Fixed a(-7);
+    Fixed b(-3);
+
+    cr_assert_not(a == b);
+    cr_assert_not(b == a);
+}
+
+Test(Fixed_class, Test_equal_equal_operator_overload_with_mixed_values,
+.init = redirect_all_stdout)
+{
+    Fixed a(2);
+    Fixed b(-5);
+
+    cr_assert_not(a == b);
+    cr_assert_not(b == a);
+}
+
+Test(Fixed_class, Test_equal_equal_operator_overload_with_large_values,
+.init = redirect_all_stdout)
+{
+    Fixed a(500000);
+    Fixed b(1000000);
+
+    cr_assert_not(a == b);
+    cr_assert_not(b == a);
 }
 
 
