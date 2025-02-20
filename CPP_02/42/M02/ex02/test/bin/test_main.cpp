@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:13:40 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/20 17:19:40 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/20 18:05:49 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Test(Fixed_class, Test_default_CTOR_isDefined, .init = redirect_all_stdout)
     cr_assert_not_null(&a);
 }
 
-Test(Fixed_class, Test_default_CTOR_initializes_fixedPointValue_to_zero,
+Test(Fixed_class, Test_default_CTOR_initializes_FixedValue_to_zero,
 .init = redirect_all_stdout)
 {
     Fixed a;
@@ -42,7 +42,7 @@ Test(Fixed_class, Test_default_CTOR_initializes_fixedPointValue_to_zero,
     cr_assert(a.getRawBits() == 0);
 }
 
-Test(Fixed_class, Test_getRawBits_func_returns_fixedPointValue,
+Test(Fixed_class, Test_getRawBits_func_returns_FixedValue,
 .init = redirect_all_stdout)
 {
     {
@@ -78,7 +78,7 @@ Test(Fixed_class, Test_assigment_operator,
     cr_assert(b.getRawBits() == a.getRawBits());
 }
 
-Test(Fixed_class, Test_setRawBits_allows_to_change_fixedPointValue,
+Test(Fixed_class, Test_setRawBits_allows_to_change_FixedValue,
 .init = redirect_all_stdout)
 {
     Fixed a;
@@ -104,7 +104,7 @@ Test(Fixed_class, Test_custom_CTOR_take_integer_isDefined, .init = redirect_all_
     cr_assert_not_null(&a);
 }
 
-Test(Fixed_class, Test_custom_CTOR_initializes_fixedPointValue_value,
+Test(Fixed_class, Test_custom_CTOR_initializes_FixedValue_value,
 .init = redirect_all_stdout)
 {
     Fixed const a(10);
@@ -119,7 +119,7 @@ Test(Fixed_class, Test_custom_CTOR_take_float_isDefined, .init = redirect_all_st
     cr_assert_not_null(&a);
 }
 
-Test(Fixed_class, Test_custom_CTOR_taking_float_initializes_fixedPointValue_value,
+Test(Fixed_class, Test_custom_CTOR_taking_float_initializes_FixedValue_value,
 .init = redirect_all_stdout)
 {
     Fixed const a(42.42f);
@@ -128,7 +128,7 @@ Test(Fixed_class, Test_custom_CTOR_taking_float_initializes_fixedPointValue_valu
 }
 
 
-Test(Fixed_class, Test_toFloat_funct_converts_fixedPointValue_to_float,
+Test(Fixed_class, Test_toFloat_funct_converts_FixedValue_to_float,
 .init = redirect_all_stdout)
 {
     Fixed a;
@@ -190,7 +190,7 @@ Test_operator_stream_insertion_overloaded_prints_msg_to_stdout,
     );
 }
 
-Test(Fixed_class, Test_toInt_funct_converts_fixedPointValue_to_integer,
+Test(Fixed_class, Test_toInt_funct_converts_FixedValue_to_integer,
 .init = redirect_all_stdout)
 {
     Fixed a;
@@ -205,6 +205,58 @@ Test(Fixed_class, Test_toInt_funct_converts_fixedPointValue_to_integer,
     cr_assert(c.toInt() == 42);
     cr_assert(d.toInt() == 10);
 }
+
+Test(Fixed_class, Test_greater_than_operator_basic_overload,
+.init = redirect_all_stdout)
+{
+    Fixed a(10);
+    Fixed b(5);
+    
+    cr_assert(a > b);
+    cr_assert_not(b > a);
+}
+
+Test(Fixed_class, Test_greater_than_operator_overload_with_equal_values,
+.init = redirect_all_stdout)
+{
+    Fixed a(7);
+    Fixed b(7);
+
+    cr_assert_not(a > b);
+    cr_assert_not(b > a);
+}
+
+Test(Fixed_class, Test_greater_than_operator_overload_with_negative_values,
+.init = redirect_all_stdout)
+{
+    Fixed a(-3);
+    Fixed b(-7);
+
+    cr_assert(a > b);
+    cr_assert_not(b > a);
+}
+
+Test(Fixed_class, Test_greater_than_operator_overload_with_mixed_values,
+.init = redirect_all_stdout)
+{
+    Fixed a(-5);
+    Fixed b(2);
+
+    cr_assert_not(a > b);
+    cr_assert(b > a);
+}
+
+Test(Fixed_class, Test_greater_than_operator_overload_with_large_values,
+.init = redirect_all_stdout)
+{
+    Fixed a(1000000);
+    Fixed b(500000);
+
+    cr_assert(a > b);
+    cr_assert_not(b > a);
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
