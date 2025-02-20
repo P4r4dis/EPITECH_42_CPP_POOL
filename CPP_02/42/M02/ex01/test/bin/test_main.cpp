@@ -6,16 +6,18 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:27:43 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/20 00:09:15 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/20 03:16:53 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <criterion/criterion.h>
+#include <criterion/internal/assert.h>
 #include <criterion/logging.h>
 #include <criterion/new/assert.h>
 #include <criterion/redirect.h>
-#include <ostream>
+
+#include <iostream>
 
 #include "../../include/Fixed.hpp"
 
@@ -214,10 +216,26 @@ Test(Fixed_class, Test_custom_CTOR_taking_float_prints_msg_to_stdout,
         "Destructor called\n"
     );
 }
+
+Test(Fixed_class, Test_toFloat_funct_converts_fixedPointValue_to_float,
+.init = redirect_all_stdout)
+{
+    Fixed a;
+    Fixed const b(10);
+    Fixed const c(42.42f);
+    Fixed const d(b);
+    
+    a = Fixed(1234.4321f);
+
+    cr_assert_float_eq(a.toFloat(), 1234.43, 0.01);
+    cr_assert_float_eq(b.toFloat(), 10, 0.0001);
+    cr_assert_float_eq(c.toFloat(), 42.4219, 0.0001);
+    cr_assert_float_eq(d.toFloat(), 10, 0.0001);
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
-#include <iostream>
+
 
 Test(main, Test_main, .init = redirect_all_stdout)
 {

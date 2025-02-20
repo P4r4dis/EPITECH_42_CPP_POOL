@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:23:08 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/20 00:07:57 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/20 03:11:02 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
             int                 getRawBits(void) const;
             static int          getFractionalBits(void);
             void                setRawBits(int const raw);
+
+            float               toFloat(void) const;
 
         private:
             int                 _fixedPointValue;

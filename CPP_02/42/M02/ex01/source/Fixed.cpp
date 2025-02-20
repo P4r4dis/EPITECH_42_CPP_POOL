@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:23:46 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/20 00:08:04 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/20 02:56:40 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,9 @@ void    Fixed::setRawBits(int const raw)
 int     Fixed::getFractionalBits(void)
 {
     return _fractionalBits;
+}
+
+float   Fixed::toFloat(void) const
+{
+    return static_cast<float>(_fixedPointValue) / (1 << _fractionalBits);
 }
