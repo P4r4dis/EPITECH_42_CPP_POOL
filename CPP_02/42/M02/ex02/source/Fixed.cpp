@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:10:17 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/20 19:11:26 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/20 19:26:41 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,11 @@ bool    Fixed::operator<=(const Fixed &rhs) const
 bool    Fixed::operator==(const Fixed &rhs) const
 {
     return (_fixedPointValue == rhs._fixedPointValue);
+}
+
+bool    Fixed::operator!=(const Fixed &rhs) const
+{
+    return (_fixedPointValue != rhs._fixedPointValue);
 }
 
 std::ostream    &operator<<(std::ostream &os, Fixed const &rhs)
