@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:23:46 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/20 02:56:40 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/20 03:47:36 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ Fixed               &Fixed::operator=(const Fixed &src)
 
 int     Fixed::getRawBits(void) const
 {
-    std::cout << "getRawBits member function called" << std::endl;
     return _fixedPointValue;
 }
 
@@ -76,4 +75,9 @@ int     Fixed::getFractionalBits(void)
 float   Fixed::toFloat(void) const
 {
     return static_cast<float>(_fixedPointValue) / (1 << _fractionalBits);
+}
+
+std::ostream    &operator<<(std::ostream &os, Fixed const &rhs)
+{
+    return os << rhs.toFloat();
 }

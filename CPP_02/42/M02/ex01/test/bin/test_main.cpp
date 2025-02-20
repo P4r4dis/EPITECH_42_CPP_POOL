@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:27:43 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/20 03:16:53 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/20 03:48:45 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ Test(Fixed_class, Test_getRawBits_func_prints_msg_to_stdout,
     }
     cr_assert_stdout_eq_str(
         "Default constructor called\n"
-        "getRawBits member function called\n"
         "Destructor called\n"
     );
 }
@@ -119,9 +118,6 @@ Test(Fixed_class, Test_assigment_operator_prints_msg_to_stdout,
         "Default constructor called\n"
         "Default constructor called\n"
         "Copy assignment operator called\n"
-        "getRawBits member function called\n"
-        "getRawBits member function called\n"
-        "getRawBits member function called\n"
         "Destructor called\n"
         "Destructor called\n"
     );
@@ -138,7 +134,6 @@ Test(Fixed_class, Test_CopyCTOR_and_CTOR_and_DTOR_prints_msg_to_stdout,
         "Default constructor called\n"
         "Copy constructor called\n"
         "Copy assignment operator called\n"
-        "getRawBits member function called\n"
         "Destructor called\n"
         "Destructor called\n"
     );
@@ -232,40 +227,98 @@ Test(Fixed_class, Test_toFloat_funct_converts_fixedPointValue_to_float,
     cr_assert_float_eq(c.toFloat(), 42.4219, 0.0001);
     cr_assert_float_eq(d.toFloat(), 10, 0.0001);
 }
-///////////////////////////////////////////////////////////////////////////////
-//                            TEST main                                      //
-///////////////////////////////////////////////////////////////////////////////
 
+Test(Fixed_class, Test_overload_operator_stream_insertion,
+.init = redirect_all_stdout)
+{
+    Fixed a;
+    Fixed const b(10);
+    Fixed const c(42.42f);
+    Fixed const d(b);
+    
+    a = Fixed(1234.4321f);
 
-Test(main, Test_main, .init = redirect_all_stdout)
+    cr_assert_float_eq(a.toFloat(), 1234.43, 0.01);
+    cr_assert_float_eq(b.toFloat(), 10, 0.0001);
+    cr_assert_float_eq(c.toFloat(), 42.4219, 0.0001);
+    cr_assert_float_eq(d.toFloat(), 10, 0.0001);
+}
+
+Test(Fixed_class,
+Test_operator_stream_insertion_overloaded_prints_msg_to_stdout,
+.init = redirect_all_stdout)
 {
     {
         Fixed a;
-        Fixed b(a);
-        Fixed c;
+        Fixed const b(10);
+        Fixed const c(42.42f);
+        Fixed const d(b);
+        
+        a = Fixed(1234.4321f);
 
-        c = b;
+        cr_assert_float_eq(a.toFloat(), 1234.43, 0.01);
+        cr_assert_float_eq(b.toFloat(), 10, 0.0001);
+        cr_assert_float_eq(c.toFloat(), 42.4219, 0.0001);
+        cr_assert_float_eq(d.toFloat(), 10, 0.0001);
 
-        std::cout << a.getRawBits() << std::endl;
-        std::cout << b.getRawBits() << std::endl;
-        std::cout << c.getRawBits() << std::endl;
+        std::cout << "a is " << a << std::endl;
+        std::cout << "b is " << b << std::endl;
+        std::cout << "c is " << c << std::endl;
+        std::cout << "d is " << d << std::endl;
     }
     cr_assert_stdout_eq_str(
         "Default constructor called\n"
+        "Int constructor called\n"
+        "Float constructor called\n"
         "Copy constructor called\n"
         "Copy assignment operator called\n"
-        "getRawBits member function called\n"
-        "Default constructor called\n"
+        "Float constructor called\n"
         "Copy assignment operator called\n"
-        "getRawBits member function called\n"
-        "getRawBits member function called\n"
-        "0\n"
-        "getRawBits member function called\n"
-        "0\n"
-        "getRawBits member function called\n"
-        "0\n"
+        "Destructor called\n"
+        "a is 1234.43\n"
+        "b is 10\n"
+        "c is 42.4219\n"
+        "d is 10\n"
+        "Destructor called\n"
         "Destructor called\n"
         "Destructor called\n"
         "Destructor called\n"
     );
 }
+///////////////////////////////////////////////////////////////////////////////
+//                            TEST main                                      //
+///////////////////////////////////////////////////////////////////////////////
+
+
+// Test(main, Test_main, .init = redirect_all_stdout)
+// {
+//     {
+//         Fixed a;
+//         Fixed b(a);
+//         Fixed c;
+
+//         c = b;
+
+//         std::cout << a.getRawBits() << std::endl;
+//         std::cout << b.getRawBits() << std::endl;
+//         std::cout << c.getRawBits() << std::endl;
+//     }
+//     cr_assert_stdout_eq_str(
+//         "Default constructor called\n"
+//         "Copy constructor called\n"
+//         "Copy assignment operator called\n"
+//         "getRawBits member function called\n"
+//         "Default constructor called\n"
+//         "Copy assignment operator called\n"
+//         "getRawBits member function called\n"
+//         "getRawBits member function called\n"
+//         "0\n"
+//         "getRawBits member function called\n"
+//         "0\n"
+//         "getRawBits member function called\n"
+//         "0\n"
+//         "Destructor called\n"
+//         "Destructor called\n"
+//         "Destructor called\n"
+//     );
+// }
