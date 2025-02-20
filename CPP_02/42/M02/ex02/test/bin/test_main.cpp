@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:13:40 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/20 19:28:55 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:30:45 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <criterion/redirect.h>
 
 #include <iostream>
+#include <limits>
 
 #include "../../include/Fixed.hpp"
 
@@ -506,7 +507,76 @@ Test(Fixed_class, Test_different_operator_overload_with_large_values,
     cr_assert(b != a);
 }
 
+Test(Fixed_class, Test_addition_operator_overload_basic,
+.init = redirect_all_stdout)
+{
+    Fixed   a(10);
+    Fixed   b(5);
+    Fixed   result = a + b;
 
+    cr_assert_eq(result.toInt(), 15);
+}
+
+Test(Fixed_class, Test_addition_operator_overload_with_zero,
+.init = redirect_all_stdout)
+{
+    Fixed   a(7);
+    Fixed   b(0);
+    Fixed   result = a + b;
+
+    cr_assert_eq(result.toInt(), 7);
+}
+
+Test(Fixed_class, Test_addition_operator_overload_with_negative_values,
+.init = redirect_all_stdout)
+{
+    Fixed   a(-3);
+    Fixed   b(7);
+    Fixed   result = a + b;
+
+    cr_assert_eq(result.toInt(), 4);
+}
+
+Test(Fixed_class, Test_addition_operator_overload_both_negative,
+.init = redirect_all_stdout)
+{
+    Fixed   a(-5);
+    Fixed   b(-2);
+    Fixed   result = a + b;
+
+    cr_assert_eq(result.toInt(), -7);
+}
+
+Test(Fixed_class, Test_addition_operator_overload_large_values,
+.init = redirect_all_stdout)
+{
+    Fixed   a(1000000);
+    Fixed   b(500000);
+    Fixed   result = a + b;
+
+    cr_assert_eq(result.toInt(), 1500000);
+}
+
+Test(Fixed_class, Test_addition_operator_overload_overflow,
+.init = redirect_all_stdout)
+{
+    Fixed   a(std::numeric_limits<int>::max());
+    Fixed   b(1);
+    Fixed   result = a + b;
+
+
+    cr_assert(result.toInt() >= 0);
+}
+
+Test(Fixed_class, Test_addition_operator_overload_negative_overflow,
+.init = redirect_all_stdout)
+{
+    Fixed   a(std::numeric_limits<int>::min());
+    Fixed   b(-1);
+    Fixed   result = a + b;
+
+    cr_assert(result.toInt() <= 0);
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
