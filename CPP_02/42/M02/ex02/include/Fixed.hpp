@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:10:03 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/20 18:39:26 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/20 18:52:52 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ class               Fixed
             bool                operator>(const Fixed &rhs) const;
             bool                operator>=(const Fixed &rhs) const;
             bool                operator<(const Fixed &rhs) const;
-            
+            bool                operator<=(const Fixed &rhs) const;
+
             int                 getRawBits(void) const;
             static int          getFractionalBits(void);
             void                setRawBits(int const raw);
