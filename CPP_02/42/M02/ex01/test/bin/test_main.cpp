@@ -6,14 +6,16 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:27:43 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/19 17:45:02 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/20 00:09:15 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <criterion/criterion.h>
+#include <criterion/logging.h>
 #include <criterion/new/assert.h>
 #include <criterion/redirect.h>
+#include <ostream>
 
 #include "../../include/Fixed.hpp"
 
@@ -161,7 +163,7 @@ Test(Fixed_class, Test_getFractionalBits_func_returns_fractionalBits,
 
 Test(Fixed_class, Test_custom_CTOR_take_integer_isDefined, .init = redirect_all_stdout)
 {
-    Fixed a(10);
+    Fixed const a(10);
 
     cr_assert_not_null(&a);
 }
@@ -169,19 +171,46 @@ Test(Fixed_class, Test_custom_CTOR_take_integer_isDefined, .init = redirect_all_
 Test(Fixed_class, Test_custom_CTOR_initializes_fixedPointValue_value,
 .init = redirect_all_stdout)
 {
-    Fixed a(10);
+    Fixed const a(10);
 
-    cr_assert(a.getRawBits() == 10);
+    cr_assert(a.getRawBits() == 10 << 8);
 }
 
 Test(Fixed_class, Test_custom_CTOR_prints_msg_to_stdout,
 .init = redirect_all_stdout)
 {
     {
-        Fixed a(10);
+        Fixed const a(10);
     }
     cr_assert_stdout_eq_str(
         "Int constructor called\n"
+        "Destructor called\n"
+    );
+}
+
+Test(Fixed_class, Test_custom_CTOR_take_float_isDefined, .init = redirect_all_stdout)
+{
+    Fixed const a(42.42f);
+
+    cr_assert_not_null(&a);
+}
+
+Test(Fixed_class, Test_custom_CTOR_taking_float_initializes_fixedPointValue_value,
+.init = redirect_all_stdout)
+{
+    Fixed const a(42.42f);
+
+    cr_assert(a.getRawBits() == roundf(42.42f * (1 << 8)));
+}
+
+Test(Fixed_class, Test_custom_CTOR_taking_float_prints_msg_to_stdout,
+.init = redirect_all_stdout)
+{
+    {
+        Fixed const a(42.42f);
+    }
+    cr_assert_stdout_eq_str(
+        "Float constructor called\n"
         "Destructor called\n"
     );
 }

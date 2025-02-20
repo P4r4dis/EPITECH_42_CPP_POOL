@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:23:08 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/19 17:42:01 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/20 00:07:57 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
         public:
             Fixed(void); // Default constructor -> Canonical
             Fixed(const int intValue); // Custom CTOR
+            Fixed(const float floatValue); // Custom CTOR
             Fixed(const Fixed &src); // Copy constructor -> Canonical
             virtual ~Fixed(void); // Virtaul Destructor -> Canonical
 
