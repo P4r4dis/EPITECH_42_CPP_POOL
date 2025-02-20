@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:23:08 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/20 03:28:51 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/20 04:02:41 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ class               Fixed
             void                setRawBits(int const raw);
 
             float               toFloat(void) const;
+            int                 toInt(void) const;
 
         private:
             int                 _fixedPointValue;

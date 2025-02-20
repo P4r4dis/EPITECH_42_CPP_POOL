@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:23:46 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/20 03:47:36 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/20 04:03:15 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ int     Fixed::getFractionalBits(void)
 float   Fixed::toFloat(void) const
 {
     return static_cast<float>(_fixedPointValue) / (1 << _fractionalBits);
+}
+
+int     Fixed::toInt(void) const
+{
+    return _fixedPointValue >> _fractionalBits;
 }
 
 std::ostream    &operator<<(std::ostream &os, Fixed const &rhs)

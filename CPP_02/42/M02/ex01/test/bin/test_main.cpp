@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:27:43 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/20 03:48:45 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/20 04:02:52 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,6 +284,22 @@ Test_operator_stream_insertion_overloaded_prints_msg_to_stdout,
         "Destructor called\n"
         "Destructor called\n"
     );
+}
+
+Test(Fixed_class, Test_toInt_funct_converts_fixedPointValue_to_integer,
+.init = redirect_all_stdout)
+{
+    Fixed a;
+    Fixed const b(10);
+    Fixed const c(42.42f);
+    Fixed const d(b);
+    
+    a = Fixed(1234.4321f);
+
+    cr_assert(a.toInt() == 1234);
+    cr_assert(b.toInt() == 10);
+    cr_assert(c.toInt() == 42);
+    cr_assert(d.toInt() == 10);
 }
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
