@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/02/18 19:55:13 by Paradis           #+#    #+#              #
-#    Updated: 2025/02/19 17:44:14 by Paradis          ###   ########.fr        #
+#    Created: 2025/02/20 17:15:14 by Paradis           #+#    #+#              #
+#    Updated: 2025/02/20 17:16:10 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,18 +90,18 @@
 #								42 EX02										   #
 #																			   #
 # **************************************************************************** #
-42_EX02_PATH 					= 	./42/M01/ex02
-42_EX02_BIN_PATH 				= 	./42/M01/ex02/bin
-42_EX02_SRC_PATH				=	./42/M01/ex02/source
-42_EX02_INC_PATH				=	./42/M01/ex02/include
-42_EX02_UT_PATH					=	./42/M01/ex02/test
+42_EX02_PATH 					= 	./42/M02/ex02
+42_EX02_BIN_PATH 				= 	./42/M02/ex02/bin
+42_EX02_SRC_PATH				=	./42/M02/ex02/source
+42_EX02_INC_PATH				=	./42/M02/ex02/include
+42_EX02_UT_PATH					=	./42/M02/ex02/test
 
-42_EX02_NAME					=	zombie
+42_EX02_NAME					=	Now_we_are_talking
 
 42_EX02_UT_SRC					=	$(42_EX02_UT_PATH)/$(42_EX02_NAME)_test.cpp
 42_EX02_UT_NAME 				= 	test_$(42_EX02_NAME)
 
-42_EX02_SRC						=	$(42_EX02_SRC_PATH)/Zombie.cpp \
+42_EX02_SRC						=	$(42_EX02_SRC_PATH)/Fixed.cpp \
 									$(42_EX02_BIN_PATH)/main.cpp
 42_EX02_OBJS					=	$(42_EX02_SRC:.cpp=.o)
 
@@ -529,7 +529,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2124 Paradis
-## Last update Thu Feb 19 5:44:14 PM 2025 Paradis
+## Last update Fri Feb 20 5:16:10 PM 2025 Paradis
 ##
 # **************************************************************************** #
 #																			   #
@@ -973,8 +973,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(42_EX00_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX02_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX02_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX03_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX03_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX04_PATH)
@@ -1023,8 +1023,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX02_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX03_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX03_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX04_PATH)
