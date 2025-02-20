@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:22:00 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/19 17:22:55 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/20 04:11:14 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int     main(void)
     Fixed const b(10);
     Fixed const c(42.42f);
     Fixed const d(b);
+    
     a = Fixed(1234.4321f);
+
     std::cout << "a is " << a << std::endl;
     std::cout << "b is " << b << std::endl;
     std::cout << "c is " << c << std::endl;

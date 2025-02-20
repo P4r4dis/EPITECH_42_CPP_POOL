@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:27:43 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/20 04:02:52 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/20 04:10:39 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,35 +306,45 @@ Test(Fixed_class, Test_toInt_funct_converts_fixedPointValue_to_integer,
 ///////////////////////////////////////////////////////////////////////////////
 
 
-// Test(main, Test_main, .init = redirect_all_stdout)
-// {
-//     {
-//         Fixed a;
-//         Fixed b(a);
-//         Fixed c;
+Test(main, Test_main, .init = redirect_all_stdout)
+{
+    {
+        Fixed a;
+        Fixed const b(10);
+        Fixed const c(42.42f);
+        Fixed const d(b);
+        
+        a = Fixed(1234.4321f);
 
-//         c = b;
-
-//         std::cout << a.getRawBits() << std::endl;
-//         std::cout << b.getRawBits() << std::endl;
-//         std::cout << c.getRawBits() << std::endl;
-//     }
-//     cr_assert_stdout_eq_str(
-//         "Default constructor called\n"
-//         "Copy constructor called\n"
-//         "Copy assignment operator called\n"
-//         "getRawBits member function called\n"
-//         "Default constructor called\n"
-//         "Copy assignment operator called\n"
-//         "getRawBits member function called\n"
-//         "getRawBits member function called\n"
-//         "0\n"
-//         "getRawBits member function called\n"
-//         "0\n"
-//         "getRawBits member function called\n"
-//         "0\n"
-//         "Destructor called\n"
-//         "Destructor called\n"
-//         "Destructor called\n"
-//     );
-// }
+        std::cout << "a is " << a << std::endl;
+        std::cout << "b is " << b << std::endl;
+        std::cout << "c is " << c << std::endl;
+        std::cout << "d is " << d << std::endl;
+        std::cout << "a is " << a.toInt() << " as integer" << std::endl;
+        std::cout << "b is " << b.toInt() << " as integer" << std::endl;
+        std::cout << "c is " << c.toInt() << " as integer" << std::endl;
+        std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+    }
+    cr_assert_stdout_eq_str(
+        "Default constructor called\n"
+        "Int constructor called\n"
+        "Float constructor called\n"
+        "Copy constructor called\n"
+        "Copy assignment operator called\n"
+        "Float constructor called\n"
+        "Copy assignment operator called\n"
+        "Destructor called\n"
+        "a is 1234.43\n"
+        "b is 10\n"
+        "c is 42.4219\n"
+        "d is 10\n"
+        "a is 1234 as integer\n"
+        "b is 10 as integer\n"
+        "c is 42 as integer\n"
+        "d is 10 as integer\n"
+        "Destructor called\n"
+        "Destructor called\n"
+        "Destructor called\n"
+        "Destructor called\n"
+    );
+}

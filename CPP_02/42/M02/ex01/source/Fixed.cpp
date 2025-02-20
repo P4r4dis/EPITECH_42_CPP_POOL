@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:23:46 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/20 04:03:15 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/20 04:32:20 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,15 @@ Fixed::Fixed(const int intValue)
 
 // float to fixed point value
 Fixed::Fixed(const float floatValue)
-            : _fixedPointValue(roundf(floatValue * (1<< _fractionalBits)))
+            : _fixedPointValue(roundf(floatValue * (1 << _fractionalBits)))
 {
     std::cout << "Float constructor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed &src)  : _fixedPointValue(src._fixedPointValue)
+Fixed::Fixed(const Fixed &src)
 {
     std::cout << "Copy constructor called" << std::endl;
     *this = src;
-    // _fixedPointValue = src.getRawBits();
 }
 Fixed::~Fixed(void)
 {
@@ -72,11 +71,13 @@ int     Fixed::getFractionalBits(void)
     return _fractionalBits;
 }
 
+// fixedPointValue to float
 float   Fixed::toFloat(void) const
 {
     return static_cast<float>(_fixedPointValue) / (1 << _fractionalBits);
 }
 
+// fixedPointValue to int
 int     Fixed::toInt(void) const
 {
     return _fixedPointValue >> _fractionalBits;
