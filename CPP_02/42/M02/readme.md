@@ -123,3 +123,168 @@ On appellera aussi ces fonctions des méthodes.
 Le mot clé __virtual__ va permettre d’avoir un linkage dynamique et non plus statique / à la compilation (”at runtime” / à l’exécution).
 
 Notez que l’utilisation de __virtual__ vous permettra d’éviter d’avoir des fuites de mémoire (leaks) dans ce cas précis (problèmes au niveau du destructeur appelé si la résolution est statique).
+
+## Fixed Point Value
+Les Fixed Point Values (valeurs en virgule fixe) sont une alternative aux nombres en virgule flottante (float, double). Ils sont souvent utilisés dans les systèmes embarqués, les jeux vidéo et les calculs nécessitant plus de précision et de performance.
+
+__Qu'est-ce qu'un Fixed Point Value ?__
+Un Fixed Point Value représente un nombre avec une précision fixe. Contrairement aux nombres en virgule flottante, où la position de la virgule peut changer (1.23 devient 123.0 * 10^-2), les Fixed Point Values utilisent une position fixe pour la virgule.
+
+Exemple avec une base 2 :
+  * En binaire, 1010.101 représente 10.625 en décimal.
+  * Si on fixe la position de la virgule après 3 bits, ce nombre sera toujours interprété de la même façon.
+
+__Pourquoi utiliser les Fixed Point Values ?__
+| Avantage |	Explication |
+|----------|--------------|
+|Performance | Pas de conversion flottante, les opérations sont plus rapides sur certains processeurs. |
+|Précision | Pas de problèmes d’arrondi comme avec les float et double. |
+|Contrôle | La précision est fixe, ce qui évite les erreurs liées à la représentation des nombres flottants. |
+| Compatibilité | Utilisé dans les systèmes embarqués où les unités FPU (Floating Point Unit) ne sont pas disponibles. |
+	
+	
+__Représentation en C++__
+Les Fixed Point Values sont souvent stockées sous forme d'entiers (int, long, int64_t). On choisit un nombre de bits pour la partie entière et la partie fractionnaire.
+
+Exemple : 
+  * représentation en Q8.8
+  * Q8.8 signifie 8 bits pour la partie entière et 8 bits pour la partie fractionnaire.
+  * Un entier de 16 bits est utilisé : xxxx xxxx . xxxx xxxx
+  * Pour stocker 3.75 :
+    * 3 → 00000011
+    * 0.75 → 11000000 (0.75 × 256 = 192)
+    * En mémoire : 00000011 11000000 (soit 0x03C0 en hexadécimal)
+
+__Implémentation en C++__
+```CPP
+// Fixed.hpp
+#include <ostream>
+class               Fixed
+    {
+        public:
+            Fixed(void); // Default constructor -> Canonical
+            Fixed(const int intValue); // Custom CTOR
+            Fixed(const float floatValue); // Custom CTOR
+            Fixed(const Fixed &src); // Copy constructor -> Canonical
+            virtual ~Fixed(void); // Virtaul Destructor -> Canonical
+
+            Fixed               &operator=(const Fixed &src); // Assignation operator -> Canonical
+
+            int                 getRawBits(void) const;
+            static int          getFractionalBits(void);
+            void                setRawBits(int const raw);
+
+            float               toFloat(void) const;
+            int                 toInt(void) const;
+
+        private:
+            int                 _fixedPointValue;
+            static const int    _fractionalBits;
+    };
+#endif
+std::ostream                    &operator<<(std::ostream &os,
+                                            Fixed const &rhs);
+```
+```CPP
+// Fixed.cpp
+const int    Fixed::_fractionalBits = 8;
+
+Fixed::Fixed(void)  : _fixedPointValue(0)
+{
+    std::cout << "Default constructor called" << std::endl;
+}
+
+// int to fixed point value
+Fixed::Fixed(const int intValue)  
+            : _fixedPointValue(intValue << _fractionalBits)
+{
+    std::cout << "Int constructor called"<< std::endl;
+}
+
+// float to fixed point value
+Fixed::Fixed(const float floatValue)
+            : _fixedPointValue(roundf(floatValue * (1 << _fractionalBits)))
+{
+    std::cout << "Float constructor called" << std::endl;
+}
+
+Fixed::Fixed(const Fixed &src)
+{
+    std::cout << "Copy constructor called" << std::endl;
+    *this = src;
+}
+Fixed::~Fixed(void)
+{
+    std::cout << "Destructor called" << std::endl;
+}
+
+Fixed               &Fixed::operator=(const Fixed &src)
+{
+    std::cout << "Copy assignment operator called" << std::endl;
+    if (this != &src)
+        this->_fixedPointValue = src.getRawBits();
+
+    return *this;
+}
+
+int     Fixed::getRawBits(void) const
+{
+    return _fixedPointValue;
+}
+
+void    Fixed::setRawBits(int const raw)
+{
+    _fixedPointValue = raw;
+}
+
+int     Fixed::getFractionalBits(void)
+{
+    return _fractionalBits;
+}
+
+// fixedPointValue to float
+float   Fixed::toFloat(void) const
+{
+    return static_cast<float>(_fixedPointValue) / (1 << _fractionalBits);
+}
+
+// fixedPointValue to int
+int     Fixed::toInt(void) const
+{
+    return _fixedPointValue >> _fractionalBits;
+}
+
+std::ostream    &operator<<(std::ostream &os, Fixed const &rhs)
+{
+    return os << rhs.toFloat();
+}
+```
+
+```CPP
+// main.cpp
+int     main(void)
+{
+    Fixed a;
+    Fixed const b(10);
+    Fixed const c(42.42f);
+    Fixed const d(b);
+    
+    a = Fixed(1234.4321f);
+
+    std::cout << "a is " << a << std::endl;
+    std::cout << "b is " << b << std::endl;
+    std::cout << "c is " << c << std::endl;
+    std::cout << "d is " << d << std::endl;
+    std::cout << "a is " << a.toInt() << " as integer" << std::endl;
+    std::cout << "b is " << b.toInt() << " as integer" << std::endl;
+    std::cout << "c is " << c.toInt() << " as integer" << std::endl;
+    std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+
+    return 0;
+}
+```
+__Explication__
+* On stocke la valeur entière et fractionnaire en Q8.8.
+* Décalage à gauche (<< FRACTIONAL_BITS) pour convertir un entier en Fixed Point.
+* Multiplication par (1 << FRACTIONAL_BITS) pour convertir un float.
+
