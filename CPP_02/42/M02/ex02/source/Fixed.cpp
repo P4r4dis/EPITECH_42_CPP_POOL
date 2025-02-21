@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:10:17 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/21 17:00:39 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/21 17:56:22 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,13 @@ Fixed    Fixed::operator-(const Fixed &rhs) const
 Fixed    Fixed::operator*(const Fixed &rhs) const
 {
     return Fixed(toFloat() * rhs.toFloat());
+}
+
+Fixed    Fixed::operator/(const Fixed &rhs) const
+{
+    if (_fixedPointValue == 0 || rhs._fixedPointValue == 0)
+        return Fixed(0);
+    return Fixed(_fixedPointValue / rhs._fixedPointValue);
 }
 
 std::ostream    &operator<<(std::ostream &os, Fixed const &rhs)
