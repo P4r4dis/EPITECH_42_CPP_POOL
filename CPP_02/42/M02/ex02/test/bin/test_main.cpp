@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:13:40 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/21 18:54:53 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/21 19:10:08 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -805,6 +805,23 @@ Test(Fixed_class, Test_post_increment_operator, .init = redirect_all_stdout)
     cr_assert_eq(a.getRawBits(), 2561);
 }
 
+
+Test(Fixed_class, Test_pre_decrement_operator, .init = redirect_all_stdout)
+{
+    Fixed a(10);
+    --a;
+
+    cr_assert_eq(a.getRawBits(), 2559);
+}
+
+Test(Fixed_class, Test_post_decrement_operator, .init = redirect_all_stdout)
+{
+    Fixed a(10);
+    Fixed old_a = a--; // Sauvegarde l'ancienne valeur
+
+    cr_assert_eq(old_a.getRawBits(), 2560);
+    cr_assert_eq(a.getRawBits(), 2559);
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
