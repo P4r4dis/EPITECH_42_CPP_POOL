@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:13:40 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/21 16:52:05 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/21 17:10:49 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -646,6 +646,76 @@ Test(Fixed_class, Test_subtraction_operator_overload_negative_overflow,
     Fixed   result = a - b;
 
     cr_assert(result.toInt() >= 0);
+}
+
+Test(Fixed_class, Test_multiplication_operator_overload_basic,
+.init = redirect_all_stdout)
+{
+    Fixed   a(10);
+    Fixed   b(5);
+    Fixed   result = a * b;
+
+    cr_assert_eq(result.toInt(), 50);
+}
+
+Test(Fixed_class, Test_multiplication_operator_overload_with_zero,
+.init = redirect_all_stdout)
+{
+    Fixed   a(7);
+    Fixed   b(0);
+    Fixed   result = a * b;
+
+    cr_assert_eq(result.toInt(), 0);
+}
+
+Test(Fixed_class, Test_multiplication_operator_overload_with_negative_values,
+.init = redirect_all_stdout)
+{
+    Fixed   a(-3);
+    Fixed   b(7);
+    Fixed   result = a * b;
+
+    cr_assert_eq(result.toInt(), -21);
+}
+
+Test(Fixed_class, Test_multiplication_operator_overload_both_negative,
+.init = redirect_all_stdout)
+{
+    Fixed   a(-5);
+    Fixed   b(-2);
+    Fixed   result = a * b;
+
+    cr_assert_eq(result.toInt(), 10);
+}
+
+Test(Fixed_class, Test_multiplication_operator_overload_large_values,
+.init = redirect_all_stdout)
+{
+    Fixed   a(1000000);
+    Fixed   b(500000);
+    Fixed   result = a * b;
+
+    cr_assert(result.toInt() <= 0);
+}
+
+Test(Fixed_class, Test_multiplication_operator_overload_overflow,
+.init = redirect_all_stdout)
+{
+    Fixed   a(std::numeric_limits<int>::max());
+    Fixed   b(1);
+    Fixed   result = a * b;
+
+    cr_assert(result.toInt() <= 0);
+}
+
+Test(Fixed_class, Test_multiplication_operator_overload_negative_overflow,
+.init = redirect_all_stdout)
+{
+    Fixed   a(std::numeric_limits<int>::min());
+    Fixed   b(-1);
+    Fixed   result = a * b;
+
+    cr_assert(result.toInt() <= 0);
 }
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
