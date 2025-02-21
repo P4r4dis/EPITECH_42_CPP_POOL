@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:10:03 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/20 19:36:46 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/21 16:46:50 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ class               Fixed
             Fixed               &operator=(const Fixed &src); // Assignation operator -> Canonical
             
             Fixed               operator+(const Fixed &rhs) const;
-
+            Fixed               operator-(const Fixed &rhs) const;
+            
             bool                operator>(const Fixed &rhs) const;
             bool                operator>=(const Fixed &rhs) const;
             bool                operator<(const Fixed &rhs) const;
