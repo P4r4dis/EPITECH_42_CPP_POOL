@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:13:40 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/21 19:10:08 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/21 19:27:07 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -821,6 +821,46 @@ Test(Fixed_class, Test_post_decrement_operator, .init = redirect_all_stdout)
 
     cr_assert_eq(old_a.getRawBits(), 2560);
     cr_assert_eq(a.getRawBits(), 2559);
+}
+
+Test(Fixed_class, Test_min_function_mutable, .init = redirect_all_stdout)
+{
+    Fixed a(10);
+    Fixed b(5);
+    Fixed &result = Fixed::min(a, b);
+
+    cr_assert_eq(result.getRawBits(), (5 << 8), "La fonction min ne retourne pas la plus petite valeur.");
+    cr_assert_eq(&result, &b);
+}
+
+Test(Fixed_class, Test_min_function_const)
+{
+    const Fixed a(10);
+    const Fixed b(3);
+    const Fixed &result = Fixed::min(a, b);
+
+    cr_assert_eq(result.getRawBits(), (3 << 8), "La fonction min ne retourne pas la plus petite valeur.");
+    cr_assert_eq(&result, &b);
+}
+
+Test(Fixed_class, Test_min_function_equal_values)
+{
+    Fixed a(7);
+    Fixed b(7);
+    Fixed &result = Fixed::min(a, b);
+
+    cr_assert_eq(result.getRawBits(), (7 << 8), "La fonction min ne doit pas modifier les valeurs égales.");
+    cr_assert_eq(&result, &a);
+}
+
+Test(Fixed_class, Test_min_function_negative_values)
+{
+    Fixed a(-5);
+    Fixed b(-10);
+    Fixed &result = Fixed::min(a, b);
+
+    cr_assert_eq(result.getRawBits(), (-10 << 8), "La fonction min ne retourne pas la plus petite valeur négative.");
+    cr_assert_eq(&result, &b);
 }
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
