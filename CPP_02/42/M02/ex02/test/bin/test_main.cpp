@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:13:40 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/21 19:46:51 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/21 19:50:54 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -901,40 +901,27 @@ Test(Fixed_class, Test_max_function_negative_values, .init = redirect_all_stdout
 ///////////////////////////////////////////////////////////////////////////////
 
 
-// Test(main, Test_main, .init = redirect_all_stdout)
-// {
-//     {
-//         Fixed a;
-//         Fixed const b(Fixed(5.05f) * Fixed(2));
+Test(main, Test_main, .init = redirect_all_stdout)
+{
+    {
+        Fixed a;
+        Fixed const b(Fixed(5.05f) * Fixed(2));
         
-//         std::cout << a << std::endl;
-//         std::cout << ++a << std::endl;
-//         std::cout << a << std::endl;
-//         std::cout << a++ << std::endl;
-//         std::cout << a << std::endl;
-//         std::cout << b << std::endl;
-//         std::cout << Fixed::max(a, b) << std::endl;
-//     }
-//     cr_assert_stdout_eq_str(
-//         "Default constructor called\n"
-//         "Int constructor called\n"
-//         "Float constructor called\n"
-//         "Copy constructor called\n"
-//         "Copy assignment operator called\n"
-//         "Float constructor called\n"
-//         "Copy assignment operator called\n"
-//         "Destructor called\n"
-//         "a is 1234.43\n"
-//         "b is 10\n"
-//         "c is 42.4219\n"
-//         "d is 10\n"
-//         "a is 1234 as integer\n"
-//         "b is 10 as integer\n"
-//         "c is 42 as integer\n"
-//         "d is 10 as integer\n"
-//         "Destructor called\n"
-//         "Destructor called\n"
-//         "Destructor called\n"
-//         "Destructor called\n"
-//     );
-// }
+        std::cout << a << std::endl;
+        std::cout << ++a << std::endl;
+        std::cout << a << std::endl;
+        std::cout << a++ << std::endl;
+        std::cout << a << std::endl;
+        std::cout << b << std::endl;
+        std::cout << Fixed::max(a, b) << std::endl;
+    }
+    cr_assert_stdout_eq_str(
+        "0\n"
+        "0.00390625\n"
+        "0.00390625\n"
+        "0.00390625\n"
+        "0.0078125\n"
+        "10.1016\n"
+        "10.1016\n"
+    );
+}
