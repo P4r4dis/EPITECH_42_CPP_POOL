@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:10:17 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/21 17:56:22 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:28:21 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,21 @@ Fixed    Fixed::operator/(const Fixed &rhs) const
         return Fixed(0);
     return Fixed(_fixedPointValue / rhs._fixedPointValue);
 }
+
+// pre incrementation
+Fixed    &Fixed::operator++(void)
+{
+    _fixedPointValue++;
+    return *this;
+}
+
+Fixed    Fixed::operator++(int)
+{
+    Fixed   copy(*this);
+    _fixedPointValue++;
+    return copy;
+}
+// post incrementation
 
 std::ostream    &operator<<(std::ostream &os, Fixed const &rhs)
 {
