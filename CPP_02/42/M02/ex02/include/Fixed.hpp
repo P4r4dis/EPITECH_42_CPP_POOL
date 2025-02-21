@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:10:03 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/21 19:24:46 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/21 19:40:47 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ class               Fixed
             static Fixed        &min(Fixed &fixedPointvalue1,
                                     Fixed &fixedPointvalue2);
             static const Fixed  &min(const Fixed &fixedPointvalue1,
+                                    const Fixed &fixedPointvalue2);
+            static Fixed        &max(Fixed &fixedPointvalue1,
+                                    Fixed &fixedPointvalue2);
+            static const Fixed  &max(const Fixed &fixedPointvalue1,
                                     const Fixed &fixedPointvalue2);
             int                 getRawBits(void) const;
             static int          getFractionalBits(void);

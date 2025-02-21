@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:10:17 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/21 19:34:36 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/21 19:46:07 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,18 @@ Fixed   &Fixed::min(Fixed &fixedPointvalue1, Fixed &fixedPointvalue2)
 const Fixed   &Fixed::min(const Fixed &fixedPointvalue1, const Fixed &fixedPointvalue2)
 {
     return (fixedPointvalue1 <= fixedPointvalue2) ? 
+            fixedPointvalue1 : fixedPointvalue2;
+}
+
+Fixed   &Fixed::max(Fixed &fixedPointvalue1, Fixed &fixedPointvalue2)
+{
+    return (fixedPointvalue1 >= fixedPointvalue2) ? 
+            fixedPointvalue1 : fixedPointvalue2;
+}
+
+const Fixed   &Fixed::max(const Fixed &fixedPointvalue1, const Fixed &fixedPointvalue2)
+{
+    return (fixedPointvalue1 >= fixedPointvalue2) ? 
             fixedPointvalue1 : fixedPointvalue2;
 }
 
