@@ -5,10 +5,11 @@
 #                                                     +:+ +:+         +:+      #
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/02/20 17:15:14 by Paradis           #+#    #+#              #
-#    Updated: 2025/02/20 17:16:10 by Paradis          ###   ########.fr        #
+#    Created: 2025/02/24 19:01:44 by Paradis           #+#    #+#              #
+#    Updated: 2025/02/24 19:03:19 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 ## RULES FOR 42 SCHOOL
 # **************************************************************************** #
@@ -126,21 +127,20 @@
 #								42 EX03										   #
 #																			   #
 # **************************************************************************** #
-42_EX03_PATH 					= 	./42/M01/ex03
-42_EX03_BIN_PATH 				= 	./42/M01/ex03/bin
-42_EX03_SRC_PATH				=	./42/M01/ex03/source
-42_EX03_INC_PATH				=	./42/M01/ex03/include
-42_EX03_UT_PATH					=	./42/M01/ex03/test
+42_EX03_PATH 					= 	./42/M02/ex03
+42_EX03_BIN_PATH 				= 	./42/M02/ex03/bin
+42_EX03_SRC_PATH				=	./42/M02/ex03/source
+42_EX03_INC_PATH				=	./42/M02/ex03/include
+42_EX03_UT_PATH					=	./42/M02/ex03/test
 
-42_EX03_NAME					=	zombieHorde
+42_EX03_NAME					=	BSP
 
 42_EX03_UT_SRC					=	$(42_EX03_UT_PATH)/$(42_EX03_NAME)_test.cpp
 42_EX03_UT_NAME 				= 	test_$(42_EX03_NAME)
 
-42_EX03_SRC						=	$(42_EX03_SRC_PATH)/Zombie.cpp \
-									$(42_EX03_SRC_PATH)/newZombie.cpp \
-									$(42_EX03_SRC_PATH)/randomChump.cpp \
-									$(42_EX03_SRC_PATH)/zombieHorde.cpp \
+42_EX03_SRC						=	$(42_EX03_SRC_PATH)/Fixed.cpp \
+									$(42_EX03_SRC_PATH)/Point.cpp \
+									$(42_EX03_SRC_PATH)/bsp.cpp \
 									$(42_EX03_BIN_PATH)/main.cpp
 42_EX03_OBJS					=	$(42_EX03_SRC:.cpp=.o)
 
@@ -529,7 +529,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2124 Paradis
-## Last update Fri Feb 20 5:16:10 PM 2025 Paradis
+## Last update Tue Feb 24 7:03:19 PM 2025 Paradis
 ##
 # **************************************************************************** #
 #																			   #
@@ -975,8 +975,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX02_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX03_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX03_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX03_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX03_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX04_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX04_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX05_PATH)
@@ -1025,8 +1025,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX03_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX03_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX03_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX03_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX04_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX04_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX05_PATH)
