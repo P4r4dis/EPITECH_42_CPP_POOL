@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/24 19:00:35 by Paradis           #+#    #+#              #
-#    Updated: 2025/02/24 19:00:59 by Paradis          ###   ########.fr        #
+#    Updated: 2025/02/25 16:42:43 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(IN
 
 SRCS         	= 	$(SRC_PATH)/Fixed.cpp \
 					$(SRC_PATH)/Point.cpp \
+					$(SRC_PATH)/bsp.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)

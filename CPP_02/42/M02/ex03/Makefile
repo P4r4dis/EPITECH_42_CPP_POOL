@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/24 19:01:07 by Paradis           #+#    #+#              #
-#    Updated: 2025/02/24 19:01:27 by Paradis          ###   ########.fr        #
+#    Updated: 2025/02/25 16:42:53 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAG
 # # Files sources
 SRCS		=	$(SRC_PATH)/Fixed.cpp \
 				$(SRC_PATH)/Point.cpp \
+				$(SRC_PATH)/bsp.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp

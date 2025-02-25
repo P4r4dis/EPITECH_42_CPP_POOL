@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:17:03 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/24 20:30:27 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/25 16:46:45 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,5 @@ class                   Point
         const Fixed     _x;
         const Fixed     _y;
 };
+
 #endif //               !_POINT_HPP__

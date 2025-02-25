@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:00:25 by Paradis           #+#    #+#             */
-/*   Updated: 2025/02/24 20:47:52 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/02/25 19:46:21 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 #include <iostream>
 #include <limits>
 
-#include "../../include/Fixed.hpp"
 #include "../../include/Point.hpp"
+#include "../../include/Bsp.hpp"
 
 void redirect_all_stdout(void)
 {
@@ -953,11 +953,82 @@ TEST_Assignment_operator_does_nothing_because_x_and_y_are_const,
     cr_assert_float_eq(p2.getY().toFloat(), 0.0f, 0.01f);
 }
 
-Test(Point_Tests, Getters, , .init = redirect_all_stdout)
+Test(Point_Tests, Getters, .init = redirect_all_stdout)
 {
     Point p(-7.8f, 6.2f);
     cr_assert_float_eq(p.getX().toFloat(), -7.8f, 0.01f);
     cr_assert_float_eq(p.getY().toFloat(), 6.2f, 0.01f);
+}
+
+Test(BSP_Tests, TEST_Point_inside_triangle, .init = redirect_all_stdout)
+{
+    Point a(0, 0);
+    Point b(10, 0);
+    Point c(5, 10);
+    Point p(5, 5);
+
+    cr_assert(bsp(a, b, c, p) == true);
+}
+
+Test(BSP_Tests, TEST_Point_outside_triangle, .init = redirect_all_stdout)
+{
+    Point a(0, 0);
+    Point b(10, 0);
+    Point c(5, 10);
+    Point p(10, 10);
+
+    cr_assert(bsp(a, b, c, p) == false);
+}
+
+Test(BSP_Tests, TEST_Point_on_vertex, .init = redirect_all_stdout)
+{
+    Point a(0, 0);
+    Point b(10, 0);
+    Point c(5, 10);
+
+    cr_assert(bsp(a, b, c, a) == false);
+    cr_assert(bsp(a, b, c, b) == false);
+    cr_assert(bsp(a, b, c, c) == false);
+}
+
+Test(Bsp_Tests, TEST_Point_on_edge, .init = redirect_all_stdout)
+{
+    Point a(0, 0);
+    Point b(10, 0);
+    Point c(5, 10);
+    Point p(5, 0); // Point sur l'arête [a, b]
+
+    cr_assert(bsp(a, b, c, p) == false);
+}
+
+Test(BSP_Tests, TEST_Point_very_close_to_edge, .init = redirect_all_stdout)
+{
+    Point a(0, 0);
+    Point b(10, 0);
+    Point c(5, 10);
+    Point p(5, 0.01f); // Très proche de l'arête [a, b], mais à l'intérieur
+
+    cr_assert(bsp(a, b, c, p) == true);
+}
+
+Test(BSP_Tests, TEST_Point_at_triangle_center, .init = redirect_all_stdout)
+{
+    Point a(0, 0);
+    Point b(10, 0);
+    Point c(5, 10);
+    Point p(5, 3.33f); // Approximativement au centre du triangle
+
+    cr_assert(bsp(a, b, c, p) == true);
+}
+
+Test(BSP_Tests, TEST_Degenerate_triangle, .init = redirect_all_stdout)
+{
+    Point a(0, 0);
+    Point b(5, 0);
+    Point c(10, 0); // Aligné avec `a` et `b`
+    Point p(5, 1); // En dehors de la ligne, mais avec un triangle non valide
+
+    cr_assert(bsp(a, b, c, p) == false);
 }
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
