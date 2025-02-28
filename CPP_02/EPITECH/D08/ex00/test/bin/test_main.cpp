@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Feb 27 4:53:52 PM 2025 Paradis
-** Last update Sat Feb 28 8:03:18 PM 2025 Paradis
+** Last update Sat Feb 28 8:40:49 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -269,41 +269,127 @@ Test(Droid_class,
     }
 }
 
+Test(Droid_class, Test_operator_equal_identical_droids, .init = redirect_all_stdout)
+{
+    Droid d1("R2D2");
+    Droid d2("R2D2");
+
+    cr_assert_eq(d1, d2);
+}
+
+Test(Droid_class, Test_operator_equal_same_instance, .init = redirect_all_stdout)
+{
+    Droid d1("R2D2");
+
+    cr_assert(d1 == d1);
+}
+
+Test(Droid_class, Test_operator_equal_different_models, .init = redirect_all_stdout)
+{
+    Droid d1("R2D2");
+    Droid d2("C3PO");
+
+    cr_assert_not((d1 == d2));
+}
+
+Test(Droid_class, Test_operator_equal_different_energy, .init = redirect_all_stdout)
+{
+    Droid d1("R2D2");
+    Droid d2("R2D2");
+
+    d2.setEnergy(50);
+
+    cr_assert(d1 == d2);
+}
+
+Test(Droid_class, Test_operator_equal_different_status, .init = redirect_all_stdout)
+{
+    Droid d1("R2D2");
+    Droid d2("R2D2");
+
+    d2.setStatus(new std::string("Attack mode"));
+
+    cr_assert_not(d1 == d2);
+}
+
+Test(Droid_class, Test_operator_not_equal_identical_droids, .init = redirect_all_stdout)
+{
+    Droid d1("R2D2");
+    Droid d2("R2D2");
+
+    cr_assert_not((d1 != d2));
+}
+
+Test(Droid_class, Test_operator_not_equal_same_instance, .init = redirect_all_stdout)
+{
+    Droid d1("R2D2");
+
+    cr_assert_not((d1 != d1));
+}
+
+Test(Droid_class, Test_operator_not_equal_different_models, .init = redirect_all_stdout)
+{
+    Droid d1("R2D2");
+    Droid d2("C3PO");
+
+    cr_assert(d1 != d2);
+}
+
+Test(Droid_class, Test_operator_not_equal_different_energy, .init = redirect_all_stdout)
+{
+    Droid d1("R2D2");
+    Droid d2("R2D2");
+
+    d2.setEnergy(50);
+
+    cr_assert_not(d1 != d2);
+}
+
+Test(Droid_class, Test_operator_not_equal_different_status, .init = redirect_all_stdout)
+{
+    Droid d1("R2D2");
+    Droid d2("R2D2");
+
+    d2.setStatus(new std::string("Attack mode"));
+
+    cr_assert(d1 != d2);
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
 
 
-// Test(main, Test_main, .init = redirect_all_stdout)
-// {
-//     {
-//         Droid   d;
-//         Droid   d1("Avenger");
-//         size_t  Durasel = 200;
+
+Test(main, Test_main, .init = redirect_all_stdout)
+{
+    {
+        Droid   d;
+        Droid   d1("Avenger");
+        size_t  Durasel = 200;
     
-//         std::cout << d << std::endl;
-//         std::cout << d1 << std::endl;
+        std::cout << d << std::endl;
+        std::cout << d1 << std::endl;
     
-//         d = d1;
-//         d.setStatus (new std::string("Kill Kill Kill !"));
-//         d << Durasel;
+        d = d1;
+        d.setStatus (new std::string("Kill Kill Kill!"));
+        d << Durasel;
     
-//         std::cout << d << "--" << Durasel << std::endl;
+        std::cout << d << "--" << Durasel << std::endl;
     
-//         Droid d2 = d;
-//         d.setId("Rex");
-//         std::cout << (d2 != d) << std::endl;
-//     }
-//     cr_assert_stdout_eq_str(
-//         "Droid '' Activated\n"
-//         "Droid 'Avenger' Activated\n"
-//         "Droid '', Standing by, 50\n"
-//         "Droid 'Avenger', Standing by, 50\n"
-//         "Droid 'Avenger', Kill Kill Kill!, 100--150\n"
-//         "Droid 'Avenger' Activated, Memory Dumped\n"
-//         "1\n"
-//         "Droid 'Avenger' Destroyed\n"
-//         "Droid 'Avenger' Destroyed\n"
-//         "Droid 'Rex' Destroyed\n"
-//     );
-// }
+        Droid d2 = d;
+        d.setId("Rex");
+        std::cout << (d2 != d) << std::endl;
+    }
+    cr_assert_stdout_eq_str(
+        "Droid '' Activated\n"
+        "Droid 'Avenger' Activated\n"
+        "Droid '', Standing by, 50\n"
+        "Droid 'Avenger', Standing by, 50\n"
+        "Droid 'Avenger', Kill Kill Kill!, 100--150\n"
+        "Droid 'Avenger' Activated, Memory Dumped\n"
+        "1\n"
+        "Droid 'Avenger' Destroyed\n"
+        "Droid 'Avenger' Destroyed\n"
+        "Droid 'Rex' Destroyed\n"
+    );
+}

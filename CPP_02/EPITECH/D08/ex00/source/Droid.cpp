@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Feb 27 4:59:15 PM 2025 Paradis
-** Last update Sat Feb 28 8:02:24 PM 2025 Paradis
+** Last update Sat Feb 28 8:33:50 PM 2025 Paradis
 */
 #include <cstddef>
 #include <iostream>
@@ -121,4 +121,16 @@ Droid               &Droid::operator<<(size_t &rhs)
         rhs -= reload;
     }
     return *this;
+}
+
+bool                Droid::operator==(const Droid &droid)
+{
+    return (Id == droid.Id && Energy == droid.Energy &&
+            Attack == droid.Attack && Toughness == droid.Toughness &&
+            *Status == *droid.Status);
+}
+
+bool                Droid::operator!=(const Droid &droid)
+{
+    return !(*this == droid);
 }

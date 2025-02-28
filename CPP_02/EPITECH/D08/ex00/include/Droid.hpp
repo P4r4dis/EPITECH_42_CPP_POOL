@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Feb 27 4:59:40 PM 2025 Paradis
-** Last update Sat Feb 28 6:27:54 PM 2025 Paradis
+** Last update Sat Feb 28 8:25:04 PM 2025 Paradis
 */
 
 #ifndef 			__DROID_HPP__
@@ -29,6 +29,9 @@ class	            Droid
         ~Droid(void);
 
         Droid           &operator=(const Droid &droid);
+        Droid           &operator<<(size_t &rhs);
+        bool           operator==(const Droid &droid);
+        bool           operator!=(const Droid &droid);
 
         std::string     getId(void) const;
         size_t          getEnergy(void) const;
@@ -40,7 +43,6 @@ class	            Droid
         void            setEnergy(size_t energy);
         void            setStatus(std::string *status);
 
-        Droid           &operator<<(size_t &rhs);
 
 
     protected:
