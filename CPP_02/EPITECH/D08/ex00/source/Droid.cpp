@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Feb 27 4:59:15 PM 2025 Paradis
-** Last update Sat Feb 28 5:39:49 PM 2025 Paradis
+** Last update Sat Feb 28 6:00:29 PM 2025 Paradis
 */
 #include <cstddef>
 #include <iostream>
@@ -101,4 +101,10 @@ void                Droid::setStatus(std::string *status)
 {
     delete Status;
     Status = status;
+}
+
+std::ostream            &operator<<(std::ostream &os, Droid const &rhs)
+{
+    return os   << "Droid '" << rhs.getId() << "', "
+                << rhs.getStatus()->data() << ", " << rhs.getEnergy();
 }

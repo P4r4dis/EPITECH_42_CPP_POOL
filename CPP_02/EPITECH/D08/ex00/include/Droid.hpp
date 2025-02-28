@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Feb 27 4:59:40 PM 2025 Paradis
-** Last update Sat Feb 28 5:34:09 PM 2025 Paradis
+** Last update Sat Feb 28 5:54:37 PM 2025 Paradis
 */
 
 #ifndef 			__DROID_HPP__
@@ -49,4 +49,5 @@ class	            Droid
         std::string     *Status;
 };
 
+std::ostream            &operator<<(std::ostream &os, Droid const &rhs);
 #endif 				/* !__DROID_HPP___ */

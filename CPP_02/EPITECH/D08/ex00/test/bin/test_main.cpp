@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Feb 27 4:53:52 PM 2025 Paradis
-** Last update Sat Feb 28 5:47:52 PM 2025 Paradis
+** Last update Sat Feb 28 6:01:48 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -217,6 +217,21 @@ Test(Droid_class, TEST_setStatus,
 
         cr_assert(d.getStatus()->compare("Pending by") == 0);
     }
+}
+
+Test(Droid_class, TEST_operator_stream_insertion_overloaded_print_msg,
+    .init = redirect_all_stdout)
+{
+    {
+        Droid   d;
+
+        std::cout << d << std::endl;
+    }
+    cr_assert_stdout_eq_str(
+        "Droid '' Activated\n"
+        "Droid '', Standing by, 50\n"
+        "Droid '' Destroyed\n"
+    );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
