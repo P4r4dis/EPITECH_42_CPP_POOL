@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Feb 27 4:59:40 PM 2025 Paradis
-** Last update Fri Feb 27 6:32:36 PM 2025 Paradis
+** Last update Sat Feb 28 5:34:09 PM 2025 Paradis
 */
 
 #ifndef 			__DROID_HPP__
@@ -35,6 +35,10 @@ class	            Droid
         size_t          getAttack(void) const;
         size_t          getToughness(void) const;
         std::string     *getStatus(void) const;
+
+        void            setId(std::string id);
+        void            setEnergy(size_t energy);
+        void            setStatus(std::string *status);
 
     protected:
     private:

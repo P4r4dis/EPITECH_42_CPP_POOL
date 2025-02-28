@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Feb 27 4:59:15 PM 2025 Paradis
-** Last update Fri Feb 27 6:37:39 PM 2025 Paradis
+** Last update Sat Feb 28 5:39:49 PM 2025 Paradis
 */
 #include <cstddef>
 #include <iostream>
@@ -54,7 +54,6 @@ Droid               &Droid::operator=(const Droid &droid)
         if (Status)
         {
             delete Status;
-            Status = nullptr;
             Status = new std::string(*droid.Status);
         }
         return *this;
@@ -86,4 +85,20 @@ size_t              Droid::getToughness(void) const
 std::string         *Droid::getStatus(void) const
 {
     return Status;
+}
+
+void                Droid::setId(std::string id)
+{
+    Id = id;
+}
+
+void                Droid::setEnergy(size_t energy)
+{
+    energy > 100 ? Energy = 100 : Energy = energy;
+}
+
+void                Droid::setStatus(std::string *status)
+{
+    delete Status;
+    Status = status;
 }
