@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Feb 27 4:59:40 PM 2025 Paradis
-** Last update Sat Feb 28 5:54:37 PM 2025 Paradis
+** Last update Sat Feb 28 6:27:54 PM 2025 Paradis
 */
 
 #ifndef 			__DROID_HPP__
@@ -40,6 +40,9 @@ class	            Droid
         void            setEnergy(size_t energy);
         void            setStatus(std::string *status);
 
+        Droid           &operator<<(size_t &rhs);
+
+
     protected:
     private:
         std::string     Id;
@@ -50,4 +53,5 @@ class	            Droid
 };
 
 std::ostream            &operator<<(std::ostream &os, Droid const &rhs);
+
 #endif 				/* !__DROID_HPP___ */

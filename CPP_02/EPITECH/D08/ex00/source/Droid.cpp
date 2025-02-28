@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Feb 27 4:59:15 PM 2025 Paradis
-** Last update Sat Feb 28 6:00:29 PM 2025 Paradis
+** Last update Sat Feb 28 8:02:24 PM 2025 Paradis
 */
 #include <cstddef>
 #include <iostream>
@@ -103,8 +103,22 @@ void                Droid::setStatus(std::string *status)
     Status = status;
 }
 
-std::ostream            &operator<<(std::ostream &os, Droid const &rhs)
+std::ostream        &operator<<(std::ostream &os, Droid const &rhs)
 {
     return os   << "Droid '" << rhs.getId() << "', "
                 << rhs.getStatus()->data() << ", " << rhs.getEnergy();
+}
+
+Droid               &Droid::operator<<(size_t &rhs)
+{
+
+    if (Energy < 100)
+    {
+        size_t need = 100 - Energy;
+        size_t reload = (rhs >= 100) ? need : rhs;
+
+        Energy += reload;
+        rhs -= reload;
+    }
+    return *this;
 }
