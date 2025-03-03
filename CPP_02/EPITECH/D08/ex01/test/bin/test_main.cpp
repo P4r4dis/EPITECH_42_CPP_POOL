@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 4:57:30 PM 2025 Paradis
-** Last update Tue Mar 3 8:34:39 PM 2025 Paradis
+** Last update Tue Mar 3 8:44:34 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -435,89 +435,98 @@ Test(DroidMemory, TEST_DroidMemory_left_stream_operator_add_exp,
     }
 }
 
-// Test(DroidMemory,
-//     TEST_DroidMemory_left_stream_operator_performs_xor_of_the_Fingerprint,
-//     .init = redirect_all_stdout)
-// {
-//     {
-//         DroidMemory     mem1;
-//         DroidMemory     mem2;
+Test(DroidMemory,
+    TEST_DroidMemory_left_stream_operator_performs_xor_of_the_Fingerprint,
+    .init = redirect_all_stdout)
+{
+    {
+        DroidMemory     mem1;
+        mem1 += 42;
 
-//         mem1 << mem2;
-//         cr_assert(mem1.getFingerPrint() == (mem1.getFingerPrint() << mem2.getFingerPrint()));
-//     }
-// }
+        DroidMemory mem3;
+        mem3 << mem1;
+        mem3 >> mem1;
+        mem3 << mem1;
+        cr_assert(mem3.getFingerPrint() == 1804289357);
+        cr_assert(mem3.getExp() == 126);
 
-// Test(DroidMemory,
-//     TEST_DroidMemory_left_stream_operator_can_be_chain,
-//     .init = redirect_all_stdout)
-// {
-//     {
-//         DroidMemory     mem1;
-//         cr_assert(mem1.getExp() == 0);
+    }
+}
 
-//         DroidMemory     mem2;
-//         mem2.setExp(1);
-//         cr_assert(mem2.getExp() == 1);
+Test(DroidMemory,
+    TEST_DroidMemory_left_stream_operator_can_be_chain,
+    .init = redirect_all_stdout)
+{
+    {
+        DroidMemory     mem1;
+        cr_assert(mem1.getExp() == 0);
 
-//         DroidMemory     mem3;
-//         mem3.setExp(1);
-//         cr_assert(mem3.getExp() == 1);
-//         mem1 << mem2 << mem3;
-//         cr_assert(mem1.getExp() == 2);
-//     }
-// }
+        DroidMemory     mem2;
+        mem2.setExp(1);
+        cr_assert(mem2.getExp() == 1);
 
-// Test(DroidMemory, TEST_DroidMemory_right_stream_operator_add_exp,
-//     .init = redirect_all_stdout)
-// {
-//     {
-//         DroidMemory   mem1;
+        DroidMemory     mem3;
+        mem3.setExp(1);
+        cr_assert(mem3.getExp() == 1);
+        mem1 << mem2 << mem3;
+        cr_assert(mem1.getExp() == 2);
+    }
+}
 
-//         cr_assert(mem1.getExp() == 0);
+Test(DroidMemory, TEST_DroidMemory_right_stream_operator_add_exp,
+    .init = redirect_all_stdout)
+{
+    {
+        DroidMemory   mem1;
 
-//         DroidMemory   mem2;
-//         mem2.setExp(42);
-//         cr_assert(mem2.getExp() == 42);
+        cr_assert(mem1.getExp() == 0);
 
-//         mem1 >> mem2;
-//         cr_assert(mem2.getExp() == 42);
+        DroidMemory   mem2;
+        mem2.setExp(42);
+        cr_assert(mem2.getExp() == 42);
 
-//     }
-// }
+        mem1 >> mem2;
+        cr_assert(mem2.getExp() == 42);
 
-// Test(DroidMemory,
-//     TEST_DroidMemory_right_stream_operator_performs_xor_of_the_Fingerprint,
-//     .init = redirect_all_stdout)
-// {
-//     {
-//         DroidMemory     mem1;
-//         DroidMemory     mem2;
+    }
+}
 
-//         mem1 >> mem2;
-//         cr_assert(mem2.getFingerPrint() == 1804289357);
-//     }
-// }
+Test(DroidMemory,
+    TEST_DroidMemory_right_stream_operator_performs_xor_of_the_Fingerprint,
+    .init = redirect_all_stdout)
+{
+    {
+        DroidMemory     mem1;
+        mem1 += 42;
 
-// Test(DroidMemory,
-//     TEST_DroidMemory_right_stream_operator_can_be_chain,
-//     .init = redirect_all_stdout)
-// {
-//     {
-//         DroidMemory     mem1;
-//         cr_assert(mem1.getExp() == 0);
+        DroidMemory mem3;
+        mem3 << mem1;
+        mem3 >> mem1;
+        mem3 << mem1;
+        cr_assert(mem1.getFingerPrint() == 846930886);
+        cr_assert(mem1.getExp() == 84);
+    }
+}
 
-//         DroidMemory     mem2;
-//         mem2.setExp(1);
-//         cr_assert(mem2.getExp() == 1);
+Test(DroidMemory,
+    TEST_DroidMemory_right_stream_operator_can_be_chain,
+    .init = redirect_all_stdout)
+{
+    {
+        DroidMemory     mem1;
+        cr_assert(mem1.getExp() == 0);
 
-//         DroidMemory     mem3;
-//         mem3.setExp(1);
-//         cr_assert(mem3.getExp() == 1);
-//         mem1 >> mem2 >> mem3;
-//         cr_assert(mem3.getExp() == 2);
-//     }
-// }
+        DroidMemory     mem2;
+        mem2.setExp(1);
+        cr_assert(mem2.getExp() == 1);
+
+        DroidMemory     mem3;
+        mem3.setExp(1);
+        cr_assert(mem3.getExp() == 1);
+        mem1 >> mem2 >> mem3;
+        cr_assert(mem3.getExp() == 2);
+    }
+}
 
 Test(DroidMemory,
     TEST_DroidMemory_Plus_Equal_operator_add_exp_and_perform_XOR,
