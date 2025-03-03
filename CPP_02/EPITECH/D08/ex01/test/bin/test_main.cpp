@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 4:57:30 PM 2025 Paradis
-** Last update Tue Mar 3 8:44:34 PM 2025 Paradis
+** Last update Tue Mar 3 9:01:32 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -541,6 +541,25 @@ Test(DroidMemory,
         mem1 += 42;
         cr_assert(mem1.getExp() == 42);
         cr_assert(mem1.getFingerPrint() == 1804289357);
+    }
+}
+
+Test(DroidMemory,
+    TEST_DroidMemory_Plus_operator_overload,
+    .init = redirect_all_stdout)
+{
+    {
+        DroidMemory     mem1;
+        DroidMemory     mem2;
+        DroidMemory     mem3;
+        mem1 += 42;
+        cr_assert(mem1.getExp() == 42);
+        cr_assert(mem1.getFingerPrint() == 1804289357);
+
+        mem3 = mem1 + mem2;
+        
+        cr_assert(mem3.getExp() == 42);
+        cr_assert(mem3.getFingerPrint() == (mem1.getFingerPrint() ^ mem2.getFingerPrint()));
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
