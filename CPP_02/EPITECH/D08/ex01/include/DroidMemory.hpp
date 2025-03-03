@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 6:11:46 PM 2025 Paradis
-** Last update Tue Mar 3 9:56:22 PM 2025 Paradis
+** Last update Tue Mar 3 10:01:06 PM 2025 Paradis
 */
 
 #ifndef 			__DROIDMEMORY_HPP__
@@ -36,7 +36,6 @@ class	DroidMemory
     private:
         size_t          Fingerprint;
         size_t          Exp;
-        // DroidMemory     *newDroidMemory;
 };
 
 #endif 				/* !__DROIDMEMORY_HPP__ */
