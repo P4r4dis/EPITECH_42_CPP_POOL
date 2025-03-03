@@ -1,0 +1,36 @@
+/*
+** DroidMemory.hpp for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_02/EPITECH/D08/ex01/include
+**
+** Made by Paradis
+** Login   <Adil Denia>
+**
+** Started on  Mon Mar 3 6:11:46 PM 2025 Paradis
+** Last update Tue Mar 3 6:16:14 PM 2025 Paradis
+*/
+
+#ifndef 			__DROIDMEMORY_HPP__
+	# define 		__DROIDMEMORY_HPP__
+
+#include <cstddef>
+class	DroidMemory
+{
+    public:
+        DroidMemory(void);
+        DroidMemory(const DroidMemory &copyCTOR);
+        ~DroidMemory(void);
+
+        DroidMemory     &operator=(const DroidMemory &rhs);
+
+        size_t          getFingerPrint(void) const;
+        size_t          getExp(void) const;
+
+        void            setFingerPrint(size_t fingerprint);
+        void            setExp(size_t exp);
+
+    protected:
+    private:
+        size_t          Fingerprint;
+        size_t          Exp;
+};
+
+#endif 				/* !__DROIDMEMORY_HPP__ */

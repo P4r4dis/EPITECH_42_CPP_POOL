@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Mar 3 4:58:19 PM 2025 Paradis
-## Last update Tue Mar 3 5:12:20 PM 2025 Paradis
+## Last update Tue Mar 3 6:27:16 PM 2025 Paradis
 ##
 
 
@@ -24,6 +24,7 @@ CRITFLAGS    	+=  --coverage -lcriterion
 CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAGS) $(CRITFLAGS)
 
 SRCS         	= 	$(SRC_PATH)/Droid.cpp \
+					$(SRC_PATH)/DroidMemory.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)
