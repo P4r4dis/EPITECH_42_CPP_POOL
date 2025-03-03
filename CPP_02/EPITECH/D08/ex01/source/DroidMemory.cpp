@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 6:16:16 PM 2025 Paradis
-** Last update Tue Mar 3 6:32:40 PM 2025 Paradis
+** Last update Tue Mar 3 7:07:00 PM 2025 Paradis
 */
 
 #include "../include/DroidMemory.hpp"
@@ -13,13 +13,11 @@
 
 DroidMemory::DroidMemory(void)  :   Fingerprint(random()), Exp(0)
 {
-    std::cout << "DroidMemory '" << Fingerprint << "', " << Exp << std::endl;
 }
 
 DroidMemory::DroidMemory(const DroidMemory &copyCTOR)
                     :   Fingerprint(copyCTOR.Fingerprint), Exp(copyCTOR.Exp)
 {
-    std::cout << "DroidMemory '" << Fingerprint << "', " << Exp << std::endl;
 }
 
 

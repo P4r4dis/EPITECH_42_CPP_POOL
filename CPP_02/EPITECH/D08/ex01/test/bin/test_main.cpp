@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 4:57:30 PM 2025 Paradis
-** Last update Tue Mar 3 7:04:02 PM 2025 Paradis
+** Last update Tue Mar 3 7:06:51 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -345,17 +345,6 @@ Test(DroidMemory, TEST_DroidMemory_default_CTOR_check_parameters,
     cr_assert(mem1.getExp() == 0);
 }
 
-Test(DroidMemory, TEST_DroidMemory_default_CTOR_check_stdout,
-    .init = redirect_all_stdout)
-{
-    {
-        DroidMemory   mem1;
-    }
-    cr_assert_stdout_eq_str(
-        "DroidMemory '1804289383', 0\n"
-    );
-}
-
 Test(DroidMemory, TEST_DroidMemory_setFingerPrint,
     .init = redirect_all_stdout)
 {
@@ -378,20 +367,6 @@ Test(DroidMemory, TEST_DroidMemory_setExp,
     mem1.setExp(100);
 
     cr_assert(mem1.getExp() == 100);
-}
-
-
-Test(DroidMemory, TEST_DroidMemory_copyCTOR_check_stdout, .init = redirect_all_stdout)
-{
-    {
-        DroidMemory   mem1;
-        DroidMemory   mem2(mem1);
-
-    }
-    cr_assert_stdout_eq_str(
-        "DroidMemory '1804289383', 0\n"
-        "DroidMemory '1804289383', 0\n"
-    );
 }
 
 Test(DroidMemory, TEST_DroidMemory_copyCTOR_checks_parameters, .init = redirect_all_stdout)
