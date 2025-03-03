@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 6:16:16 PM 2025 Paradis
-** Last update Tue Mar 3 9:27:39 PM 2025 Paradis
+** Last update Tue Mar 3 9:57:08 PM 2025 Paradis
 */
 
 #include "../include/DroidMemory.hpp"
@@ -24,7 +24,6 @@ DroidMemory::DroidMemory(const DroidMemory &copyCTOR)
 
 DroidMemory::~DroidMemory(void)
 {
-        delete this;
 }
 
 DroidMemory         &DroidMemory::operator=(const DroidMemory &rhs)
@@ -80,13 +79,14 @@ DroidMemory         &DroidMemory::operator>>(DroidMemory &rhs)
     return rhs;
 }
 
-DroidMemory         &DroidMemory::operator+(const DroidMemory &rhs)
+DroidMemory         DroidMemory::operator+(const DroidMemory &rhs)
 {
-    DroidMemory *newDroidMemory = new DroidMemory(*this);
-    newDroidMemory->Fingerprint = newDroidMemory->Fingerprint ^ rhs.Fingerprint;
-    newDroidMemory->Exp = newDroidMemory->Exp + rhs.Exp;
+    DroidMemory newDroidMemory(*this);
 
-    return *newDroidMemory;
+    newDroidMemory.Exp += rhs.Exp;
+    newDroidMemory.Fingerprint ^= rhs.Fingerprint;
+    
+    return newDroidMemory;
 }
 
 std::ostream        &operator<<(std::ostream &os, const DroidMemory &rhs)

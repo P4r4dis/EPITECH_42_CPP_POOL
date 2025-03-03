@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 6:11:46 PM 2025 Paradis
-** Last update Tue Mar 3 9:24:15 PM 2025 Paradis
+** Last update Tue Mar 3 9:56:22 PM 2025 Paradis
 */
 
 #ifndef 			__DROIDMEMORY_HPP__
@@ -31,11 +31,12 @@ class	DroidMemory
         DroidMemory     &operator+=(const size_t &rhs);
         DroidMemory     &operator<<(const DroidMemory &lhs);
         DroidMemory     &operator>>(DroidMemory &rhs);
-        DroidMemory     &operator+(const DroidMemory &rhs);
+        DroidMemory     operator+(const DroidMemory &rhs);
     protected:
     private:
         size_t          Fingerprint;
         size_t          Exp;
+        // DroidMemory     *newDroidMemory;
 };
 
 #endif 				/* !__DROIDMEMORY_HPP__ */
