@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 6:16:16 PM 2025 Paradis
-** Last update Tue Mar 3 7:07:00 PM 2025 Paradis
+** Last update Tue Mar 3 8:34:42 PM 2025 Paradis
 */
 
 #include "../include/DroidMemory.hpp"
@@ -55,4 +55,25 @@ void                DroidMemory::setFingerPrint(size_t fingerprint)
 void                DroidMemory::setExp(size_t exp)
 {
     Exp = exp;
+}
+
+DroidMemory         &DroidMemory::operator+=(const size_t &rhs)
+{
+    Exp += rhs;
+    Fingerprint ^= rhs;
+    return *this;
+}
+
+DroidMemory         &DroidMemory::operator<<(const DroidMemory &lhs)
+{
+    Exp += lhs.Exp;
+    Fingerprint ^= lhs.Fingerprint;
+    return *this;
+}
+
+DroidMemory         &DroidMemory::operator>>(DroidMemory &rhs)
+{
+    rhs.Exp += Exp;
+    rhs.Fingerprint ^= Fingerprint;
+    return rhs;
 }

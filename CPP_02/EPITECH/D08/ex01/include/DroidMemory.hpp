@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 6:11:46 PM 2025 Paradis
-** Last update Tue Mar 3 6:16:14 PM 2025 Paradis
+** Last update Tue Mar 3 8:31:48 PM 2025 Paradis
 */
 
 #ifndef 			__DROIDMEMORY_HPP__
@@ -27,6 +27,9 @@ class	DroidMemory
         void            setFingerPrint(size_t fingerprint);
         void            setExp(size_t exp);
 
+        DroidMemory     &operator+=(const size_t &rhs);
+        DroidMemory     &operator<<(const DroidMemory &lhs);
+        DroidMemory     &operator>>(DroidMemory &rhs);
     protected:
     private:
         size_t          Fingerprint;
