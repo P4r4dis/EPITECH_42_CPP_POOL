@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 4:57:30 PM 2025 Paradis
-** Last update Tue Mar 3 9:01:32 PM 2025 Paradis
+** Last update Tue Mar 3 9:24:16 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -562,6 +562,23 @@ Test(DroidMemory,
         cr_assert(mem3.getFingerPrint() == (mem1.getFingerPrint() ^ mem2.getFingerPrint()));
     }
 }
+
+Test(DroidMemory,
+    TEST_DroidMemory_left_stream_operator_overload_redirected_to_stdout,
+    .init = redirect_all_stdout)
+{
+    {
+        DroidMemory     mem1;
+
+        mem1 += 42;
+        cr_assert(mem1.getExp() == 42);
+        cr_assert(mem1.getFingerPrint() == 1804289357);
+        std::cout << mem1 << std::endl;
+    }
+    cr_assert_stdout_eq_str(
+        "DroidMemory '1804289357', 42\n"
+    );
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
@@ -588,16 +605,16 @@ Test(DroidMemory,
 //         std::cout << mem3 << std::endl;
 //         std::cout << mem1 << std::endl;
 //     }
-//     cr_assert_stdout_eq_str(
-//         "Droid '' Activated\n"
-//         "Droid 'Avenger' Activated\n"
-//         "Droid '', Standing by, 50\n"
-//         "Droid 'Avenger', Standing by, 50\n"
-//         "Droid 'Avenger', Kill Kill Kill!, 100--150\n"
-//         "Droid 'Avenger' Activated, Memory Dumped\n"
-//         "1\n"
-//         "Droid 'Avenger' Destroyed\n"
-//         "Droid 'Avenger' Destroyed\n"
-//         "Droid 'Rex' Destroyed\n"
-//     );
+    // cr_assert_stdout_eq_str(
+    //     "Droid '' Activated\n"
+    //     "Droid 'Avenger' Activated\n"
+    //     "Droid '', Standing by, 50\n"
+    //     "Droid 'Avenger', Standing by, 50\n"
+    //     "Droid 'Avenger', Kill Kill Kill!, 100--150\n"
+    //     "Droid 'Avenger' Activated, Memory Dumped\n"
+    //     "1\n"
+    //     "Droid 'Avenger' Destroyed\n"
+    //     "Droid 'Avenger' Destroyed\n"
+    //     "Droid 'Rex' Destroyed\n"
+    // );
 // }

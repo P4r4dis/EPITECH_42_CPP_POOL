@@ -5,13 +5,14 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 6:11:46 PM 2025 Paradis
-** Last update Tue Mar 3 8:55:16 PM 2025 Paradis
+** Last update Tue Mar 3 9:24:15 PM 2025 Paradis
 */
 
 #ifndef 			__DROIDMEMORY_HPP__
 	# define 		__DROIDMEMORY_HPP__
 
 #include <cstddef>
+#include <ostream>
 class	DroidMemory
 {
     public:
@@ -38,3 +39,4 @@ class	DroidMemory
 };
 
 #endif 				/* !__DROIDMEMORY_HPP__ */
+std::ostream            &operator<<(std::ostream &os, const DroidMemory &rhs);

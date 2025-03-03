@@ -5,11 +5,12 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 6:16:16 PM 2025 Paradis
-** Last update Tue Mar 3 9:01:05 PM 2025 Paradis
+** Last update Tue Mar 3 9:27:39 PM 2025 Paradis
 */
 
 #include "../include/DroidMemory.hpp"
 #include <iostream>
+#include <ostream>
 
 DroidMemory::DroidMemory(void)  :   Fingerprint(random()), Exp(0)
 {
@@ -23,6 +24,7 @@ DroidMemory::DroidMemory(const DroidMemory &copyCTOR)
 
 DroidMemory::~DroidMemory(void)
 {
+        delete this;
 }
 
 DroidMemory         &DroidMemory::operator=(const DroidMemory &rhs)
@@ -85,4 +87,10 @@ DroidMemory         &DroidMemory::operator+(const DroidMemory &rhs)
     newDroidMemory->Exp = newDroidMemory->Exp + rhs.Exp;
 
     return *newDroidMemory;
+}
+
+std::ostream        &operator<<(std::ostream &os, const DroidMemory &rhs)
+{
+    os << "DroidMemory '" << rhs.getFingerPrint() << "', " << rhs.getExp();
+    return os;
 }
