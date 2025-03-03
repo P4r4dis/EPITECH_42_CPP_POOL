@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 4:57:14 PM 2025 Paradis
-** Last update Tue Mar 3 5:13:35 PM 2025 Paradis
+** Last update Tue Mar 3 5:35:55 PM 2025 Paradis
 */
 
 
@@ -120,9 +120,7 @@ Droid               &Droid::operator<<(size_t &rhs)
 
 bool                Droid::operator==(const Droid &droid)
 {
-    return (Id == droid.Id && Energy == droid.Energy &&
-            Attack == droid.Attack && Toughness == droid.Toughness &&
-            *Status == *droid.Status);
+    return (*Status == *droid.Status);
 }
 
 bool                Droid::operator!=(const Droid &droid)

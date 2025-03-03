@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 4:57:30 PM 2025 Paradis
-** Last update Tue Mar 3 5:25:38 PM 2025 Paradis
+** Last update Tue Mar 3 5:42:34 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -283,12 +283,12 @@ Test(Droid_class, Test_operator_equal_same_instance, .init = redirect_all_stdout
     cr_assert(d1 == d1);
 }
 
-Test(Droid_class, Test_operator_equal_different_models, .init = redirect_all_stdout)
+Test(Droid_class, Test_operator_equal_equal_models, .init = redirect_all_stdout)
 {
     Droid d1("R2D2");
     Droid d2("C3PO");
 
-    cr_assert_not((d1 == d2));
+    cr_assert(d1 == d2);
 }
 
 Test(Droid_class, Test_operator_equal_different_energy, .init = redirect_all_stdout)
@@ -326,12 +326,12 @@ Test(Droid_class, Test_operator_not_equal_same_instance, .init = redirect_all_st
     cr_assert_not((d1 != d1));
 }
 
-Test(Droid_class, Test_operator_not_equal_different_models, .init = redirect_all_stdout)
+Test(Droid_class, Test_operator_not_different_models, .init = redirect_all_stdout)
 {
     Droid d1("R2D2");
     Droid d2("C3PO");
 
-    cr_assert(d1 != d2);
+    cr_assert_not(d1 != d2);
 }
 
 Test(Droid_class, Test_operator_not_equal_different_energy, .init = redirect_all_stdout)
