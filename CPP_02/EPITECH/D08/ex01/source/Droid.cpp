@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 4:57:14 PM 2025 Paradis
-** Last update Wed Mar 4 6:34:18 PM 2025 Paradis
+** Last update Wed Mar 4 8:46:28 PM 2025 Paradis
 */
 
 
@@ -54,16 +54,16 @@ Droid               &Droid::operator=(const Droid &droid)
     {
         Id = droid.Id;
         Energy = droid.Energy;
-        if (Status)
+        if (droid.Status)
         {
             delete Status;
-            Status = new std::string(*droid.Status);
+            Status = droid.Status ? new std::string(*droid.Status) : nullptr;
         }
 
-        if (BattleData)
+        if (droid.BattleData)
         {
             delete BattleData;
-            BattleData = new DroidMemory(*droid.BattleData);
+            BattleData = droid.BattleData ? new DroidMemory(*droid.BattleData) : nullptr;
         }
         return *this;
     }
