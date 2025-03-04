@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 6:16:16 PM 2025 Paradis
-** Last update Tue Mar 3 9:57:08 PM 2025 Paradis
+** Last update Wed Mar 4 8:02:37 PM 2025 Paradis
 */
 
 #include "../include/DroidMemory.hpp"
@@ -72,11 +72,11 @@ DroidMemory         &DroidMemory::operator<<(const DroidMemory &lhs)
     return *this;
 }
 
-DroidMemory         &DroidMemory::operator>>(DroidMemory &rhs)
+DroidMemory         &DroidMemory::operator>>(DroidMemory &lhs)
 {
-    rhs.Exp += Exp;
-    rhs.Fingerprint ^= Fingerprint;
-    return rhs;
+    lhs.Exp += Exp;
+    lhs.Fingerprint ^= Fingerprint;
+    return lhs;
 }
 
 DroidMemory         DroidMemory::operator+(const DroidMemory &rhs)
