@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 4:57:14 PM 2025 Paradis
-** Last update Tue Mar 3 10:27:54 PM 2025 Paradis
+** Last update Wed Mar 4 2:09:26 PM 2025 Paradis
 */
 
 
@@ -113,14 +113,18 @@ void                Droid::setEnergy(size_t energy)
 
 void                Droid::setStatus(std::string *status)
 {
-    delete Status;
+    if (Status)
+        delete Status;
     Status = status;
 }
 
 void                Droid::setBattleData(const DroidMemory *battleData)
 {
-    delete BattleData;
-    BattleData = new DroidMemory(*battleData);
+    if (!battleData)
+        return ;
+
+    if (BattleData)
+        *BattleData = *battleData;
 }
 std::ostream        &operator<<(std::ostream &os, Droid const &rhs)
 {

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 4:57:30 PM 2025 Paradis
-** Last update Tue Mar 3 10:31:20 PM 2025 Paradis
+** Last update Wed Mar 4 2:10:21 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -127,7 +127,7 @@ Test(Droid_class, TEST_setBattleData,
     .init = redirect_all_stdout)
 {
     {
-        Droid   d("Thanos");
+        Droid d("Thanos");
 
         cr_assert_not_null(d.getBattleData());
         cr_assert(d.getBattleData()->getExp() == 0);
@@ -136,6 +136,14 @@ Test(Droid_class, TEST_setBattleData,
         mem += 42;
         d.setBattleData(&mem);
 
+        cr_assert_not_null(d.getBattleData());
+        cr_assert(d.getBattleData()->getExp() == 42);
+
+        d.setBattleData(nullptr);
+        cr_assert_not_null(d.getBattleData());
+
+        d.setBattleData(&mem);
+        cr_assert_not_null(d.getBattleData());
         cr_assert(d.getBattleData()->getExp() == 42);
     }
 }
