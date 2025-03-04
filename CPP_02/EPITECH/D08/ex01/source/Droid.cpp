@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 4:57:14 PM 2025 Paradis
-** Last update Tue Mar 3 5:35:55 PM 2025 Paradis
+** Last update Tue Mar 3 10:27:54 PM 2025 Paradis
 */
 
 
@@ -16,7 +16,8 @@
 
 Droid::Droid(std::string serial)    :   Id(serial), Energy(ENERGY),
                                         Attack(ATTACK), Toughness(TOUGHNESS),
-                                        Status(new std::string(STATUS))
+                                        Status(new std::string(STATUS)),
+                                        BattleData(new DroidMemory)
 {
     std::cout << "Droid '" << Id << "' Activated" << std::endl;
 }
@@ -25,7 +26,8 @@ Droid::Droid(const Droid &copyCTOR) :   Id(copyCTOR.Id),
                                         Energy(copyCTOR.Energy),
                                         Attack(copyCTOR.Attack),
                                         Toughness(copyCTOR.Toughness),
-                                        Status(new std::string(*copyCTOR.Status))
+                                        Status(new std::string(*copyCTOR.Status)),
+                                        BattleData(new DroidMemory(*copyCTOR.BattleData))
 {
     std::cout << "Droid '" << Id << "' Activated, Memory Dumped" << std::endl;
 }
@@ -36,6 +38,12 @@ Droid::~Droid()
     {
         delete Status;
         Status = nullptr;
+    }
+
+    if (BattleData)
+    {
+        delete BattleData;
+        BattleData = nullptr;
     }
     std::cout << "Droid '" << Id << "' Destroyed" << std::endl;
 }
@@ -50,6 +58,12 @@ Droid               &Droid::operator=(const Droid &droid)
         {
             delete Status;
             Status = new std::string(*droid.Status);
+        }
+
+        if (BattleData)
+        {
+            delete BattleData;
+            BattleData = new DroidMemory(*droid.BattleData);
         }
         return *this;
     }
@@ -82,6 +96,11 @@ std::string         *Droid::getStatus(void) const
     return Status;
 }
 
+DroidMemory         *Droid::getBattleData(void) const
+{
+    return BattleData;
+}
+
 void                Droid::setId(std::string id)
 {
     Id = id;
@@ -98,6 +117,11 @@ void                Droid::setStatus(std::string *status)
     Status = status;
 }
 
+void                Droid::setBattleData(const DroidMemory *battleData)
+{
+    delete BattleData;
+    BattleData = new DroidMemory(*battleData);
+}
 std::ostream        &operator<<(std::ostream &os, Droid const &rhs)
 {
     return os   << "Droid '" << rhs.getId() << "', "

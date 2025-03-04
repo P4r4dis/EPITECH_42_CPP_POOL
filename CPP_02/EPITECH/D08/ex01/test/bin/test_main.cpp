@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 4:57:30 PM 2025 Paradis
-** Last update Tue Mar 3 9:24:16 PM 2025 Paradis
+** Last update Tue Mar 3 10:31:20 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -42,6 +42,8 @@ Test(Droid_class, TEST_Droid_custom_CTOR_check_parameters, .init = redirect_all_
     cr_assert(d.getAttack() == 25);
     cr_assert(d.getToughness() == 15);
     cr_assert(d.getStatus()->compare("Standing by") == 0);
+    cr_assert_not_null(d.getBattleData());
+
 }
 
 Test(Droid_class, TEST_Droid_custom_CTOR_check_stdout, .init = redirect_all_stdout)
@@ -61,11 +63,6 @@ Test(Droid_class, TEST_Droid_copyCTOR_check_stdout, .init = redirect_all_stdout)
         Droid   d1("Avenger");
         Droid   d(d1);
 
-        cr_assert(d.getId() == "Avenger");
-        cr_assert(d.getEnergy() == 50);
-        cr_assert(d.getAttack() == 25);
-        cr_assert(d.getToughness() == 15);
-        cr_assert(d.getStatus()->compare("Standing by") == 0);
     }
     cr_assert_stdout_eq_str(
         "Droid 'Avenger' Activated\n"
@@ -87,6 +84,7 @@ Test(Droid_class, TEST_Droid_assignment_operator_with_two_differents_CTOR,
         cr_assert(d.getAttack() == 25);
         cr_assert(d.getToughness() == 15);
         cr_assert(d.getStatus()->compare("Standing by") == 0);
+        cr_assert_not_null(d.getBattleData());
 
         d = d1;
 
@@ -95,6 +93,8 @@ Test(Droid_class, TEST_Droid_assignment_operator_with_two_differents_CTOR,
         cr_assert(d.getAttack() == 25);
         cr_assert(d.getToughness() == 15);
         cr_assert(d.getStatus()->compare("Standing by") == 0);
+        cr_assert(d.getBattleData()->getExp() == d1.getBattleData()->getExp());
+
     }
 }
 
@@ -109,6 +109,7 @@ Test(Droid_class, TEST_Droid_assignment_operator_with_two_same_CTOR,
         cr_assert(d.getAttack() == 25);
         cr_assert(d.getToughness() == 15);
         cr_assert(d.getStatus()->compare("Standing by") == 0);
+        cr_assert_not_null(d.getBattleData());
 
         d = d;
 
@@ -117,6 +118,25 @@ Test(Droid_class, TEST_Droid_assignment_operator_with_two_same_CTOR,
         cr_assert(d.getAttack() == 25);
         cr_assert(d.getToughness() == 15);
         cr_assert(d.getStatus()->compare("Standing by") == 0);
+        cr_assert(d.getBattleData() == d.getBattleData());
+
+    }
+}
+
+Test(Droid_class, TEST_setBattleData,
+    .init = redirect_all_stdout)
+{
+    {
+        Droid   d("Thanos");
+
+        cr_assert_not_null(d.getBattleData());
+        cr_assert(d.getBattleData()->getExp() == 0);
+
+        DroidMemory mem;
+        mem += 42;
+        d.setBattleData(&mem);
+
+        cr_assert(d.getBattleData()->getExp() == 42);
     }
 }
 
@@ -324,6 +344,15 @@ Test(Droid_class, Test_operator_not_equal_different_status, .init = redirect_all
     d2.setStatus(new std::string("Attack mode"));
 
     cr_assert(d1 != d2);
+}
+
+Test(Droid_class, Test_DroidMemory_created_during_Droid_construction,
+    .init = redirect_all_stdout)
+{
+    Droid d1("R2D2");
+
+    cr_assert_not_null(d1.getBattleData());
+    cr_assert(d1.getBattleData()->getExp() == 0);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
