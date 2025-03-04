@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 4:57:30 PM 2025 Paradis
-** Last update Wed Mar 4 2:10:21 PM 2025 Paradis
+** Last update Wed Mar 4 6:09:39 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -210,6 +210,7 @@ Test(Droid_class, TEST_setStatus,
     {
         Droid   d("Avenger");
 
+        d.setStatus(nullptr);
         cr_assert(d.getStatus()->compare("Standing by") == 0);
 
         d.setStatus(new std::string("Pending by"));
