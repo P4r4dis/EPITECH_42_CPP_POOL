@@ -4,8 +4,8 @@
 ** Made by Paradis
 ** Login   <Adil Denia>
 **
-** Started on  Wed Mar 5 5:22:56 PM 2025 Paradis
-** Last update Thu Mar 5 7:05:39 PM 2025 Paradis
+** Started on  Wed Mar 5 5:22:56 PM 20ATTACK Paradis
+** Last update Thu Mar 5 7:22:28 PM 2025 Paradis
 */
 
 
@@ -40,9 +40,9 @@ Test(Droid_class, TEST_Droid_custom_CTOR_check_parameters, .init = redirect_all_
     Droid   d("Avenger");
     
     cr_assert(d.getId() == "Avenger");
-    cr_assert(d.getEnergy() == 50);
-    cr_assert(d.getAttack() == 25);
-    cr_assert(d.getToughness() == 15);
+    cr_assert(d.getEnergy() == ENERGY);
+    cr_assert(d.getAttack() == ATTACK);
+    cr_assert(d.getToughness() == TOUGHNESS);
     cr_assert(d.getStatus()->compare("Standing by") == 0);
     cr_assert_not_null(d.getBattleData());
 
@@ -82,23 +82,51 @@ Test(Droid_class, TEST_Droid_assignment_operator_with_two_differents_CTOR,
         Droid   d1("Avenger");
 
         cr_assert(d.getId() == "Thanos");
-        cr_assert(d.getEnergy() == 50);
-        cr_assert(d.getAttack() == 25);
-        cr_assert(d.getToughness() == 15);
+        cr_assert(d.getEnergy() == ENERGY);
+        cr_assert(d.getAttack() == ATTACK);
+        cr_assert(d.getToughness() == TOUGHNESS);
         cr_assert(d.getStatus()->compare("Standing by") == 0);
         cr_assert_not_null(d.getBattleData());
 
         d = d1;
 
         cr_assert(d.getId() == "Avenger");
-        cr_assert(d.getEnergy() == 50);
-        cr_assert(d.getAttack() == 25);
-        cr_assert(d.getToughness() == 15);
+        cr_assert(d.getEnergy() == ENERGY);
+        cr_assert(d.getAttack() == ATTACK);
+        cr_assert(d.getToughness() == TOUGHNESS);
         cr_assert(d.getStatus()->compare("Standing by") == 0);
         cr_assert(d.getBattleData()->getExp() == d1.getBattleData()->getExp());
 
     }
 }
+
+Test(Droid_class, TEST_Droid_assignment_operator_with_Energy_CTOR_is_different,
+    .init = redirect_all_stdout)
+{
+    {
+        Droid   d("Thanos");
+        Droid   d1("Avenger");
+
+        cr_assert(d.getId() == "Thanos");
+        cr_assert(d.getEnergy() == ENERGY);
+        cr_assert(d.getAttack() == ATTACK);
+        cr_assert(d.getToughness() == TOUGHNESS);
+        cr_assert(d.getStatus()->compare("Standing by") == 0);
+        cr_assert_not_null(d.getBattleData());
+
+        d1.setEnergy(100);
+        d = d1;
+
+        cr_assert(d.getId() == "Avenger");
+        cr_assert(d.getEnergy() == ENERGY);
+        cr_assert(d.getAttack() == ATTACK);
+        cr_assert(d.getToughness() == TOUGHNESS);
+        cr_assert(d.getStatus()->compare("Standing by") == 0);
+        cr_assert(d.getBattleData()->getExp() == d1.getBattleData()->getExp());
+
+    }
+}
+
 
 Test(Droid_class, TEST_Droid_assignment_operator_with_two_same_CTOR,
     .init = redirect_all_stdout)
@@ -107,18 +135,18 @@ Test(Droid_class, TEST_Droid_assignment_operator_with_two_same_CTOR,
         Droid   d("Avenger");
 
         cr_assert(d.getId() == "Avenger");
-        cr_assert(d.getEnergy() == 50);
-        cr_assert(d.getAttack() == 25);
-        cr_assert(d.getToughness() == 15);
+        cr_assert(d.getEnergy() == ENERGY);
+        cr_assert(d.getAttack() == ATTACK);
+        cr_assert(d.getToughness() == TOUGHNESS);
         cr_assert(d.getStatus()->compare("Standing by") == 0);
         cr_assert_not_null(d.getBattleData());
 
         d = d;
 
         cr_assert(d.getId() == "Avenger");
-        cr_assert(d.getEnergy() == 50);
-        cr_assert(d.getAttack() == 25);
-        cr_assert(d.getToughness() == 15);
+        cr_assert(d.getEnergy() == ENERGY);
+        cr_assert(d.getAttack() == ATTACK);
+        cr_assert(d.getToughness() == TOUGHNESS);
         cr_assert(d.getStatus()->compare("Standing by") == 0);
         cr_assert(d.getBattleData() == d.getBattleData());
 
@@ -170,7 +198,7 @@ Test(Droid_class, TEST_setEnergy,
     {
         Droid   d("Avenger");
         
-        cr_assert(d.getEnergy() == 50);
+        cr_assert(d.getEnergy() == ENERGY);
 
         d.setEnergy(60);
 
@@ -184,9 +212,9 @@ Test(Droid_class, TEST_setEnergy_cant_set_more_than_100,
     {
         Droid   d("Avenger");
 
-        cr_assert(d.getEnergy() == 50);
+        cr_assert(d.getEnergy() == ENERGY);
 
-        d.setEnergy(350);
+        d.setEnergy(100);
 
         cr_assert(d.getEnergy() == 100);
     }
@@ -198,7 +226,7 @@ Test(Droid_class, TEST_setEnergy_cant_set_less_than_zero,
     {
         Droid   d("Avenger");
 
-        cr_assert(d.getEnergy() == 50);
+        cr_assert(d.getEnergy() == ENERGY);
 
         d.setEnergy(-100);
         
@@ -245,7 +273,7 @@ Test(Droid_class,
         size_t  Durasel = 200;
     
         cr_assert(Durasel == 200);
-        cr_assert(d.getEnergy() == 50);
+        cr_assert(d.getEnergy() == ENERGY);
 
         d << Durasel;
         
@@ -299,7 +327,7 @@ Test(Droid_class, Test_operator_equal_different_energy, .init = redirect_all_std
     Droid d1("R2D2");
     Droid d2("R2D2");
 
-    d2.setEnergy(50);
+    d2.setEnergy(ENERGY);
 
     cr_assert(d1 == d2);
 }
@@ -342,7 +370,7 @@ Test(Droid_class, Test_operator_not_equal_different_energy, .init = redirect_all
     Droid d1("R2D2");
     Droid d2("R2D2");
 
-    d2.setEnergy(50);
+    d2.setEnergy(ENERGY);
 
     cr_assert_not(d1 != d2);
 }
@@ -830,7 +858,7 @@ Test(DroidMemory,
 //     std::cout << d << std::endl;
 //     while (d(new std::string("Patrol around"), 20))
 //     {
-//         if (!d(new std::string("Shoot some ennemies"), 50))
+//         if (!d(new std::string("Shoot some ennemies"), ENERGY))
 //             d(new std::string("Run Away"), 20);
 //         std::cout << d << std::endl;
 //     }
@@ -850,7 +878,7 @@ Test(DroidMemory,
 //         "Droid 'rudolf' Activated\n"
 //         "Droid 'gaston' Activated\n"
 //         "Droid 'rudolf', take a coffee - Failed!, 80\n"
-//         "Droid 'rudolf', Run Away - Completed!, 50\n"
+//         "Droid 'rudolf', Run Away - Completed!, ENERGY\n"
 //         "Droid 'rudolf', Shoot some ennemies - Completed!, 30\n"
 //         "Droid 'rudolf', Shoot some ennemies - Completed!, 10\n"
 //         "Droid 'rudolf', Battery Low, 0\n"

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Mar 5 5:32:35 PM 2025 Paradis
-** Last update Thu Mar 5 5:33:48 PM 2025 Paradis
+** Last update Thu Mar 5 7:17:32 PM 2025 Paradis
 */
 
 #include <iostream>
@@ -22,7 +22,7 @@ Droid::Droid(std::string serial)    :   Id(serial), Energy(ENERGY),
 }
 
 Droid::Droid(const Droid &copyCTOR) :   Id(copyCTOR.Id),
-                                        Energy(copyCTOR.Energy),
+                                        Energy(ENERGY),
                                         Attack(copyCTOR.Attack),
                                         Toughness(copyCTOR.Toughness),
                                         Status(new std::string(*copyCTOR.Status)),
@@ -52,7 +52,8 @@ Droid               &Droid::operator=(const Droid &droid)
     if (this != &droid)
     {
         Id = droid.Id;
-        Energy = droid.Energy;
+        // Energy = droid.Energy;
+        Energy = ENERGY;
         if (droid.Status)
         {
             delete Status;
