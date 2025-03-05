@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/24 19:01:44 by Paradis           #+#    #+#              #
-#    Updated: 2025/03/03 17:12:42 by Paradis          ###   ########.fr        #
+#    Updated: 2025/03/05 17:21:19 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -178,7 +178,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2124 Paradis
-## Last update Tue Mar 3 5:12:42 PM 2025 Paradis
+## Last update Thu Mar 5 5:21:19 PM 2025 Paradis
 ##
 # **************************************************************************** #
 #																			   #
@@ -266,14 +266,13 @@ EPITECH_EX02_SRC_PATH			=	./EPITECH/D08/ex02/source
 EPITECH_EX02_INC_PATH			=	./EPITECH/D08/ex02/include
 EPITECH_EX02_UT_PATH			=	./EPITECH/D08/ex02/test
 
-EPITECH_EX02_NAME				=	Move
+EPITECH_EX02_NAME				=	RogerRoger
 
 EPITECH_EX02_UT_SRC				=	$(EPITECH_EX02_UT_PATH)/$(EPITECH_EX02_NAME)_test.cpp
 EPITECH_EX02_UT_NAME 			= 	test_$(EPITECH_EX02_NAME)
 
-EPITECH_EX02_SRC				=	$(EPITECH_EX02_SRC_PATH)/Droids.cpp \
-									$(EPITECH_EX02_SRC_PATH)/WarpSystem.cpp \
-									$(EPITECH_EX02_SRC_PATH)/Borg.cpp \
+EPITECH_EX02_SRC				=	$(EPITECH_EX01_SRC_PATH)/Droids.cpp \
+									$(EPITECH_EX01_SRC_PATH)/Droidmemory.cpp \
 									$(EPITECH_EX02_BIN_PATH)/main.cpp
 EPITECH_EX02_OBJS				=	$(EPITECH_EX02_SRC:.cpp=.o)
 
@@ -629,8 +628,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_UT_PATH)	
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX01_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX01_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX02_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX02_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX02_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX02_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX03_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX03_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_PATH)
@@ -661,8 +660,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX01_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX01_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX02_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX02_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX02_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX02_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX03_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX03_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_PATH)
