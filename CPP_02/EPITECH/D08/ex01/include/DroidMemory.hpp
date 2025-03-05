@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 6:11:46 PM 2025 Paradis
-** Last update Thu Mar 5 4:35:25 PM 2025 Paradis
+** Last update Thu Mar 5 5:08:14 PM 2025 Paradis
 */
 
 #ifndef 			__DROIDMEMORY_HPP__
