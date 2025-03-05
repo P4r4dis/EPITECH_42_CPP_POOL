@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 4:57:30 PM 2025 Paradis
-** Last update Wed Mar 4 6:09:39 PM 2025 Paradis
+** Last update Thu Mar 5 4:48:13 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -616,6 +616,25 @@ Test(DroidMemory,
     cr_assert_stdout_eq_str(
         "DroidMemory '1804289357', 42\n"
     );
+}
+
+Test(DroidMemory,
+    TEST_DroidMemory_plus_equal_operator_same_behavior_than_left_stream_operator_overloaded,
+    .init = redirect_all_stdout)
+{
+    {
+        DroidMemory   mem1;
+
+        cr_assert(mem1.getExp() == 0);
+
+        DroidMemory   mem2;
+        mem2.setExp(42);
+        cr_assert(mem2.getExp() == 42);
+        size_t result = mem1.getFingerPrint() ^ mem2.getFingerPrint();
+        mem1 += mem2;
+        cr_assert(mem1.getExp() == 42);
+        cr_assert(mem1.getFingerPrint() == result);
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //

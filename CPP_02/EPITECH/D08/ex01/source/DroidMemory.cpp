@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 6:16:16 PM 2025 Paradis
-** Last update Wed Mar 4 8:02:37 PM 2025 Paradis
+** Last update Thu Mar 5 4:36:34 PM 2025 Paradis
 */
 
 #include "../include/DroidMemory.hpp"
@@ -93,4 +93,9 @@ std::ostream        &operator<<(std::ostream &os, const DroidMemory &rhs)
 {
     os << "DroidMemory '" << rhs.getFingerPrint() << "', " << rhs.getExp();
     return os;
+}
+
+DroidMemory         &DroidMemory::operator+=(const DroidMemory &lhs)
+{
+    return *this << lhs;
 }

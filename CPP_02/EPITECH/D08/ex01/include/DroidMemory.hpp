@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Mar 3 6:11:46 PM 2025 Paradis
-** Last update Tue Mar 3 10:01:06 PM 2025 Paradis
+** Last update Thu Mar 5 4:35:25 PM 2025 Paradis
 */
 
 #ifndef 			__DROIDMEMORY_HPP__
@@ -29,6 +29,7 @@ class	DroidMemory
         void            setExp(size_t exp);
 
         DroidMemory     &operator+=(const size_t &rhs);
+        DroidMemory     &operator+=(const DroidMemory &lhs);
         DroidMemory     &operator<<(const DroidMemory &lhs);
         DroidMemory     &operator>>(DroidMemory &rhs);
         DroidMemory     operator+(const DroidMemory &rhs);
