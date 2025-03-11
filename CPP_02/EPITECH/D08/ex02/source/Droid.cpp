@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Mar 5 5:32:35 PM 2025 Paradis
-** Last update Sat Mar 7 7:31:28 PM 2025 Paradis
+** Last update Wed Mar 11 5:40:58 PM 2025 Paradis
 */
 
 #include <iostream>
@@ -52,7 +52,6 @@ Droid               &Droid::operator=(const Droid &droid)
     if (this != &droid)
     {
         Id = droid.Id;
-        // Energy = droid.Energy;
         Energy = ENERGY;
         if (droid.Status)
         {
@@ -118,8 +117,8 @@ void                Droid::setStatus(std::string *status)
     if (Status)
     {
         delete Status;
-        // Status ? Status = status : Status = new std::string(*status);
-        Status = status;
+        Status ? Status = status : Status = new std::string(*status);
+        // Status = status;
     }
 }
 

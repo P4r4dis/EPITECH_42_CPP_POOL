@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Mar 5 5:33:43 PM 2025 Paradis
-** Last update Fri Mar 6 6:24:59 PM 2025 Paradis
+** Last update Wed Mar 11 5:40:57 PM 2025 Paradis
 */
 
 
@@ -47,8 +47,6 @@ class	            Droid
         void            setEnergy(size_t energy);
         void            setStatus(std::string *status);
         void            setBattleData(const DroidMemory *battleData);
-
-
     protected:
     private:
         std::string     Id;

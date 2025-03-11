@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Mar 5 5:33:31 PM 2025 Paradis
-** Last update Thu Mar 5 6:50:00 PM 2025 Paradis
+** Last update Wed Mar 11 5:02:37 PM 2025 Paradis
 */
 
 #ifndef 			__DROIDMEMORY_HPP__
@@ -49,5 +49,5 @@ class	DroidMemory
         size_t          Exp;
 };
 
-#endif 				/* !__DROIDMEMORY_HPP__ */
 std::ostream            &operator<<(std::ostream &os, const DroidMemory &rhs);
+#endif 				/* !__DROIDMEMORY_HPP__ */
