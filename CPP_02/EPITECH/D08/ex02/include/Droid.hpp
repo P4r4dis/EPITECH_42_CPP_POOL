@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Mar 5 5:33:43 PM 2025 Paradis
-** Last update Thu Mar 5 5:33:45 PM 2025 Paradis
+** Last update Fri Mar 6 6:24:59 PM 2025 Paradis
 */
 
 
@@ -20,6 +20,7 @@
 #define ATTACK 25
 #define TOUGHNESS 15
 #define STATUS "Standing by"
+#define COST 10
 
 class	            Droid
 {
@@ -33,6 +34,7 @@ class	            Droid
         Droid           &operator<<(size_t &rhs);
         bool            operator==(const Droid &droid);
         bool            operator!=(const Droid &droid);
+        bool            operator()(const std::string *task, size_t expRequired);
 
         std::string     getId(void) const;
         size_t          getEnergy(void) const;

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Mar 5 5:22:56 PM 20ATTACK Paradis
-** Last update Thu Mar 5 7:22:28 PM 2025 Paradis
+** Last update Wed Mar 11 4:54:35 PM 2025 Paradis
 */
 
 
@@ -18,6 +18,7 @@
 
 #include <iostream>
 #include <limits>
+#include <ostream>
 
 #include "../../include/Droid.hpp"
 #include "../../include/DroidMemory.hpp"
@@ -27,6 +28,50 @@ void redirect_all_stdout(void)
 {
     cr_redirect_stdout();
     cr_redirect_stderr();
+}
+
+static void testMemory()
+{
+    DroidMemory mem1;
+
+    mem1 += 42;
+    std::cout << mem1 << std::endl;
+
+    DroidMemory mem2;
+
+    mem2 << mem1;
+    mem2 >> mem1;
+    mem2 << mem1;
+    std::cout << mem2 << std::endl;
+    std::cout << mem1 << std::endl;
+
+    DroidMemory mem3 = mem1;
+    DroidMemory mem4;
+
+    mem4 = mem1 + mem3;
+}
+
+static void testDroids ()
+{
+    Droid d("rudolf");
+    Droid d2("gaston");
+    size_t DuraSell = 40;
+
+    d << DuraSell;
+    d.setStatus(new std::string("having some reset"));
+    d2.setStatus(new std::string("having some reset"));
+    if (d2 != d && !(d == d2))
+        std::cout << "a droid is a droid, all its matter is what it's doing" << std::endl;
+
+    d(new std::string("take a coffee"), 20);
+    std::cout << d << std::endl;
+    while (d(new std::string("Patrol around"), 20))
+    {
+        if (!d(new std::string("Shoot some ennemies"), 50))
+            d(new std::string("Run Away"), 20);
+        std::cout << d << std::endl;
+    }
+    std::cout << d << std::endl;
 }
 
 Test(Droid_class, TEST_Droid_custom_CTOR_isDefined, .init = redirect_all_stdout)
@@ -392,6 +437,201 @@ Test(Droid_class, Test_DroidMemory_created_during_Droid_construction,
 
     cr_assert_not_null(d1.getBattleData());
     cr_assert(d1.getBattleData()->getExp() == 0);
+}
+
+Test(Droid_class,
+    TEST_Droid_operator_call_function_has_empty_task_return_false,
+    .init = redirect_all_stdout)
+{
+    {
+        testMemory();
+
+        Droid d("rudolf");
+        Droid d2("gaston");
+        size_t DuraSell = 40;
+    
+        d << DuraSell;
+        d.setStatus(new std::string("having some reset"));
+        d2.setStatus(new std::string("having some reset"));
+        // if (d2 != d && !(d == d2))
+        //     std::cout << "a droid is a droid, all its matter is what it's doing" << std::endl;
+        cr_assert(d(new std::string(""), 20) == false);
+    }
+}
+
+Test(Droid_class,
+    TEST_Droid_operator_call_function_has_enough_Energy_but_doesnt_have_enough_xp_return_false,
+    .init = redirect_all_stdout)
+{
+    {
+        testMemory();
+
+        Droid d("rudolf");
+        Droid d2("gaston");
+        size_t DuraSell = 40;
+
+        d << DuraSell;
+        d.setStatus(new std::string("having some reset"));
+        d2.setStatus(new std::string("having some reset"));
+
+        // if (d2 != d && !(d == d2))
+        //     std::cout << "a droid is a droid, all its matter is what it's doing" << std::endl;
+        cr_assert(d.getEnergy() == ENERGY + 40);
+        cr_assert(d(new std::string("take a coffee"), 20) == false);
+
+    }
+}
+
+Test(Droid_class,
+    TEST_Droid_operator_call_function_doesnt_have_enough_xp_return_false_and_use_Energy,
+    .init = redirect_all_stdout)
+{
+    {
+        testMemory();
+
+        Droid d("rudolf");
+        Droid d2("gaston");
+        size_t DuraSell = 40;
+    
+        d << DuraSell;
+        d.setStatus(new std::string("having some reset"));
+        d2.setStatus(new std::string("having some reset"));
+
+        // if (d2 != d && !(d == d2))
+        //     std::cout << "a droid is a droid, all its matter is what it's doing" << std::endl;
+
+        cr_assert(d.getEnergy() == ENERGY + 40);
+        cr_assert(d(new std::string("take a coffee"), 20) == false);
+        cr_assert(d.getEnergy() == (ENERGY + 40 - COST));
+
+    }
+}
+
+Test(Droid_class,
+    TEST_Droid_operator_call_function_return_false_but_increase_Exp_by_total_amount_of_expRequired,
+    .init = redirect_all_stdout)
+{
+    {
+        testMemory();
+
+        Droid d("rudolf");
+        Droid d2("gaston");
+        size_t DuraSell = 40;
+    
+        d << DuraSell;
+        d.setStatus(new std::string("having some reset"));
+        d2.setStatus(new std::string("having some reset"));
+
+        // if (d2 != d && !(d == d2))
+        //     std::cout << "a droid is a droid, all its matter is what it's doing" << std::endl;
+
+        cr_assert(d.getBattleData()->getExp() == 0);
+        cr_assert(d(new std::string("take a coffee"), 20) == false);
+        cr_assert(d.getBattleData()->getExp() == 20);
+
+    }
+}
+
+Test(Droid_class,
+    TEST_Droid_operator_call_function_task_fail_because_not_enough_exp_return_false_and_update_Status,
+    .init = redirect_all_stdout)
+{
+    {
+        testMemory();
+
+        Droid d("rudolf");
+        Droid d2("gaston");
+        size_t DuraSell = 40;
+    
+        d << DuraSell;
+        d.setStatus(new std::string("having some reset"));
+        d2.setStatus(new std::string("having some reset"));
+
+        // if (d2 != d && !(d == d2))
+        //     std::cout << "a droid is a droid, all its matter is what it's doing" << std::endl;
+
+        cr_assert(d.getStatus()->compare("having some reset") == 0);
+        cr_assert(d(new std::string("take a coffee"), 20) == false);
+        cr_assert(d.getStatus()->compare("take a coffee - Failed!") == 0);
+        std::cout << d << std::endl;
+    }
+}
+
+Test(Droid_class,
+    TEST_Droid_operator_call_function_task_perform_task_and_return_true,
+    .init = redirect_all_stdout)
+{
+    {
+        testMemory();
+
+        Droid d("rudolf");
+        Droid d2("gaston");
+        size_t DuraSell = 40;
+    
+        d << DuraSell;
+        d.setStatus(new std::string("having some reset"));
+        d2.setStatus(new std::string("having some reset"));
+
+        // if (d2 != d && !(d == d2))
+        //     std::cout << "a droid is a droid, all its matter is what it's doing" << std::endl;
+
+        cr_assert(d.getStatus()->compare("having some reset") == 0);
+        cr_assert(d(new std::string("take a coffee"), 20) == false);
+        cr_assert(d.getStatus()->compare("take a coffee - Failed!") == 0);
+        std::cout << d << std::endl;
+        while (d(new std::string("Patrol around"), 20))
+        {
+            if (!d(new std::string("Shoot some ennemies"), 50))
+                d(new std::string("Run Away"), 20);
+            std::cout << d << std::endl;
+        }
+    }
+}
+
+Test(Droid_class,
+    TEST_Droid_operator_call_function_try_to_performs_task_but_battery_low_and_return_false,
+    .init = redirect_all_stdout)
+{
+    {
+        testMemory();
+
+        Droid d("rudolf");
+        Droid d2("gaston");
+        size_t DuraSell = 40;
+    
+        d << DuraSell;
+        d.setStatus(new std::string("having some reset"));
+        d2.setStatus(new std::string("having some reset"));
+
+        // if (d2 != d && !(d == d2))
+        //     std::cout << "a droid is a droid, all its matter is what it's doing" << std::endl;
+
+        cr_assert(d.getStatus()->compare("having some reset") == 0);
+        cr_assert(d(new std::string("take a coffee"), 20) == false);
+        cr_assert(d.getStatus()->compare("take a coffee - Failed!") == 0);
+        std::cout << d << std::endl;
+        while (d(new std::string("Patrol around"), 20))
+        {
+            if (!d(new std::string("Shoot some ennemies"), 50))
+                cr_assert(d(new std::string("Run Away"), 20));
+            std::cout << d << std::endl;
+        }
+        std::cout << d << std::endl;
+    }
+    cr_assert_stdout_eq_str(
+        "DroidMemory '1804289357', 42\n"
+        "DroidMemory '1804289357', 126\n"
+        "DroidMemory '846930886', 84\n"
+        "Droid 'rudolf' Activated\n"
+        "Droid 'gaston' Activated\n"
+        "Droid 'rudolf', take a coffee - Failed!, 80\n"
+        "Droid 'rudolf', Run Away - Completed!, 50\n"
+        "Droid 'rudolf', Shoot some ennemies - Completed!, 30\n"
+        "Droid 'rudolf', Shoot some ennemies - Completed!, 10\n"
+        "Droid 'rudolf', Battery Low, 0\n"
+        "Droid 'gaston' Destroyed\n"
+        "Droid 'rudolf' Destroyed\n"
+    );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -818,71 +1058,31 @@ Test(DroidMemory,
         cr_assert_not(mem2 >= mem1.getExp());
     }
 }
+
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
-// static void testMemory()
-// {
-//     DroidMemory mem1;
 
-//     mem1 += 42;
-//     std::cout << mem1 << std::endl;
-
-//     DroidMemory mem2;
-
-//     mem2 << mem1;
-//     mem2 >> mem1;
-//     mem2 << mem1;
-//     std::cout << mem2 << std::endl;
-//     std::cout << mem1 << std::endl;
-
-//     DroidMemory mem3 = mem1;
-//     DroidMemory mem4;
-
-//     mem4 = mem1 + mem3;
-// }
-
-// static void testDroids ()
-// {
-//     Droid d("rudolf");
-//     Droid d2("gaston");
-//     size_t DuraSell = 40;
-
-//     d << DuraSell;
-//     d.setStatus(new std::string("having some reset"));
-//     d2.setStatus(new std::string("having some reset"));
-//     if (d2 != d && !(d == d2))
-//         std::cout << "a droid is a droid, all its matter is what it's doing" << std::endl;
-
-//     d(new std::string("take a coffee"), 20);
-//     std::cout << d << std::endl;
-//     while (d(new std::string("Patrol around"), 20))
-//     {
-//         if (!d(new std::string("Shoot some ennemies"), ENERGY))
-//             d(new std::string("Run Away"), 20);
-//         std::cout << d << std::endl;
-//     }
-//     std::cout << d << std::endl;
-// }
-
-// Test(main, Test_main, .init = redirect_all_stdout)
-// {
-//     {
-//         testMemory();
-//         testDroids();
-//     }
-//     cr_assert_stdout_eq_str(
-//         "DroidMemory '1804289357', 42\n"
-//         "DroidMemory '1804289357', 126\n"
-//         "DroidMemory '846930886', 84\n"
-//         "Droid 'rudolf' Activated\n"
-//         "Droid 'gaston' Activated\n"
-//         "Droid 'rudolf', take a coffee - Failed!, 80\n"
-//         "Droid 'rudolf', Run Away - Completed!, ENERGY\n"
-//         "Droid 'rudolf', Shoot some ennemies - Completed!, 30\n"
-//         "Droid 'rudolf', Shoot some ennemies - Completed!, 10\n"
-//         "Droid 'rudolf', Battery Low, 0\n"
-//         "Droid 'gaston' Destroyed\n"
-//         "Droid 'rudolf' Destroyed\n"
-//     );
-// }
+Test(main, Test_main, .init = redirect_all_stdout)
+{
+    {
+        testMemory();
+        testDroids();
+    }
+    cr_assert_stdout_eq_str(
+        "DroidMemory '1804289357', 42\n"
+        "DroidMemory '1804289357', 126\n"
+        "DroidMemory '846930886', 84\n"
+        "Droid 'rudolf' Activated\n"
+        "Droid 'gaston' Activated\n"
+        "Droid 'rudolf', take a coffee - Failed!, 80\n"
+        "Droid 'rudolf', Run Away - Completed!, 50\n"
+        "Droid 'rudolf', Shoot some ennemies - Completed!, 30\n"
+        "Droid 'rudolf', Shoot some ennemies - Completed!, 10\n"
+        "Droid 'rudolf', Battery Low, 0\n"
+        "Droid 'gaston' Destroyed\n"
+        "Droid 'rudolf' Destroyed\n"
+    );
+}

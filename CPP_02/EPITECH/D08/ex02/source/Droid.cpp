@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Mar 5 5:32:35 PM 2025 Paradis
-** Last update Thu Mar 5 7:17:32 PM 2025 Paradis
+** Last update Sat Mar 7 7:31:28 PM 2025 Paradis
 */
 
 #include <iostream>
@@ -118,7 +118,8 @@ void                Droid::setStatus(std::string *status)
     if (Status)
     {
         delete Status;
-        Status ? Status = status : Status = new std::string(*status);
+        // Status ? Status = status : Status = new std::string(*status);
+        Status = status;
     }
 }
 
@@ -158,4 +159,31 @@ bool                Droid::operator==(const Droid &droid)
 bool                Droid::operator!=(const Droid &droid)
 {
     return !(*this == droid);
+}
+
+bool                Droid::operator()(const std::string *task, size_t expRequired)
+{
+    if (!task->empty() && Energy >= 10 && BattleData->getExp() >= expRequired)
+    {
+        Energy -= COST;
+        BattleData->setExp(BattleData->getExp() + (expRequired / 2));
+        *Status = *task + " - Completed!";
+        if (Energy < COST)
+        {
+            Energy -= Energy;
+            *Status = "Battery Low";
+            delete task;
+            return false;
+        }
+        delete task;
+        return true;
+    }
+    else
+    {
+        Energy -= COST;
+        BattleData->setExp(BattleData->getExp() + expRequired);
+        *Status = *task + " - Failed!";
+        delete task;
+        return false;
+    }
 }
