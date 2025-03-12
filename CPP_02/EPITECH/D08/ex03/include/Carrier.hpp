@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 11 6:26:48 PM 2025 Paradis
-** Last update Wed Mar 11 8:11:00 PM 2025 Paradis
+** Last update Thu Mar 12 8:11:07 PM 2025 Paradis
 */
 
 #ifndef 			__CARRIER_HPP__
@@ -24,8 +24,8 @@
 
             std::string     getId(void) const;
             size_t          getEnergy(void) const;
-            size_t    getAttack(void) const;
-            size_t    getToughness(void) const;
+            size_t          getAttack(void) const;
+            size_t          getToughness(void) const;
             size_t          getSpeed(void) const;
             Droid           *getDroids(size_t nb) const;
 
@@ -34,6 +34,7 @@
             void            setSpeed(size_t Speed);
             void            setDroids(size_t pos, Droid *droid);
 
+            Carrier         &operator<<(Droid *&droid);
         protected:
         private:
             std::string     Id;

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 11 5:56:14 PM 2025 Paradis
-** Last update Wed Mar 11 8:58:54 PM 2025 Paradis
+** Last update Thu Mar 12 8:11:09 PM 2025 Paradis
 */
 
 
@@ -1290,6 +1290,165 @@ Test(Carrier, TEST_setDroids_at_pos_where_there_is_already_Droid,
         cr_assert_not_null(c.getDroids(0));
         cr_assert(c.getSpeed() == 90);
     }
+
+Test(Carrier, TEST_left_stream_operator_boarding_one_droids,
+    .init = redirect_all_stdout)
+    {
+        {
+            Carrier     c("HellExpress");
+            Droid       *d1 = new Droid("Commander");
+            
+            c << d1;
+            std::cout << c.getDroids(0)->getId() << std::endl;
+        }
+        cr_assert_stdout_eq_str(
+            "Droid 'Commander' Activated\n"
+            "Commander\n"
+            "Droid 'Commander' Destroyed\n"
+        );
+    }
+
+Test(Carrier, TEST_left_stream_operator_boarding_more_droids_than_possible,
+.init = redirect_all_stdout)
+    {
+        {
+            Carrier     c("HellExpress");
+            Droid       *d1 = new Droid("Commander");
+            Droid       *d2 = new Droid("Sergent");
+            Droid       *d3 = new Droid("Troufiont");
+            Droid       *d4 = new Droid("Groupie");
+            Droid       *d5 = new Droid("BeerHolder");
+            Droid       *d6 = new Droid("Intruder");
+            
+            c << d1 << d2 << d3 << d4 << d5 << d6;
+ 
+            for (size_t i = 0; i < MAX_SIZE; ++i)
+            {
+                if (c.getDroids(i) != nullptr)
+                    std::cout << c.getDroids(i)->getId() << std::endl;
+            }
+            delete d6;
+        }
+        cr_assert_stdout_eq_str(
+            "Droid 'Commander' Activated\n"
+            "Droid 'Sergent' Activated\n"
+            "Droid 'Troufiont' Activated\n"
+            "Droid 'Groupie' Activated\n"
+            "Droid 'BeerHolder' Activated\n"
+            "Droid 'Intruder' Activated\n"
+            "Commander\n"
+            "Sergent\n"
+            "Troufiont\n"
+            "Groupie\n"
+            "BeerHolder\n"
+            "Droid 'Intruder' Destroyed\n"
+            "Droid 'Commander' Destroyed\n"
+            "Droid 'Sergent' Destroyed\n"
+            "Droid 'Troufiont' Destroyed\n"
+            "Droid 'Groupie' Destroyed\n"
+            "Droid 'BeerHolder' Destroyed\n"
+        );
+    }
+
+Test(Carrier, TEST_left_stream_operator_boarding_null_droid,
+.init = redirect_all_stdout)
+    {
+        {
+            Carrier     c("HellExpress");
+            Droid       *d1 = new Droid("Commander");
+            Droid       *d2 = new Droid("Sergent");
+            Droid       *d3 = new Droid("Troufiont");
+            Droid       *d4 = new Droid("Groupie");
+            Droid       *d5 = nullptr;
+            
+            c << d1 << d2 << d3 << d4 << d5;
+ 
+            for (size_t i = 0; i < MAX_SIZE; ++i)
+            {
+                if (c.getDroids(i) != nullptr)
+                    std::cout << c.getDroids(i)->getId() << std::endl;
+            }
+        }
+        cr_assert_stdout_eq_str(
+            "Droid 'Commander' Activated\n"
+            "Droid 'Sergent' Activated\n"
+            "Droid 'Troufiont' Activated\n"
+            "Droid 'Groupie' Activated\n"
+            "Commander\n"
+            "Sergent\n"
+            "Troufiont\n"
+            "Groupie\n"
+            "Droid 'Commander' Destroyed\n"
+            "Droid 'Sergent' Destroyed\n"
+            "Droid 'Troufiont' Destroyed\n"
+            "Droid 'Groupie' Destroyed\n"
+        );
+    }
+
+Test(Carrier, TEST_left_stream_operator_boarding_droids_update_speed,
+.init = redirect_all_stdout)
+    {
+        {
+            Carrier     c("HellExpress");
+            Droid       *d1 = new Droid("Commander");
+            Droid       *d2 = new Droid("Sergent");
+            Droid       *d3 = new Droid("Troufiont");
+            Droid       *d4 = new Droid("Groupie");
+            Droid       *d5 = new Droid("BeerHolder");
+            
+            cr_assert(c.getSpeed() == 0);
+            c << d1 << d2 << d3 << d4 << d5;
+ 
+            for (size_t i = 0; i < MAX_SIZE; ++i)
+            {
+                if (c.getDroids(i) != nullptr)
+                    std::cout << c.getDroids(i)->getId() << std::endl;
+            }
+            // cr_log_warn("%lu", c.getSpeed());
+            cr_assert(c.getSpeed() == 50);
+        }
+        cr_assert_stdout_eq_str(
+            "Droid 'Commander' Activated\n"
+            "Droid 'Sergent' Activated\n"
+            "Droid 'Troufiont' Activated\n"
+            "Droid 'Groupie' Activated\n"
+            "Droid 'BeerHolder' Activated\n"
+            "Commander\n"
+            "Sergent\n"
+            "Troufiont\n"
+            "Groupie\n"
+            "BeerHolder\n"
+            "Droid 'Commander' Destroyed\n"
+            "Droid 'Sergent' Destroyed\n"
+            "Droid 'Troufiont' Destroyed\n"
+            "Droid 'Groupie' Destroyed\n"
+            "Droid 'BeerHolder' Destroyed\n"
+        );
+    }
+
+Test(Carrier, TEST_left_stream_operator_boarding_same_droids_should_be_not_possible,
+.init = redirect_all_stdout)
+    {
+        {
+            Carrier     c("HellExpress");
+            Droid       *d1 = new Droid("Commander");
+            
+            c << d1 << d1 << d1;
+ 
+            for (size_t i = 0; i < MAX_SIZE; ++i)
+            {
+                if (c.getDroids(i) != nullptr)
+                    std::cout << c.getDroids(i)->getId() << std::endl;
+            }
+        }
+        cr_assert_stdout_eq_str(
+            "Droid 'Commander' Activated\n"
+            "Commander\n"
+            "Droid 'Commander' Destroyed\n"
+        );
+    }
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
@@ -1298,11 +1457,11 @@ Test(Carrier, TEST_setDroids_at_pos_where_there_is_already_Droid,
 // {
 //     {
 //         Carrier c("HellExpress");
-//         Droid *d1 = new Droid("Commander");
-//         Droid *d2 = new Droid("Sergent");
-//         Droid *d3 = new Droid("Troufiont");
-//         Droid *d4 = new Droid("Groupie");
-//         Droid *d5 = new Droid("BeerHolder");
+        // Droid *d1 = new Droid("Commander");
+        // Droid *d2 = new Droid("Sergent");
+        // Droid *d3 = new Droid("Troufiont");
+        // Droid *d4 = new Droid("Groupie");
+        // Droid *d5 = new Droid("BeerHolder");
         
         // c << d1 << d2 << d3 << d4 << d5;
         // std::cout << c.getSpeed() << d1 << std::endl;

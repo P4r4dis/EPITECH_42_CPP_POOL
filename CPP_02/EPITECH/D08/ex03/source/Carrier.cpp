@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 11 6:31:41 PM 2025 Paradis
-** Last update Wed Mar 11 9:01:52 PM 2025 Paradis
+** Last update Thu Mar 12 8:11:14 PM 2025 Paradis
 */
 
 #include "../include/Carrier.hpp"
@@ -58,7 +58,10 @@ size_t          Carrier::getSpeed(void) const
 
 Droid          *Carrier::getDroids(size_t nb) const
 {
-    return Droids[nb];
+    if (nb < 5)
+        return Droids[nb];
+    else
+        return nullptr;
 }
 
 void            Carrier::setId(std::string id)
@@ -93,4 +96,29 @@ void            Carrier::setDroids(size_t pos, Droid *droid)
         }
         Speed -= 10 * nbDroid;
     }
+}
+
+Carrier         &Carrier::operator<<(Droid *&droid)
+{
+    if (droid == nullptr)
+        return *this;
+
+    for (size_t i = 0; i < MAX_SIZE; ++i)
+    {
+        if (!Droids[i])
+        {
+
+            Droids[i] = droid;
+            droid = nullptr;
+            // size_t nbDroid = 0;
+            // for (size_t i = 0; i < MAX_SIZE; ++i)
+            // {
+            //     if (Droids[i] != nullptr)
+            //         nbDroid++;
+            // }
+            Speed = 100 - (10 * (i + 1));//nbDroid);
+            return *this;
+        }
+    }
+    return *this;
 }
