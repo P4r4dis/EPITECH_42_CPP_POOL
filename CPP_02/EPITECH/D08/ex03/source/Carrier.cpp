@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 11 6:31:41 PM 2025 Paradis
-** Last update Thu Mar 12 8:11:14 PM 2025 Paradis
+** Last update Fri Mar 13 5:43:15 PM 2025 Paradis
 */
 
 #include "../include/Carrier.hpp"
@@ -110,13 +110,25 @@ Carrier         &Carrier::operator<<(Droid *&droid)
 
             Droids[i] = droid;
             droid = nullptr;
-            // size_t nbDroid = 0;
-            // for (size_t i = 0; i < MAX_SIZE; ++i)
-            // {
-            //     if (Droids[i] != nullptr)
-            //         nbDroid++;
-            // }
-            Speed = 100 - (10 * (i + 1));//nbDroid);
+            Speed = 100 - (10 * (i + 1));
+            return *this;
+        }
+    }
+    return *this;
+}
+
+Carrier         &Carrier::operator>>(Droid *&droid)
+{
+
+    for (size_t i = 0; i < MAX_SIZE; ++i)
+    {
+        if (Droids[i])
+        {
+            droid = Droids[i];
+            Droids[i] = nullptr;
+            Speed = 100 - (10 * (i));
+            if (i == MAX_SIZE - 1)
+                Speed = 0;
             return *this;
         }
     }
