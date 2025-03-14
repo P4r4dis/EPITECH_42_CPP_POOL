@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 11 6:26:48 PM 2025 Paradis
-** Last update Fri Mar 13 7:47:50 PM 2025 Paradis
+** Last update Sat Mar 14 5:06:02 PM 2025 Paradis
 */
 
 #ifndef 			__CARRIER_HPP__
@@ -39,7 +39,7 @@
             Carrier         &operator<<(Droid *&droid);
             Carrier         &operator>>(Droid *&droid);
             Droid           *&operator[](size_t index);
-            // Carrier           &operator<<(size_t &rhs);
+            Carrier         &operator~(void);
         protected:
         private:
             std::string     Id;

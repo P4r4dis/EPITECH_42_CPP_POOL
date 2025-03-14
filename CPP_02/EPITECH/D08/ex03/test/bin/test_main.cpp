@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 11 5:56:14 PM 2025 Paradis
-** Last update Fri Mar 13 7:51:40 PM 2025 Paradis
+** Last update Sat Mar 14 5:21:16 PM 2025 Paradis
 */
 
 
@@ -1657,6 +1657,40 @@ Test(Carrier, TEST_bracket_operator_performs_access_to_Droids_slot_with_wrong_in
             "Droid 'BeerHolder' Activated\n"
             "500\n"
             "80\n"
+            "Droid 'Commander' Destroyed\n"
+            "Droid 'Groupie' Destroyed\n"
+            "Droid 'BeerHolder' Destroyed\n"
+        );
+    }
+
+Test(Carrier, TEST_bitwiseNot_operator_checkup_carrier,
+.init = redirect_all_stdout)
+    {
+        {
+            Carrier     c("HellExpress");
+            Droid       *d1 = new Droid("Commander");
+            Droid       *d2 = new Droid("Sergent");
+            Droid       *d3 = new Droid("Troufiont");
+            Droid       *d4 = new Droid("Groupie");
+            Droid       *d5 = new Droid("BeerHolder");
+
+            c << d1 << d2 << d3 << d4 << d5;
+            std::cout << c.getSpeed() << d1 << std::endl;
+            c >> d1 >> d2 >> d3;
+            std::cout << c.getSpeed() << std::endl;
+            c[0] = d1;
+            std::cout << (~c).getSpeed() << std::endl;
+            cr_assert(c.getSpeed() == 70);
+        }
+        cr_assert_stdout_eq_str(
+            "Droid 'Commander' Activated\n"
+            "Droid 'Sergent' Activated\n"
+            "Droid 'Troufiont' Activated\n"
+            "Droid 'Groupie' Activated\n"
+            "Droid 'BeerHolder' Activated\n"
+            "500\n"
+            "80\n"
+            "70\n"
             "Droid 'Commander' Destroyed\n"
             "Droid 'Groupie' Destroyed\n"
             "Droid 'BeerHolder' Destroyed\n"

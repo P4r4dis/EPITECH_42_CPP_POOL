@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 11 6:31:41 PM 2025 Paradis
-** Last update Fri Mar 13 7:53:31 PM 2025 Paradis
+** Last update Sat Mar 14 5:18:42 PM 2025 Paradis
 */
 
 #include "../include/Carrier.hpp"
@@ -142,4 +142,10 @@ void            Carrier::updateSpeed(void)
             count++;
     }
     Speed = (count > 0) ? 100 - (count * 10) : 0;
+}
+
+Carrier         &Carrier::operator~(void)
+{
+    updateSpeed();
+    return *this;
 }
