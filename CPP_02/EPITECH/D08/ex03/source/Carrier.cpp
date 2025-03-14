@@ -5,11 +5,10 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 11 6:31:41 PM 2025 Paradis
-** Last update Sat Mar 14 5:18:42 PM 2025 Paradis
+** Last update Sat Mar 14 6:10:45 PM 2025 Paradis
 */
 
 #include "../include/Carrier.hpp"
-#include <cstddef>
 #include <string>
 
 Carrier::Carrier(std::string id)    :   Id(id), Energy(300), Attack(100),
@@ -62,6 +61,17 @@ Droid          *Carrier::getDroids(size_t nb) const
         return Droids[nb];
     else
         return nullptr;
+}
+
+size_t          Carrier::getNbDroid(void)
+{
+    NbDroid = 0;
+    for (int i = 0; i < MAX_SIZE; ++i)
+    {
+        if (Droids[i] != nullptr)
+            NbDroid++;
+    }
+    return NbDroid;
 }
 
 void            Carrier::setId(std::string id)
@@ -148,4 +158,16 @@ Carrier         &Carrier::operator~(void)
 {
     updateSpeed();
     return *this;
+}
+
+bool            Carrier::operator()(int x, int y)
+{
+    size_t costEnergy = ((std::abs(x) + std::abs(y)) * (10 + getNbDroid()));
+    if (Energy < costEnergy || Speed == 0)
+        return false;
+    else
+    {
+        Energy -= costEnergy;
+        return true;
+    }
 }

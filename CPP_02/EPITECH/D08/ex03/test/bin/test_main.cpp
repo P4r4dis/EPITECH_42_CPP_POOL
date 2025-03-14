@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 11 5:56:14 PM 2025 Paradis
-** Last update Sat Mar 14 5:21:16 PM 2025 Paradis
+** Last update Sat Mar 14 6:10:51 PM 2025 Paradis
 */
 
 
@@ -1681,6 +1681,119 @@ Test(Carrier, TEST_bitwiseNot_operator_checkup_carrier,
             c[0] = d1;
             std::cout << (~c).getSpeed() << std::endl;
             cr_assert(c.getSpeed() == 70);
+        }
+        cr_assert_stdout_eq_str(
+            "Droid 'Commander' Activated\n"
+            "Droid 'Sergent' Activated\n"
+            "Droid 'Troufiont' Activated\n"
+            "Droid 'Groupie' Activated\n"
+            "Droid 'BeerHolder' Activated\n"
+            "500\n"
+            "80\n"
+            "70\n"
+            "Droid 'Commander' Destroyed\n"
+            "Droid 'Groupie' Destroyed\n"
+            "Droid 'BeerHolder' Destroyed\n"
+        );
+    }
+
+Test(Carrier, TEST_parenthesis_operator_performs_move_if_enough_Speed_and_Energy_return_true,
+.init = redirect_all_stdout)
+    {
+        {
+            Carrier     c("HellExpress");
+            Droid       *d1 = new Droid("Commander");
+            Droid       *d2 = new Droid("Sergent");
+            Droid       *d3 = new Droid("Troufiont");
+            Droid       *d4 = new Droid("Groupie");
+            Droid       *d5 = new Droid("BeerHolder");
+
+            c << d1 << d2 << d3 << d4 << d5;
+            std::cout << c.getSpeed() << d1 << std::endl;
+            c >> d1 >> d2 >> d3;
+            std::cout << c.getSpeed() << std::endl;
+            c[0] = d1;
+            std::cout << (~c).getSpeed() << std::endl;
+
+            cr_assert(c(4, 2) == true);
+            cr_assert(c.getSpeed() == 70);
+            cr_assert(c.getEnergy() == 222);
+        }
+        cr_assert_stdout_eq_str(
+            "Droid 'Commander' Activated\n"
+            "Droid 'Sergent' Activated\n"
+            "Droid 'Troufiont' Activated\n"
+            "Droid 'Groupie' Activated\n"
+            "Droid 'BeerHolder' Activated\n"
+            "500\n"
+            "80\n"
+            "70\n"
+            "Droid 'Commander' Destroyed\n"
+            "Droid 'Groupie' Destroyed\n"
+            "Droid 'BeerHolder' Destroyed\n"
+        );
+    }
+
+Test(Carrier, TEST_parenthesis_operator_return_false_cause_not_enough_energy,
+.init = redirect_all_stdout)
+    {
+        {
+            Carrier     c("HellExpress");
+            Droid       *d1 = new Droid("Commander");
+            Droid       *d2 = new Droid("Sergent");
+            Droid       *d3 = new Droid("Troufiont");
+            Droid       *d4 = new Droid("Groupie");
+            Droid       *d5 = new Droid("BeerHolder");
+
+            c << d1 << d2 << d3 << d4 << d5;
+            std::cout << c.getSpeed() << d1 << std::endl;
+            c >> d1 >> d2 >> d3;
+            std::cout << c.getSpeed() << std::endl;
+            c[0] = d1;
+            std::cout << (~c).getSpeed() << std::endl;
+            cr_assert(c(4, 2) == true);
+            cr_assert(c.getSpeed() == 70);
+            cr_assert(c.getEnergy() == 222);
+            cr_assert(c(-15, 4) == false);
+        }
+        cr_assert_stdout_eq_str(
+            "Droid 'Commander' Activated\n"
+            "Droid 'Sergent' Activated\n"
+            "Droid 'Troufiont' Activated\n"
+            "Droid 'Groupie' Activated\n"
+            "Droid 'BeerHolder' Activated\n"
+            "500\n"
+            "80\n"
+            "70\n"
+            "Droid 'Commander' Destroyed\n"
+            "Droid 'Groupie' Destroyed\n"
+            "Droid 'BeerHolder' Destroyed\n"
+        );
+    }
+
+Test(Carrier, TEST_parenthesis_operator_return_false_cause_not_enough_speed,
+.init = redirect_all_stdout)
+    {
+        {
+            Carrier     c("HellExpress");
+            Droid       *d1 = new Droid("Commander");
+            Droid       *d2 = new Droid("Sergent");
+            Droid       *d3 = new Droid("Troufiont");
+            Droid       *d4 = new Droid("Groupie");
+            Droid       *d5 = new Droid("BeerHolder");
+
+            c << d1 << d2 << d3 << d4 << d5;
+            std::cout << c.getSpeed() << d1 << std::endl;
+            c >> d1 >> d2 >> d3;
+            std::cout << c.getSpeed() << std::endl;
+            c[0] = d1;
+            std::cout << (~c).getSpeed() << std::endl;
+            cr_assert(c(4, 2) == true);
+            c.setSpeed(0);
+            cr_assert(c.getSpeed() == 0);
+            cr_assert(c.getEnergy() == 222);
+            cr_assert(c(-15, 4) == false);
+
         }
         cr_assert_stdout_eq_str(
             "Droid 'Commander' Activated\n"

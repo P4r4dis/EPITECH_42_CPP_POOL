@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 11 6:26:48 PM 2025 Paradis
-** Last update Sat Mar 14 5:06:02 PM 2025 Paradis
+** Last update Sat Mar 14 6:00:51 PM 2025 Paradis
 */
 
 #ifndef 			__CARRIER_HPP__
@@ -28,6 +28,7 @@
             size_t          getToughness(void) const;
             size_t          getSpeed(void) const;
             Droid           *getDroids(size_t nb) const;
+            size_t          getNbDroid(void);
 
             void            setId(std::string id);
             void            setEnergy(size_t energy);
@@ -40,6 +41,7 @@
             Carrier         &operator>>(Droid *&droid);
             Droid           *&operator[](size_t index);
             Carrier         &operator~(void);
+            bool            operator()(int x, int y);
         protected:
         private:
             std::string     Id;
@@ -48,6 +50,7 @@
             const size_t    Toughness;
             size_t          Speed;
             Droid           *Droids[MAX_SIZE];
+            size_t          NbDroid;
     };
 
 #endif 				/* !__CARRIER_HPP___ */
