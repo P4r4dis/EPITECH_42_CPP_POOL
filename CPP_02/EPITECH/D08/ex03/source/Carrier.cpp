@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 11 6:31:41 PM 2025 Paradis
-** Last update Fri Mar 13 5:43:15 PM 2025 Paradis
+** Last update Fri Mar 13 7:53:31 PM 2025 Paradis
 */
 
 #include "../include/Carrier.hpp"
@@ -86,15 +86,7 @@ void            Carrier::setDroids(size_t pos, Droid *droid)
         if (Droids[pos])
             delete Droids[pos];
         Droids[pos] = droid;
-
-        Speed = 100;
-        size_t nbDroid = 0;
-        for (size_t i = 0; i < MAX_SIZE; ++i)
-        {
-            if (Droids[i] != nullptr)
-                nbDroid++;
-        }
-        Speed -= 10 * nbDroid;
+        updateSpeed();
     }
 }
 
@@ -107,10 +99,9 @@ Carrier         &Carrier::operator<<(Droid *&droid)
     {
         if (!Droids[i])
         {
-
             Droids[i] = droid;
             droid = nullptr;
-            Speed = 100 - (10 * (i + 1));
+            updateSpeed();
             return *this;
         }
     }
@@ -126,11 +117,29 @@ Carrier         &Carrier::operator>>(Droid *&droid)
         {
             droid = Droids[i];
             Droids[i] = nullptr;
-            Speed = 100 - (10 * (i));
-            if (i == MAX_SIZE - 1)
-                Speed = 0;
+            updateSpeed();
             return *this;
         }
     }
     return *this;
+}
+
+Droid           *&Carrier::operator[](size_t index)
+{
+    if (index < MAX_SIZE)
+        return Droids[index];
+
+    Droids[index] = nullptr;
+    return Droids[index];
+  
+}
+
+void            Carrier::updateSpeed(void)
+{
+    size_t count = 0;
+    for (size_t i = 0; i < MAX_SIZE; ++i) {
+        if (Droids[i] != nullptr)
+            count++;
+    }
+    Speed = (count > 0) ? 100 - (count * 10) : 0;
 }
