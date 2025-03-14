@@ -5,12 +5,13 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 11 6:26:48 PM 2025 Paradis
-** Last update Sat Mar 14 6:00:51 PM 2025 Paradis
+** Last update Sat Mar 14 6:21:34 PM 2025 Paradis
 */
 
 #ifndef 			__CARRIER_HPP__
 	# define 		__CARRIER_HPP__
-    #define MAX_SIZE 5
+    #include <ostream>
+#define MAX_SIZE 5
     #include "Droid.hpp"
     #include <string>
     class	        Carrier
@@ -53,4 +54,5 @@
             size_t          NbDroid;
     };
 
+std::ostream        &operator<<(std::ostream &os, Carrier &carrier);
 #endif 				/* !__CARRIER_HPP___ */

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 11 5:56:14 PM 2025 Paradis
-** Last update Sat Mar 14 6:10:51 PM 2025 Paradis
+** Last update Sat Mar 14 6:28:44 PM 2025 Paradis
 */
 
 
@@ -1809,6 +1809,49 @@ Test(Carrier, TEST_parenthesis_operator_return_false_cause_not_enough_speed,
             "Droid 'BeerHolder' Destroyed\n"
         );
     }
+
+Test(Carrier, TEST_left_stream_operator_display_informations,
+.init = redirect_all_stdout)
+    {
+        {
+            Carrier     c("HellExpress");
+            Droid       *d1 = new Droid("Commander");
+            Droid       *d2 = new Droid("Sergent");
+            Droid       *d3 = new Droid("Troufiont");
+            Droid       *d4 = new Droid("Groupie");
+            Droid       *d5 = new Droid("BeerHolder");
+
+            c << d1 << d2 << d3 << d4 << d5;
+            std::cout << c.getSpeed() << d1 << std::endl;
+            c >> d1 >> d2 >> d3;
+            std::cout << c.getSpeed() << std::endl;
+            c[0] = d1;
+            std::cout << (~c).getSpeed() << std::endl;
+            c(4, 2);
+            std::cout << c << std::endl;
+
+        }
+        cr_assert_stdout_eq_str(
+            "Droid 'Commander' Activated\n"
+            "Droid 'Sergent' Activated\n"
+            "Droid 'Troufiont' Activated\n"
+            "Droid 'Groupie' Activated\n"
+            "Droid 'BeerHolder' Activated\n"
+            "500\n"
+            "80\n"
+            "70\n"
+            "Carrier 'HellExpress' Droid(s) on-board:\n"
+            "[0] : Droid 'Commander', Standing by, 50\n"
+            "[1] : Free\n"
+            "[2] : Free\n"
+            "[3] : Droid 'Groupie', Standing by, 50\n"
+            "[4] : Droid 'BeerHolder', Standing by, 50\n"
+            "Speed : 70, Energy 222\n"
+            "Droid 'Commander' Destroyed\n"
+            "Droid 'Groupie' Destroyed\n"
+            "Droid 'BeerHolder' Destroyed\n"
+        );
+    }
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
@@ -1817,11 +1860,11 @@ Test(Carrier, TEST_parenthesis_operator_return_false_cause_not_enough_speed,
 // {
 //     {
 //         Carrier c("HellExpress");
-        // Droid *d1 = new Droid("Commander");
-        // Droid *d2 = new Droid("Sergent");
-        // Droid *d3 = new Droid("Troufiont");
-        // Droid *d4 = new Droid("Groupie");
-        // Droid *d5 = new Droid("BeerHolder");
+//         Droid *d1 = new Droid("Commander");
+//         Droid *d2 = new Droid("Sergent");
+//         Droid *d3 = new Droid("Troufiont");
+//         Droid *d4 = new Droid("Groupie");
+//         Droid *d5 = new Droid("BeerHolder");
         
         // c << d1 << d2 << d3 << d4 << d5;
         // std::cout << c.getSpeed() << d1 << std::endl;
@@ -1847,13 +1890,13 @@ Test(Carrier, TEST_parenthesis_operator_return_false_cause_not_enough_speed,
 //         "500\n"
 //         "80\n"
 //         "70\n"
-//         "Carrier 'HellExpress' Droid(s) on-board:\n"
-//         "[0] : Droid 'Commander', Standing by, 50\n"
-//         "[1] : Free\n"
-//         "[2] : Free\n"
-//         "[3] : Droid 'Groupie', Standing by, 50\n"
-//         "[4] : Droid 'BeerHolder', Standing by, 50\n"
-//         "Speed : 70, Energy 222\n"
+        // "Carrier 'HellExpress' Droid(s) on-board:\n"
+        // "[0] : Droid 'Commander', Standing by, 50\n"
+        // "[1] : Free\n"
+        // "[2] : Free\n"
+        // "[3] : Droid 'Groupie', Standing by, 50\n"
+        // "[4] : Droid 'BeerHolder', Standing by, 50\n"
+        // "Speed : 70, Energy 222\n"
 //         "Carrier 'HellExpress' Droid(s) on-board:\n"
 //         "[0] : Droid 'Commander', Standing by, 50\n"
 //         "[1] : Free\n"

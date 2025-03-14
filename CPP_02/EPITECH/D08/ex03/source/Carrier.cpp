@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 11 6:31:41 PM 2025 Paradis
-** Last update Sat Mar 14 6:10:45 PM 2025 Paradis
+** Last update Sat Mar 14 6:28:11 PM 2025 Paradis
 */
 
 #include "../include/Carrier.hpp"
@@ -170,4 +170,20 @@ bool            Carrier::operator()(int x, int y)
         Energy -= costEnergy;
         return true;
     }
+}
+
+std::ostream    &operator<<(std::ostream &os, Carrier &carrier)
+{
+    os  << "Carrier '" << carrier.getId() << "' Droid(s) on-board:" << std::endl;
+    for (int i = 0; i < MAX_SIZE; ++i)
+    {
+        os  << "[" << i << "] : ";
+        if (carrier[i])
+            os << *carrier[i] << std::endl;
+        else
+            os << "Free" << std::endl;
+    }
+    os  << "Speed : " << carrier.getSpeed() << ", Energy " 
+        << carrier.getEnergy();
+    return os;
 }
