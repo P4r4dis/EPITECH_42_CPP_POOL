@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/24 19:01:44 by Paradis           #+#    #+#              #
-#    Updated: 2025/03/11 17:58:38 by Paradis          ###   ########.fr        #
+#    Updated: 2025/03/18 16:21:58 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -178,7 +178,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2124 Paradis
-## Last update Wed Mar 11 5:58:38 PM 2025 Paradis
+## Last update Wed Mar 18 4:21:58 PM 2025 Paradis
 ##
 # **************************************************************************** #
 #																			   #
@@ -310,6 +310,7 @@ EPITECH_EX03_UT_NAME 			= 	test_$(EPITECH_EX03_NAME)
 
 EPITECH_EX03_SRC				=	$(EPITECH_EX03_SRC_PATH)/Droids.cpp \
 									$(EPITECH_EX03_SRC_PATH)/DroidMemory.cpp \
+									$(EPITECH_EX03_SRC_PATH)/Carrier.cpp \
 									$(EPITECH_EX03_BIN_PATH)/main.cpp
 EPITECH_EX03_OBJS				=	$(EPITECH_EX03_SRC:.cpp=.o)
 

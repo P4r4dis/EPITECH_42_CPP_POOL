@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 11 6:26:48 PM 2025 Paradis
-** Last update Sat Mar 14 6:21:34 PM 2025 Paradis
+** Last update Wed Mar 18 1:00:22 AM 2025 Paradis
 */
 
 #ifndef 			__CARRIER_HPP__
@@ -41,6 +41,7 @@
             Carrier         &operator<<(Droid *&droid);
             Carrier         &operator>>(Droid *&droid);
             Droid           *&operator[](size_t index);
+            // Droid const          *operator[](size_t index) const;
             Carrier         &operator~(void);
             bool            operator()(int x, int y);
         protected:

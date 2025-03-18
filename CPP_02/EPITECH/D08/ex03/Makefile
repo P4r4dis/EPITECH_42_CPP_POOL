@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue Mar 11 5:56:55 PM 2025 Paradis
-## Last update Wed Mar 11 5:57:04 PM 2025 Paradis
+## Last update Wed Mar 18 4:21:31 PM 2025 Paradis
 ##
 
 
@@ -31,6 +31,7 @@ CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAG
 # # Files sources
 SRCS		=	$(SRC_PATH)/Droid.cpp \
 				$(SRC_PATH)/DroidMemory.cpp \
+				$(SRC_PATH)/Carrier.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp

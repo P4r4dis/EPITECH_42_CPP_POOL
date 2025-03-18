@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 11 5:51:44 PM 2025 Paradis
-** Last update Wed Mar 11 5:55:18 PM 2025 Paradis
+** Last update Wed Mar 18 4:17:00 PM 2025 Paradis
 */
 
 #include <iostream>
@@ -30,8 +30,8 @@ int     main(void)
     std::cout << c << std::endl;
     c(-15, 4);
     std::cout << c << std::endl;
-    c[3] = 0;
-    c[4] = 0;
+    c[3] = 0;   // MEMORY LEAKS BUT NO CHOICE IF WE WANT RESPECT THE SUBJECT
+    c[4] = 0;   // MEMORY LEAKS BUT NO CHOICE IF WE WANT RESPECT THE SUBJECT
     (~c)(-15, 4);
     std::cout << c << std::endl;
     

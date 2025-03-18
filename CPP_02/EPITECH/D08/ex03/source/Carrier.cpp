@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 11 6:31:41 PM 2025 Paradis
-** Last update Sat Mar 14 6:28:11 PM 2025 Paradis
+** Last update Wed Mar 18 1:00:17 AM 2025 Paradis
 */
 
 #include "../include/Carrier.hpp"
@@ -143,6 +143,15 @@ Droid           *&Carrier::operator[](size_t index)
     return Droids[index];
   
 }
+
+// Droid const     *Carrier::operator[](size_t index) const
+// {
+//     if (index < MAX_SIZE)
+//         return Droids[index];
+
+//     return nullptr;
+// }
+
 
 void            Carrier::updateSpeed(void)
 {
