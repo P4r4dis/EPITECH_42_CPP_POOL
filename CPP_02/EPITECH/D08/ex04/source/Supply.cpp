@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 6:14:24 PM 2025 Paradis
-** Last update Thu Mar 19 9:16:15 PM 2025 Paradis
+** Last update Thu Mar 19 10:09:43 PM 2025 Paradis
 */
 
 #include "../include/Supply.hpp"
@@ -83,4 +83,10 @@ std::ostream        &operator<<(std::ostream &os, const Supply &supply)
 Supply::operator    size_t(void) const
 {
     return _amount;
+}
+
+#include <iostream>
+Droid               *Supply::operator*(void)
+{
+    return _wreck[_nbDroids];
 }

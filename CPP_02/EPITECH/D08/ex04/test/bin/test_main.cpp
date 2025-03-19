@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 4:47:53 PM 2025 Paradis
-** Last update Thu Mar 19 9:11:43 PM 2025 Paradis
+** Last update Thu Mar 19 10:14:19 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -1860,6 +1860,30 @@ Test(Supply, TEST_Supply_size_T_operator_overload,
         std::cout << s << std::endl;
     }
     cr_assert_stdout_eq_str("70\n");
+}
+
+Test(Supply,
+TEST_Supply_indirection_operaaotr_overload_performs_access_to_Droid_pointer,
+.init = redirect_all_stdout)
+{
+    {
+        Droid   **w = new Droid *[10];
+        char    c = '0';
+        for (int i = 0; i < 3; ++i)
+            w[i] = new Droid(std::string("wreck: ") + (char) (c + i));
+
+        Supply s3(Supply::Wreck, 3, w);
+        
+        cr_assert_null(*s3);
+    }
+    cr_assert_stdout_eq_str(
+        "Droid 'wreck: 0' Activated\n"
+        "Droid 'wreck: 1' Activated\n"
+        "Droid 'wreck: 2' Activated\n"
+        "Droid 'wreck: 0' Destroyed\n"
+        "Droid 'wreck: 1' Destroyed\n"
+        "Droid 'wreck: 2' Destroyed\n"
+    );
 }
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
