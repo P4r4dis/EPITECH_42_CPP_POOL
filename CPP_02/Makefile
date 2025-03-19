@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/24 19:01:44 by Paradis           #+#    #+#              #
-#    Updated: 2025/03/18 16:21:58 by Paradis          ###   ########.fr        #
+#    Updated: 2025/03/18 16:46:38 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -178,7 +178,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2124 Paradis
-## Last update Wed Mar 18 4:21:58 PM 2025 Paradis
+## Last update Wed Mar 18 4:46:38 PM 2025 Paradis
 ##
 # **************************************************************************** #
 #																			   #
@@ -341,16 +341,15 @@ EPITECH_EX04_SRC_PATH			=	./EPITECH/D08/ex04/source
 EPITECH_EX04_INC_PATH			=	./EPITECH/D08/ex04/include
 EPITECH_EX04_UT_PATH			=	./EPITECH/D08/ex04/test
 
-EPITECH_EX04_NAME				=	Commanders
+EPITECH_EX04_NAME				=	Supply
 
 EPITECH_EX04_UT_SRC				=	$(EPITECH_EX04_UT_PATH)/$(EPITECH_EX04_NAME)_test.cpp
 EPITECH_EX04_UT_NAME 			= 	test_$(EPITECH_EX04_NAME)
 
 EPITECH_EX04_SRC				=	$(EPITECH_EX04_SRC_PATH)/Droids.cpp \
-									$(EPITECH_EX04_SRC_PATH)/WarpSystem.cpp \
-									$(EPITECH_EX04_SRC_PATH)/Borg.cpp \
-									$(EPITECH_EX04_SRC_PATH)/Admiral.cpp \
-									$(EPITECH_EX04_SRC_PATH)/BorgQueen.cpp \
+									$(EPITECH_EX04_SRC_PATH)/DroidMemory.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Carrier.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Supply.cpp \
 									$(EPITECH_EX04_BIN_PATH)/main.cpp
 EPITECH_EX04_OBJS				=	$(EPITECH_EX04_SRC:.cpp=.o)
 
@@ -632,8 +631,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX02_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX03_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX03_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX05_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX05_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX06_PATH)
@@ -664,8 +663,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX02_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX03_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX03_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX05_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX05_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX06_PATH)
