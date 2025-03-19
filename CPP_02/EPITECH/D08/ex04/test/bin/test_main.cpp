@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 4:47:53 PM 2025 Paradis
-** Last update Thu Mar 19 8:39:45 PM 2025 Paradis
+** Last update Thu Mar 19 9:11:43 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -1848,6 +1848,18 @@ Test(Supply, TEST_Supply_left_stream_operator_overload_stdout,
         "Droid 'wreck: 1' Destroyed\n"
         "Droid 'wreck: 2' Destroyed\n"
     );
+}
+
+Test(Supply, TEST_Supply_size_T_operator_overload,
+.init = redirect_all_stdout)
+{
+    {
+        Supply s2(Supply::Iron, 70);
+        
+        size_t s = s2;
+        std::cout << s << std::endl;
+    }
+    cr_assert_stdout_eq_str("70\n");
 }
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //

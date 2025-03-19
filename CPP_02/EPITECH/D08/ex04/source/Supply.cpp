@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 6:14:24 PM 2025 Paradis
-** Last update Thu Mar 19 8:40:16 PM 2025 Paradis
+** Last update Thu Mar 19 9:16:15 PM 2025 Paradis
 */
 
 #include "../include/Supply.hpp"
@@ -37,27 +37,27 @@ Supply::~Supply()
     }
 }
 
-Supply::Types   Supply::getType(void) const
+Supply::Types       Supply::getType(void) const
 {
     return _type;
 }
 
-size_t          Supply::getAmount(void) const
+size_t              Supply::getAmount(void) const
 {
     return _amount;
 }
 
-Droid           **Supply::getPtrWreck(void) const
+Droid               **Supply::getPtrWreck(void) const
 {
     return _wreck;
 }
 
-size_t          Supply::getNbDroid(void) const
+size_t              Supply::getNbDroid(void) const
 {
     return _nbDroids;
 }
 
-std::ostream    &operator<<(std::ostream &os, const Supply &supply)
+std::ostream        &operator<<(std::ostream &os, const Supply &supply)
 {
     os  << "Supply : " << supply.getAmount() << ", ";
     switch (supply.getType())
@@ -77,4 +77,10 @@ std::ostream    &operator<<(std::ostream &os, const Supply &supply)
             break;
     }
     return os;
+}
+
+
+Supply::operator    size_t(void) const
+{
+    return _amount;
 }

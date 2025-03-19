@@ -5,13 +5,14 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 5:48:52 PM 2025 Paradis
-** Last update Thu Mar 19 8:14:59 PM 2025 Paradis
+** Last update Thu Mar 19 9:15:03 PM 2025 Paradis
 */
 
 #ifndef 			__SUPPLY_HPP__
 	# define 		__SUPPLY_HPP__
 
     #include "Droid.hpp"
+#include <cstddef>
 #include <ostream>
 class	Supply
 {
@@ -31,6 +32,8 @@ class	Supply
         size_t          getAmount(void) const;
         Droid           **getPtrWreck(void) const;
         size_t          getNbDroid(void) const;
+
+                        operator size_t(void) const;
 
     protected:
     private:
