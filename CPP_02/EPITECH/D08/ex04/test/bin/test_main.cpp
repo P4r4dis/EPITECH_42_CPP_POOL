@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 4:47:53 PM 2025 Paradis
-** Last update Thu Mar 19 7:52:45 PM 2025 Paradis
+** Last update Thu Mar 19 8:39:45 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -1811,6 +1811,39 @@ Test(Supply, TEST_Supply_check_droid_stdout,
         "Droid 'wreck: 0' Activated\n"
         "Droid 'wreck: 1' Activated\n"
         "Droid 'wreck: 2' Activated\n"
+        "Droid 'wreck: 0' Destroyed\n"
+        "Droid 'wreck: 1' Destroyed\n"
+        "Droid 'wreck: 2' Destroyed\n"
+    );
+}
+
+Test(Supply, TEST_Supply_left_stream_operator_overload_stdout,
+.init = redirect_all_stdout)
+{
+    {
+        Droid   **w = new Droid *[10];
+        char    c = '0';
+        for (int i = 0; i < 3; ++i)
+            w[i] = new Droid(std::string("wreck: ") + (char) (c + i));
+
+        Supply s1(Supply::Silicon, 42);
+        Supply s2(Supply::Iron, 70);
+        Supply s3(Supply::Wreck, 3, w);
+        
+        std::cout << s1 << std::endl;
+        std::cout << s2 << std::endl;
+        std::cout << s3 << std::endl;
+    }
+    cr_assert_stdout_eq_str(
+        "Droid 'wreck: 0' Activated\n"
+        "Droid 'wreck: 1' Activated\n"
+        "Droid 'wreck: 2' Activated\n"
+        "Supply : 42, Silicon\n"
+        "Supply : 70, Iron\n"
+        "Supply : 3, Wreck\n"
+        "Droid 'wreck: 0', Standing by, 50\n"
+        "Droid 'wreck: 1', Standing by, 50\n"
+        "Droid 'wreck: 2', Standing by, 50\n"
         "Droid 'wreck: 0' Destroyed\n"
         "Droid 'wreck: 1' Destroyed\n"
         "Droid 'wreck: 2' Destroyed\n"

@@ -5,11 +5,12 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 6:14:24 PM 2025 Paradis
-** Last update Thu Mar 19 7:52:02 PM 2025 Paradis
+** Last update Thu Mar 19 8:40:16 PM 2025 Paradis
 */
 
 #include "../include/Supply.hpp"
 #include <cstddef>
+#include <ostream>
 
 Supply::Supply(Types type, size_t Amount)
         :   _type(type), _amount(Amount), 
@@ -54,4 +55,26 @@ Droid           **Supply::getPtrWreck(void) const
 size_t          Supply::getNbDroid(void) const
 {
     return _nbDroids;
+}
+
+std::ostream    &operator<<(std::ostream &os, const Supply &supply)
+{
+    os  << "Supply : " << supply.getAmount() << ", ";
+    switch (supply.getType())
+    {
+        case 1:
+            os << "Iron";
+            break;
+        case 2:
+            os << "Silicon";
+            break;
+        case 3:
+            os << "Wreck" << std::endl;
+            for (size_t i = 0; i < supply.getNbDroid(); ++i)
+                (i != supply.getNbDroid() - 1) ? 
+                    os << *supply.getPtrWreck()[i] << std::endl :
+                    os << *supply.getPtrWreck()[i];
+            break;
+    }
+    return os;
 }

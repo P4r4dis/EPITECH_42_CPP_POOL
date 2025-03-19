@@ -5,13 +5,14 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 5:48:52 PM 2025 Paradis
-** Last update Thu Mar 19 7:57:50 PM 2025 Paradis
+** Last update Thu Mar 19 8:14:59 PM 2025 Paradis
 */
 
 #ifndef 			__SUPPLY_HPP__
 	# define 		__SUPPLY_HPP__
 
     #include "Droid.hpp"
+#include <ostream>
 class	Supply
 {
     public:
@@ -44,4 +45,5 @@ class	Supply
 
 };
 
+std::ostream            &operator<<(std::ostream &os, const Supply &supply);
 #endif 				/* !__SUPPLY_HPP___ */
