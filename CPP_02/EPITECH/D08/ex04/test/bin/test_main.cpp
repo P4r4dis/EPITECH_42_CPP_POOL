@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 4:47:53 PM 2025 Paradis
-** Last update Fri Mar 20 3:32:14 PM 2025 Paradis
+** Last update Fri Mar 20 4:26:38 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -2192,6 +2192,28 @@ TEST_Supply_assignment_operator_overload,
         );
         // GCOVR_EXCL_STOP
         GCOV_EXCL_IF_VALGRIND_STOP
+    }
+}
+
+Test(Supply, TEST_Supply_Equal_to_operator_overload_compare_the_Type_of_ressource,
+.init = redirect_all_stdout)
+{
+    {
+        Supply s1(Supply::Silicon, 42);
+        Supply s2(Supply::Silicon, 70);
+
+        cr_assert(s1 == s2);
+    }
+}
+
+Test(Supply, TEST_Supply_Not_Equal_to_operator_overload_compare_the_Type_of_ressource,
+.init = redirect_all_stdout)
+{
+    {
+        Supply s1(Supply::Silicon, 42);
+        Supply s2(Supply::Iron, 70);
+
+        cr_assert(s1 != s2);
     }
 }
 ///////////////////////////////////////////////////////////////////////////////

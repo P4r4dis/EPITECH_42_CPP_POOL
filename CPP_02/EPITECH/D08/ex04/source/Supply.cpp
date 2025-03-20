@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 6:14:24 PM 2025 Paradis
-** Last update Fri Mar 20 6:44:58 AM 2025 Paradis
+** Last update Fri Mar 20 4:25:40 PM 2025 Paradis
 */
 
 #include "../include/Supply.hpp"
@@ -115,4 +115,14 @@ Supply              &Supply::operator++(void)
 Droid              *Supply::operator->(void)
 {
     return *(*this);
+}
+
+bool                Supply::operator==(const Supply &supply) const
+{
+    return _type == supply._type;
+}
+
+bool                Supply::operator!=(const Supply &supply) const
+{
+    return !(_type == supply._type);
 }

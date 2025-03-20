@@ -5,16 +5,15 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 5:48:52 PM 2025 Paradis
-** Last update Fri Mar 20 6:38:15 AM 2025 Paradis
+** Last update Fri Mar 20 4:23:44 PM 2025 Paradis
 */
 
 #ifndef 			__SUPPLY_HPP__
 	# define 		__SUPPLY_HPP__
 
-    #include "Droid.hpp"
-#include <cstddef>
-#include <memory>
+#include "Droid.hpp"
 #include <ostream>
+
 class	Supply
 {
     public:
@@ -40,6 +39,9 @@ class	Supply
         Supply          &operator--(void);
         Supply          &operator++(void);
         Droid           *operator->(void);
+
+        bool            operator==(const Supply &supply) const;
+        bool            operator!=(const Supply &supply) const;
 
     protected:
     private:
