@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue Mar 18 4:47:20 PM 2025 Paradis
-## Last update Wed Mar 18 4:47:47 PM 2025 Paradis
+## Last update Fri Mar 20 11:51:45 AM 2025 Paradis
 ##
 
 G++           	= 	g++
@@ -20,7 +20,7 @@ NAME          	= 	test_Supply
 INCFLAGS     	+= 	-I $(INC_PATH)
 CPP_VERSION		+=	-std=c++23
 CRITFLAGS    	+=  --coverage -lcriterion
-CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAGS) $(CRITFLAGS)
+CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -DVALGRIND_MODE $(CPP_VERSION) $(INCFLAGS) $(CRITFLAGS)
 
 SRCS         	= 	$(SRC_PATH)/Droid.cpp \
 					$(SRC_PATH)/DroidMemory.cpp \

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 5:48:52 PM 2025 Paradis
-** Last update Fri Mar 20 3:23:11 AM 2025 Paradis
+** Last update Fri Mar 20 6:38:15 AM 2025 Paradis
 */
 
 #ifndef 			__SUPPLY_HPP__
@@ -13,6 +13,7 @@
 
     #include "Droid.hpp"
 #include <cstddef>
+#include <memory>
 #include <ostream>
 class	Supply
 {
@@ -25,7 +26,7 @@ class	Supply
         };
 
         Supply(Types type, size_t Amount);
-        Supply(Types type, size_t Amount, Droid **Wreck);
+        explicit Supply(Types type, size_t Amount, Droid **Wreck);
         ~Supply(void);
 
         Types           getType(void) const;
@@ -34,7 +35,8 @@ class	Supply
         size_t          getNbDroid(void) const;
 
                         operator size_t(void) const;
-        Droid           *operator*(void);
+        Droid           *&operator*(void);
+
         Supply          &operator--(void);
         Supply          &operator++(void);
         Droid           *operator->(void);

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 4:47:53 PM 2025 Paradis
-** Last update Fri Mar 20 3:31:26 AM 2025 Paradis
+** Last update Fri Mar 20 3:32:14 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -22,6 +22,33 @@
 #include "../../include/Droid.hpp"
 #include "../../include/DroidMemory.hpp"
 #include "../../include/Supply.hpp"
+
+#ifdef __has_include
+#  if __has_include(<valgrind/valgrind.h>)
+#    include <valgrind/valgrind.h>
+#  else
+#    define RUNNING_ON_VALGRIND 0
+#  endif
+#else
+#  define RUNNING_ON_VALGRIND 0
+#endif
+
+#ifndef CONFIG_HPP
+#define CONFIG_HPP
+
+#ifdef RUNNING_ON_VALGRIND
+    #define GCOV_EXCL_IF_VALGRIND_START
+    #define GCOV_EXCL_IF_VALGRIND_STOP
+    #define GCOV_EXCL_IF_NOT_VALGRIND_START // GCOVR_EXCL_START
+    #define GCOV_EXCL_IF_NOT_VALGRIND_STOP // GCOVR_EXCL_STOP
+#else
+    #define GCOV_EXCL_IF_VALGRIND_START // GCOVR_EXCL_START
+    #define GCOV_EXCL_IF_VALGRIND_STOP // GCOVR_EXCL_STOP
+    #define GCOV_EXCL_IF_NOT_VALGRIND_START __attribute__((no_instrument_function))
+    #define GCOV_EXCL_IF_NOT_VALGRIND_STOP
+#endif
+
+#endif // CONFIG_HPP
 
 void redirect_all_stdout(void) {
   cr_redirect_stdout();
@@ -2081,6 +2108,92 @@ TEST_Supply_structure_dereference_operator_performs_access_to_member_function,
         "Droid 'wreck: 2' Destroyed\n"
     );
 }
+
+Test(Supply,
+TEST_Supply_assignment_operator_overload,
+.init = redirect_all_stdout)
+{
+    {
+        Droid   **w = new Droid *[10];
+        char    c = '0';
+        for (int i = 0; i < 3; ++i)
+            w[i] = new Droid(std::string("wreck: ") + (char) (c + i));
+        Supply s2(Supply::Iron, 70);
+        Supply s3(Supply::Wreck, 3, w);
+        std::cout << s3 << std::endl;
+        
+        size_t s = s2;
+        std::cout << s << std::endl;
+        std::cout << *(*(--s3)) << std::endl;
+        std::cout << *(++s3)->getStatus() << std::endl;
+
+        ++s3;
+        if (RUNNING_ON_VALGRIND)
+        {
+            GCOV_EXCL_IF_NOT_VALGRIND_START
+            // GCOVR_EXCL_START
+            delete *s3;
+            *s3 = 0;
+            // GCOVR_EXCL_STOP
+            GCOV_EXCL_IF_NOT_VALGRIND_STOP
+        }
+        else
+        {
+            GCOV_EXCL_IF_VALGRIND_START
+            // GCOVR_EXCL_START
+                *s3 = 0;
+            // GCOVR_EXCL_STOP
+            GCOV_EXCL_IF_VALGRIND_STOP
+        }
+        cr_assert_null(*s3);
+        std::cout << *s3 << std::endl;
+    }
+    if (RUNNING_ON_VALGRIND)
+    {
+        GCOV_EXCL_IF_NOT_VALGRIND_START
+        // GCOVR_EXCL_START
+        cr_assert_stdout_eq_str(
+            "Droid 'wreck: 0' Activated\n"
+            "Droid 'wreck: 1' Activated\n"
+            "Droid 'wreck: 2' Activated\n"
+            "Supply : 3, Wreck\n"
+            "Droid 'wreck: 0', Standing by, 50\n"
+            "Droid 'wreck: 1', Standing by, 50\n"
+            "Droid 'wreck: 2', Standing by, 50\n"
+            "70\n"
+            "Droid 'wreck: 2', Standing by, 50\n"
+            "Standing by\n"
+            "Droid 'wreck: 1' Destroyed\n"
+            "0\n"
+            "Droid 'wreck: 0' Destroyed\n"
+            "Droid 'wreck: 2' Destroyed\n"
+        );
+        // GCOVR_EXCL_STOP
+        GCOV_EXCL_IF_NOT_VALGRIND_STOP
+    }
+    else
+    {
+        GCOV_EXCL_IF_VALGRIND_START
+        // GCOVR_EXCL_START
+        cr_assert_stdout_eq_str(
+            "Droid 'wreck: 0' Activated\n"
+            "Droid 'wreck: 1' Activated\n"
+            "Droid 'wreck: 2' Activated\n"
+            "Supply : 3, Wreck\n"
+            "Droid 'wreck: 0', Standing by, 50\n"
+            "Droid 'wreck: 1', Standing by, 50\n"
+            "Droid 'wreck: 2', Standing by, 50\n"
+            "70\n"
+            "Droid 'wreck: 2', Standing by, 50\n"
+            "Standing by\n"
+            "0\n"
+            "Droid 'wreck: 0' Destroyed\n"
+            "Droid 'wreck: 2' Destroyed\n"
+        );
+        // GCOVR_EXCL_STOP
+        GCOV_EXCL_IF_VALGRIND_STOP
+    }
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
@@ -2102,9 +2215,9 @@ TEST_Supply_structure_dereference_operator_performs_access_to_member_function,
     //     std::cout << s << std::endl;
     //     std::cout << *(*(--s3)) << std::endl;
     //     std::cout << *(++s3)->getStatus() << std::endl;
-    //     ++s3;
-    //     *s3 = 0;
-    //     std::cout << *s3 << std::endl;
+        // ++s3;
+        // *s3 = 0;
+        // std::cout << *s3 << std::endl;
     //     std::cout << s2 << std::endl;
     //     std::cout << !s3 << std::endl;
     // }

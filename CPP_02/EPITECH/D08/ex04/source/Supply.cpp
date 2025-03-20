@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 6:14:24 PM 2025 Paradis
-** Last update Fri Mar 20 3:30:30 AM 2025 Paradis
+** Last update Fri Mar 20 6:44:58 AM 2025 Paradis
 */
 
 #include "../include/Supply.hpp"
@@ -90,11 +90,13 @@ Supply::operator    size_t(void) const
     return _amount;
 }
 
-Droid               *Supply::operator*(void)
+Droid               *&Supply::operator*(void)
 {
     if (_wreck && _nbDroids < _amount)
         return _wreck[_nbDroids];
-    return nullptr;
+    
+    static Droid *nullDroid = nullptr;
+    return nullDroid;
 }
 
 Supply              &Supply::operator--(void)
