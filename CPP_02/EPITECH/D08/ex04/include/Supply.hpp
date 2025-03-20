@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 5:48:52 PM 2025 Paradis
-** Last update Fri Mar 20 4:23:44 PM 2025 Paradis
+** Last update Fri Mar 20 4:51:14 PM 2025 Paradis
 */
 
 #ifndef 			__SUPPLY_HPP__
@@ -42,6 +42,7 @@ class	Supply
 
         bool            operator==(const Supply &supply) const;
         bool            operator!=(const Supply &supply) const;
+        Supply          &operator!(void);
 
     protected:
     private:

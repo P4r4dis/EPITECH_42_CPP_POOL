@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 6:14:24 PM 2025 Paradis
-** Last update Fri Mar 20 4:25:40 PM 2025 Paradis
+** Last update Fri Mar 20 5:32:12 PM 2025 Paradis
 */
 
 #include "../include/Supply.hpp"
@@ -29,7 +29,7 @@ Supply::Supply(Types type, size_t Amount, Droid **Wreck)
 
 Supply::~Supply()
 {
-    if (_wreck)
+    if (_type == Wreck && _wreck)
     {
         for (size_t i = 0; i < _amount; ++i)
             if (_wreck[i])
@@ -74,11 +74,15 @@ std::ostream        &operator<<(std::ostream &os, const Supply &supply)
             os << "Silicon";
             break;
         case 3:
-            os << "Wreck" << std::endl;
-            for (size_t i = 0; i < supply.getNbDroid(); ++i)
-                (i != supply.getNbDroid() - 1) ? 
-                    os << *supply.getPtrWreck()[i] << std::endl :
-                    os << *supply.getPtrWreck()[i];
+            os << "Wreck";
+            if (supply.getPtrWreck())
+            {
+                os << std::endl;
+                for (size_t i = 0; i < supply.getNbDroid(); ++i)
+                    (i != supply.getNbDroid() - 1) ? 
+                        os << *supply.getPtrWreck()[i] << std::endl :
+                        os << *supply.getPtrWreck()[i];
+            }
             break;
     }
     return os;
@@ -125,4 +129,22 @@ bool                Supply::operator==(const Supply &supply) const
 bool                Supply::operator!=(const Supply &supply) const
 {
     return !(_type == supply._type);
+}
+
+Supply              &Supply::operator!(void)
+{
+    if (_type == Wreck && _wreck)
+    {
+        for (size_t i = 0; i < _amount; i++)
+        {
+            if (_wreck[i]) { // Vérification avant de delete
+                delete _wreck[i];
+            }
+        }
+        delete [] _wreck; // Suppression complète
+        _wreck = nullptr; // Empêche un accès sauvage
+        _amount = 0;      // Empêche les boucles sur un tableau inexistant
+        _nbDroids = 0;
+    }
+    return *this;
 }

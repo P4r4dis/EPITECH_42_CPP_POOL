@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 4:47:53 PM 2025 Paradis
-** Last update Fri Mar 20 4:26:38 PM 2025 Paradis
+** Last update Fri Mar 20 5:35:12 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -2216,6 +2216,42 @@ Test(Supply, TEST_Supply_Not_Equal_to_operator_overload_compare_the_Type_of_ress
         cr_assert(s1 != s2);
     }
 }
+
+Test(Supply,
+TEST_Supply_NOT_operator_overload_purge_Droids_with_stdout,
+.init = redirect_all_stdout)
+{
+    {
+        Droid   **w = new Droid *[10];
+        char    c = '0';
+        for (int i = 0; i < 3; ++i)
+            w[i] = new Droid(std::string("wreck: ") + (char) (c + i));
+
+        Supply s3(Supply::Wreck, 3, w);
+        std::cout << s3 << std::endl;
+        
+        if (s3.getPtrWreck())
+            for (size_t i = 0; i < s3.getAmount(); ++i)
+                cr_assert_not_null(s3.getPtrWreck()[i]);
+        
+        std::cout << !s3 << std::endl;
+        
+        cr_assert_null(s3.getPtrWreck());
+    }
+    cr_assert_stdout_eq_str(
+        "Droid 'wreck: 0' Activated\n"
+        "Droid 'wreck: 1' Activated\n"
+        "Droid 'wreck: 2' Activated\n"
+        "Supply : 3, Wreck\n"
+        "Droid 'wreck: 0', Standing by, 50\n"
+        "Droid 'wreck: 1', Standing by, 50\n"
+        "Droid 'wreck: 2', Standing by, 50\n"
+        "Droid 'wreck: 0' Destroyed\n"
+        "Droid 'wreck: 1' Destroyed\n"
+        "Droid 'wreck: 2' Destroyed\n"
+        "Supply : 0, Wreck\n"
+    );
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
@@ -2230,30 +2266,30 @@ Test(Supply, TEST_Supply_Not_Equal_to_operator_overload_compare_the_Type_of_ress
 //             w[i] = new Droid(std::string("wreck: ") + (char) (c + i));
 //         Supply s1(Supply::Silicon, 42);
 //         Supply s2(Supply::Iron, 70);
-    //     Supply s3(Supply::Wreck, 3, w);
-    //     std::cout << s3 << std::endl;
+//         Supply s3(Supply::Wreck, 3, w);
+//         std::cout << s3 << std::endl;
         
-    //     size_t s = s2;
-    //     std::cout << s << std::endl;
-    //     std::cout << *(*(--s3)) << std::endl;
-    //     std::cout << *(++s3)->getStatus() << std::endl;
-        // ++s3;
-        // *s3 = 0;
-        // std::cout << *s3 << std::endl;
-    //     std::cout << s2 << std::endl;
-    //     std::cout << !s3 << std::endl;
-    // }
+//         size_t s = s2;
+//         std::cout << s << std::endl;
+//         std::cout << *(*(--s3)) << std::endl;
+//         std::cout << *(++s3)->getStatus() << std::endl;
+//         ++s3;
+//         *s3 = 0;
+//         std::cout << *s3 << std::endl;
+//         std::cout << s2 << std::endl;
+//         std::cout << !s3 << std::endl;
+//     }
 //     cr_assert_stdout_eq_str(
-        // "Droid 'wreck: 0' Activated\n"
-        // "Droid 'wreck: 1' Activated\n"
-        // "Droid 'wreck: 2' Activated\n"
-        // "Supply : 3, Wreck\n"
-        // "Droid 'wreck: 0', Standing by, 50\n"
-        // "Droid 'wreck: 1', Standing by, 50\n"
-        // "Droid 'wreck: 2', Standing by, 50\n"
-        // "70\n"
-        // "Droid 'wreck: 2', Standing by, 50\n"
-        // "Standing by\n"
+//         "Droid 'wreck: 0' Activated\n"
+//         "Droid 'wreck: 1' Activated\n"
+//         "Droid 'wreck: 2' Activated\n"
+//         "Supply : 3, Wreck\n"
+//         "Droid 'wreck: 0', Standing by, 50\n"
+//         "Droid 'wreck: 1', Standing by, 50\n"
+//         "Droid 'wreck: 2', Standing by, 50\n"
+//         "70\n"
+//         "Droid 'wreck: 2', Standing by, 50\n"
+//         "Standing by\n"
 //         "0\n"
 //         "Supply : 70, Iron\n"
 //         "Droid 'wreck: 0' Destroyed\n"
