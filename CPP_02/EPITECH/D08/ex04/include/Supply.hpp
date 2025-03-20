@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 5:48:52 PM 2025 Paradis
-** Last update Thu Mar 19 10:29:43 PM 2025 Paradis
+** Last update Thu Mar 19 11:17:18 PM 2025 Paradis
 */
 
 #ifndef 			__SUPPLY_HPP__
@@ -36,6 +36,7 @@ class	Supply
                         operator size_t(void) const;
         Droid           *operator*(void);
         Supply          &operator--(void);
+        Supply          &operator++(void);
 
     protected:
     private:

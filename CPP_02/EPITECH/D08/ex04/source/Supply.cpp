@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 6:14:24 PM 2025 Paradis
-** Last update Thu Mar 19 10:41:39 PM 2025 Paradis
+** Last update Fri Mar 20 3:05:14 AM 2025 Paradis
 */
 
 #include "../include/Supply.hpp"
@@ -16,7 +16,11 @@ Supply::Supply(Types type, size_t Amount)
         :   _type(type), _amount(Amount), 
             _wreck((_type == Supply::Wreck) ? new Droid *[_amount] : nullptr),
             _nbDroids((_type == Supply::Wreck) ? _amount : 0)
-{}
+{
+    if (_wreck)
+        for (size_t i = 0; i < _amount; ++i)
+            _wreck[i] = nullptr;
+}
 
 Supply::Supply(Types type, size_t Amount, Droid **Wreck)    
                 :   _type(type), _amount(Amount), _wreck(Wreck),
@@ -34,6 +38,7 @@ Supply::~Supply()
                 _wreck[i] = nullptr;
             }
         delete [] _wreck;
+        _wreck = nullptr;
     }
 }
 
@@ -87,11 +92,20 @@ Supply::operator    size_t(void) const
 
 Droid               *Supply::operator*(void)
 {
-    return _wreck[_nbDroids];
+    if (_wreck && _nbDroids < _amount)
+        return _wreck[_nbDroids];
+    return nullptr;
 }
 
 Supply              &Supply::operator--(void)
 {
-    _nbDroids = _nbDroids == 0 ? _amount : _nbDroids - 1;
+    _nbDroids = _nbDroids == 0 ? _amount - 1 : _nbDroids - 1;
+    return *this;
+}
+
+Supply              &Supply::operator++(void)
+{
+    _nbDroids = (_nbDroids == _amount || _nbDroids == _amount - 1) ? 
+                0 : _nbDroids + 1 % _amount;
     return *this;
 }

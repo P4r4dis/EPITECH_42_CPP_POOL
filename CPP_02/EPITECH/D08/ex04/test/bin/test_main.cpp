@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 4:47:53 PM 2025 Paradis
-** Last update Thu Mar 19 10:42:08 PM 2025 Paradis
+** Last update Fri Mar 20 2:54:28 AM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -1887,7 +1887,7 @@ TEST_Supply_indirection_operator_overload_performs_access_to_Droid_pointer,
 }
 
 Test(Supply,
-TEST_Supply_decrewment_operator_overload_performs_scroll_through_Droids,
+TEST_Supply_decrement_operator_overload_performs_scroll_through_Droids,
 .init = redirect_all_stdout)
 {
     {
@@ -1912,7 +1912,7 @@ TEST_Supply_decrewment_operator_overload_performs_scroll_through_Droids,
 }
 
 Test(Supply,
-TEST_Supply_decrewment_op_overload_scroll_through_Droids_but_out_of_range,
+TEST_Supply_decrement_op_overload_scroll_through_Droids_but_out_of_range,
 .init = redirect_all_stdout)
     {
         {
@@ -1924,10 +1924,8 @@ TEST_Supply_decrewment_op_overload_scroll_through_Droids_but_out_of_range,
             Supply s3(Supply::Wreck, 3, w);
             
             cr_assert_null(*s3);
-            cr_assert_not_null(*(--s3));
-            cr_assert_not_null(*(--s3));            
-            cr_assert_not_null(*(--s3));
-            cr_assert_null(*(--s3));
+            for ( int i = 0; i != 6; ++i)
+                cr_assert_not_null(*(--s3));
         }
         cr_assert_stdout_eq_str(
             "Droid 'wreck: 0' Activated\n"
@@ -1940,7 +1938,7 @@ TEST_Supply_decrewment_op_overload_scroll_through_Droids_but_out_of_range,
     }
 
 Test(Supply,
-TEST_Supply_decrewment_op_overload_scroll_through_Droids_stdout,
+TEST_Supply_decrement_op_overload_scroll_through_Droids_stdout,
 .init = redirect_all_stdout)
     {
         {
@@ -1957,6 +1955,88 @@ TEST_Supply_decrewment_op_overload_scroll_through_Droids_stdout,
             "Droid 'wreck: 0' Activated\n"
             "Droid 'wreck: 1' Activated\n"
             "Droid 'wreck: 2' Activated\n"
+            "Droid 'wreck: 2', Standing by, 50\n"
+            "Droid 'wreck: 0' Destroyed\n"
+            "Droid 'wreck: 1' Destroyed\n"
+            "Droid 'wreck: 2' Destroyed\n"
+        );
+    }
+
+Test(Supply,
+TEST_Supply_increment_operator_overload_performs_scroll_through_Droids,
+.init = redirect_all_stdout)
+{
+    {
+        Droid   **w = new Droid *[10];
+        char    c = '0';
+        for (int i = 0; i < 3; ++i)
+            w[i] = new Droid(std::string("wreck: ") + (char) (c + i));
+
+        Supply s3(Supply::Wreck, 3, w);
+        
+        cr_assert_null(*s3);
+        cr_assert_not_null(*(++s3));
+    }
+    cr_assert_stdout_eq_str(
+        "Droid 'wreck: 0' Activated\n"
+        "Droid 'wreck: 1' Activated\n"
+        "Droid 'wreck: 2' Activated\n"
+        "Droid 'wreck: 0' Destroyed\n"
+        "Droid 'wreck: 1' Destroyed\n"
+        "Droid 'wreck: 2' Destroyed\n"
+    );
+}
+
+Test(Supply,
+TEST_Supply_increment_op_overload_scroll_through_Droids_but_out_of_range,
+.init = redirect_all_stdout)
+    {
+        {
+            Droid   **w = new Droid *[10];
+            char    c = '0';
+            for (int i = 0; i < 3; ++i)
+                w[i] = new Droid(std::string("wreck: ") + (char) (c + i));
+    
+            Supply s3(Supply::Wreck, 3, w);
+            
+            cr_assert_null(*s3);
+            for ( int i = 0; i != 6; ++i)
+                cr_assert_not_null(*(++s3));
+        }
+        cr_assert_stdout_eq_str(
+            "Droid 'wreck: 0' Activated\n"
+            "Droid 'wreck: 1' Activated\n"
+            "Droid 'wreck: 2' Activated\n"
+            "Droid 'wreck: 0' Destroyed\n"
+            "Droid 'wreck: 1' Destroyed\n"
+            "Droid 'wreck: 2' Destroyed\n"
+        );
+    }
+
+Test(Supply,
+TEST_Supply_increment_op_overload_scroll_through_Droids_stdout,
+.init = redirect_all_stdout)
+    {
+        {
+            Droid   **w = new Droid *[10];
+            char    c = '0';
+            for (int i = 0; i < 3; ++i)
+                w[i] = new Droid(std::string("wreck: ") + (char) (c + i));
+    
+            Supply s3(Supply::Wreck, 3, w);
+            
+            for ( int i = 0; i != 6; ++i)
+                std::cout << *(*(++s3)) << std::endl;
+        }
+        cr_assert_stdout_eq_str(
+            "Droid 'wreck: 0' Activated\n"
+            "Droid 'wreck: 1' Activated\n"
+            "Droid 'wreck: 2' Activated\n"
+            "Droid 'wreck: 0', Standing by, 50\n"
+            "Droid 'wreck: 1', Standing by, 50\n"
+            "Droid 'wreck: 2', Standing by, 50\n"
+            "Droid 'wreck: 0', Standing by, 50\n"
+            "Droid 'wreck: 1', Standing by, 50\n"
             "Droid 'wreck: 2', Standing by, 50\n"
             "Droid 'wreck: 0' Destroyed\n"
             "Droid 'wreck: 1' Destroyed\n"
