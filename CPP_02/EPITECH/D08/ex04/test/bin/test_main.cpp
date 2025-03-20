@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 4:47:53 PM 2025 Paradis
-** Last update Fri Mar 20 5:35:12 PM 2025 Paradis
+** Last update Fri Mar 20 6:30:34 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -22,33 +22,7 @@
 #include "../../include/Droid.hpp"
 #include "../../include/DroidMemory.hpp"
 #include "../../include/Supply.hpp"
-
-#ifdef __has_include
-#  if __has_include(<valgrind/valgrind.h>)
-#    include <valgrind/valgrind.h>
-#  else
-#    define RUNNING_ON_VALGRIND 0
-#  endif
-#else
-#  define RUNNING_ON_VALGRIND 0
-#endif
-
-#ifndef CONFIG_HPP
-#define CONFIG_HPP
-
-#ifdef RUNNING_ON_VALGRIND
-    #define GCOV_EXCL_IF_VALGRIND_START
-    #define GCOV_EXCL_IF_VALGRIND_STOP
-    #define GCOV_EXCL_IF_NOT_VALGRIND_START // GCOVR_EXCL_START
-    #define GCOV_EXCL_IF_NOT_VALGRIND_STOP // GCOVR_EXCL_STOP
-#else
-    #define GCOV_EXCL_IF_VALGRIND_START // GCOVR_EXCL_START
-    #define GCOV_EXCL_IF_VALGRIND_STOP // GCOVR_EXCL_STOP
-    #define GCOV_EXCL_IF_NOT_VALGRIND_START __attribute__((no_instrument_function))
-    #define GCOV_EXCL_IF_NOT_VALGRIND_STOP
-#endif
-
-#endif // CONFIG_HPP
+#include "../../include/Config.hpp"
 
 void redirect_all_stdout(void) {
   cr_redirect_stdout();
@@ -2256,44 +2230,92 @@ TEST_Supply_NOT_operator_overload_purge_Droids_with_stdout,
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
 
-// Test(main, Test_main, .init = redirect_all_stdout)
-// {
-//     {
-//         Droid ** w = new Droid*[10];
-//         char c = '0';
+Test(main, Test_main, .init = redirect_all_stdout)
+{
+    {
+        Droid ** w = new Droid*[10];
+        char c = '0';
     
-//         for (int i = 0; i < 3; ++i)
-//             w[i] = new Droid(std::string("wreck: ") + (char) (c + i));
-//         Supply s1(Supply::Silicon, 42);
-//         Supply s2(Supply::Iron, 70);
-//         Supply s3(Supply::Wreck, 3, w);
-//         std::cout << s3 << std::endl;
+        for (int i = 0; i < 3; ++i)
+            w[i] = new Droid(std::string("wreck: ") + (char) (c + i));
+        Supply s1(Supply::Silicon, 42);
+        Supply s2(Supply::Iron, 70);
+        Supply s3(Supply::Wreck, 3, w);
+        std::cout << s3 << std::endl;
         
-//         size_t s = s2;
-//         std::cout << s << std::endl;
-//         std::cout << *(*(--s3)) << std::endl;
-//         std::cout << *(++s3)->getStatus() << std::endl;
-//         ++s3;
-//         *s3 = 0;
-//         std::cout << *s3 << std::endl;
-//         std::cout << s2 << std::endl;
-//         std::cout << !s3 << std::endl;
-//     }
-//     cr_assert_stdout_eq_str(
-//         "Droid 'wreck: 0' Activated\n"
-//         "Droid 'wreck: 1' Activated\n"
-//         "Droid 'wreck: 2' Activated\n"
-//         "Supply : 3, Wreck\n"
-//         "Droid 'wreck: 0', Standing by, 50\n"
-//         "Droid 'wreck: 1', Standing by, 50\n"
-//         "Droid 'wreck: 2', Standing by, 50\n"
-//         "70\n"
-//         "Droid 'wreck: 2', Standing by, 50\n"
-//         "Standing by\n"
-//         "0\n"
-//         "Supply : 70, Iron\n"
-//         "Droid 'wreck: 0' Destroyed\n"
-//         "Droid 'wreck: 2' Destroyed\n"
-//         "Supply : 0, Wreck\n"
-//     );
-// }
+        size_t s = s2;
+        std::cout << s << std::endl;
+        std::cout << *(*(--s3)) << std::endl;
+        std::cout << *(++s3)->getStatus() << std::endl;
+        ++s3;
+        if (RUNNING_ON_VALGRIND)
+        {
+            GCOV_EXCL_IF_NOT_VALGRIND_START
+            // GCOVR_EXCL_START
+            delete *s3;
+            *s3 = 0;
+            // GCOVR_EXCL_STOP
+            GCOV_EXCL_IF_NOT_VALGRIND_STOP
+        }
+        else
+        {
+            GCOV_EXCL_IF_VALGRIND_START
+            // GCOVR_EXCL_START
+                *s3 = 0;
+            // GCOVR_EXCL_STOP
+            GCOV_EXCL_IF_VALGRIND_STOP
+        }
+        std::cout << *s3 << std::endl;
+        std::cout << s2 << std::endl;
+        std::cout << !s3 << std::endl;
+    }
+    if (RUNNING_ON_VALGRIND)
+    {
+        GCOV_EXCL_IF_NOT_VALGRIND_START
+        // GCOVR_EXCL_START
+        cr_assert_stdout_eq_str(
+            "Droid 'wreck: 0' Activated\n"
+            "Droid 'wreck: 1' Activated\n"
+            "Droid 'wreck: 2' Activated\n"
+            "Supply : 3, Wreck\n"
+            "Droid 'wreck: 0', Standing by, 50\n"
+            "Droid 'wreck: 1', Standing by, 50\n"
+            "Droid 'wreck: 2', Standing by, 50\n"
+            "70\n"
+            "Droid 'wreck: 2', Standing by, 50\n"
+            "Standing by\n"
+            "Droid 'wreck: 1' Destroyed\n"
+            "0\n"
+            "Supply : 70, Iron\n"
+            "Droid 'wreck: 0' Destroyed\n"
+            "Droid 'wreck: 2' Destroyed\n"
+            "Supply : 0, Wreck\n"
+        );
+        // GCOVR_EXCL_STOP
+        GCOV_EXCL_IF_NOT_VALGRIND_STOP
+    }
+    else
+    {
+        GCOV_EXCL_IF_VALGRIND_START
+        // GCOVR_EXCL_START
+        cr_assert_stdout_eq_str(
+            "Droid 'wreck: 0' Activated\n"
+            "Droid 'wreck: 1' Activated\n"
+            "Droid 'wreck: 2' Activated\n"
+            "Supply : 3, Wreck\n"
+            "Droid 'wreck: 0', Standing by, 50\n"
+            "Droid 'wreck: 1', Standing by, 50\n"
+            "Droid 'wreck: 2', Standing by, 50\n"
+            "70\n"
+            "Droid 'wreck: 2', Standing by, 50\n"
+            "Standing by\n"
+            "0\n"
+            "Supply : 70, Iron\n"
+            "Droid 'wreck: 0' Destroyed\n"
+            "Droid 'wreck: 2' Destroyed\n"
+            "Supply : 0, Wreck\n"
+        );
+        // GCOVR_EXCL_STOP
+        GCOV_EXCL_IF_VALGRIND_STOP
+    }
+}

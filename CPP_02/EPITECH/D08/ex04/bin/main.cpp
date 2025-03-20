@@ -5,11 +5,12 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 11 5:51:44 PM 2025 Paradis
-** Last update Wed Mar 18 4:44:33 PM 2025 Paradis
+** Last update Fri Mar 20 6:26:00 PM 2025 Paradis
 */
 
 #include <iostream>
 #include "../include/Supply.hpp"
+#include "../include/Config.hpp"
 
 int     main(void)
 {
@@ -28,7 +29,23 @@ int     main(void)
     std::cout << *(*(--s3)) << std::endl;
     std::cout << *(++s3)->getStatus() << std::endl;
     ++s3;
-    *s3 = 0;
+    if (RUNNING_ON_VALGRIND)
+    {
+        GCOV_EXCL_IF_NOT_VALGRIND_START
+        // GCOVR_EXCL_START
+        delete *s3;
+        *s3 = 0;
+        // GCOVR_EXCL_STOP
+        GCOV_EXCL_IF_NOT_VALGRIND_STOP
+    }
+    else
+    {
+        GCOV_EXCL_IF_VALGRIND_START
+        // GCOVR_EXCL_START
+            *s3 = 0;
+        // GCOVR_EXCL_STOP
+        GCOV_EXCL_IF_VALGRIND_STOP
+    }
     std::cout << *s3 << std::endl;
     std::cout << s2 << std::endl;
     std::cout << !s3 << std::endl;

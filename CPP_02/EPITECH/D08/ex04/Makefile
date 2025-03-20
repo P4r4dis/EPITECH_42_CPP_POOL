@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue Mar 18 4:46:50 PM 2025 Paradis
-## Last update Wed Mar 18 4:47:16 PM 2025 Paradis
+## Last update Fri Mar 20 6:26:37 PM 2025 Paradis
 ##
 
 # # Compilateur
@@ -24,7 +24,7 @@ UT_NAME 	= 	test_$(NAME)
 # # Options de compilation
 INCFLAGS	+=	-I $(INC_PATH)
 CPP_VERSION	+=	-std=c++23
-CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAGS)
+CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -DVALGRIND_MODE $(CPP_VERSION) $(INCFLAGS)
 
 # # Files sources
 SRCS		=	$(SRC_PATH)/Droid.cpp \
