@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 6:14:24 PM 2025 Paradis
-** Last update Fri Mar 20 3:05:14 AM 2025 Paradis
+** Last update Fri Mar 20 3:30:30 AM 2025 Paradis
 */
 
 #include "../include/Supply.hpp"
@@ -108,4 +108,9 @@ Supply              &Supply::operator++(void)
     _nbDroids = (_nbDroids == _amount || _nbDroids == _amount - 1) ? 
                 0 : _nbDroids + 1 % _amount;
     return *this;
+}
+
+Droid              *Supply::operator->(void)
+{
+    return *(*this);
 }

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Mar 18 5:48:52 PM 2025 Paradis
-** Last update Thu Mar 19 11:17:18 PM 2025 Paradis
+** Last update Fri Mar 20 3:23:11 AM 2025 Paradis
 */
 
 #ifndef 			__SUPPLY_HPP__
@@ -37,6 +37,7 @@ class	Supply
         Droid           *operator*(void);
         Supply          &operator--(void);
         Supply          &operator++(void);
+        Droid           *operator->(void);
 
     protected:
     private:
