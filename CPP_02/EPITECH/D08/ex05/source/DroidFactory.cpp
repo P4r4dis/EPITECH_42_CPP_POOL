@@ -5,16 +5,19 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Mar 20 7:29:54 PM 2025 Paradis
-** Last update Sat Mar 21 5:35:27 PM 2025 Paradis
+** Last update Tue Mar 24 5:44:08 PM 2025 Paradis
 */
 
 #include "../include/DroidFactory.hpp"
+#include <cstddef>
 #include <iostream>
+#include <ostream>
 
 DroidFactory::DroidFactory(size_t ratio)    :   _ratio(ratio),
                                                 _Iron(0),
                                                 _Silicon(0),
-                                                _Wreck(0)
+                                                _Wreck(0),
+                                                _exp(0)
 {
 }
 
@@ -22,7 +25,8 @@ DroidFactory::DroidFactory(const DroidFactory &dFactory)
                                             :   _ratio(dFactory._ratio),
                                                 _Iron(dFactory._Iron),
                                                 _Silicon(dFactory._Silicon),
-                                                _Wreck(dFactory._Wreck)
+                                                _Wreck(dFactory._Wreck),
+                                                _exp(dFactory._exp)
 {}
 
 DroidFactory::~DroidFactory()
@@ -47,6 +51,25 @@ DroidFactory    &DroidFactory::operator=(const DroidFactory &dFactory)
 
     return *this;
 }
+
+Droid       *DroidFactory::operator>>(Droid *&droid)
+{
+    if (_Iron >= 100 && _Silicon >= 50)
+    {
+        _Iron -= IRON_COST;
+        _Silicon -= SILICON_COST;
+        droid = new Droid("");
+        _exp -= (_exp / _ratio);
+        droid->getBattleData()->setExp(_exp);
+        
+        return droid;
+    }
+    else
+    {
+        droid = nullptr;
+        return droid;
+    }
+}
 size_t      DroidFactory::getRatio(void) const
 {
     return  _ratio;
@@ -65,4 +88,29 @@ size_t      DroidFactory::getSilicon(void) const
 size_t      DroidFactory::getWreck(void) const
 {
     return  _Wreck;
+}
+
+size_t      DroidFactory::getExp(void) const
+{
+    return _exp;
+}
+
+void        DroidFactory::setIron(size_t iron)
+{
+    _Iron = iron;
+}
+
+void        DroidFactory::setSilicon(size_t silicon)
+{
+    _Silicon = silicon;
+}
+
+void DroidFactory::display()
+{
+    std::cout << "DroidFactory status report :" << std::endl
+     << "Iron : " << _Iron << std::endl
+     << "Silicon : " << _Silicon << std::endl
+     << "Exp : " << _exp << std::endl
+     << "End of status report." << std::endl;
+
 }

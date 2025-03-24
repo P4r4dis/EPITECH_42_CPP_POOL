@@ -5,29 +5,40 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Mar 20 7:28:32 PM 2025 Paradis
-** Last update Sat Mar 21 5:40:25 PM 2025 Paradis
+** Last update Tue Mar 24 5:44:07 PM 2025 Paradis
 */
 
 #ifndef 			__DROIDFACTORY_HPP__
 	# define 		__DROIDFACTORY_HPP__
 
     #include <cstddef>
+
+    #include "Droid.hpp"
     
-    #define RATIO_BASE  2
+    #define RATIO_BASE      2
+    #define IRON_COST       80
+    #define SILICON_COST    20
 class	DroidFactory
 {
     public:
         explicit        DroidFactory(size_t ratio = 2);
         explicit        DroidFactory(const DroidFactory &dFactory);
+        ~DroidFactory(void);
 
         DroidFactory    &operator=(const DroidFactory &dFactory);
 
-        ~DroidFactory(void);
+        Droid           *operator>>(Droid *&droid);
 
         size_t          getRatio(void) const;
         size_t          getIron(void) const;
         size_t          getSilicon(void) const;
         size_t          getWreck(void) const;
+        size_t          getExp(void) const;
+
+        void            setIron(size_t iron);
+        void            setSilicon(size_t silicon);
+        
+        void display();
 
     protected:
     private:
@@ -35,6 +46,7 @@ class	DroidFactory
         size_t          _Iron;
         size_t          _Silicon;
         size_t          _Wreck;
+        size_t          _exp;
 };
 
 #endif 				/* !__DROIDFACTORY_HPP___ */
