@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Mar 20 7:18:13 PM 2025 Paradis
-** Last update Tue Mar 24 5:53:04 PM 2025 Paradis
+** Last update Wed Mar 25 5:34:17 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -2316,7 +2316,7 @@ Test(DroidFactory, TEST_Equal_operator_overload, .init = redirect_all_stdout)
 }
 
 Test(DroidFactory,
-TEST_Left_Stream_operator_overload_cant_create_droid_because_no_ressources,
+TEST_Right_Stream_operator_overload_cant_create_droid_because_no_ressources,
 .init = redirect_all_stdout)
 {
     {
@@ -2333,7 +2333,7 @@ TEST_Left_Stream_operator_overload_cant_create_droid_because_no_ressources,
 }
 
 Test(DroidFactory,
-TEST_Left_Stream_operator_overload_can_create_new_droid,
+TEST_Right_Stream_operator_overload_can_create_new_droid,
 .init = redirect_all_stdout)
 {
     {
@@ -2353,7 +2353,7 @@ TEST_Left_Stream_operator_overload_can_create_new_droid,
 }
 
 Test(DroidFactory,
-TEST_Left_Stream_operator_overload_create_new_droid_and_consumes_ressources,
+TEST_Right_Stream_operator_overload_create_new_droid_and_consumes_ressources,
 .init = redirect_all_stdout)
 {
     {
@@ -2368,8 +2368,8 @@ TEST_Left_Stream_operator_overload_create_new_droid_and_consumes_ressources,
 
         factory >> newbie;
 
-        cr_assert(factory.getIron() == 20);
-        cr_assert(factory.getSilicon() == 30);
+        cr_assert(factory.getIron() == 0);
+        cr_assert(factory.getSilicon() == 0);
 
         delete newbie;
     }
@@ -2380,7 +2380,7 @@ TEST_Left_Stream_operator_overload_create_new_droid_and_consumes_ressources,
 }
 
 Test(DroidFactory,
-TEST_Left_Stream_operator_overload_create_new_droid_and_distributes_exp,
+TEST_Right_Stream_operator_overload_create_new_droid_and_distributes_exp,
 .init = redirect_all_stdout)
 {
     {
@@ -2395,8 +2395,8 @@ TEST_Left_Stream_operator_overload_create_new_droid_and_distributes_exp,
 
         factory >> newbie;
 
-        cr_assert(factory.getIron() == 20);
-        cr_assert(factory.getSilicon() == 30);
+        cr_assert(factory.getIron() == 0);
+        cr_assert(factory.getSilicon() == 0);
 
         cr_assert(factory.getExp() == 0);
         cr_assert(newbie->getBattleData()->getExp() == 0);
@@ -2408,14 +2408,55 @@ TEST_Left_Stream_operator_overload_create_new_droid_and_distributes_exp,
         "Droid '' Destroyed\n"
     );
 }
-///////////////////////////////////////////////////////////////////////////////
-//                            TEST main                                      //
-///////////////////////////////////////////////////////////////////////////////
 
-Test(main, Test_main, .init = redirect_all_stdout)
+Test(DroidFactory,
+TEST_Left_Stream_operator_overload_supplying_factory_with_one_container,
+.init = redirect_all_stdout)
 {
     {
-        DroidFactory factory(3);
+        DroidFactory    factory(3);
+        Droid           *newbie;
+        Supply s1(Supply::Silicon, 42);
+        Supply s2(Supply::Iron, 70);
+
+        factory >> newbie;
+        std::cout << newbie << std::endl;
+
+        factory << s1;
+        cr_assert(factory.getIron() == 0);
+        cr_assert(factory.getSilicon() == 42);
+        cr_assert(factory.getExp() == 0);
+    }
+    cr_assert_stdout_eq_str("0\n");
+}
+
+Test(DroidFactory,
+TEST_Left_Stream_operator_overload_supplying_factory_with_several_containers,
+.init = redirect_all_stdout)
+{
+    {
+        DroidFactory    factory(3);
+        Droid           *newbie;
+        Supply s1(Supply::Silicon, 42);
+        Supply s2(Supply::Iron, 70);
+
+        factory >> newbie;
+        std::cout << newbie << std::endl;
+
+        factory << s1 << s2;
+        cr_assert(factory.getIron() == 70);
+        cr_assert(factory.getSilicon() == 42);
+        cr_assert(factory.getExp() == 0);
+    }
+    cr_assert_stdout_eq_str("0\n");
+}
+
+Test(DroidFactory,
+TEST_Left_Stream_op_overload_supplying_with_droids_containers_and_distributes_ressources,
+.init = redirect_all_stdout)
+{
+    {
+        DroidFactory    factory(3);
         Droid **w = new Droid *[10];
         Droid *newbie;
         char c = '0';
@@ -2425,81 +2466,128 @@ Test(main, Test_main, .init = redirect_all_stdout)
             w[i] = new Droid(std::string("wreck: ") + (char) (c + i));
             *(w[i]->getBattleData()) += (i * 100);
         }
-    
+
         Supply s1(Supply::Silicon, 42);
         Supply s2(Supply::Iron, 70);
         Supply s3(Supply::Wreck, 3, w);
-    
+        
         factory >> newbie;
         std::cout << newbie << std::endl;
-        // factory << s1 << s2;
-        // std::cout << factory << std::endl;
-        // s3 >> factory >> newbie;
-        // std::cout << factory << std::endl;
-        // factory++ >> newbie;
-        // std::cout << *newbie->getBattleData() << std::endl;
-        // --factory >> newbie;
-        // std::cout << *newbie->getBattleData() << std::endl;
+
+        factory << s1 << s2 << s3;
+        factory >> newbie;
+
+        cr_assert(factory.getIron() == 210);
+        cr_assert(factory.getSilicon() == 82);
+        cr_assert(factory.getExp() == 88);
+        delete newbie;
+
     }
-    if (RUNNING_ON_VALGRIND)
-    {
-        GCOV_EXCL_IF_NOT_VALGRIND_START
-        // GCOVR_EXCL_START
-        cr_assert_stdout_eq_str(
-            "Droid 'wreck: 0' Activated\n"
-            "Droid 'wreck: 1' Activated\n"
-            "Droid 'wreck: 2' Activated\n"
-            "0\n"
-            // "DroidFactory status report :\n"
-            // "Iron : 70\n"
-            // "Silicon : 42\n"
-            // "Exp : 0\n"
-            // "End of status report.\n"
-            // "Droid 'wreck: 0' Destroyed\n"
-            // "Droid 'wreck: 1' Destroyed\n"
-            // "Droid 'wreck: 2' Destroyed\n"
-            // "Droid '' Activated\n"
-            // "DroidFactory status report :\n"
-            // "Iron : 210\n"
-            // "Silicon : 82\n"
-            // "Exp : 88\n"
-            // "End of status report.\n"
-            // "Droid '' Activated\n"
-            // "DroidMemory '1957747793', 59\n"
-            // "Droid '' Activated\n"
-            // "DroidMemory '424238335', 59\n"
-            "Droid 'wreck: 0' Destroyed\n"
-            "Droid 'wreck: 1' Destroyed\n"
-            "Droid 'wreck: 2' Destroyed\n"
-        );
-        // GCOVR_EXCL_STOP
-        GCOV_EXCL_IF_NOT_VALGRIND_STOP
-    }
-    else
-    {
-        cr_assert_stdout_eq_str(
-            "Droid 'wreck: 0' Activated\n"
-            "Droid 'wreck: 1' Activated\n"
-            "Droid 'wreck: 2' Activated\n"
-            "0\n"
-            // "DroidFactory status report :\n"
-            // "Iron : 70\n"
-            // "Silicon : 42\n"
-            // "Exp : 0\n"
-            // "End of status report.\n"
-            "Droid 'wreck: 0' Destroyed\n"
-            "Droid 'wreck: 1' Destroyed\n"
-            "Droid 'wreck: 2' Destroyed\n"
-            // "Droid '' Activated\n"
-            // "DroidFactory status report :\n"
-            // "Iron : 210\n"
-            // "Silicon : 82\n"
-            // "Exp : 88\n"
-            // "End of status report.\n"
-            // "Droid '' Activated\n"
-            // "DroidMemory '1957747793', 59\n"
-            // "Droid '' Activated\n"
-            // "DroidMemory '424238335', 59\n"
-        );
-    }
+    cr_assert_stdout_eq_str(
+        "Droid 'wreck: 0' Activated\n"
+        "Droid 'wreck: 1' Activated\n"
+        "Droid 'wreck: 2' Activated\n"
+        "0\n"
+        "Droid 'wreck: 0' Destroyed\n"
+        "Droid 'wreck: 1' Destroyed\n"
+        "Droid 'wreck: 2' Destroyed\n"
+        "Droid '' Activated\n"
+        "Droid '' Destroyed\n"
+    );
 }
+
+///////////////////////////////////////////////////////////////////////////////
+//                            TEST main                                      //
+///////////////////////////////////////////////////////////////////////////////
+
+// Test(main, Test_main, .init = redirect_all_stdout)
+// {
+//     {
+//         DroidFactory factory(3);
+//         Droid **w = new Droid *[10];
+//         Droid *newbie;
+//         char c = '0';
+    
+//         for (int i = 0; i < 3; ++i)
+//         {
+//             w[i] = new Droid(std::string("wreck: ") + (char) (c + i));
+//             *(w[i]->getBattleData()) += (i * 100);
+//         }
+    
+//         Supply s1(Supply::Silicon, 42);
+//         Supply s2(Supply::Iron, 70);
+//         Supply s3(Supply::Wreck, 3, w);
+    
+//         factory >> newbie;
+//         std::cout << newbie << std::endl;
+//         // factory << s1 << s2;
+//         // std::cout << factory << std::endl;
+//         // s3 >> factory >> newbie;
+//         // std::cout << factory << std::endl;
+//         // factory++ >> newbie;
+//         // std::cout << *newbie->getBattleData() << std::endl;
+//         // --factory >> newbie;
+//         // std::cout << *newbie->getBattleData() << std::endl;
+//     }
+//     if (RUNNING_ON_VALGRIND)
+//     {
+//         GCOV_EXCL_IF_NOT_VALGRIND_START
+//         // GCOVR_EXCL_START
+//         cr_assert_stdout_eq_str(
+//             "Droid 'wreck: 0' Activated\n"
+//             "Droid 'wreck: 1' Activated\n"
+//             "Droid 'wreck: 2' Activated\n"
+//             "0\n"
+//             // "DroidFactory status report :\n"
+//             // "Iron : 70\n"
+//             // "Silicon : 42\n"
+//             // "Exp : 0\n"
+//             // "End of status report.\n"
+//             // "Droid 'wreck: 0' Destroyed\n"
+//             // "Droid 'wreck: 1' Destroyed\n"
+//             // "Droid 'wreck: 2' Destroyed\n"
+//             // "Droid '' Activated\n"
+//             // "DroidFactory status report :\n"
+//             // "Iron : 210\n"
+//             // "Silicon : 82\n"
+//             // "Exp : 88\n"
+//             // "End of status report.\n"
+//             // "Droid '' Activated\n"
+//             // "DroidMemory '1957747793', 59\n"
+//             // "Droid '' Activated\n"
+//             // "DroidMemory '424238335', 59\n"
+//             "Droid 'wreck: 0' Destroyed\n"
+//             "Droid 'wreck: 1' Destroyed\n"
+//             "Droid 'wreck: 2' Destroyed\n"
+//         );
+//         // GCOVR_EXCL_STOP
+//         GCOV_EXCL_IF_NOT_VALGRIND_STOP
+//     }
+//     else
+//     {
+//         cr_assert_stdout_eq_str(
+//             "Droid 'wreck: 0' Activated\n"
+//             "Droid 'wreck: 1' Activated\n"
+//             "Droid 'wreck: 2' Activated\n"
+//             "0\n"
+//             // "DroidFactory status report :\n"
+//             // "Iron : 70\n"
+//             // "Silicon : 42\n"
+//             // "Exp : 0\n"
+//             // "End of status report.\n"
+//             "Droid 'wreck: 0' Destroyed\n"
+//             "Droid 'wreck: 1' Destroyed\n"
+//             "Droid 'wreck: 2' Destroyed\n"
+//             // "Droid '' Activated\n"
+//             // "DroidFactory status report :\n"
+//             // "Iron : 210\n"
+//             // "Silicon : 82\n"
+//             // "Exp : 88\n"
+//             // "End of status report.\n"
+//             // "Droid '' Activated\n"
+//             // "DroidMemory '1957747793', 59\n"
+//             // "Droid '' Activated\n"
+//             // "DroidMemory '424238335', 59\n"
+//         );
+//     }
+// }

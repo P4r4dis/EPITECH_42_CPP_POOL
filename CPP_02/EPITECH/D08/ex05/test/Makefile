@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Thu Mar 20 7:23:12 PM 2025 Paradis
-## Last update Fri Mar 20 7:24:07 PM 2025 Paradis
+## Last update Tue Mar 24 7:27:44 PM 2025 Paradis
 ##
 
 G++           	= 	g++
@@ -22,11 +22,11 @@ CPP_VERSION		+=	-std=c++23
 CRITFLAGS    	+=  --coverage -lcriterion
 CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -DVALGRIND_MODE $(CPP_VERSION) $(INCFLAGS) $(CRITFLAGS)
 
-SRCS         	= 	$(SRC_PATH)/Droid.cpp \
+SRCS         	= 	$(SRC_PATH)/DroidFactory.cpp \
+					$(SRC_PATH)/Droid.cpp \
 					$(SRC_PATH)/DroidMemory.cpp \
 					$(SRC_PATH)/Carrier.cpp \
 					$(SRC_PATH)/Supply.cpp \
-					$(SRC_PATH)/DroidFactory.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)

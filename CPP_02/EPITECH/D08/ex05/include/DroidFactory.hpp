@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Mar 20 7:28:32 PM 2025 Paradis
-** Last update Tue Mar 24 5:44:07 PM 2025 Paradis
+** Last update Wed Mar 25 4:11:06 PM 2025 Paradis
 */
 
 #ifndef 			__DROIDFACTORY_HPP__
@@ -14,10 +14,11 @@
     #include <cstddef>
 
     #include "Droid.hpp"
+    #include "Supply.hpp"
     
     #define RATIO_BASE      2
     #define IRON_COST       80
-    #define SILICON_COST    20
+    #define SILICON_COST    30
 class	DroidFactory
 {
     public:
@@ -28,6 +29,7 @@ class	DroidFactory
         DroidFactory    &operator=(const DroidFactory &dFactory);
 
         Droid           *operator>>(Droid *&droid);
+        DroidFactory    &operator<<(Supply &supply);
 
         size_t          getRatio(void) const;
         size_t          getIron(void) const;
@@ -39,6 +41,7 @@ class	DroidFactory
         void            setSilicon(size_t silicon);
         
         void display();
+        Supply &operator>>(Supply &supply);
 
     protected:
     private:

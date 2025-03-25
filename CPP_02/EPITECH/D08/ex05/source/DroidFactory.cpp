@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Mar 20 7:29:54 PM 2025 Paradis
-** Last update Tue Mar 24 5:44:08 PM 2025 Paradis
+** Last update Wed Mar 25 5:25:56 PM 2025 Paradis
 */
 
 #include "../include/DroidFactory.hpp"
@@ -56,11 +56,10 @@ Droid       *DroidFactory::operator>>(Droid *&droid)
 {
     if (_Iron >= 100 && _Silicon >= 50)
     {
-        _Iron -= IRON_COST;
-        _Silicon -= SILICON_COST;
+        _Iron -= 100;
+        _Silicon -= 50;
         droid = new Droid("");
-        _exp -= (_exp / _ratio);
-        droid->getBattleData()->setExp(_exp);
+        droid->getBattleData()->setExp(_exp - (_exp / _ratio));
         
         return droid;
     }
@@ -70,6 +69,43 @@ Droid       *DroidFactory::operator>>(Droid *&droid)
         return droid;
     }
 }
+
+DroidFactory    &DroidFactory::operator<<(Supply &supply)
+{
+    switch (supply.getType())
+    {
+        case Supply::Iron:
+            _Iron += supply.getAmount();
+            break;
+        case Supply::Silicon:
+            _Silicon += supply.getAmount();
+            break;
+        case Supply::Wreck:
+        {
+            if (supply.getPtrWreck())
+            {
+                _Wreck = supply.getAmount();
+                for (size_t i = 0; i < supply.getNbDroid(); ++i)
+                {
+                    if (supply.getPtrWreck()[i])
+                    {
+                        _Iron += IRON_COST;
+                        _Silicon += SILICON_COST;
+                        if (supply.getPtrWreck()[i]->getBattleData()->getExp() > _exp)
+                            _exp += (supply.getPtrWreck()[i]->getBattleData()->getExp() - _exp) / _ratio;
+                        else 
+                            _exp += (_exp + supply.getPtrWreck()[i]->getBattleData()->getExp()) / _ratio;
+                        delete supply.getPtrWreck()[i];
+                        supply.getPtrWreck()[i] = nullptr;
+                    }
+                }
+            }
+            break;
+        }
+    }
+    return *this;
+}
+
 size_t      DroidFactory::getRatio(void) const
 {
     return  _ratio;
@@ -114,3 +150,10 @@ void DroidFactory::display()
      << "End of status report." << std::endl;
 
 }
+
+// Supply &DroidFactory::operator>>(Supply &supply) {
+//     if (supply.getType() == Supply::Wreck) {
+//         *this << supply;
+//     }
+//     return supply;
+// }
