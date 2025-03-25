@@ -5,13 +5,14 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Mar 20 7:28:32 PM 2025 Paradis
-** Last update Wed Mar 25 4:11:06 PM 2025 Paradis
+** Last update Wed Mar 25 5:45:21 PM 2025 Paradis
 */
 
 #ifndef 			__DROIDFACTORY_HPP__
 	# define 		__DROIDFACTORY_HPP__
 
     #include <cstddef>
+#include <ostream>
 
     #include "Droid.hpp"
     #include "Supply.hpp"
@@ -41,7 +42,7 @@ class	DroidFactory
         void            setSilicon(size_t silicon);
         
         void display();
-        Supply &operator>>(Supply &supply);
+        // Supply &operator>>(Supply &supply);
 
     protected:
     private:
@@ -52,4 +53,5 @@ class	DroidFactory
         size_t          _exp;
 };
 
+std::ostream        &operator<<(std::ostream &os, const DroidFactory &dFactory);
 #endif 				/* !__DROIDFACTORY_HPP___ */

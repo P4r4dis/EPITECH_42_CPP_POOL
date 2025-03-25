@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Mar 20 7:29:54 PM 2025 Paradis
-** Last update Wed Mar 25 5:25:56 PM 2025 Paradis
+** Last update Wed Mar 25 5:51:26 PM 2025 Paradis
 */
 
 #include "../include/DroidFactory.hpp"
@@ -141,14 +141,14 @@ void        DroidFactory::setSilicon(size_t silicon)
     _Silicon = silicon;
 }
 
-void DroidFactory::display()
+std::ostream    &operator<<(std::ostream &os, const DroidFactory &dFactory)
 {
-    std::cout << "DroidFactory status report :" << std::endl
-     << "Iron : " << _Iron << std::endl
-     << "Silicon : " << _Silicon << std::endl
-     << "Exp : " << _exp << std::endl
-     << "End of status report." << std::endl;
-
+    os  << "DroidFactory status report :" << std::endl
+        << "Iron : " << dFactory.getIron() << std::endl
+        << "Silicon : " << dFactory.getSilicon() << std::endl
+        << "Exp : " << dFactory.getExp() << std::endl
+        << "End of status report.";
+    return os;
 }
 
 // Supply &DroidFactory::operator>>(Supply &supply) {
