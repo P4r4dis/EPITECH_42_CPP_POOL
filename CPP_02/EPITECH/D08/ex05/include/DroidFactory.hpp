@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Mar 20 7:28:32 PM 2025 Paradis
-** Last update Wed Mar 25 6:43:15 PM 2025 Paradis
+** Last update Wed Mar 25 7:12:24 PM 2025 Paradis
 */
 
 #ifndef 			__DROIDFACTORY_HPP__
@@ -31,7 +31,10 @@ class	DroidFactory
 
         Droid           *operator>>(Droid *&droid);
         DroidFactory    &operator<<(Supply &supply);
-
+        DroidFactory    &operator++(void);
+        size_t          operator++(int);
+        DroidFactory    &operator--(void);
+        size_t          operator--(int);
         size_t          getRatio(void) const;
         size_t          getIron(void) const;
         size_t          getSilicon(void) const;
@@ -40,9 +43,6 @@ class	DroidFactory
 
         void            setIron(size_t iron);
         void            setSilicon(size_t silicon);
-        
-        void display();
-        // DroidFactory &operator>>(Supply &supply);
 
     protected:
     private:

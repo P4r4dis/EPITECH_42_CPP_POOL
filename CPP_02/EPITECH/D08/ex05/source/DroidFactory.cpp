@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Mar 20 7:29:54 PM 2025 Paradis
-** Last update Wed Mar 25 6:43:34 PM 2025 Paradis
+** Last update Wed Mar 25 7:13:59 PM 2025 Paradis
 */
 
 #include "../include/DroidFactory.hpp"
@@ -156,4 +156,30 @@ DroidFactory &operator>>(Supply &supply, DroidFactory &d) {
         d << supply;
     }
     return d;
+}
+
+DroidFactory    &DroidFactory::operator++(void)
+{
+    ++_ratio;
+    return *this;
+}
+
+size_t    DroidFactory::operator++(int)
+{
+    _ratio++;
+    return _ratio;
+}
+
+DroidFactory    &DroidFactory::operator--(void)
+{
+    if (_ratio > 0)
+        --_ratio;
+    return *this;
+}
+
+size_t    DroidFactory::operator--(int)
+{
+    if (_ratio > 0)
+        _ratio--;
+    return _ratio;
 }
