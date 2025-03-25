@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Mar 20 7:29:54 PM 2025 Paradis
-** Last update Wed Mar 25 5:51:26 PM 2025 Paradis
+** Last update Wed Mar 25 6:43:34 PM 2025 Paradis
 */
 
 #include "../include/DroidFactory.hpp"
@@ -151,9 +151,9 @@ std::ostream    &operator<<(std::ostream &os, const DroidFactory &dFactory)
     return os;
 }
 
-// Supply &DroidFactory::operator>>(Supply &supply) {
-//     if (supply.getType() == Supply::Wreck) {
-//         *this << supply;
-//     }
-//     return supply;
-// }
+DroidFactory &operator>>(Supply &supply, DroidFactory &d) {
+    if (supply.getType() == Supply::Wreck) {
+        d << supply;
+    }
+    return d;
+}

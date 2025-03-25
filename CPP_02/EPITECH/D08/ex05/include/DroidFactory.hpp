@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Mar 20 7:28:32 PM 2025 Paradis
-** Last update Wed Mar 25 5:45:21 PM 2025 Paradis
+** Last update Wed Mar 25 6:43:15 PM 2025 Paradis
 */
 
 #ifndef 			__DROIDFACTORY_HPP__
@@ -42,7 +42,7 @@ class	DroidFactory
         void            setSilicon(size_t silicon);
         
         void display();
-        // Supply &operator>>(Supply &supply);
+        // DroidFactory &operator>>(Supply &supply);
 
     protected:
     private:
@@ -54,4 +54,5 @@ class	DroidFactory
 };
 
 std::ostream        &operator<<(std::ostream &os, const DroidFactory &dFactory);
+DroidFactory        &operator>>(Supply &supply, DroidFactory &d);
 #endif 				/* !__DROIDFACTORY_HPP___ */

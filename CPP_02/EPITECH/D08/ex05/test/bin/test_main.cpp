@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Mar 20 7:18:13 PM 2025 Paradis
-** Last update Wed Mar 25 5:51:43 PM 2025 Paradis
+** Last update Wed Mar 25 6:45:01 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -2523,6 +2523,59 @@ TEST_Left_Stream_op_overload_display_report,
         std::cout << factory << std::endl;
         factory << s3;
         factory >> newbie;
+        std::cout << factory << std::endl;
+        delete newbie;
+
+    }
+    cr_assert_stdout_eq_str(
+        "Droid 'wreck: 0' Activated\n"
+        "Droid 'wreck: 1' Activated\n"
+        "Droid 'wreck: 2' Activated\n"
+        "0\n"
+        "DroidFactory status report :\n"
+        "Iron : 70\n"
+        "Silicon : 42\n"
+        "Exp : 0\n"
+        "End of status report.\n"
+        "Droid 'wreck: 0' Destroyed\n"
+        "Droid 'wreck: 1' Destroyed\n"
+        "Droid 'wreck: 2' Destroyed\n"
+        "Droid '' Activated\n"
+        "DroidFactory status report :\n"
+        "Iron : 210\n"
+        "Silicon : 82\n"
+        "Exp : 88\n"
+        "End of status report.\n"
+        "Droid '' Destroyed\n"
+    );
+}
+
+Test(DroidFactory,
+TEST_right_Stream_op_overload_load_container_and_create_droid,
+.init = redirect_all_stdout)
+{
+    {
+        DroidFactory    factory(3);
+        Droid **w = new Droid *[10];
+        Droid *newbie;
+        char c = '0';
+    
+        for (int i = 0; i < 3; ++i)
+        {
+            w[i] = new Droid(std::string("wreck: ") + (char) (c + i));
+            *(w[i]->getBattleData()) += (i * 100);
+        }
+
+        Supply s1(Supply::Silicon, 42);
+        Supply s2(Supply::Iron, 70);
+        Supply s3(Supply::Wreck, 3, w);
+        
+        factory >> newbie;
+        std::cout << newbie << std::endl;
+
+        factory << s1 << s2;
+        std::cout << factory << std::endl;
+        s3 >> factory >> newbie;
         std::cout << factory << std::endl;
         delete newbie;
 
