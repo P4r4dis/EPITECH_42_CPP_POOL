@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Mar 20 7:16:00 PM 2025 Paradis
-** Last update Fri Mar 20 7:16:16 PM 2025 Paradis
+** Last update Thu Apr 9 7:33:23 PM 2025 Paradis
 */
 
 #include <iostream>
@@ -97,7 +97,10 @@ std::string         *Droid::getStatus(void) const
 
 DroidMemory         *Droid::getBattleData(void) const
 {
-    return BattleData;
+    if (BattleData != nullptr)
+        return BattleData;
+    else
+        return nullptr;
 }
 
 void                Droid::setId(std::string id)

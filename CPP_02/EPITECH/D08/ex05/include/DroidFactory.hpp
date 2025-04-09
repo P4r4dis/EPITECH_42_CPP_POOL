@@ -5,14 +5,13 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Mar 20 7:28:32 PM 2025 Paradis
-** Last update Wed Mar 25 7:12:24 PM 2025 Paradis
+** Last update Thu Apr 9 7:34:52 PM 2025 Paradis
 */
 
 #ifndef 			__DROIDFACTORY_HPP__
 	# define 		__DROIDFACTORY_HPP__
 
-    #include <cstddef>
-#include <ostream>
+    #include <ostream>
 
     #include "Droid.hpp"
     #include "Supply.hpp"
@@ -24,7 +23,7 @@ class	DroidFactory
 {
     public:
         explicit        DroidFactory(size_t ratio = 2);
-        explicit        DroidFactory(const DroidFactory &dFactory);
+                        DroidFactory(const DroidFactory &dFactory);
         ~DroidFactory(void);
 
         DroidFactory    &operator=(const DroidFactory &dFactory);
@@ -32,9 +31,9 @@ class	DroidFactory
         Droid           *operator>>(Droid *&droid);
         DroidFactory    &operator<<(Supply &supply);
         DroidFactory    &operator++(void);
-        size_t          operator++(int);
+        DroidFactory    operator++(int);
         DroidFactory    &operator--(void);
-        size_t          operator--(int);
+        DroidFactory    operator--(int);
         size_t          getRatio(void) const;
         size_t          getIron(void) const;
         size_t          getSilicon(void) const;

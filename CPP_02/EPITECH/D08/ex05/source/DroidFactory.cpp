@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Mar 20 7:29:54 PM 2025 Paradis
-** Last update Wed Mar 25 7:13:59 PM 2025 Paradis
+** Last update Thu Apr 9 7:27:02 PM 2025 Paradis
 */
 
 #include "../include/DroidFactory.hpp"
@@ -58,13 +58,21 @@ Droid       *DroidFactory::operator>>(Droid *&droid)
     {
         _Iron -= 100;
         _Silicon -= 50;
-        droid = new Droid("");
-        droid->getBattleData()->setExp(_exp - (_exp / _ratio));
         
+        if (*&droid)
+        {
+            delete droid;
+            droid = nullptr;
+        }
+        std::cout << "WHY?" << std::endl;
+        droid = new Droid("");
+        size_t newExp = (_ratio > 0 && _exp >= (_exp / _ratio)) ? _exp - (_exp / _ratio) : 0;
+        droid->getBattleData()->setExp(newExp);//(_exp - (_exp / _ratio));
         return droid;
     }
     else
     {
+        delete droid;
         droid = nullptr;
         return droid;
     }
@@ -82,7 +90,7 @@ DroidFactory    &DroidFactory::operator<<(Supply &supply)
             break;
         case Supply::Wreck:
         {
-            if (supply.getPtrWreck())
+            if (supply.getPtrWreck() != nullptr)
             {
                 _Wreck = supply.getAmount();
                 for (size_t i = 0; i < supply.getNbDroid(); ++i)
@@ -99,6 +107,30 @@ DroidFactory    &DroidFactory::operator<<(Supply &supply)
                         supply.getPtrWreck()[i] = nullptr;
                     }
                 }
+                // _Wreck = supply.getAmount();
+                // for (size_t i = 0; i < supply.getNbDroid(); ++i)
+                // {
+                    // Droid *wreckedDroid = supply.getPtrWreck()[i];
+                    // if (wreckedDroid)
+                    // {
+                    //     _Iron += IRON_COST;
+                    //     _Silicon += SILICON_COST;
+                    //     _exp += wreckedDroid->getBattleData()->getExp() / (_ratio > 0 ? _ratio : 1);
+                    //     delete wreckedDroid;
+                    //     supply.getPtrWreck()[i] = nullptr;
+                    // }
+                    // if (supply.getPtrWreck()[i])
+                    // {
+                    //     _Iron += IRON_COST * i;
+                    //     _Silicon += SILICON_COST * i;
+                    //     if (supply.getPtrWreck()[i]->getBattleData()->getExp() > _exp)
+                    //         _exp += (supply.getPtrWreck()[i]->getBattleData()->getExp() - _exp) / _ratio;
+                    //     else 
+                    //         _exp += (_exp + supply.getPtrWreck()[i]->getBattleData()->getExp()) / _ratio;
+                    //     delete supply.getPtrWreck()[i];
+                    //     supply.getPtrWreck()[i] = nullptr;
+                    // }
+                // }
             }
             break;
         }
@@ -152,9 +184,8 @@ std::ostream    &operator<<(std::ostream &os, const DroidFactory &dFactory)
 }
 
 DroidFactory &operator>>(Supply &supply, DroidFactory &d) {
-    if (supply.getType() == Supply::Wreck) {
+    if (supply.getType() == Supply::Wreck)
         d << supply;
-    }
     return d;
 }
 
@@ -164,10 +195,12 @@ DroidFactory    &DroidFactory::operator++(void)
     return *this;
 }
 
-size_t    DroidFactory::operator++(int)
+DroidFactory    DroidFactory::operator++(int)
 {
-    _ratio++;
-    return _ratio;
+    DroidFactory old = *this;
+
+    operator++();
+    return old;   
 }
 
 DroidFactory    &DroidFactory::operator--(void)
@@ -177,9 +210,10 @@ DroidFactory    &DroidFactory::operator--(void)
     return *this;
 }
 
-size_t    DroidFactory::operator--(int)
+DroidFactory    DroidFactory::operator--(int)
 {
-    if (_ratio > 0)
-        _ratio--;
-    return _ratio;
+    DroidFactory old = *this;
+
+    operator--();
+    return old;   
 }
