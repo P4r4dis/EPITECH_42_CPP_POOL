@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Mar 20 7:16:00 PM 2025 Paradis
-** Last update Thu Apr 9 7:33:23 PM 2025 Paradis
+** Last update Fri Apr 17 5:12:38 PM 2025 Paradis
 */
 
 #include <iostream>
@@ -126,12 +126,18 @@ void                Droid::setStatus(std::string *status)
 
 void                Droid::setBattleData(const DroidMemory *battleData)
 {
-    if (!battleData)
-        return ;
+    if (battleData == nullptr) {
+        delete BattleData;
+        BattleData = nullptr;
+        return;
+    }
 
-    if (BattleData)
-        *BattleData = *battleData;
+    if (BattleData == nullptr)
+        BattleData = new DroidMemory;
+
+    *BattleData = *battleData;
 }
+
 std::ostream        &operator<<(std::ostream &os, Droid const &rhs)
 {
     return os   << "Droid '" << rhs.getId() << "', "

@@ -5,13 +5,15 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Mar 20 7:29:54 PM 2025 Paradis
-** Last update Thu Apr 9 7:27:02 PM 2025 Paradis
+** Last update Fri Apr 17 5:13:29 PM 2025 Paradis
 */
 
 #include "../include/DroidFactory.hpp"
 #include <cstddef>
 #include <iostream>
 #include <ostream>
+
+#include "../include//Config.hpp"
 
 DroidFactory::DroidFactory(size_t ratio)    :   _ratio(ratio),
                                                 _Iron(0),
@@ -58,21 +60,23 @@ Droid       *DroidFactory::operator>>(Droid *&droid)
     {
         _Iron -= 100;
         _Silicon -= 50;
-        
-        if (*&droid)
+        if (RUNNING_ON_VALGRIND)
         {
-            delete droid;
-            droid = nullptr;
+            GCOV_EXCL_IF_VALGRIND_START
+            if (droid)
+            {
+                delete droid;
+                droid = nullptr;
+            }
+            GCOV_EXCL_IF_VALGRIND_STOP
         }
-        std::cout << "WHY?" << std::endl;
         droid = new Droid("");
         size_t newExp = (_ratio > 0 && _exp >= (_exp / _ratio)) ? _exp - (_exp / _ratio) : 0;
-        droid->getBattleData()->setExp(newExp);//(_exp - (_exp / _ratio));
+        droid->getBattleData()->setExp(newExp);
         return droid;
     }
     else
     {
-        delete droid;
         droid = nullptr;
         return droid;
     }
