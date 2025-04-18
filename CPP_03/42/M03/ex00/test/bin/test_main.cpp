@@ -6,13 +6,15 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 19:58:37 by Paradis           #+#    #+#             */
-/*   Updated: 2025/04/18 17:41:25 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/04/18 19:42:21 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <criterion/criterion.h>
+#include <criterion/logging.h>
 #include <criterion/new/assert.h>
 #include <criterion/redirect.h>
+#include <iostream>
 
 #include "../../include/ClapTrap.hpp"
 void redirect_all_stdout(void)
@@ -145,6 +147,72 @@ Test(ClapTrap, TEST_ClapTrap_equal_operator_overload_return_assignment, .init = 
 
         cr_assert_eq(&return_value, &clapTrap2);
     }
+}
+
+Test(ClapTrap, TEST_ClapTrap_attack_function_cant_performs_because_has_no_hit_points_stdout,
+    .init = redirect_all_stdout)
+    {
+        {
+            ClapTrap clapTrap("Clap");
+            std::string target = "BadBoy";
+            
+            clapTrap.setHit(0);
+            clapTrap.attack(target);
+        }
+        
+        cr_assert_stdout_eq_str(
+            "CTOR called\n"
+            "ClapTrap Clap can't attack BadBoy, causing 0 points of damage!\n"
+            "ClapTrap Clap has no hit or energy points\n"
+            "DTOR called\n"
+        );
+    }
+
+Test(ClapTrap, TEST_ClapTrap_attack_function_cant_performs_because_has_no_energy_points_stdout,
+.init = redirect_all_stdout)
+{
+    {
+        ClapTrap    clapTrap("Clap");
+
+        clapTrap.setEnergy(0);
+        clapTrap.attack("BadBoy");
+    }
+    cr_assert_stdout_eq_str(
+        "CTOR called\n"
+        "ClapTrap Clap can't attack BadBoy, causing 0 points of damage!\n"
+        "ClapTrap Clap has no hit or energy points\n"
+        "DTOR called\n"
+    );
+}
+
+Test(ClapTrap, TEST_ClapTrap_attack_function_performs_attack_and_loses_1_energy_points, .init = redirect_all_stdout)
+{
+    {
+        ClapTrap    clapTrap("Clap");
+
+        cr_assert(clapTrap.getEnergy() == 10);
+        clapTrap.attack("BadBoy");
+        cr_assert(clapTrap.getEnergy() == 9);
+    }
+    cr_assert_stdout_eq_str(
+        "CTOR called\n"
+        "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+        "DTOR called\n"
+    );
+}
+
+Test(ClapTrap, TEST_ClapTrap_attack_function_stdout, .init = redirect_all_stdout)
+{
+    {
+        ClapTrap    clapTrap("Clap");
+
+        clapTrap.attack("BadBoy");
+    }
+    cr_assert_stdout_eq_str(
+        "CTOR called\n"
+        "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+        "DTOR called\n"
+    );
 }
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //

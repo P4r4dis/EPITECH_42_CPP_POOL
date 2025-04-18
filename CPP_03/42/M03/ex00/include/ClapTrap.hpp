@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 18:42:41 by Paradis           #+#    #+#             */
-/*   Updated: 2025/04/18 17:49:23 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/04/18 19:03:13 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
         public:
             ClapTrap(const std::string &name);
             ClapTrap(const ClapTrap &clapTrap);
-            virtual ~ClapTrap(void);
+            ~ClapTrap(void);
 
             ClapTrap            &operator=(const ClapTrap &clapTrap);
 
@@ -35,6 +35,8 @@
 
             size_t              getAttack(void) const;
             void                setAttack(size_t attack);
+
+            void                attack(const std::string &target);
         
         private:
             std::string _name;

@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:45:09 by Paradis           #+#    #+#             */
-/*   Updated: 2025/04/18 17:49:37 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/04/18 19:36:01 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,23 @@ size_t                  ClapTrap::getAttack(void) const
 void                    ClapTrap::setAttack(size_t attack)
 {
     _attack = attack;
+}
+
+void                    ClapTrap::attack(const std::string &target)
+{
+    if (_hit > 0 && _energy > 0)
+    {
+        _energy--;
+        std::cout   << "ClapTrap " << _name << " attacks " 
+                    << target << ", causing " << _attack 
+                    << " points of damage!" << std::endl;
+    }
+    else
+    {
+        std::cout   << "ClapTrap " << _name << " can't attack " 
+                    << target << ", causing 0 points of damage!"
+                    << std::endl
+                    << "ClapTrap " << _name << " has no hit or energy points"
+                    << std::endl;
+    }
 }
