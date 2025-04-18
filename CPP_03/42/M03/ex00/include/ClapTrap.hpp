@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 18:42:41 by Paradis           #+#    #+#             */
-/*   Updated: 2025/04/18 19:52:54 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/04/18 20:53:14 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 
             void                attack(const std::string &target);
             void                takeDamage(unsigned int amount);
+            void                beRepaired(unsigned int amount);
         
         private:
             std::string _name;

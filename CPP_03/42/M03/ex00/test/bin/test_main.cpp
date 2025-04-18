@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 19:58:37 by Paradis           #+#    #+#             */
-/*   Updated: 2025/04/18 20:47:45 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/04/18 20:56:59 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,6 +275,70 @@ Test(ClapTrap, TEST_ClapTrap_takeDamage_function_stdout, .init = redirect_all_st
     cr_assert_stdout_eq_str(
         "CTOR called\n"
         "ClapTrap Clap receives 100 points of damage!\n"
+        "DTOR called\n"
+    );
+}
+
+Test(ClapTrap, TEST_ClapTrap_beRepaired_function_receives_hit_points_and_loses_energy_points,
+.init = redirect_all_stdout)
+{
+    {
+        ClapTrap    clapTrap("Clap");
+
+        cr_assert(clapTrap.getHit() == 10);
+        cr_assert(clapTrap.getEnergy() == 10);
+        clapTrap.beRepaired(2);
+        cr_assert(clapTrap.getHit() == 12);
+        cr_assert(clapTrap.getEnergy() == 9);
+    }
+    cr_assert_stdout_eq_str(
+        "CTOR called\n"
+        "ClapTrap Clap receives 2 hit points!\n"
+        "DTOR called\n"
+    );
+}
+
+Test(ClapTrap, TEST_ClapTrap_beRepaired_function_cant_performs_because_it_has_no_hit_points,
+.init = redirect_all_stdout)
+{
+    {
+        ClapTrap    clapTrap("Clap");
+
+        clapTrap.setHit(0);
+        clapTrap.beRepaired(100);
+    }
+    cr_assert_stdout_eq_str(
+        "CTOR called\n"
+        "ClapTrap Clap can't receives hit points because it has no hit points\n"
+        "DTOR called\n"
+    );
+}
+
+Test(ClapTrap, TEST_ClapTrap_beRepaired_function_cant_performs_because_it_has_no_energy_points,
+.init = redirect_all_stdout)
+{
+    {
+        ClapTrap    clapTrap("Clap");
+
+        clapTrap.setEnergy(0);
+        clapTrap.beRepaired(100);
+    }
+    cr_assert_stdout_eq_str(
+        "CTOR called\n"
+        "ClapTrap Clap can't receives hit points because it has no energy points\n"
+        "DTOR called\n"
+    );
+}
+Test(ClapTrap, TEST_ClapTrap_beRepaired_function_stdout, .init = redirect_all_stdout)
+{
+    {
+        ClapTrap    clapTrap("Clap");
+
+        clapTrap.beRepaired(100);
+    }
+    cr_assert_stdout_eq_str(
+        "CTOR called\n"
+        "ClapTrap Clap receives 100 hit points!\n"
         "DTOR called\n"
     );
 }

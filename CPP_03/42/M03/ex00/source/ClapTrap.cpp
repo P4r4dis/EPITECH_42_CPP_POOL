@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:45:09 by Paradis           #+#    #+#             */
-/*   Updated: 2025/04/18 20:47:37 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/04/18 20:55:23 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,29 @@ void                    ClapTrap::takeDamage(unsigned int amount)
         std::cout   << "ClapTrap " << _name 
                     << " can't receives damage because it has no hit points"
                     << std::endl;
+    }
+}
+
+void                    ClapTrap::beRepaired(unsigned int amount)
+{
+    if (_hit > 0 && _energy > 0)
+    {
+        _hit += amount;
+        _energy--;
+        std::cout   << "ClapTrap " << _name << " receives "
+                    << amount << " hit points!"
+                    << std::endl;
+    }
+    else if (_hit <= 0)
+    {
+        std::cout   << "ClapTrap " << _name 
+                    << " can't receives hit points because it has no hit points"
+                    << std::endl;
+    }
+    else
+    {
+        std::cout   << "ClapTrap " << _name 
+        << " can't receives hit points because it has no energy points"
+        << std::endl;
     }
 }
