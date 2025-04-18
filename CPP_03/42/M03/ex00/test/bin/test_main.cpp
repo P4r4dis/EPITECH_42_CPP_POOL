@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 19:58:37 by Paradis           #+#    #+#             */
-/*   Updated: 2025/04/18 19:42:21 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/04/18 20:47:45 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <criterion/logging.h>
 #include <criterion/new/assert.h>
 #include <criterion/redirect.h>
-#include <iostream>
 
 #include "../../include/ClapTrap.hpp"
+
 void redirect_all_stdout(void)
 {
     cr_redirect_stdout();
@@ -211,6 +211,70 @@ Test(ClapTrap, TEST_ClapTrap_attack_function_stdout, .init = redirect_all_stdout
     cr_assert_stdout_eq_str(
         "CTOR called\n"
         "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+        "DTOR called\n"
+    );
+}
+
+Test(ClapTrap, TEST_ClapTrap_takeDamage_function_receives_damage_and_loses_hit_points,
+.init = redirect_all_stdout)
+{
+    {
+        ClapTrap    clapTrap("Clap");
+
+        cr_assert(clapTrap.getHit() == 10);
+        clapTrap.takeDamage(2);
+        cr_assert(clapTrap.getHit() == 8);
+    }
+    cr_assert_stdout_eq_str(
+        "CTOR called\n"
+        "ClapTrap Clap receives 2 points of damage!\n"
+        "DTOR called\n"
+    );
+}
+
+Test(ClapTrap, TEST_ClapTrap_takeDamage_function_receives_more_damage_than_it_has_hit_points,
+.init = redirect_all_stdout)
+{
+    {
+        ClapTrap    clapTrap("Clap");
+
+        cr_assert(clapTrap.getHit() == 10);
+        clapTrap.takeDamage(100);
+        cr_assert(clapTrap.getHit() == 0);
+    }
+    cr_assert_stdout_eq_str(
+        "CTOR called\n"
+        "ClapTrap Clap receives 100 points of damage!\n"
+        "DTOR called\n"
+    );
+}
+
+Test(ClapTrap, TEST_ClapTrap_takeDamage_function_cant_performs_because_it_has_no_hit_points,
+.init = redirect_all_stdout)
+{
+    {
+        ClapTrap    clapTrap("Clap");
+
+        clapTrap.setHit(0);
+        clapTrap.takeDamage(100);
+    }
+    cr_assert_stdout_eq_str(
+        "CTOR called\n"
+        "ClapTrap Clap can't receives damage because it has no hit points\n"
+        "DTOR called\n"
+    );
+}
+
+Test(ClapTrap, TEST_ClapTrap_takeDamage_function_stdout, .init = redirect_all_stdout)
+{
+    {
+        ClapTrap    clapTrap("Clap");
+
+        clapTrap.takeDamage(100);
+    }
+    cr_assert_stdout_eq_str(
+        "CTOR called\n"
+        "ClapTrap Clap receives 100 points of damage!\n"
         "DTOR called\n"
     );
 }
