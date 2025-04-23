@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 19:58:37 by Paradis           #+#    #+#             */
-/*   Updated: 2025/04/18 20:56:59 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/04/23 19:10:30 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <criterion/logging.h>
 #include <criterion/new/assert.h>
 #include <criterion/redirect.h>
+#include <string>
 
 #include "../../include/ClapTrap.hpp"
 
@@ -345,10 +346,66 @@ Test(ClapTrap, TEST_ClapTrap_beRepaired_function_stdout, .init = redirect_all_st
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
-
 Test(main, Test_main, .init = redirect_all_stdout)
 {
-    {
-      
+    
+    {       
+        ClapTrap    clapTrap("Clap");
+        ClapTrap	clone = clapTrap;
+
+        cr_assert(clapTrap.getName() == "Clap");
+        cr_assert(clapTrap.getHit() == 10);
+        cr_assert(clapTrap.getEnergy() == 10);
+        cr_assert(clapTrap.getAttack() == 0);
+
+        clapTrap.attack("BadBoy"); // 1st attack
+        clapTrap.attack("BadBoy"); // 2nd attack
+        clapTrap.attack("BadBoy"); // 3rd attack
+        clapTrap.attack("BadBoy"); // 4th attack
+        clapTrap.attack("BadBoy"); // 5th attack
+        clapTrap.attack("BadBoy"); // 6th attack
+        clapTrap.attack("BadBoy"); // 7th attack
+        clapTrap.attack("BadBoy"); // 8th attack
+        clapTrap.attack("BadBoy"); // 9th attack
+        clapTrap.attack("BadBoy"); // 10th attack
+        clapTrap.attack("BadBoy"); // out of energy
+        clapTrap.takeDamage(9); // 1 hp left
+        clapTrap.attack("BadBoy"); // out of energy
+        clapTrap.takeDamage(1); // 0 hp left
+        clapTrap.attack("BadBoy"); // already dead
+        clone.attack("Friend of BadBoy"); // 1st attack
+        clapTrap.beRepaired(10); // already dead
+
+        cr_assert(clapTrap.getName() == "Clap");
+        cr_assert(clapTrap.getHit() == 0);
+        cr_assert(clapTrap.getEnergy() == 0);
+        cr_assert(clapTrap.getAttack() == 0);
     }
+
+    cr_assert_stdout_eq_str(
+        "CTOR called\n"
+        "Copy CTOR called\n"
+        "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+        "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+        "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+        "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+        "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+        "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+        "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+        "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+        "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+        "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+        "ClapTrap Clap can't attack BadBoy, causing 0 points of damage!\n"
+        "ClapTrap Clap has no hit or energy points\n"
+        "ClapTrap Clap receives 9 points of damage!\n"
+        "ClapTrap Clap can't attack BadBoy, causing 0 points of damage!\n"
+        "ClapTrap Clap has no hit or energy points\n"
+        "ClapTrap Clap receives 1 points of damage!\n"
+        "ClapTrap Clap can't attack BadBoy, causing 0 points of damage!\n"
+        "ClapTrap Clap has no hit or energy points\n"
+        "ClapTrap Clap attacks Friend of BadBoy, causing 0 points of damage!\n"
+        "ClapTrap Clap can't receives hit points because it has no hit points\n"
+        "DTOR called\n"
+        "DTOR called\n"
+    );
 }

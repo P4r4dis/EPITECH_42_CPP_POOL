@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 18:37:06 by Paradis           #+#    #+#              #
-#    Updated: 2025/04/17 18:38:13 by Paradis          ###   ########.fr        #
+#    Updated: 2025/04/23 19:12:20 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ INC_PATH	=	./include
 UT_PATH		=	./test
 
 
-NAME		=	First_ClapTrap
+NAME		=	ClapTrap
 UT_NAME 	= 	test_$(NAME)
 ##############################################
 
