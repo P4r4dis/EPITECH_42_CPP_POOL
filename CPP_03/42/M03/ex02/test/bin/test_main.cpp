@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 19:58:37 by Paradis           #+#    #+#             */
-/*   Updated: 2025/04/29 19:56:26 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/04/29 20:03:40 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -837,64 +837,22 @@ Test(FragTrap, TEST_FragTrap_highFivesGuys_stdout, .init = redirect_all_stdout)
 ///////////////////////////////////////////////////////////////////////////////
 Test(main, Test_main, .init = redirect_all_stdout)
 {
-    
     {       
-        // ClapTrap    clapTrap("Clap");
-        // ClapTrap	clone = clapTrap;
+        FragTrap fragTrap("Frag");
 
-        // cr_assert(clapTrap.getName() == "Clap");
-        // cr_assert(clapTrap.getHit() == 100);
-        // cr_assert(clapTrap.getEnergy() == 50);
-        // cr_assert(clapTrap.getAttack() == 20);
-
-        // clapTrap.attack("BadBoy"); // 1st attack
-        // clapTrap.attack("BadBoy"); // 2nd attack
-        // clapTrap.attack("BadBoy"); // 3rd attack
-        // clapTrap.attack("BadBoy"); // 4th attack
-        // clapTrap.attack("BadBoy"); // 5th attack
-        // clapTrap.attack("BadBoy"); // 6th attack
-        // clapTrap.attack("BadBoy"); // 7th attack
-        // clapTrap.attack("BadBoy"); // 8th attack
-        // clapTrap.attack("BadBoy"); // 9th attack
-        // clapTrap.attack("BadBoy"); // 10th attack
-        // clapTrap.attack("BadBoy"); // out of energy
-        // clapTrap.takeDamage(9); // 1 hp left
-        // clapTrap.attack("BadBoy"); // out of energy
-        // clapTrap.takeDamage(1); // 0 hp left
-        // clapTrap.attack("BadBoy"); // already dead
-        // clone.attack("Friend of BadBoy"); // 1st attack
-        // clapTrap.beRepaired(10); // already dead
-
-        // cr_assert(clapTrap.getName() == "Clap");
-        // cr_assert(clapTrap.getHit() == 0);
-        // cr_assert(clapTrap.getEnergy() == 0);
-        // cr_assert(clapTrap.getAttack() == 0);
+        fragTrap.attack("BadBoy");
+        fragTrap.takeDamage(50);
+        fragTrap.beRepaired(1);
+        fragTrap.highFivesGuy();
     }
-
-    // cr_assert_stdout_eq_str(
-    //     "ClapTrap CTOR called\n"
-    //     "ClapTrap Copy CTOR called\n"
-    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
-    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
-    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
-    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
-    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
-    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
-    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
-    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
-    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
-    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
-    //     "ClapTrap Clap can't attack BadBoy, causing 0 points of damage!\n"
-    //     "ClapTrap Clap has no hit or energy points\n"
-    //     "ClapTrap Clap receives 9 points of damage!\n"
-    //     "ClapTrap Clap can't attack BadBoy, causing 0 points of damage!\n"
-    //     "ClapTrap Clap has no hit or energy points\n"
-    //     "ClapTrap Clap receives 1 points of damage!\n"
-    //     "ClapTrap Clap can't attack BadBoy, causing 0 points of damage!\n"
-    //     "ClapTrap Clap has no hit or energy points\n"
-    //     "ClapTrap Clap attacks Friend of BadBoy, causing 0 points of damage!\n"
-    //     "ClapTrap Clap can't receives hit points because it has no hit points\n"
-    //     "ClapTrap DTOR called\n"
-    //     "ClapTrap DTOR called\n"
-    // );
+    cr_assert_stdout_eq_str(
+        "ClapTrap Frag Custom CTOR called\n"
+        "FragTrap Frag Custom CTOR called\n"
+        "ClapTrap Frag attacks BadBoy, causing 30 points of damage!\n"
+        "ClapTrap Frag receives 50 points of damage!\n"
+        "ClapTrap Frag receives 1 hit points!\n"
+        "Frag does High Fives Guys!\n"
+        "FragTrap Frag DTOR called\n"
+        "ClapTrap Frag DTOR called\n"
+    );
 }
