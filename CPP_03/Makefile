@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 18:18:45 by Paradis           #+#    #+#              #
-#    Updated: 2025/04/28 17:21:01 by Paradis          ###   ########.fr        #
+#    Updated: 2025/04/29 19:42:02 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,18 +94,20 @@
 #								42 EX02										   #
 #																			   #
 # **************************************************************************** #
-42_EX02_PATH 					= 	./42/M02/ex02
-42_EX02_BIN_PATH 				= 	./42/M02/ex02/bin
-42_EX02_SRC_PATH				=	./42/M02/ex02/source
-42_EX02_INC_PATH				=	./42/M02/ex02/include
-42_EX02_UT_PATH					=	./42/M02/ex02/test
+42_EX02_PATH 					= 	./42/M03/ex02
+42_EX02_BIN_PATH 				= 	./42/M03/ex02/bin
+42_EX02_SRC_PATH				=	./42/M03/ex02/source
+42_EX02_INC_PATH				=	./42/M03/ex02/include
+42_EX02_UT_PATH					=	./42/M03/ex02/test
 
-42_EX02_NAME					=	Now_we_are_talking
+42_EX02_NAME					=	FragTrap
 
 42_EX02_UT_SRC					=	$(42_EX02_UT_PATH)/$(42_EX02_NAME)_test.cpp
 42_EX02_UT_NAME 				= 	test_$(42_EX02_NAME)
 
-42_EX02_SRC						=	$(42_EX02_SRC_PATH)/Fixed.cpp \
+42_EX02_SRC						=	$(42_EX02_SRC_PATH)/ClapTrap.cpp \
+									$(42_EX02_SRC_PATH)/ScavTrap.cpp \
+									$(42_EX02_SRC_PATH)/FragTrap.cpp \
 									$(42_EX02_BIN_PATH)/main.cpp
 42_EX02_OBJS					=	$(42_EX02_SRC:.cpp=.o)
 
@@ -115,7 +117,7 @@
 
 42_test_run_ex02				:	fclean
 									@$(MAKE) -s -C $(42_EX02_UT_PATH)
-									$(42_EX02_UT_PATH)/$(42_EX02_UT_NAME)
+									$(42_EX02_UT_PATH)/$(42_EX02_UT_NAME) --fail-fast --jobs=1 --verbose=2
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 # @brave coverage.html
 
@@ -181,7 +183,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Aug 26 8:17:58 PM 2124 Paradis
-## Last update Tue Apr 28 5:21:01 PM 2025 Paradis
+## Last update Wed Apr 29 7:42:02 PM 2025 Paradis
 ##
 # **************************************************************************** #
 #																			   #
@@ -440,8 +442,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(42_EX00_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX02_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX02_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX03_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX03_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_PATH)
@@ -463,8 +465,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX02_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX03_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX03_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_PATH)

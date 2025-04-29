@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 19:58:37 by Paradis           #+#    #+#             */
-/*   Updated: 2025/04/29 18:51:26 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/04/29 19:44:24 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 #include "../../include/ClapTrap.hpp"
 #include "../../include/ScavTrap.hpp"
+#include "../../include/FragTrap.hpp"
 
 void redirect_all_stdout(void)
 {
@@ -659,6 +660,162 @@ Test(ScavTrap, TEST_ScavTrap_guardGate_function_desactivates_guard_mode_with_std
         "ClapTrap Scav DTOR called\n"
     );
 }
+///////////////////////////////////////////////////////////////////////////////
+//                            FragTrap class                                 //
+///////////////////////////////////////////////////////////////////////////////
+Test(FragTrap, TEST_FragTrap_default_CTOR, .init = redirect_all_stdout)
+{
+    {
+        FragTrap    fragTrap;
+
+        cr_assert_not_null(&fragTrap);
+    }
+}
+
+Test(FragTrap, TEST_FragTrap_default_CTOR_stdout, .init = redirect_all_stdout)
+{
+    {
+        FragTrap    fragTrap;
+    }
+    cr_assert_stdout_eq_str(
+        "ClapTrap ClapTrap Default CTOR called\n"
+        "FragTrap FragTrap Default CTOR called\n"
+        "FragTrap FragTrap DTOR called\n"
+        "ClapTrap FragTrap DTOR called\n"
+    );
+}
+
+Test(FragTrap, TEST_FragTrap_Custom_CTOR, .init = redirect_all_stdout)
+{
+    {
+        FragTrap    fragTrap("FragTrap");
+
+        cr_assert_not_null(&fragTrap);
+    }
+}
+
+Test(FragTrap, TEST_FragTrap_Custom_CTOR_stdout, .init = redirect_all_stdout)
+{
+    {
+        FragTrap    fragTrap("FragTrap");
+    }
+    cr_assert_stdout_eq_str(
+        "ClapTrap FragTrap Custom CTOR called\n"
+        "FragTrap FragTrap Custom CTOR called\n"
+        "FragTrap FragTrap DTOR called\n"
+        "ClapTrap FragTrap DTOR called\n"
+    );
+}
+
+Test(FragTrap, TEST_FragTrap_copy_CTOR, .init = redirect_all_stdout)
+{
+    {
+        FragTrap    fragTrap("FragTrap");
+        FragTrap    cpyFragTrap(fragTrap);
+
+        cr_assert_not_null(&fragTrap);
+        cr_assert_not_null(&cpyFragTrap);
+    }
+}
+
+Test(FragTrap, TEST_FragTrap_copy_CTOR_stdout, .init = redirect_all_stdout)
+{
+    {
+        FragTrap    fragTrap("FragTrap");
+        FragTrap    cpyFragTrap(fragTrap);
+
+    }
+    cr_assert_stdout_eq_str(
+        "ClapTrap FragTrap Custom CTOR called\n"
+        "FragTrap FragTrap Custom CTOR called\n"
+        "ClapTrap FragTrap Copy CTOR called\n"
+        "FragTrap FragTrap Copy CTOR called\n"
+        "FragTrap FragTrap DTOR called\n"
+        "ClapTrap FragTrap DTOR called\n"
+        "FragTrap FragTrap DTOR called\n"
+        "ClapTrap FragTrap DTOR called\n"
+    );
+}
+
+Test(FragTrap, TEST_FragTrap_getters_and_setters, .init = redirect_all_stdout)
+{
+    {
+        FragTrap    fragTrap("FragTrap");
+
+        cr_assert(fragTrap.getName() == "FragTrap");
+        fragTrap.setName("NewFragTrap");
+        cr_assert(fragTrap.getName() == "NewFragTrap");
+
+        cr_assert(fragTrap.getHit() == 100);
+        fragTrap.setHit(20);
+        cr_assert(fragTrap.getHit() == 20);
+
+        cr_assert(fragTrap.getEnergy() == 100);
+        fragTrap.setEnergy(20);
+        cr_assert(fragTrap.getEnergy() == 20);
+
+        cr_assert(fragTrap.getAttack() == 30);
+        fragTrap.setAttack(50);
+        cr_assert(fragTrap.getAttack() == 50);
+    }
+}
+
+Test(FragTrap, TEST_FragTrap_equal_operator_overload_simple_assignment, .init = redirect_all_stdout)
+{
+    {
+        FragTrap    fragTrap("FragTrap");
+        FragTrap    fragTrap2("FragTrap2");
+
+        fragTrap2 = fragTrap;
+
+        cr_assert(fragTrap.getName() == fragTrap2.getName());
+        cr_assert(fragTrap.getHit() == fragTrap2.getHit());
+        cr_assert(fragTrap.getEnergy() == fragTrap2.getEnergy());
+        cr_assert(fragTrap.getAttack() == fragTrap2.getAttack());
+    }
+}
+
+Test(FragTrap, TEST_FragTrap_equal_operator_overload_self_assignment, .init = redirect_all_stdout)
+{
+    {
+        FragTrap    fragTrap("FragTrap");
+
+        fragTrap = fragTrap;
+
+        cr_assert(fragTrap.getName() == fragTrap.getName());
+        cr_assert(fragTrap.getHit() == fragTrap.getHit());
+        cr_assert(fragTrap.getEnergy() == fragTrap.getEnergy());
+        cr_assert(fragTrap.getAttack() == fragTrap.getAttack());
+    }
+}
+
+Test(FragTrap, TEST_FragTrap_equal_operator_overload_assignment_after_modified_an_object, .init = redirect_all_stdout)
+{
+    {
+        FragTrap    fragTrap("FragTrap");
+        FragTrap    fragTrap2("FragTrap2");
+
+        fragTrap2 = fragTrap;
+        fragTrap.setName("NewFragTrap");
+
+        cr_assert(fragTrap2.getName() != fragTrap.getName());
+        cr_assert(fragTrap2.getHit() == fragTrap.getHit());
+        cr_assert(fragTrap2.getEnergy() == fragTrap.getEnergy());
+        cr_assert(fragTrap2.getAttack() == fragTrap.getAttack());
+    }
+}
+
+Test(FragTrap, TEST_FragTrap_equal_operator_overload_return_assignment, .init = redirect_all_stdout)
+{
+    {
+        FragTrap    fragTrap("FragTrap");
+        FragTrap    fragTrap2("FragTrap2");
+        FragTrap    &return_value = (fragTrap2 = fragTrap);
+
+        cr_assert_eq(&return_value, &fragTrap2);
+    }
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////

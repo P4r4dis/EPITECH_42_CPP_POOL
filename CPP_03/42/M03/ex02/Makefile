@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 18:37:06 by Paradis           #+#    #+#              #
-#    Updated: 2025/04/25 18:36:09 by Paradis          ###   ########.fr        #
+#    Updated: 2025/04/29 19:40:14 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ INC_PATH	=	./include
 UT_PATH		=	./test
 
 
-NAME		=	ScavTrap
+NAME		=	FragTrap
 UT_NAME 	= 	test_$(NAME)
 ##############################################
 
@@ -31,6 +31,7 @@ CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -Wshadow -Wno-shadow $(C
 # # Files sources
 SRCS		=	$(SRC_PATH)/ClapTrap.cpp \
 				$(SRC_PATH)/ScavTrap.cpp \
+				$(SRC_PATH)/FragTrap.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp

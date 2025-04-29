@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/18 19:58:09 by Paradis           #+#    #+#              #
-#    Updated: 2025/04/25 18:35:53 by Paradis          ###   ########.fr        #
+#    Updated: 2025/04/29 19:39:57 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC_PATH		= 	../source
 INC_PATH 		= 	../include
 BIN_PATH 		= 	./bin
 
-NAME          	= 	test_ScavTrap
+NAME          	= 	test_FragTrap
 #############################################
 
 INCFLAGS     	+= 	-I $(INC_PATH)
@@ -26,6 +26,7 @@ CRITFLAGS    	+=  --coverage -lcriterion
 CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -Wshadow -Wno-shadow $(CPP_VERSION) $(INCFLAGS) $(CRITFLAGS)
 SRCS         	= 	$(SRC_PATH)/ClapTrap.cpp \
 					$(SRC_PATH)/ScavTrap.cpp \
+					$(SRC_PATH)/FragTrap.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)
