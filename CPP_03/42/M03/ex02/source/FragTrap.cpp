@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 19:37:51 by Paradis           #+#    #+#             */
-/*   Updated: 2025/04/29 19:43:00 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/04/29 19:54:32 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,9 @@ FragTrap        &FragTrap::operator=(const FragTrap &fragTrap)
         ClapTrap::operator=(fragTrap);
 
     return *this;
+}
+
+void            FragTrap::highFivesGuy(void)
+{
+    std::cout   <<  _name << " does High Fives Guys!" << std::endl;
 }

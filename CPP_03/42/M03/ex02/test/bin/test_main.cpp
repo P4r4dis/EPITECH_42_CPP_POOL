@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 19:58:37 by Paradis           #+#    #+#             */
-/*   Updated: 2025/04/29 19:44:24 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/04/29 19:56:26 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -814,6 +814,22 @@ Test(FragTrap, TEST_FragTrap_equal_operator_overload_return_assignment, .init = 
 
         cr_assert_eq(&return_value, &fragTrap2);
     }
+}
+
+Test(FragTrap, TEST_FragTrap_highFivesGuys_stdout, .init = redirect_all_stdout)
+{
+    {
+        FragTrap    fragTrap("FragTrap");
+
+        fragTrap.highFivesGuy();
+    }
+    cr_assert_stdout_eq_str(
+        "ClapTrap FragTrap Custom CTOR called\n"
+        "FragTrap FragTrap Custom CTOR called\n"
+        "FragTrap does High Fives Guys!\n"
+        "FragTrap FragTrap DTOR called\n"
+        "ClapTrap FragTrap DTOR called\n"
+    );
 }
 
 ///////////////////////////////////////////////////////////////////////////////

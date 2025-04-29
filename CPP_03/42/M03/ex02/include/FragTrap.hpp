@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 19:36:16 by Paradis           #+#    #+#             */
-/*   Updated: 2025/04/29 19:37:23 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/04/29 19:51:36 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@
             ~FragTrap(void);
 
             FragTrap    &operator=(const FragTrap &fragTrap);
+
+            void        highFivesGuy(void);
     };
 #endif //               !_FRAGTRAP_HPP__
