@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:45:09 by Paradis           #+#    #+#             */
-/*   Updated: 2025/04/29 19:14:40 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/04/29 18:34:30 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,16 +99,16 @@ void                    ClapTrap::attack(const std::string &target)
     if (_hit > 0 && _energy > 0)
     {
         _energy--;
-        std::cout   << _name << " attacks " 
+        std::cout   << "ClapTrap " << _name << " attacks " 
                     << target << ", causing " << _attack 
                     << " points of damage!" << std::endl;
     }
     else
     {
-        std::cout   << _name << " can't attack " 
+        std::cout   << "ClapTrap " << _name << " can't attack " 
                     << target << ", causing 0 points of damage!"
                     << std::endl
-                    << _name << " has no hit or energy points"
+                    << "ClapTrap " << _name << " has no hit or energy points"
                     << std::endl;
     }
 }
@@ -118,13 +118,13 @@ void                    ClapTrap::takeDamage(unsigned int amount)
     if (_hit > 0)
     {
         _hit = (_hit <= amount) ? 0 : _hit - amount;
-        std::cout   << _name << " receives "
+        std::cout   << "ClapTrap " << _name << " receives "
                     << amount << " points of damage!"
                     << std::endl;
     }
     else
     {
-        std::cout   << _name 
+        std::cout   << "ClapTrap " << _name 
                     << " can't receives damage because it has no hit points"
                     << std::endl;
     }
@@ -136,19 +136,19 @@ void                    ClapTrap::beRepaired(unsigned int amount)
     {
         _hit += amount;
         _energy--;
-        std::cout   << _name << " receives "
+        std::cout   << "ClapTrap " << _name << " receives "
                     << amount << " hit points!"
                     << std::endl;
     }
     else if (_hit <= 0)
     {
-        std::cout   << _name 
+        std::cout   << "ClapTrap " << _name 
                     << " can't receives hit points because it has no hit points"
                     << std::endl;
     }
     else
     {
-        std::cout   << _name 
+        std::cout   << "ClapTrap " << _name 
         << " can't receives hit points because it has no energy points"
         << std::endl;
     }

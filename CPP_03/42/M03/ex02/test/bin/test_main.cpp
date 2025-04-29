@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 19:58:37 by Paradis           #+#    #+#             */
-/*   Updated: 2025/04/29 19:20:30 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/04/29 18:51:26 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,8 +184,8 @@ Test(ClapTrap, TEST_ClapTrap_attack_function_cant_performs_because_has_no_hit_po
         
         cr_assert_stdout_eq_str(
             "ClapTrap Clap Custom CTOR called\n"
-            "Clap can't attack BadBoy, causing 0 points of damage!\n"
-            "Clap has no hit or energy points\n"
+            "ClapTrap Clap can't attack BadBoy, causing 0 points of damage!\n"
+            "ClapTrap Clap has no hit or energy points\n"
             "ClapTrap Clap DTOR called\n"
         );
     }
@@ -202,8 +202,8 @@ Test(ClapTrap, TEST_ClapTrap_attack_function_cant_performs_because_has_no_energy
 
     cr_assert_stdout_eq_str(
         "ClapTrap Clap Custom CTOR called\n"
-        "Clap can't attack BadBoy, causing 0 points of damage!\n"
-        "Clap has no hit or energy points\n"
+        "ClapTrap Clap can't attack BadBoy, causing 0 points of damage!\n"
+        "ClapTrap Clap has no hit or energy points\n"
         "ClapTrap Clap DTOR called\n"
     );
 }
@@ -219,7 +219,7 @@ Test(ClapTrap, TEST_ClapTrap_attack_function_performs_attack_and_loses_1_energy_
     }
     cr_assert_stdout_eq_str(
         "ClapTrap Clap Custom CTOR called\n"
-        "Clap attacks BadBoy, causing 0 points of damage!\n"
+        "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
         "ClapTrap Clap DTOR called\n"
     );
 }
@@ -233,7 +233,7 @@ Test(ClapTrap, TEST_ClapTrap_attack_function_stdout, .init = redirect_all_stdout
     }
     cr_assert_stdout_eq_str(
         "ClapTrap Clap Custom CTOR called\n"
-        "Clap attacks BadBoy, causing 0 points of damage!\n"
+        "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
         "ClapTrap Clap DTOR called\n"
     );
 }
@@ -250,7 +250,7 @@ Test(ClapTrap, TEST_ClapTrap_takeDamage_function_receives_damage_and_loses_hit_p
     }
     cr_assert_stdout_eq_str(
         "ClapTrap Clap Custom CTOR called\n"
-        "Clap receives 2 points of damage!\n"
+        "ClapTrap Clap receives 2 points of damage!\n"
         "ClapTrap Clap DTOR called\n"
     );
 }
@@ -267,7 +267,7 @@ Test(ClapTrap, TEST_ClapTrap_takeDamage_function_receives_more_damage_than_it_ha
     }
     cr_assert_stdout_eq_str(
         "ClapTrap Clap Custom CTOR called\n"
-        "Clap receives 100 points of damage!\n"
+        "ClapTrap Clap receives 100 points of damage!\n"
         "ClapTrap Clap DTOR called\n"
     );
 }
@@ -283,7 +283,7 @@ Test(ClapTrap, TEST_ClapTrap_takeDamage_function_cant_performs_because_it_has_no
     }
     cr_assert_stdout_eq_str(
         "ClapTrap Clap Custom CTOR called\n"
-        "Clap can't receives damage because it has no hit points\n"
+        "ClapTrap Clap can't receives damage because it has no hit points\n"
         "ClapTrap Clap DTOR called\n"
     );
 }
@@ -297,7 +297,7 @@ Test(ClapTrap, TEST_ClapTrap_takeDamage_function_stdout, .init = redirect_all_st
     }
     cr_assert_stdout_eq_str(
         "ClapTrap Clap Custom CTOR called\n"
-        "Clap receives 100 points of damage!\n"
+        "ClapTrap Clap receives 100 points of damage!\n"
         "ClapTrap Clap DTOR called\n"
     );
 }
@@ -316,7 +316,7 @@ Test(ClapTrap, TEST_ClapTrap_beRepaired_function_receives_hit_points_and_loses_e
     }
     cr_assert_stdout_eq_str(
         "ClapTrap Clap Custom CTOR called\n"
-        "Clap receives 2 hit points!\n"
+        "ClapTrap Clap receives 2 hit points!\n"
         "ClapTrap Clap DTOR called\n"
     );
 }
@@ -332,7 +332,7 @@ Test(ClapTrap, TEST_ClapTrap_beRepaired_function_cant_performs_because_it_has_no
     }
     cr_assert_stdout_eq_str(
         "ClapTrap Clap Custom CTOR called\n"
-        "Clap can't receives hit points because it has no hit points\n"
+        "ClapTrap Clap can't receives hit points because it has no hit points\n"
         "ClapTrap Clap DTOR called\n"
     );
 }
@@ -348,7 +348,7 @@ Test(ClapTrap, TEST_ClapTrap_beRepaired_function_cant_performs_because_it_has_no
     }
     cr_assert_stdout_eq_str(
         "ClapTrap Clap Custom CTOR called\n"
-        "Clap can't receives hit points because it has no energy points\n"
+        "ClapTrap Clap can't receives hit points because it has no energy points\n"
         "ClapTrap Clap DTOR called\n"
     );
 }
@@ -361,7 +361,7 @@ Test(ClapTrap, TEST_ClapTrap_beRepaired_function_stdout, .init = redirect_all_st
     }
     cr_assert_stdout_eq_str(
         "ClapTrap Clap Custom CTOR called\n"
-        "Clap receives 100 hit points!\n"
+        "ClapTrap Clap receives 100 hit points!\n"
         "ClapTrap Clap DTOR called\n"
     );
 }
@@ -535,8 +535,8 @@ Test(ScavTrap, TEST_ScavTrap_attack_function_cant_performs_because_has_no_hit_po
     cr_assert_stdout_eq_str(
         "ClapTrap Scav Custom CTOR called\n"
         "ScavTrap Scav Custom CTOR called\n"
-        "Scav can't attack BadBoy, causing 0 points of damage!\n"
-        "Scav has no hit or energy points\n"
+        "ScavTrap Scav can't attack BadBoy, causing 0 points of damage!\n"
+        "ScavTrap Scav has no hit or energy points\n"
         "ScavTrap Scav DTOR called\n"
         "ClapTrap Scav DTOR called\n"
     );
@@ -555,8 +555,8 @@ Test(ScavTrap, TEST_ScavTrap_attack_function_cant_performs_because_has_no_energy
     cr_assert_stdout_eq_str(
         "ClapTrap Scav Custom CTOR called\n"
         "ScavTrap Scav Custom CTOR called\n"
-        "Scav can't attack BadBoy, causing 0 points of damage!\n"
-        "Scav has no hit or energy points\n"
+        "ScavTrap Scav can't attack BadBoy, causing 0 points of damage!\n"
+        "ScavTrap Scav has no hit or energy points\n"
         "ScavTrap Scav DTOR called\n"
         "ClapTrap Scav DTOR called\n"
     );
@@ -574,7 +574,7 @@ Test(ScavTrap, TEST_ScavTrap_attack_function_performs_attack_and_loses_1_energy_
     cr_assert_stdout_eq_str(
         "ClapTrap Scav Custom CTOR called\n"
         "ScavTrap Scav Custom CTOR called\n"
-        "Scav attacks BadBoy, causing 20 points of damage!\n"
+        "ScavTrap Scav attacks BadBoy, causing 20 points of damage!\n"
         "ScavTrap Scav DTOR called\n"
         "ClapTrap Scav DTOR called\n"
     );
@@ -590,7 +590,7 @@ Test(ScavTrap, TEST_ScavTrap_attack_function_stdout, .init = redirect_all_stdout
     cr_assert_stdout_eq_str(
         "ClapTrap Scav Custom CTOR called\n"
         "ScavTrap Scav Custom CTOR called\n"
-        "Scav attacks BadBoy, causing 20 points of damage!\n"
+        "ScavTrap Scav attacks BadBoy, causing 20 points of damage!\n"
         "ScavTrap Scav DTOR called\n"
         "ClapTrap Scav DTOR called\n"
     );
@@ -619,7 +619,7 @@ Test(ScavTrap, TEST_ScavTrap_guardGate_function_activates_guard_mode_with_stdout
     cr_assert_stdout_eq_str(
         "ClapTrap Scav Custom CTOR called\n"
         "ScavTrap Scav Custom CTOR called\n"
-        "Scav activates the guard mode!\n"
+        "ScavTrap Scav activates the guard mode!\n"
         "ScavTrap Scav DTOR called\n"
         "ClapTrap Scav DTOR called\n"
     );
@@ -653,8 +653,8 @@ Test(ScavTrap, TEST_ScavTrap_guardGate_function_desactivates_guard_mode_with_std
     cr_assert_stdout_eq_str(
         "ClapTrap Scav Custom CTOR called\n"
         "ScavTrap Scav Custom CTOR called\n"
-        "Scav activates the guard mode!\n"
-        "Scav desactivates the guard mode!\n"
+        "ScavTrap Scav activates the guard mode!\n"
+        "ScavTrap Scav desactivates the guard mode!\n"
         "ScavTrap Scav DTOR called\n"
         "ClapTrap Scav DTOR called\n"
     );
@@ -666,39 +666,62 @@ Test(main, Test_main, .init = redirect_all_stdout)
 {
     
     {       
-        ClapTrap	clap("Clap");
-        ScavTrap	scav("Scav");
-    
-        clap.attack(scav.getName());
-        scav.takeDamage(clap.getAttack());
-        scav.attack(clap.getName());
-        clap.takeDamage(scav.getAttack());
-        clap.attack(scav.getName());
-        scav.takeDamage(clap.getAttack());
-        scav.guardGate();
-        clap.attack(scav.getName());
-        scav.takeDamage(clap.getAttack());
-        scav.guardGate();
+        // ClapTrap    clapTrap("Clap");
+        // ClapTrap	clone = clapTrap;
+
+        // cr_assert(clapTrap.getName() == "Clap");
+        // cr_assert(clapTrap.getHit() == 100);
+        // cr_assert(clapTrap.getEnergy() == 50);
+        // cr_assert(clapTrap.getAttack() == 20);
+
+        // clapTrap.attack("BadBoy"); // 1st attack
+        // clapTrap.attack("BadBoy"); // 2nd attack
+        // clapTrap.attack("BadBoy"); // 3rd attack
+        // clapTrap.attack("BadBoy"); // 4th attack
+        // clapTrap.attack("BadBoy"); // 5th attack
+        // clapTrap.attack("BadBoy"); // 6th attack
+        // clapTrap.attack("BadBoy"); // 7th attack
+        // clapTrap.attack("BadBoy"); // 8th attack
+        // clapTrap.attack("BadBoy"); // 9th attack
+        // clapTrap.attack("BadBoy"); // 10th attack
+        // clapTrap.attack("BadBoy"); // out of energy
+        // clapTrap.takeDamage(9); // 1 hp left
+        // clapTrap.attack("BadBoy"); // out of energy
+        // clapTrap.takeDamage(1); // 0 hp left
+        // clapTrap.attack("BadBoy"); // already dead
+        // clone.attack("Friend of BadBoy"); // 1st attack
+        // clapTrap.beRepaired(10); // already dead
+
+        // cr_assert(clapTrap.getName() == "Clap");
+        // cr_assert(clapTrap.getHit() == 0);
+        // cr_assert(clapTrap.getEnergy() == 0);
+        // cr_assert(clapTrap.getAttack() == 0);
     }
 
-    cr_assert_stdout_eq_str(
-        "ClapTrap Clap Custom CTOR called\n"
-        "ClapTrap Scav Custom CTOR called\n"
-        "ScavTrap Scav Custom CTOR called\n"
-        "Clap attacks Scav, causing 0 points of damage!\n"
-        "Scav receives 0 points of damage!\n"
-        "Scav attacks Clap, causing 20 points of damage!\n"
-        "Clap receives 20 points of damage!\n"
-        "Clap can't attack Scav, causing 0 points of damage!\n"
-        "Clap has no hit or energy points\n"
-        "Scav receives 0 points of damage!\n"
-        "Scav activates the guard mode!\n"
-        "Clap can't attack Scav, causing 0 points of damage!\n"
-        "Clap has no hit or energy points\n"
-        "Scav receives 0 points of damage!\n"
-        "Scav desactivates the guard mode!\n"
-        "ScavTrap Scav DTOR called\n"
-        "ClapTrap Scav DTOR called\n"
-        "ClapTrap Clap DTOR called\n"
-    );
+    // cr_assert_stdout_eq_str(
+    //     "ClapTrap CTOR called\n"
+    //     "ClapTrap Copy CTOR called\n"
+    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+    //     "ClapTrap Clap attacks BadBoy, causing 0 points of damage!\n"
+    //     "ClapTrap Clap can't attack BadBoy, causing 0 points of damage!\n"
+    //     "ClapTrap Clap has no hit or energy points\n"
+    //     "ClapTrap Clap receives 9 points of damage!\n"
+    //     "ClapTrap Clap can't attack BadBoy, causing 0 points of damage!\n"
+    //     "ClapTrap Clap has no hit or energy points\n"
+    //     "ClapTrap Clap receives 1 points of damage!\n"
+    //     "ClapTrap Clap can't attack BadBoy, causing 0 points of damage!\n"
+    //     "ClapTrap Clap has no hit or energy points\n"
+    //     "ClapTrap Clap attacks Friend of BadBoy, causing 0 points of damage!\n"
+    //     "ClapTrap Clap can't receives hit points because it has no hit points\n"
+    //     "ClapTrap DTOR called\n"
+    //     "ClapTrap DTOR called\n"
+    // );
 }

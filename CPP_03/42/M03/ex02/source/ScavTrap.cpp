@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 18:41:02 by Paradis           #+#    #+#             */
-/*   Updated: 2025/04/29 19:17:15 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/04/29 18:56:12 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,16 @@ void            ScavTrap::attack(const std::string &target)
     if (_hit > 0 && _energy > 0)
     {
         _energy--;
-        std::cout   << _name << " attacks " 
+        std::cout   << "ScavTrap " << _name << " attacks " 
                     << target << ", causing " << _attack 
                     << " points of damage!" << std::endl;
     }
     else
     {
-        std::cout   << _name << " can't attack " 
+        std::cout   << "ScavTrap " << _name << " can't attack " 
                     << target << ", causing 0 points of damage!"
                     << std::endl
-                    << _name << " has no hit or energy points"
+                    << "ScavTrap " << _name << " has no hit or energy points"
                     << std::endl;
     }
 }
@@ -75,12 +75,12 @@ void            ScavTrap::guardGate(void)
     if (_guardGate == false)
     {
         _guardGate = true;
-        std::cout   << _name << " activates the guard mode!" << std::endl;
+        std::cout   << "ScavTrap " << _name << " activates the guard mode!" << std::endl;
     }
     else
     {
         _guardGate = false;
-        std::cout   << _name << " desactivates the guard mode!" << std::endl;
+        std::cout   << "ScavTrap " << _name << " desactivates the guard mode!" << std::endl;
     }
 }
 
