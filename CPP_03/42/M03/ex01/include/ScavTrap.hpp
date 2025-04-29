@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 18:36:57 by Paradis           #+#    #+#             */
-/*   Updated: 2025/04/29 18:38:28 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/04/29 18:52:16 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,11 @@
             ScavTrap    &operator=(const ScavTrap &scavTrap);
 
             void        attack(const std::string &target);
+            void        guardGate(void);
+
+            bool        getGuardGate(void) const;
+
+        private:
+            bool        _guardGate;
     };
 #endif //               !_SCAVTRAP_HPP__

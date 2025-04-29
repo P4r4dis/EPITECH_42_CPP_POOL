@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 19:58:37 by Paradis           #+#    #+#             */
-/*   Updated: 2025/04/29 18:42:37 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/04/29 18:51:26 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -596,6 +596,69 @@ Test(ScavTrap, TEST_ScavTrap_attack_function_stdout, .init = redirect_all_stdout
     );
 }
 
+Test(ScavTrap, TEST_ScavTrap_guardGate_function_activates_guard_mode, .init = redirect_all_stdout)
+{
+    {
+        ScavTrap    scavTrap("Scav");
+
+        cr_assert(scavTrap.getGuardGate() == false);
+        scavTrap.guardGate();
+        cr_assert(scavTrap.getGuardGate() == true);
+    }
+}
+
+Test(ScavTrap, TEST_ScavTrap_guardGate_function_activates_guard_mode_with_stdout, .init = redirect_all_stdout)
+{
+    {
+        ScavTrap    scavTrap("Scav");
+
+        cr_assert(scavTrap.getGuardGate() == false);
+        scavTrap.guardGate();
+        cr_assert(scavTrap.getGuardGate() == true);
+    }
+    cr_assert_stdout_eq_str(
+        "ClapTrap Scav Custom CTOR called\n"
+        "ScavTrap Scav Custom CTOR called\n"
+        "ScavTrap Scav activates the guard mode!\n"
+        "ScavTrap Scav DTOR called\n"
+        "ClapTrap Scav DTOR called\n"
+    );
+}
+
+
+Test(ScavTrap, TEST_ScavTrap_guardGate_function_desactivates_guard_mode, .init = redirect_all_stdout)
+{
+    {
+        ScavTrap    scavTrap("Scav");
+
+        cr_assert(scavTrap.getGuardGate() == false);
+        scavTrap.guardGate();
+        cr_assert(scavTrap.getGuardGate() == true);
+        scavTrap.guardGate();
+        cr_assert(scavTrap.getGuardGate() == false);
+    }
+}
+
+Test(ScavTrap, TEST_ScavTrap_guardGate_function_desactivates_guard_mode_with_stdout, .init = redirect_all_stdout)
+{
+    {
+        ScavTrap    scavTrap("Scav");
+
+        cr_assert(scavTrap.getGuardGate() == false);
+        scavTrap.guardGate();
+        cr_assert(scavTrap.getGuardGate() == true);
+        scavTrap.guardGate();
+        cr_assert(scavTrap.getGuardGate() == false);
+    }
+    cr_assert_stdout_eq_str(
+        "ClapTrap Scav Custom CTOR called\n"
+        "ScavTrap Scav Custom CTOR called\n"
+        "ScavTrap Scav activates the guard mode!\n"
+        "ScavTrap Scav desactivates the guard mode!\n"
+        "ScavTrap Scav DTOR called\n"
+        "ClapTrap Scav DTOR called\n"
+    );
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////

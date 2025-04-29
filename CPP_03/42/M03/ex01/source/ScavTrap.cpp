@@ -6,14 +6,14 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 18:41:02 by Paradis           #+#    #+#             */
-/*   Updated: 2025/04/29 18:39:03 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/04/29 18:56:12 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "../include/ScavTrap.hpp"
 
-ScavTrap::ScavTrap(void)
+ScavTrap::ScavTrap(void)    :   _guardGate(false)
 {
     this->_name = "ScavTrap";
     this->_hit = 100;
@@ -22,7 +22,8 @@ ScavTrap::ScavTrap(void)
     std::cout << "ScavTrap " << _name << " Default CTOR called" << std::endl;
 }
 
-ScavTrap::ScavTrap(const std::string &name)     :   ClapTrap(name)
+ScavTrap::ScavTrap(const std::string &name)     :   ClapTrap(name),
+                                                    _guardGate(false)
 {
     this->_name = name;
     this->_hit = 100;
@@ -31,10 +32,9 @@ ScavTrap::ScavTrap(const std::string &name)     :   ClapTrap(name)
     std::cout << "ScavTrap " << _name << " Custom CTOR called" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &scavTrap)    :   ClapTrap(scavTrap)
+ScavTrap::ScavTrap(const ScavTrap &scavTrap)    :   ClapTrap(scavTrap),
+                                                    _guardGate(false)
 {
-    // if (this != &scavTrap)
-    //     *this = scavTrap;
     std::cout << "ScavTrap " << _name << " Copy CTOR called" << std::endl;
 }
 
@@ -68,4 +68,23 @@ void            ScavTrap::attack(const std::string &target)
                     << "ScavTrap " << _name << " has no hit or energy points"
                     << std::endl;
     }
+}
+
+void            ScavTrap::guardGate(void)
+{
+    if (_guardGate == false)
+    {
+        _guardGate = true;
+        std::cout   << "ScavTrap " << _name << " activates the guard mode!" << std::endl;
+    }
+    else
+    {
+        _guardGate = false;
+        std::cout   << "ScavTrap " << _name << " desactivates the guard mode!" << std::endl;
+    }
+}
+
+bool            ScavTrap::getGuardGate(void) const
+{
+    return _guardGate;
 }
