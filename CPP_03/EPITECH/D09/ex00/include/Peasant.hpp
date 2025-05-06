@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 6 5:36:17 PM 2025 Paradis
-** Last update Wed May 6 6:45:04 PM 2025 Paradis
+** Last update Wed May 6 7:12:39 PM 2025 Paradis
 */
 
 #ifndef 			__PEASANT_HPP__
@@ -30,6 +30,8 @@ class	            Peasant
 
         int                 getHp(void) const;
         void                setHp(int hp);
+
+        int                 attack(void);
 
     protected:
     private:
