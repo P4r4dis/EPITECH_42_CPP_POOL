@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 18:18:45 by Paradis           #+#    #+#              #
-#    Updated: 2025/05/06 16:51:49 by Paradis          ###   ########.fr        #
+#    Updated: 2025/05/06 17:31:42 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -178,32 +178,32 @@
 
 
 ##
-## Makefile for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_12
+## Makefile for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_03
 ##
 ## Made by Paradis
 ## Login   <Adil Denia>
 ##
-## Started on  Mon Aug 26 8:17:58 PM 2124 Paradis
-## Last update Wed May 6 4:51:49 PM 2025 Paradis
+## Started on  Tue May 6 5:30:03 PM 2025 Paradis
+## Last update Wed May 6 5:31:42 PM 2025 Paradis
 ##
+
 # **************************************************************************** #
 #																			   #
 #								EPITECH EX00								   #
 #																			   #
 # **************************************************************************** #
-EPITECH_EX00_PATH 				= 	./EPITECH/D08/ex00
-EPITECH_EX00_BIN_PATH 			= 	./EPITECH/D08/ex00/bin
-EPITECH_EX00_SRC_PATH			=	./EPITECH/D08/ex00/source
-EPITECH_EX00_INC_PATH			=	./EPITECH/D08/ex00/include
-EPITECH_EX00_UT_PATH			=	./EPITECH/D08/ex00/test
+EPITECH_EX00_PATH 				= 	./EPITECH/D09/ex00
+EPITECH_EX00_BIN_PATH 			= 	./EPITECH/D09/ex00/bin
+EPITECH_EX00_SRC_PATH			=	./EPITECH/D09/ex00/source
+EPITECH_EX00_INC_PATH			=	./EPITECH/D09/ex00/include
+EPITECH_EX00_UT_PATH			=	./EPITECH/D09/ex00/test
 
-EPITECH_EX00_NAME				=	Droids
+EPITECH_EX00_NAME				=	Peasant
 
 EPITECH_EX00_UT_SRC				=	$(EPITECH_EX00_UT_PATH)/$(EPITECH_EX00_NAME)_test.cpp
 EPITECH_EX00_UT_NAME 			= 	test_$(EPITECH_EX00_NAME)
 
-EPITECH_EX00_SRC				=	$(EPITECH_EX00_SRC_PATH)/Droid.cpp \
-									$(EPITECH_EX00_SRC_PATH)/WarpSystem.cpp \
+EPITECH_EX00_SRC				=	$(EPITECH_EX00_SRC_PATH)/Peasant.cpp \
 									$(EPITECH_EX00_BIN_PATH)/main.cpp
 EPITECH_EX00_OBJS				=	$(EPITECH_EX00_SRC:.cpp=.o)
 
@@ -216,7 +216,7 @@ EPITECH_valgrind_ex00 			: 	fclean
 
 EPITECH_test_run_ex00			:	fclean
 									@$(MAKE) -s -C $(EPITECH_EX00_UT_PATH)
-									$(EPITECH_EX00_UT_PATH)/$(EPITECH_EX00_UT_NAME)
+									$(EPITECH_EX00_UT_PATH)/$(EPITECH_EX00_UT_NAME) --fail-fast --jobs=1 --verbose=2
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 						
 EPITECH_valgrind_test_run_ex00	:	fclean
@@ -447,8 +447,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX03_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX03_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_UT_PATH)	
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_UT_PATH)	
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX01_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX01_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX02_PATH)
@@ -470,8 +470,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX03_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX03_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX01_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX01_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX02_PATH)
