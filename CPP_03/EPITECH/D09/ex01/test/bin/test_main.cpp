@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 7 5:29:47 PM 2025 Paradis
-** Last update Thu May 7 7:40:11 PM 2025 Paradis
+** Last update Thu May 7 7:57:19 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -690,6 +690,69 @@ Test(Knight, TEST_Knight_attack_stdout, .init = redirect_all_stdout)
         "Arthur goes for an adventure.\n"
         "Arthur vows to protect the kingdom.\n"
         "Arthur strikes with his sword.\n"
+        "Arthur takes off his armor.\n"
+        "Arthur is back to his crops.\n"
+    );
+}
+
+
+Test(Knight, TEST_Knight_special_but_is_out_of_health_stdout, .init = redirect_all_stdout)
+{
+    {
+        Knight     knight("Arthur", 50);
+
+        cr_assert(knight.getHp() == 100);
+        knight.setHp(0);
+        cr_assert(knight.getHp() == 0);
+
+        cr_assert(knight.getPower() == 50);
+        cr_assert(knight.special() == 0);
+        cr_assert(knight.getPower() == 50);
+
+    }
+    cr_assert_stdout_eq_str(
+        "Arthur goes for an adventure.\n"
+        "Arthur vows to protect the kingdom.\n"
+        "Arthur is out of combat.\n"
+        "Arthur takes off his armor.\n"
+        "Arthur is back to his crops.\n"
+    );
+}
+
+Test(Knight, TEST_Knight_special_but_is_out_of_power_stdout, .init = redirect_all_stdout)
+{
+    {
+        Knight     knight("Arthur", 1);
+
+
+        cr_assert(knight.getPower() == 1);
+        knight.setPower(0);
+        cr_assert(knight.special() == 0);
+        cr_assert(knight.getPower() == 0);
+    }
+    cr_assert_stdout_eq_str(
+        "Arthur goes for an adventure.\n"
+        "Arthur vows to protect the kingdom.\n"
+        "Arthur is out of power.\n"
+        "Arthur takes off his armor.\n"
+        "Arthur is back to his crops.\n"
+    );
+}
+
+Test(Knight, TEST_Knight_special_stdout, .init = redirect_all_stdout)
+{
+    {
+        Knight     knight("Arthur", 50);
+
+        cr_assert(knight.getPower() == 50);
+        cr_assert(knight.special() == 50);
+        cr_assert(knight.getPower() == 20);
+
+    }
+    cr_assert_stdout_eq_str(
+        "Arthur goes for an adventure.\n"
+        "Arthur vows to protect the kingdom.\n"
+        "Arthur impales his enemy.\n"
         "Arthur takes off his armor.\n"
         "Arthur is back to his crops.\n"
     );

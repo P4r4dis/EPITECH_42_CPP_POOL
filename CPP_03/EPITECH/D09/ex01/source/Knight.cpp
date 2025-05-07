@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 7 5:29:24 PM 2025 Paradis
-** Last update Thu May 7 7:37:51 PM 2025 Paradis
+** Last update Thu May 7 7:57:14 PM 2025 Paradis
 */
 
 #include "../include/Knight.hpp"
@@ -82,6 +82,29 @@ int                 Knight::attack(void)
     {
         _power -= cost;
         std::cout   << _name << " strikes with his sword." << std::endl;
+        return damage;
+    }
+}
+
+int                 Knight::special(void)
+{
+    int     cost = 30;
+    int     damage = 50;
+
+    if (_hp == 0)
+    {
+        std::cout   << _name << " is out of combat." << std::endl;
+        return 0;
+    }
+    else if (_power <= cost)
+    {
+        std::cout   << _name << " is out of power." << std::endl;
+        return 0;
+    }
+    else
+    {
+        _power -= cost;
+        std::cout   << _name << " impales his enemy." << std::endl;
         return damage;
     }
 }
