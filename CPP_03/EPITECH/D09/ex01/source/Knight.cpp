@@ -1,0 +1,64 @@
+/*
+** Knight.cpp for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_03/EPITECH/D09/ex01/source
+**
+** Made by Paradis
+** Login   <Adil Denia>
+**
+** Started on  Wed May 7 5:29:24 PM 2025 Paradis
+** Last update Thu May 7 7:24:39 PM 2025 Paradis
+*/
+
+#include "../include/Knight.hpp"
+#include <iostream>
+
+Knight::Knight(void)
+{
+    _name = "";
+    _power = 0;
+    _hp = 100;
+    std::cout   << "A knight with no name or power points is like a pony "
+                << "that isn't pink: nonsense." << std::endl;
+}
+
+Knight::Knight(const std::string &name, int power)  :   Peasant(name, power)
+{
+    _name = name;
+    power > 100 ? _power = 100 : power < 0 ? _power = 0 : _power = power;
+    _hp = 100;
+    if (_name.empty() || _power == 0)
+        std::cout   << "A knight with no name or power points is like a pony "
+                    << "that isn't pink: nonsense." << std::endl;
+    else
+        std::cout   << _name << " vows to protect the kingdom." << std::endl;
+}
+
+Knight::Knight(const Knight &obj)   :   Peasant(obj)
+{
+    if (this != &obj)
+    {
+        _name = obj._name;
+        _power = obj._power;
+        _hp = obj._hp;
+    }
+    std::cout   << _name << " vows to protect the kingdom." << std::endl;
+}
+
+Knight              &Knight::operator=(const Knight &obj)
+{
+    if (this != &obj)
+    {
+        _name = obj._name;
+        _power = obj._power;
+        _hp = obj._hp;
+    }
+
+    return *this;
+}
+
+Knight::~Knight()
+{
+    if (_name.empty())
+        std::cout   << "Unknown takes off his armor." << std::endl;
+    else
+        std::cout   << _name << " takes off his armor." << std::endl;
+}

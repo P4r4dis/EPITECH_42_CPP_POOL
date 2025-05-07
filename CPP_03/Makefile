@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 18:18:45 by Paradis           #+#    #+#              #
-#    Updated: 2025/05/06 17:31:42 by Paradis          ###   ########.fr        #
+#    Updated: 2025/05/07 17:38:05 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -184,7 +184,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 6 5:30:03 PM 2025 Paradis
-## Last update Wed May 6 5:31:42 PM 2025 Paradis
+## Last update Thu May 7 5:38:05 PM 2025 Paradis
 ##
 
 # **************************************************************************** #
@@ -228,19 +228,19 @@ EPITECH_valgrind_test_run_ex00	:	fclean
 #								EPITECH_EX01								   #
 #																			   #
 # **************************************************************************** #
-EPITECH_EX01_PATH 				= 	./EPITECH/D08/ex01
-EPITECH_EX01_BIN_PATH 			= 	./EPITECH/D08/ex01/bin
-EPITECH_EX01_SRC_PATH			=	./EPITECH/D08/ex01/source
-EPITECH_EX01_INC_PATH			=	./EPITECH/D08/ex01/include
-EPITECH_EX01_UT_PATH			=	./EPITECH/D08/ex01/test
+EPITECH_EX01_PATH 				= 	./EPITECH/D09/ex01
+EPITECH_EX01_BIN_PATH 			= 	./EPITECH/D09/ex01/bin
+EPITECH_EX01_SRC_PATH			=	./EPITECH/D09/ex01/source
+EPITECH_EX01_INC_PATH			=	./EPITECH/D09/ex01/include
+EPITECH_EX01_UT_PATH			=	./EPITECH/D09/ex01/test
 
-EPITECH_EX01_NAME				=	DroidMemory
+EPITECH_EX01_NAME				=	Knight
 
 EPITECH_EX01_UT_SRC				=	$(EPITECH_EX01_UT_PATH)/$(EPITECH_EX01_NAME)_test.cpp
 EPITECH_EX01_UT_NAME 			= 	test_$(EPITECH_EX01_NAME)
 
-EPITECH_EX01_SRC				=	$(EPITECH_EX01_SRC_PATH)/Droids.cpp \
-									$(EPITECH_EX01_SRC_PATH)/Droidmemory.cpp \
+EPITECH_EX01_SRC				=	$(EPITECH_EX01_SRC_PATH)/Peasant.cpp \
+									$(EPITECH_EX01_SRC_PATH)/Knight.cpp \
 									$(EPITECH_EX01_BIN_PATH)/main.cpp
 EPITECH_EX01_OBJS				=	$(EPITECH_EX01_SRC:.cpp=.o)
 
@@ -253,7 +253,7 @@ EPITECH_valgrind_ex01 			: 	fclean
 
 EPITECH_test_run_ex01			:	fclean
 									@$(MAKE) -s -C $(EPITECH_EX01_UT_PATH)
-									$(EPITECH_EX01_UT_PATH)/$(EPITECH_EX01_UT_NAME)
+									$(EPITECH_EX01_UT_PATH)/$(EPITECH_EX01_UT_NAME) --fail-fast --jobs=1 --verbose=2
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 						
 EPITECH_valgrind_test_run_ex01	:	fclean
