@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 7 5:29:24 PM 2025 Paradis
-** Last update Thu May 7 7:24:39 PM 2025 Paradis
+** Last update Thu May 7 7:37:51 PM 2025 Paradis
 */
 
 #include "../include/Knight.hpp"
@@ -61,4 +61,27 @@ Knight::~Knight()
         std::cout   << "Unknown takes off his armor." << std::endl;
     else
         std::cout   << _name << " takes off his armor." << std::endl;
+}
+
+int                 Knight::attack(void)
+{
+    int     cost = 10;
+    int     damage = 20;
+
+    if (_hp == 0)
+    {
+        std::cout   << _name << " is out of combat." << std::endl;
+        return 0;
+    }
+    else if (_power < cost)
+    {
+        std::cout   << _name << " is out of power." << std::endl;
+        return 0;
+    }
+    else
+    {
+        _power -= cost;
+        std::cout   << _name << " strikes with his sword." << std::endl;
+        return damage;
+    }
 }

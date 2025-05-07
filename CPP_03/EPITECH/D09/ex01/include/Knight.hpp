@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 7 5:27:11 PM 2025 Paradis
-** Last update Thu May 7 7:27:13 PM 2025 Paradis
+** Last update Thu May 7 7:34:19 PM 2025 Paradis
 */
 
 #ifndef 			__KNIGHT_HPP__
@@ -21,6 +21,8 @@ class	            Knight  :   public Peasant
         Knight(const Knight &obj);
         Knight      &operator=(const Knight &obj);
         virtual ~Knight(void);
+
+        int         attack(void);
 
     protected:
     private:
