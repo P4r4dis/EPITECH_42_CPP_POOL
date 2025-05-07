@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 6 5:38:49 PM 2025 Paradis
-** Last update Wed May 6 8:05:23 PM 2025 Paradis
+** Last update Thu May 7 4:43:13 PM 2025 Paradis
 */
 
 #include "../include/Peasant.hpp"
@@ -29,9 +29,12 @@ Peasant::Peasant(const std::string &name, int power)    :   _name(name),
         _power = power;
 
     if (_name.empty() || _power == 0)
+    {
         std::cout   << "A peasant with no name or power points is like a pony "
                     << "that isn't pink: nonsense." << std::endl;
-    std::cout   << _name << " goes for an adventure." << std::endl;
+    }
+    else
+        std::cout   << _name << " goes for an adventure." << std::endl;
 }
 
 Peasant::Peasant(const Peasant &obj)    :   _name(obj._name),
@@ -120,6 +123,29 @@ int                 Peasant::attack(void)
     {
         _power -= cost;
         std::cout   << _name << " tosses a stone." << std::endl;
+        return damage;
+    }
+}
+
+int                 Peasant::special(void)
+{
+    int     cost = 0;
+    int     damage = 0;
+
+    if (_hp == 0)
+    {
+        std::cout   << _name << " is out of combat." << std::endl;
+        return 0;
+    }
+    else if (_power <= cost)
+    {
+        std::cout   << _name << " is out of power." << std::endl;
+        return 0;
+    }
+    else
+    {
+        _power -= cost;
+        std::cout   << _name << " doesn't know any special move." << std::endl;
         return damage;
     }
 }
