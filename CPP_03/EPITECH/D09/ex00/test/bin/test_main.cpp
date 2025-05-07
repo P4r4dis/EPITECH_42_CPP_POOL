@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 6 5:26:56 PM 2025 Paradis
-** Last update Thu May 7 4:45:18 PM 2025 Paradis
+** Last update Thu May 7 4:53:02 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -315,6 +315,62 @@ Test(Peasant, TEST_Peasant_special_stdout, .init = redirect_all_stdout)
     cr_assert_stdout_eq_str(
         "Pepe goes for an adventure.\n"
         "Pepe doesn't know any special move.\n"
+        "Pepe is back to his crops.\n"
+    );
+}
+
+Test(Peasant, TEST_Peasant_rest_but_is_out_of_health_stdout, .init = redirect_all_stdout)
+{
+    {
+        Peasant     peasant("Pepe", 50);
+
+        cr_assert(peasant.getHp() == 100);
+        peasant.setHp(0);
+        cr_assert(peasant.getHp() == 0);
+
+        cr_assert(peasant.getPower() == 50);
+        peasant.rest();
+        cr_assert(peasant.getPower() == 50);
+
+    }
+    cr_assert_stdout_eq_str(
+        "Pepe goes for an adventure.\n"
+        "Pepe is out of combat.\n"
+        "Pepe is back to his crops.\n"
+    );
+}
+
+Test(Peasant, TEST_Peasant_rest_but_is_out_of_power_stdout, .init = redirect_all_stdout)
+{
+    {
+        Peasant     peasant("Pepe", 1);
+
+
+        cr_assert(peasant.getPower() == 1);
+        peasant.setPower(0);
+        peasant.rest();
+        cr_assert(peasant.getPower() == 0);
+    }
+    cr_assert_stdout_eq_str(
+        "Pepe goes for an adventure.\n"
+        "Pepe is out of power.\n"
+        "Pepe is back to his crops.\n"
+    );
+}
+
+Test(Peasant, TEST_Peasant_rest_stdout, .init = redirect_all_stdout)
+{
+    {
+        Peasant     peasant("Pepe", 50);
+
+        cr_assert(peasant.getPower() == 50);
+        peasant.rest();
+        cr_assert(peasant.getPower() == 80);
+
+    }
+    cr_assert_stdout_eq_str(
+        "Pepe goes for an adventure.\n"
+        "Pepe takes a nap.\n"
         "Pepe is back to his crops.\n"
     );
 }

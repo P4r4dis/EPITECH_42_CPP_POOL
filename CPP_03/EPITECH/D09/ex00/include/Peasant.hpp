@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 6 5:36:17 PM 2025 Paradis
-** Last update Thu May 7 4:39:53 PM 2025 Paradis
+** Last update Thu May 7 4:52:14 PM 2025 Paradis
 */
 
 #ifndef 			__PEASANT_HPP__
@@ -33,7 +33,7 @@ class	            Peasant
 
         int                 attack(void);
         int                 special(void);
-
+        void                rest(void);
     protected:
     private:
         std::string _name;

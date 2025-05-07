@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 6 5:38:49 PM 2025 Paradis
-** Last update Thu May 7 4:43:13 PM 2025 Paradis
+** Last update Thu May 7 4:53:23 PM 2025 Paradis
 */
 
 #include "../include/Peasant.hpp"
@@ -147,5 +147,21 @@ int                 Peasant::special(void)
         _power -= cost;
         std::cout   << _name << " doesn't know any special move." << std::endl;
         return damage;
+    }
+}
+
+void                Peasant::rest(void)
+{
+    int     cost = 0;
+    int     rest = 30;
+
+    if (_hp == 0)
+        std::cout   << _name << " is out of combat." << std::endl;
+    else if (_power <= cost)
+        std::cout   << _name << " is out of power." << std::endl;
+    else
+    {
+        _power += rest;
+        std::cout   << _name << " takes a nap." << std::endl;
     }
 }
