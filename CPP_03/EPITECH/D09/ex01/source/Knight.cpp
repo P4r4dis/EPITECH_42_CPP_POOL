@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 7 5:29:24 PM 2025 Paradis
-** Last update Thu May 7 7:57:14 PM 2025 Paradis
+** Last update Thu May 7 8:12:26 PM 2025 Paradis
 */
 
 #include "../include/Knight.hpp"
@@ -106,5 +106,21 @@ int                 Knight::special(void)
         _power -= cost;
         std::cout   << _name << " impales his enemy." << std::endl;
         return damage;
+    }
+}
+
+void                Knight::rest(void)
+{
+    int     cost = 0;
+    int     rest = 50;
+
+    if (_hp == 0)
+        std::cout   << _name << " is out of combat." << std::endl;
+    else if (_power <= cost)
+        std::cout   << _name << " is out of power." << std::endl;
+    else
+    {
+        _power = (_power + rest > 100) ? 100 : _power + rest;
+        std::cout   << _name << " eats." << std::endl;
     }
 }

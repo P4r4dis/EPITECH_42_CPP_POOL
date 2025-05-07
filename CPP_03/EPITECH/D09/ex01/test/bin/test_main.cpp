@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 7 5:29:47 PM 2025 Paradis
-** Last update Thu May 7 7:57:19 PM 2025 Paradis
+** Last update Thu May 7 8:14:01 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -355,6 +355,28 @@ Test(Peasant, TEST_Peasant_rest_but_is_out_of_power_stdout, .init = redirect_all
     cr_assert_stdout_eq_str(
         "Pepe goes for an adventure.\n"
         "Pepe is out of power.\n"
+        "Pepe is back to his crops.\n"
+    );
+}
+
+Test(Peasant, TEST_Peasant_rest_many_times, .init = redirect_all_stdout)
+{
+    {
+        Peasant     peasant("Pepe", 50);
+
+        cr_assert(peasant.getPower() == 50);
+        peasant.rest();
+        cr_assert(peasant.getPower() == 80);
+        peasant.rest();
+        cr_assert(peasant.getPower() == 100);
+        peasant.rest();
+        cr_assert(peasant.getPower() == 100);
+    }
+    cr_assert_stdout_eq_str(
+        "Pepe goes for an adventure.\n"
+        "Pepe takes a nap.\n"
+        "Pepe takes a nap.\n"
+        "Pepe takes a nap.\n"
         "Pepe is back to his crops.\n"
     );
 }
@@ -753,6 +775,93 @@ Test(Knight, TEST_Knight_special_stdout, .init = redirect_all_stdout)
         "Arthur goes for an adventure.\n"
         "Arthur vows to protect the kingdom.\n"
         "Arthur impales his enemy.\n"
+        "Arthur takes off his armor.\n"
+        "Arthur is back to his crops.\n"
+    );
+}
+
+Test(Knight, TEST_Knight_rest_but_is_out_of_health_stdout, .init = redirect_all_stdout)
+{
+    {
+        Knight     knight("Arthur", 50);
+
+        cr_assert(knight.getHp() == 100);
+        knight.setHp(0);
+        cr_assert(knight.getHp() == 0);
+
+        cr_assert(knight.getPower() == 50);
+        knight.rest();
+        cr_assert(knight.getPower() == 50);
+
+    }
+    cr_assert_stdout_eq_str(
+        "Arthur goes for an adventure.\n"
+        "Arthur vows to protect the kingdom.\n"
+        "Arthur is out of combat.\n"
+        "Arthur takes off his armor.\n"
+        "Arthur is back to his crops.\n"
+    );
+}
+
+Test(Knight, TEST_Knight_rest_but_is_out_of_power_stdout, .init = redirect_all_stdout)
+{
+    {
+        Knight     knight("Arthur", 1);
+
+
+        cr_assert(knight.getPower() == 1);
+        knight.setPower(0);
+        knight.rest();
+        cr_assert(knight.getPower() == 0);
+    }
+    cr_assert_stdout_eq_str(
+        "Arthur goes for an adventure.\n"
+        "Arthur vows to protect the kingdom.\n"
+        "Arthur is out of power.\n"
+        "Arthur takes off his armor.\n"
+        "Arthur is back to his crops.\n"
+    );
+}
+
+Test(Knight, TEST_Knight_rest_many_times, .init = redirect_all_stdout)
+{
+    {
+        Knight     knight("Arthur", 50);
+
+        cr_assert(knight.getPower() == 50);
+        knight.rest();
+        cr_assert(knight.getPower() == 100);
+        knight.rest();
+        cr_assert(knight.getPower() == 100);
+        knight.rest();
+        cr_assert(knight.getPower() == 100);
+
+    }
+    cr_assert_stdout_eq_str(
+        "Arthur goes for an adventure.\n"
+        "Arthur vows to protect the kingdom.\n"
+        "Arthur eats.\n"
+        "Arthur eats.\n"
+        "Arthur eats.\n"
+        "Arthur takes off his armor.\n"
+        "Arthur is back to his crops.\n"
+    );
+}
+
+Test(Knight, TEST_Knight_rest_stdout, .init = redirect_all_stdout)
+{
+    {
+        Knight     knight("Arthur", 50);
+
+        cr_assert(knight.getPower() == 50);
+        knight.rest();
+        cr_assert(knight.getPower() == 100);
+
+    }
+    cr_assert_stdout_eq_str(
+        "Arthur goes for an adventure.\n"
+        "Arthur vows to protect the kingdom.\n"
+        "Arthur eats.\n"
         "Arthur takes off his armor.\n"
         "Arthur is back to his crops.\n"
     );

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 7 5:28:35 PM 2025 Paradis
-** Last update Thu May 7 5:28:50 PM 2025 Paradis
+** Last update Thu May 7 8:12:19 PM 2025 Paradis
 */
 
 #include "../include/Peasant.hpp"
@@ -160,7 +160,7 @@ void                Peasant::rest(void)
         std::cout   << _name << " is out of power." << std::endl;
     else
     {
-        _power += rest;
+        _power = (_power + rest > 100) ? 100 : _power + rest;
         std::cout   << _name << " takes a nap." << std::endl;
     }
 }
