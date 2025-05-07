@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 7 5:29:47 PM 2025 Paradis
-** Last update Thu May 7 8:14:01 PM 2025 Paradis
+** Last update Thu May 7 8:21:09 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -866,6 +866,66 @@ Test(Knight, TEST_Knight_rest_stdout, .init = redirect_all_stdout)
         "Arthur is back to his crops.\n"
     );
 }
+
+Test(Knight, TEST_Knight_damage_but_is_out_of_health_stdout, .init = redirect_all_stdout)
+{
+    {
+        Knight     knight("Arthur", 50);
+
+        cr_assert(knight.getHp() == 100);
+        knight.setHp(0);
+        cr_assert(knight.getHp() == 0);
+
+        knight.damage(10);
+
+    }
+    cr_assert_stdout_eq_str(
+        "Arthur goes for an adventure.\n"
+        "Arthur vows to protect the kingdom.\n"
+        "Arthur is out of combat.\n"
+        "Arthur takes off his armor.\n"
+        "Arthur is back to his crops.\n"
+    );
+}
+
+Test(Knight, TEST_Knight_damage_but_is_out_of_power_stdout, .init = redirect_all_stdout)
+{
+    {
+        Knight     knight("Arthur", 1);
+
+
+        cr_assert(knight.getPower() == 1);
+        knight.setPower(0);
+        cr_assert(knight.getPower() == 0);
+
+        knight.damage(10);
+    }
+    cr_assert_stdout_eq_str(
+        "Arthur goes for an adventure.\n"
+        "Arthur vows to protect the kingdom.\n"
+        "Arthur is out of power.\n"
+        "Arthur takes off his armor.\n"
+        "Arthur is back to his crops.\n"
+    );
+}
+
+Test(Knight, TEST_Knight_damage_stdout, .init = redirect_all_stdout)
+{
+    {
+        Knight     knight("Arthur", 50);
+
+        cr_assert(knight.getHp() == 100);
+        knight.damage(10);
+        cr_assert(knight.getHp() == 90);
+    }
+    cr_assert_stdout_eq_str(
+        "Arthur goes for an adventure.\n"
+        "Arthur vows to protect the kingdom.\n"
+        "Arthur takes 10 damage.\n"
+        "Arthur takes off his armor.\n"
+        "Arthur is back to his crops.\n"
+    );
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
@@ -873,19 +933,24 @@ Test(main, Test_main, .init = redirect_all_stdout)
 {
     
     {       
-        Peasant peasant("Gildas", 42);
-        peasant.damage(50);
-        peasant.damage(100);
-        peasant.damage(200);
-        peasant.rest();
+        Knight knight("Arthur", 20);
+
+        knight.attack();
+        knight.special();
+        knight.rest();
+        knight.special();
+        knight.damage(50);
     }
 
     cr_assert_stdout_eq_str(
-        "Gildas goes for an adventure.\n"
-        "Gildas takes 50 damage.\n"
-        "Gildas is out of combat.\n"
-        "Gildas is out of combat.\n"
-        "Gildas is out of combat.\n"
-        "Gildas is back to his crops.\n"
+    "Arthur goes for an adventure.\n"
+    "Arthur vows to protect the kingdom.\n"
+    "Arthur strikes with his sword.\n"
+    "Arthur is out of power.\n"
+    "Arthur eats.\n"
+    "Arthur impales his enemy.\n"
+    "Arthur takes 50 damage.\n"
+    "Arthur takes off his armor.\n"
+    "Arthur is back to his crops.\n"
     );
 }
