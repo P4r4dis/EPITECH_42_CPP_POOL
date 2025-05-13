@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 18:18:45 by Paradis           #+#    #+#              #
-#    Updated: 2025/05/12 19:11:53 by Paradis          ###   ########.fr        #
+#    Updated: 2025/05/13 16:34:51 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -184,7 +184,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 6 5:30:03 PM 2025 Paradis
-## Last update Tue May 12 7:11:53 PM 2025 Paradis
+## Last update Wed May 13 4:34:51 PM 2025 Paradis
 ##
 
 # **************************************************************************** #
@@ -331,7 +331,7 @@ EPITECH_valgrind_ex03 			: 	fclean
 
 EPITECH_test_run_ex03			:	fclean
 									@$(MAKE) -s -C $(EPITECH_EX03_UT_PATH)
-									$(EPITECH_EX03_UT_PATH)/$(EPITECH_EX03_UT_NAME)
+									$(EPITECH_EX03_UT_PATH)/$(EPITECH_EX03_UT_NAME) --fail-fast --jobs=1 --verbose=2
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 						
 EPITECH_valgrind_test_run_ex03	:	fclean
@@ -343,21 +343,22 @@ EPITECH_valgrind_test_run_ex03	:	fclean
 #								EPITECH_EX04								   #
 #																			   #
 # **************************************************************************** #
-EPITECH_EX04_PATH 				= 	./EPITECH/D08/ex04
-EPITECH_EX04_BIN_PATH 			= 	./EPITECH/D08/ex04/bin
-EPITECH_EX04_SRC_PATH			=	./EPITECH/D08/ex04/source
-EPITECH_EX04_INC_PATH			=	./EPITECH/D08/ex04/include
-EPITECH_EX04_UT_PATH			=	./EPITECH/D08/ex04/test
+EPITECH_EX04_PATH 				= 	./EPITECH/D09/ex04
+EPITECH_EX04_BIN_PATH 			= 	./EPITECH/D09/ex04/bin
+EPITECH_EX04_SRC_PATH			=	./EPITECH/D09/ex04/source
+EPITECH_EX04_INC_PATH			=	./EPITECH/D09/ex04/include
+EPITECH_EX04_UT_PATH			=	./EPITECH/D09/ex04/test
 
-EPITECH_EX04_NAME				=	Supply
+EPITECH_EX04_NAME				=	Paladin
 
 EPITECH_EX04_UT_SRC				=	$(EPITECH_EX04_UT_PATH)/$(EPITECH_EX04_NAME)_test.cpp
 EPITECH_EX04_UT_NAME 			= 	test_$(EPITECH_EX04_NAME)
 
-EPITECH_EX04_SRC				=	$(EPITECH_EX04_SRC_PATH)/Droids.cpp \
-									$(EPITECH_EX04_SRC_PATH)/DroidMemory.cpp \
-									$(EPITECH_EX04_SRC_PATH)/Carrier.cpp \
-									$(EPITECH_EX04_SRC_PATH)/Supply.cpp \
+EPITECH_EX04_SRC				=	$(EPITECH_EX04_SRC_PATH)/Peasant.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Knight.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Enchanter.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Priest.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Paladin.cpp \
 									$(EPITECH_EX04_BIN_PATH)/main.cpp
 EPITECH_EX04_OBJS				=	$(EPITECH_EX04_SRC:.cpp=.o)
 
@@ -370,7 +371,7 @@ EPITECH_valgrind_ex04 			: 	fclean
 
 EPITECH_test_run_ex04			:	fclean
 									@$(MAKE) -s -C $(EPITECH_EX04_UT_PATH)
-									$(EPITECH_EX04_UT_PATH)/$(EPITECH_EX04_UT_NAME)
+									$(EPITECH_EX04_UT_PATH)/$(EPITECH_EX04_UT_NAME) --fail-fast --jobs=1 --verbose=2
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 						
 EPITECH_valgrind_test_run_ex04	:	fclean
@@ -457,8 +458,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX02_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX03_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX03_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX05_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX05_UT_PATH)
 
@@ -480,8 +481,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX02_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX03_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX03_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX05_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX05_UT_PATH)
 
