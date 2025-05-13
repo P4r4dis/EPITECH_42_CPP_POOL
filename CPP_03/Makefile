@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 18:18:45 by Paradis           #+#    #+#              #
-#    Updated: 2025/05/13 16:34:51 by Paradis          ###   ########.fr        #
+#    Updated: 2025/05/13 18:51:54 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -184,7 +184,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 6 5:30:03 PM 2025 Paradis
-## Last update Wed May 13 4:34:51 PM 2025 Paradis
+## Last update Wed May 13 6:51:54 PM 2025 Paradis
 ##
 
 # **************************************************************************** #
@@ -383,22 +383,23 @@ EPITECH_valgrind_test_run_ex04	:	fclean
 #								EPITECH_EX05								   #
 #																			   #
 # **************************************************************************** #
-EPITECH_EX05_PATH 				= 	./EPITECH/D08/ex05
-EPITECH_EX05_BIN_PATH 			= 	./EPITECH/D08/ex05/bin
-EPITECH_EX05_SRC_PATH			=	./EPITECH/D08/ex05/source
-EPITECH_EX05_INC_PATH			=	./EPITECH/D08/ex05/include
-EPITECH_EX05_UT_PATH			=	./EPITECH/D08/ex05/test
+EPITECH_EX05_PATH 				= 	./EPITECH/D09/ex05
+EPITECH_EX05_BIN_PATH 			= 	./EPITECH/D09/ex05/bin
+EPITECH_EX05_SRC_PATH			=	./EPITECH/D09/ex05/source
+EPITECH_EX05_INC_PATH			=	./EPITECH/D09/ex05/include
+EPITECH_EX05_UT_PATH			=	./EPITECH/D09/ex05/test
 
-EPITECH_EX05_NAME				=	DroidFactory
+EPITECH_EX05_NAME				=	ICharacter
 
 EPITECH_EX05_UT_SRC				=	$(EPITECH_EX05_UT_PATH)/$(EPITECH_EX05_NAME)_test.cpp
 EPITECH_EX05_UT_NAME 			= 	test_$(EPITECH_EX05_NAME)
 
-EPITECH_EX05_SRC				=	$(EPITECH_EX05_SRC_PATH)/Droids.cpp \
-									$(EPITECH_EX05_SRC_PATH)/DroidMemory.cpp \
-									$(EPITECH_EX05_SRC_PATH)/Carrier.cpp \
-									$(EPITECH_EX05_SRC_PATH)/Supply.cpp \
-									$(EPITECH_EX05_SRC_PATH)/DroidFactory.cpp \
+EPITECH_EX05_SRC				=	$(EPITECH_EX05_SRC_PATH)/Peasant.cpp \
+									$(EPITECH_EX05_SRC_PATH)/Knight.cpp \
+									$(EPITECH_EX05_SRC_PATH)/Enchanter.cpp \
+									$(EPITECH_EX05_SRC_PATH)/Priest.cpp \
+									$(EPITECH_EX05_SRC_PATH)/Paladin.cpp \
+									$(EPITECH_EX05_SRC_PATH)/ICharacter.cpp \
 									$(EPITECH_EX05_BIN_PATH)/main.cpp
 
 EPITECH_EX05_OBJS				=	$(EPITECH_EX05_SRC:.cpp=.o)
@@ -460,8 +461,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX03_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX05_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX05_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX05_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX05_UT_PATH)
 
 
 fclean							:	clean
@@ -483,8 +484,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX03_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX05_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX05_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX05_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX05_UT_PATH)
 
 tests_run						:	fclean \
 
