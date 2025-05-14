@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 18:18:45 by Paradis           #+#    #+#              #
-#    Updated: 2025/05/13 18:51:54 by Paradis          ###   ########.fr        #
+#    Updated: 2025/05/14 16:46:54 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -184,7 +184,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 6 5:30:03 PM 2025 Paradis
-## Last update Wed May 13 6:51:54 PM 2025 Paradis
+## Last update Thu May 14 4:46:54 PM 2025 Paradis
 ##
 
 # **************************************************************************** #
@@ -420,6 +420,51 @@ EPITECH_valgrind_test_run_ex05	:	fclean
 									@$(MAKE) -s -C $(EPITECH_EX05_UT_PATH) VALGRIND
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 
+# **************************************************************************** #
+#																			   #
+#								EPITECH_EX06								   #
+#																			   #
+# **************************************************************************** #
+EPITECH_EX06_PATH 				= 	./EPITECH/D09/ex06
+EPITECH_EX06_BIN_PATH 			= 	./EPITECH/D09/ex06/bin
+EPITECH_EX06_SRC_PATH			=	./EPITECH/D09/ex06/source
+EPITECH_EX06_INC_PATH			=	./EPITECH/D09/ex06/include
+EPITECH_EX06_UT_PATH			=	./EPITECH/D09/ex06/test
+
+EPITECH_EX06_NAME				=	IPotion
+
+EPITECH_EX06_UT_SRC				=	$(EPITECH_EX06_UT_PATH)/$(EPITECH_EX06_NAME)_test.cpp
+EPITECH_EX06_UT_NAME 			= 	test_$(EPITECH_EX06_NAME)
+
+EPITECH_EX06_SRC				=	$(EPITECH_EX06_SRC_PATH)/Peasant.cpp \
+									$(EPITECH_EX06_SRC_PATH)/Knight.cpp \
+									$(EPITECH_EX06_SRC_PATH)/Enchanter.cpp \
+									$(EPITECH_EX06_SRC_PATH)/Priest.cpp \
+									$(EPITECH_EX06_SRC_PATH)/Paladin.cpp \
+									$(EPITECH_EX06_SRC_PATH)/ICharacter.cpp \
+									$(EPITECH_EX06_SRC_PATH)/IPotion.cpp \
+									$(EPITECH_EX06_SRC_PATH)/HealthPotion.cpp \
+									$(EPITECH_EX06_SRC_PATH)/PowerPotion.cpp \
+									$(EPITECH_EX06_SRC_PATH)/PoisonPotion.cpp \
+									$(EPITECH_EX06_BIN_PATH)/main.cpp
+
+EPITECH_EX06_OBJS				=	$(EPITECH_EX06_SRC:.cpp=.o)
+
+EPITECH_ex06 					: 	fclean
+									@$(MAKE) -C $(EPITECH_EX06_PATH)
+									$(EPITECH_EX06_PATH)/$(EPITECH_EX06_NAME)
+
+EPITECH_valgrind_ex06 			: 	fclean
+									@$(MAKE) -C $(EPITECH_EX06_PATH) VALGRIND
+
+EPITECH_test_run_ex06			:	fclean
+									@$(MAKE) -s -C $(EPITECH_EX06_UT_PATH)
+									$(EPITECH_EX06_UT_PATH)/$(EPITECH_EX06_UT_NAME)
+									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+						
+EPITECH_valgrind_test_run_ex06	:	fclean
+									@$(MAKE) -s -C $(EPITECH_EX06_UT_PATH) VALGRIND
+									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 
 # **************************************************************************** #
 #																			   #
@@ -463,7 +508,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX05_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX05_UT_PATH)
-
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX06_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX06_UT_PATH)
 
 fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_PATH)
@@ -486,6 +532,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX05_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX05_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX06_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX06_UT_PATH)
 
 tests_run						:	fclean \
 
