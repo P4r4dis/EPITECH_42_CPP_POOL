@@ -5,15 +5,25 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 14 4:33:44 PM 2025 Paradis
-** Last update Thu May 14 4:41:35 PM 2025 Paradis
+** Last update Fri May 15 6:29:43 PM 2025 Paradis
 */
 
 #include "../include/HealthPotion.hpp"
 
-HealthPotion::HealthPotion(void)
+HealthPotion::HealthPotion(void)    :   _HP(50)
 {
 }
 
 HealthPotion::~HealthPotion(void)
 {
+}
+
+int     HealthPotion::getValuePotion(void) const
+{
+    return _HP;
+}
+
+int     HealthPotion::getStatusPotion(void) const
+{
+    return HEALTH_POTION;
 }

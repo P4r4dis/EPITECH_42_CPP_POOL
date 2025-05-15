@@ -5,15 +5,20 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 7 5:26:38 PM 2025 Paradis
-** Last update Thu May 14 4:41:38 PM 2025 Paradis
+** Last update Fri May 15 7:20:28 PM 2025 Paradis
 */
 
 #ifndef 			__PEASANT_HPP__
 	# define 		__PEASANT_HPP__
 
 #include <string>
+
 #include "ICharacter.hpp"
-class	            Peasant :   public ICharacter // IPotion + ipotion call drink
+
+// #include "HealthPotion.hpp"
+// #include "PoisonPotion.hpp"
+// #include "PowerPotion.hpp"
+class	            Peasant :   public ICharacter
 {
     public:
         Peasant(void);
@@ -35,6 +40,11 @@ class	            Peasant :   public ICharacter // IPotion + ipotion call drink
         virtual int                 special(void);
         virtual void                rest(void);
         virtual void                damage(int damage);
+        
+        virtual void                drink(const IPotion& potion);
+        virtual void                drink(const HealthPotion& potion);
+        virtual void                drink(const PowerPotion& potion);
+        virtual void                drink(const PoisonPotion& potion);
     protected:
         std::string _name;
         int         _power;

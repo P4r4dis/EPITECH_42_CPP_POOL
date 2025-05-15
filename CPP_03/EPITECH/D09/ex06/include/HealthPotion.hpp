@@ -5,20 +5,27 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 14 4:32:20 PM 2025 Paradis
-** Last update Thu May 14 4:33:27 PM 2025 Paradis
+** Last update Fri May 15 7:17:49 PM 2025 Paradis
 */
 
 #ifndef 			__HEALTHPOTION_HPP__
 	# define 		__HEALTHPOTION_HPP__
 
-class	            HealthPotion
+#include "IPotion.hpp"
+
+#define HEALTH_POTION 1
+
+class	            HealthPotion    :   public IPotion
 {
     public:
         HealthPotion(void);
-        ~HealthPotion(void);
+        virtual ~HealthPotion(void);
 
+        virtual int     getValuePotion(void) const;
+        virtual int     getStatusPotion(void) const;
     protected:
     private:
+        int         _HP;
 };
 
 #endif 				/* !__HEALTHPOTION_HPP___ */

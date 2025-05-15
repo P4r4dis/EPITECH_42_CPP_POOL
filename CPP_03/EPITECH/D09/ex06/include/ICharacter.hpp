@@ -5,13 +5,17 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 13 5:43:50 PM 2025 Paradis
-** Last update Wed May 13 6:01:58 PM 2025 Paradis
+** Last update Fri May 15 7:20:21 PM 2025 Paradis
 */
 
 #ifndef 			__ICHARACTER_HPP__
 	# define 		__ICHARACTER_HPP__
 
 #include <string>
+#include "HealthPotion.hpp"
+#include "PowerPotion.hpp"
+#include "PoisonPotion.hpp"
+
 class	            ICharacter
 {
     public:
@@ -30,6 +34,11 @@ class	            ICharacter
 
         virtual int                 getHp(void) const = 0;
         virtual void                setHp(int hp) = 0;
+
+        virtual void                drink(const IPotion& potion) = 0;
+        virtual void                drink(const HealthPotion& potion) = 0;
+        virtual void                drink(const PowerPotion& potion) = 0;
+        virtual void                drink(const PoisonPotion& potion) = 0;
 
     protected:
     private:

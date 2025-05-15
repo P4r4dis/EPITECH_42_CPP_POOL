@@ -5,8 +5,10 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 7 5:28:35 PM 2025 Paradis
-** Last update Thu May 7 8:12:19 PM 2025 Paradis
+** Last update Fri May 15 7:38:43 PM 2025 Paradis
 */
+
+#include "../include/IPotion.hpp"
 
 #include "../include/Peasant.hpp"
 #include <iostream>
@@ -179,4 +181,49 @@ void                Peasant::damage(int damage)
         std::cout   << _name << " is out of power." << std::endl;
     else
         std::cout   << _name << " takes " << damage << " damage." << std::endl;
+}
+
+void                Peasant::drink(const HealthPotion &potion)
+{
+    if (potion.getStatusPotion() == HEALTH_POTION)
+    {
+        _hp = (_hp + potion.getValuePotion() > 100) ? 100 : _hp + potion.getValuePotion();
+        std::cout << _name << " feels rejuvenated." << std::endl;
+    }
+}
+
+void                Peasant::drink(const PowerPotion &potion)
+{
+    if (potion.getStatusPotion() == POWER_POTION)
+    {
+        _power = (_power + potion.getValuePotion() > 100) ? 100 : _power + potion.getValuePotion();
+        std::cout << _name << "'s power is restored." << std::endl;
+    }
+
+}
+
+void                Peasant::drink(const PoisonPotion &potion)
+{
+    if (potion.getStatusPotion() == POISON_POTION)
+    {
+        _hp = (_hp - potion.getValuePotion() < 0) ? 0 : _hp - potion.getValuePotion();
+        std::cout << _name << " has been poisoned." << std::endl;
+    }
+}
+
+void                Peasant::drink(const IPotion &potion)
+{
+    std::cout << _name << " drinks a mysterious potion." << std::endl;
+    switch (potion.getStatusPotion())
+    {
+        case HEALTH_POTION:
+            _hp = (_hp + potion.getValuePotion() > 100) ? 100 : _hp + potion.getValuePotion();
+            break;
+        case POWER_POTION:
+            _power = (_power + potion.getValuePotion() > 100) ? 100 : _power + potion.getValuePotion();
+            break;
+        case POISON_POTION:
+            _hp = (_hp - potion.getValuePotion() < 0) ? 0 : _hp - potion.getValuePotion();
+            break;
+    }
 }

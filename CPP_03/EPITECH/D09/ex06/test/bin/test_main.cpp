@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 7 5:29:47 PM 2025 Paradis
-** Last update Thu May 14 4:50:35 PM 2025 Paradis
+** Last update Fri May 15 8:01:08 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -22,6 +22,7 @@
 #include "../../include/Paladin.hpp"
 #include "../../include/ICharacter.hpp"
 #include "../../include/HealthPotion.hpp"
+#include "../../include/IPotion.hpp"
 
 void redirect_all_stdout(void)
 {
@@ -2683,41 +2684,409 @@ Test(HealthPotion, Test_HealPotion_is_defined, .init = redirect_all_stdout)
 
     cr_assert_not_null(&healthPotion);
 }
+
+Test(PowerPotion, Test_PowerPotion_is_defined, .init = redirect_all_stdout)
+{
+    PowerPotion    powerPotion;
+
+    cr_assert_not_null(&powerPotion);
+}
+
+Test(PoisonPotion, Test_PoisonPotion_is_defined, .init = redirect_all_stdout)
+{
+    PoisonPotion    poisonPotion;
+
+    cr_assert_not_null(&poisonPotion);
+}
+
+Test(IPotion, Test_Peasant_use_drink_func_with_HealthPotion, .init = redirect_all_stdout)
+{
+    
+    {       
+        ICharacter      *peasant = new Peasant("Gildas", 42);
+        HealthPotion    health_potion;
+    
+        cr_assert(peasant->getName() == "Gildas");
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 42);
+        peasant->setHp(50);
+        cr_assert(peasant->getHp() == 50);
+
+        std::cout << peasant->getName() << ": " << peasant->getHp() << "HP, "
+        << peasant->getPower() << " PP." << std::endl;
+    
+        peasant->drink(health_potion);
+    
+        std::cout << peasant->getName() << ": " << peasant->getHp() << "HP, "
+        << peasant->getPower() << " PP." << std::endl;
+
+        cr_assert(peasant->getName() == "Gildas");
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 42);
+    
+        delete peasant;
+    }
+}
+
+Test(IPotion, Test_Peasant_use_drink_func_with_HealthPotion_stdout, .init = redirect_all_stdout)
+{
+    
+    {       
+        ICharacter      *peasant = new Peasant("Gildas", 42);
+        HealthPotion    health_potion;
+    
+        peasant->setHp(50);
+
+        std::cout << peasant->getName() << ": " << peasant->getHp() << "HP, "
+        << peasant->getPower() << " PP." << std::endl;
+    
+        peasant->drink(health_potion);
+    
+        std::cout << peasant->getName() << ": " << peasant->getHp() << "HP, "
+        << peasant->getPower() << " PP." << std::endl;
+    
+        delete peasant;
+    }
+    cr_assert_stdout_eq_str(
+        "Gildas goes for an adventure.\n"
+        "Gildas: 50HP, 42 PP.\n"
+        "Gildas feels rejuvenated.\n"
+        "Gildas: 100HP, 42 PP.\n"
+        "Gildas is back to his crops.\n"
+    );
+}
+
+Test(IPotion, Test_Peasant_use_drink_func_with_PowerPotion_stdout, .init = redirect_all_stdout)
+{
+    
+    {       
+        ICharacter      *peasant = new Peasant("Gildas", 42);
+        PowerPotion     power_potion;
+        HealthPotion    health_potion;
+    
+        peasant->setHp(50);
+
+        std::cout << peasant->getName() << ": " << peasant->getHp() << "HP, "
+        << peasant->getPower() << " PP." << std::endl;
+    
+        peasant->drink(health_potion);
+    
+        std::cout << peasant->getName() << ": " << peasant->getHp() << "HP, "
+        << peasant->getPower() << " PP." << std::endl;
+
+        peasant->drink(power_potion);
+
+        std::cout << peasant->getName() << ": " << peasant->getHp() << "HP, "
+        << peasant->getPower() << " PP." << std::endl;
+        
+        delete peasant;
+    }
+    cr_assert_stdout_eq_str(
+        "Gildas goes for an adventure.\n"
+        "Gildas: 50HP, 42 PP.\n"
+        "Gildas feels rejuvenated.\n"
+        "Gildas: 100HP, 42 PP.\n"
+        "Gildas's power is restored.\n"
+        "Gildas: 100HP, 92 PP.\n"
+        "Gildas is back to his crops.\n"
+    );
+}
+
+Test(IPotion, Test_Peasant_use_drink_func_with_PoisonPotion_stdout, .init = redirect_all_stdout)
+{
+    {       
+        ICharacter      *peasant = new Peasant("Gildas", 42);
+        PoisonPotion    poison_potion;
+        HealthPotion    health_potion;
+        IPotion         &potion = health_potion;
+    
+        std::cout << peasant->getName() << ": " << peasant->getHp() << "HP, "
+        << peasant->getPower() << " PP." << std::endl;
+    
+        peasant->drink(poison_potion);
+    
+        std::cout << peasant->getName() << ": " << peasant->getHp() << "HP, "
+        << peasant->getPower() << " PP." << std::endl;
+    
+        peasant->drink(potion) ;
+    
+        std::cout << peasant->getName() << ": " << peasant->getHp() << "HP, "
+        << peasant->getPower() << " PP." << std::endl;
+    
+        delete peasant;
+    }
+
+    cr_assert_stdout_eq_str(
+        "Gildas goes for an adventure.\n"
+        "Gildas: 100HP, 42 PP.\n"
+        "Gildas has been poisoned.\n"
+        "Gildas: 50HP, 42 PP.\n"
+        "Gildas drinks a mysterious potion.\n"
+        "Gildas: 100HP, 42 PP.\n"
+        "Gildas is back to his crops.\n"
+    );
+}
+
+Test(IPotion, Test_Peasant_use_drink_func_with_MysteriousPoisonPotion_stdout, .init = redirect_all_stdout)
+{
+    {       
+        ICharacter      *peasant = new Peasant("Gildas", 42);
+        PoisonPotion    poison_potion;
+        IPotion         &potion = poison_potion;
+    
+        std::cout << peasant->getName() << ": " << peasant->getHp() << "HP, "
+        << peasant->getPower() << " PP." << std::endl;
+    
+        peasant->drink(potion) ;
+    
+        std::cout << peasant->getName() << ": " << peasant->getHp() << "HP, "
+        << peasant->getPower() << " PP." << std::endl;
+    
+        delete peasant;
+    }
+
+    cr_assert_stdout_eq_str(
+        "Gildas goes for an adventure.\n"
+        "Gildas: 100HP, 42 PP.\n"
+        "Gildas drinks a mysterious potion.\n"
+        "Gildas: 50HP, 42 PP.\n"
+        "Gildas is back to his crops.\n"
+    );
+}
+
+Test(IPotion, Test_Peasant_use_drink_func_with_MysteriousPowerPotion_stdout, .init = redirect_all_stdout)
+{
+    {       
+        ICharacter      *peasant = new Peasant("Gildas", 42);
+        PowerPotion     power_potion;
+        IPotion         &potion = power_potion;
+    
+        std::cout << peasant->getName() << ": " << peasant->getHp() << "HP, "
+        << peasant->getPower() << " PP." << std::endl;
+    
+        peasant->drink(potion) ;
+    
+        std::cout << peasant->getName() << ": " << peasant->getHp() << "HP, "
+        << peasant->getPower() << " PP." << std::endl;
+    
+        delete peasant;
+    }
+
+    cr_assert_stdout_eq_str(
+        "Gildas goes for an adventure.\n"
+        "Gildas: 100HP, 42 PP.\n"
+        "Gildas drinks a mysterious potion.\n"
+        "Gildas: 100HP, 92 PP.\n"
+        "Gildas is back to his crops.\n"
+    );
+}
+
+Test(IPotion, Test_Peasant_chain_PoisonPotion, .init = redirect_all_stdout)
+{
+    {       
+        ICharacter      *peasant = new Peasant("Gildas", 42);
+        PoisonPotion    poison_potion;
+    
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 42);
+
+        peasant->drink(poison_potion);
+
+        cr_assert(peasant->getHp() == 50);
+        cr_assert(peasant->getPower() == 42);
+
+        peasant->drink(poison_potion);
+
+        cr_assert(peasant->getHp() == 0);
+        cr_assert(peasant->getPower() == 42);
+
+        peasant->drink(poison_potion);
+
+        cr_assert(peasant->getHp() == 0);
+        cr_assert(peasant->getPower() == 42);
+
+        delete peasant;
+    }
+}
+
+Test(IPotion, Test_Peasant_chain_PowerPotion, .init = redirect_all_stdout)
+{
+    {       
+        ICharacter      *peasant = new Peasant("Gildas", 42);
+        PowerPotion     power_potion;
+    
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 42);
+
+        peasant->drink(power_potion);
+
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 92);
+
+        peasant->drink(power_potion);
+
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 100);
+
+        peasant->drink(power_potion);
+
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 100);
+
+        delete peasant;
+    }
+}
+
+Test(IPotion, Test_Peasant_chain_HealthPotion, .init = redirect_all_stdout)
+{
+    {       
+        ICharacter      *peasant = new Peasant("Gildas", 42);
+        HealthPotion    health_potion;
+    
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 42);
+
+        peasant->drink(health_potion);
+
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 42);
+
+        peasant->drink(health_potion);
+
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 42);
+
+        peasant->drink(health_potion);
+
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 42);
+        
+        delete peasant;
+    }
+}
+
+Test(IPotion, Test_Peasant_chain_Mysterious_HealthPotion, .init = redirect_all_stdout)
+{
+    {       
+        ICharacter      *peasant = new Peasant("Gildas", 42);
+        HealthPotion    health_potion;
+        IPotion         &potion = health_potion;
+    
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 42);
+
+        peasant->drink(potion);
+
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 42);
+
+        peasant->drink(potion);
+
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 42);
+
+        peasant->drink(potion);
+
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 42);
+        
+        delete peasant;
+    }
+}
+
+Test(IPotion, Test_Peasant_chain_Mysterious_PowerPotion, .init = redirect_all_stdout)
+{
+    {       
+        ICharacter      *peasant = new Peasant("Gildas", 42);
+        PowerPotion     power_potion;
+        IPotion         &potion = power_potion;
+
+    
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 42);
+
+        peasant->drink(potion);
+
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 92);
+
+        peasant->drink(potion);
+
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 100);
+
+        peasant->drink(potion);
+
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 100);
+        
+        delete peasant;
+    }
+}
+
+Test(IPotion, Test_Peasant_chain_Mysterious_PoisonPotion, .init = redirect_all_stdout)
+{
+    {       
+        ICharacter      *peasant = new Peasant("Gildas", 42);
+        PoisonPotion    poison_potion;
+        IPotion         &potion = poison_potion;
+
+        cr_assert(peasant->getHp() == 100);
+        cr_assert(peasant->getPower() == 42);
+
+        peasant->drink(potion);
+
+        cr_assert(peasant->getHp() == 50);
+        cr_assert(peasant->getPower() == 42);
+
+        peasant->drink(potion);
+
+        cr_assert(peasant->getHp() == 0);
+        cr_assert(peasant->getPower() == 42);
+
+        peasant->drink(potion);
+
+        cr_assert(peasant->getHp() == 0);
+        cr_assert(peasant->getPower() == 42);
+        
+        delete peasant;
+    }
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
-// Test(main, Test_main, .init = redirect_all_stdout)
-// {
+Test(main, Test_main, .init = redirect_all_stdout)
+{
     
-//     {       
-//         ICharacter      *peasant = new Peasant("Gildas", 42);
-//         PoisonPotion    poison_potion;
-//         HealthPotion    health_potion;
-//         IPotion         &potion = health_potion;
+    {       
+        ICharacter      *peasant = new Peasant("Gildas", 42);
+        PoisonPotion    poison_potion;
+        HealthPotion    health_potion;
+        IPotion         &potion = health_potion;
     
-//         std::cout << peasant->getName() << ": " << peasant->getHp() << " HP, "
-//         << peasant->getPower() << " PP." << std::endl;
+        std::cout << peasant->getName() << ": " << peasant->getHp() << "HP, "
+        << peasant->getPower() << " PP." << std::endl;
     
-//         peasant->drink(poison_potion);
+        peasant->drink(poison_potion);
     
-//         std::cout << peasant->getName() << ": " << peasant->getHp() << " HP, "
-//         << peasant->getPower() << " PP." << std::endl;
+        std::cout << peasant->getName() << ": " << peasant->getHp() << "HP, "
+        << peasant->getPower() << " PP." << std::endl;
     
-//         peasant->drink(potion) ;
+        peasant->drink(potion) ;
     
-//         std::cout << peasant->getName() << ": " << peasant->getHp() << " HP, "
-//         << peasant->getPower() << " PP." << std::endl;
+        std::cout << peasant->getName() << ": " << peasant->getHp() << "HP, "
+        << peasant->getPower() << " PP." << std::endl;
     
-//         delete peasant;
-//     }
+        delete peasant;
+    }
 
-//     cr_assert_stdout_eq_str(
-//         "Gildas goes for an adventure.\n"
-//         "Gildas: 100HP, 42 PP.\n"
-//         "Gildas has been poisoned.\n"
-//         "Gildas: 50HP, 42 PP.\n"
-//         "Gildas drinks a mysterious potion.\n"
-//         "Gildas: 100HP, 42 PP.\n"
-//         "Gildas is back to his crops.\n"
-//     );
-// }
+    cr_assert_stdout_eq_str(
+        "Gildas goes for an adventure.\n"
+        "Gildas: 100HP, 42 PP.\n"
+        "Gildas has been poisoned.\n"
+        "Gildas: 50HP, 42 PP.\n"
+        "Gildas drinks a mysterious potion.\n"
+        "Gildas: 100HP, 42 PP.\n"
+        "Gildas is back to his crops.\n"
+    );
+}
