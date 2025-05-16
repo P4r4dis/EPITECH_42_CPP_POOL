@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:59:06 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 19:56:27 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/16 20:02:17 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -495,15 +495,21 @@ Test(Cat, TEST_Cat_equal_operator_overload_return_assignment, .init = redirect_a
     }
 }
 
-Test(Cat, TEST_Cat_makeSound_stdout, .init = redirect_all_stdout)
+Test(Cat, TEST_Cat_makeSound_should_display_Cat_sound_stdout, .init = redirect_all_stdout)
 {
     {
-        Cat     cat;
-        Cat     cat2("Cat");
+        Animal      *cat = new Cat();
+        Animal      *cat2 = new Cat("Cat");
+        Cat         cat3;
+        Cat         cat4("Cat");
 
-        cat.makeSound();
-        cat2.makeSound();
+        cat->makeSound();
+        cat2->makeSound();
+        cat3.makeSound();
+        cat4.makeSound();
 
+        delete cat;
+        delete cat2;
     }
     
     cr_assert_stdout_eq_str
@@ -512,8 +518,18 @@ Test(Cat, TEST_Cat_makeSound_stdout, .init = redirect_all_stdout)
         "Cat Default Constructor created an Cat animal.\n"
         "Animal Custom Constructor created a Cat animal.\n"
         "Cat Custom Constructor created a Cat animal.\n"
-        "Cat animal sound.\n"
-        "Cat animal sound.\n"
+        "Animal Custom Constructor created a Cat animal.\n"
+        "Cat Default Constructor created an Cat animal.\n"
+        "Animal Custom Constructor created a Cat animal.\n"
+        "Cat Custom Constructor created a Cat animal.\n"
+        "Cat sound: MiaouMiaou.\n"
+        "Cat sound: MiaouMiaou.\n"
+        "Cat sound: MiaouMiaou.\n"
+        "Cat sound: MiaouMiaou.\n"
+        "Cat Destructor destroyed a Cat animal.\n"
+        "Animal Destructor destroyed a Cat animal.\n"
+        "Cat Destructor destroyed a Cat animal.\n"
+        "Animal Destructor destroyed a Cat animal.\n"
         "Cat Destructor destroyed a Cat animal.\n"
         "Animal Destructor destroyed a Cat animal.\n"
         "Cat Destructor destroyed a Cat animal.\n"

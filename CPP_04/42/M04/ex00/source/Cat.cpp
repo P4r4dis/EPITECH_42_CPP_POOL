@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:14:09 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 18:14:30 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/16 19:59:50 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,9 @@ Cat::~Cat(void)
 {
     std::cout   <<  "Cat Destructor destroyed a " 
     << _type << " animal." << std::endl;
+}
+
+void            Cat::makeSound() const
+{
+    std::cout   << _type << " sound: MiaouMiaou." << std::endl;
 }

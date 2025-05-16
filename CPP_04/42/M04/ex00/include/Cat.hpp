@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:13:43 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 18:18:21 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/16 19:59:16 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
             Cat      &operator=(const Cat &dog);
             virtual ~Cat(void);
             
+            virtual void makeSound(void) const;
         private:
     };
     
