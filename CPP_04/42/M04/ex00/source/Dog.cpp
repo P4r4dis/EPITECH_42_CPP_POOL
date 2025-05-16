@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 17:28:58 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 18:09:36 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/16 19:52:03 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,9 @@ Dog::~Dog(void)
 {
     std::cout   <<  "Dog Destructor destroyed a " 
     << _type << " animal." << std::endl;
+}
+
+void            Dog::makeSound() const
+{
+    std::cout   << _type << " sound: OuafOuaf." << std::endl;
 }

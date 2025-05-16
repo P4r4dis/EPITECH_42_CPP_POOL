@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:59:06 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 18:46:19 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/16 19:56:27 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -315,15 +315,21 @@ Test(Dog, TEST_Dog_equal_operator_overload_return_assignment, .init = redirect_a
     }
 }
 
-Test(Dog, TEST_Dog_makeSound_stdout, .init = redirect_all_stdout)
+Test(Dog, TEST_Dog_makeSound_should_display_Dog_sound_stdout, .init = redirect_all_stdout)
 {
     {
-        Dog     dog;
-        Dog     dog2("Dog");
+        Animal      *dog = new Dog();
+        Animal      *dog2 = new Dog("Dog");
+        Dog         dog3;
+        Dog         dog4("Dog");
 
-        dog.makeSound();
-        dog2.makeSound();
+        dog->makeSound();
+        dog2->makeSound();
+        dog3.makeSound();
+        dog4.makeSound();
 
+        delete dog;
+        delete dog2;
     }
     
     cr_assert_stdout_eq_str
@@ -332,8 +338,18 @@ Test(Dog, TEST_Dog_makeSound_stdout, .init = redirect_all_stdout)
         "Dog Default Constructor created an Dog animal.\n"
         "Animal Custom Constructor created a Dog animal.\n"
         "Dog Custom Constructor created a Dog animal.\n"
-        "Dog animal sound.\n"
-        "Dog animal sound.\n"
+        "Animal Custom Constructor created a Dog animal.\n"
+        "Dog Default Constructor created an Dog animal.\n"
+        "Animal Custom Constructor created a Dog animal.\n"
+        "Dog Custom Constructor created a Dog animal.\n"
+        "Dog sound: OuafOuaf.\n"
+        "Dog sound: OuafOuaf.\n"
+        "Dog sound: OuafOuaf.\n"
+        "Dog sound: OuafOuaf.\n"
+        "Dog Destructor destroyed a Dog animal.\n"
+        "Animal Destructor destroyed a Dog animal.\n"
+        "Dog Destructor destroyed a Dog animal.\n"
+        "Animal Destructor destroyed a Dog animal.\n"
         "Dog Destructor destroyed a Dog animal.\n"
         "Animal Destructor destroyed a Dog animal.\n"
         "Dog Destructor destroyed a Dog animal.\n"
@@ -820,18 +836,18 @@ Test(WrongCat, TEST_WrongCat_makeSound_stdout, .init = redirect_all_stdout)
     );
 }
 ////////////////////////////////////////////////////////////////////////////
-Test(makeSound, TEST_makeSound_with_wrong_animals_stdout)//, .init = redirect_all_stdout)
-{
-    {
-        WrongAnimal   *wrongMeta = new WrongAnimal();
-        WrongAnimal   *wrongCat = new WrongCat();
+// Test(makeSound, TEST_makeSound_with_wrong_animals_stdout, .init = redirect_all_stdout)
+// {
+//     {
+//         WrongAnimal   *wrongMeta = new WrongAnimal();
+//         WrongAnimal   *wrongCat = new WrongCat();
 
-        wrongMeta->makeSound();
-        wrongCat->makeSound();
+//         wrongMeta->makeSound();
+//         wrongCat->makeSound();
 
-        delete wrongMeta;
-        delete wrongCat;
-    }
+//         delete wrongMeta;
+//         delete wrongCat;
+//     }
     
 //     cr_assert_stdout_eq_str
 //     (
@@ -846,7 +862,7 @@ Test(makeSound, TEST_makeSound_with_wrong_animals_stdout)//, .init = redirect_al
 //         "WrongCat Destructor destroyed a WrongCat animal.\n"
 //         "WrongAnimal Destructor destroyed a WrongCat animal.\n"
 //     );
-}
+// }
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////

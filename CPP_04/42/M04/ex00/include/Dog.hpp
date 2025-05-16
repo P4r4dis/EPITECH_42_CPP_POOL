@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 17:26:22 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 18:11:54 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/16 19:52:02 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
             Dog      &operator=(const Dog &dog);
             virtual ~Dog(void);
             
+            virtual void    makeSound(void) const;
         private:
     };
     
