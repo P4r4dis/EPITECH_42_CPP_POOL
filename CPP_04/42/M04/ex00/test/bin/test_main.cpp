@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:59:06 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 18:06:25 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/16 18:09:20 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,169 +173,169 @@ Test(Animal, TEST_Animal_makeSound_stdout, .init = redirect_all_stdout)
     );
 }
 
-// ///////////////////////////////////////////////////////////////////////////////
-// //                            Dog class                                      //
-// ///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+//                            Dog class                                      //
+///////////////////////////////////////////////////////////////////////////////
 
-// Test(Dog, TEST_Dog_default_CTOR, .init = redirect_all_stdout)
-// {
-//     {
-//         Dog     dog;
+Test(Dog, TEST_Dog_default_CTOR, .init = redirect_all_stdout)
+{
+    {
+        Dog     dog;
 
-//         cr_assert_not_null(&dog);
-//     }
-// }
+        cr_assert_not_null(&dog);
+    }
+}
 
-// Test(Dog, TEST_Dog_default_CTOR_stdout, .init = redirect_all_stdout)
-// {
-//     {
-//         Dog     dog;
-//     }
-//     cr_assert_stdout_eq_str(
-//         "Animal Custom Constructor created a Dog animal.\n"
-//         "Dog Default Constructor created an Dog animal.\n"
-//         "Dog Destructor destroyed a Dog animal.\n"
-//         "Animal Destructor destroyed a Dog animal.\n"
-//     );
-// }
+Test(Dog, TEST_Dog_default_CTOR_stdout, .init = redirect_all_stdout)
+{
+    {
+        Dog     dog;
+    }
+    cr_assert_stdout_eq_str(
+        "Animal Custom Constructor created a Dog animal.\n"
+        "Dog Default Constructor created an Dog animal.\n"
+        "Dog Destructor destroyed a Dog animal.\n"
+        "Animal Destructor destroyed a Dog animal.\n"
+    );
+}
 
-// Test(Dog, TEST_Dog_Custom_CTOR, .init = redirect_all_stdout)
-// {
-//     {
-//         Dog     dog("Dog");
+Test(Dog, TEST_Dog_Custom_CTOR, .init = redirect_all_stdout)
+{
+    {
+        Dog     dog("Dog");
 
-//         cr_assert_not_null(&dog);
-//     }
-// }
+        cr_assert_not_null(&dog);
+    }
+}
 
-// Test(Dog, TEST_Dog_Custom_CTOR_stdout, .init = redirect_all_stdout)
-// {
-//     {
-//         Dog     dog("Dog");
-//     }
-//     cr_assert_stdout_eq_str
-//     (
-//         "Animal Custom Constructor created a Dog animal.\n"
-//         "Dog Custom Constructor created a Dog animal.\n"
-//         "Dog Destructor destroyed a Dog animal.\n"
-//         "Animal Destructor destroyed a Dog animal.\n"
-//     );
-// }
+Test(Dog, TEST_Dog_Custom_CTOR_stdout, .init = redirect_all_stdout)
+{
+    {
+        Dog     dog("Dog");
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Animal Custom Constructor created a Dog animal.\n"
+        "Dog Custom Constructor created a Dog animal.\n"
+        "Dog Destructor destroyed a Dog animal.\n"
+        "Animal Destructor destroyed a Dog animal.\n"
+    );
+}
 
-// Test(Dog, TEST_Dog_copy_CTOR, .init = redirect_all_stdout)
-// {
-//     {
-//         Dog     dog("Dog");
-//         Dog     copyDog(dog);
+Test(Dog, TEST_Dog_copy_CTOR, .init = redirect_all_stdout)
+{
+    {
+        Dog     dog("Dog");
+        Dog     copyDog(dog);
 
-//         cr_assert_not_null(&dog);
-//         cr_assert_not_null(&copyDog);
-//     }
-// }
+        cr_assert_not_null(&dog);
+        cr_assert_not_null(&copyDog);
+    }
+}
 
-// Test(Dog, TEST_Dog_copy_CTOR_stdout, .init = redirect_all_stdout)
-// {
-//     {
-//         Dog     dog("Dog");
-//         Dog     copyDog(dog);
-//     }
-//     cr_assert_stdout_eq_str(
-//         "Animal Custom Constructor created a Dog animal.\n"
-//         "Dog Custom Constructor created a Dog animal.\n"
-//         "Animal Copy Constructor created a Dog animal.\n"
-//         "Dog Copy Constructor created a Dog animal.\n"
-//         "Dog Destructor destroyed a Dog animal.\n"
-//         "Animal Destructor destroyed a Dog animal.\n"
-//         "Dog Destructor destroyed a Dog animal.\n"
-//         "Animal Destructor destroyed a Dog animal.\n"
-//     );
-// }
+Test(Dog, TEST_Dog_copy_CTOR_stdout, .init = redirect_all_stdout)
+{
+    {
+        Dog     dog("Dog");
+        Dog     copyDog(dog);
+    }
+    cr_assert_stdout_eq_str(
+        "Animal Custom Constructor created a Dog animal.\n"
+        "Dog Custom Constructor created a Dog animal.\n"
+        "Animal Copy Constructor created a Dog animal.\n"
+        "Dog Copy Constructor created a Dog animal.\n"
+        "Dog Destructor destroyed a Dog animal.\n"
+        "Animal Destructor destroyed a Dog animal.\n"
+        "Dog Destructor destroyed a Dog animal.\n"
+        "Animal Destructor destroyed a Dog animal.\n"
+    );
+}
 
-// Test(Dog, TEST_Dog_getters_and_setters, .init = redirect_all_stdout)
-// {
-//     {
-//         Dog     dog("Dog");
+Test(Dog, TEST_Dog_getters_and_setters, .init = redirect_all_stdout)
+{
+    {
+        Dog     dog("Dog");
 
-//         cr_assert(dog.getType() == "Dog");
-//         dog.setType("Bird");
-//         cr_assert(dog.getType() == "Bird");
-//     }
-// }
+        cr_assert(dog.getType() == "Dog");
+        dog.setType("Bird");
+        cr_assert(dog.getType() == "Bird");
+    }
+}
 
-// Test(Dog, TEST_Dog_equal_operator_overload_simple_assignment, .init = redirect_all_stdout)
-// {
-//     {
-//         Dog     dog("Dog");
-//         Dog     dog2("Dog");
+Test(Dog, TEST_Dog_equal_operator_overload_simple_assignment, .init = redirect_all_stdout)
+{
+    {
+        Dog     dog("Dog");
+        Dog     dog2("Dog");
 
-//         dog2 = dog;
+        dog2 = dog;
 
-//         cr_assert(dog.getType() == dog2.getType());
-//     }
-// }
+        cr_assert(dog.getType() == dog2.getType());
+    }
+}
 
-// Test(Dog, TEST_Dog_equal_operator_overload_self_assignment, .init = redirect_all_stdout)
-// {
-//     {
-//         Dog     dog("Dog");
+Test(Dog, TEST_Dog_equal_operator_overload_self_assignment, .init = redirect_all_stdout)
+{
+    {
+        Dog     dog("Dog");
 
-//         dog = dog;
+        dog = dog;
 
-//         cr_assert(dog.getType() == dog.getType());
-//     }
-// }
+        cr_assert(dog.getType() == dog.getType());
+    }
+}
 
-// Test(Dog, TEST_Dog_equal_operator_overload_assignment_after_modified_an_object, .init = redirect_all_stdout)
-// {
-//     {
-//         Dog     dog("Dog");
-//         Dog     dog2("Bird");
+Test(Dog, TEST_Dog_equal_operator_overload_assignment_after_modified_an_object, .init = redirect_all_stdout)
+{
+    {
+        Dog     dog("Dog");
+        Dog     dog2("Bird");
 
 
-//         dog2 = dog;
-//         dog.setType("Mouse");
+        dog2 = dog;
+        dog.setType("Mouse");
 
-//         cr_assert(dog2.getType() != dog.getType());
-//     }
-// }
+        cr_assert(dog2.getType() != dog.getType());
+    }
+}
 
-// Test(Dog, TEST_Dog_equal_operator_overload_return_assignment, .init = redirect_all_stdout)
-// {
-//     {
-//         Dog     dog("Dog");
-//         Dog     dog2("Bird");
-//         Animal    &return_value = (dog2 = dog);
+Test(Dog, TEST_Dog_equal_operator_overload_return_assignment, .init = redirect_all_stdout)
+{
+    {
+        Dog     dog("Dog");
+        Dog     dog2("Bird");
+        Animal    &return_value = (dog2 = dog);
         
 
-//         cr_assert_eq(&return_value, &dog2);
-//     }
-// }
+        cr_assert_eq(&return_value, &dog2);
+    }
+}
 
-// Test(Dog, TEST_Dog_makeSound_stdout, .init = redirect_all_stdout)
-// {
-//     {
-//         Dog     dog;
-//         Dog     dog2("Dog");
+Test(Dog, TEST_Dog_makeSound_stdout, .init = redirect_all_stdout)
+{
+    {
+        Dog     dog;
+        Dog     dog2("Dog");
 
-//         dog.makeSound();
-//         dog2.makeSound();
+        dog.makeSound();
+        dog2.makeSound();
 
-//     }
+    }
     
-//     cr_assert_stdout_eq_str
-//     (
-//         "Animal Custom Constructor created a Dog animal.\n"
-//         "Dog Default Constructor created an Dog animal.\n"
-//         "Animal Custom Constructor created a Dog animal.\n"
-//         "Dog Custom Constructor created a Dog animal.\n"
-//         "Dog animal sound.\n"
-//         "Dog animal sound.\n"
-//         "Dog Destructor destroyed a Dog animal.\n"
-//         "Animal Destructor destroyed a Dog animal.\n"
-//         "Dog Destructor destroyed a Dog animal.\n"
-//         "Animal Destructor destroyed a Dog animal.\n"
-//     );
-// }
+    cr_assert_stdout_eq_str
+    (
+        "Animal Custom Constructor created a Dog animal.\n"
+        "Dog Default Constructor created an Dog animal.\n"
+        "Animal Custom Constructor created a Dog animal.\n"
+        "Dog Custom Constructor created a Dog animal.\n"
+        "Dog animal sound.\n"
+        "Dog animal sound.\n"
+        "Dog Destructor destroyed a Dog animal.\n"
+        "Animal Destructor destroyed a Dog animal.\n"
+        "Dog Destructor destroyed a Dog animal.\n"
+        "Animal Destructor destroyed a Dog animal.\n"
+    );
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
