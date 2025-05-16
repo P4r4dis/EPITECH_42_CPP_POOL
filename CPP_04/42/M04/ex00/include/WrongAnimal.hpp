@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/15 20:43:55 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 19:17:44 by Paradis          ###   ########.fr       */
+/*   Created: 2025/05/16 18:39:34 by Paradis           #+#    #+#             */
+/*   Updated: 2025/05/16 18:40:12 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef                 __ANIMAL_HPP__
-    #define             __ANIMAL_HPP__
+#ifndef                 __WRONGANIMAL_HPP__
+    #define             __WRONGANIMAL_HPP__
 
     #include <string>
-    class               Animal
+    class               WrongAnimal
     {
         public:
-            Animal(void);
-            Animal(std::string type);
-            Animal(const Animal &animal);
-            Animal      &operator=(const Animal &animal);
-            virtual ~Animal(void);
+            WrongAnimal(void);
+            WrongAnimal(std::string type);
+            WrongAnimal(const WrongAnimal &animal);
+            WrongAnimal      &operator=(const WrongAnimal &animal);
+            virtual ~WrongAnimal(void);
 
             std::string getType(void) const;
             void        setType(std::string type);
 
-            virtual void        makeSound(void) const;
+            void        makeSound(void);
         protected:
             std::string _type;
     };
     
-#endif //               !_ANIMAL_HPP__
+#endif //               !_WRONGANIMAL_HPP__

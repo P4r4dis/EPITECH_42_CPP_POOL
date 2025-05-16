@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 17:01:31 by Paradis           #+#    #+#              #
-#    Updated: 2025/05/16 18:15:00 by Paradis          ###   ########.fr        #
+#    Updated: 2025/05/16 18:46:47 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -Wshadow -Wno-shado
 SRCS         	= 	$(SRC_PATH)/Animal.cpp \
 					$(SRC_PATH)/Dog.cpp \
 					$(SRC_PATH)/Cat.cpp \
+					$(SRC_PATH)/WrongAnimal.cpp \
+					$(SRC_PATH)/WrongCat.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)

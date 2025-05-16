@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 17:02:13 by Paradis           #+#    #+#              #
-#    Updated: 2025/05/16 18:15:21 by Paradis          ###   ########.fr        #
+#    Updated: 2025/05/16 18:47:31 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@
 42_EX00_SRC						=	$(42_EX00_SRC_PATH)/Animal.cpp \
 									$(42_EX00_SRC_PATH)/Dog.cpp \
 									$(42_EX00_SRC_PATH)/Cat.cpp \
+									$(42_EX00_SRC_PATH)/WrongAnimal.cpp \
+									$(42_EX00_SRC_PATH)/WrongCat.cpp \
 									$(42_EX00_BIN_PATH)/main.cpp
 42_EX00_OBJS					=	$(42_EX00_SRC:.cpp=.o)
 
@@ -184,7 +186,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 6 5:30:03 PM 2025 Paradis
-## Last update Sat May 16 6:15:21 PM 2025 Paradis
+## Last update Sat May 16 6:47:31 PM 2025 Paradis
 ##
 
 # **************************************************************************** #

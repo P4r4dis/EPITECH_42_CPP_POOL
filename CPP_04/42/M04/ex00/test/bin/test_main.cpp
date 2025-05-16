@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:59:06 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 18:16:53 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/16 18:46:19 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 #include "../../include/Animal.hpp"
 #include "../../include/Dog.hpp"
 #include "../../include/Cat.hpp"
+#include "../../include/WrongAnimal.hpp"
+#include "../../include/WrongCat.hpp"
+
 
 void redirect_all_stdout(void)
 {
@@ -502,6 +505,348 @@ Test(Cat, TEST_Cat_makeSound_stdout, .init = redirect_all_stdout)
     );
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//                      WrongAnimal class                                    //
+///////////////////////////////////////////////////////////////////////////////
+
+Test(WrongAnimal, TEST_WrongAnimal_default_CTOR, .init = redirect_all_stdout)
+{
+    {
+        WrongAnimal    wrongAnimal;
+
+        cr_assert_not_null(&wrongAnimal);
+    }
+}
+
+Test(WrongAnimal, TEST_WrongAnimal_default_CTOR_stdout, .init = redirect_all_stdout)
+{
+    {
+        WrongAnimal    wrongAnimal;
+    }
+    cr_assert_stdout_eq_str(
+        "WrongAnimal Default Constructor created an Unknown animal.\n"
+        "WrongAnimal Destructor destroyed a Unknown animal.\n"
+    );
+}
+
+Test(WrongAnimal, TEST_WrongAnimal_Custom_CTOR, .init = redirect_all_stdout)
+{
+    {
+        WrongAnimal    wrongAnimal("Bear");
+
+        cr_assert_not_null(&wrongAnimal);
+    }
+}
+
+Test(WrongAnimal, TEST_WrongAnimal_Custom_CTOR_stdout, .init = redirect_all_stdout)
+{
+    {
+        WrongAnimal    wrongAnimal("Bear");
+    }
+    cr_assert_stdout_eq_str(
+        "WrongAnimal Custom Constructor created a Bear animal.\n"
+        "WrongAnimal Destructor destroyed a Bear animal.\n"
+    );
+}
+
+Test(WrongAnimal, TEST_WrongAnimal_copy_CTOR, .init = redirect_all_stdout)
+{
+    {
+        WrongAnimal    wrongAnimal("Bear");
+        WrongAnimal    cpyWrongAnimal(wrongAnimal);
+
+        cr_assert_not_null(&wrongAnimal);
+        cr_assert_not_null(&cpyWrongAnimal);
+    }
+}
+
+Test(WrongAnimal, TEST_WrongAnimal_copy_CTOR_stdout, .init = redirect_all_stdout)
+{
+    {
+        WrongAnimal    wrongAnimal("Bear");
+        WrongAnimal    cpyWrongAnimal(wrongAnimal);
+    }
+    cr_assert_stdout_eq_str(
+        "WrongAnimal Custom Constructor created a Bear animal.\n"
+        "WrongAnimal Copy Constructor created a Bear animal.\n"
+        "WrongAnimal Destructor destroyed a Bear animal.\n"
+        "WrongAnimal Destructor destroyed a Bear animal.\n"
+
+    );
+}
+
+Test(WrongAnimal, TEST_WrongAnimal_getters_and_setters, .init = redirect_all_stdout)
+{
+    {
+        WrongAnimal    wrongAnimal("Bear");
+
+        cr_assert(wrongAnimal.getType() == "Bear");
+        wrongAnimal.setType("Bird");
+        cr_assert(wrongAnimal.getType() == "Bird");
+    }
+}
+
+Test(WrongAnimal, TEST_WrongAnimal_equal_operator_overload_simple_assignment, .init = redirect_all_stdout)
+{
+    {
+        WrongAnimal    wrongAnimal("Bear");
+        WrongAnimal    wrongAnimal2("Bear");
+
+        wrongAnimal2 = wrongAnimal;
+
+        cr_assert(wrongAnimal.getType() == wrongAnimal2.getType());
+    }
+}
+
+Test(WrongAnimal, TEST_WrongAnimal_equal_operator_overload_self_assignment, .init = redirect_all_stdout)
+{
+    {
+        WrongAnimal    wrongAnimal("Bear");
+
+        wrongAnimal = wrongAnimal;
+
+        cr_assert(wrongAnimal.getType() == wrongAnimal.getType());
+    }
+}
+
+Test(WrongAnimal, TEST_WrongAnimal_equal_operator_overload_assignment_after_modified_an_object, .init = redirect_all_stdout)
+{
+    {
+        WrongAnimal    wrongAnimal("Bear");
+        WrongAnimal    wrongAnimal2("Bird");
+
+
+        wrongAnimal2 = wrongAnimal;
+        wrongAnimal.setType("Mouse");
+
+        cr_assert(wrongAnimal2.getType() != wrongAnimal.getType());
+    }
+}
+
+Test(WrongAnimal, TEST_WrongAnimal_equal_operator_overload_return_assignment, .init = redirect_all_stdout)
+{
+    {
+        WrongAnimal    wrongAnimal("Bear");
+        WrongAnimal    wrongAnimal2("Bird");
+        WrongAnimal    &return_value = (wrongAnimal2 = wrongAnimal);
+        
+
+        cr_assert_eq(&return_value, &wrongAnimal2);
+    }
+}
+
+Test(WrongAnimal, TEST_WrongAnimal_makeSound_stdout, .init = redirect_all_stdout)
+{
+    {
+        WrongAnimal  wrongAnimal;
+        WrongAnimal  wrongAnimal2("Bear");
+
+        wrongAnimal.makeSound();
+        wrongAnimal2.makeSound();
+
+    }
+    
+    cr_assert_stdout_eq_str
+    (
+        "WrongAnimal Default Constructor created an Unknown animal.\n"
+        "WrongAnimal Custom Constructor created a Bear animal.\n"
+        "Unknown animal sound.\n"
+        "Bear animal sound.\n"
+        "WrongAnimal Destructor destroyed a Bear animal.\n"
+        "WrongAnimal Destructor destroyed a Unknown animal.\n"
+    );
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//                            WrongCat class                                 //
+///////////////////////////////////////////////////////////////////////////////
+
+Test(WrongCat, TEST_WrongCat_default_CTOR, .init = redirect_all_stdout)
+{
+    {
+        WrongCat     wrongCat;
+
+        cr_assert_not_null(&wrongCat);
+    }
+}
+
+Test(WrongCat, TEST_WrongCat_default_CTOR_stdout, .init = redirect_all_stdout)
+{
+    {
+        WrongCat     wrongCat;
+    }
+    cr_assert_stdout_eq_str(
+        "WrongAnimal Custom Constructor created a WrongCat animal.\n"
+        "WrongCat Default Constructor created an WrongCat animal.\n"
+        "WrongCat Destructor destroyed a WrongCat animal.\n"
+        "WrongAnimal Destructor destroyed a WrongCat animal.\n"
+    );
+}
+
+Test(WrongCat, TEST_WrongCat_Custom_CTOR, .init = redirect_all_stdout)
+{
+    {
+        WrongCat     wrongCat("WrongCat");
+
+        cr_assert_not_null(&wrongCat);
+    }
+}
+
+Test(WrongCat, TEST_WrongCat_Custom_CTOR_stdout, .init = redirect_all_stdout)
+{
+    {
+        WrongCat     wrongCat("WrongCat");
+    }
+    cr_assert_stdout_eq_str
+    (
+        "WrongAnimal Custom Constructor created a WrongCat animal.\n"
+        "WrongCat Custom Constructor created a WrongCat animal.\n"
+        "WrongCat Destructor destroyed a WrongCat animal.\n"
+        "WrongAnimal Destructor destroyed a WrongCat animal.\n"
+    );
+}
+
+Test(WrongCat, TEST_WrongCat_copy_CTOR, .init = redirect_all_stdout)
+{
+    {
+        WrongCat     wrongCat("WrongCat");
+        WrongCat     copyWrongCat(wrongCat);
+
+        cr_assert_not_null(&wrongCat);
+        cr_assert_not_null(&copyWrongCat);
+    }
+}
+
+Test(WrongCat, TEST_WrongCat_copy_CTOR_stdout, .init = redirect_all_stdout)
+{
+    {
+        WrongCat     wrongCat("WrongCat");
+        WrongCat     copyWrongCat(wrongCat);
+    }
+    cr_assert_stdout_eq_str(
+        "WrongAnimal Custom Constructor created a WrongCat animal.\n"
+        "WrongCat Custom Constructor created a WrongCat animal.\n"
+        "WrongAnimal Copy Constructor created a WrongCat animal.\n"
+        "WrongCat Copy Constructor created a WrongCat animal.\n"
+        "WrongCat Destructor destroyed a WrongCat animal.\n"
+        "WrongAnimal Destructor destroyed a WrongCat animal.\n"
+        "WrongCat Destructor destroyed a WrongCat animal.\n"
+        "WrongAnimal Destructor destroyed a WrongCat animal.\n"
+    );
+}
+
+Test(WrongCat, TEST_WrongCat_getters_and_setters, .init = redirect_all_stdout)
+{
+    {
+        WrongCat     wrongCat("WrongCat");
+
+        cr_assert(wrongCat.getType() == "WrongCat");
+        wrongCat.setType("Bird");
+        cr_assert(wrongCat.getType() == "Bird");
+    }
+}
+
+Test(WrongCat, TEST_WrongCat_equal_operator_overload_simple_assignment, .init = redirect_all_stdout)
+{
+    {
+        WrongCat     wrongCat("WrongCat");
+        WrongCat     wrongCat2("WrongCat");
+
+        wrongCat2 = wrongCat;
+
+        cr_assert(wrongCat.getType() == wrongCat2.getType());
+    }
+}
+
+Test(WrongCat, TEST_WrongCat_equal_operator_overload_self_assignment, .init = redirect_all_stdout)
+{
+    {
+        WrongCat     wrongCat("WrongCat");
+
+        wrongCat = wrongCat;
+
+        cr_assert(wrongCat.getType() == wrongCat.getType());
+    }
+}
+
+Test(WrongCat, TEST_WrongCat_equal_operator_overload_assignment_after_modified_an_object, .init = redirect_all_stdout)
+{
+    {
+        WrongCat     wrongCat("WrongCat");
+        WrongCat     wrongCat2("Bird");
+
+
+        wrongCat2 = wrongCat;
+        wrongCat.setType("Mouse");
+
+        cr_assert(wrongCat2.getType() != wrongCat.getType());
+    }
+}
+
+Test(WrongCat, TEST_WrongCat_equal_operator_overload_return_assignment, .init = redirect_all_stdout)
+{
+    {
+        WrongCat     wrongCat("WrongCat");
+        WrongCat     wrongCat2("Bird");
+        WrongAnimal    &return_value = (wrongCat2 = wrongCat);
+        
+
+        cr_assert_eq(&return_value, &wrongCat2);
+    }
+}
+
+Test(WrongCat, TEST_WrongCat_makeSound_stdout, .init = redirect_all_stdout)
+{
+    {
+        WrongCat     wrongCat;
+        WrongCat     wrongCat2("WrongCat");
+
+        wrongCat.makeSound();
+        wrongCat2.makeSound();
+    }
+    
+    cr_assert_stdout_eq_str
+    (
+        "WrongAnimal Custom Constructor created a WrongCat animal.\n"
+        "WrongCat Default Constructor created an WrongCat animal.\n"
+        "WrongAnimal Custom Constructor created a WrongCat animal.\n"
+        "WrongCat Custom Constructor created a WrongCat animal.\n"
+        "WrongCat animal sound.\n"
+        "WrongCat animal sound.\n"
+        "WrongCat Destructor destroyed a WrongCat animal.\n"
+        "WrongAnimal Destructor destroyed a WrongCat animal.\n"
+        "WrongCat Destructor destroyed a WrongCat animal.\n"
+        "WrongAnimal Destructor destroyed a WrongCat animal.\n"
+    );
+}
+////////////////////////////////////////////////////////////////////////////
+Test(makeSound, TEST_makeSound_with_wrong_animals_stdout)//, .init = redirect_all_stdout)
+{
+    {
+        WrongAnimal   *wrongMeta = new WrongAnimal();
+        WrongAnimal   *wrongCat = new WrongCat();
+
+        wrongMeta->makeSound();
+        wrongCat->makeSound();
+
+        delete wrongMeta;
+        delete wrongCat;
+    }
+    
+//     cr_assert_stdout_eq_str
+//     (
+//         "WrongAnimal Custom Constructor created a WrongCat animal.\n"
+//         "WrongCat Default Constructor created an WrongCat animal.\n"
+//         "WrongAnimal Custom Constructor created a WrongCat animal.\n"
+//         "WrongCat Custom Constructor created a WrongCat animal.\n"
+//         "WrongAnimal animal sound.\n"
+//         "WrongCat animal sound.\n"
+//         "WrongCat Destructor destroyed a WrongCat animal.\n"
+//         "WrongAnimal Destructor destroyed a WrongCat animal.\n"
+//         "WrongCat Destructor destroyed a WrongCat animal.\n"
+//         "WrongAnimal Destructor destroyed a WrongCat animal.\n"
+//     );
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
