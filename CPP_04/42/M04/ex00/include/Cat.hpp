@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 17:26:22 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 18:11:54 by Paradis          ###   ########.fr       */
+/*   Created: 2025/05/16 18:13:43 by Paradis           #+#    #+#             */
+/*   Updated: 2025/05/16 18:18:21 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef                 __DOG_HPP__
-    #define             __DOG_HPP__
+
+
+#ifndef                 __CAT_HPP__
+    #define             __CAT_HPP__
 
     #include <string>
     #include "Animal.hpp"
-    class               Dog :   public Animal
+    class               Cat :   public Animal
     {
         public:
-            Dog(void);
-            Dog(std::string type);
-            Dog(const Dog &dog);
-            Dog      &operator=(const Dog &dog);
-            virtual ~Dog(void);
+            Cat(void);
+            Cat(std::string type);
+            Cat(const Cat &dog);
+            Cat      &operator=(const Cat &dog);
+            virtual ~Cat(void);
             
         private:
     };
     
-#endif //               !_DOG_HPP__
+#endif //               !_CAT_HPP__

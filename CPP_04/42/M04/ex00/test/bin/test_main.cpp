@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:59:06 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 18:09:20 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/16 18:16:53 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 #include "../../include/Animal.hpp"
 #include "../../include/Dog.hpp"
+#include "../../include/Cat.hpp"
 
 void redirect_all_stdout(void)
 {
@@ -338,6 +339,170 @@ Test(Dog, TEST_Dog_makeSound_stdout, .init = redirect_all_stdout)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+//                            Cat class                                      //
+///////////////////////////////////////////////////////////////////////////////
+
+Test(Cat, TEST_Cat_default_CTOR, .init = redirect_all_stdout)
+{
+    {
+        Cat     cat;
+
+        cr_assert_not_null(&cat);
+    }
+}
+
+Test(Cat, TEST_Cat_default_CTOR_stdout, .init = redirect_all_stdout)
+{
+    {
+        Cat     cat;
+    }
+    cr_assert_stdout_eq_str(
+        "Animal Custom Constructor created a Cat animal.\n"
+        "Cat Default Constructor created an Cat animal.\n"
+        "Cat Destructor destroyed a Cat animal.\n"
+        "Animal Destructor destroyed a Cat animal.\n"
+    );
+}
+
+Test(Cat, TEST_Cat_Custom_CTOR, .init = redirect_all_stdout)
+{
+    {
+        Cat     cat("Cat");
+
+        cr_assert_not_null(&cat);
+    }
+}
+
+Test(Cat, TEST_Cat_Custom_CTOR_stdout, .init = redirect_all_stdout)
+{
+    {
+        Cat     cat("Cat");
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Animal Custom Constructor created a Cat animal.\n"
+        "Cat Custom Constructor created a Cat animal.\n"
+        "Cat Destructor destroyed a Cat animal.\n"
+        "Animal Destructor destroyed a Cat animal.\n"
+    );
+}
+
+Test(Cat, TEST_Cat_copy_CTOR, .init = redirect_all_stdout)
+{
+    {
+        Cat     cat("Cat");
+        Cat     copyCat(cat);
+
+        cr_assert_not_null(&cat);
+        cr_assert_not_null(&copyCat);
+    }
+}
+
+Test(Cat, TEST_Cat_copy_CTOR_stdout, .init = redirect_all_stdout)
+{
+    {
+        Cat     cat("Cat");
+        Cat     copyCat(cat);
+    }
+    cr_assert_stdout_eq_str(
+        "Animal Custom Constructor created a Cat animal.\n"
+        "Cat Custom Constructor created a Cat animal.\n"
+        "Animal Copy Constructor created a Cat animal.\n"
+        "Cat Copy Constructor created a Cat animal.\n"
+        "Cat Destructor destroyed a Cat animal.\n"
+        "Animal Destructor destroyed a Cat animal.\n"
+        "Cat Destructor destroyed a Cat animal.\n"
+        "Animal Destructor destroyed a Cat animal.\n"
+    );
+}
+
+Test(Cat, TEST_Cat_getters_and_setters, .init = redirect_all_stdout)
+{
+    {
+        Cat     cat("Cat");
+
+        cr_assert(cat.getType() == "Cat");
+        cat.setType("Bird");
+        cr_assert(cat.getType() == "Bird");
+    }
+}
+
+Test(Cat, TEST_Cat_equal_operator_overload_simple_assignment, .init = redirect_all_stdout)
+{
+    {
+        Cat     cat("Cat");
+        Cat     cat2("Cat");
+
+        cat2 = cat;
+
+        cr_assert(cat.getType() == cat2.getType());
+    }
+}
+
+Test(Cat, TEST_Cat_equal_operator_overload_self_assignment, .init = redirect_all_stdout)
+{
+    {
+        Cat     cat("Cat");
+
+        cat = cat;
+
+        cr_assert(cat.getType() == cat.getType());
+    }
+}
+
+Test(Cat, TEST_Cat_equal_operator_overload_assignment_after_modified_an_object, .init = redirect_all_stdout)
+{
+    {
+        Cat     cat("Cat");
+        Cat     cat2("Bird");
+
+
+        cat2 = cat;
+        cat.setType("Mouse");
+
+        cr_assert(cat2.getType() != cat.getType());
+    }
+}
+
+Test(Cat, TEST_Cat_equal_operator_overload_return_assignment, .init = redirect_all_stdout)
+{
+    {
+        Cat     cat("Cat");
+        Cat     cat2("Bird");
+        Animal    &return_value = (cat2 = cat);
+        
+
+        cr_assert_eq(&return_value, &cat2);
+    }
+}
+
+Test(Cat, TEST_Cat_makeSound_stdout, .init = redirect_all_stdout)
+{
+    {
+        Cat     cat;
+        Cat     cat2("Cat");
+
+        cat.makeSound();
+        cat2.makeSound();
+
+    }
+    
+    cr_assert_stdout_eq_str
+    (
+        "Animal Custom Constructor created a Cat animal.\n"
+        "Cat Default Constructor created an Cat animal.\n"
+        "Animal Custom Constructor created a Cat animal.\n"
+        "Cat Custom Constructor created a Cat animal.\n"
+        "Cat animal sound.\n"
+        "Cat animal sound.\n"
+        "Cat Destructor destroyed a Cat animal.\n"
+        "Animal Destructor destroyed a Cat animal.\n"
+        "Cat Destructor destroyed a Cat animal.\n"
+        "Animal Destructor destroyed a Cat animal.\n"
+    );
+}
+
+///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
 Test(main, Test_main, .init = redirect_all_stdout)
@@ -345,7 +510,7 @@ Test(main, Test_main, .init = redirect_all_stdout)
     
     {       
         // const Animal    *meta = new Animal();
-        // const Animal    *j = new Dog();
+        // const Animal    *j = new Cat();
         // const Animal    *i = new Cat();
     
         // std::cout << j->getType() << " " << std::endl;
