@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:59:06 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 20:11:36 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/16 20:25:46 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -880,38 +880,64 @@ Test(makeSound, TEST_makeSound_with_wrong_animals_call_wrong_sound_stdout, .init
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
+#include <iostream>
 Test(main, Test_main, .init = redirect_all_stdout)
 {
     
     {       
-        // const Animal    *meta = new Animal();
-        // const Animal    *j = new Cat();
-        // const Animal    *i = new Cat();
+        const Animal    *meta = new Animal();
+        const Animal    *j = new Dog();
+        const Animal    *i = new Cat();
     
-        // std::cout << j->getType() << " " << std::endl;
-        // std::cout << i->getType() << " " << std::endl;
+        std::cout << j->getType() << " " << std::endl;
+        std::cout << i->getType() << " " << std::endl;
     
-        // i->makeSound(); //will output the cat sound!
-        // j->makeSound();
-        // meta->makeSound();
+        i->makeSound(); //will output the cat sound!
+        j->makeSound();
+        meta->makeSound();
     
-        // const WrongAnimal   *wrongMeta = new WrongAnimal();
-        // const WrongAnimal   *wrongCat = new WrongCat();
+        const WrongAnimal   *wrongMeta = new WrongAnimal();
+        const WrongAnimal   *wrongCat = new WrongCat();
     
-        // std::cout << wrongMeta->getType() << " " << std::endl;
-        // std::cout << wrongCat->getType() << " " << std::endl;
+        std::cout << wrongMeta->getType() << " " << std::endl;
+        std::cout << wrongCat->getType() << " " << std::endl;
         
-        // wrongMeta->makeSound(); //will output the cat sound!
-        // wrongCat->makeSound();
+        wrongMeta->makeSound(); //will output the WrongAnimal sound!
+        wrongCat->makeSound(); //will output the WrongAnimal sound!
     
-        // delete meta;
-        // delete j;
-        // delete i;
-        // delete wrongAnimal;
-        // delete wrongCat;
+        delete meta;
+        delete j;
+        delete i;
+        delete wrongMeta;
+        delete wrongCat;
     }
 
-    // cr_assert_stdout_eq_str(
-
-    // );
+    cr_assert_stdout_eq_str
+    (
+        "Animal Default Constructor created an Unknown animal.\n"
+        "Animal Custom Constructor created a Dog animal.\n"
+        "Dog Default Constructor created an Dog animal.\n"
+        "Animal Custom Constructor created a Cat animal.\n"
+        "Cat Default Constructor created an Cat animal.\n"
+        "Dog \n"
+        "Cat \n"
+        "Cat sound: MiaouMiaou.\n"
+        "Dog sound: OuafOuaf.\n"
+        "Unknown animal sound.\n"
+        "WrongAnimal Default Constructor created an Unknown animal.\n"
+        "WrongAnimal Custom Constructor created a WrongCat animal.\n"
+        "WrongCat Default Constructor created an WrongCat animal.\n"
+        "Unknown \n"
+        "WrongCat \n"
+        "Unknown animal sound.\n"
+        "WrongCat animal sound.\n"
+        "Animal Destructor destroyed a Unknown animal.\n"
+        "Dog Destructor destroyed a Dog animal.\n"
+        "Animal Destructor destroyed a Dog animal.\n"
+        "Cat Destructor destroyed a Cat animal.\n"
+        "Animal Destructor destroyed a Cat animal.\n"
+        "WrongAnimal Destructor destroyed a Unknown animal.\n"
+        "WrongCat Destructor destroyed a WrongCat animal.\n"
+        "WrongAnimal Destructor destroyed a WrongCat animal.\n"
+    );
 }

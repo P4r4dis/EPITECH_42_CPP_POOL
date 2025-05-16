@@ -6,12 +6,16 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:31:28 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/15 20:43:35 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/16 20:27:02 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Animal.hpp"
+#include "../include/Dog.hpp"
+#include "../include/Cat.hpp"
 #include "../include/WrongAnimal.hpp"
+#include "../include/WrongCat.hpp"
+
 #include <iostream>
 
 int main()
@@ -33,12 +37,14 @@ int main()
     std::cout << wrongMeta->getType() << " " << std::endl;
     std::cout << wrongCat->getType() << " " << std::endl;
     
-    wrongMeta->makeSound(); //will output the cat sound!
-    wrongCat->makeSound();
+    wrongMeta->makeSound(); //will output the WrongAnimal sound!
+    wrongCat->makeSound(); //will output the WrongAnimal sound!
 
     delete meta;
     delete j;
     delete i;
-    delete wrongAnimal;
+    delete wrongMeta;
     delete wrongCat;
+
     return 0;
+}
