@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:42:08 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 18:43:24 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/16 20:06:46 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
             WrongCat      &operator=(const WrongCat &dog);
             virtual ~WrongCat(void);
             
+            void        makeSound(void) const;
         private:
     };
     

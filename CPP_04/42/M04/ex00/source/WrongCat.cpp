@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:41:32 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 18:43:43 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/16 20:07:31 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,9 @@ WrongCat::~WrongCat(void)
 {
     std::cout   <<  "WrongCat Destructor destroyed a " 
     << _type << " animal." << std::endl;
+}
+
+void            WrongCat::makeSound() const
+{
+    std::cout   << _type << " sound: MiaouMiaou." << std::endl;
 }

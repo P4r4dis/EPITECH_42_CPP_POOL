@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:59:06 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 20:02:17 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/16 20:11:36 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -843,8 +843,8 @@ Test(WrongCat, TEST_WrongCat_makeSound_stdout, .init = redirect_all_stdout)
         "WrongCat Default Constructor created an WrongCat animal.\n"
         "WrongAnimal Custom Constructor created a WrongCat animal.\n"
         "WrongCat Custom Constructor created a WrongCat animal.\n"
-        "WrongCat animal sound.\n"
-        "WrongCat animal sound.\n"
+        "WrongCat sound: MiaouMiaou.\n"
+        "WrongCat sound: MiaouMiaou.\n"
         "WrongCat Destructor destroyed a WrongCat animal.\n"
         "WrongAnimal Destructor destroyed a WrongCat animal.\n"
         "WrongCat Destructor destroyed a WrongCat animal.\n"
@@ -852,33 +852,31 @@ Test(WrongCat, TEST_WrongCat_makeSound_stdout, .init = redirect_all_stdout)
     );
 }
 ////////////////////////////////////////////////////////////////////////////
-// Test(makeSound, TEST_makeSound_with_wrong_animals_stdout, .init = redirect_all_stdout)
-// {
-//     {
-//         WrongAnimal   *wrongMeta = new WrongAnimal();
-//         WrongAnimal   *wrongCat = new WrongCat();
+Test(makeSound, TEST_makeSound_with_wrong_animals_call_wrong_sound_stdout, .init = redirect_all_stdout)
+{
+    {
+        WrongAnimal   *wrongMeta = new WrongAnimal();
+        WrongAnimal   *wrongCat = new WrongCat();
 
-//         wrongMeta->makeSound();
-//         wrongCat->makeSound();
+        wrongMeta->makeSound();
+        wrongCat->makeSound();
 
-//         delete wrongMeta;
-//         delete wrongCat;
-//     }
+        delete wrongMeta;
+        delete wrongCat;
+    }
     
-//     cr_assert_stdout_eq_str
-//     (
-//         "WrongAnimal Custom Constructor created a WrongCat animal.\n"
-//         "WrongCat Default Constructor created an WrongCat animal.\n"
-//         "WrongAnimal Custom Constructor created a WrongCat animal.\n"
-//         "WrongCat Custom Constructor created a WrongCat animal.\n"
-//         "WrongAnimal animal sound.\n"
-//         "WrongCat animal sound.\n"
-//         "WrongCat Destructor destroyed a WrongCat animal.\n"
-//         "WrongAnimal Destructor destroyed a WrongCat animal.\n"
-//         "WrongCat Destructor destroyed a WrongCat animal.\n"
-//         "WrongAnimal Destructor destroyed a WrongCat animal.\n"
-//     );
-// }
+    cr_assert_stdout_eq_str
+    (
+        "WrongAnimal Default Constructor created an Unknown animal.\n"
+        "WrongAnimal Custom Constructor created a WrongCat animal.\n"
+        "WrongCat Default Constructor created an WrongCat animal.\n"
+        "Unknown animal sound.\n"
+        "WrongCat animal sound.\n"
+        "WrongAnimal Destructor destroyed a Unknown animal.\n"
+        "WrongCat Destructor destroyed a WrongCat animal.\n"
+        "WrongAnimal Destructor destroyed a WrongCat animal.\n"
+    );
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////

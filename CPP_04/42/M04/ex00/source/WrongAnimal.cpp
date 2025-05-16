@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:40:31 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 18:41:01 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/16 20:07:12 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void                WrongAnimal::setType(std::string type)
     _type = type;
 }
 
-void                WrongAnimal::makeSound(void)
+void                WrongAnimal::makeSound(void) const
 {
     std::cout   << _type << " animal sound." << std::endl;
 }
