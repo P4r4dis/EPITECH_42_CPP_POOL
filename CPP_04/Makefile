@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 17:02:13 by Paradis           #+#    #+#              #
-#    Updated: 2025/05/16 18:47:31 by Paradis          ###   ########.fr        #
+#    Updated: 2025/05/19 16:39:18 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,39 +57,43 @@
 #								42 EX01										   #
 #																			   #
 # **************************************************************************** #
-# 42_EX01_PATH 					= 	./42/M04/ex01
-# 42_EX01_BIN_PATH 				= 	./42/M04/ex01/bin
-# 42_EX01_SRC_PATH				=	./42/M04/ex01/source
-# 42_EX01_INC_PATH				=	./42/M04/ex01/include
-# 42_EX01_UT_PATH					=	./42/M04/ex01/test
+42_EX01_PATH 					= 	./42/M04/ex01
+42_EX01_BIN_PATH 				= 	./42/M04/ex01/bin
+42_EX01_SRC_PATH				=	./42/M04/ex01/source
+42_EX01_INC_PATH				=	./42/M04/ex01/include
+42_EX01_UT_PATH					=	./42/M04/ex01/test
 
-# 42_EX01_NAME					=	ScavTrap
+42_EX01_NAME					=	Brain
 
-# 42_EX01_UT_SRC					=	$(42_EX01_UT_PATH)/$(42_EX01_NAME)_test.cpp
-# 42_EX01_UT_NAME 				= 	test_$(42_EX01_NAME)
+42_EX01_UT_SRC					=	$(42_EX01_UT_PATH)/$(42_EX01_NAME)_test.cpp
+42_EX01_UT_NAME 				= 	test_$(42_EX01_NAME)
 
-# 42_EX01_SRC						=	$(42_EX01_SRC_PATH)/Animal.cpp \
-# 									$(42_EX01_SRC_PATH)/ScavTrap.cpp \
-# 									$(42_EX01_BIN_PATH)/main.cpp
-# 42_EX01_OBJS					=	$(42_EX01_SRC:.cpp=.o)
+42_EX01_SRC						=	$(42_EX01_SRC_PATH)/Animal.cpp \
+									$(42_EX01_SRC_PATH)/Dog.cpp \
+									$(42_EX01_SRC_PATH)/Cat.cpp \
+									$(42_EX01_SRC_PATH)/WrongAnimal.cpp \
+									$(42_EX01_SRC_PATH)/WrongCat.cpp \
+									$(42_EX01_SRC_PATH)/Brain.cpp \
+									$(42_EX01_BIN_PATH)/main.cpp
+42_EX01_OBJS					=	$(42_EX01_SRC:.cpp=.o)
 
-# 42_ex01 						: 	fclean
-# 									@$(MAKE) -C $(42_EX01_PATH)
-# 									$(42_EX01_PATH)/$(42_EX01_NAME)
+42_ex01 						: 	fclean
+									@$(MAKE) -C $(42_EX01_PATH)
+									$(42_EX01_PATH)/$(42_EX01_NAME)
 
-# 42_test_run_ex01				:	fclean
-# 									@$(MAKE) -s -C $(42_EX01_UT_PATH)
-# 									$(42_EX01_UT_PATH)/$(42_EX01_UT_NAME) --fail-fast --jobs=1 --verbose=2
-# #--fail-fast 
-# 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
-# # @brave coverage.html
+42_test_run_ex01				:	fclean
+									@$(MAKE) -s -C $(42_EX01_UT_PATH)
+									$(42_EX01_UT_PATH)/$(42_EX01_UT_NAME) --fail-fast --jobs=1 --verbose=2
+#--fail-fast 
+									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+# @brave coverage.html
 
-# 42_valgrind_ex01 				: 	fclean
-# 									@$(MAKE) -C $(42_EX01_PATH) VALGRIND
+42_valgrind_ex01 				: 	fclean
+									@$(MAKE) -C $(42_EX01_PATH) VALGRIND
 									
-# 42_valgrind_test_run_ex01		:	fclean
-# 									@$(MAKE) -s -C $(42_EX01_UT_PATH) VALGRIND
-# 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+42_valgrind_test_run_ex01		:	fclean
+									@$(MAKE) -s -C $(42_EX01_UT_PATH) VALGRIND
+									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 
 # **************************************************************************** #
 #																			   #
@@ -186,7 +190,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 6 5:30:03 PM 2025 Paradis
-## Last update Sat May 16 6:47:31 PM 2025 Paradis
+## Last update Tue May 19 4:39:18 PM 2025 Paradis
 ##
 
 # **************************************************************************** #
@@ -492,8 +496,8 @@ clean							:
 									$(RM) $(LOG)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX00_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX00_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX01_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX01_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX01_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX01_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX02_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX03_PATH)
@@ -516,8 +520,8 @@ clean							:
 fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX01_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX02_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX03_PATH)
