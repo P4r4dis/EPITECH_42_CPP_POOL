@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:59:06 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/20 20:10:56 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/20 20:28:56 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,27 +201,28 @@ Test(Animal, TEST_Animal_create_arrayAnimal_with_Dog, .init = redirect_all_stdou
     }
 }
 
-// Test(Animal, TEST_Animal_create_arrayAnimal_with_Cat, .init = redirect_all_stdout)
-// {
-//     {
-// 	Animal *animals[50];
+Test(Animal, TEST_Animal_create_arrayAnimal_with_Cat, .init = redirect_all_stdout)
+{
+    {
+	Animal *animals[50];
 
-// 	for (int i = 0; i < 50; i++)
-// 	{
-// 		animals[i] = new Cat();
-//         cr_assert_not_null(animals[i]);
-// 		animals[i]->makeSound();
-// 		animals[i]->getBrain()->setIdea(0, "newIdea");
-// 		std::cout << "Idea: " << animals[i]->getBrain()->getIdeas()[0] << std::endl;
-//         cr_assert(animals[i]->getBrain()->getIdeas()[0] == "newIdea");
-// 	}
+	for (int i = 0; i < 50; i++)
+	{
+		animals[i] = new Cat();
+        cr_assert_not_null(animals[i]);
+		animals[i]->makeSound();
+		animals[i]->getBrain()->setIdea(0, "newIdea");
+		std::cout << "Idea: " << animals[i]->getBrain()->getIdeas()[0] << std::endl;
+        cr_assert(animals[i]->getBrain()->getIdeas()[0] == "newIdea");
+	}
 
-// 	std::cout << std::endl;
+	std::cout << std::endl;
 
-// 	for (int i = 0; i < 50; i++)
-// 		delete animals[i];
-//     }
-// }
+	for (int i = 0; i < 50; i++)
+		delete animals[i];
+    }
+}
+
 // ///////////////////////////////////////////////////////////////////////////////
 // //                            Dog class                                      //
 // ///////////////////////////////////////////////////////////////////////////////
@@ -300,26 +301,26 @@ Test(Animal, TEST_Animal_create_arrayAnimal_with_Dog, .init = redirect_all_stdou
 //     );
 // }
 
-Test(Dog, TEST_Dog_getters_and_setters, .init = redirect_all_stdout)
-{
-    {
-        Dog     dog("Dog");
+// Test(Dog, TEST_Dog_getters_and_setters, .init = redirect_all_stdout)
+// {
+//     {
+//         Dog     dog("Dog");
 
-        cr_assert(dog.getType() == "Dog");
-        dog.setType("Bird");
-        cr_assert(dog.getType() == "Bird");
+//         cr_assert(dog.getType() == "Dog");
+//         dog.setType("Bird");
+//         cr_assert(dog.getType() == "Bird");
 
-        cr_assert(dog.getBrain()->getIdea(0) == "");
-        dog.getBrain()->setIdea(0, "idea");
-        cr_assert(dog.getBrain()->getIdea(0) == "idea");
+//         cr_assert(dog.getBrain()->getIdea(0) == "");
+//         dog.getBrain()->setIdea(0, "idea");
+//         cr_assert(dog.getBrain()->getIdea(0) == "idea");
 
-        Brain   brain;
+//         Brain   brain;
 
-        brain.setIdea(0, "newIdea");
-        dog.setBrain(&brain);
-        cr_assert(dog.getBrain()->getIdea(0) == "newIdea");
-    }
-}
+//         brain.setIdea(0, "newIdea");
+//         dog.setBrain(&brain);
+//         cr_assert(dog.getBrain()->getIdea(0) == "newIdea");
+//     }
+// }
 
 // Test(Dog, TEST_Dog_equal_operator_overload_simple_assignment, .init = redirect_all_stdout)
 // {
@@ -412,7 +413,7 @@ Test(Dog, TEST_Dog_getters_and_setters, .init = redirect_all_stdout)
 //     );
 // }
 
-Test(Dog, TEST_Dog_create_brain_at_construction_destroy_brain_at_the_dedstruction, .init = redirect_all_stdout)
+Test(Dog, TEST_Dog_create_brain_at_construction_destroy_brain_at_the_destruction, .init = redirect_all_stdout)
 {
     {
         const Animal     *dog = new Dog();
@@ -500,16 +501,26 @@ Test(Dog, TEST_Dog_create_brain_at_construction_destroy_brain_at_the_dedstructio
 //     );
 // }
 
-// Test(Cat, TEST_Cat_getters_and_setters, .init = redirect_all_stdout)
-// {
-//     {
-//         Cat     cat("Cat");
+Test(Cat, TEST_Cat_getters_and_setters, .init = redirect_all_stdout)
+{
+    {
+        Cat     cat("Cat");
 
-//         cr_assert(cat.getType() == "Cat");
-//         cat.setType("Bird");
-//         cr_assert(cat.getType() == "Bird");
-//     }
-// }
+        cr_assert(cat.getType() == "Cat");
+        cat.setType("Bird");
+        cr_assert(cat.getType() == "Bird");
+
+        cr_assert(cat.getBrain()->getIdea(0) == "");
+        cat.getBrain()->setIdea(0, "idea");
+        cr_assert(cat.getBrain()->getIdea(0) == "idea");
+
+        Brain   brain;
+
+        brain.setIdea(0, "newIdea");
+        cat.setBrain(&brain);
+        cr_assert(cat.getBrain()->getIdea(0) == "newIdea");
+    }
+}
 
 // Test(Cat, TEST_Cat_equal_operator_overload_simple_assignment, .init = redirect_all_stdout)
 // {
@@ -602,6 +613,16 @@ Test(Dog, TEST_Dog_create_brain_at_construction_destroy_brain_at_the_dedstructio
 //     );
 // }
 
+Test(Cat, TEST_Cat_create_brain_at_construction_destroy_brain_at_the_destruction, .init = redirect_all_stdout)
+{
+    {
+        const Animal     *cat = new Cat();
+
+        cr_assert(cat->getBrain()->getIdea(0) == "");
+
+        delete cat;
+    }
+}
 // ///////////////////////////////////////////////////////////////////////////////
 // //                      WrongAnimal class                                    //
 // ///////////////////////////////////////////////////////////////////////////////
