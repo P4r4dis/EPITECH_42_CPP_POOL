@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 17:26:22 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 19:52:02 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/20 19:50:07 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
     #include <string>
     #include "Animal.hpp"
+    #include "Brain.hpp"
+    
     class               Dog :   public Animal
     {
         public:
@@ -25,7 +27,11 @@
             virtual ~Dog(void);
             
             virtual void    makeSound(void) const;
+            
+            Brain           *getBrain(void) const;
+            void            setBrain(const Brain *brain);
         private:
+            Brain           *_brain;
     };
     
 #endif //               !_DOG_HPP__

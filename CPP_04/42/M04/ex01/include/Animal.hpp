@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:43:55 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 19:44:22 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/19 19:09:14 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
     #define             __ANIMAL_HPP__
 
     #include <string>
+    #include "Brain.hpp"
     class               Animal
     {
         public:
@@ -27,6 +28,7 @@
             void        setType(std::string type);
 
             virtual void        makeSound(void) const;
+            virtual Brain       *getBrain(void) const = 0;
         protected:
             std::string _type;
     };

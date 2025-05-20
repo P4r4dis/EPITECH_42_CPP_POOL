@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:59:06 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/19 18:26:12 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/20 20:10:56 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <criterion/new/assert.h>
 #include <criterion/redirect.h>
 #include <string>
+#include <iostream>
 
 #include "../../include/Animal.hpp"
 #include "../../include/Dog.hpp"
@@ -178,6 +179,49 @@ void redirect_all_stdout(void)
 //     );
 // }
 
+Test(Animal, TEST_Animal_create_arrayAnimal_with_Dog, .init = redirect_all_stdout)
+{
+    {
+	Animal *animals[50];
+
+	for (int i = 0; i < 50; i++)
+	{
+		animals[i] = new Dog();
+        cr_assert_not_null(animals[i]);
+		animals[i]->makeSound();
+		animals[i]->getBrain()->setIdea(0, "newIdea");
+		std::cout << "Idea: " << animals[i]->getBrain()->getIdeas()[0] << std::endl;
+        cr_assert(animals[i]->getBrain()->getIdeas()[0] == "newIdea");
+	}
+
+	std::cout << std::endl;
+
+	for (int i = 0; i < 50; i++)
+		delete animals[i];
+    }
+}
+
+// Test(Animal, TEST_Animal_create_arrayAnimal_with_Cat, .init = redirect_all_stdout)
+// {
+//     {
+// 	Animal *animals[50];
+
+// 	for (int i = 0; i < 50; i++)
+// 	{
+// 		animals[i] = new Cat();
+//         cr_assert_not_null(animals[i]);
+// 		animals[i]->makeSound();
+// 		animals[i]->getBrain()->setIdea(0, "newIdea");
+// 		std::cout << "Idea: " << animals[i]->getBrain()->getIdeas()[0] << std::endl;
+//         cr_assert(animals[i]->getBrain()->getIdeas()[0] == "newIdea");
+// 	}
+
+// 	std::cout << std::endl;
+
+// 	for (int i = 0; i < 50; i++)
+// 		delete animals[i];
+//     }
+// }
 // ///////////////////////////////////////////////////////////////////////////////
 // //                            Dog class                                      //
 // ///////////////////////////////////////////////////////////////////////////////
@@ -256,16 +300,26 @@ void redirect_all_stdout(void)
 //     );
 // }
 
-// Test(Dog, TEST_Dog_getters_and_setters, .init = redirect_all_stdout)
-// {
-//     {
-//         Dog     dog("Dog");
+Test(Dog, TEST_Dog_getters_and_setters, .init = redirect_all_stdout)
+{
+    {
+        Dog     dog("Dog");
 
-//         cr_assert(dog.getType() == "Dog");
-//         dog.setType("Bird");
-//         cr_assert(dog.getType() == "Bird");
-//     }
-// }
+        cr_assert(dog.getType() == "Dog");
+        dog.setType("Bird");
+        cr_assert(dog.getType() == "Bird");
+
+        cr_assert(dog.getBrain()->getIdea(0) == "");
+        dog.getBrain()->setIdea(0, "idea");
+        cr_assert(dog.getBrain()->getIdea(0) == "idea");
+
+        Brain   brain;
+
+        brain.setIdea(0, "newIdea");
+        dog.setBrain(&brain);
+        cr_assert(dog.getBrain()->getIdea(0) == "newIdea");
+    }
+}
 
 // Test(Dog, TEST_Dog_equal_operator_overload_simple_assignment, .init = redirect_all_stdout)
 // {
@@ -358,6 +412,16 @@ void redirect_all_stdout(void)
 //     );
 // }
 
+Test(Dog, TEST_Dog_create_brain_at_construction_destroy_brain_at_the_dedstruction, .init = redirect_all_stdout)
+{
+    {
+        const Animal     *dog = new Dog();
+
+        cr_assert(dog->getBrain()->getIdea(0) == "");
+
+        delete dog;
+    }
+}
 // ///////////////////////////////////////////////////////////////////////////////
 // //                            Cat class                                      //
 // ///////////////////////////////////////////////////////////////////////////////
@@ -1004,7 +1068,7 @@ Test(Brain, TEST_Brain_equal_operator_overload_assignment_after_modified_an_obje
     }
 }
 
-Test(WrongCat, TEST_WrongCat_equal_operator_overload_return_assignment, .init = redirect_all_stdout)
+Test(Brain, TEST_Brain_equal_operator_overload_return_assignment, .init = redirect_all_stdout)
 {
     {
         Brain     brain;
@@ -1026,7 +1090,6 @@ Test(WrongCat, TEST_WrongCat_equal_operator_overload_return_assignment, .init = 
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
-// #include <iostream>
 // Test(main, Test_main, .init = redirect_all_stdout)
 // {
     
