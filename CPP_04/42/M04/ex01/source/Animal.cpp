@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:50:17 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 19:20:16 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/21 03:15:00 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include <iostream>
 #include <string>
 
-Animal::Animal(void)    :   _type("Unknown")
-{
-    std::cout   <<  "Animal Default Constructor created an " 
-                << _type << " animal." << std::endl;
-}
+// Animal::Animal(void)    :   _type("Unknown")
+// {
+//     std::cout   <<  "Animal Default Constructor created an " 
+//                 << _type << " animal." << std::endl;
+// }
 
 Animal::Animal(std::string type)    :   _type(type)
 {
@@ -57,7 +57,7 @@ void                Animal::setType(std::string type)
     _type = type;
 }
 
-void                Animal::makeSound(void) const
-{
-    std::cout   << _type << " animal sound." << std::endl;
-}
+// void                Animal::makeSound(void) const
+// {
+//     std::cout   << _type << " animal sound." << std::endl;
+// }

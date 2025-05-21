@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:31:28 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/16 20:27:02 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/21 03:19:25 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,26 @@
 
 int main()
 {
-    const Animal    *meta = new Animal();
-    const Animal    *j = new Dog();
-    const Animal    *i = new Cat();
+    Animal *animals[100];
 
-    std::cout << j->getType() << " " << std::endl;
-    std::cout << i->getType() << " " << std::endl;
+    for (int i = 0; i < 100; i++)
+    {
+        if (i % 2)
+        {
+            animals[i] = new Dog();
+            animals[i]->getBrain()->setIdea(0, "Dog Idea");
+        }
+        else
+        {
+            animals[i] = new Cat();
+            animals[i]->getBrain()->setIdea(0, "Cat Idea");
+        }
+        animals[i]->makeSound();
+        std::cout << "Idea: " << animals[i]->getBrain()->getIdeas()[0] << std::endl;
+    }
 
-    i->makeSound(); //will output the cat sound!
-    j->makeSound();
-    meta->makeSound();
-
-    const WrongAnimal   *wrongMeta = new WrongAnimal();
-    const WrongAnimal   *wrongCat = new WrongCat();
-
-    std::cout << wrongMeta->getType() << " " << std::endl;
-    std::cout << wrongCat->getType() << " " << std::endl;
+    for (int i = 0; i < 100; i++)
+        delete animals[i];
     
-    wrongMeta->makeSound(); //will output the WrongAnimal sound!
-    wrongCat->makeSound(); //will output the WrongAnimal sound!
-
-    delete meta;
-    delete j;
-    delete i;
-    delete wrongMeta;
-    delete wrongCat;
-
     return 0;
 }
