@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 17:02:13 by Paradis           #+#    #+#              #
-#    Updated: 2025/05/21 03:27:59 by Paradis          ###   ########.fr        #
+#    Updated: 2025/05/21 17:14:13 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -147,15 +147,12 @@
 42_EX03_INC_PATH				=	./42/M04/ex03/include
 42_EX03_UT_PATH					=	./42/M04/ex03/test
 
-42_EX03_NAME					=	DiamondTrap
+42_EX03_NAME					=	Interface_and_Recap
 
 42_EX03_UT_SRC					=	$(42_EX03_UT_PATH)/$(42_EX03_NAME)_test.cpp
 42_EX03_UT_NAME 				= 	test_$(42_EX03_NAME)
 
-42_EX03_SRC						=	$(42_EX03_SRC_PATH)/Animal.cpp \
-									$(42_EX03_SRC_PATH)/ScavTrap.cpp \
-									$(42_EX03_SRC_PATH)/FragTrap.cpp \
-									$(42_EX03_SRC_PATH)/DiamondTrap.cpp \
+42_EX03_SRC						=	$(42_EX03_SRC_PATH)/Character.cpp \
 									$(42_EX03_BIN_PATH)/main.cpp
 42_EX03_OBJS					=	$(42_EX03_SRC:.cpp=.o)
 
@@ -193,7 +190,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 6 5:30:03 PM 2025 Paradis
-## Last update Thu May 21 3:27:59 AM 2025 Paradis
+## Last update Thu May 21 5:14:13 PM 2025 Paradis
 ##
 
 # **************************************************************************** #
@@ -503,8 +500,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX02_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX03_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX03_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX03_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX03_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_UT_PATH)	
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX01_PATH)
@@ -527,8 +524,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX03_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX03_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX03_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX03_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX01_PATH)
