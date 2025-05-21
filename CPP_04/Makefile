@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 17:02:13 by Paradis           #+#    #+#              #
-#    Updated: 2025/05/19 16:39:18 by Paradis          ###   ########.fr        #
+#    Updated: 2025/05/21 03:27:59 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,14 +106,17 @@
 42_EX02_INC_PATH				=	./42/M04/ex02/include
 42_EX02_UT_PATH					=	./42/M04/ex02/test
 
-42_EX02_NAME					=	FragTrap
+42_EX02_NAME					=	Aanimal
 
 42_EX02_UT_SRC					=	$(42_EX02_UT_PATH)/$(42_EX02_NAME)_test.cpp
 42_EX02_UT_NAME 				= 	test_$(42_EX02_NAME)
 
-42_EX02_SRC						=	$(42_EX02_SRC_PATH)/Animal.cpp \
-									$(42_EX02_SRC_PATH)/ScavTrap.cpp \
-									$(42_EX02_SRC_PATH)/FragTrap.cpp \
+42_EX02_SRC						=	$(42_EX02_SRC_PATH)/Aanimal.cpp \
+									$(42_EX02_SRC_PATH)/Dog.cpp \
+									$(42_EX02_SRC_PATH)/Cat.cpp \
+									$(42_EX02_SRC_PATH)/WrongAnimal.cpp \
+									$(42_EX02_SRC_PATH)/WrongCat.cpp \
+									$(42_EX02_SRC_PATH)/Brain.cpp \
 									$(42_EX02_BIN_PATH)/main.cpp
 42_EX02_OBJS					=	$(42_EX02_SRC:.cpp=.o)
 
@@ -190,7 +193,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 6 5:30:03 PM 2025 Paradis
-## Last update Tue May 19 4:39:18 PM 2025 Paradis
+## Last update Thu May 21 3:27:59 AM 2025 Paradis
 ##
 
 # **************************************************************************** #
@@ -498,8 +501,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(42_EX00_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX02_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX02_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX03_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX03_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_PATH)
@@ -522,8 +525,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX02_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX03_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX03_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_PATH)
