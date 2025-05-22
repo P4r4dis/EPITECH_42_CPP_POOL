@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:41 by Paradis           #+#    #+#              #
-#    Updated: 2025/05/21 20:23:41 by Paradis          ###   ########.fr        #
+#    Updated: 2025/05/22 20:12:11 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ CRITFLAGS    	+=  --coverage -lcriterion
 CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -Wshadow -Wno-shadow $(CPP_VERSION) $(INCFLAGS) $(CRITFLAGS)
 
 SRCS         	= 	$(SRC_PATH)/AMateria.cpp \
+					$(SRC_PATH)/Ice.cpp \
+					$(SRC_PATH)/Cure.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)

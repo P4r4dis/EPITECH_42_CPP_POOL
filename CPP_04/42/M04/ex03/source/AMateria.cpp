@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 20:22:55 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/21 20:38:47 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/22 20:19:01 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,9 @@ AMateria::~AMateria(void)
 std::string const   &AMateria::getType(void) const
 {
     return _type;
+}
+
+void                AMateria::use(ICharacter &target)
+{
+    (void) target;
 }

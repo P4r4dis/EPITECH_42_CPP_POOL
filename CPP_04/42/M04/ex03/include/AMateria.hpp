@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 20:08:10 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/21 20:38:50 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/22 20:18:08 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #define                     __AMATERIA_HPP__
 
 #include <string>
+
+class ICharacter;
+
 class                       AMateria
 {
     public:
@@ -24,9 +27,9 @@ class                       AMateria
         virtual ~AMateria(void);
 
         std::string const   &getType(void) const; //Returns the materia type
-        // virtual AMateria    *clone(void) const = 0;
-        // virtual void        use(ICharacter& target);
-    private:
+        virtual AMateria    *clone(void) const = 0;
+        virtual void        use(ICharacter& target);
+    protected:
         std::string         _type;
 };
 #endif   //              !_AMATERIA_HPP__
