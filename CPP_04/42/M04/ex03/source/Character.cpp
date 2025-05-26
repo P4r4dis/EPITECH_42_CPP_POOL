@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:07:36 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/26 18:23:23 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/26 21:33:52 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ void                    Character::equip(AMateria *m)
             if (!_inventory[i])
             {
                 _inventory[i] = m;
-                std::cout   << "Emplacement " << i << " is equiped." << std::endl;
+                // std::cout   << "Emplacement " << i << " is equiped." << std::endl;
                 return ;
             }   
         }
-
+        
         for (int i = 0; i < INVENTORY_SIZE; ++i)
             if (_inventory[i] && i == INVENTORY_SIZE - 1)
                 std::cout   << "Inventory is full." << std::endl;
@@ -124,8 +124,8 @@ void                    Character::use(int idx, ICharacter &target)
         if (_inventory[idx])
         {
             _inventory[idx]->use(target);
-            std::cout   << "Materia at the index: " 
-                        << idx << " is used." << std::endl;
+            // std::cout   << "Materia at the index: " 
+            //             << idx << " is used." << std::endl;
         }
         else
             std::cout   << "Emplacement " << idx << " is empty." << std::endl;

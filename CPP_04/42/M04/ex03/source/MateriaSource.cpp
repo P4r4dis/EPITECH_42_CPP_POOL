@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:56:37 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/26 20:33:19 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/26 21:27:20 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,3 +92,4 @@ AMateria                *MateriaSource::createMateria(std::string const &type)
     }
     return 0;
 }
+

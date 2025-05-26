@@ -6,9 +6,15 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:31:28 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/21 20:01:22 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/26 20:49:16 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../include/IMateriaSource.hpp"
+#include "../include/MateriaSource.hpp"
+#include "../include/Character.hpp"
+#include "../include/Cure.hpp"
+#include "../include/Ice.hpp"
 
 int main()
 {

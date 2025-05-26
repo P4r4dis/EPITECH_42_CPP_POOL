@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 20:05:30 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/26 20:36:13 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/26 21:39:13 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -631,13 +631,13 @@ Test(Character, equip_method_can_equip_materia_should_display_msg, .init = redir
         delete me;
         delete tmp;
     }
-    cr_assert_stdout_eq_str
-    (
-        "Emplacement 0 is equiped.\n"
-        "Emplacement 1 is equiped.\n"
-        "Emplacement 2 is equiped.\n"
-        "Emplacement 3 is equiped.\n"
-    );
+    // cr_assert_stdout_eq_str
+    // (
+    //     "Emplacement 0 is equiped.\n"
+    //     "Emplacement 1 is equiped.\n"
+    //     "Emplacement 2 is equiped.\n"
+    //     "Emplacement 3 is equiped.\n"
+    // );
 }
 
 Test(Character, equip_method_with_full_inventory_should_display_msg, .init = redirect_all_stdout) 
@@ -659,10 +659,10 @@ Test(Character, equip_method_with_full_inventory_should_display_msg, .init = red
     }
     cr_assert_stdout_eq_str
     (
-        "Emplacement 0 is equiped.\n"
-        "Emplacement 1 is equiped.\n"
-        "Emplacement 2 is equiped.\n"
-        "Emplacement 3 is equiped.\n"
+        // "Emplacement 0 is equiped.\n"
+        // "Emplacement 1 is equiped.\n"
+        // "Emplacement 2 is equiped.\n"
+        // "Emplacement 3 is equiped.\n"
         "Inventory is full.\n"
         "Inventory is full.\n"
     );
@@ -697,10 +697,10 @@ Test(Character, unequip_method_can_unequip_materia_display_msg, .init = redirect
     }
     cr_assert_stdout_eq_str
     (
-        "Emplacement 0 is equiped.\n"
-        "Emplacement 1 is equiped.\n"
-        "Emplacement 2 is equiped.\n"
-        "Emplacement 3 is equiped.\n"
+        // "Emplacement 0 is equiped.\n"
+        // "Emplacement 1 is equiped.\n"
+        // "Emplacement 2 is equiped.\n"
+        // "Emplacement 3 is equiped.\n"
         "Emplacement 0 is unequipped.\n"
         "Emplacement 1 is unequipped.\n"
         "Emplacement 2 is unequipped.\n"
@@ -731,7 +731,7 @@ Test(Character, unequip_method_try_to_unequip_empty_slot_display_msg, .init = re
 
     cr_assert_stdout_eq_str
     (
-        "Emplacement 0 is equiped.\n"
+        // "Emplacement 0 is equiped.\n"
         "Emplacement 0 is unequipped.\n"
         "Emplacement 0 is empty.\n"
         "Emplacement 1 is empty.\n"
@@ -755,7 +755,7 @@ Test(Character, unequip_method_use_wrong_index_display_msg, .init = redirect_all
     }
     cr_assert_stdout_eq_str
     (
-        "Emplacement 0 is equiped.\n"
+        // "Emplacement 0 is equiped.\n"
         "No slot at the index.\n"
         "No slot at the index.\n"
     );
@@ -819,18 +819,18 @@ Test(Character, use_method_use_materia_display_msg, .init = redirect_all_stdout)
     }
     cr_assert_stdout_eq_str
     (
-        "Emplacement 0 is equiped.\n"
-        "Emplacement 1 is equiped.\n"
-        "Emplacement 2 is equiped.\n"
-        "Emplacement 3 is equiped.\n"
+        // "Emplacement 0 is equiped.\n"
+        // "Emplacement 1 is equiped.\n"
+        // "Emplacement 2 is equiped.\n"
+        // "Emplacement 3 is equiped.\n"
         "* heals me's wounds *\n"
-        "Materia at the index: 0 is used.\n"
+        // "Materia at the index: 0 is used.\n"
         "* heals me's wounds *\n"
-        "Materia at the index: 1 is used.\n"
+        // "Materia at the index: 1 is used.\n"
         "* heals me's wounds *\n"
-        "Materia at the index: 2 is used.\n"
+        // "Materia at the index: 2 is used.\n"
         "* heals me's wounds *\n"
-        "Materia at the index: 3 is used.\n"
+        // "Materia at the index: 3 is used.\n"
     );
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -997,30 +997,36 @@ Test(MateriaSource, createMateria_with_unknown_type_return_zero, .init = redirec
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
-// Test(main, Test_main)//, .init = redirect_all_stdout)
-// {
-    
-//     {       
-        // IMateriaSource  src = new MateriaSource();
+Test(main, Test_main, .init = redirect_all_stdout)
+{
+    {       
+        IMateriaSource  *src = new MateriaSource();
 
-        // src.learnMateria(new Cure());
-//         // src.learnMateria(new Cure());
+        src->learnMateria(new Ice());
+        src->learnMateria(new Cure());
 
-//         ICharacter      *me = new Character("me");
-        // AMateria        *tmp = new Ice;
-        // // tmp = src.createMateria("cure");
-//         me->equip(tmp);
-//         me->equip(tmp);
+        ICharacter      *me = new Character("me");
+        AMateria        *tmp;
 
-//         ICharacter      *bob = new Character("bob");
+        tmp = src->createMateria("ice");
+        me->equip(tmp);
+        tmp = src->createMateria("cure");
+        me->equip(tmp);
 
-//         me->use(0, *bob);
-//         me->use(1, *bob);
-        
-//         delete bob;
-//         delete me;
-//         // delete src;
-//     }
-// }
+        ICharacter  *bob = new Character("bob");
+
+        me->use(0, *bob);
+        me->use(1, *bob);
+
+        delete bob;
+        delete me;
+        delete src;
+    }
+    cr_assert_stdout_eq_str
+    (
+        "* shoots an ice bolt at bob *\n"
+        "* heals bob's wounds *\n"
+    );
+}
 
 
