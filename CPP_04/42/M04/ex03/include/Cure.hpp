@@ -13,6 +13,7 @@
 #ifndef                 __CURE_HPP__
 #define                 __CURE_HPP__
 #include "AMateria.hpp"
+#include "ICharacter.hpp"
 #include <string>
 
 class                   Cure    :   public AMateria
@@ -25,6 +26,6 @@ class                   Cure    :   public AMateria
         virtual ~Cure(void);
 
         virtual Cure    *clone(void) const;
-        // virtual void    use(ICharacter &target);
+        virtual void    use(ICharacter &target);
 };
 #endif //               !_CURE_HPP__
