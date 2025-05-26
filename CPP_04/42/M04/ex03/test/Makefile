@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:41 by Paradis           #+#    #+#              #
-#    Updated: 2025/05/22 21:53:51 by Paradis          ###   ########.fr        #
+#    Updated: 2025/05/26 19:15:27 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS         	= 	$(SRC_PATH)/AMateria.cpp \
 					$(SRC_PATH)/Ice.cpp \
 					$(SRC_PATH)/Cure.cpp \
 					$(SRC_PATH)/Character.cpp \
+					$(SRC_PATH)/MateriaSource.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)

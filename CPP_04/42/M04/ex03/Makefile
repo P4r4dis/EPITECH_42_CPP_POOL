@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:59 by Paradis           #+#    #+#              #
-#    Updated: 2025/05/22 21:53:59 by Paradis          ###   ########.fr        #
+#    Updated: 2025/05/26 19:15:33 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS		=	$(SRC_PATH)/AMateria.cpp \
 				$(SRC_PATH)/Ice.cpp \
 				$(SRC_PATH)/Cure.cpp \
 				$(SRC_PATH)/Character.cpp \
+				$(SRC_PATH)/MateriaSource.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp

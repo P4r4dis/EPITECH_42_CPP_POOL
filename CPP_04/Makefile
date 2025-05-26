@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 17:02:13 by Paradis           #+#    #+#              #
-#    Updated: 2025/05/22 21:54:10 by Paradis          ###   ########.fr        #
+#    Updated: 2025/05/26 19:15:52 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -156,6 +156,7 @@
 									$(42_EX03_SRC_PATH)/Ice.cpp \
 									$(42_EX03_SRC_PATH)/Cure.cpp \
 									$(42_EX03_SRC_PATH)/Character.cpp \
+									$(42_EX03_SRC_PATH)/MateriaSource.cpp \
 									$(42_EX03_BIN_PATH)/main.cpp
 42_EX03_OBJS					=	$(42_EX03_SRC:.cpp=.o)
 
@@ -193,7 +194,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 6 5:30:03 PM 2025 Paradis
-## Last update Fri May 22 9:54:10 PM 2025 Paradis
+## Last update Tue May 26 7:15:52 PM 2025 Paradis
 ##
 
 # **************************************************************************** #

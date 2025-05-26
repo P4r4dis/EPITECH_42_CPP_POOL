@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 20:05:30 by Paradis           #+#    #+#             */
-/*   Updated: 2025/05/26 18:20:26 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/05/26 20:36:13 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "../../include/Cure.hpp"
 #include "../../include/ICharacter.hpp"
 #include "../../include/Character.hpp"
+#include "../../include/MateriaSource.hpp"
 
 void redirect_all_stdout(void)
 {
@@ -371,9 +372,9 @@ Test(Ice, use_method_display_msg, .init = redirect_all_stdout)
     );
 }
 
-///////////////////////////////////////////////////////////////////////////////
-//                            Cure class                                      //
-///////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+//                          Cure class                                     //
+/////////////////////////////////////////////////////////////////////////////
 Test(Cure, TEST_Cure_Default_CTOR_isDefined, .init = redirect_all_stdout)
 {
     {
@@ -832,8 +833,167 @@ Test(Character, use_method_use_materia_display_msg, .init = redirect_all_stdout)
         "Materia at the index: 3 is used.\n"
     );
 }
-////NOT FINIDHED 
+///////////////////////////////////////////////////////////////////////////////
+//                            MateriaSource class                            //
+///////////////////////////////////////////////////////////////////////////////
 
+Test(MateriaSource, TEST_MateriaSource_Default_CTOR_isDefined, .init = redirect_all_stdout)
+{
+    {
+        MateriaSource    materiaSource;
+
+        cr_assert_not_null(&materiaSource);
+    }
+}
+
+Test(MateriaSource, TEST_MateriaSource_Copy_CTOR_isDefined, .init = redirect_all_stdout)
+{
+    {
+        MateriaSource    materiaSource;
+        MateriaSource    cpyMateriaSource(materiaSource);
+
+        cr_assert_not_null(&materiaSource);
+        cr_assert_not_null(&cpyMateriaSource);
+    }
+}
+
+Test(MateriaSource, default_constructor, .init = redirect_all_stdout)
+{
+    {    
+        MateriaSource    materiaSource;
+
+        for (int i = 0; i < STOCK_SIZE; ++i)
+            cr_assert_null(materiaSource.getMateria(i));
+    }
+}
+
+ 
+Test(MateriaSource, copy_constructor, .init = redirect_all_stdout)
+{
+    {
+        MateriaSource    materiaSource;
+
+        materiaSource.learnMateria(new Cure);
+
+        AMateria *materia = materiaSource.createMateria("cure");
+        MateriaSource    cpyMateriaSource(materiaSource);
+        
+        cr_assert(cpyMateriaSource.getMateria(0)->getType() == "cure");
+        for (int i = 0; i < STOCK_SIZE; ++i)
+        {
+            if (cpyMateriaSource.getMateria(i))
+                cr_assert(cpyMateriaSource.getMateria(i)->getType() == materiaSource.getMateria(i)->getType());
+            else
+            {
+                cr_assert_null(cpyMateriaSource.getMateria(i));
+                cr_assert_null(materiaSource.getMateria(i));
+            }
+        }
+        delete materia;
+    }
+}
+
+Test(MateriaSource, assignment_operator, .init = redirect_all_stdout)
+{
+    {
+        MateriaSource    materiaSource;
+
+        materiaSource.learnMateria(new Cure);
+
+        AMateria *materia = materiaSource.createMateria("cure");
+        MateriaSource    assigned;
+
+
+        assigned = materiaSource;
+        materiaSource = assigned;
+        cr_assert(assigned.getMateria(0)->getType() == "cure");
+        for (int i = 0; i < STOCK_SIZE; ++i)
+        {
+            if (assigned.getMateria(i))
+                cr_assert(assigned.getMateria(i)->getType() == materiaSource.getMateria(i)->getType());
+            else
+            {
+                cr_assert_null(assigned.getMateria(i));
+                cr_assert_null(materiaSource.getMateria(i));
+            }
+        }
+
+        delete materia;
+    }
+}
+
+Test(MateriaSource, destructor, .init = redirect_all_stdout)
+{
+    MateriaSource    materiaSource;
+    
+    cr_assert(true, "Destructor has no crash");
+}
+
+Test(MateriaSource, getMateria_with_wrong_index, .init = redirect_all_stdout)
+{
+    MateriaSource    materiaSource;
+    
+    cr_assert_null(materiaSource.getMateria(-1));
+    cr_assert_null(materiaSource.getMateria(4));
+    cr_assert_null(materiaSource.getMateria(42));
+}
+
+Test(MateriaSource, getMateria_return_materia, .init = redirect_all_stdout)
+{
+        MateriaSource    materiaSource;
+
+        materiaSource.learnMateria(new Cure);
+    
+        cr_assert(materiaSource.getMateria(0)->getType() == "cure");
+}
+
+Test(MateriaSource, learnMateria_delete_materia, .init = redirect_all_stdout)
+{
+        MateriaSource    materiaSource;
+
+        materiaSource.learnMateria(new Cure);
+        materiaSource.learnMateria(new Cure);
+        materiaSource.learnMateria(new Cure);
+        materiaSource.learnMateria(new Cure);
+        materiaSource.learnMateria(new Cure); // delete materia
+}
+
+Test(MateriaSource, learnMateria, .init = redirect_all_stdout)
+{
+        MateriaSource    materiaSource;
+
+        materiaSource.learnMateria(new Cure);
+        cr_assert(materiaSource.getMateria(0)->getType() == "cure");
+}
+
+Test(MateriaSource, createMateria, .init = redirect_all_stdout)
+{
+    {
+        MateriaSource    materiaSource;
+
+        materiaSource.learnMateria(new Cure);
+
+        AMateria *materia = materiaSource.createMateria("cure");
+
+        cr_assert(materia->getType() == "cure");
+        delete materia;
+    }
+}
+
+Test(MateriaSource, createMateria_with_unknown_type_return_zero, .init = redirect_all_stdout)
+{
+    {
+        MateriaSource    materiaSource;
+
+        materiaSource.learnMateria(new Cure);
+
+        AMateria *materia = materiaSource.createMateria("Unknown");
+
+        cr_assert_null(materia);
+        
+        delete materia;
+    }
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
@@ -841,14 +1001,14 @@ Test(Character, use_method_use_materia_display_msg, .init = redirect_all_stdout)
 // {
     
 //     {       
-//         // IMateriaSource  src = new MateriaSource();
+        // IMateriaSource  src = new MateriaSource();
 
-//         // src.learnMateria(new Cure());
+        // src.learnMateria(new Cure());
 //         // src.learnMateria(new Cure());
 
 //         ICharacter      *me = new Character("me");
-//         AMateria        *tmp = new Ice;
-//         // tmp = src.createMateria("cure");
+        // AMateria        *tmp = new Ice;
+        // // tmp = src.createMateria("cure");
 //         me->equip(tmp);
 //         me->equip(tmp);
 
