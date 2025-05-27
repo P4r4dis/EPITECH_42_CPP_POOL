@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 27 5:16:39 PM 2025 Paradis
-** Last update Wed May 27 5:34:44 PM 2025 Paradis
+** Last update Wed May 27 8:30:54 PM 2025 Paradis
 */
 
 #ifndef 			__AFRUIT_HPP__
@@ -15,6 +15,10 @@
 class	            AFruit  :   public IFruit
 {
     public:
+        AFruit(void) = delete;
+        AFruit(const std::string& name, unsigned int vitamins, bool peeled = false);
+        AFruit(const AFruit& aFruit) = delete;
+        AFruit      &operator=(const AFruit& aFruit) = delete;
         virtual ~AFruit() {}
 
         virtual unsigned int    getVitamins(void) const;
@@ -28,4 +32,4 @@ class	            AFruit  :   public IFruit
     private:
 };
 
-#endif 				/* !__AFRUIT_HPP___ */
+#endif 				/* !__AFRUIT_HPP__ */

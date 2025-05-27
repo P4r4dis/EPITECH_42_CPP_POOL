@@ -5,11 +5,11 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 27 4:20:12 PM 2025 Paradis
-** Last update Wed May 27 5:06:14 PM 2025 Paradis
+** Last update Wed May 27 7:18:30 PM 2025 Paradis
 */
 
 #include "../include/IFruit.hpp"
-#include <ios>
+#include <ostream>
 
 std::ostream        &operator<<(std::ostream &os, const IFruit &fruit)
 {

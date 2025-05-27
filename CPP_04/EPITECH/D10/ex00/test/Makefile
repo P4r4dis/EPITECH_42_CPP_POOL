@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:01:46 PM 2025 Paradis
-## Last update Wed May 27 5:32:40 PM 2025 Paradis
+## Last update Wed May 27 8:24:58 PM 2025 Paradis
 ##
 
 
@@ -25,6 +25,7 @@ CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -Wshadow -Wno-shado
 
 SRCS         	= 	$(SRC_PATH)/IFruit.cpp \
 					$(SRC_PATH)/AFruit.cpp \
+					$(SRC_PATH)/ABerry.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)

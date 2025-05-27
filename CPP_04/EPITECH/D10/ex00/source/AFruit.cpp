@@ -5,10 +5,16 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 27 5:24:21 PM 2025 Paradis
-** Last update Wed May 27 5:52:11 PM 2025 Paradis
+** Last update Wed May 27 8:24:27 PM 2025 Paradis
 */
 
 #include "../include/AFruit.hpp"
+
+AFruit::AFruit(const std::string& name, unsigned int vitamins, bool peeled)
+            :   _vitamins(vitamins),
+                _name(name),
+                _peeled(peeled)
+{}
 
 unsigned int        AFruit::getVitamins(void) const
 {
@@ -27,6 +33,6 @@ bool                AFruit::isPeeled(void) const
 
 void                AFruit::peel()
 {
-    if (_peeled == false)
+    if (!_peeled)
         _peeled = true;
 }

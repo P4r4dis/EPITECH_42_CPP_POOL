@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:02:37 PM 2025 Paradis
-## Last update Wed May 27 5:32:54 PM 2025 Paradis
+## Last update Wed May 27 8:25:03 PM 2025 Paradis
 ##
 
 
@@ -30,6 +30,7 @@ CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -Wshadow -Wno-shadow $(C
 # # Files sources
 SRCS		=	$(SRC_PATH)/IFruit.cpp \
 				$(SRC_PATH)/AFruit.cpp \
+				$(SRC_PATH)/ABerry.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp
