@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 27 3:53:48 PM 2025 Paradis
-** Last update Wed May 27 5:41:05 PM 2025 Paradis
+** Last update Wed May 27 5:54:40 PM 2025 Paradis
 */
 
 
@@ -34,29 +34,38 @@ class Dummy : public AFruit
 
 Test(IFruit, TEST_left_stream_operator_overload_ostream, .init = redirect_all_stdout)
 {
-    
     {
         Dummy fruit;
 
         std::cout << fruit << std::endl;
-
     }
-    cr_assert_stdout_eq_str(
-        "[name: \"DummyFruit\", vitamins: 10, peeled: false]\n"
+    cr_assert_stdout_eq_str
+    (
+        "[name: \"DummyFruit\", vitamins: 0, peeled: false]\n"
     );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 //                            AFruit class                                   //
 ///////////////////////////////////////////////////////////////////////////////
-Test(AFruit, TEST_getVitamins_return_vitamins, .init = redirect_all_stdout)
+Test(AFruit, TEST_getVitamins_return_zero_if_fruit_is_not_peeled,
+.init = redirect_all_stdout)
 {
-    
     {
         Dummy fruit;
 
-        cr_assert(fruit.getVitamins() == 10);
+        cr_assert(fruit.getVitamins() == 0);
+    }
+}
 
+Test(AFruit, TEST_getVitamins_return_vitamins_if_fruit_is_peeled,
+.init = redirect_all_stdout)
+{
+    {
+        Dummy fruit;
+
+        fruit.peel();
+        cr_assert(fruit.getVitamins() == 10);
     }
 }
 
@@ -119,7 +128,7 @@ Test(AFruit, TEST_left_stream_operator_overload_ostream, .init = redirect_all_st
 
     }
     cr_assert_stdout_eq_str(
-        "[name: \"DummyFruit\", vitamins: 10, peeled: false]\n"
+        "[name: \"DummyFruit\", vitamins: 0, peeled: false]\n"
     );
 }
 ///////////////////////////////////////////////////////////////////////////////

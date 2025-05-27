@@ -5,14 +5,14 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 27 5:24:21 PM 2025 Paradis
-** Last update Wed May 27 5:39:49 PM 2025 Paradis
+** Last update Wed May 27 5:52:11 PM 2025 Paradis
 */
 
 #include "../include/AFruit.hpp"
 
 unsigned int        AFruit::getVitamins(void) const
 {
-    return _vitamins;
+    return _peeled ? _vitamins : 0;
 }
 
 std::string         AFruit::getName(void) const
