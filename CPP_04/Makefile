@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 17:02:13 by Paradis           #+#    #+#              #
-#    Updated: 2025/05/26 19:15:52 by Paradis          ###   ########.fr        #
+#    Updated: 2025/05/27 17:04:00 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -186,34 +186,34 @@
 
 
 
-
 ##
-## Makefile for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_03
+## Makefile for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_04
 ##
 ## Made by Paradis
 ## Login   <Adil Denia>
 ##
-## Started on  Tue May 6 5:30:03 PM 2025 Paradis
-## Last update Tue May 26 7:15:52 PM 2025 Paradis
+## Started on  Tue May 27 5:03:01 PM 2025 Paradis
+## Last update Wed May 27 5:04:00 PM 2025 Paradis
 ##
+
 
 # **************************************************************************** #
 #																			   #
 #								EPITECH EX00								   #
 #																			   #
 # **************************************************************************** #
-EPITECH_EX00_PATH 				= 	./EPITECH/D09/ex00
-EPITECH_EX00_BIN_PATH 			= 	./EPITECH/D09/ex00/bin
-EPITECH_EX00_SRC_PATH			=	./EPITECH/D09/ex00/source
-EPITECH_EX00_INC_PATH			=	./EPITECH/D09/ex00/include
-EPITECH_EX00_UT_PATH			=	./EPITECH/D09/ex00/test
+EPITECH_EX00_PATH 				= 	./EPITECH/D10/ex00
+EPITECH_EX00_BIN_PATH 			= 	./EPITECH/D10/ex00/bin
+EPITECH_EX00_SRC_PATH			=	./EPITECH/D10/ex00/source
+EPITECH_EX00_INC_PATH			=	./EPITECH/D10/ex00/include
+EPITECH_EX00_UT_PATH			=	./EPITECH/D10/ex00/test
 
-EPITECH_EX00_NAME				=	Peasant
+EPITECH_EX00_NAME				=	Fruits
 
 EPITECH_EX00_UT_SRC				=	$(EPITECH_EX00_UT_PATH)/$(EPITECH_EX00_NAME)_test.cpp
 EPITECH_EX00_UT_NAME 			= 	test_$(EPITECH_EX00_NAME)
 
-EPITECH_EX00_SRC				=	$(EPITECH_EX00_SRC_PATH)/Peasant.cpp \
+EPITECH_EX00_SRC				=	$(EPITECH_EX00_SRC_PATH)/IFruit.cpp \
 									$(EPITECH_EX00_BIN_PATH)/main.cpp
 EPITECH_EX00_OBJS				=	$(EPITECH_EX00_SRC:.cpp=.o)
 
@@ -506,8 +506,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX03_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX03_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_UT_PATH)	
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_UT_PATH)	
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX01_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX01_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX02_PATH)
@@ -530,8 +530,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX03_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX03_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX01_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX01_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX02_PATH)
