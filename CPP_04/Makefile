@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 17:02:13 by Paradis           #+#    #+#              #
-#    Updated: 2025/05/27 20:25:24 by Paradis          ###   ########.fr        #
+#    Updated: 2025/05/27 21:05:46 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -193,7 +193,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:03:01 PM 2025 Paradis
-## Last update Wed May 27 8:25:24 PM 2025 Paradis
+## Last update Wed May 27 9:05:46 PM 2025 Paradis
 ##
 
 
@@ -216,6 +216,8 @@ EPITECH_EX00_UT_NAME 			= 	test_$(EPITECH_EX00_NAME)
 EPITECH_EX00_SRC				=	$(EPITECH_EX00_SRC_PATH)/IFruit.cpp \
 									$(EPITECH_EX00_SRC_PATH)/AFruit.cpp \
 									$(EPITECH_EX00_SRC_PATH)/ABerry.cpp \
+									$(EPITECH_EX00_SRC_PATH)/ACitrus.cpp \
+									$(EPITECH_EX00_SRC_PATH)/ANut.cpp \
 									$(EPITECH_EX00_BIN_PATH)/main.cpp
 EPITECH_EX00_OBJS				=	$(EPITECH_EX00_SRC:.cpp=.o)
 

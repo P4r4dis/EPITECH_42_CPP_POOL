@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 27 3:53:48 PM 2025 Paradis
-** Last update Wed May 27 8:23:40 PM 2025 Paradis
+** Last update Wed May 27 9:10:26 PM 2025 Paradis
 */
 
 
@@ -20,16 +20,29 @@
 #include "../../include/IFruit.hpp"
 #include "../../include/AFruit.hpp"
 #include "../../include/ABerry.hpp"
+#include "../../include/ACitrus.hpp"
+#include "../../include/ANut.hpp"
+
+
 void redirect_all_stdout(void)
 {
     cr_redirect_stdout();
     cr_redirect_stderr();
 }
+// class Dummy : public AFruit
+// {
+//     public:
+//         Dummy(const std::string& name, unsigned int vitamins, bool peeled = false)  :   AFruit(name, vitamins)
+//         { _name = name; _vitamins = vitamins; _peeled = peeled;}
+//         ~Dummy() {}
+//     private:
+// };
+
 class Dummy : public AFruit
 {
     public:
-        Dummy(const std::string& name, unsigned int vitamins, bool peeled = false)  :   AFruit(name, vitamins)
-        { _name = name; _vitamins = vitamins; _peeled = peeled;}
+        Dummy()  :   AFruit("DummyFruit", 10)
+        { _name = "DummyFruit"; _vitamins = 10; _peeled = false;}
         ~Dummy() {}
     private:
 };
@@ -41,10 +54,27 @@ class DummyBerry : public ABerry
         ~DummyBerry() {}
     private:
 };
+
+class DummyCitrus : public ACitrus
+{
+    public:
+        DummyCitrus() : ACitrus("DummyCitrus", 4) {}
+        ~DummyCitrus() {}
+    private:
+};
+
+class DummyNut : public ANut
+{
+    public:
+        DummyNut() : ANut("DummyNut", 2) {}
+        ~DummyNut() {}
+    private:
+};
+
 Test(IFruit, TEST_left_stream_operator_overload_ostream, .init = redirect_all_stdout)
 {
     {
-        Dummy fruit("DummyFruit", 10);
+        Dummy fruit;
 
         std::cout << fruit << std::endl;
     }
@@ -61,7 +91,7 @@ Test(AFruit, TEST_getVitamins_return_zero_if_fruit_is_not_peeled,
 .init = redirect_all_stdout)
 {
     {
-        Dummy fruit("DummyFruit", 10);
+        Dummy fruit;
 
         cr_assert(fruit.getVitamins() == 0);
     }
@@ -71,7 +101,7 @@ Test(AFruit, TEST_getVitamins_return_vitamins_if_fruit_is_peeled,
 .init = redirect_all_stdout)
 {
     {
-        Dummy fruit("DummyFruit", 10);
+        Dummy fruit;
 
         fruit.peel();
         cr_assert(fruit.getVitamins() == 10);
@@ -82,7 +112,7 @@ Test(AFruit, TEST_getName_return_name, .init = redirect_all_stdout)
 {
     
     {
-        Dummy fruit("DummyFruit", 10);
+        Dummy fruit;
 
         cr_assert(fruit.getName() == "DummyFruit");
     }
@@ -92,7 +122,7 @@ Test(AFruit, TEST_isPeeled_checks_if_fruit_is_peeled_or_not, .init = redirect_al
 {
     
     {
-        Dummy fruit("DummyFruit", 10);
+        Dummy fruit;
 
         cr_assert(fruit.isPeeled() == false);
         fruit.peel();
@@ -104,7 +134,7 @@ Test(AFruit, TEST_peel_peel_fruit_not_peeled_by_default, .init = redirect_all_st
 {
     
     {
-        Dummy fruit("DummyFruit", 10);
+        Dummy fruit;
 
         cr_assert(fruit.isPeeled() == false);
         fruit.peel();
@@ -116,7 +146,7 @@ Test(AFruit, TEST_peel_do_nothing_if_fruit_is_already_peel, .init = redirect_all
 {
     
     {
-        Dummy fruit("DummyFruit", 10);
+        Dummy fruit;
 
         cr_assert(fruit.isPeeled() == false);
         fruit.peel();
@@ -131,7 +161,7 @@ Test(AFruit, TEST_left_stream_operator_overload_ostream, .init = redirect_all_st
 {
     
     {
-        Dummy fruit("DummyFruit", 10);
+        Dummy fruit;
 
         std::cout << fruit << std::endl;
 
@@ -200,6 +230,182 @@ Test(ABerry, TEST_left_stream_operator_overload_ostream, .init = redirect_all_st
         "[name: \"DummyBerry\", vitamins: 6, peeled: true]\n"
     );
 }
+
+///////////////////////////////////////////////////////////////////////////////
+//                            ACitrus class                                   //
+///////////////////////////////////////////////////////////////////////////////
+Test(ACitrus, TEST_getVitamins_return_zero_if_fruit_is_not_peeled,
+.init = redirect_all_stdout)
+{
+    {
+        DummyCitrus fruit;
+
+        cr_assert(fruit.getVitamins() == 0);
+    }
+}
+
+Test(ACitrus, TEST_getVitamins_return_vitamins_if_fruit_is_peeled,
+.init = redirect_all_stdout)
+{
+    {
+        DummyCitrus fruit;
+
+        fruit.peel();
+        cr_assert(fruit.getVitamins() == 4);
+    }
+}
+
+Test(ACitrus, TEST_getName_return_name, .init = redirect_all_stdout)
+{
+    
+    {
+        DummyCitrus fruit;
+
+        cr_assert(fruit.getName() == "DummyCitrus");
+    }
+}
+
+Test(ACitrus, TEST_isPeeled_checks_if_fruit_is_peeled_or_not, .init = redirect_all_stdout)
+{
+    
+    {
+        DummyCitrus fruit;
+
+        cr_assert(fruit.isPeeled() == false);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+    }
+}
+
+Test(ACitrus, TEST_peel_peel_fruit_not_peeled_by_default, .init = redirect_all_stdout)
+{
+    
+    {
+        DummyCitrus fruit;
+
+        cr_assert(fruit.isPeeled() == false);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+    }
+}
+
+Test(ACitrus, TEST_peel_do_nothing_if_fruit_is_already_peel, .init = redirect_all_stdout)
+{
+    
+    {
+        DummyCitrus fruit;
+
+        cr_assert(fruit.isPeeled() == false);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+    }
+}
+
+
+Test(ACitrus, TEST_left_stream_operator_overload_ostream, .init = redirect_all_stdout)
+{
+    
+    {
+        DummyCitrus fruit;
+
+        std::cout << fruit << std::endl;
+
+    }
+    cr_assert_stdout_eq_str(
+        "[name: \"DummyCitrus\", vitamins: 0, peeled: false]\n"
+    );
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//                            ANut class                                     //
+///////////////////////////////////////////////////////////////////////////////
+Test(ANut, TEST_getVitamins_return_zero_if_fruit_is_not_peeled,
+.init = redirect_all_stdout)
+{
+    {
+        DummyNut fruit;
+
+        cr_assert(fruit.getVitamins() == 0);
+    }
+}
+
+Test(ANut, TEST_getVitamins_return_vitamins_if_fruit_is_peeled,
+.init = redirect_all_stdout)
+{
+    {
+        DummyNut fruit;
+
+        fruit.peel();
+        cr_assert(fruit.getVitamins() == 2);
+    }
+}
+
+Test(ANut, TEST_getName_return_name, .init = redirect_all_stdout)
+{
+    
+    {
+        DummyNut fruit;
+
+        cr_assert(fruit.getName() == "DummyNut");
+    }
+}
+
+Test(ANut, TEST_isPeeled_checks_if_fruit_is_peeled_or_not, .init = redirect_all_stdout)
+{
+    
+    {
+        DummyNut fruit;
+
+        cr_assert(fruit.isPeeled() == false);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+    }
+}
+
+Test(ANut, TEST_peel_peel_fruit_not_peeled_by_default, .init = redirect_all_stdout)
+{
+    
+    {
+        DummyNut fruit;
+
+        cr_assert(fruit.isPeeled() == false);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+    }
+}
+
+Test(ANut, TEST_peel_do_nothing_if_fruit_is_already_peel, .init = redirect_all_stdout)
+{
+    
+    {
+        DummyNut fruit;
+
+        cr_assert(fruit.isPeeled() == false);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+    }
+}
+
+
+Test(ANut, TEST_left_stream_operator_overload_ostream, .init = redirect_all_stdout)
+{
+    
+    {
+        DummyNut fruit;
+
+        std::cout << fruit << std::endl;
+
+    }
+    cr_assert_stdout_eq_str(
+        "[name: \"DummyNut\", vitamins: 0, peeled: false]\n"
+    );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
