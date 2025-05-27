@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:01:46 PM 2025 Paradis
-## Last update Wed May 27 5:02:27 PM 2025 Paradis
+## Last update Wed May 27 5:32:40 PM 2025 Paradis
 ##
 
 
@@ -24,6 +24,7 @@ CRITFLAGS    	+=  --coverage -lcriterion
 CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -Wshadow -Wno-shadow $(CPP_VERSION) $(INCFLAGS) $(CRITFLAGS)
 
 SRCS         	= 	$(SRC_PATH)/IFruit.cpp \
+					$(SRC_PATH)/AFruit.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)
