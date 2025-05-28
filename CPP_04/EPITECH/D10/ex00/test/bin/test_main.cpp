@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 27 3:53:48 PM 2025 Paradis
-** Last update Thu May 28 6:00:48 PM 2025 Paradis
+** Last update Thu May 28 6:09:56 PM 2025 Paradis
 */
 
 
@@ -25,6 +25,7 @@
 #include "../../include/Lemon.hpp"
 #include "../../include/Orange.hpp"
 #include "../../include/Strawberry.hpp"
+#include "../../include/Nut.hpp"
 
 
 void redirect_all_stdout(void)
@@ -546,7 +547,7 @@ Test(Lemon, TEST_left_stream_operator_overload_ostream, .init = redirect_all_std
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//                            Lemon class                                    //
+//                            Orange class                                   //
 ///////////////////////////////////////////////////////////////////////////////
 Test(Orange, TEST_default_CTOR, .init = redirect_all_stdout)
 {
@@ -683,7 +684,7 @@ Test(Orange, TEST_left_stream_operator_overload_ostream, .init = redirect_all_st
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//                            Lemon class                                    //
+//                            Strawberry class                               //
 ///////////////////////////////////////////////////////////////////////////////
 Test(Strawberry, TEST_default_CTOR, .init = redirect_all_stdout)
 {
@@ -819,6 +820,142 @@ Test(Strawberry, TEST_left_stream_operator_overload_ostream, .init = redirect_al
     );
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//                            Nut class                                      //
+///////////////////////////////////////////////////////////////////////////////
+Test(Nut, TEST_default_CTOR, .init = redirect_all_stdout)
+{
+    {
+        Nut fruit;
+
+        cr_assert_not_null(&fruit);
+        cr_assert(fruit.getVitamins() == 0);
+        cr_assert(fruit.getName() == "Nut");
+        cr_assert(fruit.isPeeled() == false);
+    }
+}
+
+Test(Nut, TEST_paramaters_CTOR, .init = redirect_all_stdout)
+{
+    {
+        Nut fruit("Nut", 2);
+
+        cr_assert_not_null(&fruit);
+        cr_assert(fruit.getVitamins() == 0);
+        cr_assert(fruit.getName() == "Nut");
+        cr_assert(fruit.isPeeled() == false);
+    }
+}
+
+Test(Nut, TEST_assignment_operator, .init = redirect_all_stdout)
+{
+    {
+        Nut  fruit("CopyNut", 2);
+        Nut  nut;
+
+        nut = fruit;
+        cr_assert(nut.getVitamins() == fruit.getVitamins());
+        cr_assert(nut.getName() == fruit.getName());
+        cr_assert(nut.isPeeled() == fruit.isPeeled());
+    }
+}
+
+Test(Nut, TEST_assignment_operator_self_assignment,
+.init = redirect_all_stdout)
+{
+    {
+        Nut  fruit("CopyNut", 2);
+
+        fruit = fruit;
+        cr_assert(fruit.getVitamins() == fruit.getVitamins());
+        cr_assert(fruit.getName() == fruit.getName());
+        cr_assert(fruit.isPeeled() == fruit.isPeeled());
+    }
+}
+
+Test(Nut, TEST_getVitamins_return_zero_if_fruit_is_not_peeled,
+.init = redirect_all_stdout)
+{
+    {
+        Nut fruit;
+
+        cr_assert(fruit.getVitamins() == 0);
+    }
+}
+
+Test(Nut, TEST_getVitamins_return_vitamins_if_fruit_is_peeled,
+.init = redirect_all_stdout)
+{
+    {
+        Nut fruit;
+
+        fruit.peel();
+        cr_assert(fruit.getVitamins() == 2);
+    }
+}
+
+Test(Nut, TEST_getName_return_name, .init = redirect_all_stdout)
+{
+    
+    {
+        Nut fruit;
+
+        cr_assert(fruit.getName() == "Nut");
+    }
+}
+
+Test(Nut, TEST_isPeeled_checks_if_fruit_is_peeled_or_not, .init = redirect_all_stdout)
+{
+    
+    {
+        Nut fruit;
+
+        cr_assert(fruit.isPeeled() == false);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+    }
+}
+
+Test(Nut, TEST_peel_peel_fruit_not_peeled_by_default, .init = redirect_all_stdout)
+{
+    
+    {
+        Nut fruit;
+
+        cr_assert(fruit.isPeeled() == false);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+    }
+}
+
+Test(Nut, TEST_peel_do_nothing_if_fruit_is_already_peel, .init = redirect_all_stdout)
+{
+    
+    {
+        Nut fruit;
+
+        cr_assert(fruit.isPeeled() == false);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+    }
+}
+
+
+Test(Nut, TEST_left_stream_operator_overload_ostream, .init = redirect_all_stdout)
+{
+    
+    {
+        Nut fruit;
+
+        std::cout << fruit << std::endl;
+
+    }
+    cr_assert_stdout_eq_str(
+        "[name: \"Nut\", vitamins: 0, peeled: false]\n"
+    );
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////

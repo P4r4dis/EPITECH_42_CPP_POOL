@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:01:46 PM 2025 Paradis
-## Last update Thu May 28 5:55:31 PM 2025 Paradis
+## Last update Thu May 28 6:08:35 PM 2025 Paradis
 ##
 
 
@@ -31,6 +31,7 @@ SRCS         	= 	$(SRC_PATH)/IFruit.cpp \
 					$(SRC_PATH)/Lemon.cpp \
 					$(SRC_PATH)/Orange.cpp \
 					$(SRC_PATH)/Strawberry.cpp \
+					$(SRC_PATH)/Nut.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)
