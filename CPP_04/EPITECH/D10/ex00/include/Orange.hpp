@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 27 9:27:33 PM 2025 Paradis
-** Last update Wed May 27 9:28:08 PM 2025 Paradis
+** Last update Thu May 28 5:53:09 PM 2025 Paradis
 */
 
 #ifndef 			__ORANGE_HPP__
@@ -18,7 +18,7 @@ class	            Orange   :   public ACitrus
     public:
         Orange(void);
         Orange(const std::string& name, unsigned int vitamins, bool peeled = false);
-        Orange(const Orange& orange);
+        Orange(const Orange& orange) = delete;
         Orange       &operator=(const Orange& orange);
         virtual ~Orange();
 
