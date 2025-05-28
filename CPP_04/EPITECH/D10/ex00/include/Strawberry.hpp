@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 28 5:52:17 PM 2025 Paradis
-** Last update Thu May 28 6:07:16 PM 2025 Paradis
+** Last update Thu May 28 6:17:47 PM 2025 Paradis
 */
 
 #ifndef 			__STRAWBERRY_HPP__
@@ -26,4 +26,4 @@ class	            Strawberry   :   public ABerry
     private:
 };
 
-#endif 				/* !__STRAWBERRY_HPP___ */
+#endif 				/* !__STRAWBERRY_HPP__ */

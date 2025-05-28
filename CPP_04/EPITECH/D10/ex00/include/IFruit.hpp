@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 27 3:50:36 PM 2025 Paradis
-** Last update Wed May 27 6:56:01 PM 2025 Paradis
+** Last update Thu May 28 6:17:36 PM 2025 Paradis
 */
 
 #ifndef 			__IFRUIT_HPP__
@@ -29,4 +29,4 @@ class	            IFruit
 };
 
 std::ostream        &operator<<(std::ostream &os, const IFruit &fruit);
-#endif 				/* !__IFRUIT_HPP___ */
+#endif 				/* !__IFRUIT_HPP__ */

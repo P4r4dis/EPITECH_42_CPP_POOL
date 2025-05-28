@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 27 9:27:33 PM 2025 Paradis
-** Last update Thu May 28 5:53:09 PM 2025 Paradis
+** Last update Thu May 28 6:17:43 PM 2025 Paradis
 */
 
 #ifndef 			__ORANGE_HPP__
@@ -26,4 +26,4 @@ class	            Orange   :   public ACitrus
     private:
 };
 
-#endif 				/* !__ORANGE_HPP___ */
+#endif 				/* !__ORANGE_HPP__ */

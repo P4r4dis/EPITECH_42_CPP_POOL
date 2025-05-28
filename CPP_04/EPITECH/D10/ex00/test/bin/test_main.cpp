@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 27 3:53:48 PM 2025 Paradis
-** Last update Thu May 28 6:09:56 PM 2025 Paradis
+** Last update Thu May 28 6:21:53 PM 2025 Paradis
 */
 
 
@@ -25,7 +25,7 @@
 #include "../../include/Lemon.hpp"
 #include "../../include/Orange.hpp"
 #include "../../include/Strawberry.hpp"
-#include "../../include/Nut.hpp"
+#include "../../include/Almond.hpp"
 
 
 void redirect_all_stdout(void)
@@ -419,7 +419,7 @@ Test(Lemon, TEST_default_CTOR, .init = redirect_all_stdout)
 
         cr_assert_not_null(&fruit);
         cr_assert(fruit.getVitamins() == 0);
-        cr_assert(fruit.getName() == "Lemon");
+        cr_assert(fruit.getName() == "lemon");
         cr_assert(fruit.isPeeled() == false);
     }
 }
@@ -427,11 +427,11 @@ Test(Lemon, TEST_default_CTOR, .init = redirect_all_stdout)
 Test(Lemon, TEST_paramaters_CTOR, .init = redirect_all_stdout)
 {
     {
-        Lemon fruit("Lemon", 4);
+        Lemon fruit("lemon", 4);
 
         cr_assert_not_null(&fruit);
         cr_assert(fruit.getVitamins() == 0);
-        cr_assert(fruit.getName() == "Lemon");
+        cr_assert(fruit.getName() == "lemon");
         cr_assert(fruit.isPeeled() == false);
     }
 }
@@ -489,7 +489,7 @@ Test(Lemon, TEST_getName_return_name, .init = redirect_all_stdout)
     {
         Lemon fruit;
 
-        cr_assert(fruit.getName() == "Lemon");
+        cr_assert(fruit.getName() == "lemon");
     }
 }
 
@@ -542,7 +542,7 @@ Test(Lemon, TEST_left_stream_operator_overload_ostream, .init = redirect_all_std
 
     }
     cr_assert_stdout_eq_str(
-        "[name: \"Lemon\", vitamins: 0, peeled: false]\n"
+        "[name: \"lemon\", vitamins: 0, peeled: false]\n"
     );
 }
 
@@ -556,7 +556,7 @@ Test(Orange, TEST_default_CTOR, .init = redirect_all_stdout)
 
         cr_assert_not_null(&fruit);
         cr_assert(fruit.getVitamins() == 0);
-        cr_assert(fruit.getName() == "Orange");
+        cr_assert(fruit.getName() == "orange");
         cr_assert(fruit.isPeeled() == false);
     }
 }
@@ -564,11 +564,11 @@ Test(Orange, TEST_default_CTOR, .init = redirect_all_stdout)
 Test(Orange, TEST_paramaters_CTOR, .init = redirect_all_stdout)
 {
     {
-        Orange fruit("Orange", 7);
+        Orange fruit("orange", 7);
 
         cr_assert_not_null(&fruit);
         cr_assert(fruit.getVitamins() == 0);
-        cr_assert(fruit.getName() == "Orange");
+        cr_assert(fruit.getName() == "orange");
         cr_assert(fruit.isPeeled() == false);
     }
 }
@@ -626,7 +626,7 @@ Test(Orange, TEST_getName_return_name, .init = redirect_all_stdout)
     {
         Orange fruit;
 
-        cr_assert(fruit.getName() == "Orange");
+        cr_assert(fruit.getName() == "orange");
     }
 }
 
@@ -679,7 +679,7 @@ Test(Orange, TEST_left_stream_operator_overload_ostream, .init = redirect_all_st
 
     }
     cr_assert_stdout_eq_str(
-        "[name: \"Orange\", vitamins: 0, peeled: false]\n"
+        "[name: \"orange\", vitamins: 0, peeled: false]\n"
     );
 }
 
@@ -693,7 +693,7 @@ Test(Strawberry, TEST_default_CTOR, .init = redirect_all_stdout)
 
         cr_assert_not_null(&fruit);
         cr_assert(fruit.getVitamins() == 6);
-        cr_assert(fruit.getName() == "Strawberry");
+        cr_assert(fruit.getName() == "strawberry");
         cr_assert(fruit.isPeeled() == true);
     }
 }
@@ -701,11 +701,11 @@ Test(Strawberry, TEST_default_CTOR, .init = redirect_all_stdout)
 Test(Strawberry, TEST_paramaters_CTOR, .init = redirect_all_stdout)
 {
     {
-        Strawberry fruit("Strawberry", 6);
+        Strawberry fruit("strawberry", 6);
 
         cr_assert_not_null(&fruit);
         cr_assert(fruit.getVitamins() == 6);
-        cr_assert(fruit.getName() == "Strawberry");
+        cr_assert(fruit.getName() == "strawberry");
         cr_assert(fruit.isPeeled() == true);
     }
 }
@@ -763,7 +763,7 @@ Test(Strawberry, TEST_getName_return_name, .init = redirect_all_stdout)
     {
         Strawberry fruit;
 
-        cr_assert(fruit.getName() == "Strawberry");
+        cr_assert(fruit.getName() == "strawberry");
     }
 }
 
@@ -816,42 +816,42 @@ Test(Strawberry, TEST_left_stream_operator_overload_ostream, .init = redirect_al
 
     }
     cr_assert_stdout_eq_str(
-        "[name: \"Strawberry\", vitamins: 6, peeled: true]\n"
+        "[name: \"strawberry\", vitamins: 6, peeled: true]\n"
     );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//                            Nut class                                      //
+//                            Almond class                                      //
 ///////////////////////////////////////////////////////////////////////////////
-Test(Nut, TEST_default_CTOR, .init = redirect_all_stdout)
+Test(Almond, TEST_default_CTOR, .init = redirect_all_stdout)
 {
     {
-        Nut fruit;
+        Almond fruit;
 
         cr_assert_not_null(&fruit);
         cr_assert(fruit.getVitamins() == 0);
-        cr_assert(fruit.getName() == "Nut");
+        cr_assert(fruit.getName() == "almond");
         cr_assert(fruit.isPeeled() == false);
     }
 }
 
-Test(Nut, TEST_paramaters_CTOR, .init = redirect_all_stdout)
+Test(Almond, TEST_paramaters_CTOR, .init = redirect_all_stdout)
 {
     {
-        Nut fruit("Nut", 2);
+        Almond fruit("almond", 2);
 
         cr_assert_not_null(&fruit);
         cr_assert(fruit.getVitamins() == 0);
-        cr_assert(fruit.getName() == "Nut");
+        cr_assert(fruit.getName() == "almond");
         cr_assert(fruit.isPeeled() == false);
     }
 }
 
-Test(Nut, TEST_assignment_operator, .init = redirect_all_stdout)
+Test(Almond, TEST_assignment_operator, .init = redirect_all_stdout)
 {
     {
-        Nut  fruit("CopyNut", 2);
-        Nut  nut;
+        Almond  fruit("CopyNut", 2);
+        Almond  nut;
 
         nut = fruit;
         cr_assert(nut.getVitamins() == fruit.getVitamins());
@@ -860,11 +860,11 @@ Test(Nut, TEST_assignment_operator, .init = redirect_all_stdout)
     }
 }
 
-Test(Nut, TEST_assignment_operator_self_assignment,
+Test(Almond, TEST_assignment_operator_self_assignment,
 .init = redirect_all_stdout)
 {
     {
-        Nut  fruit("CopyNut", 2);
+        Almond  fruit("CopyNut", 2);
 
         fruit = fruit;
         cr_assert(fruit.getVitamins() == fruit.getVitamins());
@@ -873,42 +873,42 @@ Test(Nut, TEST_assignment_operator_self_assignment,
     }
 }
 
-Test(Nut, TEST_getVitamins_return_zero_if_fruit_is_not_peeled,
+Test(Almond, TEST_getVitamins_return_zero_if_fruit_is_not_peeled,
 .init = redirect_all_stdout)
 {
     {
-        Nut fruit;
+        Almond fruit;
 
         cr_assert(fruit.getVitamins() == 0);
     }
 }
 
-Test(Nut, TEST_getVitamins_return_vitamins_if_fruit_is_peeled,
+Test(Almond, TEST_getVitamins_return_vitamins_if_fruit_is_peeled,
 .init = redirect_all_stdout)
 {
     {
-        Nut fruit;
+        Almond fruit;
 
         fruit.peel();
         cr_assert(fruit.getVitamins() == 2);
     }
 }
 
-Test(Nut, TEST_getName_return_name, .init = redirect_all_stdout)
+Test(Almond, TEST_getName_return_name, .init = redirect_all_stdout)
 {
     
     {
-        Nut fruit;
+        Almond fruit;
 
-        cr_assert(fruit.getName() == "Nut");
+        cr_assert(fruit.getName() == "almond");
     }
 }
 
-Test(Nut, TEST_isPeeled_checks_if_fruit_is_peeled_or_not, .init = redirect_all_stdout)
+Test(Almond, TEST_isPeeled_checks_if_fruit_is_peeled_or_not, .init = redirect_all_stdout)
 {
     
     {
-        Nut fruit;
+        Almond fruit;
 
         cr_assert(fruit.isPeeled() == false);
         fruit.peel();
@@ -916,11 +916,11 @@ Test(Nut, TEST_isPeeled_checks_if_fruit_is_peeled_or_not, .init = redirect_all_s
     }
 }
 
-Test(Nut, TEST_peel_peel_fruit_not_peeled_by_default, .init = redirect_all_stdout)
+Test(Almond, TEST_peel_peel_fruit_not_peeled_by_default, .init = redirect_all_stdout)
 {
     
     {
-        Nut fruit;
+        Almond fruit;
 
         cr_assert(fruit.isPeeled() == false);
         fruit.peel();
@@ -928,11 +928,11 @@ Test(Nut, TEST_peel_peel_fruit_not_peeled_by_default, .init = redirect_all_stdou
     }
 }
 
-Test(Nut, TEST_peel_do_nothing_if_fruit_is_already_peel, .init = redirect_all_stdout)
+Test(Almond, TEST_peel_do_nothing_if_fruit_is_already_peel, .init = redirect_all_stdout)
 {
     
     {
-        Nut fruit;
+        Almond fruit;
 
         cr_assert(fruit.isPeeled() == false);
         fruit.peel();
@@ -943,42 +943,42 @@ Test(Nut, TEST_peel_do_nothing_if_fruit_is_already_peel, .init = redirect_all_st
 }
 
 
-Test(Nut, TEST_left_stream_operator_overload_ostream, .init = redirect_all_stdout)
+Test(Almond, TEST_left_stream_operator_overload_ostream, .init = redirect_all_stdout)
 {
     
     {
-        Nut fruit;
+        Almond fruit;
 
         std::cout << fruit << std::endl;
 
     }
     cr_assert_stdout_eq_str(
-        "[name: \"Nut\", vitamins: 0, peeled: false]\n"
+        "[name: \"almond\", vitamins: 0, peeled: false]\n"
     );
 }
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
-// Test(main, Test_main, .init = redirect_all_stdout)
-// {
-//     {       
-//         Orange          o;
-//         Strawberry      s;
-//         const Almond    a;
-//         IFruit&         f = o;
+Test(main, Test_main, .init = redirect_all_stdout)
+{
+    {       
+        Orange          o;
+        Strawberry      s;
+        const Almond    a;
+        IFruit&         f = o;
 
-//         std::cout   << o.getName() << ": " << o.getVitamins() << " vitamins" << std::endl;
-//         std::cout   << s << std::endl;
-//         std::cout   << a << std::endl;
+        std::cout   << o.getName() << ": " << o.getVitamins() << " vitamins" << std::endl;
+        std::cout   << s << std::endl;
+        std::cout   << a << std::endl;
 
-//         o.peel();
-//         std::cout   << f << std::endl;
-//     }
+        o.peel();
+        std::cout   << f << std::endl;
+    }
 
-//     cr_assert_stdout_eq_str(
-//         "orange: 0 vitamins\n"
-//         "[name: \"strawberry\", vitamins: 6, peeled: true]\n"
-//         "[name: \"almond\", vitamins: 0, peeled: false]\n"
-//         "[name: \"orange\", vitamins: 7, peeled: true]\n"
-//     );
-// }
+    cr_assert_stdout_eq_str(
+        "orange: 0 vitamins\n"
+        "[name: \"strawberry\", vitamins: 6, peeled: true]\n"
+        "[name: \"almond\", vitamins: 0, peeled: false]\n"
+        "[name: \"orange\", vitamins: 7, peeled: true]\n"
+    );
+}

@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 17:02:13 by Paradis           #+#    #+#              #
-#    Updated: 2025/05/28 18:08:53 by Paradis          ###   ########.fr        #
+#    Updated: 2025/05/28 18:16:47 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -193,7 +193,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:03:01 PM 2025 Paradis
-## Last update Thu May 28 6:08:53 PM 2025 Paradis
+## Last update Thu May 28 6:16:47 PM 2025 Paradis
 ##
 
 
@@ -221,7 +221,7 @@ EPITECH_EX00_SRC				=	$(EPITECH_EX00_SRC_PATH)/IFruit.cpp \
 									$(EPITECH_EX00_SRC_PATH)/Lemon.cpp \
 									$(EPITECH_EX00_SRC_PATH)/Orange.cpp \
 									$(EPITECH_EX00_SRC_PATH)/Strawberry.cpp \
-									$(EPITECH_EX00_SRC_PATH)/Nut.cpp \
+									$(EPITECH_EX00_SRC_PATH)/Almond.cpp \
 									$(EPITECH_EX00_BIN_PATH)/main.cpp
 EPITECH_EX00_OBJS				=	$(EPITECH_EX00_SRC:.cpp=.o)
 

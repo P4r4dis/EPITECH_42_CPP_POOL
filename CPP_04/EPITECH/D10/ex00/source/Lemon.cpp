@@ -5,12 +5,12 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 27 9:23:34 PM 2025 Paradis
-** Last update Thu May 28 5:40:28 PM 2025 Paradis
+** Last update Thu May 28 6:20:03 PM 2025 Paradis
 */
 
 #include "../include/Lemon.hpp"
 
-Lemon::Lemon(void)  :   ACitrus("Lemon", 4)
+Lemon::Lemon(void)  :   ACitrus("lemon", 4)
 {
 }
 

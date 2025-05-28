@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:02:37 PM 2025 Paradis
-## Last update Thu May 28 6:08:39 PM 2025 Paradis
+## Last update Thu May 28 6:16:42 PM 2025 Paradis
 ##
 
 
@@ -36,7 +36,7 @@ SRCS		=	$(SRC_PATH)/IFruit.cpp \
 				$(SRC_PATH)/Lemon.cpp \
 				$(SRC_PATH)/Orange.cpp \
 				$(SRC_PATH)/Strawberry.cpp \
-				$(SRC_PATH)/Nut.cpp \
+				$(SRC_PATH)/Almond.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp

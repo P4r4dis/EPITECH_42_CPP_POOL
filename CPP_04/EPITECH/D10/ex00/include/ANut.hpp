@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 27 8:48:37 PM 2025 Paradis
-** Last update Wed May 27 9:05:10 PM 2025 Paradis
+** Last update Thu May 28 6:17:31 PM 2025 Paradis
 */
 
 #ifndef 			__ANUT_HPP__
@@ -24,4 +24,4 @@ class	            ANut : public AFruit
     private:
 };
 
-#endif 				/* !__ANUT_HPP___ */
+#endif 				/* !__ANUT_HPP__ */

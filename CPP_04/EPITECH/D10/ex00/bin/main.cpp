@@ -5,11 +5,14 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 27 3:40:45 PM 2025 Paradis
-** Last update Wed May 27 3:50:21 PM 2025 Paradis
+** Last update Thu May 28 6:23:19 PM 2025 Paradis
 */
 
 
 #include <iostream>
+#include "../include/Orange.hpp"
+#include "../include/Strawberry.hpp"
+#include "../include/Almond.hpp"
 
 int     main(void)
 {

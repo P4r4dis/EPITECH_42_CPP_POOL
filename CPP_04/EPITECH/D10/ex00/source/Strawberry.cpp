@@ -5,12 +5,12 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 28 5:54:03 PM 2025 Paradis
-** Last update Thu May 28 5:55:00 PM 2025 Paradis
+** Last update Thu May 28 6:21:26 PM 2025 Paradis
 */
 
 #include "../include/Strawberry.hpp"
 
-Strawberry::Strawberry(void)  :   ABerry("Strawberry", 6)
+Strawberry::Strawberry(void)  :   ABerry("strawberry", 6)
 {
 }
 

@@ -5,12 +5,12 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 27 9:28:22 PM 2025 Paradis
-** Last update Thu May 28 5:40:39 PM 2025 Paradis
+** Last update Thu May 28 6:21:21 PM 2025 Paradis
 */
 
 #include "../include/Orange.hpp"
 
-Orange::Orange(void)  :   ACitrus("Orange", 7)
+Orange::Orange(void)  :   ACitrus("orange", 7)
 {
 }
 
