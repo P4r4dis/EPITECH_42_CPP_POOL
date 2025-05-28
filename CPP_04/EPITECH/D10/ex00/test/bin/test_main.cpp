@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue May 27 3:53:48 PM 2025 Paradis
-** Last update Wed May 27 9:10:26 PM 2025 Paradis
+** Last update Thu May 28 5:42:55 PM 2025 Paradis
 */
 
 
@@ -22,6 +22,8 @@
 #include "../../include/ABerry.hpp"
 #include "../../include/ACitrus.hpp"
 #include "../../include/ANut.hpp"
+#include "../../include/Lemon.hpp"
+#include "../../include/Orange.hpp"
 
 
 void redirect_all_stdout(void)
@@ -405,6 +407,309 @@ Test(ANut, TEST_left_stream_operator_overload_ostream, .init = redirect_all_stdo
     );
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//                            Lemon class                                   //
+///////////////////////////////////////////////////////////////////////////////
+Test(Lemon, TEST_default_CTOR, .init = redirect_all_stdout)
+{
+    {
+        Lemon fruit;
+
+        cr_assert_not_null(&fruit);
+        cr_assert(fruit.getVitamins() == 0);
+        cr_assert(fruit.getName() == "Lemon");
+        cr_assert(fruit.isPeeled() == false);
+    }
+}
+
+Test(Lemon, TEST_paramaters_CTOR, .init = redirect_all_stdout)
+{
+    {
+        Lemon fruit("Lemon", 4);
+
+        cr_assert_not_null(&fruit);
+        cr_assert(fruit.getVitamins() == 0);
+        cr_assert(fruit.getName() == "Lemon");
+        cr_assert(fruit.isPeeled() == false);
+    }
+}
+
+// Test(Lemon, TEST_Copy_CTOR, .init = redirect_all_stdout)
+// {
+//     {
+//         Lemon  fruit("CopyLemon", 4);
+//         Lemon  copy(fruit);
+
+//         cr_assert_not_null(&fruit);
+//         cr_assert_not_null(&copy);
+
+//         cr_assert(copy.getVitamins() == fruit.getVitamins());
+//         cr_assert(copy.getName() == fruit.getName());
+//         cr_assert(copy.isPeeled() == fruit.isPeeled());
+//     }
+// }
+
+Test(Lemon, TEST_assignment_operator, .init = redirect_all_stdout)
+{
+    {
+        Lemon  fruit("CopyLemon", 4);
+        Lemon  lemon;
+
+        lemon = fruit;
+        cr_assert(lemon.getVitamins() == fruit.getVitamins());
+        cr_assert(lemon.getName() == fruit.getName());
+        cr_assert(lemon.isPeeled() == fruit.isPeeled());
+    }
+}
+
+Test(Lemon, TEST_assignment_operator_self_assignment,
+.init = redirect_all_stdout)
+{
+    {
+        Lemon  fruit("CopyLemon", 4);
+
+        fruit = fruit;
+        cr_assert(fruit.getVitamins() == fruit.getVitamins());
+        cr_assert(fruit.getName() == fruit.getName());
+        cr_assert(fruit.isPeeled() == fruit.isPeeled());
+    }
+}
+
+Test(Lemon, TEST_getVitamins_return_zero_if_fruit_is_not_peeled,
+.init = redirect_all_stdout)
+{
+    {
+        Lemon fruit;
+
+        cr_assert(fruit.getVitamins() == 0);
+    }
+}
+
+Test(Lemon, TEST_getVitamins_return_vitamins_if_fruit_is_peeled,
+.init = redirect_all_stdout)
+{
+    {
+        Lemon fruit;
+
+        fruit.peel();
+        cr_assert(fruit.getVitamins() == 4);
+    }
+}
+
+Test(Lemon, TEST_getName_return_name, .init = redirect_all_stdout)
+{
+    
+    {
+        Lemon fruit;
+
+        cr_assert(fruit.getName() == "Lemon");
+    }
+}
+
+Test(Lemon, TEST_isPeeled_checks_if_fruit_is_peeled_or_not, .init = redirect_all_stdout)
+{
+    
+    {
+        Lemon fruit;
+
+        cr_assert(fruit.isPeeled() == false);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+    }
+}
+
+Test(Lemon, TEST_peel_peel_fruit_not_peeled_by_default, .init = redirect_all_stdout)
+{
+    
+    {
+        Lemon fruit;
+
+        cr_assert(fruit.isPeeled() == false);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+    }
+}
+
+Test(Lemon, TEST_peel_do_nothing_if_fruit_is_already_peel, .init = redirect_all_stdout)
+{
+    
+    {
+        Lemon fruit;
+
+        cr_assert(fruit.isPeeled() == false);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+    }
+}
+
+
+Test(Lemon, TEST_left_stream_operator_overload_ostream, .init = redirect_all_stdout)
+{
+    
+    {
+        Lemon fruit;
+
+        std::cout << fruit << std::endl;
+
+    }
+    cr_assert_stdout_eq_str(
+        "[name: \"Lemon\", vitamins: 0, peeled: false]\n"
+    );
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//                            Lemon class                                    //
+///////////////////////////////////////////////////////////////////////////////
+Test(Orange, TEST_default_CTOR, .init = redirect_all_stdout)
+{
+    {
+        Orange fruit;
+
+        cr_assert_not_null(&fruit);
+        cr_assert(fruit.getVitamins() == 0);
+        cr_assert(fruit.getName() == "Orange");
+        cr_assert(fruit.isPeeled() == false);
+    }
+}
+
+Test(Orange, TEST_paramaters_CTOR, .init = redirect_all_stdout)
+{
+    {
+        Orange fruit("Orange", 7);
+
+        cr_assert_not_null(&fruit);
+        cr_assert(fruit.getVitamins() == 0);
+        cr_assert(fruit.getName() == "Orange");
+        cr_assert(fruit.isPeeled() == false);
+    }
+}
+
+// Test(Orange, TEST_Copy_CTOR, .init = redirect_all_stdout)
+// {
+//     {
+//         Orange  fruit("CopyOrange", 4);
+//         Orange  copy(fruit);
+
+//         cr_assert_not_null(&fruit);
+//         cr_assert_not_null(&copy);
+
+//         cr_assert(copy.getVitamins() == fruit.getVitamins());
+//         cr_assert(copy.getName() == fruit.getName());
+//         cr_assert(copy.isPeeled() == fruit.isPeeled());
+//     }
+// }
+
+Test(Orange, TEST_assignment_operator, .init = redirect_all_stdout)
+{
+    {
+        Orange  fruit("CopyOrange", 7);
+        Orange  orange;
+
+        orange = fruit;
+        cr_assert(orange.getVitamins() == fruit.getVitamins());
+        cr_assert(orange.getName() == fruit.getName());
+        cr_assert(orange.isPeeled() == fruit.isPeeled());
+    }
+}
+
+Test(Orange, TEST_assignment_operator_self_assignment,
+.init = redirect_all_stdout)
+{
+    {
+        Orange  fruit("CopyOrange", 7);
+
+        fruit = fruit;
+        cr_assert(fruit.getVitamins() == fruit.getVitamins());
+        cr_assert(fruit.getName() == fruit.getName());
+        cr_assert(fruit.isPeeled() == fruit.isPeeled());
+    }
+}
+
+Test(Orange, TEST_getVitamins_return_zero_if_fruit_is_not_peeled,
+.init = redirect_all_stdout)
+{
+    {
+        Orange fruit;
+
+        cr_assert(fruit.getVitamins() == 0);
+    }
+}
+
+Test(Orange, TEST_getVitamins_return_vitamins_if_fruit_is_peeled,
+.init = redirect_all_stdout)
+{
+    {
+        Orange fruit;
+
+        fruit.peel();
+        cr_assert(fruit.getVitamins() == 7);
+    }
+}
+
+Test(Orange, TEST_getName_return_name, .init = redirect_all_stdout)
+{
+    
+    {
+        Orange fruit;
+
+        cr_assert(fruit.getName() == "Orange");
+    }
+}
+
+Test(LeOrangemon, TEST_isPeeled_checks_if_fruit_is_peeled_or_not, .init = redirect_all_stdout)
+{
+    
+    {
+        Orange fruit;
+
+        cr_assert(fruit.isPeeled() == false);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+    }
+}
+
+Test(Orange, TEST_peel_peel_fruit_not_peeled_by_default, .init = redirect_all_stdout)
+{
+    
+    {
+        Orange fruit;
+
+        cr_assert(fruit.isPeeled() == false);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+    }
+}
+
+Test(Orange, TEST_peel_do_nothing_if_fruit_is_already_peel, .init = redirect_all_stdout)
+{
+    
+    {
+        Orange fruit;
+
+        cr_assert(fruit.isPeeled() == false);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+        fruit.peel();
+        cr_assert(fruit.isPeeled() == true);
+    }
+}
+
+
+Test(Orange, TEST_left_stream_operator_overload_ostream, .init = redirect_all_stdout)
+{
+    
+    {
+        Orange fruit;
+
+        std::cout << fruit << std::endl;
+
+    }
+    cr_assert_stdout_eq_str(
+        "[name: \"Orange\", vitamins: 0, peeled: false]\n"
+    );
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
