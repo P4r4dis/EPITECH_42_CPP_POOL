@@ -5,10 +5,11 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 28 6:59:10 PM 2025 Paradis
-** Last update Tue Jun 2 7:13:02 PM 2025 Paradis
+** Last update Tue Jun 2 8:30:41 PM 2025 Paradis
 */
 
 #include "../include/FruitBox.hpp"
+#include <ios>
 
 FruitBox::FruitBox(void)    :   _size(0),
                                 _nbFruit(0),
@@ -77,6 +78,7 @@ unsigned int            FruitBox::nbFruit(void)
     return 0;
 }
 
+#include <sstream>
 #include <iostream>
 bool                    FruitBox::pushFruit(IFruit *fruit)
 {
@@ -123,19 +125,21 @@ IFruit              *FruitBox::getFruit(size_t idx) const
 
 std::ostream        &operator<<(std::ostream &os, const FruitBox &fruit)
 {
-    os << "[";
+    std::ostringstream tmp;
+
+    tmp << "[";
     for (size_t i = 0; i < fruit.getSize(); ++i)
     {
         if (fruit.getFruit(i))
         {
-            os  << std::boolalpha << "[name: \"" 
-                << fruit.getFruit(i)->getName()
+            tmp << "[name: \"" << fruit.getFruit(i)->getName()
                 << "\", vitamins: " << fruit.getFruit(i)->getVitamins()
-                << ", peeled: " << fruit.getFruit(i)->isPeeled() << "]";
+                << ", peeled: " << std::boolalpha << fruit.getFruit(i)->isPeeled() << "]";
             if (i < fruit.getSize() - 1)
-                os  << ", ";
+                tmp << ", ";
         }
     }
-    os << "]";
-    return os;
+
+    tmp << "]";
+    return os << tmp.str();
 }

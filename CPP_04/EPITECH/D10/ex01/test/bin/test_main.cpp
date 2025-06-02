@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 28 6:35:25 PM 2025 Paradis
-** Last update Tue Jun 2 7:40:29 PM 2025 Paradis
+** Last update Tue Jun 2 8:30:49 PM 2025 Paradis
 */
 
 
@@ -74,6 +74,21 @@ class DummyNut : public ANut
     public:
         DummyNut() : ANut("DummyNut", 2) {}
         ~DummyNut() {}
+    private:
+};
+
+class TestFruit : public AFruit
+{
+    public:
+        TestFruit(const std::string& name)
+            : AFruit(name, 0)
+        {
+            _vitamins = 0;
+            _peeled = false;
+            std::cout << _name << " lives." << std::endl;
+        }
+
+        virtual ~TestFruit() { std::cout << _name << " dies." << std::endl;}
     private:
 };
 
@@ -1207,38 +1222,38 @@ TEST_left_stream_operator_overload_ostream_with_empty_fruitBox,
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
-// Test(main, Test_main, .init = redirect_all_stdout)
-// {
-//     {       
-//         FruitBox        box(3);
-//         const FruitBox& cref = box;
+Test(main, Test_main, .init = redirect_all_stdout)
+{
+    {       
+        FruitBox        box(3);
+        const FruitBox& cref = box;
 
-//         box.pushFruit(new TestFruit("Cerise"));
-//         box.pushFruit(new TestFruit("Framboise"));
-//         box.pushFruit(new TestFruit("Anis"));
-//         std::cout << cref << std::endl;
+        box.pushFruit(new TestFruit("Cerise"));
+        box.pushFruit(new TestFruit("Framboise"));
+        box.pushFruit(new TestFruit("Anis"));
+        std::cout << cref << std::endl;
 
-//         IFruit          *tmp = new TestFruit("Serge");
+        IFruit          *tmp = new TestFruit("Serge");
 
-//         std::cout << box.pushFruit(tmp) << std::endl;
-//         delete tmp;
+        std::cout << box.pushFruit(tmp) << std::endl;
+        delete tmp;
 
-//         tmp = box.popFruit();
-//         delete tmp;
-//         std::cout << cref << std::endl;
-//     }
+        tmp = box.popFruit();
+        delete tmp;
+        std::cout << cref << std::endl;
+    }
 
-//     cr_assert_stdout_eq_str(
-//         "Cerise lives.\n"
-//         "Framboise lives.\n"
-//         "Anis lives.\n"
-//         "[[name: \"Cerise\", vitamins: 0, peeled: false], [name: \"Framboise\", vitamins: 0, peeled: false], [name: \"Anis\", vitamins: 0, peeled: false]]\n"
-//         "Serge lives.\n"
-//         "0\n"
-//         "Serge dies.\n"
-//         "Cerise dies.\n"
-//         "[[name: \"Framboise\", vitamins: 0, peeled: false], [name: \"Anis\", vitamins: 0, peeled: false]]\n"
-//         "Framboise dies.\n"
-//         "Anis dies.\n"
-//     );
-// }
+    cr_assert_stdout_eq_str(
+        "Cerise lives.\n"
+        "Framboise lives.\n"
+        "Anis lives.\n"
+        "[[name: \"Cerise\", vitamins: 0, peeled: false], [name: \"Framboise\", vitamins: 0, peeled: false], [name: \"Anis\", vitamins: 0, peeled: false]]\n"
+        "Serge lives.\n"
+        "0\n"
+        "Serge dies.\n"
+        "Cerise dies.\n"
+        "[[name: \"Framboise\", vitamins: 0, peeled: false], [name: \"Anis\", vitamins: 0, peeled: false]]\n"
+        "Framboise dies.\n"
+        "Anis dies.\n"
+    );
+}

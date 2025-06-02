@@ -5,22 +5,36 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 28 6:31:10 PM 2025 Paradis
-** Last update Thu May 28 6:34:41 PM 2025 Paradis
+** Last update Tue Jun 2 8:33:08 PM 2025 Paradis
 */
 
 #include <iostream>
-#include "../include/Orange.hpp"
-#include "../include/Strawberry.hpp"
-#include "../include/Almond.hpp"
+#include "../include/FruitBox.hpp"
+#include "../include/AFruit.hpp"
+
+class TestFruit : public AFruit
+{
+    public:
+        TestFruit(const std::string& name)
+            : AFruit(name, 0)
+        {
+            _vitamins = 0;
+            _peeled = false;
+            std::cout << _name << " lives." << std::endl;
+        }
+
+        virtual ~TestFruit() { std::cout << _name << " dies." << std::endl;}
+    private:
+};
 
 int     main(void)
 {
     FruitBox        box(3);
     const FruitBox& cref = box;
 
-    box.puahFruit(new TestFruit("Cerise"));
-    box.puahFruit(new TestFruit("Framboise"));
-    box.puahFruit(new TestFruit("Anis"));
+    box.pushFruit(new TestFruit("Cerise"));
+    box.pushFruit(new TestFruit("Framboise"));
+    box.pushFruit(new TestFruit("Anis"));
     std::cout << cref << std::endl;
 
     IFruit          *tmp = new TestFruit("Serge");
