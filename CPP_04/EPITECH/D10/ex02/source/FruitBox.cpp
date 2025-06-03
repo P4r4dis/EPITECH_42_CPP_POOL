@@ -5,11 +5,12 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 28 6:59:10 PM 2025 Paradis
-** Last update Tue Jun 2 8:30:41 PM 2025 Paradis
+** Last update Wed Jun 3 6:58:32 PM 2025 Paradis
 */
 
 #include "../include/FruitBox.hpp"
-#include <ios>
+#include <sstream>
+#include <iostream>
 
 FruitBox::FruitBox(void)    :   _size(0),
                                 _nbFruit(0),
@@ -24,30 +25,6 @@ FruitBox::FruitBox(unsigned int sizeBox)    :   _size(sizeBox),
     for (size_t i = 0; i < _size; ++i)
         _fruitBox[i] = nullptr;
 }
-
-// FruitBox                &FruitBox::operator=(const FruitBox& fruitBox)
-// {
-//     if (this != &fruitBox)
-//     {
-//         _size = fruitBox._size;
-//         _nbFruit = fruitBox._nbFruit;
-//         for (size_t i = 0; i < _size; ++i)
-//         {
-//             if (_fruitBox[i])
-//             {
-//                 delete _fruitBox[i];
-//                 _fruitBox[i] = nullptr;
-//             }
-//         }
-
-//         for (size_t i = 0; i < _size; ++i)
-//         {
-//             if (fruitBox._fruitBox[i])
-//                 _fruitBox[i] = fruitBox._fruitBox[i];
-//         }
-//     }
-//     return *this;
-// }
 
 FruitBox::~FruitBox()
 {
@@ -78,8 +55,6 @@ unsigned int            FruitBox::nbFruit(void)
     return 0;
 }
 
-#include <sstream>
-#include <iostream>
 bool                    FruitBox::pushFruit(IFruit *fruit)
 {
     if (_fruitBox && fruit)
@@ -135,7 +110,7 @@ std::ostream        &operator<<(std::ostream &os, const FruitBox &fruit)
             tmp << "[name: \"" << fruit.getFruit(i)->getName()
                 << "\", vitamins: " << fruit.getFruit(i)->getVitamins()
                 << ", peeled: " << std::boolalpha << fruit.getFruit(i)->isPeeled() << "]";
-            if (i < fruit.getSize() - 1)
+            if (i < fruit.getSize() - 1 && fruit.getFruit(i + 1))
                 tmp << ", ";
         }
     }

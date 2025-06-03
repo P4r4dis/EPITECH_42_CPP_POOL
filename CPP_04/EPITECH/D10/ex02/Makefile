@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Wed May 28 6:40:48 PM 2025 Paradis
-## Last update Wed Jun 3 2:40:20 PM 2025 Paradis
+## Last update Wed Jun 3 3:42:50 PM 2025 Paradis
 ##
 
 # # Compilateur
@@ -41,6 +41,7 @@ SRCS		=	$(SRC_PATH)/IFruit.cpp \
 				$(SRC_PATH)/BloodOrange.cpp \
 				$(SRC_PATH)/Raspberry.cpp \
 				$(SRC_PATH)/Coconut.cpp \
+				$(SRC_PATH)/FruitUtils.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 28 6:35:25 PM 2025 Paradis
-** Last update Wed Jun 3 2:44:10 PM 2025 Paradis
+** Last update Wed Jun 3 6:56:56 PM 2025 Paradis
 */
 
 
@@ -31,7 +31,7 @@
 #include "../../include/BloodOrange.hpp"
 #include "../../include/Raspberry.hpp"
 #include "../../include/Coconut.hpp"
-
+#include "../../include/FruitUtils.hpp"
 
 void redirect_all_stdout(void)
 {
@@ -505,7 +505,6 @@ Test(Lemon, TEST_getVitamins_return_vitamins_if_fruit_is_peeled,
 
 Test(Lemon, TEST_getName_return_name, .init = redirect_all_stdout)
 {
-    
     {
         Lemon fruit;
 
@@ -515,7 +514,6 @@ Test(Lemon, TEST_getName_return_name, .init = redirect_all_stdout)
 
 Test(Lemon, TEST_isPeeled_checks_if_fruit_is_peeled_or_not, .init = redirect_all_stdout)
 {
-    
     {
         Lemon fruit;
 
@@ -527,7 +525,6 @@ Test(Lemon, TEST_isPeeled_checks_if_fruit_is_peeled_or_not, .init = redirect_all
 
 Test(Lemon, TEST_peel_peel_fruit_not_peeled_by_default, .init = redirect_all_stdout)
 {
-    
     {
         Lemon fruit;
 
@@ -539,7 +536,6 @@ Test(Lemon, TEST_peel_peel_fruit_not_peeled_by_default, .init = redirect_all_std
 
 Test(Lemon, TEST_peel_do_nothing_if_fruit_is_already_peel, .init = redirect_all_stdout)
 {
-    
     {
         Lemon fruit;
 
@@ -554,7 +550,6 @@ Test(Lemon, TEST_peel_do_nothing_if_fruit_is_already_peel, .init = redirect_all_
 
 Test(Lemon, TEST_left_stream_operator_overload_ostream, .init = redirect_all_stdout)
 {
-    
     {
         Lemon fruit;
 
@@ -642,7 +637,6 @@ Test(Orange, TEST_getVitamins_return_vitamins_if_fruit_is_peeled,
 
 Test(Orange, TEST_getName_return_name, .init = redirect_all_stdout)
 {
-    
     {
         Orange fruit;
 
@@ -652,7 +646,6 @@ Test(Orange, TEST_getName_return_name, .init = redirect_all_stdout)
 
 Test(Orange, TEST_isPeeled_checks_if_fruit_is_peeled_or_not, .init = redirect_all_stdout)
 {
-    
     {
         Orange fruit;
 
@@ -664,7 +657,6 @@ Test(Orange, TEST_isPeeled_checks_if_fruit_is_peeled_or_not, .init = redirect_al
 
 Test(Orange, TEST_peel_peel_fruit_not_peeled_by_default, .init = redirect_all_stdout)
 {
-    
     {
         Orange fruit;
 
@@ -676,7 +668,6 @@ Test(Orange, TEST_peel_peel_fruit_not_peeled_by_default, .init = redirect_all_st
 
 Test(Orange, TEST_peel_do_nothing_if_fruit_is_already_peel, .init = redirect_all_stdout)
 {
-    
     {
         Orange fruit;
 
@@ -691,7 +682,6 @@ Test(Orange, TEST_peel_do_nothing_if_fruit_is_already_peel, .init = redirect_all
 
 Test(Orange, TEST_left_stream_operator_overload_ostream, .init = redirect_all_stdout)
 {
-    
     {
         Orange fruit;
 
@@ -789,7 +779,6 @@ Test(Strawberry, TEST_getName_return_name, .init = redirect_all_stdout)
 
 Test(Strawberry, TEST_isPeeled_checks_if_fruit_is_peeled_or_not, .init = redirect_all_stdout)
 {
-    
     {
         Strawberry fruit;
 
@@ -813,7 +802,6 @@ Test(Strawberry, TEST_peel_peel_fruit_is_peeled_by_default, .init = redirect_all
 
 Test(Strawberry, TEST_peel_do_nothing_if_fruit_is_already_peel, .init = redirect_all_stdout)
 {
-    
     {
         Strawberry fruit;
 
@@ -828,7 +816,6 @@ Test(Strawberry, TEST_peel_do_nothing_if_fruit_is_already_peel, .init = redirect
 
 Test(Strawberry, TEST_left_stream_operator_overload_ostream, .init = redirect_all_stdout)
 {
-    
     {
         Strawberry fruit;
 
@@ -1515,6 +1502,7 @@ Test(Coconut, TEST_left_stream_operator_overload_ostream, .init = redirect_all_s
         "[name: \"coconut\", vitamins: 0, peeled: false]\n"
     );
 }
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            FruitBox class                                 //
 ///////////////////////////////////////////////////////////////////////////////
@@ -1760,41 +1748,182 @@ TEST_left_stream_operator_overload_ostream_with_empty_fruitBox,
         "[]\n"
     );
 }
+
+///////////////////////////////////////////////////////////////////////////////
+//                            FruitUtils class                               //
+///////////////////////////////////////////////////////////////////////////////
+Test(FruitUtils, TEST_default_CTOR, .init = redirect_all_stdout)
+{
+    {
+        FruitUtils utils;
+
+        cr_assert_not_null(&utils);
+    }
+}
+
+Test(FruitUtils, TEST_sort_fruits, .init = redirect_all_stdout)
+{
+    {
+        FruitUtils  utils;
+        FruitBox    unsortedBox(8);
+        FruitBox    lemonBox(8);
+        FruitBox    citrusBox(8);
+        FruitBox    berryBox(8);
+        Orange      *orange = new Orange;
+        Lemon       *lemon = new Lemon;
+        Strawberry  *berry = new Strawberry;
+        Almond      *almond = new Almond;
+        Grapefruit  *grapefruit = new Grapefruit;
+        BloodOrange *bloodOrange = new BloodOrange;
+        Raspberry   *raspberry = new Raspberry;
+        Coconut     *coconut = new Coconut;
+
+
+        cr_assert(unsortedBox.pushFruit(orange) == true);
+        cr_assert(unsortedBox.pushFruit(lemon) == true);
+        cr_assert(unsortedBox.pushFruit(berry) == true);
+        cr_assert(unsortedBox.pushFruit(almond) == true);
+        cr_assert(unsortedBox.pushFruit(grapefruit) == true);
+        cr_assert(unsortedBox.pushFruit(bloodOrange) == true);
+        cr_assert(unsortedBox.pushFruit(raspberry) == true);
+        cr_assert(unsortedBox.pushFruit(coconut) == true);
+
+        utils.sort(unsortedBox, lemonBox, citrusBox, berryBox);
+
+        std::cout << "unsorted: " << unsortedBox << std::endl;
+        std::cout << "lemonBox: " << lemonBox << std::endl;
+        std::cout << "citrusBox: " << citrusBox << std::endl;
+        std::cout << "berryBox: " << berryBox << std::endl;
+    }
+    cr_assert_stdout_eq_str
+    (
+        "unsorted: [[name: \"almond\", vitamins: 0, peeled: false], [name: \"coconut\", vitamins: 0, peeled: false]]\n"
+        "lemonBox: [[name: \"lemon\", vitamins: 0, peeled: false]]\n"
+        "citrusBox: [[name: \"orange\", vitamins: 0, peeled: false], [name: \"grapefruit\", vitamins: 0, peeled: false], [name: \"blood orange\", vitamins: 0, peeled: false]]\n"
+        "berryBox: [[name: \"strawberry\", vitamins: 6, peeled: true], [name: \"raspberry\", vitamins: 5, peeled: true]]\n"
+    );
+}
+
+Test(FruitUtils, TEST_sort_unknown_fruit_goes_back_to_unsorted, .init = redirect_all_stdout)
+{
+    FruitBox unsorted(3);
+    FruitBox lemonBox(1);
+    FruitBox citrusBox(1);
+    FruitBox berryBox(1);
+
+    unsorted.pushFruit(new Almond);
+
+    FruitUtils::sort(unsorted, lemonBox, citrusBox, berryBox);
+
+    cr_assert_eq(unsorted.nbFruit(), 1);
+    delete unsorted.popFruit();
+}
+
+Test(FruitUtils, TEST_sort_full_boxes_push_back_unsorted, .init = redirect_all_stdout)
+{
+    FruitBox unsorted(4);
+    FruitBox lemonBox(1);
+    FruitBox citrusBox(1);
+    FruitBox berryBox(1);
+
+    unsorted.pushFruit(new Lemon);
+    unsorted.pushFruit(new Lemon);
+    unsorted.pushFruit(new Orange);
+    unsorted.pushFruit(new Strawberry);
+
+    FruitUtils::sort(unsorted, lemonBox, citrusBox, berryBox);
+
+    cr_assert_eq(lemonBox.nbFruit(), 1);
+    cr_assert_eq(citrusBox.nbFruit(), 1);
+    cr_assert_eq(berryBox.nbFruit(), 1);
+    cr_assert_eq(unsorted.nbFruit(), 1);
+
+    delete lemonBox.popFruit();
+    delete citrusBox.popFruit();
+    delete berryBox.popFruit();
+    delete unsorted.popFruit();
+}
+
+Test(FruitUtils, TEST_sort_all_fruits_rejected, .init = redirect_all_stdout)
+{
+    FruitBox unsorted(3);
+    FruitBox lemonBox(0);
+    FruitBox citrusBox(0);
+    FruitBox berryBox(0);
+
+    unsorted.pushFruit(new Lemon);
+    unsorted.pushFruit(new Orange);
+    unsorted.pushFruit(new Strawberry);
+
+    FruitUtils::sort(unsorted, lemonBox, citrusBox, berryBox);
+
+    cr_assert_eq(unsorted.nbFruit(), 3);
+
+    delete unsorted.popFruit();
+    delete unsorted.popFruit();
+    delete unsorted.popFruit();
+}
+
+Test(FruitUtils, TEST_sort_no_duplicate_push, .init = redirect_all_stdout)
+{
+    FruitBox unsorted(3);
+    FruitBox lemonBox(2);
+
+    Lemon *lemon = new Lemon;
+    unsorted.pushFruit(lemon);
+
+    FruitUtils::sort(unsorted, lemonBox, unsorted, unsorted);
+
+    cr_assert_eq(lemonBox.pushFruit(lemon), false);
+
+    delete lemonBox.popFruit();
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
 Test(main, Test_main, .init = redirect_all_stdout)
 {
-    {       
-        FruitBox        box(3);
-        const FruitBox& cref = box;
+    {
+        FruitUtils  utils;
+        FruitBox    unsortedBox(9);
+        FruitBox    lemonBox(8);
+        FruitBox    citrusBox(8);
+        FruitBox    berryBox(8);
+        Orange      *orange = new Orange;
+        Lemon       *lemon = new Lemon;
+        Strawberry  *berry = new Strawberry;
+        Almond      *almond = new Almond;
+        Grapefruit  *grapefruit = new Grapefruit;
+        BloodOrange *bloodOrange = new BloodOrange;
+        Raspberry   *raspberry = new Raspberry;
+        Coconut     *coconut = new Coconut;
+        TestFruit   *testFruit = new TestFruit("Apple");
 
-        box.pushFruit(new TestFruit("Cerise"));
-        box.pushFruit(new TestFruit("Framboise"));
-        box.pushFruit(new TestFruit("Anis"));
-        std::cout << cref << std::endl;
+        cr_assert(unsortedBox.pushFruit(orange) == true);
+        cr_assert(unsortedBox.pushFruit(lemon) == true);
+        cr_assert(unsortedBox.pushFruit(berry) == true);
+        cr_assert(unsortedBox.pushFruit(almond) == true);
+        cr_assert(unsortedBox.pushFruit(grapefruit) == true);
+        cr_assert(unsortedBox.pushFruit(bloodOrange) == true);
+        cr_assert(unsortedBox.pushFruit(raspberry) == true);
+        cr_assert(unsortedBox.pushFruit(coconut) == true);
+        cr_assert(unsortedBox.pushFruit(testFruit) == true);
 
-        IFruit          *tmp = new TestFruit("Serge");
+        utils.sort(unsortedBox, lemonBox, citrusBox, berryBox);
 
-        std::cout << box.pushFruit(tmp) << std::endl;
-        delete tmp;
-
-        tmp = box.popFruit();
-        delete tmp;
-        std::cout << cref << std::endl;
+        std::cout << "unsorted: " << unsortedBox << std::endl;
+        std::cout << "lemonBox: " << lemonBox << std::endl;
+        std::cout << "citrusBox: " << citrusBox << std::endl;
+        std::cout << "berryBox: " << berryBox << std::endl;
     }
-
-    cr_assert_stdout_eq_str(
-        "Cerise lives.\n"
-        "Framboise lives.\n"
-        "Anis lives.\n"
-        "[[name: \"Cerise\", vitamins: 0, peeled: false], [name: \"Framboise\", vitamins: 0, peeled: false], [name: \"Anis\", vitamins: 0, peeled: false]]\n"
-        "Serge lives.\n"
-        "0\n"
-        "Serge dies.\n"
-        "Cerise dies.\n"
-        "[[name: \"Framboise\", vitamins: 0, peeled: false], [name: \"Anis\", vitamins: 0, peeled: false]]\n"
-        "Framboise dies.\n"
-        "Anis dies.\n"
+    cr_assert_stdout_eq_str
+    (
+        "Apple lives.\n"
+        "unsorted: [[name: \"almond\", vitamins: 0, peeled: false], [name: \"coconut\", vitamins: 0, peeled: false], [name: \"Apple\", vitamins: 0, peeled: false]]\n"
+        "lemonBox: [[name: \"lemon\", vitamins: 0, peeled: false]]\n"
+        "citrusBox: [[name: \"orange\", vitamins: 0, peeled: false], [name: \"grapefruit\", vitamins: 0, peeled: false], [name: \"blood orange\", vitamins: 0, peeled: false]]\n"
+        "berryBox: [[name: \"strawberry\", vitamins: 6, peeled: true], [name: \"raspberry\", vitamins: 5, peeled: true]]\n"
+        "Apple dies.\n"
     );
 }
