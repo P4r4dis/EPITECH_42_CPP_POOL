@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 17:02:13 by Paradis           #+#    #+#              #
-#    Updated: 2025/06/03 19:59:38 by Paradis          ###   ########.fr        #
+#    Updated: 2025/06/05 20:04:17 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -193,7 +193,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:03:01 PM 2025 Paradis
-## Last update Wed Jun 3 7:59:38 PM 2025 Paradis
+## Last update Fri Jun 5 8:04:17 PM 2025 Paradis
 ##
 
 
@@ -392,22 +392,32 @@ EPITECH_valgrind_test_run_ex03	:	fclean
 #								EPITECH_EX04								   #
 #																			   #
 # **************************************************************************** #
-EPITECH_EX04_PATH 				= 	./EPITECH/D09/ex04
-EPITECH_EX04_BIN_PATH 			= 	./EPITECH/D09/ex04/bin
-EPITECH_EX04_SRC_PATH			=	./EPITECH/D09/ex04/source
-EPITECH_EX04_INC_PATH			=	./EPITECH/D09/ex04/include
-EPITECH_EX04_UT_PATH			=	./EPITECH/D09/ex04/test
+EPITECH_EX04_PATH 				= 	./EPITECH/D10/ex04
+EPITECH_EX04_BIN_PATH 			= 	./EPITECH/D10/ex04/bin
+EPITECH_EX04_SRC_PATH			=	./EPITECH/D10/ex04/source
+EPITECH_EX04_INC_PATH			=	./EPITECH/D10/ex04/include
+EPITECH_EX04_UT_PATH			=	./EPITECH/D10/ex04/test
 
-EPITECH_EX04_NAME				=	Paladin
+EPITECH_EX04_NAME				=	FruitFactory
 
 EPITECH_EX04_UT_SRC				=	$(EPITECH_EX04_UT_PATH)/$(EPITECH_EX04_NAME)_test.cpp
 EPITECH_EX04_UT_NAME 			= 	test_$(EPITECH_EX04_NAME)
 
-EPITECH_EX04_SRC				=	$(EPITECH_EX04_SRC_PATH)/Peasant.cpp \
-									$(EPITECH_EX04_SRC_PATH)/Knight.cpp \
-									$(EPITECH_EX04_SRC_PATH)/Enchanter.cpp \
-									$(EPITECH_EX04_SRC_PATH)/Priest.cpp \
-									$(EPITECH_EX04_SRC_PATH)/Paladin.cpp \
+EPITECH_EX04_SRC				=	$(EPITECH_EX04_SRC_PATH)/IFruit.cpp \
+									$(EPITECH_EX04_SRC_PATH)/AFruit.cpp \
+									$(EPITECH_EX04_SRC_PATH)/ABerry.cpp \
+									$(EPITECH_EX04_SRC_PATH)/ACitrus.cpp \
+									$(EPITECH_EX04_SRC_PATH)/ANut.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Lemon.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Orange.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Strawberry.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Almond.cpp \
+									$(EPITECH_EX04_SRC_PATH)/FruitBox.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Grapefruit.cpp \
+									$(EPITECH_EX04_SRC_PATH)/BloodOrange.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Raspberry.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Coconut.cpp \
+									$(EPITECH_EX04_SRC_PATH)/FruitUtils.cpp \
 									$(EPITECH_EX04_BIN_PATH)/main.cpp
 EPITECH_EX04_OBJS				=	$(EPITECH_EX04_SRC:.cpp=.o)
 
@@ -553,8 +563,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX02_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX03_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX03_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX05_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX05_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX06_PATH)
@@ -577,8 +587,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX02_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX03_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX03_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX05_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX05_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX06_PATH)
