@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 17:02:13 by Paradis           #+#    #+#              #
-#    Updated: 2025/06/05 20:04:17 by Paradis          ###   ########.fr        #
+#    Updated: 2025/06/06 17:53:57 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -193,7 +193,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:03:01 PM 2025 Paradis
-## Last update Fri Jun 5 8:04:17 PM 2025 Paradis
+## Last update Sat Jun 6 5:53:57 PM 2025 Paradis
 ##
 
 
@@ -418,6 +418,7 @@ EPITECH_EX04_SRC				=	$(EPITECH_EX04_SRC_PATH)/IFruit.cpp \
 									$(EPITECH_EX04_SRC_PATH)/Raspberry.cpp \
 									$(EPITECH_EX04_SRC_PATH)/Coconut.cpp \
 									$(EPITECH_EX04_SRC_PATH)/FruitUtils.cpp \
+									$(EPITECH_EX04_SRC_PATH)/FruitFactory.cpp \
 									$(EPITECH_EX04_BIN_PATH)/main.cpp
 EPITECH_EX04_OBJS				=	$(EPITECH_EX04_SRC:.cpp=.o)
 
@@ -453,12 +454,21 @@ EPITECH_EX05_NAME				=	ICharacter
 EPITECH_EX05_UT_SRC				=	$(EPITECH_EX05_UT_PATH)/$(EPITECH_EX05_NAME)_test.cpp
 EPITECH_EX05_UT_NAME 			= 	test_$(EPITECH_EX05_NAME)
 
-EPITECH_EX05_SRC				=	$(EPITECH_EX05_SRC_PATH)/Peasant.cpp \
-									$(EPITECH_EX05_SRC_PATH)/Knight.cpp \
-									$(EPITECH_EX05_SRC_PATH)/Enchanter.cpp \
-									$(EPITECH_EX05_SRC_PATH)/Priest.cpp \
-									$(EPITECH_EX05_SRC_PATH)/Paladin.cpp \
-									$(EPITECH_EX05_SRC_PATH)/ICharacter.cpp \
+EPITECH_EX05_SRC				=	$(EPITECH_EX04_SRC_PATH)/IFruit.cpp \
+									$(EPITECH_EX04_SRC_PATH)/AFruit.cpp \
+									$(EPITECH_EX04_SRC_PATH)/ABerry.cpp \
+									$(EPITECH_EX04_SRC_PATH)/ACitrus.cpp \
+									$(EPITECH_EX04_SRC_PATH)/ANut.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Lemon.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Orange.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Strawberry.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Almond.cpp \
+									$(EPITECH_EX04_SRC_PATH)/FruitBox.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Grapefruit.cpp \
+									$(EPITECH_EX04_SRC_PATH)/BloodOrange.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Raspberry.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Coconut.cpp \
+									$(EPITECH_EX04_SRC_PATH)/FruitUtils.cpp \
 									$(EPITECH_EX05_BIN_PATH)/main.cpp
 
 EPITECH_EX05_OBJS				=	$(EPITECH_EX05_SRC:.cpp=.o)

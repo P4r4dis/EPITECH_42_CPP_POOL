@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 28 6:35:25 PM 2025 Paradis
-** Last update Fri Jun 5 8:45:25 PM 2025 Paradis
+** Last update Thu Jun 11 2:12:51 AM 2025 Paradis
 */
 
 
@@ -32,6 +32,8 @@
 #include "../../include/Raspberry.hpp"
 #include "../../include/Coconut.hpp"
 #include "../../include/FruitUtils.hpp"
+#include "../../include/FruitFactory.hpp"
+
 
 void redirect_all_stdout(void)
 {
@@ -210,7 +212,6 @@ Test(AFruit_clone, clone_method_returns_new_instance, .init = redirect_all_stdou
 ///////////////////////////////////////////////////////////////////////////////
 //                            ABerry class                                   //
 ///////////////////////////////////////////////////////////////////////////////
-
 Test(ABerry, TEST_getVitamins_return_vitamins,
 .init = redirect_all_stdout)
 {
@@ -1029,6 +1030,7 @@ Test(Almond_Clone, clone_returns_independent_copy)
 
     delete clone;
 }
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            Grapefruit class                               //
 ///////////////////////////////////////////////////////////////////////////////
@@ -1175,6 +1177,7 @@ Test(Grapefruit_Clone, clone_returns_independent_copy)
 
     delete clone;
 }
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            BloodOrange class                              //
 ///////////////////////////////////////////////////////////////////////////////
@@ -1320,6 +1323,7 @@ Test(BloodOrange_Clone, clone_returns_independent_copy)
 
     delete clone;
 }
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            Raspberry class                                //
 ///////////////////////////////////////////////////////////////////////////////
@@ -1470,6 +1474,7 @@ Test(Raspberry_Clone, clone_returns_independent_copy)
 
     delete clone;
 }
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            Coconut class                                  //
 ///////////////////////////////////////////////////////////////////////////////
@@ -1620,6 +1625,7 @@ Test(Coconut_Clone, clone_returns_independent_copy)
 
     delete clone;
 }
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            FruitBox class                                 //
 ///////////////////////////////////////////////////////////////////////////////
@@ -2281,106 +2287,195 @@ Test(FruitUtils_unpack, TEST_should_return_nullptr_because_fruitBox_is_nullptr, 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+//                            FruitFactory class                             //
+///////////////////////////////////////////////////////////////////////////////
+Test(FruitFactory_registerFruit, TEST_register_fruits, .init = redirect_all_stdout)
+{
+    {
+        FruitFactory    factory;
+
+        factory.registerFruit(new Orange);
+        factory.registerFruit(new BloodOrange);
+        factory.registerFruit(new Almond);
+        factory.registerFruit(new Coconut);
+        factory.registerFruit(new Almond);
+        
+        factory.display();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "[name: \"orange\", vitamins: 0, peeled: false]\n"
+        "[name: \"blood orange\", vitamins: 0, peeled: false]\n"
+        "[name: \"almond\", vitamins: 0, peeled: false]\n"
+        "[name: \"coconut\", vitamins: 0, peeled: false]\n"
+    );
+}
+
+Test(FruitFactory_registerFruit, TEST_replace_fruits_already_registered, .init = redirect_all_stdout)
+{
+    {
+        FruitFactory    factory;
+
+        factory.registerFruit(new Orange);
+        factory.registerFruit(new Almond);
+        factory.registerFruit(new Almond);
+        factory.registerFruit(new Almond);
+        factory.registerFruit(new Almond);
+        
+        factory.display();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "[name: \"orange\", vitamins: 0, peeled: false]\n"
+        "[name: \"almond\", vitamins: 0, peeled: false]\n"
+    );
+}
+
+Test(FruitFactory_unregisterFruit, TEST_unregister_fruits_already_registered, .init = redirect_all_stdout)
+{
+    {
+        FruitFactory    factory;
+
+        factory.registerFruit(new Orange);
+        factory.registerFruit(new BloodOrange);
+        factory.registerFruit(new Almond);
+        factory.registerFruit(new Coconut);
+        factory.registerFruit(new Almond);
+        factory.unregisterFruit("almond");
+        factory.unregisterFruit("blood orange");
+
+        factory.display();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "[name: \"orange\", vitamins: 0, peeled: false]\n"
+        "[name: \"coconut\", vitamins: 0, peeled: false]\n"
+    );
+}
+
+Test(FruitFactory_unregisterFruit, TEST_try_to_unregister_unknown_fruits, .init = redirect_all_stdout)
+{
+    {
+        FruitFactory    factory;
+
+        factory.registerFruit(new Orange);
+        factory.registerFruit(new BloodOrange);
+        factory.registerFruit(new Almond);
+        factory.registerFruit(new Coconut);
+        factory.registerFruit(new Almond);
+        
+        factory.unregisterFruit("banana");
+        factory.unregisterFruit("coconut");
+        
+        factory.display();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "[name: \"orange\", vitamins: 0, peeled: false]\n"
+        "[name: \"blood orange\", vitamins: 0, peeled: false]\n"
+        "[name: \"almond\", vitamins: 0, peeled: false]\n"
+    );
+}
+
+Test(FruitFactory_createFruit, TEST_create_fruit_registered, .init = redirect_all_stdout)
+{
+    {
+        FruitFactory    factory;
+
+        factory.registerFruit(new Orange);
+        factory.registerFruit(new BloodOrange);
+        factory.registerFruit(new Almond);
+        factory.registerFruit(new Coconut);
+        factory.registerFruit(new Almond);
+
+        factory.unregisterFruit("banana");
+        factory.unregisterFruit("coconut");
+        
+        IFruit          *fruit1 = factory.createFruit("almond");
+        IFruit          *fruit2 = factory.createFruit("coconut");
+        IFruit          *fruit3 = factory.createFruit("tomato");
+
+        std::cout << *fruit1 << std::endl;
+        std::cout << fruit2 << std::endl;
+        std::cout << fruit3 << std::endl;
+
+        delete fruit1;
+    }
+    cr_assert_stdout_eq_str
+    (
+        "[name: \"almond\", vitamins: 0, peeled: false]\n"
+        "0\n"
+        "0\n"
+    );
+}
+
+Test(FruitFactory_createFruit,
+TEST_try_to_create_fruit_unregistered_or_unknown_should_return_nullptr,
+.init = redirect_all_stdout)
+{
+    {
+        FruitFactory    factory;
+
+        factory.registerFruit(new Orange);
+        factory.registerFruit(new BloodOrange);
+        factory.registerFruit(new Almond);
+        factory.registerFruit(new Coconut);
+        factory.registerFruit(new Almond);
+
+        factory.unregisterFruit("banana");
+        factory.unregisterFruit("coconut");
+        
+        IFruit          *fruit1 = factory.createFruit("almond");
+        IFruit          *fruit2 = factory.createFruit("coconut");
+        cr_assert_null(fruit2);
+        IFruit          *fruit3 = factory.createFruit("tomato");
+        cr_assert_null(fruit3);
+
+        std::cout << *fruit1 << std::endl;
+        std::cout << fruit2 << std::endl;
+        std::cout << fruit3 << std::endl;
+
+        delete fruit1;
+    }
+    cr_assert_stdout_eq_str
+    (
+        "[name: \"almond\", vitamins: 0, peeled: false]\n"
+        "0\n"
+        "0\n"
+    );
+}
+
+///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
 Test(main, Test_main, .init = redirect_all_stdout)
 {
     {
-        // IFruit *fruits[] =  {   new Almond, new BloodOrange, new Coconut,
-        //                         new Grapefruit, new Lemon, new Orange,
-        //                         new Raspberry, new Strawberry, new Almond,
-        //                         new BloodOrange, new Coconut, new Grapefruit,
-        //                         new Lemon, new Orange, new Raspberry,
-        //                         new Strawberry, new Almond, new BloodOrange,
-        //                         new Coconut, new Grapefruit, new Lemon, new Orange,
-        //                         new Raspberry, new Strawberry, new Almond, nullptr
-        //                     };
-        IFruit *fruits[26];
-        int i = 0;
-        fruits[i++] = new Almond;
-        fruits[i++] = new BloodOrange;
-        fruits[i++] = new Coconut;
-        fruits[i++] = new Grapefruit;
-        fruits[i++] = new Lemon;
-        fruits[i++] = new Orange;
-        fruits[i++] = new Raspberry;
-        fruits[i++] = new Strawberry;
-        fruits[i++] = new Almond;
-        fruits[i++] = new BloodOrange;
-        fruits[i++] = new Coconut;
-        fruits[i++] = new Grapefruit;
-        fruits[i++] = new Lemon;
-        fruits[i++] = new Orange;
-        fruits[i++] = new Raspberry;
-        fruits[i++] = new Strawberry;
-        fruits[i++] = new Almond;
-        fruits[i++] = new BloodOrange;
-        fruits[i++] = new Coconut;
-        fruits[i++] = new Grapefruit;
-        fruits[i++] = new Lemon;
-        fruits[i++] = new Orange;
-        fruits[i++] = new Raspberry;
-        fruits[i++] = new Strawberry;
-        fruits[i++] = new Almond;
-        fruits[i] = nullptr;
+          FruitFactory    factory;
 
-        FruitBox **tmp = FruitUtils::pack(fruits, 6);
+    factory.registerFruit(new Raspberry);
+    factory.registerFruit(new BloodOrange);
+    factory.registerFruit(new Almond);
+    factory.registerFruit(new Coconut);
+    factory.registerFruit(new Almond);
 
-        std::cout << "Fruits are packed in the fruitbox:" << std::endl;
-        for (size_t i = 0; tmp[i] != nullptr; ++i)
-            std::cout << *tmp[i] << std::endl;
-        
-        std::cout << "Fruits are unpacked in the new array of Fruits:" << std::endl;
-        IFruit **unpackedFruits = FruitUtils::unpack(tmp);
-        for (size_t i = 0; unpackedFruits[i] != nullptr; ++i)
-            std::cout << *unpackedFruits[i] << std::endl;
+    factory.unregisterFruit("banana");
+    factory.unregisterFruit("coconut");
 
-        std::cout << "Now the old array of fruits are empty!" << std::endl;
+    IFruit          *fruit1 = factory.createFruit("almond");
+    IFruit          *fruit2 = factory.createFruit("coconut");
+    IFruit          *fruit3 = factory.createFruit("tomato");
 
-        for (size_t i = 0; tmp[i] != nullptr; ++i)
-            delete tmp[i];
-        delete [] tmp;
-
-        for (size_t i = 0; unpackedFruits[i] != nullptr; ++i)
-                delete unpackedFruits[i];
-        delete [] unpackedFruits;
+    std::cout << *fruit1 << std::endl;
+    std::cout << fruit2 << std::endl;
+    std::cout << fruit3 << std::endl;
+    
+    delete fruit1;
     }
     cr_assert_stdout_eq_str
     (
-        "Fruits are packed in the fruitbox:\n"
-        "[[name: \"almond\", vitamins: 0, peeled: false], [name: \"blood orange\", vitamins: 0, peeled: false], [name: \"coconut\", vitamins: 0, peeled: false], [name: \"grapefruit\", vitamins: 0, peeled: false], [name: \"lemon\", vitamins: 0, peeled: false], [name: \"orange\", vitamins: 0, peeled: false]]\n"
-        "[[name: \"raspberry\", vitamins: 5, peeled: true], [name: \"strawberry\", vitamins: 6, peeled: true], [name: \"almond\", vitamins: 0, peeled: false], [name: \"blood orange\", vitamins: 0, peeled: false], [name: \"coconut\", vitamins: 0, peeled: false], [name: \"grapefruit\", vitamins: 0, peeled: false]]\n"
-        "[[name: \"lemon\", vitamins: 0, peeled: false], [name: \"orange\", vitamins: 0, peeled: false], [name: \"raspberry\", vitamins: 5, peeled: true], [name: \"strawberry\", vitamins: 6, peeled: true], [name: \"almond\", vitamins: 0, peeled: false], [name: \"blood orange\", vitamins: 0, peeled: false]]\n"
-        "[[name: \"coconut\", vitamins: 0, peeled: false], [name: \"grapefruit\", vitamins: 0, peeled: false], [name: \"lemon\", vitamins: 0, peeled: false], [name: \"orange\", vitamins: 0, peeled: false], [name: \"raspberry\", vitamins: 5, peeled: true], [name: \"strawberry\", vitamins: 6, peeled: true]]\n"
-        "[[name: \"almond\", vitamins: 0, peeled: false]]\n"
-
-        "Fruits are unpacked in the new array of Fruits:\n"
         "[name: \"almond\", vitamins: 0, peeled: false]\n"
-        "[name: \"blood orange\", vitamins: 0, peeled: false]\n"
-        "[name: \"coconut\", vitamins: 0, peeled: false]\n"
-        "[name: \"grapefruit\", vitamins: 0, peeled: false]\n"
-        "[name: \"lemon\", vitamins: 0, peeled: false]\n"
-        "[name: \"orange\", vitamins: 0, peeled: false]\n"
-        "[name: \"raspberry\", vitamins: 5, peeled: true]\n"
-        "[name: \"strawberry\", vitamins: 6, peeled: true]\n"
-        "[name: \"almond\", vitamins: 0, peeled: false]\n"
-        "[name: \"blood orange\", vitamins: 0, peeled: false]\n"
-        "[name: \"coconut\", vitamins: 0, peeled: false]\n"
-        "[name: \"grapefruit\", vitamins: 0, peeled: false]\n"
-        "[name: \"lemon\", vitamins: 0, peeled: false]\n"
-        "[name: \"orange\", vitamins: 0, peeled: false]\n"
-        "[name: \"raspberry\", vitamins: 5, peeled: true]\n"
-        "[name: \"strawberry\", vitamins: 6, peeled: true]\n"
-        "[name: \"almond\", vitamins: 0, peeled: false]\n"
-        "[name: \"blood orange\", vitamins: 0, peeled: false]\n"
-        "[name: \"coconut\", vitamins: 0, peeled: false]\n"
-        "[name: \"grapefruit\", vitamins: 0, peeled: false]\n"
-        "[name: \"lemon\", vitamins: 0, peeled: false]\n"
-        "[name: \"orange\", vitamins: 0, peeled: false]\n"
-        "[name: \"raspberry\", vitamins: 5, peeled: true]\n"
-        "[name: \"strawberry\", vitamins: 6, peeled: true]\n"
-        "[name: \"almond\", vitamins: 0, peeled: false]\n"
-
-        "Now the old array of fruits are empty!\n"
+        "0\n"
+        "0\n"
     );
 }
