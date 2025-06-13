@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 20:46:59 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/13 18:40:58 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/13 19:19:53 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int main()
 {
-    Bureaucrat bureau("name", 42);
+    Bureaucrat bureau("Bob", 42);
 
     bureau.getName();
     bureau.getGrade();
@@ -24,7 +24,7 @@ int main()
     bureau.getGrade();
     bureau.decrement();
     bureau.getGrade();
-
+    std::cout << bureau << std::endl;
 
     try
     {

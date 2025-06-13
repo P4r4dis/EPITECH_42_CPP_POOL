@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 19:11:15 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/13 16:06:17 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/13 19:14:16 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ class                   Bureaucrat
         size_t              _grade;
 };
 
-// std::ostream                &operator<<(const std::ostream &os,
-//                                         const Bureaucrat &bureau);
+std::ostream                &operator<<(std::ostream &os,
+                                        const Bureaucrat &bureau);
 #endif //               !_BUREAUCRAT_HPP__

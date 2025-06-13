@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 20:47:30 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/13 18:18:42 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/13 19:18:34 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,22 +167,33 @@ TEST_decrement_grade_should_throw_exception_if_overflow,
                         Bureaucrat::GradeTooLowException);
     }
 }
+
+Test(Bureaucrat_left_stream_operator,
+TEST_left_stream_operator_overload_display_msg,
+.init = redirect_all_stdout)
+{
+    {
+        Bureaucrat bureau("Bob", 42);
+
+        std::cout << bureau << std::endl;
+    }
+    cr_assert_stdout_eq_str("Bob, bureaucrat grade 42.\n");
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
 Test(main, Test_main, .init = redirect_all_stdout)
 {
     {
+        Bureaucrat bureau("Bob", 42);
 
-        Bureaucrat bureau("name", 42);
-
-        cr_assert(bureau.getName() == "name");
+        cr_assert(bureau.getName() == "Bob");
         cr_assert(bureau.getGrade() == 42);
         bureau.increment();
         cr_assert(bureau.getGrade() == 41);
         bureau.decrement();
         cr_assert(bureau.getGrade() == 42);
-
+        std::cout << bureau << std::endl;
 
         try
         {
@@ -209,7 +220,9 @@ Test(main, Test_main, .init = redirect_all_stdout)
         {
             std::cerr << e.what() << std::endl;
         }
+
     }
+    cr_assert_stdout_eq_str("Bob, bureaucrat grade 42.\n");
     cr_assert_stderr_eq_str
     (
         "Error: Grade is too high.\n"

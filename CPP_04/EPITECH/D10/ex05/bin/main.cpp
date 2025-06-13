@@ -5,21 +5,15 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed May 28 6:31:10 PM 2025 Paradis
-** Last update Thu Jun 11 5:20:10 PM 2025 Paradis
+** Last update Thu Jun 11 8:46:16 PM 2025 Paradis
 */
 
 #include <iostream>
 #include "../include/FruitBox.hpp"
-#include "../include/FruitUtils.hpp"
 #include "../include/Orange.hpp"
 #include "../include/Lemon.hpp"
 #include "../include/Strawberry.hpp"
 #include "../include/Almond.hpp"
-#include "../include/Grapefruit.hpp"
-#include "../include/BloodOrange.hpp"
-#include "../include/Raspberry.hpp"
-#include "../include/Coconut.hpp"
-#include "../include/FruitFactory.hpp"
 #include "../include/IFruitMixer.hpp"
 #include "../include/FruitMixer.hpp"
 

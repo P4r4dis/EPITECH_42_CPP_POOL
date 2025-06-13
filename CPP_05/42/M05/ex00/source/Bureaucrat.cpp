@@ -6,13 +6,13 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 19:10:35 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/13 16:09:56 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/13 19:14:47 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Bureaucrat.hpp"
-#include <cstddef>
 #include <string>
+#include <ostream>
 
 const char      *Bureaucrat::GradeTooHighException::what(void) const throw()
 {
@@ -58,4 +58,11 @@ void                Bureaucrat::decrement(void)
     if ((_grade + 1) > LOWEST)
         throw Bureaucrat::GradeTooLowException();
     ++_grade;
+}
+
+std::ostream        &operator<<(std::ostream &os, const Bureaucrat &bureau)
+{
+    os  << bureau.getName() + ", bureaucrat grade " << bureau.getGrade()
+        << ".";
+    return os;
 }
