@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:25:50 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/16 17:55:49 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/16 18:41:51 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #include <cstddef>
 #include <exception>
 #include <string>
+
+class Form;
+#include "Form.hpp"
 
 #define HIGHEST 1
 #define LOWEST  150
@@ -29,6 +32,7 @@ class                   Bureaucrat
         size_t              getGrade(void) const;
         void                increment(void);
         void                decrement(void);
+        void                signForm(Form &form);
 
         class           GradeTooHighException   :   public std::exception
         {

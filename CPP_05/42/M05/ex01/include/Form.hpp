@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:28:27 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/16 18:06:12 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/16 18:42:05 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include <string>
 #include <ostream>
+
+class Bureaucrat;
 #include "Bureaucrat.hpp"
 
 #define HIGHEST 1
@@ -48,10 +50,10 @@ class                   Form
         };
         
     private:
-        std::string         _name;
+        const std::string   _name;
         bool                _isSigned;
-        size_t              _gradeToSign;
-        size_t              _gradeToExecute;
+        const size_t        _gradeToSign;
+        const size_t        _gradeToExecute;
 };
 
 std::ostream                &operator<<(std::ostream &os, const Form &form);

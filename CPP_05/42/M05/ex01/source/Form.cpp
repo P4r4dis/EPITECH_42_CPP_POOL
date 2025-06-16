@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:55:34 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/16 18:03:46 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/16 18:37:19 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,7 @@ Form::Form(const Form &cpy) :   _name(cpy._name),
 Form                    &Form::operator=(const Form &form)
 {
     if (this != &form)
-    {
-        _name = form._name;
         _isSigned = form._isSigned;
-        _gradeToSign = form._gradeToSign;
-        _gradeToExecute = form._gradeToExecute;
-    }
     return *this;
 }
 

@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:26:43 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/16 18:03:52 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/16 18:56:35 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,31 @@ TEST_left_stream_operator_overload_display_msg,
     cr_assert_stdout_eq_str("Bob, bureaucrat grade 42.\n");
 }
 
+Test(Bureaucrat_signForm, TEST_if_form_is_signed_print_msg_stdout,
+.init = redirect_all_stdout)
+{
+    Form        form("A43", 42, 42);
+    Bureaucrat  bureaucrat("Bob", 42);
+
+    bureaucrat.signForm(form);
+    cr_assert_stdout_eq_str
+    (
+        "Bob signed A43\n"
+    );
+}
+
+Test(Bureaucrat_signForm, TEST_if_form_is_not_signed_print_msg_stdout,
+.init = redirect_all_stdout)
+{
+    Form        form("A43", 42, 42);
+    Bureaucrat  bureaucrat("Bob", 45);
+
+    bureaucrat.signForm(form);
+    cr_assert_stdout_eq_str
+    (
+        "Bob couldn't sign A43 because Error: Grade is too low.\n"
+    );
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            Form class                                     //
 ///////////////////////////////////////////////////////////////////////////////
@@ -362,10 +387,7 @@ Test(Form_assignment_operator, TEST_simple_assignement, .init = redirect_all_std
 
     copy = form;
 
-    cr_assert(copy.getName() == form.getName());
     cr_assert(copy.getIsSigned() == form.getIsSigned());
-    cr_assert(copy.getGradeToSign() == form.getGradeToSign());
-    cr_assert(copy.getGradeToExecute() == form.getGradeToExecute());
 }
 
 Test(Form_beSigned, TEST_form_can_be_signed_by_bureaucrat,
