@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:55:34 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/16 16:12:28 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/16 16:41:06 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ Form::Form(const std::string &name, const size_t gradeToSign,
         throw Form::GradeTooLowException();
 }
 
-// Form::Form(const Form &cpy) :   _name(cpy._name),
-//                                 _isSigned(cpy._isSigned),
-//                                 _gradeToSign(cpy._gradeToSign),
-//                                 _gradeToExecute(cpy._gradeToExecute)
-// {
-// }
+Form::Form(const Form &cpy) :   _name(cpy._name),
+                                _isSigned(cpy._isSigned),
+                                _gradeToSign(cpy._gradeToSign),
+                                _gradeToExecute(cpy._gradeToExecute)
+{
+}
 
 Form::~Form(void)
 {}

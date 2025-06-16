@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:26:43 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/16 16:14:56 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/16 16:40:56 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -337,6 +337,17 @@ Test(Form_getGradeToExecute, Test_return_gradeToExecute,
     Form    form("Bob", 42, 42);
 
     cr_assert(form.getGradeToSign() == 42);
+}
+
+Test(Form_copy_CTOR, TEST_simple_copy, .init = redirect_all_stdout)
+{
+    Form    form("Bob", 42, 42);
+    Form    copy(form);
+
+    cr_assert(copy.getName() == form.getName());
+    cr_assert(copy.getIsSigned() == form.getIsSigned());
+    cr_assert(copy.getGradeToSign() == form.getGradeToSign());
+    cr_assert(copy.getGradeToExecute() == form.getGradeToExecute());
 }
 
 ///////////////////////////////////////////////////////////////////////////////
