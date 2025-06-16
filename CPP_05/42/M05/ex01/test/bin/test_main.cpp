@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:26:43 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/16 16:05:30 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/16 16:14:56 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -325,6 +325,14 @@ Test(Form_getisSigned, Test_return_isSigned, .init = redirect_all_stdout)
 }
 
 Test(Form_getGradeToSign, Test_return_gradeToSign, .init = redirect_all_stdout)
+{
+    Form    form("Bob", 42, 42);
+
+    cr_assert(form.getGradeToSign() == 42);
+}
+
+Test(Form_getGradeToExecute, Test_return_gradeToExecute,
+.init = redirect_all_stdout)
 {
     Form    form("Bob", 42, 42);
 
