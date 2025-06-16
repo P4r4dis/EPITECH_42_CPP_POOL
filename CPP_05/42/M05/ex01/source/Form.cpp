@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:55:34 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/16 16:49:40 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/16 17:21:44 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,12 @@ size_t                  Form::getGradeToSign(void) const
 size_t                  Form::getGradeToExecute(void) const
 {
     return _gradeToExecute;
+}
+
+void                    Form::beSigned(const Bureaucrat &bureaucrat)
+{
+    if (bureaucrat.getGrade() > _gradeToSign)
+        throw Bureaucrat::GradeTooLowException();
+    else
+        _isSigned = true;
 }

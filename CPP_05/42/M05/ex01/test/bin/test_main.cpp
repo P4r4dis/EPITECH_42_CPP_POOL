@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:26:43 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/16 16:54:29 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/16 17:31:13 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ TEST_left_stream_operator_overload_display_msg,
 Test(Form_CTOR, TEST_CTOR_correctly_created, .init = redirect_all_stdout)
 {
     {
-        Form    form("Bob", 42, 20);
+        Form    form("A43", 42, 20);
 
         cr_assert_not_null(&form);
     }
@@ -198,7 +198,7 @@ Test(Form_CTOR, TEST_CTOR_shouldndt_throw_exception,
 .init = redirect_all_stdout)
 {
     {
-        cr_assert_none_throw(Form form("Bob", 42, 20));
+        cr_assert_none_throw(Form form("A43", 42, 20));
     }
 }
 
@@ -206,7 +206,7 @@ Test(Form_CTOR, TEST_CTOR_with_too_small_gradeToSign_should_throw_exception,
 .init = redirect_all_stdout)
 {
     {
-        cr_assert_throw(Form form("Bob", 242, 20),
+        cr_assert_throw(Form form("A43", 242, 20),
                         Form::GradeTooLowException);
     }
 }
@@ -215,7 +215,7 @@ Test(Form_CTOR, TEST_CTOR_with_too_high_gradeToSign_should_throw_exception,
 .init = redirect_all_stdout)
 {
     {
-        cr_assert_throw(Form form("Bob", 0, 20),
+        cr_assert_throw(Form form("A43", 0, 20),
                         Form::GradeTooHighException);
     }
 }
@@ -224,7 +224,7 @@ Test(Form_CTOR, TEST_CTOR_with_too_small_gradeToExecute_should_throw_exception,
 .init = redirect_all_stdout)
 {
     {
-        cr_assert_throw(Form form("Bob", 42, 242),
+        cr_assert_throw(Form form("A43", 42, 242),
                         Form::GradeTooLowException);
     }
 }
@@ -233,7 +233,7 @@ Test(Form_CTOR, TEST_CTOR_with_too_high_gradeToExecute_should_throw_exception,
 .init = redirect_all_stdout)
 {
     {
-        cr_assert_throw(Form form("Bob", 42, 0),
+        cr_assert_throw(Form form("A43", 42, 0),
                         Form::GradeTooHighException);
     }
 }
@@ -245,7 +245,7 @@ TEST_gradeToSign_is_too_high_should_throw_GradeTooHighException,
     {
         try
         {
-            Form    form("Bob", 0, 20);
+            Form    form("A43", 0, 20);
         } catch (Form::GradeTooHighException &e) {
             std::cerr << e.what() << std::endl;
         }
@@ -263,7 +263,7 @@ TEST_gradeToExecute_is_too_high_should_throw_GradeTooHighException,
     {
         try
         {
-            Form    form("Bob", 42, 0);
+            Form    form("A43", 42, 0);
         } catch (Form::GradeTooHighException &e) {
             std::cerr << e.what() << std::endl;
         }
@@ -281,7 +281,7 @@ TEST_gradeToSign_is_too_low_should_throw_GradeTooLowException,
     {
         try
         {
-            Form    form("Bob", 242, 20);
+            Form    form("A43", 242, 20);
         } catch (Form::GradeTooLowException &e) {
             std::cerr << e.what() << std::endl;
         }
@@ -299,7 +299,7 @@ TEST_gradeToExecute_is_too_low_should_throw_GradeTooLowException,
     {
         try
         {
-            Form    form("Bob", 42, 242);
+            Form    form("A43", 42, 242);
         } catch (Form::GradeTooLowException &e) {
             std::cerr << e.what() << std::endl;
         }
@@ -312,21 +312,21 @@ TEST_gradeToExecute_is_too_low_should_throw_GradeTooLowException,
 
 Test(Form_getName, Test_return_name, .init = redirect_all_stdout)
 {
-    Form    form("Bob", 42, 42);
+    Form    form("A43", 42, 42);
 
-    cr_assert(form.getName() == "Bob");
+    cr_assert(form.getName() == "A43");
 }
 
 Test(Form_getisSigned, Test_return_isSigned, .init = redirect_all_stdout)
 {
-    Form    form("Bob", 42, 42);
+    Form    form("A43", 42, 42);
 
     cr_assert(form.getIsSigned() == false);
 }
 
 Test(Form_getGradeToSign, Test_return_gradeToSign, .init = redirect_all_stdout)
 {
-    Form    form("Bob", 42, 42);
+    Form    form("A43", 42, 42);
 
     cr_assert(form.getGradeToSign() == 42);
 }
@@ -334,14 +334,14 @@ Test(Form_getGradeToSign, Test_return_gradeToSign, .init = redirect_all_stdout)
 Test(Form_getGradeToExecute, Test_return_gradeToExecute,
 .init = redirect_all_stdout)
 {
-    Form    form("Bob", 42, 42);
+    Form    form("A43", 42, 42);
 
     cr_assert(form.getGradeToSign() == 42);
 }
 
 Test(Form_copy_CTOR, TEST_simple_copy, .init = redirect_all_stdout)
 {
-    Form    form("Bob", 42, 42);
+    Form    form("A43", 42, 42);
     Form    copy(form);
 
     cr_assert(copy.getName() == form.getName());
@@ -352,8 +352,8 @@ Test(Form_copy_CTOR, TEST_simple_copy, .init = redirect_all_stdout)
 
 Test(Form_assignment_operator, TEST_simple_assignement, .init = redirect_all_stdout)
 {
-    Form    form("Bob", 42, 42);
-    Form    copy("Mike", 90, 50);
+    Form    form("A43", 42, 42);
+    Form    copy("B75", 90, 50);
 
     cr_assert(copy.getName() != form.getName());
     cr_assert(copy.getIsSigned() == form.getIsSigned());
@@ -366,6 +366,46 @@ Test(Form_assignment_operator, TEST_simple_assignement, .init = redirect_all_std
     cr_assert(copy.getIsSigned() == form.getIsSigned());
     cr_assert(copy.getGradeToSign() == form.getGradeToSign());
     cr_assert(copy.getGradeToExecute() == form.getGradeToExecute());
+}
+
+Test(Form_beSigned, TEST_form_can_be_signed_by_bureaucrat,
+.init = redirect_all_stdout)
+{
+    Form        form("A43", 42, 42);
+    Bureaucrat  bureaucrat("Bob", 41);
+
+    cr_assert(form.getIsSigned() == false);
+
+    form.beSigned(bureaucrat);
+
+    cr_assert(form.getIsSigned() == true);
+}
+
+Test(Form_beSigned,
+TEST_form_can_be_signed_by_bureaucrat_if_grade_is_equal_to_gradToSign,
+.init = redirect_all_stdout)
+{
+    Form        form("A43", 42, 42);
+    Bureaucrat  bureaucrat("Bob", 42);
+
+    cr_assert(form.getIsSigned() == false);
+
+    form.beSigned(bureaucrat);
+
+    cr_assert(form.getIsSigned() == true);
+}
+
+Test(Form_beSigned,
+TEST_form_cant_be_signed_by_bureaucrat_and_throw_exception,
+.init = redirect_all_stdout)
+{
+    Form        form("A43", 42, 42);
+    Bureaucrat  bureaucrat("Bob", 43);
+
+    cr_assert(form.getIsSigned() == false);
+
+    cr_assert_throw(form.beSigned(bureaucrat), Bureaucrat::GradeTooLowException);
+    cr_assert(form.getIsSigned() == false);
 }
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
