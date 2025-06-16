@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:55:34 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/16 15:39:13 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/16 15:44:24 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ bool                    Form::getIsSigned(void) const
     return _isSigned;
 }
 
-// size_t                  Form::getGradeToSign(void) const
-// {
-//     return _gradeToSign;
-// }
+size_t                  Form::getGradeToSign(void) const
+{
+    return _gradeToSign;
+}
 
 // size_t                  Form::getGradeToExecute(void) const
 // {
