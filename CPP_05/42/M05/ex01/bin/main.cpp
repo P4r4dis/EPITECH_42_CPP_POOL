@@ -1,0 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/13 19:25:36 by Paradis           #+#    #+#             */
+/*   Updated: 2025/06/13 19:25:38 by Paradis          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/Bureaucrat.hpp"
+
+#include <iostream>
+
+int main()
+{
+    Bureaucrat bureau("Bob", 42);
+
+    bureau.getName();
+    bureau.getGrade();
+    bureau.increment();
+    bureau.getGrade();
+    bureau.decrement();
+    bureau.getGrade();
+    std::cout << bureau << std::endl;
+
+    try
+    {
+        Bureaucrat bureau("name", 1);
+
+        bureau.getName();
+        bureau.getGrade();
+        bureau.increment();
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    try
+    {
+        Bureaucrat bureau("name", 150);
+
+        bureau.getName();
+        bureau.getGrade();
+        bureau.decrement();
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+}

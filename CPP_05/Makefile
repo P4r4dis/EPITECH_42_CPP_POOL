@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/11 20:49:26 by Paradis           #+#    #+#              #
-#    Updated: 2025/06/12 19:50:20 by Paradis          ###   ########.fr        #
+#    Updated: 2025/06/13 20:25:14 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,23 +53,19 @@
 #								42 EX01										   #
 #																			   #
 # **************************************************************************** #
-42_EX01_PATH 					= 	./42/M04/ex01
-42_EX01_BIN_PATH 				= 	./42/M04/ex01/bin
-42_EX01_SRC_PATH				=	./42/M04/ex01/source
-42_EX01_INC_PATH				=	./42/M04/ex01/include
-42_EX01_UT_PATH					=	./42/M04/ex01/test
+42_EX01_PATH 					= 	./42/M05/ex01
+42_EX01_BIN_PATH 				= 	./42/M05/ex01/bin
+42_EX01_SRC_PATH				=	./42/M05/ex01/source
+42_EX01_INC_PATH				=	./42/M05/ex01/include
+42_EX01_UT_PATH					=	./42/M05/ex01/test
 
-42_EX01_NAME					=	Brain
+42_EX01_NAME					=	Form
 
 42_EX01_UT_SRC					=	$(42_EX01_UT_PATH)/$(42_EX01_NAME)_test.cpp
 42_EX01_UT_NAME 				= 	test_$(42_EX01_NAME)
 
-42_EX01_SRC						=	$(42_EX01_SRC_PATH)/Animal.cpp \
-									$(42_EX01_SRC_PATH)/Dog.cpp \
-									$(42_EX01_SRC_PATH)/Cat.cpp \
-									$(42_EX01_SRC_PATH)/WrongAnimal.cpp \
-									$(42_EX01_SRC_PATH)/WrongCat.cpp \
-									$(42_EX01_SRC_PATH)/Brain.cpp \
+42_EX01_SRC						=	$(42_EX01_SRC_PATH)/Bureaucrat.cpp \
+									$(42_EX01_SRC_PATH)/Form.cpp \
 									$(42_EX01_BIN_PATH)/main.cpp
 42_EX01_OBJS					=	$(42_EX01_SRC:.cpp=.o)
 
@@ -189,7 +185,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:03:01 PM 2025 Paradis
-## Last update Fri Jun 12 7:50:20 PM 2025 Paradis
+## Last update Sat Jun 13 8:25:14 PM 2025 Paradis
 ##
 
 
@@ -556,8 +552,8 @@ clean							:
 									$(RM) $(LOG)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX00_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX00_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX01_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX01_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX01_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX01_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX02_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX03_PATH)
@@ -580,8 +576,8 @@ clean							:
 fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX01_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX02_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX03_PATH)
