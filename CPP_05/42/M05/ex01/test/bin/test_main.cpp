@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:26:43 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/16 18:56:35 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/16 19:52:05 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -454,47 +454,22 @@ TEST_left_stream_operator_overload_display_msg_stdout,
 Test(main, Test_main, .init = redirect_all_stdout)
 {
     {
-        Bureaucrat bureau("Bob", 42);
+        Bureaucrat bureaucrat("Bureaucrat",9);
+        Form form("A43", 10, 50);
 
-        cr_assert(bureau.getName() == "Bob");
-        cr_assert(bureau.getGrade() == 42);
-        bureau.increment();
-        cr_assert(bureau.getGrade() == 41);
-        bureau.decrement();
-        cr_assert(bureau.getGrade() == 42);
-        std::cout << bureau << std::endl;
+        bureaucrat.signForm(form);
 
-        try
-        {
-            Bureaucrat bureau("name", 1);
+ 
+        Bureaucrat bureaucrat2("Bureaucrat",15);
+        Form form2("A43", 10, 50);
 
-            cr_assert(bureau.getName() == "name");
-            cr_assert(bureau.getGrade() == 1);
-            bureau.increment();
-        }
-        catch (std::exception &e)
-        {
-            std::cerr << e.what() << std::endl;
-        }
-
-        try
-        {
-            Bureaucrat bureau("name", 150);
-
-            cr_assert(bureau.getName() == "name");
-            cr_assert(bureau.getGrade() == 150);
-            bureau.decrement();
-        }
-        catch (std::exception &e)
-        {
-            std::cerr << e.what() << std::endl;
-        }
+        bureaucrat2.signForm(form2);
 
     }
-    cr_assert_stdout_eq_str("Bob, bureaucrat grade 42.\n");
-    cr_assert_stderr_eq_str
+    cr_assert_stdout_eq_str
     (
-        "Error: Grade is too high.\n"
-        "Error: Grade is too low.\n"
+        "Bureaucrat signed A43\n"
+        "Bureaucrat couldn't sign A43 because Error: Grade is too low.\n"
     );
+
 }

@@ -6,49 +6,22 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:25:36 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/13 19:25:38 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/16 19:51:46 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Bureaucrat.hpp"
 
-#include <iostream>
-
 int main()
 {
-    Bureaucrat bureau("Bob", 42);
+        Bureaucrat bureaucrat("Bureaucrat",9);
+        Form form("A43", 10, 50);
 
-    bureau.getName();
-    bureau.getGrade();
-    bureau.increment();
-    bureau.getGrade();
-    bureau.decrement();
-    bureau.getGrade();
-    std::cout << bureau << std::endl;
+        bureaucrat.signForm(form);
 
-    try
-    {
-        Bureaucrat bureau("name", 1);
+ 
+        Bureaucrat bureaucrat2("Bureaucrat",15);
+        Form form2("A43", 10, 50);
 
-        bureau.getName();
-        bureau.getGrade();
-        bureau.increment();
-    }
-    catch (std::exception &e)
-    {
-        std::cerr << e.what() << std::endl;
-    }
-
-    try
-    {
-        Bureaucrat bureau("name", 150);
-
-        bureau.getName();
-        bureau.getGrade();
-        bureau.decrement();
-    }
-    catch (std::exception &e)
-    {
-        std::cerr << e.what() << std::endl;
-    }
+        bureaucrat2.signForm(form2);
 }
