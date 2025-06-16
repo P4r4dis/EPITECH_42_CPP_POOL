@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:28:27 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/16 16:49:26 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/16 18:06:12 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define                 __FORM_HPP__
 
 #include <string>
+#include <ostream>
 #include "Bureaucrat.hpp"
 
 #define HIGHEST 1
@@ -23,7 +24,6 @@ class                   Form
     public:
         Form(const std::string &name, const size_t gradeToSign,
             const size_t gradeToExecute);
-
         Form(const Form &cpy);
         Form            &operator=(const Form &rhs);
         virtual ~Form(void);
@@ -46,14 +46,13 @@ class                   Form
             public:
                 virtual     const char *what(void) const throw();
         };
+        
     private:
         std::string         _name;
         bool                _isSigned;
         size_t              _gradeToSign;
         size_t              _gradeToExecute;
-
-
 };
 
-std::ostream                &operator<<(std::ostream &os, const Form form);
+std::ostream                &operator<<(std::ostream &os, const Form &form);
 #endif //               !_FORM_HPP__

@@ -6,12 +6,11 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:55:34 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/16 17:21:44 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/16 18:03:46 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Form.hpp"
-#include <cstddef>
 
 const char      *Form::GradeTooHighException::what(void) const throw()
 {
@@ -84,4 +83,13 @@ void                    Form::beSigned(const Bureaucrat &bureaucrat)
         throw Bureaucrat::GradeTooLowException();
     else
         _isSigned = true;
+}
+
+std::ostream            &operator<<(std::ostream &os, const Form &form)
+{
+    os  << "Form name: " << form.getName() << std::endl
+        << "Form grade to sign: " << form.getGradeToSign() << std::endl
+        << "Form grade to execute: " << form.getGradeToExecute() << std::endl
+        << std::boolalpha << "Form is signed: " << form.getIsSigned();
+    return os;
 }

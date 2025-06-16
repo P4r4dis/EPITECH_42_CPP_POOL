@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:26:43 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/16 17:31:13 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/16 18:03:52 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -407,6 +407,25 @@ TEST_form_cant_be_signed_by_bureaucrat_and_throw_exception,
     cr_assert_throw(form.beSigned(bureaucrat), Bureaucrat::GradeTooLowException);
     cr_assert(form.getIsSigned() == false);
 }
+
+Test(Form_left_stream_operator,
+TEST_left_stream_operator_overload_display_msg_stdout,
+.init = redirect_all_stdout)
+{
+    {
+        Form        form("A43", 42, 42);
+
+        std::cout << form << std::endl;
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Form name: A43\n"
+        "Form grade to sign: 42\n"
+        "Form grade to execute: 42\n"
+        "Form is signed: false\n"
+    );
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
