@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:28:27 by Paradis           #+#    #+#             */
-/*   Updated: 2025/06/16 15:00:39 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/06/16 16:49:26 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ class                   Form
                 virtual     const char *what(void) const throw();
         };
     private:
-        const std::string   _name;
+        std::string         _name;
         bool                _isSigned;
-        const size_t        _gradeToSign;
-        const size_t        _gradeToExecute;
+        size_t              _gradeToSign;
+        size_t              _gradeToExecute;
 
 
 };
