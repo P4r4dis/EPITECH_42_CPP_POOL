@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/11 20:49:26 by Paradis           #+#    #+#              #
-#    Updated: 2025/06/18 16:53:46 by Paradis          ###   ########.fr        #
+#    Updated: 2025/06/18 17:18:06 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,13 +133,13 @@
 #								42 EX03										   #
 #																			   #
 # **************************************************************************** #
-42_EX03_PATH 					= 	./42/M04/ex03
-42_EX03_BIN_PATH 				= 	./42/M04/ex03/bin
-42_EX03_SRC_PATH				=	./42/M04/ex03/source
-42_EX03_INC_PATH				=	./42/M04/ex03/include
-42_EX03_UT_PATH					=	./42/M04/ex03/test
+42_EX03_PATH 					= 	./42/M05/ex03
+42_EX03_BIN_PATH 				= 	./42/M05/ex03/bin
+42_EX03_SRC_PATH				=	./42/M05/ex03/source
+42_EX03_INC_PATH				=	./42/M05/ex03/include
+42_EX03_UT_PATH					=	./42/M05/ex03/test
 
-42_EX03_NAME					=	Interface_Recap
+42_EX03_NAME					=	Intern
 
 42_EX03_UT_SRC					=	$(42_EX03_UT_PATH)/$(42_EX03_NAME)_test.cpp
 42_EX03_UT_NAME 				= 	test_$(42_EX03_NAME)
@@ -149,6 +149,7 @@
 									$(42_EX03_SRC_PATH)/Cure.cpp \
 									$(42_EX03_SRC_PATH)/Character.cpp \
 									$(42_EX03_SRC_PATH)/MateriaSource.cpp \
+									$(42_EX03_SRC_PATH)/Intern.cpp \
 									$(42_EX03_BIN_PATH)/main.cpp
 42_EX03_OBJS					=	$(42_EX03_SRC:.cpp=.o)
 
@@ -185,7 +186,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:03:01 PM 2025 Paradis
-## Last update Thu Jun 18 4:53:46 PM 2025 Paradis
+## Last update Thu Jun 18 5:18:06 PM 2025 Paradis
 ##
 
 
@@ -557,8 +558,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX02_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX03_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX03_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX03_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX03_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_UT_PATH)	
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX01_PATH)
@@ -581,8 +582,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX03_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX03_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX03_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX03_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX01_PATH)
