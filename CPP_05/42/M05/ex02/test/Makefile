@@ -1,0 +1,66 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/06/16 20:12:02 by Paradis           #+#    #+#              #
+#    Updated: 2025/06/18 16:52:25 by Paradis          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+G++           	= 	g++
+#############################################
+SRC_PATH		= 	../source
+INC_PATH 		= 	../include
+BIN_PATH 		= 	./bin
+
+NAME          	= 	test_You_need_a_form
+#############################################
+
+INCFLAGS     	+= 	-I $(INC_PATH)
+CPP_VERSION		+=	-std=c++23
+CRITFLAGS    	+=  --coverage -lcriterion
+CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -Wshadow -Wno-shadow $(CPP_VERSION) $(INCFLAGS) $(CRITFLAGS)
+
+SRCS         	= 	$(SRC_PATH)/Bureaucrat.cpp \
+					$(SRC_PATH)/AForm.cpp \
+					$(SRC_PATH)/ShrubberyCreationForm.cpp \
+					$(SRC_PATH)/RobotomyRequestForm.cpp \
+					$(SRC_PATH)/PresidentialPardonForm.cpp \
+					$(BIN_PATH)/test_main.cpp
+
+OBJS         	= 	$(SRCS:.cpp=.o)
+OBJS_GCDA    	= 	$(SRCS:.cpp=.gcda)
+OBJS_GCNO    	= 	$(SRCS:.cpp=.gcno)
+COVERAGE	 	= 	../../../../coverage.*
+LOG 			= 	*.log 
+FILE 			=	*_*
+
+all				: 	$(NAME)
+
+$(NAME)			: 	$(OBJS)
+					$(G++) $(CPPFLAGS) $(OBJS) -o $(NAME)
+
+VALGRIND		:	$(NAME)
+					@valgrind --trace-children=yes --quiet --leak-check=full --show-leak-kinds=all  --error-exitcode=1 ./$(NAME) 2>&1 | tee valgrind_output.log || true
+					@if ! grep -q "definitely lost" valgrind_output.log; \
+					then \
+						echo -e "\033[32mNo memory leaks detected, running unit tests...\033[0m"; \
+					else \
+						echo -e "\033[31mMemory leaks detected, aborting.\033[0m"; \
+						exit 1; \
+					fi
+
+RM 				= 	rm -rf
+
+clean			:
+					$(RM) $(OBJS) $(OBJS_GCDA) $(OBJS_GCNO) $(COVERAGE) $(LOG) $(FILE)
+
+fclean			: 	clean
+					$(RM) $(NAME)
+
+re				: 	fclean all
+
+.PHONY			: all clean fclean re

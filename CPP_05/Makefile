@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/11 20:49:26 by Paradis           #+#    #+#              #
-#    Updated: 2025/06/13 20:25:14 by Paradis          ###   ########.fr        #
+#    Updated: 2025/06/18 16:53:46 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,23 +92,22 @@
 #								42 EX02										   #
 #																			   #
 # **************************************************************************** #
-42_EX02_PATH 					= 	./42/M04/ex02
-42_EX02_BIN_PATH 				= 	./42/M04/ex02/bin
-42_EX02_SRC_PATH				=	./42/M04/ex02/source
-42_EX02_INC_PATH				=	./42/M04/ex02/include
-42_EX02_UT_PATH					=	./42/M04/ex02/test
+42_EX02_PATH 					= 	./42/M05/ex02
+42_EX02_BIN_PATH 				= 	./42/M05/ex02/bin
+42_EX02_SRC_PATH				=	./42/M05/ex02/source
+42_EX02_INC_PATH				=	./42/M05/ex02/include
+42_EX02_UT_PATH					=	./42/M05/ex02/test
 
-42_EX02_NAME					=	Aanimal
+42_EX02_NAME					=	You_need_a_form
 
 42_EX02_UT_SRC					=	$(42_EX02_UT_PATH)/$(42_EX02_NAME)_test.cpp
 42_EX02_UT_NAME 				= 	test_$(42_EX02_NAME)
 
-42_EX02_SRC						=	$(42_EX02_SRC_PATH)/Aanimal.cpp \
-									$(42_EX02_SRC_PATH)/Dog.cpp \
-									$(42_EX02_SRC_PATH)/Cat.cpp \
-									$(42_EX02_SRC_PATH)/WrongAnimal.cpp \
-									$(42_EX02_SRC_PATH)/WrongCat.cpp \
-									$(42_EX02_SRC_PATH)/Brain.cpp \
+42_EX02_SRC						=	$(42_EX02_SRC_PATH)/Bureaucrat.cpp \
+									$(42_EX02_SRC_PATH)/AForm.cpp \
+									$(42_EX02_SRC_PATH)/ShrubberyCreationForm.cpp \
+									$(42_EX02_SRC_PATH)/RobotomyRequestForm.cpp \
+									$(42_EX02_SRC_PATH)/PresidentialPardonForm.cpp \
 									$(42_EX02_BIN_PATH)/main.cpp
 42_EX02_OBJS					=	$(42_EX02_SRC:.cpp=.o)
 
@@ -128,6 +127,7 @@
 42_valgrind_test_run_ex02		:	fclean
 									@$(MAKE) -s -C $(42_EX02_UT_PATH) VALGRIND
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
+									
 # **************************************************************************** #
 #																			   #
 #								42 EX03										   #
@@ -185,7 +185,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:03:01 PM 2025 Paradis
-## Last update Sat Jun 13 8:25:14 PM 2025 Paradis
+## Last update Thu Jun 18 4:53:46 PM 2025 Paradis
 ##
 
 
@@ -540,6 +540,7 @@ CLEAN							=	clean
 FCLEAN							=	fclean
 RM								=	rm -rf
 LOG								=	*.log
+FILE 							=	*_*
 %								: 	capture
 									@:
 
@@ -549,13 +550,13 @@ $(42_EX12_NAME)					: 	$(42_EX12_OBJS)
 									$(G++) $(CPPFLAGS) $(INCFLAGS)$(42_EX12_INC_PATH) $(42_EX12_OBJS) -o $(42_EX12_NAME)
 
 clean							:	
-									$(RM) $(LOG)
+									$(RM) $(LOG) $(FILE)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX00_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX00_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX02_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX02_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX03_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX03_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_PATH)
@@ -578,8 +579,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX02_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX03_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX03_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_PATH)
