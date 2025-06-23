@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/11 20:49:26 by Paradis           #+#    #+#              #
-#    Updated: 2025/06/18 17:18:06 by Paradis          ###   ########.fr        #
+#    Updated: 2025/06/23 17:52:15 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -186,7 +186,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:03:01 PM 2025 Paradis
-## Last update Thu Jun 18 5:18:06 PM 2025 Paradis
+## Last update Tue Jun 23 5:52:15 PM 2025 Paradis
 ##
 
 
@@ -195,26 +195,18 @@
 #								EPITECH EX00								   #
 #																			   #
 # **************************************************************************** #
-EPITECH_EX00_PATH 				= 	./EPITECH/D10/ex00
-EPITECH_EX00_BIN_PATH 			= 	./EPITECH/D10/ex00/bin
-EPITECH_EX00_SRC_PATH			=	./EPITECH/D10/ex00/source
-EPITECH_EX00_INC_PATH			=	./EPITECH/D10/ex00/include
-EPITECH_EX00_UT_PATH			=	./EPITECH/D10/ex00/test
+EPITECH_EX00_PATH 				= 	./EPITECH/D11/ex00
+EPITECH_EX00_BIN_PATH 			= 	./EPITECH/D11/ex00/bin
+EPITECH_EX00_SRC_PATH			=	./EPITECH/D11/ex00/source
+EPITECH_EX00_INC_PATH			=	./EPITECH/D11/ex00/include
+EPITECH_EX00_UT_PATH			=	./EPITECH/D11/ex00/Test
 
-EPITECH_EX00_NAME				=	Fruits
+EPITECH_EX00_NAME				=	Listing_Directories
 
 EPITECH_EX00_UT_SRC				=	$(EPITECH_EX00_UT_PATH)/$(EPITECH_EX00_NAME)_test.cpp
 EPITECH_EX00_UT_NAME 			= 	test_$(EPITECH_EX00_NAME)
 
-EPITECH_EX00_SRC				=	$(EPITECH_EX00_SRC_PATH)/IFruit.cpp \
-									$(EPITECH_EX00_SRC_PATH)/AFruit.cpp \
-									$(EPITECH_EX00_SRC_PATH)/ABerry.cpp \
-									$(EPITECH_EX00_SRC_PATH)/ACitrus.cpp \
-									$(EPITECH_EX00_SRC_PATH)/ANut.cpp \
-									$(EPITECH_EX00_SRC_PATH)/Lemon.cpp \
-									$(EPITECH_EX00_SRC_PATH)/Orange.cpp \
-									$(EPITECH_EX00_SRC_PATH)/Strawberry.cpp \
-									$(EPITECH_EX00_SRC_PATH)/Almond.cpp \
+EPITECH_EX00_SRC				=	$(EPITECH_EX00_SRC_PATH)/DirectoryLister.cpp \
 									$(EPITECH_EX00_BIN_PATH)/main.cpp
 EPITECH_EX00_OBJS				=	$(EPITECH_EX00_SRC:.cpp=.o)
 
@@ -560,8 +552,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX03_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX03_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_UT_PATH)	
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_UT_PATH)	
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX01_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX01_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX02_PATH)
@@ -584,8 +576,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX03_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX03_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX01_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX01_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX02_PATH)
