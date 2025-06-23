@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jun 23 7:04:27 PM 2025 Paradis
-** Last update Tue Jun 23 7:04:30 PM 2025 Paradis
+** Last update Tue Jun 23 7:17:32 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -30,7 +30,7 @@ Test(DirectoryLister_Constructor, Test_CTOR_is_defined,
     cr_assert_not_null(&dl);
 }
 
-Test(DirectoryLister_Copy_Constructor, Test_CopyCTOR_is_defined,
+Test(DirectoryLister_Custom_Constructor, Test_Custom_CTOR_is_defined,
 .init = redirect_all_stdout)
 {
     DirectoryLister dl("./test/", true);
