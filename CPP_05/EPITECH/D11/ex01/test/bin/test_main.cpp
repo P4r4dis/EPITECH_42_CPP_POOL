@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jun 25 6:27:55 PM 2025 Paradis
-** Last update Thu Jun 25 7:35:07 PM 2025 Paradis
+** Last update Thu Jun 25 9:26:23 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -13,10 +13,13 @@
 #include <criterion/new/assert.h>
 #include <criterion/redirect.h>
 
+#include <exception>
 #include <iostream>
+#include <stdexcept>
 
 #include "../../include/IDirectoryLister.hpp"
 #include "../../include/DirectoryLister.hpp"
+#include "../../include/SafeDirectoryLister.hpp"
 
 void redirect_all_stdout(void)
 {
@@ -24,39 +27,23 @@ void redirect_all_stdout(void)
     cr_redirect_stderr();
 }
 
-// void    myLs(const std::string &directory)
-// {
-//     try
-//     {
-//         SafeDirectoryLister     dl(directory, false);
-
-//         std::cout << directory << ":" << std::endl;
-//         for (std::string file = dl.get(); true; file = dl.get())
-//             std::cout << file << std::endl;
-//     } 
-//     catch (const IDirectoryLister::NoMoreFileException &e)
-//     {
-//         return;
-//     }
-//     throw std::runtime_error("should not happen");
-// }
-
 void    myLs(const std::string &directory)
 {
     try
     {
-        DirectoryLister     dl(directory, false);
+        SafeDirectoryLister     dl(directory, false);
 
         std::cout << directory << ":" << std::endl;
         for (std::string file = dl.get(); true; file = dl.get())
             std::cout << file << std::endl;
     } 
-    catch (const IDirectoryLister::OpenFailureException &e)
+    catch (const IDirectoryLister::NoMoreFileException &e)
     {
         return;
     }
     throw std::runtime_error("should not happen");
 }
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            IDirectoryLister class                         //
 ///////////////////////////////////////////////////////////////////////////////
@@ -235,7 +222,6 @@ Test_catch_and_throw_NoMoreFileException,
         "End of stream\n"
     );
 }
-
 ///////////////////////////////////////////////////////////////////////////////
 //                            DirectoryLister class                          //
 ///////////////////////////////////////////////////////////////////////////////
@@ -463,39 +449,340 @@ Test_resize_the_capacity_of_the_list,
     dl.resize();
     cr_assert(dl.getCapacity() == 8);
 }
+
+///////////////////////////////////////////////////////////////////////////////
+//                            SafeDirectoryLister class                          //
+///////////////////////////////////////////////////////////////////////////////
+Test(SafeDirectoryLister_Constructor, Test_CTOR_is_defined,
+.init = redirect_all_stdout)
+{
+    SafeDirectoryLister dl;
+
+    cr_assert_not_null(&dl);
+}
+
+Test(SafeDirectoryLister_Custom_Constructor, Test_Custom_CTOR_is_defined,
+.init = redirect_all_stdout)
+{
+    SafeDirectoryLister dl("./test/", true);
+
+    cr_assert_not_null(&dl);
+}
+
+Test(SafeDirectoryLister_getPath, Test_getPath_return_path,
+.init = redirect_all_stdout)
+{
+    SafeDirectoryLister dl;
+    SafeDirectoryLister dl2("./test/", true);
+
+    cr_assert(dl.getPath() == "");
+    cr_assert(dl2.getPath() == "./test/");
+}
+
+Test(SafeDirectoryLister_getHidden, Test_getHidden_return_hidden,
+.init = redirect_all_stdout)
+{
+    SafeDirectoryLister dl;
+    SafeDirectoryLister dl2("./test/", true);
+
+    cr_assert(dl.getHidden() == false);
+    cr_assert(dl2.getHidden() == true);
+}
+
+Test(SafeDirectoryLister_get,
+Test_get_return_empty_string_if_directory_is_not_open,
+.init = redirect_all_stdout)
+{
+    try
+    {
+        SafeDirectoryLister dl2("./testefd/", true);
+    } catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    cr_assert_stdout_eq_str
+    (
+        ""
+    );
+    cr_assert_stderr_eq_str
+    (
+        "No such file or directory\n"
+    );
+}
+
+Test(SafeDirectoryLister_get,
+Test_get_return_names_of_files_or_directories_with_no_hidden_files,
+.init = redirect_all_stdout)
+{
+    try
+    {
+        SafeDirectoryLister dl("./test/", false);
+
+        for (std::string file = dl.get(); !file.empty(); file = dl.get())
+            std::cout << file << std::endl;
+    } catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+    cr_assert_stdout_eq_str
+    (
+        "file1\n"
+        "file2\n"
+        "subdirectory\n"
+    );
+    cr_assert_stderr_eq_str
+    (
+        "End of stream\n"
+    );
+}
+
+Test(SafeDirectoryLister_get,
+Test_get_return_names_of_files_or_directories_with_hidden_files,
+.init = redirect_all_stdout)
+{
+    try
+    {
+        SafeDirectoryLister dl("./test/", true);
+
+        for (std::string file = dl.get(); !file.empty(); file = dl.get())
+            std::cout << file << std::endl;
+    } catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    cr_assert_stdout_eq_str
+    (
+        ".\n"
+        "..\n"
+        ".hidden\n"
+        "file1\n"
+        "file2\n"
+        "subdirectory\n"
+    );
+    cr_assert_stderr_eq_str
+    (
+        "End of stream\n"
+    );
+}
+
+
+Test(SafeDirectoryLister_open,
+Test_open_directory_with_invalid_path_return_false,
+.init = redirect_all_stdout)
+{
+    try
+    {
+        SafeDirectoryLister dl("./test/", true);
+
+        for (std::string file = dl.get(); !file.empty(); file = dl.get())
+            std::cout << file << std::endl;
+    } catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    cr_assert_stderr_eq_str
+    (
+        "End of stream\n"
+    );
+}
+
+Test(SafeDirectoryLister_open,
+Test_open_directory_with_invalid_path_and_display_msg_error,
+.init = redirect_all_stdout)
+{
+    try
+    {
+        SafeDirectoryLister dl("./test", true);
+        cr_assert(dl.open("invalid path", true) == false);
+        
+    } catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+    cr_assert_stderr_eq_str
+    (
+        "No such file or directory\n"
+    );
+}
+
+Test(SafeDirectoryLister_open,
+Test_open_directory_return_true,
+.init = redirect_all_stdout)
+{
+    try
+    {
+        SafeDirectoryLister dl;
+
+        cr_assert(dl.open("./test/", false) == true);
+        cr_assert(dl.open("invalid path", true) == false);
+    } catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+    cr_assert_stderr_eq_str
+    (
+        "No such file or directory\n"
+    );
+}
+
+Test(SafeDirectoryLister_getElemOfListByIndex,
+Test_return_elements_of_list,
+.init = redirect_all_stdout)
+{
+    try
+    {
+        SafeDirectoryLister dl("./test/", true);
+
+        for (size_t i = 0; !dl.get().empty(); i++)
+            std::cout << dl.getElemOfListByIndex(i) << std::endl;
+    } catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+    cr_assert_stdout_eq_str
+    (
+        ".\n"
+        "..\n"
+        ".hidden\n"
+        "file1\n"
+        "file2\n"
+        "subdirectory\n"
+    );
+    cr_assert_stderr_eq_str
+    (
+        "End of stream\n"
+    );
+}
+
+Test(SafeDirectoryLister_getSize,
+Test_return_the_size_of_List,
+.init = redirect_all_stdout)
+{
+
+        SafeDirectoryLister dl("./test/", true);
+        cr_assert(dl.getSize() == 6);
+
+}
+
+Test(SafeDirectoryLister_getIndex,
+Test_return_the_index_of_List,
+.init = redirect_all_stdout)
+{
+    try
+    {
+        SafeDirectoryLister dl("./test/", true);
+
+        size_t idx = 0;
+        cr_assert(dl.getIndex() == 0);
+        for (std::string file = dl.get(); !file.empty(); file = dl.get())
+        {
+            std::cout << file << std::endl;
+            cr_assert(dl.getIndex() == ++idx);
+        }
+    } catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+    cr_assert_stdout_eq_str
+    (
+        ".\n"
+        "..\n"
+        ".hidden\n"
+        "file1\n"
+        "file2\n"
+        "subdirectory\n"
+    );
+    cr_assert_stderr_eq_str
+    (
+        "End of stream\n"
+    );
+}
+
+Test(SafeDirectoryLister_getCapacity,
+Test_return_the_capacity_of_List,
+.init = redirect_all_stdout)
+{
+    SafeDirectoryLister dl("./test/", true);
+
+    cr_assert(dl.getCapacity() == dl.getSize());
+}
+
+Test(SafeDirectoryLister_clean,
+Test_clean_list_and_its_properties,
+. init = redirect_all_stdout)
+{
+    SafeDirectoryLister dl("./test/", true);
+
+    size_t idx = 0;
+    try {
+        for (; true; idx++) {
+            std::string file = dl.get();
+            std::cout << dl.getElemOfListByIndex(idx) << std::endl;
+        }
+    } catch (const IDirectoryLister::NoMoreFileException &) {
+        
+    }
+
+    cr_assert(dl.getSize() == 6);
+    cr_assert(dl.getIndex() == idx);
+    cr_assert(dl.getCapacity() == dl.getSize());
+
+    dl.clean();
+
+    idx = 0;
+    cr_assert(dl.getElemOfListByIndex(idx).empty() == true);
+    cr_assert(dl.getSize() == 0);
+    cr_assert(dl.getIndex() == idx);
+    cr_assert(dl.getCapacity() == dl.getSize());
+}
+
+Test(SafeDirectoryLister_resize,
+Test_resize_the_capacity_of_the_list,
+.init = redirect_all_stdout)
+{
+    SafeDirectoryLister dl("./test/", true);
+
+    cr_assert(dl.getCapacity() == 6);
+    dl.resize();
+    cr_assert(dl.getCapacity() == 7);
+    dl.resize();
+    cr_assert(dl.getCapacity() == 8);
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
-Test(main, test_main)//, .init = redirect_all_stdout)
+Test(main, test_main, .init = redirect_all_stdout)
 {
-    // try
-    // {
-    //     myLs("./test/");
-    //     myLs("./not_exist/");
-    //     myLs("./test/");
-    // } 
-    // catch (const IDirectoryLister::OpenFailureException &e)
-    // {
-    //     std::cerr << "failure: " << e.what() << std::endl;
-    // }
-    // catch (const std::exception &e)
-    // {
-    //     std::cerr << "unexpected error: " << e.what() << std::endl;
-    // }
-    // cr_assert_stdout_eq_str
-    // (
-    //     ".\n"
-    //     "..\n"
-    //     ".hidden\n"
-    //     "file1\n"
-    //     "file2\n"
-    //     "subdirectory\n"
-    //     "file1\n"
-    //     "file2\n"
-    //     "subdirectory\n"
-    // );
-    // cr_assert_stderr_eq_str
-    // (
-    //     "invalid path: No such file or directory\n"
-    // );
+    myLs("./test/");
+
+    try {
+        myLs("./not_exist/");
+    }
+    catch (const IDirectoryLister::OpenFailureException &e)
+    {
+        std::cerr << "failure: " << e.what() << std::endl;
+    }
+
+    try {
+        throw std::runtime_error("should not happen");
+    } 
+    catch (const std::exception &e)
+    {
+        std::cerr << "unexpected error: " << e.what() << std::endl;
+    }
+    cr_assert_stdout_eq_str
+    (
+        "./test/:\n"
+        "file1\n"
+        "file2\n"
+        "subdirectory\n"
+    );
+    cr_assert_stderr_eq_str
+    (
+        "failure: No such file or directory\n"
+        "unexpected error: should not happen\n"
+    );
 }

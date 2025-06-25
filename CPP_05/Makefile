@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/11 20:49:26 by Paradis           #+#    #+#              #
-#    Updated: 2025/06/25 19:10:10 by Paradis          ###   ########.fr        #
+#    Updated: 2025/06/25 19:55:40 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -186,7 +186,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:03:01 PM 2025 Paradis
-## Last update Thu Jun 25 7:10:10 PM 2025 Paradis
+## Last update Thu Jun 25 7:55:40 PM 2025 Paradis
 ##
 
 
@@ -244,6 +244,7 @@ EPITECH_EX01_UT_NAME 			= 	test_$(EPITECH_EX01_NAME)
 
 EPITECH_EX01_SRC				=	$(EPITECH_EX01_SRC_PATH)/DirectoryLister.cpp \
 									$(EPITECH_EX01_SRC_PATH)/IDirectoryLister.cpp \
+									$(EPITECH_EX01_SRC_PATH)/SafeDirectoryLister.cpp \
 									$(EPITECH_EX01_BIN_PATH)/main.cpp
 EPITECH_EX01_OBJS				=	$(EPITECH_EX01_SRC:.cpp=.o)
 

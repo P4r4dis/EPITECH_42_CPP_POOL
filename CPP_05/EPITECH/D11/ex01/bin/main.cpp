@@ -5,12 +5,12 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Jun 25 6:18:03 PM 2025 Paradis
-** Last update Thu Jun 25 6:26:02 PM 2025 Paradis
+** Last update Thu Jun 25 9:36:42 PM 2025 Paradis
 */
 
 #include <iostream>
 
-#include "../include/DirectoryLister.hpp"
+#include "../include/SafeDirectoryLister.hpp"
 
 
 void    myLs(const std::string &directory)

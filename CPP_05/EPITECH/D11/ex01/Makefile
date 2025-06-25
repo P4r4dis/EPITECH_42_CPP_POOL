@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Wed Jun 25 6:28:51 PM 2025 Paradis
-## Last update Thu Jun 25 7:09:49 PM 2025 Paradis
+## Last update Thu Jun 25 9:37:05 PM 2025 Paradis
 ##
 
 # # Compilateur
@@ -29,6 +29,7 @@ CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAG
 # # Files sources
 SRCS		=	$(SRC_PATH)/DirectoryLister.cpp \
 				$(SRC_PATH)/IDirectoryLister.cpp \
+				$(SRC_PATH)/SafeDirectoryLister.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp

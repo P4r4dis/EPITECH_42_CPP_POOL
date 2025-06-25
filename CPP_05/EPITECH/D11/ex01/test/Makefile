@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Jun 23 7:04:43 PM 2025 Paradis
-## Last update Thu Jun 25 7:09:35 PM 2025 Paradis
+## Last update Thu Jun 25 7:55:20 PM 2025 Paradis
 ##
 
 
@@ -25,6 +25,7 @@ CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(IN
 
 SRCS         	= 	$(SRC_PATH)/DirectoryLister.cpp \
 					$(SRC_PATH)/IDirectoryLister.cpp \
+					$(SRC_PATH)/SafeDirectoryLister.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)
