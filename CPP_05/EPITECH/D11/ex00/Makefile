@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Mon Jun 23 7:04:55 PM 2025 Paradis
-## Last update Tue Jun 23 7:04:56 PM 2025 Paradis
+## Last update Tue Jun 23 7:37:40 PM 2025 Paradis
 ##
 
 # # Compilateur
@@ -14,7 +14,7 @@ G++			=	g++
 BIN_PATH	=	./bin
 SRC_PATH	=	./source
 INC_PATH	=	./include
-UT_PATH		=	./Test
+UT_PATH		=	./test
 
 
 NAME		=	Listing_Directories

@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/11 20:49:26 by Paradis           #+#    #+#              #
-#    Updated: 2025/06/23 17:52:15 by Paradis          ###   ########.fr        #
+#    Updated: 2025/06/23 20:26:18 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -186,7 +186,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:03:01 PM 2025 Paradis
-## Last update Tue Jun 23 5:52:15 PM 2025 Paradis
+## Last update Tue Jun 23 8:26:18 PM 2025 Paradis
 ##
 
 
@@ -199,7 +199,7 @@ EPITECH_EX00_PATH 				= 	./EPITECH/D11/ex00
 EPITECH_EX00_BIN_PATH 			= 	./EPITECH/D11/ex00/bin
 EPITECH_EX00_SRC_PATH			=	./EPITECH/D11/ex00/source
 EPITECH_EX00_INC_PATH			=	./EPITECH/D11/ex00/include
-EPITECH_EX00_UT_PATH			=	./EPITECH/D11/ex00/Test
+EPITECH_EX00_UT_PATH			=	./EPITECH/D11/ex00/test
 
 EPITECH_EX00_NAME				=	Listing_Directories
 
