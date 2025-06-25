@@ -5,15 +5,16 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jun 23 7:03:58 PM 2025 Paradis
-** Last update Thu Jun 25 5:24:39 PM 2025 Paradis
+** Last update Thu Jun 25 5:39:18 PM 2025 Paradis
 */
 
 #ifndef 			    __DIRECTORYLISTER_HPP__
 	# define 		    __DIRECTORYLISTER_HPP__
 
-#include <string>
 #include <dirent.h>
-class	                DirectoryLister
+#include "IDirectoryLister.hpp"
+
+class	                DirectoryLister :   public IDirectoryLister
 {
     public:
         DirectoryLister(void);
