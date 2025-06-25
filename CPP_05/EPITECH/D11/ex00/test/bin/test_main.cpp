@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jun 23 7:04:27 PM 2025 Paradis
-** Last update Thu Jun 25 5:24:38 PM 2025 Paradis
+** Last update Thu Jun 25 5:34:36 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -21,6 +21,7 @@ void redirect_all_stdout(void)
     cr_redirect_stdout();
     cr_redirect_stderr();
 }
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            DirectoryLister class                          //
 ///////////////////////////////////////////////////////////////////////////////
@@ -121,10 +122,6 @@ Test_open_directory_with_invalid_path_return_false,
         std::cout << file << std::endl;
 
     cr_assert(dl.open("invalid path", true) == false);
-    // if (dl.open("./test/", false) == true)
-    //     for (std::string file = dl.get(); !file.empty(); file = dl.get())
-    //         std::cout << file << std::endl;
-
 }
 
 Test(DirectoryLister_open,
@@ -252,8 +249,7 @@ Test_resize_the_capacity_of_the_list,
     dl.resize();
     cr_assert(dl.getCapacity() == 8);
 }
-// TODO:
-//  -   main
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
