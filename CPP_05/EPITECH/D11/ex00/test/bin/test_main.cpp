@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jun 23 7:04:27 PM 2025 Paradis
-** Last update Thu Jun 25 5:15:42 PM 2025 Paradis
+** Last update Thu Jun 25 5:24:38 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -240,9 +240,19 @@ Test_clean_list_and_its_properties,
     cr_assert(dl.getCapacity() == dl.getSize());
 }
 
+Test(DirectoryLister_resize,
+Test_resize_the_capacity_of_the_list,
+.init = redirect_all_stdout)
+{
+    DirectoryLister dl("./test/", true);
+
+    cr_assert(dl.getCapacity() == 6);
+    dl.resize();
+    cr_assert(dl.getCapacity() == 7);
+    dl.resize();
+    cr_assert(dl.getCapacity() == 8);
+}
 // TODO:
-//  -   unit test clean
-//  -   unit test resize
 //  -   main
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //

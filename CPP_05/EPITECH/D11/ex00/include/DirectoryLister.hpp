@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jun 23 7:03:58 PM 2025 Paradis
-** Last update Thu Jun 25 4:54:18 PM 2025 Paradis
+** Last update Thu Jun 25 5:24:39 PM 2025 Paradis
 */
 
 #ifndef 			    __DIRECTORYLISTER_HPP__
@@ -28,7 +28,6 @@ class	                DirectoryLister
         size_t          getSize(void) const;
         size_t          getIndex(void) const;
         size_t          getCapacity(void) const;
-        // DIR             *getDirectory(void) const;
 
         std::string     get(void);
         bool            open(const std::string& path, bool hidden);
