@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jun 23 7:04:27 PM 2025 Paradis
-** Last update Thu Jun 25 4:54:26 PM 2025 Paradis
+** Last update Thu Jun 25 5:15:42 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -59,16 +59,6 @@ Test(DirectoryLister_getHidden, Test_getHidden_return_hidden,
     cr_assert(dl.getHidden() == false);
     cr_assert(dl2.getHidden() == true);
 }
-
-// Test(DirectoryLister_getDirectory, Test_getDirectory_return_dir,
-// .init = redirect_all_stdout)
-// {
-//     DirectoryLister dl;
-//     DirectoryLister dl2("./test/", true);
-
-//     cr_assert_null(dl.getDirectory());
-//     cr_assert_not_null(dl2.getDirectory());
-// }
 
 Test(DirectoryLister_get,
 Test_get_return_empty_string_if_directory_is_not_open,
@@ -225,6 +215,28 @@ Test_return_the_capacity_of_List,
 {
     DirectoryLister dl("./test/", true);
 
+    cr_assert(dl.getCapacity() == dl.getSize());
+}
+
+Test(DirectoryLister_clean,
+Test_clean_list_and_its_properties,
+.init = redirect_all_stdout)
+{
+    DirectoryLister dl("./test/", true);
+
+    size_t idx = 0;
+    for (idx = 0; !dl.get().empty(); idx++)
+        std::cout << dl.getElemOfListByIndex(idx) << std::endl;
+
+    cr_assert(dl.getSize() == 6);
+    cr_assert(dl.getIndex() == idx);
+    cr_assert(dl.getCapacity() == dl.getSize());
+
+    dl.clean();
+    idx = 0;
+    cr_assert(dl.getElemOfListByIndex(idx).empty() == true);
+    cr_assert(dl.getSize() == 0);
+    cr_assert(dl.getIndex() == idx);
     cr_assert(dl.getCapacity() == dl.getSize());
 }
 

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jun 23 7:04:12 PM 2025 Paradis
-** Last update Thu Jun 25 4:53:45 PM 2025 Paradis
+** Last update Thu Jun 25 5:18:12 PM 2025 Paradis
 */
 
 #include "../include/DirectoryLister.hpp"
@@ -83,6 +83,8 @@ bool                    DirectoryLister::getHidden(void) const
 
 std::string             DirectoryLister::getElemOfListByIndex(size_t idx) const
 {
+    if (_list == nullptr || idx >= _size)
+        return "";
     return *_list[idx];
 }
 
