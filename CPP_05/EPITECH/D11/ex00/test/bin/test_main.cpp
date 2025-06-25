@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jun 23 7:04:27 PM 2025 Paradis
-** Last update Wed Jun 24 9:48:03 PM 2025 Paradis
+** Last update Thu Jun 25 4:54:26 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -141,17 +141,25 @@ Test(DirectoryLister_open,
 Test_open_directory_with_invalid_path_and_display_msg_error,
 .init = redirect_all_stdout)
 {
-    DirectoryLister dl("./test/", true);
+    DirectoryLister dl("./test", true);
 
     for (std::string file = dl.get(); !file.empty(); file = dl.get())
         std::cout << file << std::endl;
 
     cr_assert(dl.open("invalid path", true) == false);
-    cr_assert_stdout_eq_str("");
-    // if (dl.open("./test/", false) == true)
-    //     for (std::string file = dl.get(); !file.empty(); file = dl.get())
-    //         std::cout << file << std::endl;
-
+    cr_assert_stdout_eq_str
+    (
+        ".\n"
+        "..\n"
+        ".hidden\n"
+        "file1\n"
+        "file2\n"
+        "subdirectory\n"
+    );
+    cr_assert_stderr_eq_str
+    (
+        "invalid path: No such file or directory\n"
+    );
 }
 
 Test(DirectoryLister_open,
@@ -167,10 +175,60 @@ Test_open_directory_return_true,
     cr_assert(dl.open("./test/", false) == true);
 }
 
+Test(DirectoryLister_getElemOfListByIndex,
+Test_return_elements_of_list,
+.init = redirect_all_stdout)
+{
+    DirectoryLister dl("./test/", true);
+
+    for (size_t i = 0; !dl.get().empty(); i++)
+        std::cout << dl.getElemOfListByIndex(i) << std::endl;
+
+    cr_assert_stdout_eq_str
+    (
+        ".\n"
+        "..\n"
+        ".hidden\n"
+        "file1\n"
+        "file2\n"
+        "subdirectory\n"
+    );
+}
+
+Test(DirectoryLister_getSize,
+Test_return_the_size_of_List,
+.init = redirect_all_stdout)
+{
+    DirectoryLister dl("./test/", true);
+
+    cr_assert(dl.getSize() == 6);
+}
+
+Test(DirectoryLister_getIndex,
+Test_return_the_index_of_List,
+.init = redirect_all_stdout)
+{
+    DirectoryLister dl("./test/", true);
+
+    size_t idx = 0;
+    cr_assert(dl.getIndex() == 0);
+    for (std::string file = dl.get(); !file.empty(); file = dl.get())
+    {
+        std::cout << file << std::endl;
+        cr_assert(dl.getIndex() == ++idx);
+    }
+}
+
+Test(DirectoryLister_getCapacity,
+Test_return_the_capacity_of_List,
+.init = redirect_all_stdout)
+{
+    DirectoryLister dl("./test/", true);
+
+    cr_assert(dl.getCapacity() == dl.getSize());
+}
+
 // TODO:
-//  -   push + commit
-//  -   getters
-//  -   unit test for getters
 //  -   unit test clean
 //  -   unit test resize
 //  -   main

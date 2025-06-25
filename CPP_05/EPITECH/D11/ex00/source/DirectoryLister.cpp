@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jun 23 7:04:12 PM 2025 Paradis
-** Last update Wed Jun 24 9:41:01 PM 2025 Paradis
+** Last update Thu Jun 25 4:53:45 PM 2025 Paradis
 */
 
 #include "../include/DirectoryLister.hpp"
@@ -79,6 +79,26 @@ std::string             DirectoryLister::getPath(void) const
 bool                    DirectoryLister::getHidden(void) const
 {
     return _hidden;
+}
+
+std::string             DirectoryLister::getElemOfListByIndex(size_t idx) const
+{
+    return *_list[idx];
+}
+
+size_t                   DirectoryLister::getSize(void) const
+{
+    return _size;
+}
+
+size_t                   DirectoryLister::getIndex(void) const
+{
+    return _index;
+}
+
+size_t                   DirectoryLister::getCapacity(void) const
+{
+    return _capacity;
 }
 
 std::string             DirectoryLister::get(void)
