@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jun 26 4:26:51 PM 2025 Paradis
-** Last update Fri Jun 26 8:03:51 PM 2025 Paradis
+** Last update Fri Jun 26 8:36:56 PM 2025 Paradis
 */
 
 #include "../include/UniquePointer.hpp"
@@ -48,7 +48,10 @@ IObject     *UniquePointer::operator->(void)
 {
     return _uniquePtr;
 }
-// IObject *UniquePointer::getUniquePtr(void) const
-// {
-//     return _uniquePtr;
-// }
+
+void        UniquePointer::reset(IObject *ptr)
+{
+    if (_uniquePtr)
+        delete _uniquePtr;
+    _uniquePtr = ptr;
+}

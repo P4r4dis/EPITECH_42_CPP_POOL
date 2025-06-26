@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jun 26 4:20:12 PM 2025 Paradis
-** Last update Fri Jun 26 8:16:46 PM 2025 Paradis
+** Last update Fri Jun 26 8:45:33 PM 2025 Paradis
 */
 
 
@@ -159,6 +159,29 @@ Test_return_a_pointer_to_object,
         "Tennant is alive\n"
         "Tennant is touched\n"
         "Tennant is dead\n"
+    );
+}
+
+Test(UniquePointer_reset,
+Test_should_reset_the_pointer,
+.init = redirect_all_stdout)
+{
+    {
+        UniquePointer   ptr = new TestObject("Tennant");
+        UniquePointer   ptr2 = new TestObject("Smith");
+        
+        ptr.reset(new TestObject("Capaldi"));
+        ptr2.reset();
+        
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Tennant is alive\n"
+        "Smith is alive\n"
+        "Capaldi is alive\n"
+        "Tennant is dead\n"
+        "Smith is dead\n"
+        "Capaldi is dead\n"
     );
 }
 ///////////////////////////////////////////////////////////////////////////////
