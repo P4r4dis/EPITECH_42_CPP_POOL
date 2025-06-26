@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jun 26 2:23:49 PM 2025 Paradis
-** Last update Fri Jun 26 6:59:28 PM 2025 Paradis
+** Last update Fri Jun 26 7:31:14 PM 2025 Paradis
 */
 
 #ifndef 			    __IOBJECT_HPP__
@@ -17,7 +17,7 @@ class	                IObject
     public:
         virtual ~IObject() = default;
         
-        // virtual void touch() = 0;
+        virtual void touch() = 0;
 
     protected:
     private:
@@ -33,9 +33,9 @@ public:
         std::cout << _name << " is dead" << std::endl;
     }
 
-    // void touch() override {
-    //     std::cout << _name << " is touched" << std::endl;
-    // }
+    void touch() override {
+        std::cout << _name << " is touched" << std::endl;
+    }
 
 private:
     std::string _name;

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jun 26 4:26:51 PM 2025 Paradis
-** Last update Fri Jun 26 6:58:11 PM 2025 Paradis
+** Last update Fri Jun 26 7:35:52 PM 2025 Paradis
 */
 
 #include "../include/UniquePointer.hpp"
@@ -34,6 +34,10 @@ UniquePointer::~UniquePointer(void)
         delete _uniquePtr;
 }
 
+void        UniquePointer::touch(void)
+{
+    _uniquePtr->touch();
+}
 // IObject *UniquePointer::getUniquePtr(void) const
 // {
 //     return _uniquePtr;

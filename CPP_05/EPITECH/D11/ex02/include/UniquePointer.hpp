@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jun 26 2:19:37 PM 2025 Paradis
-** Last update Fri Jun 26 6:25:48 PM 2025 Paradis
+** Last update Fri Jun 26 7:31:18 PM 2025 Paradis
 */
 
 #ifndef 			    __UNIQUEPOINTER_HPP__
@@ -18,11 +18,12 @@ class	                UniquePointer   :   public IObject
     public:
         UniquePointer(void);
         UniquePointer(IObject *object);
-        // UniquePointer(const UniquePointer &object) = delete;
+        UniquePointer(const UniquePointer &object) = delete;
+        UniquePointer   &operator=(const UniquePointer &rhs) = delete;
         UniquePointer   &operator=(IObject *rhs);
         virtual ~UniquePointer();
 
-        // IObject *getUniquePtr(void) const;
+        virtual void    touch(void);
     protected:
     private:
         IObject         *_uniquePtr;
