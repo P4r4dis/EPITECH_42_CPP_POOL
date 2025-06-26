@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jun 26 2:19:37 PM 2025 Paradis
-** Last update Fri Jun 26 7:31:18 PM 2025 Paradis
+** Last update Fri Jun 26 7:46:52 PM 2025 Paradis
 */
 
 #ifndef 			    __UNIQUEPOINTER_HPP__
@@ -24,6 +24,8 @@ class	                UniquePointer   :   public IObject
         virtual ~UniquePointer();
 
         virtual void    touch(void);
+        IObject         &operator*(void);
+
     protected:
     private:
         IObject         *_uniquePtr;

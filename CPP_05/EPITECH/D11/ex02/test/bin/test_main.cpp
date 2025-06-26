@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jun 26 4:20:12 PM 2025 Paradis
-** Last update Fri Jun 26 7:37:54 PM 2025 Paradis
+** Last update Fri Jun 26 8:00:33 PM 2025 Paradis
 */
 
 
@@ -119,6 +119,23 @@ Test_touch_display_stdout,
         UniquePointer   ptr = new TestObject("Tennant");
 
         ptr.touch();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Tennant is alive\n"
+        "Tennant is touched\n"
+        "Tennant is dead\n"
+    );
+}
+
+Test(UniquePointer_indirection_operator,
+Test_indirection_operator,
+.init = redirect_all_stdout)
+{
+    {
+        UniquePointer   ptr(new TestObject("Tennant"));
+
+        (*ptr).touch();
     }
     cr_assert_stdout_eq_str
     (
