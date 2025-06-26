@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jun 26 4:20:12 PM 2025 Paradis
-** Last update Fri Jun 26 8:45:33 PM 2025 Paradis
+** Last update Fri Jun 26 9:17:20 PM 2025 Paradis
 */
 
 
@@ -184,25 +184,71 @@ Test_should_reset_the_pointer,
         "Capaldi is dead\n"
     );
 }
+
+Test(UniquePointer_swap,
+Test_should_swap_the_pointer,
+.init = redirect_all_stdout)
+{
+    {
+        UniquePointer   ptr = new TestObject("Tennant");
+        UniquePointer   ptr2 = new TestObject("Smith");
+        
+        ptr.reset(new TestObject("Capaldi"));
+        ptr.swap(ptr2);
+        ptr.touch(); // smith
+        ptr2.touch();
+        ptr2.reset();
+        
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Tennant is alive\n"
+        "Smith is alive\n"
+        "Capaldi is alive\n"
+        "Tennant is dead\n"
+        "Smith is touched\n"
+        "Capaldi is touched\n"
+        "Capaldi is dead\n"
+        "Smith is dead\n"
+    );
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
 Test(main, test_main, .init = redirect_all_stdout)
 {
-    // UniquePointer   ptr1;
-    // UniquePointer   ptr2(new TestObject("Eccleston"));
-    // // UniquePointer ptr3 ( ptr2 ) ; <- Does not compile !
-    // ptr1 = new TestObject("Tennant");
-    // ptr2 = new TestObject("Smith");
-    // ptr1->touch();
-    // (*ptr2).touch();
+    {
+        UniquePointer   ptr1;
+        UniquePointer   ptr2(new TestObject("Eccleston"));
+        // UniquePointer ptr3 ( ptr2 ) ; <- Does not compile !
 
-    // {
-    //     UniquePointer   ptr4(new TestObject("Whittaker"));
-    // }
+        ptr1 = new TestObject("Tennant");
+        ptr2 = new TestObject("Smith");
+        ptr1->touch();
+        (*ptr2).touch();
 
-    // ptr1.reset(new TestObject("Capaldi"));
-    // ptr1.swap(ptr2);
-    // // ptr1 = ptr2 ; <- Does not compile !
-    // ptr2.reset();
+        {
+            UniquePointer   ptr4(new TestObject("Whittaker"));
+        }
+
+        ptr1.reset(new TestObject("Capaldi"));
+        ptr1.swap(ptr2);
+        // ptr1 = ptr2; //<- Does not compile !
+        ptr2.reset();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Eccleston is alive\n"
+        "Tennant is alive\n"
+        "Smith is alive\n"
+        "Eccleston is dead\n"
+        "Tennant is touched\n"
+        "Smith is touched\n"
+        "Whittaker is alive\n"
+        "Whittaker is dead\n"
+        "Capaldi is alive\n"
+        "Tennant is dead\n"
+        "Capaldi is dead\n"
+        "Smith is dead\n"
+    );
 }

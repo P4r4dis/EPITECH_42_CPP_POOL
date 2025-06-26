@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jun 26 4:26:51 PM 2025 Paradis
-** Last update Fri Jun 26 8:36:56 PM 2025 Paradis
+** Last update Fri Jun 26 9:20:57 PM 2025 Paradis
 */
 
 #include "../include/UniquePointer.hpp"
@@ -54,4 +54,15 @@ void        UniquePointer::reset(IObject *ptr)
     if (_uniquePtr)
         delete _uniquePtr;
     _uniquePtr = ptr;
+}
+
+void        UniquePointer::swap(UniquePointer &ptr)
+{
+    IObject *temp = nullptr;
+    
+    temp = _uniquePtr;
+    _uniquePtr = ptr._uniquePtr;
+    ptr._uniquePtr = temp;
+    
+    // std::swap(_uniquePtr, ptr._uniquePtr);
 }
