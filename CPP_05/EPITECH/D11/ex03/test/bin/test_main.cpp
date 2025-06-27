@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:16:37 PM 2025 Paradis
-** Last update Sat Jun 27 8:53:47 PM 2025 Paradis
+** Last update Sat Jun 27 9:16:42 PM 2025 Paradis
 */
 
 
@@ -117,6 +117,30 @@ Test(List_pushBack, Test_add_NULL_element_of_the_list_at_the_end,
         "Kermit is dead\n"
         "Kermit2 is dead\n"
     );
+}
+
+Test(List_empty, Test_should_return_true,
+.init = redirect_all_stdout)
+{
+    {
+        List    list;
+
+        cr_assert(list.empty() == true);
+    }
+}
+
+Test(List_empty, Test_should_return_false,
+.init = redirect_all_stdout)
+{
+    {
+        List    list;
+
+        cr_assert(list.empty() == true);
+
+        list.pushBack(new TestObject(("Kermit")));
+
+        cr_assert(list.empty() == false);
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //

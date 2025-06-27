@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:34:16 PM 2025 Paradis
-** Last update Sat Jun 27 8:54:43 PM 2025 Paradis
+** Last update Sat Jun 27 9:19:19 PM 2025 Paradis
 */
 
 #ifndef 		        __LIST_HPP__
@@ -24,11 +24,15 @@ class	                List
 
         void            display(void);
 
+        bool            empty(void) const;
         void            pushBack(IObject *element);
         class           InvalidOperationException : public std::exception
         {
             public:
-                virtual const char *what(void) const throw();
+                virtual const char *what(void) const throw()
+                {
+                    return ("Error: Invalid operation");
+                };
         };
         
     protected:

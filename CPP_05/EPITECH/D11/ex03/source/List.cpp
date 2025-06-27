@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:50:29 PM 2025 Paradis
-** Last update Sat Jun 27 8:50:57 PM 2025 Paradis
+** Last update Sat Jun 27 9:22:27 PM 2025 Paradis
 */
 
 #include "../include/List.hpp"
@@ -48,23 +48,33 @@ void        List::display(void)
     std::cout << "End List" << std::endl;
 }
 
+bool        List::empty(void) const
+{
+    return (_size == 0 ? true : false);
+
+}
 void        List::pushBack(IObject *element)
 {
-    Node    *newNode = new Node(element);
-
-    if (_head == nullptr)
+    try
     {
-        _head = newNode;
+        Node    *newNode = new Node(element);
+
+        if (_head == nullptr)
+            _head = newNode;
+        else
+        {
+            Node    *temp = _head;
+
+            while (temp->next)
+                temp = temp->next;
+            temp->next = newNode;
+        }
         _size++;
+
     }
-    else
+    catch (InvalidOperationException &e)
     {
-        Node    *temp = _head;
-
-        while (temp->next)
-            temp = temp->next;
-        temp->next = newNode;
-        _size++;
+        std::cout << e.what() << std::endl;
     }
 }
 
