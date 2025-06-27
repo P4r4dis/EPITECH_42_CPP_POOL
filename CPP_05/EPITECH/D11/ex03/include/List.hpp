@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:34:16 PM 2025 Paradis
-** Last update Sat Jun 27 9:19:19 PM 2025 Paradis
+** Last update Sat Jun 27 9:30:54 PM 2025 Paradis
 */
 
 #ifndef 		        __LIST_HPP__
@@ -25,6 +25,7 @@ class	                List
         void            display(void);
 
         bool            empty(void) const;
+        size_t          size(void) const;
         void            pushBack(IObject *element);
         class           InvalidOperationException : public std::exception
         {

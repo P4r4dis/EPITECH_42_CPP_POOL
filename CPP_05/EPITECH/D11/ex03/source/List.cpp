@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:50:29 PM 2025 Paradis
-** Last update Sat Jun 27 9:22:27 PM 2025 Paradis
+** Last update Sat Jun 27 9:34:02 PM 2025 Paradis
 */
 
 #include "../include/List.hpp"
@@ -53,6 +53,12 @@ bool        List::empty(void) const
     return (_size == 0 ? true : false);
 
 }
+
+size_t      List::size(void) const
+{
+    return _size;
+}
+
 void        List::pushBack(IObject *element)
 {
     try

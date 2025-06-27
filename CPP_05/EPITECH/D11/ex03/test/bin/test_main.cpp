@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:16:37 PM 2025 Paradis
-** Last update Sat Jun 27 9:16:42 PM 2025 Paradis
+** Last update Sat Jun 27 9:30:23 PM 2025 Paradis
 */
 
 
@@ -140,6 +140,30 @@ Test(List_empty, Test_should_return_false,
         list.pushBack(new TestObject(("Kermit")));
 
         cr_assert(list.empty() == false);
+    }
+}
+
+Test(List_size, Test_should_return_zero,
+.init = redirect_all_stdout)
+{
+    {
+        List    list;
+
+        cr_assert(list.size() == 0);
+    }
+}
+
+Test(List_size, Test_should_not_return_zero,
+.init = redirect_all_stdout)
+{
+    {
+        List    list;
+
+        cr_assert(list.size() == 0);
+
+        list.pushBack(new TestObject(("Kermit")));
+
+        cr_assert(list.size() == 1);
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
