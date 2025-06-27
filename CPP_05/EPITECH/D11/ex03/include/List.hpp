@@ -1,0 +1,50 @@
+/*
+** List.hpp for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_05/EPITECH/D11/ex03/include
+**
+** Made by Paradis
+** Login   <Adil Denia>
+**
+** Started on  Fri Jun 27 6:34:16 PM 2025 Paradis
+** Last update Sat Jun 27 8:54:43 PM 2025 Paradis
+*/
+
+#ifndef 		        __LIST_HPP__
+	# define 	        __LIST_HPP__
+
+#include "IObject.hpp"
+#include <exception>
+
+class	                List
+{
+    public:
+        List(void);
+        List(const List &list) = delete;
+        List            &operator=(const List &rhs) = delete;
+        virtual ~List(void);
+
+        void            display(void);
+
+        void            pushBack(IObject *element);
+        class           InvalidOperationException : public std::exception
+        {
+            public:
+                virtual const char *what(void) const throw();
+        };
+        
+    protected:
+    private:
+        class           Node
+        {
+            public:
+                Node(IObject *obj) : element(obj), next(nullptr)
+                {};
+
+                IObject *element;
+                Node    *next;
+        };
+
+        Node    *_head;
+        size_t  _size;
+};
+
+#endif 				/*  !_LIST_HPP__ */
