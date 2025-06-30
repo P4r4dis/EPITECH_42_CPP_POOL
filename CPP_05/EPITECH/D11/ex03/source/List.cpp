@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:50:29 PM 2025 Paradis
-** Last update Tue Jun 30 6:04:34 PM 2025 Paradis
+** Last update Tue Jun 30 6:59:51 PM 2025 Paradis
 */
 
 #include "../include/List.hpp"
@@ -61,16 +61,40 @@ size_t      List::size(void) const
 
 IObject     *&List::front(void)
 {
-    if (_head == nullptr)
+    if (empty() == true)
         throw InvalidOperationException();
     return _head->element;
 }
 
 IObject     *List::front(void) const
 {
-    if (_head == nullptr)
+    if (empty() == true)
         throw InvalidOperationException();
     return _head->element;
+}
+
+IObject     *&List::back(void)
+{
+    if (empty() == true)
+        throw InvalidOperationException();
+
+    Node *tmp = _head;
+
+    while (tmp->next)
+        tmp = tmp->next;
+    return tmp->element;
+}
+
+IObject     *List::back(void) const
+{
+    if (empty() == true)
+        throw InvalidOperationException();
+
+    Node *tmp = _head;
+
+    while (tmp->next)
+        tmp = tmp->next;
+    return tmp->element;
 }
 
 void        List::pushBack(IObject *element)

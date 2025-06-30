@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:34:16 PM 2025 Paradis
-** Last update Tue Jun 30 5:54:34 PM 2025 Paradis
+** Last update Tue Jun 30 6:52:29 PM 2025 Paradis
 */
 
 #ifndef 		        __LIST_HPP__
@@ -28,6 +28,8 @@ class	                List
         size_t          size(void) const;
         IObject         *&front(void);
         IObject         *front(void) const;
+        IObject         *&back(void);
+        IObject         *back(void) const;
         void            pushBack(IObject *element);
         class           InvalidOperationException : public std::exception
         {
