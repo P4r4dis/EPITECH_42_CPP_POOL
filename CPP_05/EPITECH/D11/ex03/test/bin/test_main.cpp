@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:16:37 PM 2025 Paradis
-** Last update Tue Jun 30 6:57:38 PM 2025 Paradis
+** Last update Tue Jun 30 8:18:43 PM 2025 Paradis
 */
 
 
@@ -334,6 +334,86 @@ Test(List_back, Test_return_the_last_element_of_the_const_list,
         "Kermit3 is dead\n"
     );
 }
+
+Test(List_pushFront, Test_if_List_is_empty_add_element_at_the_beginning,
+.init = redirect_all_stdout)
+{
+    {
+        List    list;
+
+        list.pushFront(new TestObject(("Kermit")));
+
+        list.display();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Kermit is alive\n"
+        "List:\n"
+        "Kermit is touched\n"
+        "End List\n"
+        "Kermit is dead\n"
+    );
+}
+
+Test(List_pushBack, Test_add_element_at_the_begenning_of_the_list,
+.init = redirect_all_stdout)
+{
+    {
+        List    list;
+
+        list.pushFront(new TestObject(("Kermit")));
+        list.pushFront(new TestObject(("Kermit2")));
+        list.pushFront(new TestObject(("Kermit3")));
+        list.display();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Kermit is alive\n"
+        "Kermit2 is alive\n"
+        "Kermit3 is alive\n"
+        "List:\n"
+        "Kermit3 is touched\n"
+        "Kermit2 is touched\n"
+        "Kermit is touched\n"
+        "End List\n"
+        "Kermit3 is dead\n"
+        "Kermit2 is dead\n"
+        "Kermit is dead\n"
+    );
+}
+
+Test(List_pushFront, Test_add_NULL_element_at_the_beginning_of_the_list,
+.init = redirect_all_stdout)
+{
+    {
+        {
+            List    list;
+
+            list.pushFront(new TestObject(("Kermit")));
+            list.pushFront(new TestObject(("Kermit2")));
+            list.pushFront(new TestObject(("Kermit3")));
+            list.pushFront(nullptr);
+
+            list.display();
+        }
+        cr_assert_stdout_eq_str
+        (
+            "Kermit is alive\n"
+            "Kermit2 is alive\n"
+            "Kermit3 is alive\n"
+            "List:\n"
+            "NULLPTR\n"
+            "Kermit3 is touched\n"
+            "Kermit2 is touched\n"
+            "Kermit is touched\n"
+            "End List\n"
+            "Kermit3 is dead\n"
+            "Kermit2 is dead\n"
+            "Kermit is dead\n"
+        );
+    }
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////

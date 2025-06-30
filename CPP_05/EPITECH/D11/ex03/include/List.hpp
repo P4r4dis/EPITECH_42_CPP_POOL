@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:34:16 PM 2025 Paradis
-** Last update Tue Jun 30 6:52:29 PM 2025 Paradis
+** Last update Tue Jun 30 7:05:15 PM 2025 Paradis
 */
 
 #ifndef 		        __LIST_HPP__
@@ -31,6 +31,7 @@ class	                List
         IObject         *&back(void);
         IObject         *back(void) const;
         void            pushBack(IObject *element);
+        void            pushFront(IObject *element);
         class           InvalidOperationException : public std::exception
         {
             public:

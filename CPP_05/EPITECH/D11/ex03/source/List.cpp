@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:50:29 PM 2025 Paradis
-** Last update Tue Jun 30 6:59:51 PM 2025 Paradis
+** Last update Tue Jun 30 8:15:49 PM 2025 Paradis
 */
 
 #include "../include/List.hpp"
@@ -114,7 +114,21 @@ void        List::pushBack(IObject *element)
     _size++;
 }
 
+void        List::pushFront(IObject *element)
+{
+    Node    *newElement = new Node(element);
 
+    if (!_head)
+        _head = newElement;
+    else
+    {
+        Node *temp = _head;
+
+        _head = newElement;
+        _head->next = temp;
+    }
+    _size++;
+}
 
 
 
