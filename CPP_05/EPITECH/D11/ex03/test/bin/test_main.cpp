@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:16:37 PM 2025 Paradis
-** Last update Tue Jun 30 8:18:43 PM 2025 Paradis
+** Last update Tue Jun 30 8:51:28 PM 2025 Paradis
 */
 
 
@@ -342,7 +342,7 @@ Test(List_pushFront, Test_if_List_is_empty_add_element_at_the_beginning,
         List    list;
 
         list.pushFront(new TestObject(("Kermit")));
-
+        cr_assert(list.size() == 1);
         list.display();
     }
     cr_assert_stdout_eq_str
@@ -355,7 +355,7 @@ Test(List_pushFront, Test_if_List_is_empty_add_element_at_the_beginning,
     );
 }
 
-Test(List_pushBack, Test_add_element_at_the_begenning_of_the_list,
+Test(List_pushFront, Test_add_element_at_the_begenning_of_the_list,
 .init = redirect_all_stdout)
 {
     {
@@ -364,6 +364,7 @@ Test(List_pushBack, Test_add_element_at_the_begenning_of_the_list,
         list.pushFront(new TestObject(("Kermit")));
         list.pushFront(new TestObject(("Kermit2")));
         list.pushFront(new TestObject(("Kermit3")));
+        cr_assert(list.size() == 3);
         list.display();
     }
     cr_assert_stdout_eq_str
@@ -393,7 +394,7 @@ Test(List_pushFront, Test_add_NULL_element_at_the_beginning_of_the_list,
             list.pushFront(new TestObject(("Kermit2")));
             list.pushFront(new TestObject(("Kermit3")));
             list.pushFront(nullptr);
-
+            cr_assert(list.size() == 4);
             list.display();
         }
         cr_assert_stdout_eq_str
@@ -403,6 +404,38 @@ Test(List_pushFront, Test_add_NULL_element_at_the_beginning_of_the_list,
             "Kermit3 is alive\n"
             "List:\n"
             "NULLPTR\n"
+            "Kermit3 is touched\n"
+            "Kermit2 is touched\n"
+            "Kermit is touched\n"
+            "End List\n"
+            "Kermit3 is dead\n"
+            "Kermit2 is dead\n"
+            "Kermit is dead\n"
+        );
+    }
+}
+
+Test(List_popFront, Test_delete_first_element_of_the_list,
+.init = redirect_all_stdout)
+{
+    {
+        {
+            List    list;
+
+            list.pushFront(new TestObject(("Kermit")));
+            list.pushFront(new TestObject(("Kermit2")));
+            list.pushFront(new TestObject(("Kermit3")));
+            list.pushFront(nullptr);
+            list.popFront();
+            cr_assert(list.size() == 3);
+            list.display();
+        }
+        cr_assert_stdout_eq_str
+        (
+            "Kermit is alive\n"
+            "Kermit2 is alive\n"
+            "Kermit3 is alive\n"
+            "List:\n"
             "Kermit3 is touched\n"
             "Kermit2 is touched\n"
             "Kermit is touched\n"

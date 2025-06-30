@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:50:29 PM 2025 Paradis
-** Last update Tue Jun 30 8:15:49 PM 2025 Paradis
+** Last update Tue Jun 30 8:49:17 PM 2025 Paradis
 */
 
 #include "../include/List.hpp"
@@ -128,6 +128,19 @@ void        List::pushFront(IObject *element)
         _head->next = temp;
     }
     _size++;
+}
+
+void        List::popFront(void)
+{
+    if (_head)
+    {
+        Node *temp = _head;
+
+        _head = temp->next;
+        delete temp->element;
+        delete temp;
+        _size--;
+    }
 }
 
 
