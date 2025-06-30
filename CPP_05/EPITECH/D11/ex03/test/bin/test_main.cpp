@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:16:37 PM 2025 Paradis
-** Last update Sat Jun 27 9:30:23 PM 2025 Paradis
+** Last update Tue Jun 30 6:08:26 PM 2025 Paradis
 */
 
 
@@ -165,6 +165,90 @@ Test(List_size, Test_should_not_return_zero,
 
         cr_assert(list.size() == 1);
     }
+}
+
+Test(List_front, Test_should_throw_exception_if_first_node_is_null,
+.init = redirect_all_stdout)
+{
+    {
+        try
+        {
+            List    list;
+            list.front();
+        } catch (std::exception &e)
+        {
+            std::cout << e.what() << std::endl;
+        }
+
+        try
+        {
+            const List    list;
+            list.front();
+        } catch (std::exception &e)
+        {
+            std::cout << e.what() << std::endl;
+        }
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Error: Invalid operation\n"
+        "Error: Invalid operation\n"
+    );
+}
+
+Test(List_front, Test_return_first_element_of_the_list,
+.init = redirect_all_stdout)
+{
+    {
+
+        List    list;
+
+        list.pushBack(new TestObject(("Kermit")));
+        list.pushBack(new TestObject(("Kermit2")));
+        list.pushBack(new TestObject(("Kermit3")));
+
+        IObject *tmp = list.front();
+        
+        tmp->touch();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Kermit is alive\n"
+        "Kermit2 is alive\n"
+        "Kermit3 is alive\n"
+        "Kermit is touched\n"
+        "Kermit is dead\n"
+        "Kermit2 is dead\n"
+        "Kermit3 is dead\n"
+    );
+}
+
+Test(List_front, Test_return_first_element_of_the_const_list,
+.init = redirect_all_stdout)
+{
+    {
+            List list;
+
+        list.pushBack(new TestObject("Kermit"));
+        list.pushBack(new TestObject("Kermit2"));
+        list.pushBack(new TestObject("Kermit3"));
+
+        const List &ref = list;  // convert to const by reference
+
+        IObject *tmp = ref.front();  // calls const verion of front()
+
+        tmp->touch();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Kermit is alive\n"
+        "Kermit2 is alive\n"
+        "Kermit3 is alive\n"
+        "Kermit is touched\n"
+        "Kermit is dead\n"
+        "Kermit2 is dead\n"
+        "Kermit3 is dead\n"
+    );
 }
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
