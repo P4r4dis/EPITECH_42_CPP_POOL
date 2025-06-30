@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:16:37 PM 2025 Paradis
-** Last update Tue Jun 30 8:51:28 PM 2025 Paradis
+** Last update Tue Jun 30 9:38:59 PM 2025 Paradis
 */
 
 
@@ -446,6 +446,95 @@ Test(List_popFront, Test_delete_first_element_of_the_list,
         );
     }
 }
+
+Test(List_popBack, Test_delete_first_element_of_the_list,
+.init = redirect_all_stdout)
+{
+    {
+        {
+            List    list;
+
+            list.pushFront(new TestObject(("Kermit")));
+
+            list.popBack();
+            cr_assert(list.size() == 0);
+            list.display();
+        }
+        cr_assert_stdout_eq_str
+        (
+            "Kermit is alive\n"
+            "Kermit is dead\n"
+            "List:\n"
+            "NULLPTR\n"
+            "End List\n"
+        );
+    }
+}
+
+Test(List_popBack, Test_delete_the_last_element_of_the_list,
+.init = redirect_all_stdout)
+{
+    {
+        {
+            List    list;
+
+            list.pushBack(new TestObject(("Kermit")));
+            list.pushBack(new TestObject(("Kermit2")));
+            list.pushBack(new TestObject(("Kermit3")));
+            list.popBack();
+            cr_assert(list.size() == 2);
+            list.display();
+        }
+        cr_assert_stdout_eq_str
+        (
+            "Kermit is alive\n"
+            "Kermit2 is alive\n"
+            "Kermit3 is alive\n"
+            "Kermit3 is dead\n"
+            "List:\n"
+            "Kermit is touched\n"
+            "Kermit2 is touched\n"
+            "End List\n"
+            "Kermit is dead\n"
+            "Kermit2 is dead\n"
+        );
+    }
+}
+
+Test(List_popBack, Test_delete_the_last_element_nullptr_of_the_list,
+.init = redirect_all_stdout)
+{
+    {
+        {
+            List    list;
+
+            list.pushBack(new TestObject(("Kermit")));
+            list.pushBack(new TestObject(("Kermit2")));
+            list.pushBack(new TestObject(("Kermit3")));
+            list.pushBack(nullptr);
+
+            list.popBack();
+            cr_assert(list.size() == 3);
+            list.display();
+        }
+        cr_assert_stdout_eq_str
+        (
+            "Kermit is alive\n"
+            "Kermit2 is alive\n"
+            "Kermit3 is alive\n"
+            "List:\n"
+            "Kermit is touched\n"
+            "Kermit2 is touched\n"
+            "Kermit3 is touched\n"
+            "End List\n"
+            "Kermit is dead\n"
+            "Kermit2 is dead\n"
+            "Kermit3 is dead\n"
+
+        );
+    }
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //

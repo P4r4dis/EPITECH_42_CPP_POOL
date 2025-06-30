@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:34:16 PM 2025 Paradis
-** Last update Tue Jun 30 8:30:22 PM 2025 Paradis
+** Last update Tue Jun 30 9:36:26 PM 2025 Paradis
 */
 
 #ifndef 		        __LIST_HPP__
@@ -33,6 +33,8 @@ class	                List
         void            pushBack(IObject *element);
         void            pushFront(IObject *element);
         void            popFront(void);
+        void            popBack(void);
+        void            clear(void);
         class           InvalidOperationException : public std::exception
         {
             public:

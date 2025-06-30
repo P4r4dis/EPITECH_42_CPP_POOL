@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:50:29 PM 2025 Paradis
-** Last update Tue Jun 30 8:49:17 PM 2025 Paradis
+** Last update Tue Jun 30 9:36:50 PM 2025 Paradis
 */
 
 #include "../include/List.hpp"
@@ -143,32 +143,26 @@ void        List::popFront(void)
     }
 }
 
+void        List::popBack(void)
+{
+    if (_head)
+    {
+        if (_head->next == nullptr)
+        {
+            delete _head->element;
+            delete _head;
+            _head = nullptr;
+        }
+        else
+        {
+            Node *temp = _head;
+            while (temp->next->next)
+                temp = temp->next;
 
-
-
-
-
-
-
-
-
-
-// void        List::pushBack(IObject *element)
-// {
-//     Node    *newNode = new Node(element);
-
-//     if (!_head)
-//     {
-//         _head = newNode;
-//         _size++;
-//     }
-//     else
-//     {
-//         Node    *temp = _head;
-
-//         while (temp->next)
-//             temp = temp->next;
-//         temp->next = newNode;
-//         _size++;
-//     }
-// }
+            delete temp->next->element;
+            delete temp->next;
+            temp->next = nullptr;
+        }
+        _size--;
+    }
+}
