@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:16:37 PM 2025 Paradis
-** Last update Wed Jul 1 3:43:27 PM 2025 Paradis
+** Last update Wed Jul 1 3:53:47 PM 2025 Paradis
 */
 
 
@@ -654,33 +654,33 @@ Test(List_forEach, Test_performs_functions_for_easch_elements_of_the_list,
 ///////////////////////////////////////////////////////////////////////////////
 Test(main, test_main, .init = redirect_all_stdout)
 {
-    // {
-    //     try {
-    //         List    list;
-    //         list.pushBack(new TestObject("Kermit"));
-    //         list.pushBack(new TestObject("Miss Piggy"));
-    //         list.pushFront(nullptr);
-    //         list.front() = new TestObject("Fozzie");
-    //         list.pushBack(nullptr);
-    //         list.forEach(touch);
-    //         list.clear();
-    //         list.popBack();
-    //         list.pushFront(new TestObject("Gonzo"));
-    //     } catch (const List::InvalidOperationException &e) {
-    //         std::cout << "Invalid operation on a list" << std::endl;
-    //     }
-    // }
-    // cr_assert_stdout_eq_str
-    // (
-    //     "Kermit is alive\n"
-    //     "Miss Piggy is alive\n"
-    //     "Fozzie is alive\n"
-    //     "Fozzie is touched\n"
-    //     "Kermit is touched\n"
-    //     "Miss Piggy is touched\n"
-    //     "Fozzie is dead\n"
-    //     "Kermit is dead\n"
-    //     "Miss Piggy is dead\n"
-    //     "Invalid operation on a list\n"
-    // );
+    {
+        try {
+            List    list;
+            list.pushBack(new TestObject("Kermit"));
+            list.pushBack(new TestObject("Miss Piggy"));
+            list.pushFront(nullptr);
+            list.front() = new TestObject("Fozzie");
+            list.pushBack(nullptr);
+            list.forEach(touch);
+            list.clear();
+            list.popBack();
+            list.pushFront(new TestObject("Gonzo"));
+        } catch (const List::InvalidOperationException &e) {
+            std::cout << "Invalid operation on a list" << std::endl;
+        }
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Kermit is alive\n"
+        "Miss Piggy is alive\n"
+        "Fozzie is alive\n"
+        "Fozzie is touched\n"
+        "Kermit is touched\n"
+        "Miss Piggy is touched\n"
+        "Fozzie is dead\n"
+        "Kermit is dead\n"
+        "Miss Piggy is dead\n"
+        "Invalid operation on a list\n"
+    );
 }
