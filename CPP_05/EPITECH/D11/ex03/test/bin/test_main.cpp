@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:16:37 PM 2025 Paradis
-** Last update Tue Jun 30 9:38:59 PM 2025 Paradis
+** Last update Tue Jun 30 9:49:25 PM 2025 Paradis
 */
 
 
@@ -535,6 +535,44 @@ Test(List_popBack, Test_delete_the_last_element_nullptr_of_the_list,
     }
 }
 
+Test(List_clear, Test_remove_all_element_of_the_list_and_set_size_to_zero,
+.init = redirect_all_stdout)
+{
+    {
+        {
+            List    list;
+
+            list.pushBack(new TestObject(("Kermit")));
+            list.pushBack(new TestObject(("Kermit2")));
+            list.pushBack(new TestObject(("Kermit3")));
+            list.pushBack(nullptr);
+
+            cr_assert(list.size() == 4);
+            list.display();
+            list.clear();
+            list.display();
+            cr_assert(list.size() == 0);
+        }
+        cr_assert_stdout_eq_str
+        (
+            "Kermit is alive\n"
+            "Kermit2 is alive\n"
+            "Kermit3 is alive\n"
+            "List:\n"
+            "Kermit is touched\n"
+            "Kermit2 is touched\n"
+            "Kermit3 is touched\n"
+            "NULLPTR\n"
+            "End List\n"
+            "Kermit is dead\n"
+            "Kermit2 is dead\n"
+            "Kermit3 is dead\n"
+            "List:\n"
+            "NULLPTR\n"
+            "End List\n"
+        );
+    }
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //

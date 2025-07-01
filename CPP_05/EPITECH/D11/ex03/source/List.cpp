@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:50:29 PM 2025 Paradis
-** Last update Tue Jun 30 9:36:50 PM 2025 Paradis
+** Last update Tue Jun 30 9:49:42 PM 2025 Paradis
 */
 
 #include "../include/List.hpp"
@@ -16,18 +16,18 @@ List::List(void)    :   _head(nullptr), _size(0)
 
 List::~List()
 {
-    Node    *temp;
+    // Node    *temp;
 
-    while (_head)
-    {
-        temp = _head;
-        if (temp->element)
-            delete temp->element;
+    // while (_head)
+    // {
+    //     temp = _head;
+    //     if (temp->element)
+    //         delete temp->element;
         
-        _head = _head->next;
-        delete temp;
-    }
-
+    //     _head = _head->next;
+    //     delete temp;
+    // }
+    clear();
 }
 
 void        List::display(void)
@@ -164,5 +164,22 @@ void        List::popBack(void)
             temp->next = nullptr;
         }
         _size--;
+    }
+}
+
+void        List::clear(void)
+{
+    if (_head)
+    {
+        while(_head)
+        {
+            Node    *temp = _head;
+
+            _head = _head->next;
+
+            delete temp->element;
+            delete temp;
+        }
+        _size = 0;
     }
 }
