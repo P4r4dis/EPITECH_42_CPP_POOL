@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:16:37 PM 2025 Paradis
-** Last update Wed Jul 1 9:16:18 PM 2025 Paradis
+** Last update Wed Jul 1 9:33:57 PM 2025 Paradis
 */
 
 
@@ -643,6 +643,33 @@ Test(List_forEach, Test_performs_functions_for_easch_elements_of_the_list,
             "Kermit is touched\n"
             "Kermit2 is touched\n"
             "Kermit3 is touched\n"
+            "Kermit is dead\n"
+            "Kermit2 is dead\n"
+            "Kermit3 is dead\n"
+        );
+    }
+}
+
+Test(List_begin, Test_returns_an_iterator_to_the_first_element_of_the_list,
+.init = redirect_all_stdout)
+{
+    {
+        {
+            List    list;
+
+            list.pushBack(new TestObject(("Kermit")));
+            list.pushBack(new TestObject(("Kermit2")));
+            list.pushBack(new TestObject(("Kermit3")));
+
+            List::Iterator it = list.begin();
+            (*it)->touch();
+        }
+        cr_assert_stdout_eq_str
+        (
+            "Kermit is alive\n"
+            "Kermit2 is alive\n"
+            "Kermit3 is alive\n"
+            "Kermit is touched\n"
             "Kermit is dead\n"
             "Kermit2 is dead\n"
             "Kermit3 is dead\n"

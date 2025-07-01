@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Jul 1 7:23:56 PM 2025 Paradis
-** Last update Wed Jul 1 8:51:49 PM 2025 Paradis
+** Last update Wed Jul 1 9:23:27 PM 2025 Paradis
 */
 
 #ifndef 		        __LIST_HPP__
@@ -29,7 +29,7 @@ class	                List
 
         Node    *_head;
         size_t  _size;
-        
+
     public:
         List(void);
         List(const List &list) = delete;
@@ -82,6 +82,8 @@ class	                List
                 Node    *_currentNode;
         };
         
+        List::Iterator  begin(void) const;
+
     protected:
 };
 

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Jul 1 7:24:06 PM 2025 Paradis
-** Last update Wed Jul 1 9:05:39 PM 2025 Paradis
+** Last update Wed Jul 1 9:31:57 PM 2025 Paradis
 */
 
 #include "../include/List.hpp"
@@ -181,6 +181,13 @@ void        List::forEach(void (*function)(IObject *))
 {
     for (Node *temp = _head; temp; temp = temp->next)
         (*function)(temp->element);
+}
+
+List::Iterator      List::begin(void) const
+{
+    List::Iterator it(_head);
+
+    return it;
 }
 ////////////////////////////////////////////////////////////////////////////////
 List::Iterator::Iterator(Node *node)    :   _currentNode(node)
