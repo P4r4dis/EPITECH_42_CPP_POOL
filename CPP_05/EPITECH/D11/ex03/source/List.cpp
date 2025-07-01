@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:50:29 PM 2025 Paradis
-** Last update Tue Jun 30 9:49:42 PM 2025 Paradis
+** Last update Wed Jul 1 3:25:37 PM 2025 Paradis
 */
 
 #include "../include/List.hpp"
@@ -141,6 +141,8 @@ void        List::popFront(void)
         delete temp;
         _size--;
     }
+    else
+        throw InvalidOperationException();
 }
 
 void        List::popBack(void)
@@ -165,6 +167,8 @@ void        List::popBack(void)
         }
         _size--;
     }
+    else
+        throw InvalidOperationException();
 }
 
 void        List::clear(void)
@@ -182,4 +186,10 @@ void        List::clear(void)
         }
         _size = 0;
     }
+}
+
+void        List::forEach(void (*function)(IObject *))
+{
+    for (Node *temp = _head; temp; temp = temp->next)
+        (*function)(temp->element);
 }

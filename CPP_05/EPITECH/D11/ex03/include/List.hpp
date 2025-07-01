@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:34:16 PM 2025 Paradis
-** Last update Tue Jun 30 9:36:26 PM 2025 Paradis
+** Last update Wed Jul 1 3:29:24 PM 2025 Paradis
 */
 
 #ifndef 		        __LIST_HPP__
@@ -35,12 +35,14 @@ class	                List
         void            popFront(void);
         void            popBack(void);
         void            clear(void);
+        void            forEach(void (*function)(IObject *));
+
         class           InvalidOperationException : public std::exception
         {
             public:
                 virtual const char *what(void) const throw()
                 {
-                    return ("Error: Invalid operation");
+                    return ("Invalid operation on a list");
                 };
         };
         

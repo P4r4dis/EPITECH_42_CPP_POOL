@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:16:37 PM 2025 Paradis
-** Last update Tue Jun 30 9:49:25 PM 2025 Paradis
+** Last update Wed Jul 1 3:43:27 PM 2025 Paradis
 */
 
 
@@ -25,11 +25,11 @@ void redirect_all_stdout(void)
     cr_redirect_stderr();
 }
 
-// void touch(IObject *object)
-// {
-//     if (object != nullptr)
-//         object->touch();
-// }
+void touch(IObject *object)
+{
+    if (object != nullptr)
+        object->touch();
+}
 
 Test(List_Constructor, Test_Constructor, .init = redirect_all_stdout)
 {
@@ -191,8 +191,8 @@ Test(List_front, Test_should_throw_exception_if_first_node_is_null,
     }
     cr_assert_stdout_eq_str
     (
-        "Error: Invalid operation\n"
-        "Error: Invalid operation\n"
+        "Invalid operation on a list\n"
+        "Invalid operation on a list\n"
     );
 }
 
@@ -275,8 +275,8 @@ Test(List_back, Test_should_throw_exception_if_list_is_empty,
     }
     cr_assert_stdout_eq_str
     (
-        "Error: Invalid operation\n"
-        "Error: Invalid operation\n"
+        "Invalid operation on a list\n"
+        "Invalid operation on a list\n"
     );
 }
 
@@ -447,6 +447,54 @@ Test(List_popFront, Test_delete_first_element_of_the_list,
     }
 }
 
+Test(List_popFront, Test_remove_element_for_empty_list,
+.init = redirect_all_stdout)
+{
+    {
+        {
+            try
+            {
+                List    list;
+
+                cr_assert(list.empty() == true);
+                list.popFront();
+            }
+            catch (List::InvalidOperationException &e)
+            {
+                std::cout << e.what() << std::endl;
+            }
+        }
+        cr_assert_stdout_eq_str
+        (
+            "Invalid operation on a list\n"
+        );
+    }
+}
+
+Test(List_popBack, Test_remove_element_for_empty_list,
+.init = redirect_all_stdout)
+{
+    {
+        {
+            try
+            {
+                List    list;
+
+                cr_assert(list.empty() == true);
+                list.popBack();
+            }
+            catch (List::InvalidOperationException &e)
+            {
+                std::cout << e.what() << std::endl;
+            }
+        }
+        cr_assert_stdout_eq_str
+        (
+            "Invalid operation on a list\n"
+        );
+    }
+}
+
 Test(List_popBack, Test_delete_first_element_of_the_list,
 .init = redirect_all_stdout)
 {
@@ -574,6 +622,33 @@ Test(List_clear, Test_remove_all_element_of_the_list_and_set_size_to_zero,
     }
 }
 
+Test(List_forEach, Test_performs_functions_for_easch_elements_of_the_list,
+.init = redirect_all_stdout)
+{
+    {
+        {
+            List    list;
+
+            list.pushBack(new TestObject(("Kermit")));
+            list.pushBack(new TestObject(("Kermit2")));
+            list.pushBack(nullptr);
+            list.pushBack(new TestObject(("Kermit3")));
+            list.forEach(touch);
+        }
+        cr_assert_stdout_eq_str
+        (
+            "Kermit is alive\n"
+            "Kermit2 is alive\n"
+            "Kermit3 is alive\n"
+            "Kermit is touched\n"
+            "Kermit2 is touched\n"
+            "Kermit3 is touched\n"
+            "Kermit is dead\n"
+            "Kermit2 is dead\n"
+            "Kermit3 is dead\n"
+        );
+    }
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
@@ -597,6 +672,15 @@ Test(main, test_main, .init = redirect_all_stdout)
     // }
     // cr_assert_stdout_eq_str
     // (
-
+    //     "Kermit is alive\n"
+    //     "Miss Piggy is alive\n"
+    //     "Fozzie is alive\n"
+    //     "Fozzie is touched\n"
+    //     "Kermit is touched\n"
+    //     "Miss Piggy is touched\n"
+    //     "Fozzie is dead\n"
+    //     "Kermit is dead\n"
+    //     "Miss Piggy is dead\n"
+    //     "Invalid operation on a list\n"
     // );
 }
