@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Jul 1 7:23:56 PM 2025 Paradis
-** Last update Thu Jul 2 3:47:08 PM 2025 Paradis
+** Last update Thu Jul 2 4:15:12 PM 2025 Paradis
 */
 
 #ifndef 		        __LIST_HPP__
@@ -66,7 +66,7 @@ class	                List
                 Iterator(Node *node = nullptr);
                 virtual ~Iterator(void);
                 IObject     *operator*(void) const;
-                // Iterator    &operator++();
+                Iterator    &operator++(void);
                 // bool        operator==(const Iterator *it) const;
                 // bool        operator!=(const Iterator *it) const;
 

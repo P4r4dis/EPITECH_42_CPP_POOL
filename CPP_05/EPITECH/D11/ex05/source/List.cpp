@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Jul 1 7:24:06 PM 2025 Paradis
-** Last update Thu Jul 2 3:55:33 PM 2025 Paradis
+** Last update Thu Jul 2 4:25:25 PM 2025 Paradis
 */
 
 #include "../include/List.hpp"
@@ -208,4 +208,12 @@ IObject             *List::Iterator::operator*(void) const
     if (!_currentNode)
         throw OutOfRangeException();
     return _currentNode->element;
+}
+
+List::Iterator      &List::Iterator::operator++(void)
+{
+    if (!_currentNode)
+        throw OutOfRangeException();
+    _currentNode = _currentNode->next;
+    return (*this);
 }

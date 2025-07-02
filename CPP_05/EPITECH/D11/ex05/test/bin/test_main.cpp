@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:16:37 PM 2025 Paradis
-** Last update Thu Jul 2 4:03:10 PM 2025 Paradis
+** Last update Thu Jul 2 4:30:00 PM 2025 Paradis
 */
 
 
@@ -764,6 +764,62 @@ Test_throw_exception_and_display_msg_stderr,
     cr_assert_stderr_eq_str
     (
         "Iterator out of range\n"
+    );
+}
+
+Test(List__Iterator_Increment_Operator,
+Test_advances_the_iterator_to_the_next_node,
+.init = redirect_all_stdout)
+{
+    {
+        List    list;
+
+        list.pushBack(new TestObject(("Kermit")));
+        list.pushBack(new TestObject(("Kermit2")));
+        list.pushBack(new TestObject(("Kermit3")));
+
+        List::Iterator it = list.begin();
+        if (*it != nullptr)
+            (*it)->touch();
+        ++it;
+        if (*it != nullptr)
+            (*it)->touch();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Kermit is alive\n"
+        "Kermit2 is alive\n"
+        "Kermit3 is alive\n"
+        "Kermit is touched\n"
+        "Kermit2 is touched\n"
+        "Kermit is dead\n"
+        "Kermit2 is dead\n"
+        "Kermit3 is dead\n"
+    );
+}
+
+Test(List__Iterator_Increment_Operator,
+Test_try_to_increment_nullptr_node_and_should_to_throw_exception,
+.init = redirect_all_stdout)
+{
+    {
+        List    list;
+
+        list.pushBack(new TestObject(("Kermit")));
+        list.pushBack(new TestObject(("Kermit2")));
+        list.pushBack(new TestObject(("Kermit3")));
+
+        List::Iterator it = list.end();
+        cr_assert_throw(++it, List::Iterator::OutOfRangeException);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Kermit is alive\n"
+        "Kermit2 is alive\n"
+        "Kermit3 is alive\n"
+        "Kermit is dead\n"
+        "Kermit2 is dead\n"
+        "Kermit3 is dead\n"
     );
 }
 ///////////////////////////////////////////////////////////////////////////////
