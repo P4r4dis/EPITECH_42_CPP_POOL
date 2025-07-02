@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Jul 1 7:24:06 PM 2025 Paradis
-** Last update Thu Jul 2 4:42:36 PM 2025 Paradis
+** Last update Thu Jul 2 4:49:47 PM 2025 Paradis
 */
 
 #include "../include/List.hpp"
@@ -221,4 +221,9 @@ List::Iterator      &List::Iterator::operator++(void)
 bool                List::Iterator::operator==(const Iterator &it) const
 {
     return _currentNode == it._currentNode;
+}
+
+bool                List::Iterator::operator!=(const Iterator &it) const
+{
+    return _currentNode != it._currentNode;
 }
