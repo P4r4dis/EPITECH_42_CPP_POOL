@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:16:37 PM 2025 Paradis
-** Last update Wed Jul 1 9:33:57 PM 2025 Paradis
+** Last update Thu Jul 2 4:03:10 PM 2025 Paradis
 */
 
 
@@ -677,6 +677,44 @@ Test(List_begin, Test_returns_an_iterator_to_the_first_element_of_the_list,
     }
 }
 
+Test(List_begin, Test_returns_nullptr,
+.init = redirect_all_stdout)
+{
+    {
+
+            List    list;
+
+            list.pushBack(nullptr);
+
+            List::Iterator it = list.begin();
+            cr_assert_null(*it);
+    }
+}
+
+Test(List_end, Test_returns_an_iterator_to_the_end_of_the_list,
+.init = redirect_all_stdout)
+{
+    {
+        List    list;
+
+        list.pushBack(new TestObject(("Kermit")));
+        list.pushBack(new TestObject(("Kermit2")));
+        list.pushBack(new TestObject(("Kermit3")));
+
+        List::Iterator it = list.end();
+        cr_assert_throw(*it, List::Iterator::OutOfRangeException);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Kermit is alive\n"
+        "Kermit2 is alive\n"
+        "Kermit3 is alive\n"
+        "Kermit is dead\n"
+        "Kermit2 is dead\n"
+        "Kermit3 is dead\n"
+    );
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            List::Iterator class                           //
 ///////////////////////////////////////////////////////////////////////////////
@@ -702,7 +740,7 @@ Test_throw_exception,
         {
             List::Iterator it;
 
-            cr_assert_throw(*it, List::Iterator::OutOfRange);
+            cr_assert_throw(*it, List::Iterator::OutOfRangeException);
         }
     }
 }
@@ -718,7 +756,7 @@ Test_throw_exception_and_display_msg_stderr,
 
             cr_assert_null(*it);
         }
-        catch (List::Iterator::OutOfRange &e)
+        catch (List::Iterator::OutOfRangeException &e)
         {
             std::cerr << e.what() << std::endl;
         }

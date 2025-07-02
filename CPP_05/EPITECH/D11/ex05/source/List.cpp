@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Jul 1 7:24:06 PM 2025 Paradis
-** Last update Wed Jul 1 9:31:57 PM 2025 Paradis
+** Last update Thu Jul 2 3:55:33 PM 2025 Paradis
 */
 
 #include "../include/List.hpp"
@@ -189,6 +189,13 @@ List::Iterator      List::begin(void) const
 
     return it;
 }
+
+List::Iterator      List::end(void) const
+{
+    List::Iterator it(nullptr);
+
+    return it;
+}
 ////////////////////////////////////////////////////////////////////////////////
 List::Iterator::Iterator(Node *node)    :   _currentNode(node)
 {}
@@ -199,6 +206,6 @@ List::Iterator::~Iterator(void)
 IObject             *List::Iterator::operator*(void) const
 {
     if (!_currentNode)
-        throw OutOfRange();
+        throw OutOfRangeException();
     return _currentNode->element;
 }

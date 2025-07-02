@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Jul 1 7:23:56 PM 2025 Paradis
-** Last update Wed Jul 1 9:23:27 PM 2025 Paradis
+** Last update Thu Jul 2 3:47:08 PM 2025 Paradis
 */
 
 #ifndef 		        __LIST_HPP__
@@ -70,7 +70,7 @@ class	                List
                 // bool        operator==(const Iterator *it) const;
                 // bool        operator!=(const Iterator *it) const;
 
-                class   OutOfRange  :   public std::exception
+                class   OutOfRangeException  :   public std::exception
                 {
                     public:
                         const char *what(void) const throw()
@@ -83,6 +83,7 @@ class	                List
         };
         
         List::Iterator  begin(void) const;
+        List::Iterator  end(void) const;
 
     protected:
 };
