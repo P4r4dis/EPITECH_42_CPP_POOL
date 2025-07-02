@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:16:37 PM 2025 Paradis
-** Last update Thu Jul 2 4:30:00 PM 2025 Paradis
+** Last update Thu Jul 2 4:48:28 PM 2025 Paradis
 */
 
 
@@ -820,6 +820,25 @@ Test_try_to_increment_nullptr_node_and_should_to_throw_exception,
         "Kermit is dead\n"
         "Kermit2 is dead\n"
         "Kermit3 is dead\n"
+    );
+}
+
+Test(List__Iterator_Equality_Operator,
+Test_return_true_if_the_iterators_are_equals,
+.init = redirect_all_stdout)
+{
+    {
+        List    list;
+
+        list.pushBack(new TestObject(("Kermit")));
+
+        List::Iterator it = list.begin();
+        cr_assert(it == list.begin());
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Kermit is alive\n"
+        "Kermit is dead\n"
     );
 }
 ///////////////////////////////////////////////////////////////////////////////

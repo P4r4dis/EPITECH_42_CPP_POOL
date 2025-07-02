@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Jul 1 7:23:56 PM 2025 Paradis
-** Last update Thu Jul 2 4:15:12 PM 2025 Paradis
+** Last update Thu Jul 2 4:42:27 PM 2025 Paradis
 */
 
 #ifndef 		        __LIST_HPP__
@@ -67,7 +67,7 @@ class	                List
                 virtual ~Iterator(void);
                 IObject     *operator*(void) const;
                 Iterator    &operator++(void);
-                // bool        operator==(const Iterator *it) const;
+                bool        operator==(const Iterator &it) const;
                 // bool        operator!=(const Iterator *it) const;
 
                 class   OutOfRangeException  :   public std::exception
