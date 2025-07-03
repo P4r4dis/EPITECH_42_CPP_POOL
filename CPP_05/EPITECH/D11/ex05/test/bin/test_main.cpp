@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Fri Jun 27 6:16:37 PM 2025 Paradis
-** Last update Thu Jul 2 4:49:56 PM 2025 Paradis
+** Last update Fri Jul 3 5:06:17 PM 2025 Paradis
 */
 
 
@@ -14,6 +14,7 @@
 #include <criterion/internal/assert.h>
 #include <criterion/new/assert.h>
 #include <criterion/redirect.h>
+#include <list>
 
 
 #include "../../include/IObject.hpp"
@@ -715,6 +716,191 @@ Test(List_end, Test_returns_an_iterator_to_the_end_of_the_list,
     );
 }
 
+Test(List_erase, Test_Invalid_Iterator_throw_exception,
+.init = redirect_all_stdout)
+{
+    {
+        try
+        {
+            List    list;
+            List::Iterator it = list.begin();
+
+            list.erase(it);
+        } catch (List::InvalidIteratorException &e)
+        {
+            std::cout << e.what() << std::endl;
+        }
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Invalid iterator\n"
+    );
+}
+
+Test(List_erase, Test_remove_first_node_of_the_list,
+.init = redirect_all_stdout)
+{
+    {
+        List    list1;
+
+        list1.pushBack(new TestObject("Naruto"));
+        for (List::Iterator it = list1.begin(); it != list1.end(); ++it)
+            if (*it != nullptr)
+                (*it)->touch();
+
+        list1.erase(list1.begin());
+        list1.display();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Naruto is alive\n"
+        "Naruto is touched\n"
+        "Naruto is dead\n"
+        "List:\n"
+        "NULLPTR\n"
+        "End List\n"
+    );
+}
+
+Test(List_erase,
+Test_try_to_remove_an_element_of_empty_list_should_throw_exception,
+.init = redirect_all_stdout)
+{
+    {
+        try
+        {
+            List    list1;
+
+            list1.erase(list1.begin());
+        }
+        catch (List::InvalidIteratorException &e)
+        {
+            std::cout << e.what() << std::endl;
+        }
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Invalid iterator\n"
+    );
+}
+
+Test(List_erase,
+Test_try_to_remove_the_end_of_list_should_throw_exception,
+.init = redirect_all_stdout)
+{
+    {
+        try
+        {
+            List    list1;
+
+            list1.pushBack(new TestObject("Naruto"));
+            list1.pushBack(new TestObject("Sasuke"));
+            list1.pushBack(new TestObject("Sakura"));
+            list1.pushBack(nullptr);
+            list1.pushBack(new TestObject("Serge"));
+            for (List::Iterator it = list1.begin(); it != list1.end(); ++it)
+                if (*it != nullptr)
+                    (*it)->touch();
+
+            list1.erase(list1.end());
+        }
+        catch (List::InvalidIteratorException &e)
+        {
+            std::cout << e.what() << std::endl;
+        }
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Naruto is alive\n"
+        "Sasuke is alive\n"
+        "Sakura is alive\n"
+        "Serge is alive\n"
+        "Naruto is touched\n"
+        "Sasuke is touched\n"
+        "Sakura is touched\n"
+        "Serge is touched\n"
+        "Naruto is dead\n"
+        "Sasuke is dead\n"
+        "Sakura is dead\n"
+        "Serge is dead\n"
+        "Invalid iterator\n"
+    );
+}
+
+Test(List_erase,
+Test_remove_the_last_element_of_the_list,
+.init = redirect_all_stdout)
+{
+    {
+        List    list1;
+
+        list1.pushBack(new TestObject("Naruto"));
+        list1.pushBack(new TestObject("Sasuke"));
+        list1.pushBack(new TestObject("Sakura"));
+        list1.pushBack(nullptr);
+        list1.pushBack(new TestObject("Serge"));
+        
+        List::Iterator it = list1.begin();
+        for (; it.getCurrentNode()->element != list1.back(); ++it)
+            ;
+
+        list1.erase(it);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Naruto is alive\n"
+        "Sasuke is alive\n"
+        "Sakura is alive\n"
+        "Serge is alive\n"
+        "Serge is dead\n"
+        "Naruto is dead\n"
+        "Sasuke is dead\n"
+        "Sakura is dead\n"
+    );
+}
+
+Test(List_erase,
+Test_remove_an_element_of_the_list_return_the_next_element,
+.init = redirect_all_stdout)
+{
+    {
+        List    list1;
+
+        list1.pushBack(new TestObject("Naruto"));
+        list1.pushBack(new TestObject("Sasuke"));
+        list1.pushBack(new TestObject("Sakura"));
+        list1.pushBack(nullptr);
+        list1.pushBack(new TestObject("Serge"));
+        
+        for (List::Iterator it = list1.begin(); it != list1.end(); ++it)
+            if (*it != nullptr)
+                (*it)->touch();
+
+        list1.erase(list1.erase(list1.begin()));
+        
+        for (List::Iterator it = list1.begin(); it != list1.end(); ++it)
+            if (*it != nullptr)
+                (*it)->touch();
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Naruto is alive\n"
+        "Sasuke is alive\n"
+        "Sakura is alive\n"
+        "Serge is alive\n"
+        "Naruto is touched\n"
+        "Sasuke is touched\n"
+        "Sakura is touched\n"
+        "Serge is touched\n"
+        "Naruto is dead\n"
+        "Sasuke is dead\n"
+        "Sakura is touched\n"
+        "Serge is touched\n"
+        "Sakura is dead\n"
+        "Serge is dead\n"
+    );
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            List::Iterator class                           //
 ///////////////////////////////////////////////////////////////////////////////
@@ -867,19 +1053,19 @@ Test(main, test_main, .init = redirect_all_stdout)
 {
     // {
     //     try {
-    //         List    list1;
+            // List    list1;
 
-    //         list1.pushBack(new TestObject("Naruto"));
-    //         list1.pushBack(new TestObject("Sasuke"));
-    //         list1.pushBack(new TestObject("Sakura"));
-    //         list1.pushBack(nullptr);
-    //         list1.pushBack(new TestObject("Serge"));
+            // list1.pushBack(new TestObject("Naruto"));
+            // list1.pushBack(new TestObject("Sasuke"));
+            // list1.pushBack(new TestObject("Sakura"));
+            // list1.pushBack(nullptr);
+            // list1.pushBack(new TestObject("Serge"));
 
-    //         for (List::Iterator it = list1.begin(); it != list1.end(); ++it)
-    //             if (*it != nullptr)
-    //                 (*it)->touch();
+            // for (List::Iterator it = list1.begin(); it != list1.end(); ++it)
+            //     if (*it != nullptr)
+            //         (*it)->touch();
 
-    //         list1.erase(list1.erase(list1.begin()));
+            // list1.erase(list1.erase(list1.begin()));
     //         list1.insert(list1.begin(), new TestObject("Orochimaru"));
     //         list1.insert(list1.end(), new TestObject("Tsunade"));
     //         list1.forEach(touch);
@@ -896,16 +1082,16 @@ Test(main, test_main, .init = redirect_all_stdout)
     // }
     // cr_assert_stdout_eq_str
     // (
-    //     "Naruto is alive\n"
-    //     "Sasuke is alive\n"
-    //     "Sakura is alive\n"
-    //     "Serge is alive\n"
-    //     "Naruto is touched\n"
-    //     "Sasuke is touched\n"
-    //     "Sakura is touched\n"
-    //     "Serge is touched\n"
-    //     "Naruto is dead\n"
-    //     "Sasuke is dead\n"
+        // "Naruto is alive\n"
+        // "Sasuke is alive\n"
+        // "Sakura is alive\n"
+        // "Serge is alive\n"
+        // "Naruto is touched\n"
+        // "Sasuke is touched\n"
+        // "Sakura is touched\n"
+        // "Serge is touched\n"
+        // "Naruto is dead\n"
+        // "Sasuke is dead\n"
     //     "Orochimaru is alive\n"
     //     "Tsunade is alive\n"
     //     "Orochimaru is touched\n"

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Jul 1 7:24:06 PM 2025 Paradis
-** Last update Thu Jul 2 4:49:47 PM 2025 Paradis
+** Last update Fri Jul 3 5:06:17 PM 2025 Paradis
 */
 
 #include "../include/List.hpp"
@@ -196,6 +196,30 @@ List::Iterator      List::end(void) const
 
     return it;
 }
+
+List::Iterator      List::erase(List::Iterator it)
+{
+    Node    *temp = _head;
+    Node    *prev = nullptr;
+    Node    *next = nullptr;
+    
+    if (it.getCurrentNode() == nullptr)
+        throw List::InvalidIteratorException();
+
+    for (;temp != it.getCurrentNode(); temp = temp->next)
+        prev = temp;
+
+    if (prev)
+        prev->next = temp->next;
+    else
+        _head = temp->next;
+    next = temp->next;
+
+    delete temp->element;
+    delete temp;
+
+    return Iterator(next);
+}
 ////////////////////////////////////////////////////////////////////////////////
 List::Iterator::Iterator(Node *node)    :   _currentNode(node)
 {}
@@ -226,4 +250,9 @@ bool                List::Iterator::operator==(const Iterator &it) const
 bool                List::Iterator::operator!=(const Iterator &it) const
 {
     return _currentNode != it._currentNode;
+}
+
+List::Node                *List::Iterator::getCurrentNode(void) const
+{
+    return _currentNode;
 }
