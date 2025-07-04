@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Jul 1 7:23:56 PM 2025 Paradis
-** Last update Thu Jul 2 7:05:48 PM 2025 Paradis
+** Last update Fri Jul 3 5:22:08 PM 2025 Paradis
 */
 
 #ifndef 		        __LIST_HPP__
@@ -95,6 +95,7 @@ class	                List
         List::Iterator  begin(void) const;
         List::Iterator  end(void) const;
         List::Iterator  erase(List::Iterator it);
+        List::Iterator  insert(List::Iterator it, IObject* obj);
 
     protected:
 };

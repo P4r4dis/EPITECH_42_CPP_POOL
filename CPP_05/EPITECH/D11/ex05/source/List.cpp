@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Jul 1 7:24:06 PM 2025 Paradis
-** Last update Fri Jul 3 5:06:17 PM 2025 Paradis
+** Last update Sat Jul 4 8:00:29 PM 2025 Paradis
 */
 
 #include "../include/List.hpp"
@@ -199,26 +199,91 @@ List::Iterator      List::end(void) const
 
 List::Iterator      List::erase(List::Iterator it)
 {
-    Node    *temp = _head;
-    Node    *prev = nullptr;
-    Node    *next = nullptr;
-    
-    if (it.getCurrentNode() == nullptr)
-        throw List::InvalidIteratorException();
+    Node *currCheck = _head;
+    Node *prev = nullptr;
+    Node *curr = _head;
 
-    for (;temp != it.getCurrentNode(); temp = temp->next)
-        prev = temp;
+    while (currCheck) {
+        if (currCheck == it.getCurrentNode())
+            break;
+        currCheck = currCheck->next;
+    }
+    if (currCheck == nullptr || !curr)
+        throw InvalidIteratorException();
 
-    if (prev)
-        prev->next = temp->next;
-    else
-        _head = temp->next;
-    next = temp->next;
+    // Suppression du premier élément
+    if (it.getCurrentNode() == _head) {
+        Node *toDelete = _head;
+        _head = _head->next;
+        delete toDelete->element;
+        delete toDelete;
+        --_size;
+        return Iterator(_head);
+    }
 
-    delete temp->element;
-    delete temp;
+    // Suppression au milieu / fin
 
-    return Iterator(next);
+    while (curr && curr != it.getCurrentNode()) {
+        prev = curr;
+        curr = curr->next;
+    }
+
+    prev->next = curr->next;
+    Iterator ret(curr->next);
+    delete curr->element;
+    delete curr;
+    --_size;
+    return ret;
+}
+
+List::Iterator      List::insert(List::Iterator it, IObject *obj)
+{
+
+   Node *currCheck = _head;
+    while (currCheck) {
+        if (currCheck == it.getCurrentNode())
+            break;
+        currCheck = currCheck->next;
+    }
+    if (it.getCurrentNode() != nullptr && currCheck == nullptr) {
+        delete obj;
+        throw InvalidIteratorException();
+    }
+
+    Node *newNode = new Node(obj);
+
+    if (it.getCurrentNode() == nullptr) {
+        if (_head == nullptr) {
+            _head = newNode;
+        } else {
+            Node *tmp = _head;
+            while (tmp->next)
+                tmp = tmp->next;
+            tmp->next = newNode;
+        }
+        ++_size;
+        return Iterator(newNode);
+    }
+
+    if (it.getCurrentNode() == _head) {
+        newNode->next = _head;
+        _head = newNode;
+        ++_size;
+        return Iterator(newNode);
+    }
+
+    Node *prev = nullptr;
+    Node *curr = _head;
+    while (curr && curr != it.getCurrentNode()) {
+        prev = curr;
+        curr = curr->next;
+    }
+
+    prev->next = newNode;
+    newNode->next = curr;
+    ++_size;
+
+    return Iterator(newNode);
 }
 ////////////////////////////////////////////////////////////////////////////////
 List::Iterator::Iterator(Node *node)    :   _currentNode(node)
