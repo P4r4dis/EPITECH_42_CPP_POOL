@@ -1,11 +1,11 @@
 /*
-** IObject.hpp for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_05/EPITECH/D11/ex05/include
+** IObject.hpp for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_05/EPITECH/D11/ex02/include
 **
 ** Made by Paradis
 ** Login   <Adil Denia>
 **
-** Started on  Tue Jul 1 7:23:48 PM 2025 Paradis
-** Last update Wed Jul 8 7:11:39 PM 2025 Paradis
+** Started on  Thu Jun 26 2:23:49 PM 2025 Paradis
+** Last update Fri Jun 26 7:31:14 PM 2025 Paradis
 */
 
 #ifndef 			    __IOBJECT_HPP__

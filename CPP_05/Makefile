@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/11 20:49:26 by Paradis           #+#    #+#              #
-#    Updated: 2025/07/01 19:25:27 by Paradis          ###   ########.fr        #
+#    Updated: 2025/07/08 19:36:41 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -186,7 +186,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:03:01 PM 2025 Paradis
-## Last update Wed Jul 1 7:25:27 PM 2025 Paradis
+## Last update Wed Jul 8 7:36:41 PM 2025 Paradis
 ##
 
 
@@ -282,6 +282,7 @@ EPITECH_EX02_UT_SRC				=	$(EPITECH_EX02_UT_PATH)/$(EPITECH_EX02_NAME)_test.cpp
 EPITECH_EX02_UT_NAME 			= 	test_$(EPITECH_EX02_NAME)
 
 EPITECH_EX02_SRC				=	$(EPITECH_EX02_SRC_PATH)/UniquePointer.cpp \
+									$(EPITECH_EX02_SRC_PATH)/main.cpp \
 EPITECH_EX02_OBJS				=	$(EPITECH_EX02_SRC:.cpp=.o)
 
 EPITECH_ex02 					: 	fclean
@@ -414,27 +415,18 @@ EPITECH_valgrind_test_run_ex05	:	fclean
 #								EPITECH_EX06								   #
 #																			   #
 # **************************************************************************** #
-EPITECH_EX06_PATH 				= 	./EPITECH/D09/ex06
-EPITECH_EX06_BIN_PATH 			= 	./EPITECH/D09/ex06/bin
-EPITECH_EX06_SRC_PATH			=	./EPITECH/D09/ex06/source
-EPITECH_EX06_INC_PATH			=	./EPITECH/D09/ex06/include
-EPITECH_EX06_UT_PATH			=	./EPITECH/D09/ex06/test
+EPITECH_EX06_PATH 				= 	./EPITECH/D11/ex06
+EPITECH_EX06_BIN_PATH 			= 	./EPITECH/D11/ex06/bin
+EPITECH_EX06_SRC_PATH			=	./EPITECH/D11/ex06/source
+EPITECH_EX06_INC_PATH			=	./EPITECH/D11/ex06/include
+EPITECH_EX06_UT_PATH			=	./EPITECH/D11/ex06/test
 
-EPITECH_EX06_NAME				=	IPotion
+EPITECH_EX06_NAME				=	UniquePointer_improved
 
 EPITECH_EX06_UT_SRC				=	$(EPITECH_EX06_UT_PATH)/$(EPITECH_EX06_NAME)_test.cpp
 EPITECH_EX06_UT_NAME 			= 	test_$(EPITECH_EX06_NAME)
 
-EPITECH_EX06_SRC				=	$(EPITECH_EX06_SRC_PATH)/Peasant.cpp \
-									$(EPITECH_EX06_SRC_PATH)/Knight.cpp \
-									$(EPITECH_EX06_SRC_PATH)/Enchanter.cpp \
-									$(EPITECH_EX06_SRC_PATH)/Priest.cpp \
-									$(EPITECH_EX06_SRC_PATH)/Paladin.cpp \
-									$(EPITECH_EX06_SRC_PATH)/ICharacter.cpp \
-									$(EPITECH_EX06_SRC_PATH)/IPotion.cpp \
-									$(EPITECH_EX06_SRC_PATH)/HealthPotion.cpp \
-									$(EPITECH_EX06_SRC_PATH)/PowerPotion.cpp \
-									$(EPITECH_EX06_SRC_PATH)/PoisonPotion.cpp \
+EPITECH_EX06_SRC				=	$(EPITECH_EX02_SRC_PATH)/UniquePointer.cpp \
 									$(EPITECH_EX06_BIN_PATH)/main.cpp
 
 EPITECH_EX06_OBJS				=	$(EPITECH_EX06_SRC:.cpp=.o)
@@ -498,8 +490,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX05_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX05_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX06_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX06_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX06_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX06_UT_PATH)
 
 fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_PATH)
@@ -522,8 +514,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX05_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX05_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX06_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX06_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX06_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX06_UT_PATH)
 
 tests_run						:	fclean \
 
