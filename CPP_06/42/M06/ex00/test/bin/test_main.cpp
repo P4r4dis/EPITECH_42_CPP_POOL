@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 18:51:29 by Paradis           #+#    #+#             */
-/*   Updated: 2025/07/10 18:19:32 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/07/10 19:48:38 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 #include <criterion/logging.h>
 #include <criterion/new/assert.h>
 #include <criterion/redirect.h>
-#include <exception>
-#include <limits>
+
+#include <iostream>
+#include <climits>
+#include <string>
 
 #include "../../include/ScalarConverter.hpp"
 #include "../../include/Utils.hpp"
@@ -69,6 +71,33 @@ Test(Utils_isChar, TEST_should_return_true_for_any_character,
             std::string str(1, i);
             cr_assert(Utils::isChar(str) == true);
         }
+    }
+}
+
+Test(Utils_isInt, TEST_should_return_true_if_is_neg_number,
+.init = redirect_all_stdout)
+{
+    {
+        std::string str = std::to_string(-5423543);
+        cr_assert(Utils::isInt(str) == true);
+    }
+}
+
+Test(Utils_isInt, TEST_should_return_true_if_is_pos_number,
+.init = redirect_all_stdout)
+{
+    {
+        std::string str = std::to_string(4515243);
+        cr_assert(Utils::isInt(str) == true);
+    }
+}
+
+Test(Utils_isInt, TEST_should_return_if_its_not_integer,
+.init = redirect_all_stdout)
+{
+    {
+        std::string str = "4321jk413";
+        cr_assert(Utils::isInt(str) == false);
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
