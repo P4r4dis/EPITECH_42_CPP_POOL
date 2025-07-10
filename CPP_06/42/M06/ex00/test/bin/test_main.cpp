@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 18:51:29 by Paradis           #+#    #+#             */
-/*   Updated: 2025/07/10 20:48:09 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/07/10 20:56:20 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,54 @@ Test(Utils_isFloat, TEST_should_return_false_if_its_not_float,
     }
 }
 
-Test(Utils_isFloat, TEST_should_return_true_if_its_not_float,
+Test(Utils_isFloat, TEST_should_return_true_if_its_float,
 .init = redirect_all_stdout)
 {
     {
         std::string str = "12.23f";
         
         cr_assert(Utils::isFloat(str) == true);
+    }
+}
+
+Test(Utils_isFloat, TEST_should_return_true_if_its_neg_float,
+.init = redirect_all_stdout)
+{
+    {
+        std::string str = "-12.23f";
+        
+        cr_assert(Utils::isFloat(str) == true);
+    }
+}
+
+Test(Utils_isDouble, TEST_should_return_false_if_its_not_double,
+.init = redirect_all_stdout)
+{
+    {
+        std::string str = "12.23gsfd";
+
+        cr_assert(Utils::isDouble(str) == false);
+    }
+}
+
+Test(Utils_isDouble, TEST_should_return_true_if_its_double,
+.init = redirect_all_stdout)
+{
+    {
+        std::string str = "12.23";
+        
+        cr_assert(Utils::isDouble(str) == true);
+    }
+}
+
+
+Test(Utils_isisDouble, TEST_should_return_true_if_its_neg_double,
+.init = redirect_all_stdout)
+{
+    {
+        std::string str = "-12.23";
+        
+        cr_assert(Utils::isDouble(str) == true);
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
