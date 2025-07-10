@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 18:51:29 by Paradis           #+#    #+#             */
-/*   Updated: 2025/07/09 20:54:43 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/07/10 18:19:32 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <criterion/logging.h>
 #include <criterion/new/assert.h>
 #include <criterion/redirect.h>
+#include <exception>
+#include <limits>
 
 #include "../../include/ScalarConverter.hpp"
 #include "../../include/Utils.hpp"
@@ -25,7 +27,7 @@ void redirect_all_stdout(void)
     cr_redirect_stderr();
 }
 
-Test(ScalarConverter_isPseudoLiteral, TEST_check_if_string_is_a_literal,
+Test(Utils_isPseudoLiteral, TEST_check_if_string_is_a_literal,
 .init = redirect_all_stdout)
 {
     {
@@ -45,6 +47,30 @@ Test(ScalarConverter_isPseudoLiteral, TEST_check_if_string_is_a_literal,
     }
 }
 
+Test(Utils_isChar, TEST_check_if_string_length_is_different_of_one,
+.init = redirect_all_stdout)
+{
+    {
+        std::string A = "a";
+        std::string string = "hello";
+
+        cr_assert(Utils::isChar(A) == true);
+        cr_assert(Utils::isChar(string) == false);
+    }
+}
+
+#include <iostream>
+Test(Utils_isChar, TEST_should_return_true_for_any_character,
+.init = redirect_all_stdout)
+{
+    {
+        for (int i = -127; i < 128; ++i)
+        {
+            std::string str(1, i);
+            cr_assert(Utils::isChar(str) == true);
+        }
+    }
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
