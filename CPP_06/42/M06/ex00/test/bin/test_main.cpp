@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 18:51:29 by Paradis           #+#    #+#             */
-/*   Updated: 2025/07/10 20:56:20 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/07/10 21:24:10 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,122 @@ Test(Utils_isisDouble, TEST_should_return_true_if_its_neg_double,
         
         cr_assert(Utils::isDouble(str) == true);
     }
+}
+
+Test(Utils_isChar, TEST_should_return_true_if_char_is_printable,
+.init = redirect_all_stdout)
+{
+    {
+        for (int i = -127; i < 128; ++i)
+        {
+            std::string str(1, i);
+            if (Utils::isPrintable(str))
+            {
+                std::cout << str << std::endl;
+                cr_assert(Utils::isPrintable(str) == true);
+            }
+            else
+                cr_assert(Utils::isPrintable(str) == false);
+        }
+    }
+    cr_assert_stdout_eq_str
+    (
+        " \n"
+        "!\n"
+        "\"\n"
+        "#\n"
+        "$\n"
+        "%\n"
+        "&\n"
+        "'\n"
+        "(\n"
+        ")\n"
+        "*\n"
+        "+\n"
+        ",\n"
+        "-\n"
+        ".\n"
+        "/\n"
+        "0\n"
+        "1\n"
+        "2\n"
+        "3\n"
+        "4\n"
+        "5\n"
+        "6\n"
+        "7\n"
+        "8\n"
+        "9\n"
+        ":\n"
+        ";\n"
+        "<\n"
+        "=\n"
+        ">\n"
+        "?\n"
+        "@\n"
+        "A\n"
+        "B\n"
+        "C\n"
+        "D\n"
+        "E\n"
+        "F\n"
+        "G\n"
+        "H\n"
+        "I\n"
+        "J\n"
+        "K\n"
+        "L\n"
+        "M\n"
+        "N\n"
+        "O\n"
+        "P\n"
+        "Q\n"
+        "R\n"
+        "S\n"
+        "T\n"
+        "U\n"
+        "V\n"
+        "W\n"
+        "X\n"
+        "Y\n"
+        "Z\n"
+        "[\n"
+        "\\\n"
+        "]\n"
+        "^\n"
+        "_\n"
+        "`\n"
+        "a\n"
+        "b\n"
+        "c\n"
+        "d\n"
+        "e\n"
+        "f\n"
+        "g\n"
+        "h\n"
+        "i\n"
+        "j\n"
+        "k\n"
+        "l\n"
+        "m\n"
+        "n\n"
+        "o\n"
+        "p\n"
+        "q\n"
+        "r\n"
+        "s\n"
+        "t\n"
+        "u\n"
+        "v\n"
+        "w\n"
+        "x\n"
+        "y\n"
+        "z\n"
+        "{\n"
+        "|\n"
+        "}\n"
+        "~\n"
+    );
 }
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //

@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:37:18 by Paradis           #+#    #+#             */
-/*   Updated: 2025/07/10 20:50:01 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/07/10 21:03:07 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,9 @@ bool         Utils::isDouble(const std::string &str)
     if (*end != '\0')
         return false;
     return true;
+}
+
+bool         Utils::isPrintable(const std::string &str)
+{
+    return std::isprint(static_cast<unsigned char>(str.at(0)));
 }
