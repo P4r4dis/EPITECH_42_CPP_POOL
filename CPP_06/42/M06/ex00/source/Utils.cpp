@@ -6,13 +6,14 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:37:18 by Paradis           #+#    #+#             */
-/*   Updated: 2025/07/10 19:46:30 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/07/10 20:47:58 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Utils.hpp"
 #include <algorithm>
 #include <cctype>
+#include <cerrno>
 #include <climits>
 #include <cstddef>
 #include <limits>
@@ -44,5 +45,14 @@ bool         Utils::isInt(const std::string &str)
         if (!std::isdigit(str[i]))
             return false;
     }
+    return true;
+}
+
+bool         Utils::isFloat(const std::string &str)
+{
+    char *end;
+    std::strtof(str.c_str(), &end);
+    if (*end == 'f' && *(end + 1) != '\0')
+        return false;
     return true;
 }

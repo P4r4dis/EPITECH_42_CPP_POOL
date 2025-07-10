@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 18:51:29 by Paradis           #+#    #+#             */
-/*   Updated: 2025/07/10 19:48:38 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/07/10 20:48:09 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,32 @@ Test(Utils_isInt, TEST_should_return_true_if_is_pos_number,
     }
 }
 
-Test(Utils_isInt, TEST_should_return_if_its_not_integer,
+Test(Utils_isInt, TEST_should_return_false_if_its_not_integer,
 .init = redirect_all_stdout)
 {
     {
         std::string str = "4321jk413";
         cr_assert(Utils::isInt(str) == false);
+    }
+}
+
+Test(Utils_isFloat, TEST_should_return_false_if_its_not_float,
+.init = redirect_all_stdout)
+{
+    {
+        std::string str = "12.23ffffff";
+
+        cr_assert(Utils::isFloat(str) == false);
+    }
+}
+
+Test(Utils_isFloat, TEST_should_return_true_if_its_not_float,
+.init = redirect_all_stdout)
+{
+    {
+        std::string str = "12.23f";
+        
+        cr_assert(Utils::isFloat(str) == true);
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
