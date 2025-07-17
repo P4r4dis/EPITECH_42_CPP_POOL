@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:35:55 by Paradis           #+#    #+#             */
-/*   Updated: 2025/07/10 21:00:48 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/07/16 20:46:09 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ class                   Utils
         static bool     isFloat(const std::string &str);
         static bool     isDouble(const std::string &str);
         static bool     isPrintable(const std::string &str);
+        static void     printChar(const std::string &str);
+        static void     printInt(const std::string &str);
+        static void     printFloat(const std::string &str);
+        static void     printDouble(const std::string &str);
+        static void     printLiteral(const std::string &str);
+        // static void     convertToChar(std::string &str);
     private:
         Utils(void) = delete;
         Utils(const Utils &obj) = delete;

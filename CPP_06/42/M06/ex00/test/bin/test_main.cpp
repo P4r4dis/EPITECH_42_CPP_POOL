@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 18:51:29 by Paradis           #+#    #+#             */
-/*   Updated: 2025/07/10 21:24:10 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/07/17 18:12:47 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,6 +277,113 @@ Test(Utils_isChar, TEST_should_return_true_if_char_is_printable,
         "~\n"
     );
 }
+
+Test(Utils_printLiteral, TEST_printLiteral_inff,
+.init = redirect_all_stdout)
+{
+    {
+        std::string pos_inff = "+inff";
+        std::string neg_inff = "-inff";
+
+        Utils::printLiteral(pos_inff);
+        Utils::printLiteral(neg_inff);
+
+    }
+    cr_assert_stdout_eq_str
+    (
+        "char: impossible\n"
+        "int: impossible\n"
+        "float: +inff\n"
+        "double: +inf\n"
+        "char: impossible\n"
+        "int: impossible\n"
+        "float: -inff\n"
+        "double: -inf\n"
+    );
+}
+
+Test(Utils_printLiteral, TEST_printLiteral_inf,
+.init = redirect_all_stdout)
+{
+    {
+
+        std::string pos_inf = "+inf";
+        std::string neg_inf = "-inf";
+
+        Utils::printLiteral(pos_inf);
+        Utils::printLiteral(neg_inf);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "char: impossible\n"
+        "int: impossible\n"
+        "float: +inff\n"
+        "double: +inf\n"
+        "char: impossible\n"
+        "int: impossible\n"
+        "float: -inff\n"
+        "double: -inf\n"
+    );
+}
+
+Test(Utils_printLiteral, TEST_printLiteral_nan,
+.init = redirect_all_stdout)
+{
+    {
+        std::string nan = "nan";
+        std::string nanf = "nanf";
+
+        Utils::printLiteral(nan);
+        Utils::printLiteral(nanf);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "char: impossible\n"
+        "int: impossible\n"
+        "float: nanf\n"
+        "double: nan\n"
+        "char: impossible\n"
+        "int: impossible\n"
+        "float: nanf\n"
+        "double: nan\n"
+    );
+}
+
+// Test(Utils_printChar, TEST_try_to_print_NON_DISPLAYABLE_character,
+// .init = redirect_all_stdout)
+// {
+//     {
+//         std::string var = "\0";
+//         Utils::printChar(var);
+//     }
+//     cr_assert_stdout_eq_str
+//     (
+//         "char: Non displayable\n"
+//         "int: 0\n"
+//         "float: 0.0f\n"
+//         "double: 0.0\n"
+//     );
+// }
+
+
+// Test(Utils_printChar, TEST_try_to_print_pseudo_literal_string,
+// )//.init = redirect_all_stdout)
+// {
+//     {
+//         // std::string var = "42.0f";
+//         std::string var = "nan";
+
+//         // ScalarConverter::convert(var);
+//         Utils::printChar(var);
+//     }
+//     // cr_assert_stdout_eq_str
+//     // (
+//     //     "char: '*'\n"
+//     //     "int: 42\n"
+//     //     "float: 42.0f\n"
+//     //     "double: 42.0\n"
+//     // );
+// }
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////

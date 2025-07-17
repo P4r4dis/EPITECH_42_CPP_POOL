@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 18:58:06 by Paradis           #+#    #+#              #
-#    Updated: 2025/07/09 20:53:19 by Paradis          ###   ########.fr        #
+#    Updated: 2025/07/15 19:32:59 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ UT_NAME 	= 	test_$(NAME)
 
 # # Options de compilation
 INCFLAGS	+=	-I $(INC_PATH)
-CPP_VERSION	+=	-std=c++23
+CPP_VERSION	+=	-std=c++98
 CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors -Wshadow -Wno-shadow $(CPP_VERSION) $(INCFLAGS)
 
 # # Files sources
