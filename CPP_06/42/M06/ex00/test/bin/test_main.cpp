@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 18:51:29 by Paradis           #+#    #+#             */
-/*   Updated: 2025/07/18 18:16:26 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/07/18 18:23:57 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -791,6 +791,59 @@ Test(Utils_printFloat, TEST_try_to_print_float,
         "float: 0.0f\n"
         "float: nanf\n"
         "float: nanf\n"
+    );
+}
+
+Test(Utils_printDouble, TEST_try_to_print_out_of_range_double,
+.init = redirect_all_stdout)
+{
+    {
+        double min = std::numeric_limits<double>::lowest();
+        double max = std::numeric_limits<double>::max();
+        std::string var = std::to_string(min + min);
+
+        Utils::printDouble(var);
+        var = std::to_string(max + max);
+        Utils::printDouble(var);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "double: impossible\n"
+        "double: impossible\n"
+    );
+}
+
+Test(Utils_printDouble, TEST_try_to_print_double,
+.init = redirect_all_stdout)
+{
+    {
+        std::string var = "42.00";
+        Utils::printDouble(var);
+        var = "5432.5423";
+        Utils::printDouble(var);
+        var = "-42.00";
+        Utils::printDouble(var);
+        var = "-5432.5423";
+        Utils::printDouble(var);
+        var = "0.00";
+        Utils::printDouble(var);
+        var = "0";
+        Utils::printDouble(var);
+        var = "nan";
+        Utils::printDouble(var);
+        var = "NAN";
+        Utils::printDouble(var);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "double: 42.0\n"
+        "double: 5432.54\n"
+        "double: -42.0\n"
+        "double: -5432.54\n"
+        "double: 0.0\n"
+        "double: 0.0\n"
+        "double: nan\n"
+        "double: nan\n"
     );
 }
 // Test(Utils_printChar, TEST_try_to_print_impossible_character,

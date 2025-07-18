@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:37:18 by Paradis           #+#    #+#             */
-/*   Updated: 2025/07/18 18:02:32 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/07/18 18:20:27 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,17 +88,6 @@ void        Utils::printChar(const std::string &str)
         else
             std::cout << "Non displayable" << std::endl;
     }
-    // std::cout   << "int: " << static_cast<int>(str[0]) << std::endl;
-    // std::cout   << "float: " << static_cast<float>(str[0]);
-    // if (static_cast<int>(str[0]) == static_cast<float>(str[0]))
-    //     std::cout << ".0f" << std::endl;
-    // // else
-    // // {
-    // //     std::cout << "f" << std::endl;
-    // // }
-    // std::cout   << "double: " << static_cast<double>(str[0]);
-    // if (static_cast<int>(str[0]) == static_cast<double>(str[0]))
-    //     std::cout << ".0" << std::endl;
 }
 
 void        Utils::printInt(const std::string &str)
@@ -124,6 +113,22 @@ void        Utils::printFloat(const std::string &str)
             std::cout << ".0f" << std::endl;
         else
             std::cout << "f" << std::endl;
+    }
+}
+
+void        Utils::printDouble(const std::string &str)
+{
+    float lim = std::strtod(str.c_str(), nullptr);
+    if (lim < std::numeric_limits<double>::lowest() ||
+        lim > std::numeric_limits<double>::max())
+        std::cout << "double: impossible" << std::endl;
+    else
+    {
+        std::cout << "double: " << static_cast<double>(lim);
+        if (static_cast<int>(lim) == static_cast<double>(lim))
+            std::cout << ".0" << std::endl;
+        else
+            std::cout << std::endl;
     }
 }
 
