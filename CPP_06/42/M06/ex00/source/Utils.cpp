@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:37:18 by Paradis           #+#    #+#             */
-/*   Updated: 2025/07/17 18:52:50 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/07/18 18:02:32 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <cctype>
 #include <cstddef>
 #include <exception>
+#include <limits>
 #include <string>
 #include <iostream>
 
@@ -75,25 +76,54 @@ bool         Utils::isPrintable(const std::string &str)
 
 void        Utils::printChar(const std::string &str)
 {
-    std::cout << "char: ";
-    if (isChar(std::string(1,str[0])))
+    double lim = std::strtod(str.c_str(), nullptr);
+    if (lim < std::numeric_limits<char>::min() ||
+        lim > std::numeric_limits<char>::max())
+        std::cout << "char: impossible" << std::endl;
+    else
     {
+        std::cout << "char: ";
         if (isPrintable(std::string(1,str[0])))
             std::cout << '\'' << str << '\'' << std::endl;
         else
             std::cout << "Non displayable" << std::endl;
+    }
+    // std::cout   << "int: " << static_cast<int>(str[0]) << std::endl;
+    // std::cout   << "float: " << static_cast<float>(str[0]);
+    // if (static_cast<int>(str[0]) == static_cast<float>(str[0]))
+    //     std::cout << ".0f" << std::endl;
+    // // else
+    // // {
+    // //     std::cout << "f" << std::endl;
+    // // }
+    // std::cout   << "double: " << static_cast<double>(str[0]);
+    // if (static_cast<int>(str[0]) == static_cast<double>(str[0]))
+    //     std::cout << ".0" << std::endl;
+}
 
-        std::cout   << "int: " << static_cast<int>(str[0]) << std::endl;
-        std::cout   << "float: " << static_cast<float>(str[0]);
-        if (static_cast<int>(str[0]) == static_cast<float>(str[0]))
+void        Utils::printInt(const std::string &str)
+{
+    double lim = std::strtod(str.c_str(), nullptr);
+    if (lim < std::numeric_limits<int>::min() ||
+        lim > std::numeric_limits<int>::max())
+        std::cout << "int: impossible" << std::endl;
+    else
+        std::cout << "int: " << static_cast<int>(lim) << std::endl;
+}
+
+void        Utils::printFloat(const std::string &str)
+{
+    float lim = std::strtod(str.c_str(), nullptr);
+    if (lim < std::numeric_limits<float>::lowest() ||
+        lim > std::numeric_limits<float>::max())
+        std::cout << "float: impossible" << std::endl;
+    else
+    {
+        std::cout   << "float: " << static_cast<float>(lim);
+        if (static_cast<int>(lim) == static_cast<float>(lim))
             std::cout << ".0f" << std::endl;
-        // else
-        // {
-        //     std::cout << "f" << std::endl;
-        // }
-        std::cout   << "double: " << static_cast<double>(str[0]);
-        if (static_cast<int>(str[0]) == static_cast<double>(str[0]))
-            std::cout << ".0" << std::endl;
+        else
+            std::cout << "f" << std::endl;
     }
 }
 
@@ -113,3 +143,55 @@ void            Utils::printLiteral(const std::string &str)
         std::cout << "double: " << str << std::endl;
     }
 }
+
+// void        Utils::printLimits(const std::string &str)
+// {
+//     double lim = std::strtod(str.c_str(), nullptr);
+//     if (lim < std::numeric_limits<double>::min() ||
+//         lim > std::numeric_limits<double>::max())
+//     {
+//         std::cout   << "char: impossible" << std::endl;
+//         std::cout   << "int: impossible" << std::endl;
+//         std::cout   << "float: impossible" << std::endl; 
+//         std::cout   << "double: impossible" << std::endl;
+//         return ;
+//     }
+
+//     if (lim < std::numeric_limits<float>::min() ||
+//         lim > std::numeric_limits<float>::max())
+//     {
+//         std::cout   << "char: impossible" << std::endl;
+//         std::cout   << "int: impossible" << std::endl;
+//         std::cout   << "float: impossible" << std::endl; 
+//         std::cout   << "double: " << static_cast<double>(lim)<< std::endl;
+//         return ;
+//     }
+
+//     if (lim < std::numeric_limits<int>::min() ||
+//         lim > std::numeric_limits<int>::max())
+//     {
+//         std::cout   << "char: impossible" << std::endl;
+//         std::cout   << "int: impossible" << std::endl;
+//         std::cout   << "float: " << static_cast<float>(lim) << std::endl; 
+//         std::cout   << "double: " << static_cast<double>(lim)<< std::endl;
+//         return ;
+//     }
+
+//     if (lim < std::numeric_limits<char>::min() ||
+//         lim > std::numeric_limits<char>::max())
+//     {
+//         std::cout   << "char: impossible" << std::endl;
+//         std::cout   << "int: " << static_cast<int>(lim) << std::endl;
+//         std::cout   << "float: " << static_cast<float>(lim) << std::endl; 
+//         std::cout   << "double: " << static_cast<double>(lim)<< std::endl;
+//         return ;
+//     }
+
+//     std::cout   << "char: " << static_cast<char>(lim) << std::endl;
+//     std::cout   << "int: " << static_cast<int>(lim) << std::endl;
+//     std::cout   << "float: " << static_cast<float>(lim) << std::endl; 
+//     std::cout   << "double: " << static_cast<double>(lim)<< std::endl;
+//     return ;
+
+//     // std::cout << out_of_range << std::endl;
+// }
