@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:37:18 by Paradis           #+#    #+#             */
-/*   Updated: 2025/07/18 18:20:27 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/07/18 19:26:37 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,19 @@ void        Utils::printChar(const std::string &str)
     if (lim < std::numeric_limits<char>::min() ||
         lim > std::numeric_limits<char>::max())
         std::cout << "char: impossible" << std::endl;
+    else if (str.length() > 3)
+        std::cout << "char: impossible" << std::endl;
     else
     {
         std::cout << "char: ";
         if (isPrintable(std::string(1,str[0])))
-            std::cout << '\'' << str << '\'' << std::endl;
+            if (str == "'")
+                    std::cout << "'''" << std::endl;
+            else if (str.length() == 3 &&
+                        str[0] == '\'' && str[str.length() - 1] == '\'')
+                std::cout << str << std::endl;
+            else
+                std::cout << '\'' << str << '\'' << std::endl;
         else
             std::cout << "Non displayable" << std::endl;
     }

@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 18:51:29 by Paradis           #+#    #+#             */
-/*   Updated: 2025/07/18 18:23:57 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/07/18 19:27:07 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -369,6 +369,32 @@ Test(Utils_printChar, TEST_try_to_print_impossible_character,
 {
     {
         std::string var = "5432";
+        Utils::printChar(var);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "char: impossible\n"
+    );
+}
+
+Test(Utils_printChar, TEST_try_to_print_character_between_apostrophe,
+.init = redirect_all_stdout)
+{
+    {
+        std::string var = "'a'";
+        Utils::printChar(var);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "char: 'a'\n"
+    );
+}
+
+Test(Utils_printChar, TEST_if_variable_is_several_character_should_print_impossible,
+.init = redirect_all_stdout)
+{
+    {
+        std::string var = "rqew";
         Utils::printChar(var);
     }
     cr_assert_stdout_eq_str
@@ -846,30 +872,7 @@ Test(Utils_printDouble, TEST_try_to_print_double,
         "double: nan\n"
     );
 }
-// Test(Utils_printChar, TEST_try_to_print_impossible_character,
-// .init = redirect_all_stdout)
-// {
-//     {
-//         std::string var = "5432";
-//         Utils::printChar(var);
-//     }
-//     cr_assert_stdout_eq_str
-//     (
-//         "char: impossible\n"
-//     );
-// }
 
-// Test(Utils_printChar, TEST_print_character,
-// .init = redirect_all_stdout)
-// {
-//     {
-//         for (int i = -127; i < 128; ++i)
-//         {
-//             std::string str(1, i);
-//             Utils::printChar(str);
-//         }
-//     }
-// }
 //////////////////////////////////////////////////////////////
 // Test(ScalarConverter_convert, TEST_convert_pseudo_literal,
 // .init = redirect_all_stdout)
