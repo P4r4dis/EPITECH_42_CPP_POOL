@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:35:55 by Paradis           #+#    #+#             */
-/*   Updated: 2025/07/17 20:02:36 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/07/23 18:13:51 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,16 @@ class                   Utils
         static void     printDouble(const std::string &str);
         static void     printLiteral(const std::string &str);
         static void     printLimits(const std::string &str);
-        // static void     convertToChar(std::string &str);
+        static void     convertToChar(const std::string &str);
     private:
-        Utils(void) = delete;
-        Utils(const Utils &obj) = delete;
-        Utils &operator=(const Utils &rhs) = delete;
+        Utils(void) {};
+        Utils(const Utils &obj) {
+            static_cast<void>(obj);
+        };
+        Utils &operator=(const Utils &rhs) {
+            static_cast<void>(rhs);
+            return *this;
+        };
         virtual ~Utils(void);
 
 };

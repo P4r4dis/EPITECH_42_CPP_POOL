@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 18:58:30 by Paradis           #+#    #+#              #
-#    Updated: 2025/07/09 20:53:34 by Paradis          ###   ########.fr        #
+#    Updated: 2025/07/23 18:28:42 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,11 @@
 									$(42_EX00_BIN_PATH)/main.cpp
 42_EX00_OBJS					=	$(42_EX00_SRC:.cpp=.o)
 
+ARGS							=	"$(filter-out $@,$(MAKECMDGOALS))"
+
 42_ex00 						: 	fclean
 									@$(MAKE) -C $(42_EX00_PATH)
-									$(42_EX00_PATH)/$(42_EX00_NAME)
+									$(42_EX00_PATH)/$(42_EX00_NAME) $(ARGS)
 
 42_test_run_ex00				:	fclean
 									@$(MAKE) -s -C $(42_EX00_UT_PATH)
@@ -187,7 +189,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:03:01 PM 2025 Paradis
-## Last update Thu Jul 9 8:53:34 PM 2025 Paradis
+## Last update Thu Jul 23 6:28:42 PM 2025 Paradis
 ##
 
 
