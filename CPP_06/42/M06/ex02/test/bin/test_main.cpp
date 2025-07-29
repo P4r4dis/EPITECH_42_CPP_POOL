@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 20:51:03 by Paradis           #+#    #+#             */
-/*   Updated: 2025/07/29 17:19:00 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/07/29 18:03:04 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,16 @@ void redirect_all_stdout(void)
     cr_redirect_stderr();
 }
 
-Test(Utils_generate, Test_should_generate_A_B_or_C_classes_randomly, .init = redirect_all_stdout)
+Test(Utils_generate, Test_should_generate_A_B_or_C_classes_randomly,
+.init = redirect_all_stdout)
 {
     {
         Base *base = generate();
-        std::string str = typeid(*base).name();
+        std::string str;
+
+        if(base)
+            str = typeid(*base).name();
+
         if (str == "1A")
         {
             std::cout << "Class A was generated." << std::endl;
@@ -52,6 +57,43 @@ Test(Utils_generate, Test_should_generate_A_B_or_C_classes_randomly, .init = red
             cr_assert_stdout_eq_str("Nothing was generated.\n");
         }
 
+        delete base;
+    }
+}
+
+Test(Utils_identify,
+Test_identify_with_pointer_should_prints_The_type_of_object_pointed_by_p,
+.init = redirect_all_stdout)
+{
+    {
+        for (int i = 0; i < 100; ++i)
+        {
+            Base *base = generate();
+            identify(base);
+            delete base;
+        }
+        
+        Base *ptr = nullptr;
+
+        identify(ptr);
+    }
+}
+
+Test(Utils_identify,
+Test_identify_with_reference_should_prints_The_type_of_object_pointed_by_p,
+.init = redirect_all_stdout)
+{
+    {
+        for (int i = 0; i < 100; ++i)
+        {
+            Base *basePtr = generate();
+            if (basePtr)
+            {
+                Base &base = *basePtr;
+                identify(base);
+                delete basePtr;
+            }
+        }
     }
 }
 ///////////////////////////////////////////////////////////////////////////////

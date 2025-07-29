@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.cpp                                          :+:      :+:    :+:   */
+/*   Utils.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 16:41:57 by Paradis           #+#    #+#             */
-/*   Updated: 2025/07/29 17:03:16 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/07/29 18:17:58 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,18 @@
 
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
 
 Base    *generate(void)
 {
-    std::srand(std::time(0));
+    static bool seeded = false;
+    if (!seeded) {
+        std::srand(std::time(nullptr));
+        seeded = true;
+    }
 
-    unsigned int rand = std::rand() % 3;
+
+    unsigned int rand = std::rand() % 4;
 
     switch(rand)
     {
@@ -34,4 +40,30 @@ Base    *generate(void)
             return new C;
     }
     return nullptr;
+}
+
+void    identify(Base *p)
+{
+    if (p)
+    {
+        if (dynamic_cast<A*>(p) != nullptr)
+            std::cout << "Class A is identified." << std::endl;
+        else if (dynamic_cast<B*>(p) != nullptr)
+            std::cout << "Class B is identified." << std::endl;
+        else if (dynamic_cast<C*>(p) != nullptr)
+            std::cout << "Class C is identified." << std::endl;
+    }
+    else
+        std::cout << "pointer is identified as nullptr." << std::endl;
+}
+
+void    identify(Base &p)
+{
+    std::cout << "By reference: ";
+    if (dynamic_cast<A*>(&p) != nullptr)
+        std::cout << "Class A is identified." << std::endl;
+    else if (dynamic_cast<B*>(&p) != nullptr)
+        std::cout << "Class B is identified." << std::endl;
+    else if (dynamic_cast<C*>(&p) != nullptr)
+        std::cout << "Class C is identified." << std::endl;
 }
