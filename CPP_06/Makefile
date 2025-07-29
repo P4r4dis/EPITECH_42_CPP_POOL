@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 18:58:30 by Paradis           #+#    #+#              #
-#    Updated: 2025/07/23 21:04:23 by Paradis          ###   ########.fr        #
+#    Updated: 2025/07/29 17:00:39 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,22 +94,18 @@ ARGS							=	"$(filter-out $@,$(MAKECMDGOALS))"
 #								42 EX02										   #
 #																			   #
 # **************************************************************************** #
-42_EX02_PATH 					= 	./42/M05/ex02
-42_EX02_BIN_PATH 				= 	./42/M05/ex02/bin
-42_EX02_SRC_PATH				=	./42/M05/ex02/source
-42_EX02_INC_PATH				=	./42/M05/ex02/include
-42_EX02_UT_PATH					=	./42/M05/ex02/test
+42_EX02_PATH 					= 	./42/M06/ex02
+42_EX02_BIN_PATH 				= 	./42/M06/ex02/bin
+42_EX02_SRC_PATH				=	./42/M06/ex02/source
+42_EX02_INC_PATH				=	./42/M06/ex02/include
+42_EX02_UT_PATH					=	./42/M06/ex02/test
 
-42_EX02_NAME					=	You_need_a_form
+42_EX02_NAME					=	Identify_real_type
 
 42_EX02_UT_SRC					=	$(42_EX02_UT_PATH)/$(42_EX02_NAME)_test.cpp
 42_EX02_UT_NAME 				= 	test_$(42_EX02_NAME)
 
-42_EX02_SRC						=	$(42_EX02_SRC_PATH)/Bureaucrat.cpp \
-									$(42_EX02_SRC_PATH)/AForm.cpp \
-									$(42_EX02_SRC_PATH)/ShrubberyCreationForm.cpp \
-									$(42_EX02_SRC_PATH)/RobotomyRequestForm.cpp \
-									$(42_EX02_SRC_PATH)/PresidentialPardonForm.cpp \
+42_EX02_SRC						=	$(42_EX02_SRC_PATH)/Utils.cpp \
 									$(42_EX02_BIN_PATH)/main.cpp
 42_EX02_OBJS					=	$(42_EX02_SRC:.cpp=.o)
 
@@ -188,7 +184,7 @@ ARGS							=	"$(filter-out $@,$(MAKECMDGOALS))"
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:03:01 PM 2025 Paradis
-## Last update Thu Jul 23 9:04:23 PM 2025 Paradis
+## Last update Wed Jul 29 5:00:39 PM 2025 Paradis
 ##
 
 
@@ -476,8 +472,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(42_EX00_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX02_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX02_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX03_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(42_EX03_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_PATH)
@@ -500,8 +496,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX02_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX03_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(42_EX03_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_PATH)
