@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 18:58:30 by Paradis           #+#    #+#              #
-#    Updated: 2025/07/29 17:00:39 by Paradis          ###   ########.fr        #
+#    Updated: 2025/07/31 19:53:38 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,48 +126,6 @@ ARGS							=	"$(filter-out $@,$(MAKECMDGOALS))"
 									@$(MAKE) -s -C $(42_EX02_UT_PATH) VALGRIND
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 									
-# **************************************************************************** #
-#																			   #
-#								42 EX03										   #
-#																			   #
-# **************************************************************************** #
-42_EX03_PATH 					= 	./42/M05/ex03
-42_EX03_BIN_PATH 				= 	./42/M05/ex03/bin
-42_EX03_SRC_PATH				=	./42/M05/ex03/source
-42_EX03_INC_PATH				=	./42/M05/ex03/include
-42_EX03_UT_PATH					=	./42/M05/ex03/test
-
-42_EX03_NAME					=	Intern
-
-42_EX03_UT_SRC					=	$(42_EX03_UT_PATH)/$(42_EX03_NAME)_test.cpp
-42_EX03_UT_NAME 				= 	test_$(42_EX03_NAME)
-
-42_EX03_SRC						=	$(42_EX03_SRC_PATH)/AMateria.cpp \
-									$(42_EX03_SRC_PATH)/Ice.cpp \
-									$(42_EX03_SRC_PATH)/Cure.cpp \
-									$(42_EX03_SRC_PATH)/Character.cpp \
-									$(42_EX03_SRC_PATH)/MateriaSource.cpp \
-									$(42_EX03_SRC_PATH)/Intern.cpp \
-									$(42_EX03_BIN_PATH)/main.cpp
-42_EX03_OBJS					=	$(42_EX03_SRC:.cpp=.o)
-
-42_ex03 						: 	fclean
-									@$(MAKE) -C $(42_EX03_PATH)
-									$(42_EX03_PATH)/$(42_EX03_NAME)
-
-42_test_run_ex03				:	fclean
-									@$(MAKE) -s -C $(42_EX03_UT_PATH)
-									$(42_EX03_UT_PATH)/$(42_EX03_UT_NAME) --fail-fast --jobs=1 --verbose=2
-									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
-# @brave coverage.html
-
-42_valgrind_ex03 				: 	fclean
-									@$(MAKE) -C $(42_EX03_PATH) VALGRIND
-									
-42_valgrind_test_run_ex03		:	fclean
-									@$(MAKE) -s -C $(42_EX03_UT_PATH) VALGRIND
-									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
-
 
 # **************************************************************************** #
 #																			   #
@@ -184,7 +142,7 @@ ARGS							=	"$(filter-out $@,$(MAKECMDGOALS))"
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:03:01 PM 2025 Paradis
-## Last update Wed Jul 29 5:00:39 PM 2025 Paradis
+## Last update Fri Jul 31 7:53:38 PM 2025 Paradis
 ##
 
 
@@ -193,18 +151,18 @@ ARGS							=	"$(filter-out $@,$(MAKECMDGOALS))"
 #								EPITECH EX00								   #
 #																			   #
 # **************************************************************************** #
-EPITECH_EX00_PATH 				= 	./EPITECH/D11/ex00
-EPITECH_EX00_BIN_PATH 			= 	./EPITECH/D11/ex00/bin
-EPITECH_EX00_SRC_PATH			=	./EPITECH/D11/ex00/source
-EPITECH_EX00_INC_PATH			=	./EPITECH/D11/ex00/include
-EPITECH_EX00_UT_PATH			=	./EPITECH/D11/ex00/test
+EPITECH_EX00_PATH 				= 	./EPITECH/D12/ex00
+EPITECH_EX00_BIN_PATH 			= 	./EPITECH/D12/ex00/bin
+EPITECH_EX00_SRC_PATH			=	./EPITECH/D12/ex00/source
+EPITECH_EX00_INC_PATH			=	./EPITECH/D12/ex00/include
+EPITECH_EX00_UT_PATH			=	./EPITECH/D12/ex00/test
 
-EPITECH_EX00_NAME				=	Listing_Directories
+EPITECH_EX00_NAME				=	Encapsulation
 
 EPITECH_EX00_UT_SRC				=	$(EPITECH_EX00_UT_PATH)/$(EPITECH_EX00_NAME)_test.cpp
 EPITECH_EX00_UT_NAME 			= 	test_$(EPITECH_EX00_NAME)
 
-EPITECH_EX00_SRC				=	$(EPITECH_EX00_SRC_PATH)/DirectoryLister.cpp \
+EPITECH_EX00_SRC				=	$(EPITECH_EX00_SRC_PATH)/Picture.cpp \
 									$(EPITECH_EX00_BIN_PATH)/main.cpp
 EPITECH_EX00_OBJS				=	$(EPITECH_EX00_SRC:.cpp=.o)
 
@@ -216,8 +174,7 @@ EPITECH_valgrind_ex00 			: 	fclean
 									@$(MAKE) -C $(EPITECH_EX00_PATH) VALGRIND
 
 EPITECH_test_run_ex00			:	fclean
-									@$(MAKE) -s -C $(EPITECH_EX00_UT_PATH)
-									$(EPITECH_EX00_UT_PATH)/$(EPITECH_EX00_UT_NAME) --fail-fast --jobs=1 --verbose=2
+									cd $(EPITECH_EX00_UT_PATH) && $(MAKE) && ./$(EPITECH_EX00_UT_NAME) --fail-fast --jobs=1 --verbose=2
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 						
 EPITECH_valgrind_test_run_ex00	:	fclean
@@ -474,10 +431,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(42_EX01_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX02_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(42_EX02_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX03_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(42_EX03_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_UT_PATH)	
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX00_UT_PATH)	
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX01_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX01_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX02_PATH)
@@ -498,10 +453,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX01_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX02_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX03_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(42_EX03_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX00_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX01_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX01_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX02_PATH)

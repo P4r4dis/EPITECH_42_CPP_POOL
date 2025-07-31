@@ -1,13 +1,12 @@
 ##
-## Makefile for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_05/EPITECH/D11/ex00/Test
+## Makefile for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_06/EPITECH/D12/ex00/test
 ##
 ## Made by Paradis
 ## Login   <Adil Denia>
 ##
-## Started on  Mon Jun 23 7:04:43 PM 2025 Paradis
-## Last update Tue Jun 23 8:16:38 PM 2025 Paradis
+## Started on  Thu Jul 31 7:18:44 PM 2025 Paradis
+## Last update Fri Jul 31 7:19:05 PM 2025 Paradis
 ##
-
 
 G++           	= 	g++
 #############################################
@@ -15,7 +14,7 @@ SRC_PATH		= 	../source
 INC_PATH 		= 	../include
 BIN_PATH 		= 	./bin
 
-NAME          	= 	test_Listing_Directories
+NAME          	= 	test_Encapsulation
 #############################################
 
 INCFLAGS     	+= 	-I $(INC_PATH)
@@ -23,7 +22,7 @@ CPP_VERSION		+=	-std=c++23
 CRITFLAGS    	+=  --coverage -lcriterion
 CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAGS) $(CRITFLAGS)
 
-SRCS         	= 	$(SRC_PATH)/DirectoryLister.cpp \
+SRCS         	= 	$(SRC_PATH)/Picture.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)

@@ -1,29 +1,26 @@
 /*
-** main.cpp for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_05/EPITECH/D11/ex00/bin
+** main.cpp for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_06/EPITECH/D12/ex00/bin
 **
 ** Made by Paradis
 ** Login   <Adil Denia>
 **
-** Started on  Mon Jun 23 7:03:42 PM 2025 Paradis
-** Last update Tue Jun 23 7:03:47 PM 2025 Paradis
+** Started on  Thu Jul 31 5:32:56 PM 2025 Paradis
+** Last update Fri Jul 31 6:20:04 PM 2025 Paradis
 */
 
 #include <iostream>
 
-#include "../include/DirectoryLister.hpp"
-
-
 int     main(void)
 {
-    DirectoryLister dl("./test/", true);
+    Toy     toto;
+    Toy     ET(Toy::ALIEN, "green", "./alien.txt");
 
-    for (std::string file = dl.get(); !file.empty(); file = dl.get())
-        std::cout << file << std::endl;
-
-    dl.open("invalid path", true);
-    if (dl.open("./test/", false) == true)
-        for (std::string file = dl.get(); !file.empty(); file = dl.get())
-            std::cout << file << std::endl;
-
+    toto.setName("TOTO!");
+    if (toto.getType() == Toy::BASIC_TOY)
+        std::cout   << "basic toy: " << toto.getName() << std::endl
+                    << toto.getAscii() << std::endl;
+    if (ET.getType() == Toy::ALIEN)
+        std::cout   << "this alien is : " << ET.getName() << std::endl
+                    << ET.getAscii() << std::endl;
     return 0;
 }

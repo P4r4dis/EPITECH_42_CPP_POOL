@@ -1,11 +1,11 @@
 ##
-## Makefile for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_05/EPITECH/D11/ex00
+## Makefile for EPITECH_42_CPP_POOL in /home/paradis/Workspace/Development/CPP/EPITECH_42_CPP_POOL/CPP_06/EPITECH/D12/ex00
 ##
 ## Made by Paradis
 ## Login   <Adil Denia>
 ##
-## Started on  Mon Jun 23 7:04:55 PM 2025 Paradis
-## Last update Tue Jun 23 7:37:40 PM 2025 Paradis
+## Started on  Thu Jul 31 7:19:10 PM 2025 Paradis
+## Last update Fri Jul 31 7:22:59 PM 2025 Paradis
 ##
 
 # # Compilateur
@@ -17,7 +17,7 @@ INC_PATH	=	./include
 UT_PATH		=	./test
 
 
-NAME		=	Listing_Directories
+NAME		=	Encapsulation
 UT_NAME 	= 	test_$(NAME)
 ##############################################
 
@@ -27,7 +27,7 @@ CPP_VERSION	+=	-std=c++23
 CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAGS)
 
 # # Files sources
-SRCS		=	$(SRC_PATH)/DirectoryLister.cpp \
+SRCS		=	$(SRC_PATH)/Picture.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp
