@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jun 23 7:04:27 PM 2025 Paradis
-** Last update Wed Aug 5 7:23:00 PM 2025 Paradis
+** Last update Wed Aug 5 7:32:27 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -293,15 +293,28 @@ Test(Toy_setName, Test_set_name, .init = redirect_all_stdout)
     }
 }
 
-// Test(Toy_getAscii, Test_returns_the_toy_picture_as_a_string,
-//     .init = redirect_all_stdout)
-// {
-//     {
-//         Toy     toto;
+Test(Toy_getAscii, Test_returns_the_toy_picture_as_a_string,
+    .init = redirect_all_stdout)
+{
+    {
+        Toy     ET(Toy::ALIEN, "green", "./file/alien.txt");
 
-
-//     }
-// }
+        std::cout << ET.getAscii() << std::flush;
+    }
+    cr_assert_stdout_eq_str
+    (
+        "         _|_\n"
+        "   ,_.-_' _ '_-._,\n"
+        "    l (.)(.)(.) /\n"
+        " _,  `l_-===-_/`  ,_\n"
+        ">  |----\"\"\"\"\"----|  <\n"
+        "`\"\"`--/   _-@-l--`\"\"`\n"
+        "     |===L_I===|\n"
+        "      l       /\n"
+        "      _l__|__/_\n"
+        "     `\"\"\"\"`\"\"\"\"`\n"
+    );
+}
 
 // Test(Toy_setAscii, Test_set_picture_to_file_content_and_return_true,
 //     .init = redirect_all_stdout)
