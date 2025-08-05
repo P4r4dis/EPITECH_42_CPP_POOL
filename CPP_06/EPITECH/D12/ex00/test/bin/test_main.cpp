@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jun 23 7:04:27 PM 2025 Paradis
-** Last update Wed Aug 5 6:58:25 PM 2025 Paradis
+** Last update Wed Aug 5 7:04:08 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -260,6 +260,15 @@ Test(Toy_getType, Test_return_basic_type, .init = redirect_all_stdout)
         Toy     toto;
 
         cr_assert(toto.getType() == Toy::BASIC_TOY);
+    }
+}
+
+Test(Toy_getName, Test_return_name, .init = redirect_all_stdout)
+{
+    {
+        Toy     toto;
+
+        cr_assert(toto.getName() == "toy");
     }
 }
 

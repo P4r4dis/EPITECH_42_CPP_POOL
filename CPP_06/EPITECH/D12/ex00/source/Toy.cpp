@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Aug 5 6:40:04 PM 2025 Paradis
-** Last update Wed Aug 5 6:57:08 PM 2025 Paradis
+** Last update Wed Aug 5 7:04:50 PM 2025 Paradis
 */
 
 #include "../include/Toy.hpp"
@@ -24,4 +24,9 @@ Toy::~Toy()
 Toy::ToyType     Toy::getType(void) const
 {
     return _type;
+}
+
+std::string     Toy::getName(void) const
+{
+    return _name;
 }
