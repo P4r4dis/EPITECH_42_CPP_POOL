@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jul 31 7:07:00 PM 2025 Paradis
-** Last update Wed Aug 5 6:22:11 PM 2025 Paradis
+** Last update Wed Aug 5 6:26:15 PM 2025 Paradis
 */
 
 #include "../include/Picture.hpp"
@@ -29,6 +29,15 @@ Picture::Picture(const Picture &picture)    :   data(picture.data),
 {
 }
 
+Picture     &Picture::operator=(const Picture &picture)
+{
+    if (this != &picture)
+    {
+        data = picture.data;
+        _file = picture._file;
+    }
+    return *this;
+}
 
 Picture::~Picture()
 {
