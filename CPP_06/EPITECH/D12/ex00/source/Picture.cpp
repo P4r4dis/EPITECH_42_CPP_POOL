@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jul 31 7:07:00 PM 2025 Paradis
-** Last update Fri Jul 31 9:11:41 PM 2025 Paradis
+** Last update Wed Aug 5 6:00:57 PM 2025 Paradis
 */
 
 #include "../include/Picture.hpp"
@@ -16,9 +16,13 @@
 
 Picture::Picture(void)  :   _file("")
 {
-    this->data = "ERROR";
+    this->data = "";
 }
 
+Picture::Picture(const std::string &file)   :   _file(file)
+{
+    getPictureFromFile(_file);
+}
 Picture::~Picture()
 {
 }
@@ -34,6 +38,8 @@ bool            Picture::getPictureFromFile(const std::string &file)
     {
         if (_file.empty())
             data = "";
+        else
+            data = "ERROR";
         std::cerr << data << std::endl;
         return false;
     }

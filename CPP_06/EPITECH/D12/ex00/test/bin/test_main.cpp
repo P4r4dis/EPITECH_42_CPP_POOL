@@ -5,17 +5,18 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jun 23 7:04:27 PM 2025 Paradis
-** Last update Fri Jul 31 9:12:13 PM 2025 Paradis
+** Last update Wed Aug 5 6:11:24 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
 #include <criterion/new/assert.h>
 #include <criterion/redirect.h>
 
-#include <exception>
 #include <iostream>
 
 #include "../../include/Picture.hpp"
+#include "../../include/Toy.hpp"
+
 void redirect_all_stdout(void)
 {
     cr_redirect_stdout();
@@ -84,6 +85,74 @@ Test(Picture_getPictureFromFile,
         "     `\"\"\"\"`\"\"\"\"`\n"
     );
 }
+
+Test(Picture_custom_constructor,
+    Test_open_file_and_set_value_to_data,
+    .init = redirect_all_stdout)
+{
+    {
+        Picture     picture("./file/alien.txt");
+
+        std::cout << picture.data << std::flush;
+    }
+    cr_assert_stdout_eq_str
+    (
+        "         _|_\n"
+        "   ,_.-_' _ '_-._,\n"
+        "    l (.)(.)(.) /\n"
+        " _,  `l_-===-_/`  ,_\n"
+        ">  |----\"\"\"\"\"----|  <\n"
+        "`\"\"`--/   _-@-l--`\"\"`\n"
+        "     |===L_I===|\n"
+        "      l       /\n"
+        "      _l__|__/_\n"
+        "     `\"\"\"\"`\"\"\"\"`\n"
+    );
+}
+
+Test(Picture_custom_constructor,
+    Test_try_to_open_empty_file_and_data_shoukd_be_empty_string,
+    .init = redirect_all_stdout)
+{
+    {
+        Picture     picture("");
+
+        cr_assert(picture.data == "");
+        std::cout << picture.data << std::flush;
+    }
+    cr_assert_stdout_eq_str
+    (
+        ""
+    );
+}
+
+Test(Picture_custom_constructor,
+    Test_cant_open_file_data_should_set_to_error_and_return_false,
+    .init = redirect_all_stdout)
+{
+    {
+        Picture     picture("./test/files");
+
+        cr_assert(picture.data == "ERROR");
+        std::cout << picture.data << std::flush;
+    }
+    cr_assert_stdout_eq_str
+    (
+        "ERROR"
+    );
+}
+
+// ///////////////////////////////////////////////////////////////////////////////
+// //                            Toy class                                      //
+// ///////////////////////////////////////////////////////////////////////////////
+// Test(Toy_enum, Test_enum_is_defined, .init = redirect_all_stdout)
+// {
+//     {
+//         cr_assert(Toy::BASIC_TOY == 0);
+//         cr_assert(Toy::ALIEN == 1);
+//     }
+// }
+
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////

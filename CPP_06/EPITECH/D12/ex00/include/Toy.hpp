@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jul 31 6:21:09 PM 2025 Paradis
-** Last update Fri Jul 31 6:21:15 PM 2025 Paradis
+** Last update Wed Aug 5 5:56:55 PM 2025 Paradis
 */
 
 #ifndef 			__TOY_HPP__
@@ -14,6 +14,12 @@
 class	Toy
 {
     public:
+        enum    ToyType
+        {
+            BASIC_TOY = 0,
+            ALIEN
+        };
+
         Toy();
         ~Toy();
 
