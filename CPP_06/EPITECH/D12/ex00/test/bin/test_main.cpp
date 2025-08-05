@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jun 23 7:04:27 PM 2025 Paradis
-** Last update Wed Aug 5 6:29:16 PM 2025 Paradis
+** Last update Wed Aug 5 6:58:25 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -237,13 +237,31 @@ Test(Picture_assignement_operator,
 // ///////////////////////////////////////////////////////////////////////////////
 // //                            Toy class                                      //
 // ///////////////////////////////////////////////////////////////////////////////
-// Test(Toy_enum, Test_enum_is_defined, .init = redirect_all_stdout)
-// {
-//     {
-//         cr_assert(Toy::BASIC_TOY == 0);
-//         cr_assert(Toy::ALIEN == 1);
-//     }
-// }
+Test(Toy_enum, Test_enum_is_defined, .init = redirect_all_stdout)
+{
+    {
+        cr_assert(Toy::BASIC_TOY == 0);
+        cr_assert(Toy::ALIEN == 1);
+    }
+}
+
+Test(Toy_constructor, Test_constructor_is_defined, .init = redirect_all_stdout)
+{
+    {
+        Toy     toto;
+
+        cr_assert_not_null(&toto);
+    }
+}
+
+Test(Toy_getType, Test_return_basic_type, .init = redirect_all_stdout)
+{
+    {
+        Toy     toto;
+
+        cr_assert(toto.getType() == Toy::BASIC_TOY);
+    }
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //

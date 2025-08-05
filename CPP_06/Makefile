@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 18:58:30 by Paradis           #+#    #+#              #
-#    Updated: 2025/07/31 19:53:38 by Paradis          ###   ########.fr        #
+#    Updated: 2025/08/05 18:59:59 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -142,7 +142,7 @@ ARGS							=	"$(filter-out $@,$(MAKECMDGOALS))"
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:03:01 PM 2025 Paradis
-## Last update Fri Jul 31 7:53:38 PM 2025 Paradis
+## Last update Wed Aug 5 6:59:59 PM 2025 Paradis
 ##
 
 
@@ -163,6 +163,7 @@ EPITECH_EX00_UT_SRC				=	$(EPITECH_EX00_UT_PATH)/$(EPITECH_EX00_NAME)_test.cpp
 EPITECH_EX00_UT_NAME 			= 	test_$(EPITECH_EX00_NAME)
 
 EPITECH_EX00_SRC				=	$(EPITECH_EX00_SRC_PATH)/Picture.cpp \
+									$(EPITECH_EX00_SRC_PATH)/Toy.cpp \
 									$(EPITECH_EX00_BIN_PATH)/main.cpp
 EPITECH_EX00_OBJS				=	$(EPITECH_EX00_SRC:.cpp=.o)
 

@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Thu Jul 31 7:18:44 PM 2025 Paradis
-## Last update Fri Jul 31 7:19:05 PM 2025 Paradis
+## Last update Wed Aug 5 6:58:51 PM 2025 Paradis
 ##
 
 G++           	= 	g++
@@ -23,6 +23,7 @@ CRITFLAGS    	+=  --coverage -lcriterion
 CPPFLAGS     	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAGS) $(CRITFLAGS)
 
 SRCS         	= 	$(SRC_PATH)/Picture.cpp \
+					$(SRC_PATH)/Toy.cpp \
 					$(BIN_PATH)/test_main.cpp
 
 OBJS         	= 	$(SRCS:.cpp=.o)
