@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Aug 5 6:40:04 PM 2025 Paradis
-** Last update Wed Aug 5 7:31:44 PM 2025 Paradis
+** Last update Wed Aug 5 7:45:47 PM 2025 Paradis
 */
 
 #include "../include/Toy.hpp"
@@ -47,4 +47,12 @@ void            Toy::setName(const std::string &name)
 std::string     Toy::getAscii(void) const
 {
     return _picture.data;
+}
+
+bool            Toy::setAscii(const std::string &picture)
+{
+    if (_picture.getPictureFromFile(picture))
+        return true;
+    return false;
+
 }

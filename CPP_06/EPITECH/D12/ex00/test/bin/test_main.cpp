@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jun 23 7:04:27 PM 2025 Paradis
-** Last update Wed Aug 5 7:32:27 PM 2025 Paradis
+** Last update Wed Aug 5 8:01:51 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -40,10 +40,6 @@ Test(Picture_getPictureFromFile,
 
         cr_assert(picture.getPictureFromFile("") == false);
     }
-    cr_assert_stderr_eq_str
-    (
-        "\n"
-    );
 }
 
 Test(Picture_getPictureFromFile,
@@ -55,10 +51,6 @@ Test(Picture_getPictureFromFile,
 
         cr_assert(picture.getPictureFromFile("./test/files") == false);
     }
-    cr_assert_stderr_eq_str
-    (
-        "ERROR\n"
-    );
 }
 
 Test(Picture_getPictureFromFile,
@@ -111,18 +103,18 @@ Test(Picture_custom_constructor,
 }
 
 Test(Picture_custom_constructor,
-    Test_try_to_open_empty_file_and_data_shoukd_be_empty_string,
+    Test_try_to_open_empty_filename_and_data_shoukd_be_ERROR,
     .init = redirect_all_stdout)
 {
     {
         Picture     picture("");
 
-        cr_assert(picture.data == "");
+        cr_assert(picture.data == "ERROR");
         std::cout << picture.data << std::flush;
     }
     cr_assert_stdout_eq_str
     (
-        ""
+        "ERROR"
     );
 }
 
@@ -316,17 +308,62 @@ Test(Toy_getAscii, Test_returns_the_toy_picture_as_a_string,
     );
 }
 
-// Test(Toy_setAscii, Test_set_picture_to_file_content_and_return_true,
-//     .init = redirect_all_stdout)
-// {
-//     {
-//         Toy     toto;
+Test(Toy_setAscii, Test_set_picture_to_file_content_and_return_true,
+    .init = redirect_all_stdout)
+{
+    {
+        Toy     toto;
 
-//         cr_assert(toto.getName() == "toy");
-//         toto.setName("Buzz");
-//         cr_assert(toto.getName() == "Buzz");
-//     }
-// }
+        cr_assert(toto.getAscii() == "ERROR");
+        cr_assert(toto.setAscii("./file/alien.txt") == true);
+        std::cout << toto.getAscii() << std::flush;
+    }
+    cr_assert_stdout_eq_str
+    (
+        "         _|_\n"
+        "   ,_.-_' _ '_-._,\n"
+        "    l (.)(.)(.) /\n"
+        " _,  `l_-===-_/`  ,_\n"
+        ">  |----\"\"\"\"\"----|  <\n"
+        "`\"\"`--/   _-@-l--`\"\"`\n"
+        "     |===L_I===|\n"
+        "      l       /\n"
+        "      _l__|__/_\n"
+        "     `\"\"\"\"`\"\"\"\"`\n"
+    );
+}
+
+Test(Toy_setAscii, Test_set_picture_to_empty_filename_and_return_false,
+    .init = redirect_all_stdout)
+{
+    {
+        Toy     toto;
+
+        cr_assert(toto.getAscii() == "ERROR");
+        cr_assert(toto.setAscii("") == false);
+        std::cout << toto.getAscii() << std::flush;
+    }
+    cr_assert_stdout_eq_str
+    (
+        "ERROR"
+    );
+}
+
+Test(Toy_setAscii, Test_set_picture_with_wrong_filename_and_return_false,
+    .init = redirect_all_stdout)
+{
+    {
+        Toy     toto;
+
+        cr_assert(toto.getAscii() == "ERROR");
+        cr_assert(toto.setAscii("test/test/test") == false);
+        std::cout << toto.getAscii() << std::flush;
+    }
+    cr_assert_stdout_eq_str
+    (
+        "ERROR"
+    );
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////

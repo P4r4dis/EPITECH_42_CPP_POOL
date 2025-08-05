@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jul 31 6:21:09 PM 2025 Paradis
-** Last update Wed Aug 5 6:52:38 PM 2025 Paradis
+** Last update Wed Aug 5 7:35:15 PM 2025 Paradis
 */
 
 #ifndef 			__TOY_HPP__
@@ -36,7 +36,7 @@ class	Toy
         void            setName(const std::string &name);
 
         std::string     getAscii(void) const;
-        bool            setAscii(const Picture picture);
+        bool            setAscii(const std::string &picture);
 
     protected:
     private:

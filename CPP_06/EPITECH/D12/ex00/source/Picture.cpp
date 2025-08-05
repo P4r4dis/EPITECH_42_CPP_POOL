@@ -5,12 +5,11 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jul 31 7:07:00 PM 2025 Paradis
-** Last update Wed Aug 5 6:26:15 PM 2025 Paradis
+** Last update Wed Aug 5 7:59:38 PM 2025 Paradis
 */
 
 #include "../include/Picture.hpp"
 
-#include <iostream>
 #include <fstream>
 #include <string>
 
@@ -52,11 +51,7 @@ bool            Picture::getPictureFromFile(const std::string &file)
     
     if (!fs.is_open())
     {
-        if (_file.empty())
-            data = "";
-        else
-            data = "ERROR";
-        std::cerr << data << std::endl;
+        data = "ERROR";
         return false;
     }
 
