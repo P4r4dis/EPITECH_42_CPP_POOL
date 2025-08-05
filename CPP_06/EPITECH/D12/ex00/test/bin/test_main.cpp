@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jun 23 7:04:27 PM 2025 Paradis
-** Last update Wed Aug 5 7:10:17 PM 2025 Paradis
+** Last update Wed Aug 5 7:23:00 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -254,6 +254,16 @@ Test(Toy_constructor, Test_constructor_is_defined, .init = redirect_all_stdout)
     }
 }
 
+Test(Toy_custom_constructor, Test_custom_constructor_is_defined,
+    .init = redirect_all_stdout)
+{
+    {
+        Toy     ET(Toy::ALIEN, "green", "./file/alien.txt");
+
+        cr_assert_not_null(&ET);
+    }
+}
+
 Test(Toy_getType, Test_return_basic_type, .init = redirect_all_stdout)
 {
     {
@@ -283,6 +293,27 @@ Test(Toy_setName, Test_set_name, .init = redirect_all_stdout)
     }
 }
 
+// Test(Toy_getAscii, Test_returns_the_toy_picture_as_a_string,
+//     .init = redirect_all_stdout)
+// {
+//     {
+//         Toy     toto;
+
+
+//     }
+// }
+
+// Test(Toy_setAscii, Test_set_picture_to_file_content_and_return_true,
+//     .init = redirect_all_stdout)
+// {
+//     {
+//         Toy     toto;
+
+//         cr_assert(toto.getName() == "toy");
+//         toto.setName("Buzz");
+//         cr_assert(toto.getName() == "Buzz");
+//     }
+// }
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Aug 5 6:40:04 PM 2025 Paradis
-** Last update Wed Aug 5 7:09:20 PM 2025 Paradis
+** Last update Wed Aug 5 7:20:56 PM 2025 Paradis
 */
 
 #include "../include/Toy.hpp"
@@ -14,6 +14,14 @@ Toy::Toy(void)  :   _type(BASIC_TOY),
                     _name("toy"),
                     _fileName(""),
                     _picture(_fileName)
+{
+}
+
+Toy::Toy(ToyType toyType, const std::string &name, const std::string &file)
+    :   _type(toyType),
+        _name(name),
+        _fileName(file),
+        _picture(_fileName)
 {
 }
 
