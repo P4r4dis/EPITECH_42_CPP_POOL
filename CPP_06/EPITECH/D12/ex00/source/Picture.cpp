@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jul 31 7:07:00 PM 2025 Paradis
-** Last update Wed Aug 5 6:00:57 PM 2025 Paradis
+** Last update Wed Aug 5 6:22:11 PM 2025 Paradis
 */
 
 #include "../include/Picture.hpp"
@@ -23,6 +23,13 @@ Picture::Picture(const std::string &file)   :   _file(file)
 {
     getPictureFromFile(_file);
 }
+
+Picture::Picture(const Picture &picture)    :   data(picture.data),
+                                                _file(picture._file)
+{
+}
+
+
 Picture::~Picture()
 {
 }

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jun 23 7:04:27 PM 2025 Paradis
-** Last update Wed Aug 5 6:11:24 PM 2025 Paradis
+** Last update Wed Aug 5 6:21:37 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -139,6 +139,44 @@ Test(Picture_custom_constructor,
     cr_assert_stdout_eq_str
     (
         "ERROR"
+    );
+}
+
+
+Test(Picture_Copy_constructor,
+    Test_copy_constructor,
+    .init = redirect_all_stdout)
+{
+    {
+        Picture     picture("./file/alien.txt");
+        Picture     copy(picture);
+
+        cr_assert(picture.data == copy.data);
+        std::cout << picture.data << std::flush;
+        std::cout << copy.data << std::flush;
+    }
+    cr_assert_stdout_eq_str
+    (
+        "         _|_\n"
+        "   ,_.-_' _ '_-._,\n"
+        "    l (.)(.)(.) /\n"
+        " _,  `l_-===-_/`  ,_\n"
+        ">  |----\"\"\"\"\"----|  <\n"
+        "`\"\"`--/   _-@-l--`\"\"`\n"
+        "     |===L_I===|\n"
+        "      l       /\n"
+        "      _l__|__/_\n"
+        "     `\"\"\"\"`\"\"\"\"`\n"
+        "         _|_\n"
+        "   ,_.-_' _ '_-._,\n"
+        "    l (.)(.)(.) /\n"
+        " _,  `l_-===-_/`  ,_\n"
+        ">  |----\"\"\"\"\"----|  <\n"
+        "`\"\"`--/   _-@-l--`\"\"`\n"
+        "     |===L_I===|\n"
+        "      l       /\n"
+        "      _l__|__/_\n"
+        "     `\"\"\"\"`\"\"\"\"`\n"
     );
 }
 
