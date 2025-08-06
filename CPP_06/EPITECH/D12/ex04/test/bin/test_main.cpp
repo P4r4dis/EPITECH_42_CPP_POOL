@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Aug 6 7:35:19 PM 2025 Paradis
-** Last update Thu Aug 6 8:01:17 PM 2025 Paradis
+** Last update Thu Aug 6 8:20:17 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -403,10 +403,35 @@ Test(Toy_left_stream_operator, Test_should_print_Toy_name_and_his_picture,
         "| |\n"
         "| |\n"
         "| __| |__/ _ l l / /\n"
-        "| |_| | | __/ > <\n"
+        "| |_| | | __/ >   <\n"
         "l __|_| l ___/_/ l _\\\n"
     );
 }
+
+Test(Toy_left_stream_operator, Test_should_replace_Toys_picture_with_the_string,
+.init = redirect_all_stdout)
+{
+    {
+        Toy a(Toy::BASIC_TOY, "REX", "./file/example.txt");
+
+        std::cout << a;
+        a << "rawr xD";
+        std::cout << a;
+    }
+    cr_assert_stdout_eq_str
+    (
+        "REX\n"
+        "_\n"
+        "| |\n"
+        "| |\n"
+        "| __| |__/ _ l l / /\n"
+        "| |_| | | __/ >   <\n"
+        "l __|_| l ___/_/ l _\\\n"
+        "REX\n"
+        "rawr xD\n"
+    );
+}
+
 
 // ///////////////////////////////////////////////////////////////////////////////
 // //                            Buzz class                                     //
@@ -746,25 +771,25 @@ Test(Woody_setAscii, Test_set_picture_with_wrong_filename_and_return_false,
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
-Test(main, test_main, .init = redirect_all_stdout)
-{
-    // {
-    //     Toy a(Toy::BASIC_TOY, "REX", "example.txt");
+// Test(main, test_main, .init = redirect_all_stdout)
+// {
+//     {
+//         Toy a(Toy::BASIC_TOY, "REX", "./file/example.txt");
 
-    //     std::cout << a;
-    //     a << "rawr xD";
-    //     std::cout << a;
-    // }
-    // cr_assert_stdout_eq_str
-    // (
-    //     "REX\n"
-    //     "_\n"
-    //     "| |\n"
-    //     "| |\n"
-    //     "| __| |__/ _ l l / /\n"
-    //     "| |_| | | __/ > <\n"
-    //     "l __|_| l ___/_/ l _\\n"
-    //     "REX\n"
-    //     "rawr xD\n"
-    // );
-}
+//         std::cout << a;
+//         a << "rawr xD";
+//         std::cout << a;
+//     }
+//     cr_assert_stdout_eq_str
+//     (
+//         "REX\n"
+//         "_\n"
+//         "| |\n"
+//         "| |\n"
+//         "| __| |__/ _ l l / /\n"
+//         "| |_| | | __/ >   <\n"
+//         "l __|_| l ___/_/ l _\\\n"
+//         "REX\n"
+//         "rawr xD\n"
+//     );
+// }

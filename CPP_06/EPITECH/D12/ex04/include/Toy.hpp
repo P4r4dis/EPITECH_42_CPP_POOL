@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Aug 6 7:34:27 PM 2025 Paradis
-** Last update Thu Aug 6 7:52:24 PM 2025 Paradis
+** Last update Thu Aug 6 8:08:36 PM 2025 Paradis
 */
 
 #ifndef 			__TOY_HPP__
@@ -42,6 +42,7 @@ class	Toy
 
         virtual void    speak(const std::string &str);
 
+        Toy             &operator<<(const std::string &str);
     protected:
     private:
         ToyType         _type;

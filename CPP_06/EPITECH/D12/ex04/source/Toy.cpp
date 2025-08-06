@@ -5,11 +5,12 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Aug 6 7:35:01 PM 2025 Paradis
-** Last update Thu Aug 6 7:59:31 PM 2025 Paradis
+** Last update Thu Aug 6 8:09:28 PM 2025 Paradis
 */
 
 #include "../include/Toy.hpp"
 #include <iostream>
+#include <ostream>
 
 Toy::Toy(void)  :   _type(BASIC_TOY),
                     _name("toy"),
@@ -62,7 +63,12 @@ void            Toy::speak(const std::string &str)
 {
     std::cout   << _name << " \"" << str << "\"" << std::endl;
 }
-
+Toy             &Toy::operator<<(const std::string &str)
+{
+    _picture.data = str;
+    
+    return *this;
+}
 std::ostream    &operator<<(std::ostream &os, const Toy &toy)
 {
     os  << toy.getName() << std::endl << toy.getAscii()
