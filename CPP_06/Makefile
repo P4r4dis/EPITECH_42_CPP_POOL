@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 18:58:30 by Paradis           #+#    #+#              #
-#    Updated: 2025/08/06 19:06:31 by Paradis          ###   ########.fr        #
+#    Updated: 2025/08/06 19:57:09 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -142,7 +142,7 @@ ARGS							=	"$(filter-out $@,$(MAKECMDGOALS))"
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:03:01 PM 2025 Paradis
-## Last update Thu Aug 6 7:06:31 PM 2025 Paradis
+## Last update Thu Aug 6 7:57:09 PM 2025 Paradis
 ##
 
 
@@ -304,31 +304,34 @@ EPITECH_valgrind_test_run_ex03	:	fclean
 #								EPITECH_EX04								   #
 #																			   #
 # **************************************************************************** #
-EPITECH_EX04_PATH 				= 	./EPITECH/D11/ex04
-EPITECH_EX04_BIN_PATH 			= 	./EPITECH/D11/ex04/bin
-EPITECH_EX04_SRC_PATH			=	./EPITECH/D11/ex04/source
-EPITECH_EX04_INC_PATH			=	./EPITECH/D11/ex04/include
-EPITECH_EX04_UT_PATH			=	./EPITECH/D11/ex04/test
+EPITECH_EX04_PATH 				= 	./EPITECH/D12/ex04
+EPITECH_EX04_BIN_PATH 			= 	./EPITECH/D12/ex04/bin
+EPITECH_EX04_SRC_PATH			=	./EPITECH/D12/ex04/source
+EPITECH_EX04_INC_PATH			=	./EPITECH/D12/ex04/include
+EPITECH_EX04_UT_PATH			=	./EPITECH/D12/ex04/test
 
-EPITECH_EX04_NAME				=	SharedPointer
+EPITECH_EX04_NAME				=	Operators
 
 EPITECH_EX04_UT_SRC				=	$(EPITECH_EX04_UT_PATH)/$(EPITECH_EX04_NAME)_test.cpp
 EPITECH_EX04_UT_NAME 			= 	test_$(EPITECH_EX04_NAME)
 
-EPITECH_EX04_SRC				=	$(EPITECH_EX04_SRC_PATH)/SharedPointer.cpp \
+EPITECH_EX04_SRC				=	$(EPITECH_EX04_SRC_PATH)/Picture.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Toy.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Buzz.cpp \
+									$(EPITECH_EX04_SRC_PATH)/Woody.cpp \
 									$(EPITECH_EX04_BIN_PATH)/main.cpp
 EPITECH_EX04_OBJS				=	$(EPITECH_EX04_SRC:.cpp=.o)
 
 EPITECH_ex04 					: 	fclean
-									@$(MAKE) -C $(EPITECH_EX04_PATH)
-									$(EPITECH_EX04_PATH)/$(EPITECH_EX04_NAME)
+									cd $(EPITECH_EX04_PATH) && $(MAKE) && ./$(EPITECH_EX04_NAME) --fail-fast --jobs=1 --verbose=2
+# 									@$(MAKE) -C $(EPITECH_EX00_PATH)
+# 									$(EPITECH_EX00_PATH)/$(EPITECH_EX00_NAME)
 
 EPITECH_valgrind_ex04 			: 	fclean
 									@$(MAKE) -C $(EPITECH_EX04_PATH) VALGRIND
 
 EPITECH_test_run_ex04			:	fclean
-									@$(MAKE) -s -C $(EPITECH_EX04_UT_PATH)
-									$(EPITECH_EX04_UT_PATH)/$(EPITECH_EX04_UT_NAME) --fail-fast --jobs=1 --verbose=2
+									cd $(EPITECH_EX04_UT_PATH) && $(MAKE) && ./$(EPITECH_EX04_UT_NAME) --fail-fast --jobs=1 --verbose=2
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 						
 EPITECH_valgrind_test_run_ex04	:	fclean
@@ -446,8 +449,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX02_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX03_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX03_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX05_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX05_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX06_PATH)
@@ -468,8 +471,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX02_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX03_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX03_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX05_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX05_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX06_PATH)
