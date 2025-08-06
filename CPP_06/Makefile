@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 18:58:30 by Paradis           #+#    #+#              #
-#    Updated: 2025/08/06 18:27:14 by Paradis          ###   ########.fr        #
+#    Updated: 2025/08/06 19:06:31 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -142,7 +142,7 @@ ARGS							=	"$(filter-out $@,$(MAKECMDGOALS))"
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:03:01 PM 2025 Paradis
-## Last update Thu Aug 6 6:27:14 PM 2025 Paradis
+## Last update Thu Aug 6 7:06:31 PM 2025 Paradis
 ##
 
 
@@ -265,31 +265,34 @@ EPITECH_valgrind_test_run_ex02	:	fclean
 #								EPITECH_EX03								   #
 #																			   #
 # **************************************************************************** #
-EPITECH_EX03_PATH 				= 	./EPITECH/D11/ex03
-EPITECH_EX03_BIN_PATH 			= 	./EPITECH/D11/ex03/bin
-EPITECH_EX03_SRC_PATH			=	./EPITECH/D11/ex03/source
-EPITECH_EX03_INC_PATH			=	./EPITECH/D11/ex03/include
-EPITECH_EX03_UT_PATH			=	./EPITECH/D11/ex03/test
+EPITECH_EX03_PATH 				= 	./EPITECH/D12/ex03
+EPITECH_EX03_BIN_PATH 			= 	./EPITECH/D12/ex03/bin
+EPITECH_EX03_SRC_PATH			=	./EPITECH/D12/ex03/source
+EPITECH_EX03_INC_PATH			=	./EPITECH/D12/ex03/include
+EPITECH_EX03_UT_PATH			=	./EPITECH/D12/ex03/test
 
-EPITECH_EX03_NAME				=	List
+EPITECH_EX03_NAME				=	Ponymorphism
 
 EPITECH_EX03_UT_SRC				=	$(EPITECH_EX03_UT_PATH)/$(EPITECH_EX03_NAME)_test.cpp
 EPITECH_EX03_UT_NAME 			= 	test_$(EPITECH_EX03_NAME)
 
-EPITECH_EX03_SRC				=	$(EPITECH_EX03_SRC_PATH)/List.cpp \
+EPITECH_EX03_SRC				=	$(EPITECH_EX03_SRC_PATH)/Picture.cpp \
+									$(EPITECH_EX03_SRC_PATH)/Toy.cpp \
+									$(EPITECH_EX03_SRC_PATH)/Buzz.cpp \
+									$(EPITECH_EX03_SRC_PATH)/Woody.cpp \
 									$(EPITECH_EX03_BIN_PATH)/main.cpp
 EPITECH_EX03_OBJS				=	$(EPITECH_EX03_SRC:.cpp=.o)
 
 EPITECH_ex03 					: 	fclean
-									@$(MAKE) -C $(EPITECH_EX03_PATH)
-									$(EPITECH_EX03_PATH)/$(EPITECH_EX03_NAME)
+									cd $(EPITECH_EX03_PATH) && $(MAKE) && ./$(EPITECH_EX03_NAME) --fail-fast --jobs=1 --verbose=2
+# 									@$(MAKE) -C $(EPITECH_EX00_PATH)
+# 									$(EPITECH_EX00_PATH)/$(EPITECH_EX00_NAME)
 
 EPITECH_valgrind_ex03 			: 	fclean
 									@$(MAKE) -C $(EPITECH_EX03_PATH) VALGRIND
 
 EPITECH_test_run_ex03			:	fclean
-									@$(MAKE) -s -C $(EPITECH_EX03_UT_PATH)
-									$(EPITECH_EX03_UT_PATH)/$(EPITECH_EX03_UT_NAME) --fail-fast --jobs=1 --verbose=2
+									cd $(EPITECH_EX03_UT_PATH) && $(MAKE) && ./$(EPITECH_EX03_UT_NAME) --fail-fast --jobs=1 --verbose=2
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 						
 EPITECH_valgrind_test_run_ex03	:	fclean
@@ -441,8 +444,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX01_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX02_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX02_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX03_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX03_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX03_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX03_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_UT_PATH)
 # @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX05_PATH)
@@ -463,8 +466,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX01_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX02_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX02_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX03_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX03_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX03_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX03_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_UT_PATH)
 # @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX05_PATH)
