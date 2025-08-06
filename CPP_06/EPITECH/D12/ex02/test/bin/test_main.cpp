@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Aug 6 5:30:33 PM 2025 Paradis
-** Last update Thu Aug 6 6:02:36 PM 2025 Paradis
+** Last update Thu Aug 6 6:29:16 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -17,6 +17,8 @@
 #include "../../include/Picture.hpp"
 #include "../../include/Toy.hpp"
 #include "../../include/Buzz.hpp"
+#include "../../include/Woody.hpp"
+
 void redirect_all_stdout(void)
 {
     cr_redirect_stdout();
@@ -524,6 +526,178 @@ Test(Buzz_setAscii, Test_set_picture_with_wrong_filename_and_return_false,
         cr_assert(buzzy.setAscii("test/test/test") == false);
         cr_assert(buzzy.getAscii() == "ERROR");
         std::cout << buzzy.getAscii() << std::flush;
+    }
+    cr_assert_stdout_eq_str
+    (
+        "ERROR"
+    );
+}
+
+// ///////////////////////////////////////////////////////////////////////////////
+// //                            Buzz class                                     //
+// ///////////////////////////////////////////////////////////////////////////////
+Test(Woody_constructor, Test_constructor_is_defined, .init = redirect_all_stdout)
+{
+    {
+        Woody     woody("Woody");
+
+        cr_assert_not_null(&woody);
+    }
+}
+
+Test(Woody_getType, Test_return_basic_type, .init = redirect_all_stdout)
+{
+    {
+        Woody     woody("Woody");
+
+        cr_assert(woody.getType() == Toy::WOODY);
+    }
+}
+
+Test(Woody_getName, Test_return_name, .init = redirect_all_stdout)
+{
+    {
+        Woody     woody("Woody");
+
+        cr_assert(woody.getName() == "Woody");
+    }
+}
+
+Test(Woody_setName, Test_set_name, .init = redirect_all_stdout)
+{
+    {
+        Woody     woody("Woody");
+
+        cr_assert(woody.getName() == "Woody");
+        woody.setName("Toy");
+        cr_assert(woody.getName() == "Toy");
+    }
+}
+
+Test(Woody_getAscii, Test_returns_the_toy_picture_as_a_string,
+    .init = redirect_all_stdout)
+{
+    {
+        Woody     woody("Woody", "./file/woody.txt");
+
+        std::cout << woody.getAscii() << std::flush;
+    }
+    cr_assert_stdout_eq_str
+    (
+"           .-'\"\"\"'-.\n"
+"      ,____|_______|____,\n"
+"       '._____________.'\n"
+"           |.-- --.|\n"
+"           |(o) (o)|\n"
+"          (|       |)\n"
+"           |   U   |\n"
+" __        | .___. |\n"
+"/|||       |       |\n"
+"||||       :       :\n"
+"|  |/)      `.___.'\n"
+" l  /       __) (__\n"
+"  l/l      /l l / /l\n"
+"   l l    /l l ^ / /l\n"
+"    l l  / |  |0_/l_ l\n"
+"     l l/ /|  | l  /l l\n"
+"      l  / |  |0//ll l l\n"
+"       l/  | /   l |  l l\n"
+"           |/ .-. l|  / /\n"
+"        .-'|-( ~ )-| / /\n"
+"        l  |--`-'--|/ /\n"
+"         l |       | /\n"
+"          l|   |   |/\n"
+"           |   |   |\n"
+"           |   |   |\n"
+"           |   |   |\n"
+"           |   |   |\n"
+"           |   |   |\n"
+"           |___|___|\n"
+"          `|---|---|'\n"
+"          *|   |   |*\n"
+"           |_._|_._|\n"
+"          /'  /|l  'l\n"
+"         /   /^ ^l   l\n"
+"        /__.'     `.__l\n"
+    );
+}
+
+Test(Woody_setAscii, Test_set_picture_to_file_content_and_return_true,
+    .init = redirect_all_stdout)
+{
+    {
+        Woody     woody("Woody");
+
+        cr_assert(woody.getAscii() == "ERROR");
+        cr_assert(woody.setAscii("./file/woody.txt") == true);
+        std::cout << woody.getAscii() << std::flush;
+    }
+    cr_assert_stdout_eq_str
+    (
+"           .-'\"\"\"'-.\n"
+"      ,____|_______|____,\n"
+"       '._____________.'\n"
+"           |.-- --.|\n"
+"           |(o) (o)|\n"
+"          (|       |)\n"
+"           |   U   |\n"
+" __        | .___. |\n"
+"/|||       |       |\n"
+"||||       :       :\n"
+"|  |/)      `.___.'\n"
+" l  /       __) (__\n"
+"  l/l      /l l / /l\n"
+"   l l    /l l ^ / /l\n"
+"    l l  / |  |0_/l_ l\n"
+"     l l/ /|  | l  /l l\n"
+"      l  / |  |0//ll l l\n"
+"       l/  | /   l |  l l\n"
+"           |/ .-. l|  / /\n"
+"        .-'|-( ~ )-| / /\n"
+"        l  |--`-'--|/ /\n"
+"         l |       | /\n"
+"          l|   |   |/\n"
+"           |   |   |\n"
+"           |   |   |\n"
+"           |   |   |\n"
+"           |   |   |\n"
+"           |   |   |\n"
+"           |___|___|\n"
+"          `|---|---|'\n"
+"          *|   |   |*\n"
+"           |_._|_._|\n"
+"          /'  /|l  'l\n"
+"         /   /^ ^l   l\n"
+"        /__.'     `.__l\n"
+    );
+}
+
+Test(Woody_setAscii, Test_set_picture_to_empty_filename_and_return_false,
+    .init = redirect_all_stdout)
+{
+    {
+        Woody     woody("Woody");
+
+        cr_assert(woody.setAscii("") == false);
+        cr_assert(woody.getAscii() == "ERROR");
+
+        std::cout << woody.getAscii() << std::flush;
+    }
+    cr_assert_stdout_eq_str
+    (
+        "ERROR"
+    );
+}
+
+Test(Woody_setAscii, Test_set_picture_with_wrong_filename_and_return_false,
+.init = redirect_all_stdout)
+{
+    {
+        Woody     woody("Woody");
+
+        cr_assert(woody.setAscii("test/test/test") == false);
+        cr_assert(woody.getAscii() == "ERROR");
+        std::cout << woody.getAscii() << std::flush;
     }
     cr_assert_stdout_eq_str
     (

@@ -5,7 +5,7 @@
 ## Login   <Adil Denia>
 ##
 ## Started on  Wed Aug 6 5:31:41 PM 2025 Paradis
-## Last update Thu Aug 6 5:31:55 PM 2025 Paradis
+## Last update Thu Aug 6 6:26:56 PM 2025 Paradis
 ##
 
 # # Compilateur
@@ -30,6 +30,7 @@ CPPFLAGS	+= 	-g -Wall -Wextra -Werror -W -Wfatal-errors $(CPP_VERSION) $(INCFLAG
 SRCS		=	$(SRC_PATH)/Picture.cpp \
 				$(SRC_PATH)/Toy.cpp \
 				$(SRC_PATH)/Buzz.cpp \
+				$(SRC_PATH)/Woody.cpp \
 				$(BIN_PATH)/main.cpp
 
 UT_SRC		=	$(UT_PATH)/$(NAME)_test.cpp

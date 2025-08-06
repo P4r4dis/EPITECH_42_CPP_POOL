@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Aug 6 5:34:46 PM 2025 Paradis
-** Last update Thu Aug 6 5:44:03 PM 2025 Paradis
+** Last update Thu Aug 6 6:20:49 PM 2025 Paradis
 */
 
 #ifndef 			__BUZZ_HPP__
@@ -22,4 +22,4 @@ class	            Buzz    :   public Toy
     private:
 };
 
-#endif 				/* !__BUZZ_HPP___ */
+#endif 				/* !__BUZZ_HPP__ */
