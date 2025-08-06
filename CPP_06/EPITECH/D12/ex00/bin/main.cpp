@@ -5,9 +5,10 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jul 31 5:32:56 PM 2025 Paradis
-** Last update Fri Jul 31 6:20:04 PM 2025 Paradis
+** Last update Thu Aug 6 5:08:22 PM 2025 Paradis
 */
 
+#include "../include/Toy.hpp"
 #include <iostream>
 
 int     main(void)

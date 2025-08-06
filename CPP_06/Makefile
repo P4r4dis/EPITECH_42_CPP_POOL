@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 18:58:30 by Paradis           #+#    #+#              #
-#    Updated: 2025/08/05 18:59:59 by Paradis          ###   ########.fr        #
+#    Updated: 2025/08/06 17:12:57 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -142,7 +142,7 @@ ARGS							=	"$(filter-out $@,$(MAKECMDGOALS))"
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:03:01 PM 2025 Paradis
-## Last update Wed Aug 5 6:59:59 PM 2025 Paradis
+## Last update Thu Aug 6 5:12:57 PM 2025 Paradis
 ##
 
 
@@ -168,8 +168,9 @@ EPITECH_EX00_SRC				=	$(EPITECH_EX00_SRC_PATH)/Picture.cpp \
 EPITECH_EX00_OBJS				=	$(EPITECH_EX00_SRC:.cpp=.o)
 
 EPITECH_ex00 					: 	fclean
-									@$(MAKE) -C $(EPITECH_EX00_PATH)
-									$(EPITECH_EX00_PATH)/$(EPITECH_EX00_NAME)
+									cd $(EPITECH_EX00_PATH) && $(MAKE) && ./$(EPITECH_EX00_NAME) --fail-fast --jobs=1 --verbose=2
+# 									@$(MAKE) -C $(EPITECH_EX00_PATH)
+# 									$(EPITECH_EX00_PATH)/$(EPITECH_EX00_NAME)
 
 EPITECH_valgrind_ex00 			: 	fclean
 									@$(MAKE) -C $(EPITECH_EX00_PATH) VALGRIND

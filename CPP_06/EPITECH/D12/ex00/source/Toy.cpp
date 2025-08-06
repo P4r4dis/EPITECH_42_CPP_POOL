@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Tue Aug 5 6:40:04 PM 2025 Paradis
-** Last update Wed Aug 5 7:45:47 PM 2025 Paradis
+** Last update Wed Aug 5 9:03:04 PM 2025 Paradis
 */
 
 #include "../include/Toy.hpp"
@@ -13,7 +13,7 @@
 Toy::Toy(void)  :   _type(BASIC_TOY),
                     _name("toy"),
                     _fileName(""),
-                    _picture(_fileName)
+                    _picture()
 {
 }
 

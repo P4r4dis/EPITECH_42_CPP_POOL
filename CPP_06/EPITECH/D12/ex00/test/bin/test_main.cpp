@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Mon Jun 23 7:04:27 PM 2025 Paradis
-** Last update Wed Aug 5 8:01:51 PM 2025 Paradis
+** Last update Thu Aug 6 5:13:34 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -314,7 +314,7 @@ Test(Toy_setAscii, Test_set_picture_to_file_content_and_return_true,
     {
         Toy     toto;
 
-        cr_assert(toto.getAscii() == "ERROR");
+        cr_assert(toto.getAscii() == "");
         cr_assert(toto.setAscii("./file/alien.txt") == true);
         std::cout << toto.getAscii() << std::flush;
     }
@@ -339,7 +339,7 @@ Test(Toy_setAscii, Test_set_picture_to_empty_filename_and_return_false,
     {
         Toy     toto;
 
-        cr_assert(toto.getAscii() == "ERROR");
+        cr_assert(toto.getAscii() == "");
         cr_assert(toto.setAscii("") == false);
         std::cout << toto.getAscii() << std::flush;
     }
@@ -350,12 +350,12 @@ Test(Toy_setAscii, Test_set_picture_to_empty_filename_and_return_false,
 }
 
 Test(Toy_setAscii, Test_set_picture_with_wrong_filename_and_return_false,
-    .init = redirect_all_stdout)
+.init = redirect_all_stdout)
 {
     {
         Toy     toto;
 
-        cr_assert(toto.getAscii() == "ERROR");
+        cr_assert(toto.getAscii() == "");
         cr_assert(toto.setAscii("test/test/test") == false);
         std::cout << toto.getAscii() << std::flush;
     }
@@ -369,14 +369,31 @@ Test(Toy_setAscii, Test_set_picture_with_wrong_filename_and_return_false,
 ///////////////////////////////////////////////////////////////////////////////
 Test(main, test_main, .init = redirect_all_stdout)
 {
-    // Toy     toto;
-    // Toy     ET(Toy::ALIEN, "green", "./alien.txt");
+    {
+        Toy     toto;
+        Toy     ET(Toy::ALIEN, "green", "./file/alien.txt");//"./alien.txt");
 
-    // toto.setName("TOTO!");
-    // if (toto.getType() == Toy::BASIC_TOY)
-    //     std::cout   << "basic toy: " << toto.getName() << std::endl
-    //                 << toto.getAscii() << std::endl;
-    // if (ET.getType() == Toy::ALIEN)
-    //     std::cout   << "this alien is : " << ET.getName() << std::endl
-    //                 << ET.getAscii() << std::endl;
+        toto.setName("TOTO !");
+        if (toto.getType() == Toy::BASIC_TOY)
+            std::cout   << "basic toy: " << toto.getName() << std::endl
+                        << toto.getAscii() << std::flush; // << std::endl;
+        if (ET.getType() == Toy::ALIEN)
+            std::cout   << "this alien is: " << ET.getName() << std::endl
+                        << ET.getAscii() << std::flush;// << std::endl;
+    }
+    cr_assert_stdout_eq_str
+    (
+        "basic toy: TOTO !\n"
+        "this alien is: green\n"
+        "         _|_\n"
+        "   ,_.-_' _ '_-._,\n"
+        "    l (.)(.)(.) /\n"
+        " _,  `l_-===-_/`  ,_\n"
+        ">  |----\"\"\"\"\"----|  <\n"
+        "`\"\"`--/   _-@-l--`\"\"`\n"
+        "     |===L_I===|\n"
+        "      l       /\n"
+        "      _l__|__/_\n"
+        "     `\"\"\"\"`\"\"\"\"`\n"
+    );
 }

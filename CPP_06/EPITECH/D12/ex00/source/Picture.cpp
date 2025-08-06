@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Thu Jul 31 7:07:00 PM 2025 Paradis
-** Last update Wed Aug 5 7:59:38 PM 2025 Paradis
+** Last update Wed Aug 5 9:08:04 PM 2025 Paradis
 */
 
 #include "../include/Picture.hpp"
@@ -49,15 +49,15 @@ bool            Picture::getPictureFromFile(const std::string &file)
     _file = file;
     fs.open(_file);
     
-    if (!fs.is_open())
+    if (fs.is_open())
     {
-        data = "ERROR";
-        return false;
+        while(std::getline(fs, data, '\0'))
+            ;
+
+        fs.close();
+        return true;
     }
-
-    while(std::getline(fs, data, '\0'))
-        ;
-
-    fs.close();
-    return true;
+    
+    data = "ERROR";
+    return false;
 }
