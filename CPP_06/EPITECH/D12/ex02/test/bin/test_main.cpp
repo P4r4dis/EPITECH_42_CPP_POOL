@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Aug 6 5:30:33 PM 2025 Paradis
-** Last update Thu Aug 6 6:29:16 PM 2025 Paradis
+** Last update Thu Aug 6 6:39:50 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -712,6 +712,8 @@ Test(main, test_main, .init = redirect_all_stdout)
     {
         Toy     toto;
         Toy     ET(Toy::ALIEN, "green", "./file/alien.txt");//"./alien.txt");
+        Woody   woody("Woody", "./file/woody.txt");
+        Buzz    buzzy("Buzz", "./file/buzz.txt");
 
         toto.setName("TOTO !");
         if (toto.getType() == Toy::BASIC_TOY)
@@ -720,6 +722,14 @@ Test(main, test_main, .init = redirect_all_stdout)
         if (ET.getType() == Toy::ALIEN)
             std::cout   << "this alien is: " << ET.getName() << std::endl
                         << ET.getAscii() << std::flush;// << std::endl;
+
+        if (woody.getType() == Toy::WOODY)
+            std::cout   << "this toy is: " << woody.getName() << std::endl
+                        << woody.getAscii() << std::flush;// << std::endl;
+
+        if (buzzy.getType() == Toy::BUZZ)
+            std::cout   << "this toy is: " << buzzy.getName() << std::endl
+                        << buzzy.getAscii() << std::flush;// << std::endl;
     }
     cr_assert_stdout_eq_str
     (
@@ -735,5 +745,73 @@ Test(main, test_main, .init = redirect_all_stdout)
         "      l       /\n"
         "      _l__|__/_\n"
         "     `\"\"\"\"`\"\"\"\"`\n"
+        "this toy is: Woody\n"
+"           .-'\"\"\"'-.\n"
+"      ,____|_______|____,\n"
+"       '._____________.'\n"
+"           |.-- --.|\n"
+"           |(o) (o)|\n"
+"          (|       |)\n"
+"           |   U   |\n"
+" __        | .___. |\n"
+"/|||       |       |\n"
+"||||       :       :\n"
+"|  |/)      `.___.'\n"
+" l  /       __) (__\n"
+"  l/l      /l l / /l\n"
+"   l l    /l l ^ / /l\n"
+"    l l  / |  |0_/l_ l\n"
+"     l l/ /|  | l  /l l\n"
+"      l  / |  |0//ll l l\n"
+"       l/  | /   l |  l l\n"
+"           |/ .-. l|  / /\n"
+"        .-'|-( ~ )-| / /\n"
+"        l  |--`-'--|/ /\n"
+"         l |       | /\n"
+"          l|   |   |/\n"
+"           |   |   |\n"
+"           |   |   |\n"
+"           |   |   |\n"
+"           |   |   |\n"
+"           |   |   |\n"
+"           |___|___|\n"
+"          `|---|---|'\n"
+"          *|   |   |*\n"
+"           |_._|_._|\n"
+"          /'  /|l  'l\n"
+"         /   /^ ^l   l\n"
+"        /__.'     `.__l\n"
+        "this toy is: Buzz\n"
+"                                                  .\n"
+"                                                 //\n"
+"                          ___                   ////\n"
+"                       .-'___`-.               |  |\n"
+"                     .' .'_ _'. '.            /~~/\n"
+"                     | (| b d |) |          /.    /\n"
+"                     |  |  '  |  |         /..  /\n"
+",                   ,|  | `-' |  |,       /   ./\n"
+"|'-------------''\"\"/.|  /l___/l  |.l\"\"''-/   (/------'|\n"
+"|            ____ _.-'l   /   '-._____.-'   l         |\n"
+"|.----------/   ._| _    .---. ===  |_.'l   /--------.|\n"
+"'          / l  | |l_l _ l=v=/  _   | |  l /          '\n"
+"          /   l | | l_l_l ~~~  (_)  | |  .'\n"
+"         /_.-'/ \"'|`'--.__.^.__.--'`|'\"'`\n"
+"        (    /    l                 /\n"
+"        l__.-:     `,..---'\"'---..,'\n"
+"         l'  |       :--..___..--:\n"
+"          l~~|        l         /\n"
+"          /   l       |`.     .'|\n"
+"          |  ||       |  :___:  |\n"
+"          ||||_       |   | |   |\n"
+"          ||||        |   | |   |\n"
+"          ````        |.-.| |.-.|\n"
+"                      |`-'| |`-'|\n"
+"                      |   | |   |\n"
+"                     /    | |    l\n"
+"                    |_____| |_____|\n"
+"                    ':---:-'-:---:'\n"
+"                    /    |   |    l\n"
+"                   /.---.|   |.---.l\n"
+"                   `.____;   :____.'\n"
     );
 }
