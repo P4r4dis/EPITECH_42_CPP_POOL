@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Aug 6 8:37:52 PM 2025 Paradis
-** Last update Thu Aug 6 8:52:30 PM 2025 Paradis
+** Last update Fri Aug 7 4:20:11 PM 2025 Paradis
 */
 
 #ifndef 			__WOODY_HPP__
@@ -19,7 +19,6 @@ class	            Woody    :   public Toy
         virtual ~Woody(void);
 
         virtual bool    speak(const std::string &str);
-        
     protected:
     private:
 };

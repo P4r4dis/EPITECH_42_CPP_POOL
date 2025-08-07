@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Aug 6 8:37:35 PM 2025 Paradis
-** Last update Thu Aug 6 8:52:11 PM 2025 Paradis
+** Last update Fri Aug 7 4:24:22 PM 2025 Paradis
 */
 
 #ifndef 			__BUZZ_HPP__
@@ -19,6 +19,7 @@ class	            Buzz    :   public Toy
         virtual ~Buzz();
 
         virtual bool    speak(const std::string &str);
+        virtual bool    speak_es(const std::string &str);
     protected:
     private:
 };

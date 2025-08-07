@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Aug 6 8:37:47 PM 2025 Paradis
-** Last update Thu Aug 6 9:33:59 PM 2025 Paradis
+** Last update Fri Aug 7 4:18:14 PM 2025 Paradis
 */
 
 #ifndef 			__TOY_HPP__
@@ -55,6 +55,7 @@ class	Toy
                     SPEAK
                 };
 
+                Error(void) { type = UNKNOWN; };
                 const std::string   what(void);
                 const std::string   where(void);
 

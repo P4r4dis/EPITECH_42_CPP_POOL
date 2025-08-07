@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Aug 6 8:37:58 PM 2025 Paradis
-** Last update Thu Aug 6 8:53:23 PM 2025 Paradis
+** Last update Fri Aug 7 4:28:09 PM 2025 Paradis
 */
 
 #include "../include/Buzz.hpp"
@@ -24,4 +24,11 @@ bool    Buzz::speak(const std::string &str)
 {
     std::cout   << "BUZZ: ";
     return Toy::speak(str);
+}
+
+bool    Buzz::speak_es(const std::string &str)
+{
+    std::cout   << "BUZZ: " << Toy::getName() << " senorita \"" 
+                << str << "\" senorita" << std::endl;
+    return true;
 }

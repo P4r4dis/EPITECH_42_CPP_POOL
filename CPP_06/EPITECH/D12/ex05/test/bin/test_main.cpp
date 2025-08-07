@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Aug 6 8:38:23 PM 2025 Paradis
-** Last update Fri Aug 7 4:12:19 PM 2025 Paradis
+** Last update Fri Aug 7 4:31:34 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -749,6 +749,20 @@ Test(Buzz_setAscii, Test_set_picture_with_wrong_filename_and_return_false,
     );
 }
 
+Test(Buzz_speak_es,
+Test_should_return_specific_name_of_function_with_error_message_for_speak_es,
+.init = redirect_all_stdout)
+{
+    {
+        Buzz a("Buzz", "./file/example.txt");
+
+        cr_assert(a.speak_es("Try to speak Spanish") == true);
+    }
+    cr_assert_stdout_eq_str
+    (
+        "BUZZ: Buzz senorita \"Try to speak Spanish\" senorita\n"
+    );
+}
 // ///////////////////////////////////////////////////////////////////////////////
 // //                            Woody class                                    //
 // ///////////////////////////////////////////////////////////////////////////////
@@ -920,38 +934,60 @@ Test(Woody_setAscii, Test_set_picture_with_wrong_filename_and_return_false,
         "ERROR"
     );
 }
+
+Test(Woody_speak_es,
+Test_should_return_specific_name_of_function_with_error_message_for_speak_es,
+.init = redirect_all_stdout)
+{
+    {
+        Woody a("Woody", "./file/example.txt");
+
+        if (a.speak_es("Try to speak Spanish") == false)
+        {
+            auto e = a.getLastError();
+            
+            if (e.type == Toy::Error::SPEAK)
+                std::cout   << "Error in " << e.where() << ": " << e.what()
+                            << std::endl;
+        }
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Error in speak_es: wrong mode\n"
+    );
+}
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
 ///////////////////////////////////////////////////////////////////////////////
 Test(main, test_main, .init = redirect_all_stdout)
 {
-    {
-        // Woody   w("wood");
+    // {
+    //     Woody   w("wood");
         
-        // if (w.setAscii("file_who_does_not_exist.txt") == false)
-        // {
-        //     auto e = w.getLastError();
-        //     if (e.type == Toy::Error::PICTURE)
-        //         std::cout   << "Error in " << e.where() << ": " << e.what()
-        //                     << std::endl;
-        // }
+    //     if (w.setAscii("file_who_does_not_exist.txt") == false)
+    //     {
+    //         auto e = w.getLastError();
+    //         if (e.type == Toy::Error::PICTURE)
+    //             std::cout   << "Error in " << e.where() << ": " << e.what()
+    //                         << std::endl;
+    //     }
 
-        // if (w.speak_es("Woody does not have spanish mode") == false) 
-        // {
-        //     auto e = w.getLastError();
-        //     if (e.type == Toy::Error::SPEAK) 
-        //         std::cout   << "Error in " << e.where() << ": " << e.what()
-        //                     << std::endl;
-        // }
+    //     if (w.speak_es("Woody does not have spanish mode") == false) 
+    //     {
+    //         auto e = w.getLastError();
+    //         if (e.type == Toy::Error::SPEAK) 
+    //             std::cout   << "Error in " << e.where() << ": " << e.what()
+    //                         << std::endl;
+    //     }
 
-        // if (w.speak_es("Woody does not have spanish mode") == false) 
-        // {
-        //     auto e = w.getLastError();
-        //     if (e.type == Toy::Error::SPEAK) 
-                // std::cout   << "Error in " << e.where() << ": " << e.what()
-                //             << std::endl;
-        // }
-    }
+    //     if (w.speak_es("Woody does not have spanish mode") == false) 
+    //     {
+    //         auto e = w.getLastError();
+    //         if (e.type == Toy::Error::SPEAK) 
+    //             std::cout   << "Error in " << e.where() << ": " << e.what()
+    //                         << std::endl;
+    //     }
+    // }
     // cr_assert_stdout_eq_str
     // (
     //     "Error in setAscii: bad new illustration\n"
