@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Aug 6 8:38:09 PM 2025 Paradis
-** Last update Thu Aug 6 9:03:26 PM 2025 Paradis
+** Last update Fri Aug 7 3:38:25 PM 2025 Paradis
 */
 
 #include "../include/Toy.hpp"
@@ -53,8 +53,11 @@ std::string     Toy::getAscii(void) const
 
 bool            Toy::setAscii(const std::string &picture)
 {
+    
     if (_picture.getPictureFromFile(picture))
         return true;
+    
+    _error.type = Toy::Error::ErrorType::PICTURE;
     return false;
 
 }
@@ -69,8 +72,8 @@ bool            Toy::speak(const std::string &str)
 bool            Toy::speak_es(const std::string &str)
 {
     (void) str;
-    
-    return true;
+    _error.type = Error::ErrorType::SPEAK;
+    return false;
 }
 
 Toy             &Toy::operator<<(const std::string &str)
@@ -86,4 +89,24 @@ std::ostream    &operator<<(std::ostream &os, const Toy &toy)
         << std::endl;
         
     return os;
+}
+
+const std::string   Toy::Error::what(void)
+{
+    switch (type)
+    {
+        case 0:
+            return "";
+        case 1:
+            return "bad new illustration";
+        case 2:
+            return "wrong mode";
+        default:
+            return "";
+    }
+}
+
+Toy::Error          Toy::getLastError(void) const
+{
+    return _error;
 }

@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Aug 6 8:37:47 PM 2025 Paradis
-** Last update Thu Aug 6 8:51:57 PM 2025 Paradis
+** Last update Thu Aug 6 9:33:59 PM 2025 Paradis
 */
 
 #ifndef 			__TOY_HPP__
@@ -42,13 +42,34 @@ class	Toy
 
         virtual bool    speak(const std::string &str);
         virtual bool    speak_es(const std::string &str);
+
         Toy             &operator<<(const std::string &str);
+
+        class           Error
+        {
+            public:
+                enum    ErrorType
+                {
+                    UNKNOWN = 0,
+                    PICTURE,
+                    SPEAK
+                };
+
+                const std::string   what(void);
+                const std::string   where(void);
+
+                ErrorType           type;
+
+        };
+
+        Error   getLastError(void) const;
     protected:
     private:
         ToyType         _type;
         std::string     _name;
         std::string     _fileName;
         Picture         _picture;
+        Error           _error;
 };
 
 std::ostream            &operator<<(std::ostream &os, const Toy &toy);

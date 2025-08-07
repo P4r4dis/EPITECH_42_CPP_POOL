@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Aug 6 8:38:23 PM 2025 Paradis
-** Last update Thu Aug 6 9:04:35 PM 2025 Paradis
+** Last update Fri Aug 7 3:43:21 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -438,7 +438,39 @@ Test(Toy_speak_es, Test_speak_es_is_defined,
     {
         Toy a(Toy::BASIC_TOY, "REX", "./file/example.txt");
 
-        cr_assert(a.speak_es("test") == true);
+        cr_assert(a.speak_es("Hola") == false);
+    }
+}
+
+Test(Toy_getLastError, Test_return_error, .init = redirect_all_stdout)
+{
+    {
+        Toy a(Toy::BASIC_TOY, "REX", "./file/example.txt");
+
+        if (a.setAscii("file_who_does_not_exist.txt") == false)
+            cr_assert(a.getLastError().type == Toy::Error::PICTURE);
+
+        if (a.speak_es("Try to speak Spanish") == false)
+        {
+            cr_assert(a.getLastError().type == Toy::Error::SPEAK);
+        }
+    }
+}
+// TODO:
+// - complete unit test for what
+Test(Toy__Error_what, Test_return_specific_error_message_for_setAscii,
+)//.init = redirect_all_stdout)
+{
+    {
+        Toy a(Toy::BASIC_TOY, "REX", "./file/example.txt");
+
+        if (a.setAscii("file_who_does_not_exist.txt") == false)
+        {
+            auto e = a.getLastError();
+            
+            if (e.type == Toy::Error::PICTURE)
+                std::cout   << "Error : " << e.what() << std::endl;
+        }
     }
 }
 // ///////////////////////////////////////////////////////////////////////////////
