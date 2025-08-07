@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Aug 6 8:38:09 PM 2025 Paradis
-** Last update Fri Aug 7 3:58:29 PM 2025 Paradis
+** Last update Fri Aug 7 4:13:49 PM 2025 Paradis
 */
 
 #include "../include/Toy.hpp"
@@ -99,12 +99,23 @@ const std::string   Toy::Error::what(void)
 {
     switch (type)
     {
-        case 0:
-            return "";
         case 1:
             return "bad new illustration";
         case 2:
             return "wrong mode";
+        default:
+            return "";
+    }
+}
+
+const std::string   Toy::Error::where(void)
+{
+    switch (type)
+    {
+        case 1:
+            return "setAscii";
+        case 2:
+            return "speak_es";
         default:
             return "";
     }

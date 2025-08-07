@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Aug 6 8:38:23 PM 2025 Paradis
-** Last update Fri Aug 7 4:06:08 PM 2025 Paradis
+** Last update Fri Aug 7 4:12:19 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -520,6 +520,71 @@ Test(Toy__Error_what, Test_return_empty_string_if_no_error,
         "Error: \n"
     );
 }
+
+Test(Toy__Error_what,
+    Test_return_specific_name_of_function_with_error_message_for_setAscii,
+    .init = redirect_all_stdout)
+{
+    {
+        Toy a(Toy::BASIC_TOY, "REX", "./file/example.txt");
+
+        if (a.setAscii("file_who_does_not_exist.txt") == false)
+        {
+            auto e = a.getLastError();
+            
+            if (e.type == Toy::Error::PICTURE)
+                std::cout   << "Error in " << e.where() << ": " << e.what()
+                            << std::endl;
+        }
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Error in setAscii: bad new illustration\n"
+    );
+}
+
+Test(Toy__Error_where,
+    Test_return_specific_name_of_function_with_error_message_for_speak_es,
+    .init = redirect_all_stdout)
+{
+    {
+        Toy a(Toy::BASIC_TOY, "REX", "./file/example.txt");
+
+        if (a.speak_es("Try to speak Spanish") == false)
+        {
+            auto e = a.getLastError();
+            
+            if (e.type == Toy::Error::SPEAK)
+                std::cout   << "Error in " << e.where() << ": " << e.what()
+                            << std::endl;
+        }
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Error in speak_es: wrong mode\n"
+    );
+}
+
+Test(Toy__Error_where, Test_return_empty_string_if_no_error,
+.init = redirect_all_stdout)
+{
+    {
+        Toy a(Toy::BASIC_TOY, "REX", "./file/example.txt");
+
+        if (a.setAscii("./file/example.txt") == true)
+        {
+            auto e = a.getLastError();
+            
+            if (e.type == Toy::Error::UNKNOWN)
+                std::cout   << "Error in " << e.where() << ": " << e.what()
+                            << std::endl;
+        }
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Error in : \n"
+    );
+}
 // ///////////////////////////////////////////////////////////////////////////////
 // //                            Buzz class                                     //
 // ///////////////////////////////////////////////////////////////////////////////
@@ -883,8 +948,8 @@ Test(main, test_main, .init = redirect_all_stdout)
         // {
         //     auto e = w.getLastError();
         //     if (e.type == Toy::Error::SPEAK) 
-        //         std::cout   << "Error in " << e.where() << ": " << e.what()
-        //                     << std::endl;
+                // std::cout   << "Error in " << e.where() << ": " << e.what()
+                //             << std::endl;
         // }
     }
     // cr_assert_stdout_eq_str
