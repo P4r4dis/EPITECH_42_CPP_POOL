@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Aug 6 8:38:23 PM 2025 Paradis
-** Last update Fri Aug 7 3:43:21 PM 2025 Paradis
+** Last update Fri Aug 7 4:06:08 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -447,19 +447,22 @@ Test(Toy_getLastError, Test_return_error, .init = redirect_all_stdout)
     {
         Toy a(Toy::BASIC_TOY, "REX", "./file/example.txt");
 
+        if (a.setAscii("./file/example.txt") == true)
+            cr_assert(a.getLastError().type == Toy::Error::UNKNOWN);
+        
         if (a.setAscii("file_who_does_not_exist.txt") == false)
             cr_assert(a.getLastError().type == Toy::Error::PICTURE);
 
         if (a.speak_es("Try to speak Spanish") == false)
-        {
             cr_assert(a.getLastError().type == Toy::Error::SPEAK);
-        }
+
+        if (a.setAscii("./file/example.txt") == true)
+            cr_assert(a.getLastError().type == Toy::Error::UNKNOWN);
     }
 }
-// TODO:
-// - complete unit test for what
+
 Test(Toy__Error_what, Test_return_specific_error_message_for_setAscii,
-)//.init = redirect_all_stdout)
+    .init = redirect_all_stdout)
 {
     {
         Toy a(Toy::BASIC_TOY, "REX", "./file/example.txt");
@@ -469,9 +472,53 @@ Test(Toy__Error_what, Test_return_specific_error_message_for_setAscii,
             auto e = a.getLastError();
             
             if (e.type == Toy::Error::PICTURE)
-                std::cout   << "Error : " << e.what() << std::endl;
+                std::cout   << "Error: " << e.what() << std::endl;
         }
     }
+    cr_assert_stdout_eq_str
+    (
+        "Error: bad new illustration\n"
+    );
+}
+
+Test(Toy__Error_what, Test_return_specific_error_message_for_speak_es,
+    .init = redirect_all_stdout)
+{
+    {
+        Toy a(Toy::BASIC_TOY, "REX", "./file/example.txt");
+
+        if (a.speak_es("Try to speak Spanish") == false)
+        {
+            auto e = a.getLastError();
+            
+            if (e.type == Toy::Error::SPEAK)
+                std::cout   << "Error: " << e.what() << std::endl;
+        }
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Error: wrong mode\n"
+    );
+}
+
+Test(Toy__Error_what, Test_return_empty_string_if_no_error,
+.init = redirect_all_stdout)
+{
+    {
+        Toy a(Toy::BASIC_TOY, "REX", "./file/example.txt");
+
+        if (a.setAscii("./file/example.txt") == true)
+        {
+            auto e = a.getLastError();
+            
+            if (e.type == Toy::Error::UNKNOWN)
+                std::cout   << "Error: " << e.what() << std::endl;
+        }
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Error: \n"
+    );
 }
 // ///////////////////////////////////////////////////////////////////////////////
 // //                            Buzz class                                     //

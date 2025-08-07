@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Aug 6 8:38:09 PM 2025 Paradis
-** Last update Fri Aug 7 3:38:25 PM 2025 Paradis
+** Last update Fri Aug 7 3:58:29 PM 2025 Paradis
 */
 
 #include "../include/Toy.hpp"
@@ -55,7 +55,11 @@ bool            Toy::setAscii(const std::string &picture)
 {
     
     if (_picture.getPictureFromFile(picture))
+    {
+        _error.type = Toy::Error::ErrorType::UNKNOWN;
+
         return true;
+    }
     
     _error.type = Toy::Error::ErrorType::PICTURE;
     return false;
