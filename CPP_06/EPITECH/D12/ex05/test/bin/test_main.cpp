@@ -5,7 +5,7 @@
 ** Login   <Adil Denia>
 **
 ** Started on  Wed Aug 6 8:38:23 PM 2025 Paradis
-** Last update Fri Aug 7 4:31:34 PM 2025 Paradis
+** Last update Fri Aug 7 4:39:57 PM 2025 Paradis
 */
 
 #include <criterion/criterion.h>
@@ -961,37 +961,37 @@ Test_should_return_specific_name_of_function_with_error_message_for_speak_es,
 ///////////////////////////////////////////////////////////////////////////////
 Test(main, test_main, .init = redirect_all_stdout)
 {
-    // {
-    //     Woody   w("wood");
+    {
+        Woody   w("wood");
         
-    //     if (w.setAscii("file_who_does_not_exist.txt") == false)
-    //     {
-    //         auto e = w.getLastError();
-    //         if (e.type == Toy::Error::PICTURE)
-    //             std::cout   << "Error in " << e.where() << ": " << e.what()
-    //                         << std::endl;
-    //     }
+        if (w.setAscii("file_who_does_not_exist.txt") == false)
+        {
+            auto e = w.getLastError();
+            if (e.type == Toy::Error::PICTURE)
+                std::cout   << "Error in " << e.where() << ": " << e.what()
+                            << std::endl;
+        }
 
-    //     if (w.speak_es("Woody does not have spanish mode") == false) 
-    //     {
-    //         auto e = w.getLastError();
-    //         if (e.type == Toy::Error::SPEAK) 
-    //             std::cout   << "Error in " << e.where() << ": " << e.what()
-    //                         << std::endl;
-    //     }
+        if (w.speak_es("Woody does not have spanish mode") == false) 
+        {
+            auto e = w.getLastError();
+            if (e.type == Toy::Error::SPEAK) 
+                std::cout   << "Error in " << e.where() << ": " << e.what()
+                            << std::endl;
+        }
 
-    //     if (w.speak_es("Woody does not have spanish mode") == false) 
-    //     {
-    //         auto e = w.getLastError();
-    //         if (e.type == Toy::Error::SPEAK) 
-    //             std::cout   << "Error in " << e.where() << ": " << e.what()
-    //                         << std::endl;
-    //     }
-    // }
-    // cr_assert_stdout_eq_str
-    // (
-    //     "Error in setAscii: bad new illustration\n"
-    //     "Error in speak_es: wrong mode\n"
-    //     "Error in speak_es: wrong mode\n"
-    // );
+        if (w.speak_es("Woody does not have spanish mode") == false) 
+        {
+            auto e = w.getLastError();
+            if (e.type == Toy::Error::SPEAK) 
+                std::cout   << "Error in " << e.where() << ": " << e.what()
+                            << std::endl;
+        }
+    }
+    cr_assert_stdout_eq_str
+    (
+        "Error in setAscii: bad new illustration\n"
+        "Error in speak_es: wrong mode\n"
+        "Error in speak_es: wrong mode\n"
+    );
 }
