@@ -6,7 +6,7 @@
 #    By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 18:58:30 by Paradis           #+#    #+#              #
-#    Updated: 2025/08/06 20:41:55 by Paradis          ###   ########.fr        #
+#    Updated: 2025/08/07 16:59:49 by Paradis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -142,7 +142,7 @@ ARGS							=	"$(filter-out $@,$(MAKECMDGOALS))"
 ## Login   <Adil Denia>
 ##
 ## Started on  Tue May 27 5:03:01 PM 2025 Paradis
-## Last update Thu Aug 6 8:41:55 PM 2025 Paradis
+## Last update Fri Aug 7 4:59:49 PM 2025 Paradis
 ##
 
 
@@ -382,32 +382,34 @@ EPITECH_valgrind_test_run_ex05	:	fclean
 #								EPITECH_EX06								   #
 #																			   #
 # **************************************************************************** #
-EPITECH_EX06_PATH 				= 	./EPITECH/D11/ex06
-EPITECH_EX06_BIN_PATH 			= 	./EPITECH/D11/ex06/bin
-EPITECH_EX06_SRC_PATH			=	./EPITECH/D11/ex06/source
-EPITECH_EX06_INC_PATH			=	./EPITECH/D11/ex06/include
-EPITECH_EX06_UT_PATH			=	./EPITECH/D11/ex06/test
+EPITECH_EX06_PATH 				= 	./EPITECH/D12/ex06
+EPITECH_EX06_BIN_PATH 			= 	./EPITECH/D12/ex06/bin
+EPITECH_EX06_SRC_PATH			=	./EPITECH/D12/ex06/source
+EPITECH_EX06_INC_PATH			=	./EPITECH/D12/ex06/include
+EPITECH_EX06_UT_PATH			=	./EPITECH/D12/ex06/test
 
-EPITECH_EX06_NAME				=	UniquePointer_improved
+EPITECH_EX06_NAME				=	ToyStory
 
 EPITECH_EX06_UT_SRC				=	$(EPITECH_EX06_UT_PATH)/$(EPITECH_EX06_NAME)_test.cpp
 EPITECH_EX06_UT_NAME 			= 	test_$(EPITECH_EX06_NAME)
 
-EPITECH_EX06_SRC				=	$(EPITECH_EX02_SRC_PATH)/UniquePointer.cpp \
+EPITECH_EX06_SRC				=	$(EPITECH_EX06_SRC_PATH)/Picture.cpp \
+									$(EPITECH_EX06_SRC_PATH)/Toy.cpp \
+									$(EPITECH_EX06_SRC_PATH)/Buzz.cpp \
+									$(EPITECH_EX06_SRC_PATH)/Woody.cpp \
 									$(EPITECH_EX06_BIN_PATH)/main.cpp
-
 EPITECH_EX06_OBJS				=	$(EPITECH_EX06_SRC:.cpp=.o)
 
 EPITECH_ex06 					: 	fclean
-									@$(MAKE) -C $(EPITECH_EX06_PATH)
-									$(EPITECH_EX06_PATH)/$(EPITECH_EX06_NAME)
+									cd $(EPITECH_EX06_PATH) && $(MAKE) && ./$(EPITECH_EX06_NAME) --fail-fast --jobs=1 --verbose=2
+# 									@$(MAKE) -C $(EPITECH_EX00_PATH)
+# 									$(EPITECH_EX00_PATH)/$(EPITECH_EX00_NAME)
 
 EPITECH_valgrind_ex06 			: 	fclean
 									@$(MAKE) -C $(EPITECH_EX06_PATH) VALGRIND
 
 EPITECH_test_run_ex06			:	fclean
-									@$(MAKE) -s -C $(EPITECH_EX06_UT_PATH)
-									$(EPITECH_EX06_UT_PATH)/$(EPITECH_EX06_UT_NAME)
+									cd $(EPITECH_EX06_UT_PATH) && $(MAKE) && ./$(EPITECH_EX06_UT_NAME) --fail-fast --jobs=1 --verbose=2
 									gcovr --exclude-unreachable-branches --exclude-throw-branches -r . --html --txt --html-details coverage.html
 						
 EPITECH_valgrind_test_run_ex06	:	fclean
@@ -455,8 +457,8 @@ clean							:
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX04_UT_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX05_PATH)
 									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX05_UT_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX06_PATH)
-# @$(MAKE) -s $(CLEAN) -C $(EPITECH_EX06_UT_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX06_PATH)
+									@$(MAKE) -s $(CLEAN) -C $(EPITECH_EX06_UT_PATH)
 
 fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(42_EX00_PATH)
@@ -477,8 +479,8 @@ fclean							:	clean
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX04_UT_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX05_PATH)
 									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX05_UT_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX06_PATH)
-# @$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX06_UT_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX06_PATH)
+									@$(MAKE) -s $(FCLEAN) -C $(EPITECH_EX06_UT_PATH)
 
 tests_run						:	fclean \
 
