@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:30:12 by Paradis           #+#    #+#             */
-/*   Updated: 2025/08/28 19:50:34 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/08/28 19:55:52 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ template <typename T>
 const T     &min(const T &a, const T &b)
 {
     if (a < b)
+        return a;
+    return b;
+}
+
+template <typename T>
+const T     &max(const T &a, const T &b)
+{
+    if (a > b)
         return a;
     return b;
 }
