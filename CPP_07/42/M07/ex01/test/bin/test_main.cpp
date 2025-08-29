@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 18:43:48 by Paradis           #+#    #+#             */
-/*   Updated: 2025/08/29 19:24:18 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/08/29 19:30:43 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <criterion/new/assert.h>
 #include <criterion/redirect.h>
 
-#include "../../include/whatever.hpp"
 #include "../../include/iter.hpp"
 
 #include <iostream>
