@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 19:31:46 by Paradis           #+#    #+#             */
-/*   Updated: 2025/09/08 20:35:48 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/09/10 19:36:49 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ class                    Array
     public:
         Array(void);
         Array(unsigned int n);
-        // Array(const Array &copy);
+        Array(const Array<T> &copy);
         // Array           &operator=(const Array &copy);
         virtual ~Array(void);
 
         unsigned int    size(void) const;
-        T               operator[](unsigned int idx);
+        T               &operator[](unsigned int idx);
 
     private:
-        const T         *_array;
+        T               *_array;
         unsigned int    _n;
 };
 
@@ -46,6 +46,16 @@ Array<T>::Array(unsigned int n)  :  _n(n)
 }
 
 template <typename T>
+Array<T>::Array(const Array<T> &cpy)    :   _array(new T[cpy._n]), _n(cpy._n)
+{
+    if (this != &cpy)
+    {
+        for (unsigned int i = 0; i < _n; ++i)
+            _array[i] = cpy._array[i];
+    }
+}
+
+template <typename T>
 Array<T>::~Array(void)
 {
     if (_array)
@@ -53,13 +63,13 @@ Array<T>::~Array(void)
 }
 
 template <typename T>
-unsigned int            Array<T>::size(void) const
+unsigned int                Array<T>::size(void) const
 {
     return _n;
 }
 
 template <typename T>
-T                        Array<T>::operator[](unsigned int idx)
+T                           &Array<T>::operator[](unsigned int idx)
 {
     return _array[idx];
 }

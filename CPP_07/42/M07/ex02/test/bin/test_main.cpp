@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 19:33:07 by Paradis           #+#    #+#             */
-/*   Updated: 2025/09/08 20:36:18 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/09/10 19:38:44 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ Test(Array, TEST_constructor_with_parameter_is_defined,
     cr_assert_not_null(&array);
 }
 
-Test(Array, TEST__constructor_with_parameter_create_array_of_N_elements,
-)//.init = redirect_all_stdout)
+Test(Array, TEST_constructor_with_parameter_create_array_of_N_elements,
+    .init = redirect_all_stdout)
 {
     Array<int>     array(10);
 
@@ -60,8 +60,28 @@ Test(Array, TEST__constructor_with_parameter_create_array_of_N_elements,
     int *a = new int();
     std::cout << *a << std::endl;
 
-    for (unsigned int i = 0; i < array.size(); ++i)
+    for (std::size_t  i = 0; i < array.size(); ++i)
         cr_assert(array[i] == 0);
+
+    delete a;
+}
+
+Test(Array, TEST_copy_constructor, .init = redirect_all_stdout)
+{
+    Array<int>      array(10);
+
+    cr_assert(array.size() == 10);
+    for (unsigned int i = 0; i < array.size(); ++i)
+    {
+        cr_assert(array[i] == 0);
+        array[i] = i;
+    }
+
+    Array<int>     cpy(array);
+
+    cr_assert(cpy.size() == array.size());
+    for (unsigned int i = 0; i < array.size(); ++i)
+        cr_assert(cpy[i] == array[i]);
 }
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //
