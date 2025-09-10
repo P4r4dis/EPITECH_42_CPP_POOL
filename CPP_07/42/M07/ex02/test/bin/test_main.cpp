@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 19:33:07 by Paradis           #+#    #+#             */
-/*   Updated: 2025/09/10 19:38:44 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/09/10 20:20:31 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,32 @@ Test(Array, TEST_copy_constructor, .init = redirect_all_stdout)
     cr_assert(cpy.size() == array.size());
     for (unsigned int i = 0; i < array.size(); ++i)
         cr_assert(cpy[i] == array[i]);
+}
+
+Test(Array, TEST_assignement_operator_overload, .init = redirect_all_stdout)
+{
+    Array<int>      array(10);
+
+    cr_assert(array.size() == 10);
+    for (unsigned int i = 0; i < array.size(); ++i)
+    {
+        cr_assert(array[i] == 0);
+        array[i] = i;
+    }
+
+    for (unsigned int i = 0; i < array.size(); ++i)
+        std::cout << array[i] << std::endl;
+
+    Array<int>     assign(10);
+
+    cr_assert(assign.size() == 10);
+    for (unsigned int i = 0; i < assign.size(); ++i)
+        if (i != 0)
+            cr_assert(assign[i] != array[i]);
+
+    assign = array;
+    for (unsigned int i = 0; i < assign.size(); ++i)
+        cr_assert(assign[i] == array[i]);
 }
 ///////////////////////////////////////////////////////////////////////////////
 //                            TEST main                                      //

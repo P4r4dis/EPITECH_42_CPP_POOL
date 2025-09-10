@@ -6,7 +6,7 @@
 /*   By: Paradis <adil.d.pro@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 19:31:46 by Paradis           #+#    #+#             */
-/*   Updated: 2025/09/10 19:36:49 by Paradis          ###   ########.fr       */
+/*   Updated: 2025/09/10 20:13:56 by Paradis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ class                    Array
     public:
         Array(void);
         Array(unsigned int n);
-        Array(const Array<T> &copy);
-        // Array           &operator=(const Array &copy);
+        Array(const Array &copy);
+        Array           &operator=(const Array &copy);
         virtual ~Array(void);
 
         unsigned int    size(void) const;
@@ -46,13 +46,29 @@ Array<T>::Array(unsigned int n)  :  _n(n)
 }
 
 template <typename T>
-Array<T>::Array(const Array<T> &cpy)    :   _array(new T[cpy._n]), _n(cpy._n)
+Array<T>::Array(const Array &cpy)    :   _array(new T[cpy._n]), _n(cpy._n)
 {
     if (this != &cpy)
     {
         for (unsigned int i = 0; i < _n; ++i)
             _array[i] = cpy._array[i];
     }
+}
+
+template <typename T>
+Array<T>                       &Array<T>::operator=(const Array &cpy)
+{
+    if (this != &cpy)
+    {
+        delete [] _array;
+
+        _n = cpy._n;
+        _array = new T[_n];
+
+        for (unsigned int i = 0; i < _n; ++i)
+            _array[i] = cpy._array[i];
+    }
+    return *this;
 }
 
 template <typename T>
